@@ -10,16 +10,16 @@ async def last_active(member):
     return messages[0].created_at
 
 
+async def find_channel(guild, name=None):
+    if name is None:
+        name = param.rc['channel']
+    return [i for i in guild.channels if i.name.lower() == name.lower()][0]
+
+
 class MainCommands(commands.Cog):
-    def __init__(self, bot, channel=None):
+    def __init__(self, bot):
         self.bot = bot
         self._last_member = None
-        if channel is None:
-            channel = param.rc['channel']
-        if hasattr(channel, 'lower'):
-            channel = channel.lower()
-            channel = [i for i in bot.guild.channels if i.name.lower() == channel][0]
-        self._channel = channel
 
     @commands.command()
     async def guild(self, ctx):
@@ -46,7 +46,7 @@ class MainCommands(commands.Cog):
         data = {m: last_active(m) for m in members}
         msg = sorted(data.items(), key=lambda x: x[1], reverse=True)
         msg = '\n'.join([m[0].name + ' ' + m[1].isoformat for m in msg])
-        await self._channel.send(msg)
+        await find_channel(ctx.guild).send(msg)
 
 
 class Alerts(commands.Cog):
