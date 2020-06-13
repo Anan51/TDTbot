@@ -23,6 +23,7 @@ class MainCommands(commands.Cog):
 
     @commands.command()
     async def guild(self, ctx):
+        """Prints guild/server name."""
         await ctx.channel.send(ctx.guild.name)
 
     @commands.command()
@@ -37,16 +38,33 @@ class MainCommands(commands.Cog):
 
     @commands.command()
     async def inactivity(self, ctx, role: discord.Role = None):
+        """<role (optional)> shows how long members have been inactive for."""
         if role is None:
-            role = [r for r in ctx.guild.roles if r.name.lower == 'community'][0]
+            try:
+                role = [r for r in ctx.guild.roles if r.name.lower() == 'community'][0]
+            except IndexError:
+                pass
         if not role:
             members = ctx.guild.members
         else:
             members = role.members
-        data = {m: last_active(m) for m in members}
-        msg = sorted(data.items(), key=lambda x: x[1], reverse=True)
-        msg = '\n'.join([m[0].name + ' ' + m[1].isoformat for m in msg])
-        await find_channel(ctx.guild).send(msg)
+        data = {m.display_name: await last_active(m) for m in members}
+        msg = sorted(data.items(), key=lambda x: x[1])
+        msg = '\n'.join([m[0] + ' ' + m[1].isoformat() for m in msg])
+        # msg = '\n'.join([i.display_name + ' ' + data[i].isoformat for i in data])
+        # channel = await find_channel(ctx.guild)
+        await ctx.send(msg)
+
+    @commands.command()
+    async def roles(self, ctx):
+        """List server roles"""
+        await ctx.send("\n".join([i.name for i in ctx.guild.roles
+                                  if 'everyone' not in i.name]))
+
+    @commands.command()
+    async def RuntimeError(self, ctx):
+        """Raise a runtime error (because why not)"""
+        raise RuntimeError("Per user request")
 
 
 class Alerts(commands.Cog):
