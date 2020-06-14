@@ -57,7 +57,8 @@ class MainCommands(commands.Cog):
                         except KeyError:
                             data[msg.author] = msg.created_at
             except discord.Forbidden:
-                await ctx.send("Cannot read channel {0}.".format(channel))
+                # await ctx.send("Cannot read channel {0}.".format(channel))
+                pass
         for member in members:
             if member not in data:
                 if member.joined_at > oldest:
@@ -67,7 +68,7 @@ class MainCommands(commands.Cog):
         items = sorted(data.items(), key=lambda x: x[1])
         msg = '\n'.join(['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                          for i in items])
-        await ctx.send(msg)
+        await ctx.send('```' + msg + '```')
 
     @commands.command()
     async def roles(self, ctx):
@@ -181,3 +182,6 @@ class MainBot(commands.Bot):
         @self.event
         async def on_ready():
             print('We have logged in as {0.user}'.format(self))
+            activity = discord.Activity(name='UnknownElectro be a bot',
+                                        type=discord.ActivityType.listening)
+            await self.change_presence(activity=activity)
