@@ -12,7 +12,6 @@ def reload_package(package):
     del fn
 
     def reload_recursive_ex(module):
-        print('Reloading module ' + str(module))
         try:
             importlib.reload(module)
         except ImportError:
