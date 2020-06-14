@@ -33,4 +33,3 @@ while time.time() - now > 1:
     reloader.reload_package(sys.modules[__name__])
     reloader.reload_package(sys.modules[__name__])
     print("End of loop.")
-

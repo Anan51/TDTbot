@@ -1,5 +1,6 @@
 import asyncio
 import discord
+import datetime
 from discord.ext import commands
 from . import param
 
@@ -40,20 +41,35 @@ class MainCommands(commands.Cog):
     @commands.command()
     async def inactivity(self, ctx, role: discord.Role = None):
         """<role (optional)> shows how long members have been inactive for."""
+        await ctx.send("Hold on while I parse the server history.")
         if role is None:
-            try:
-                role = [r for r in ctx.guild.roles if r.name.lower() == 'community'][0]
-            except IndexError:
-                pass
-        if not role:
             members = ctx.guild.members
         else:
             members = role.members
-        data = {m.display_name: await last_active(m) for m in members}
-        msg = sorted(data.items(), key=lambda x: x[1])
-        msg = '\n'.join([m[0] + ' ' + m[1].date().isoformat() for m in msg])
-        # msg = '\n'.join([i.display_name + ' ' + data[i].isoformat for i in data])
-        # channel = await find_channel(ctx.guild)
+        data = dict()
+        channels = [i for i in ctx.guild.channels if hasattr(i, "history")]
+        oldest = datetime.datetime.now()
+        old_af = datetime.datetime(1, 1, 1)
+        for channel in channels:
+            try:
+                async for msg in channel.history(limit=1000):
+                    oldest = min(oldest, msg.created_at)
+                    if msg.author in members:
+                        try:
+                            data[msg.author] = max(data[msg.author], msg.created_at)
+                        except KeyError:
+                            data[msg.author] = msg.created_at
+            except discord.Forbidden:
+                await ctx.send("Cannot read channel {0}.".format(channel))
+        for member in members:
+            if member not in data:
+                if member.joined_at > oldest:
+                    data[member] = member.joined_at
+                else:
+                    data[member] = old_af
+        items = sorted(data.items(), key=lambda x: x[1])
+        msg = '\n'.join(['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
+                         for i in items])
         await ctx.send(msg)
 
     @commands.command()
@@ -63,19 +79,31 @@ class MainCommands(commands.Cog):
                                   if 'everyone' not in i.name]))
 
     @commands.command()
-    async def hist(self, ctx, member: discord.Member = None):
+    async def channel_hist(self, ctx, channel: discord.ChannelType = None):
+        """<member (optional)> shows member history"""
+        if channel is None:
+            channel = ctx.channel
+        hist = await channel.history(limit=10).flatten()
+        msg = '\n'.join(["Item {0:d}\n{1.content}".format(i + 1, m)
+                         for i, m in enumerate(hist)])
+        if not msg:
+            msg = "No history available."
+        await ctx.send(msg)
+
+    @commands.command()
+    async def member_hist(self, ctx, member: discord.Member = None):
         """<member (optional)> shows member history"""
         if member is None:
             member = ctx.author
-        hist = await member.history(limit=100).flatten()
-        msg = '\n'.join([str(i) for i in hist])
-        if self.bot.read_message_history:
-            await ctx.send("Recovering history:")
-        else:
-            await ctx.send("I do not have permission to read the history")
-            return
+        hist = await member.history(limit=10).flatten()
+        if not hist:
+            user = self.bot.get_user(member.id)
+            hist = await user.history(limit=10).flatten()
+        msg = '\n'.join(["Item {0:d}\n{1.content}".format(i + 1, m)
+                         for i, m in enumerate(hist)])
         if not msg:
             msg = "No history available."
+        print(str(hist))
         await ctx.send(msg)
 
     @commands.command()
