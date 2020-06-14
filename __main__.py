@@ -1,6 +1,7 @@
 import argparse
 import sys
-from . import param, bot, git, reloader
+import time
+from . import param, bot, git_manage, reloader
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--config',
@@ -13,15 +14,23 @@ parser.add_argument('-t', '--token',
                     help='Use provided API token/file.')
 args = parser.parse_args()
 
-
-while True:
+now = 0
+while time.time() - now > 1:
+    now = time.time()
     param.rc.read_config(args.config)
-    param.rc.read_token(args.token)
+    token = param.rc.read_token(args.token)
+    tdt_bot = bot.MainBot()
     try:
-        bot.run()
+        tdt_bot.run(token)
     except KeyboardInterrupt as e:
         raise e
-    except git.ExitForGitUpdate:
-        git.update()
-        reloader.reload_package(sys.modules[__name__])
-        reloader.reload_package(sys.modules[__name__])
+    except RuntimeError as e:
+        print(e)
+    try:
+        git_manage.update()
+    except Exception as e:
+        print(e)
+    reloader.reload_package(sys.modules[__name__])
+    reloader.reload_package(sys.modules[__name__])
+    print("End of loop.")
+

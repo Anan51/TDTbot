@@ -12,7 +12,11 @@ def reload_package(package):
     del fn
 
     def reload_recursive_ex(module):
-        importlib.reload(module)
+        print('Reloading module ' + str(module))
+        try:
+            importlib.reload(module)
+        except ImportError:
+            pass
 
         for module_child in vars(module).values():
             if isinstance(module_child, types.ModuleType):
