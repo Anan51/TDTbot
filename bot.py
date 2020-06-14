@@ -117,6 +117,7 @@ class MainCommands(commands.Cog):
 
     @commands.command()
     async def nou(self, ctx, channel: str = None, guild: str = None):
+        """<channel (optional)> <server (optional)> NO U"""
         if guild is None:
             guild = ctx.guild
         else:
