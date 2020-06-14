@@ -5,13 +5,6 @@ from discord.ext import commands
 from . import param
 
 
-async def last_active(member):
-    messages = await member.history(limit=1).flatten()
-    if not messages:
-        return member.joined_at
-    return messages[0].created_at
-
-
 async def find_channel(guild, name=None):
     if name is None:
         name = param.rc['channel']
