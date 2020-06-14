@@ -11,6 +11,10 @@ async def find_channel(guild, name=None):
     return [i for i in guild.channels if i.name.lower() == name.lower()][0]
 
 
+async def find_role(guild, name):
+    return [i for i in guild.roles if i.name.lower() == name.lower()][0]
+
+
 class MainCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -157,8 +161,10 @@ class Alerts(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         channel = member.guild.get_channel('Debugging')
+        roles = [await find_role(member.guild, i) for i in ["Admin", "Devoted"]]
+        roles = " ".join([i.mention for i in roles if hasattr(i, 'mention')])
         if channel is not None:
-            await channel.send('Welcome {0.mention}.'.format(member))
+            await channel.send(roles + ' new member {0.name} joined.'.format(member))
 
 
 class MainBot(commands.Bot):
