@@ -231,4 +231,8 @@ class MainBot(commands.Bot):
                                 self._last_roast = None
                                 return
                             self._last_roast = None
+            if message.channel.name in ['badass_chat', 'lfg', 'lenny_laboratory',
+                                        'manual_page', 'tdt_events', 'movie_night',
+                                        'my_games']:
+                return  # ignore commands
             await self.process_commands(message)
