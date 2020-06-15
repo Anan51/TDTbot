@@ -217,6 +217,7 @@ class MainBot(commands.Bot):
 
         @self.event
         async def on_message(message):
+            # custom non-command events
             if message.author != self.user:
                 if re.match('^[rR]+[Ee][Ee]+$',  message.content.strip()):
                     await message.channel.send(roast_str())
@@ -226,13 +227,15 @@ class MainBot(commands.Bot):
                 if old:
                     if message.author == old.author and message.channel == old.channel:
                         if (message.created_at - old.created_at).total_seconds() < 60:
-                            if message.content.strip() == 'omg':
+                            if message.content.strip() in ['omg', 'bruh']:
                                 await message.channel.send(roast_str())
                                 self._last_roast = None
                                 return
                             self._last_roast = None
+            # ignore commands from the following channels
             if message.channel.name in ['badass_chat', 'lfg', 'lenny_laboratory',
                                         'manual_page', 'tdt_events', 'movie_night',
                                         'my_games']:
-                return  # ignore commands
+                return
+            # implement standard command interface
             await self.process_commands(message)
