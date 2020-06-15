@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import datetime
 import random
+import re
 from . import param
 
 
@@ -201,6 +202,7 @@ class MainBot(commands.Bot):
         self.add_cog(MainCommands(self))
         self.add_cog(Alerts(self))
         self.add_cog(Debugging(self))
+        self._last_roast = None
 
         @self.event
         async def on_ready():
@@ -208,3 +210,25 @@ class MainBot(commands.Bot):
             activity = discord.Activity(name='UnknownElectro be a bot',
                                         type=discord.ActivityType.listening)
             await self.change_presence(activity=activity)
+
+        @self.event
+        async def on_command_error(ctx, error):
+            await ctx.send(str(error))
+
+        @self.event
+        async def on_message(message):
+            if message.author != self.user:
+                if re.match('^[rR]+[Ee][Ee]+$',  message.content.strip()):
+                    await message.channel.send(roast_str())
+                    self._last_roast = message
+                    return
+                old = self._last_roast
+                if old:
+                    if message.author == old.author and message.channel == old.channel:
+                        if (message.created_at - old.created_at).total_seconds() < 60:
+                            if message.content.strip() == 'omg':
+                                await message.channel.send(roast_str())
+                                self._last_roast = None
+                                return
+                            self._last_roast = None
+            await self.process_commands(message)
