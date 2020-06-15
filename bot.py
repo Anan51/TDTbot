@@ -203,6 +203,7 @@ class MainBot(commands.Bot):
         self.add_cog(Alerts(self))
         self.add_cog(Debugging(self))
         self._last_roast = None
+        self._nemesis = param.rc('nemesis')
 
         @self.event
         async def on_ready():
@@ -238,5 +239,12 @@ class MainBot(commands.Bot):
                                         'manual_page', 'tdt_events', 'movie_night',
                                         'my_games']:
                 return
+            # if the nemesis of this bot posts a non command message then roast them with
+            # 1/20 probability
+            if (message.author.name == self._nemesis
+                    and not message.content.startswith(self.command_prefix)):
+                if not random.randrange(20):
+                    await message.channel.send(roast_str())
+                    self._last_roast = message.author
             # implement standard command interface
             await self.process_commands(message)
