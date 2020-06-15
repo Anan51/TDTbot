@@ -219,7 +219,8 @@ class MainBot(commands.Bot):
         async def on_message(message):
             # custom non-command events
             if message.author != self.user:
-                if re.match('^[rR]+[Ee][Ee]+$',  message.content.strip()):
+                if (re.match('^[rR]+[Ee][Ee]+$',  message.content.strip())
+                        or message.content.strip() == ':lenny: :OGTriggered:'):
                     await message.channel.send(roast_str())
                     self._last_roast = message
                     return
