@@ -1,7 +1,8 @@
 import asyncio
 import discord
-import datetime
 from discord.ext import commands
+import datetime
+import random
 from . import param
 
 
@@ -13,6 +14,10 @@ async def find_channel(guild, name=None):
 
 async def find_role(guild, name):
     return [i for i in guild.roles if i.name.lower() == name.lower()][0]
+
+
+def roast_str():
+    return random.choice(param.rc['roasts'])
 
 
 class MainCommands(commands.Cog):
@@ -131,6 +136,23 @@ class MainCommands(commands.Cog):
         else:
             channel = ctx.channel
         await channel.send("NO U")
+
+    @commands.command()
+    async def roast(self, ctx, channel: str = None, guild: str = None):
+        """<channel (optional)> <server (optional)> sends random roast message"""
+        if guild is None:
+            guild = ctx.guild
+        else:
+            try:
+                guild = [i for i in self.bot.guilds if i.name == guild][0]
+            except IndexError:
+                ctx.send('ERROR: server "{0}" not found.'.format(guild))
+                return
+        if channel:
+            channel = await find_channel(guild, channel)
+        else:
+            channel = ctx.channel
+        await channel.send(roast_str())
 
 
 class Debugging(commands.Cog):
