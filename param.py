@@ -4,7 +4,7 @@ _dir = os.path.split(os.path.realpath(__file__))[0]
 
 defaults = {
     'channel': 'devoted_chat',
-    'cmd_prefix':  '$',
+    'cmd_prefix':  'TDT$',
     'config_file': os.path.join(_dir, 'tdt.rc'),
     'token_file':  os.path.join(_dir, 'token.txt'),
     'roast_file':  os.path.join(_dir, 'roasts.txt'),
