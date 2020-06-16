@@ -8,7 +8,7 @@ defaults = {
     'config_file': os.path.join(_dir, 'tdt.rc'),
     'token_file':  os.path.join(_dir, 'token.txt'),
     'roast_file':  os.path.join(_dir, 'roasts.txt'),
-    'nemeses':     'UnknownElectro#1397',
+    'nemeses':     ['UnknownElectro#1397'],
 }
 
 
