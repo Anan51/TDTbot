@@ -196,12 +196,14 @@ class Roast(commands.Cog):
             channel = await find_channel(guild, channel)
         else:
             channel = ctx.channel
-        self._last_roast = channel.fetch_message(channel.last_message_id).author
+        self._last_roast = await channel.fetch_message(channel.last_message_id)
         await channel.send(roast_str())
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author != self.user:
+        if message.content.startswith(self.bot.command_prefix):
+            return
+        if message.author != self.bot.user:
             if (re.match('^[rR]+[Ee][Ee]+$', message.content.strip())
                     or message.content.strip() == ':lenny: :OGTriggered:'):
                 await message.channel.send(roast_str())
@@ -218,12 +220,13 @@ class Roast(commands.Cog):
                         self._last_roast = None
         # if the nemesis of this bot posts a non command message then roast them with
         # 1/20 probability
-        if (message.author.name in self._nemeses
-                and not message.content.startswith(self.command_prefix)):
-            if not random.randrange(20):
-                await message.channel.send(roast_str())
-                self._last_roast = message.author
-                return
+        try:
+            if message.author.name in self._nemeses:
+                if not random.randrange(20):
+                    await message.channel.send(roast_str())
+                    self._last_roast = message.author
+        except TypeError:
+            pass
 
 
 class MainBot(commands.Bot):
