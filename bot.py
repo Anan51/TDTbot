@@ -138,23 +138,6 @@ class MainCommands(commands.Cog):
             channel = ctx.channel
         await channel.send("NO U")
 
-    @commands.command()
-    async def roast(self, ctx, channel: str = None, guild: str = None):
-        """<channel (optional)> <server (optional)> sends random roast message"""
-        if guild is None:
-            guild = ctx.guild
-        else:
-            try:
-                guild = [i for i in self.bot.guilds if i.name == guild][0]
-            except IndexError:
-                ctx.send('ERROR: server "{0}" not found.'.format(guild))
-                return
-        if channel:
-            channel = await find_channel(guild, channel)
-        else:
-            channel = ctx.channel
-        await channel.send(roast_str())
-
 
 class Debugging(commands.Cog):
     def __init__(self, bot):
@@ -192,6 +175,57 @@ class Alerts(commands.Cog):
             await channel.send(roles + ' new member {0.name} joined.'.format(member))
 
 
+class Roast(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        self._nemeses = param.rc('nemeses')
+        self._last_roast = None
+
+    @commands.command()
+    async def roast(self, ctx, channel: str = None, guild: str = None):
+        """<channel (optional)> <server (optional)> sends random roast message"""
+        if guild is None:
+            guild = ctx.guild
+        else:
+            try:
+                guild = [i for i in self.bot.guilds if i.name == guild][0]
+            except IndexError:
+                ctx.send('ERROR: server "{0}" not found.'.format(guild))
+                return
+        if channel:
+            channel = await find_channel(guild, channel)
+        else:
+            channel = ctx.channel
+        self._last_roast = channel.fetch_message(channel.last_message_id).author
+        await channel.send(roast_str())
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.author != self.user:
+            if (re.match('^[rR]+[Ee][Ee]+$', message.content.strip())
+                    or message.content.strip() == ':lenny: :OGTriggered:'):
+                await message.channel.send(roast_str())
+                self._last_roast = message
+                return
+            old = self._last_roast
+            if old:
+                if message.author == old.author and message.channel == old.channel:
+                    if (message.created_at - old.created_at).total_seconds() < 60:
+                        if message.content.strip() in ['omg', 'bruh']:
+                            await message.channel.send(roast_str())
+                            self._last_roast = None
+                            return
+                        self._last_roast = None
+        # if the nemesis of this bot posts a non command message then roast them with
+        # 1/20 probability
+        if (message.author.name in self._nemeses
+                and not message.content.startswith(self.command_prefix)):
+            if not random.randrange(20):
+                await message.channel.send(roast_str())
+                self._last_roast = message.author
+                return
+
+
 class MainBot(commands.Bot):
     def __init__(self, *args, **kwargs):
         if 'command_prefix' not in kwargs:
@@ -202,8 +236,7 @@ class MainBot(commands.Bot):
         self.add_cog(MainCommands(self))
         self.add_cog(Alerts(self))
         self.add_cog(Debugging(self))
-        self._last_roast = None
-        self._nemesis = param.rc('nemesis')
+        self.add_cog(Roast(self))
 
         @self.event
         async def on_ready():
@@ -218,33 +251,10 @@ class MainBot(commands.Bot):
 
         @self.event
         async def on_message(message):
-            # custom non-command events
-            if message.author != self.user:
-                if (re.match('^[rR]+[Ee][Ee]+$',  message.content.strip())
-                        or message.content.strip() == ':lenny: :OGTriggered:'):
-                    await message.channel.send(roast_str())
-                    self._last_roast = message
-                    return
-                old = self._last_roast
-                if old:
-                    if message.author == old.author and message.channel == old.channel:
-                        if (message.created_at - old.created_at).total_seconds() < 60:
-                            if message.content.strip() in ['omg', 'bruh']:
-                                await message.channel.send(roast_str())
-                                self._last_roast = None
-                                return
-                            self._last_roast = None
             # ignore commands from the following channels
             if message.channel.name in ['badass_chat', 'lfg', 'lenny_laboratory',
                                         'manual_page', 'tdt_events', 'movie_night',
                                         'my_games']:
                 return
-            # if the nemesis of this bot posts a non command message then roast them with
-            # 1/20 probability
-            if (message.author.name == self._nemesis
-                    and not message.content.startswith(self.command_prefix)):
-                if not random.randrange(20):
-                    await message.channel.send(roast_str())
-                    self._last_roast = message.author
             # implement standard command interface
             await self.process_commands(message)
