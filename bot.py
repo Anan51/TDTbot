@@ -202,7 +202,7 @@ class Roast(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.content.startswith(self.bot.command_prefix):
-            return
+            return  # await self.bot.on_message(message)
         if message.author != self.bot.user:
             if (re.match('^[rR]+[Ee][Ee]+$', message.content.strip())
                     or message.content.strip() == ':lenny: :OGTriggered:'):
@@ -227,6 +227,7 @@ class Roast(commands.Cog):
                     self._last_roast = message.author
         except TypeError:
             pass
+        return
 
 
 class MainBot(commands.Bot):
@@ -243,7 +244,8 @@ class MainBot(commands.Bot):
 
         @self.event
         async def on_ready():
-            print('We have logged in as {0.user}'.format(self))
+            msg = 'We have logged in as {0.user}, running {1.__version__}'
+            print(msg.format(self, discord))
             activity = discord.Activity(name='UnknownElectro be a bot',
                                         type=discord.ActivityType.listening)
             await self.change_presence(activity=activity)
