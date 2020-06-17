@@ -170,6 +170,40 @@ class Debugging(commands.Cog):
         print('\nRebooting\n\n\n\n')
         await self.bot.loop.run_until_complete(self.bot.logout())
 
+    @commands.command()
+    async def channel_id(self, ctx, channel: str = None, guild: str = None):
+        """<channel (optional)> <server (optional)> sends random roast message"""
+        if guild is None:
+            guild = ctx.guild
+        else:
+            try:
+                guild = [i for i in self.bot.guilds if i.name == guild][0]
+            except IndexError:
+                ctx.send('ERROR: server "{0}" not found.'.format(guild))
+                return
+        if channel:
+            channel = await find_channel(guild, channel)
+        else:
+            channel = ctx.channel
+        await ctx.send('Channel "{0.name}" has id {0.id}.'.format(channel))
+
+    @commands.command()
+    async def member_id(self, ctx, member: str = None, guild: str = None):
+        """<channel (optional)> <server (optional)> sends random roast message"""
+        if guild is None:
+            guild = ctx.guild
+        else:
+            try:
+                guild = [i for i in self.bot.guilds if i.name == guild][0]
+            except IndexError:
+                ctx.send('ERROR: server "{0}" not found.'.format(guild))
+                return
+        if member:
+            member = await guild.get_member_named(member)
+        else:
+            member = ctx.author
+        await ctx.send('{0.name} has id {0.id}.'.format(member))
+
 
 class Alerts(commands.Cog):
     def __init__(self, bot):
@@ -238,6 +272,13 @@ class Roast(commands.Cog):
         except TypeError:
             pass
         return
+
+
+class Events(commands.Cog):
+    def __init__(self, bot, channel=None):
+        self.bot = bot
+        if channel is None:
+            channel = param.rc('event_channel')
 
 
 class MainBot(commands.Bot):
