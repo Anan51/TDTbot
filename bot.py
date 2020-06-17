@@ -273,3 +273,8 @@ class MainBot(commands.Bot):
                 return
             # implement standard command interface
             await self.process_commands(message)
+
+    async def bot_check(self, ctx):
+        if ctx.channel.name in param.rc('ignore_list'):
+            return False
+        return True
