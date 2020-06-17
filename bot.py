@@ -264,16 +264,6 @@ class MainBot(commands.Bot):
         async def on_command_error(ctx, error):
             await ctx.send(str(error))
 
-        @self.event
-        async def on_message(message):
-            # ignore commands from the following channels
-            if message.channel.name in ['badass_chat', 'lfg', 'lenny_laboratory',
-                                        'manual_page', 'tdt_events', 'movie_night',
-                                        'my_games']:
-                return
-            # implement standard command interface
-            await self.process_commands(message)
-
     async def bot_check(self, ctx):
         if ctx.channel.name in param.rc('ignore_list'):
             return False
