@@ -199,7 +199,7 @@ class Debugging(commands.Cog):
                 ctx.send('ERROR: server "{0}" not found.'.format(guild))
                 return
         if member:
-            member = await guild.get_member_named(member)
+            member = guild.get_member_named(member)
         else:
             member = ctx.author
         await ctx.send('{0.name} has id {0.id}.'.format(member))
