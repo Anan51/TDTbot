@@ -143,6 +143,16 @@ class Debugging(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    async def cog_check(self, ctx):
+        a = ctx.author
+        if a.roles[0].name in ['Admin', 'Devoted']:
+            return True
+        if await self.bot.is_owner(a):
+            return True
+        if ctx.guild.owner == a:
+            return True
+        return False
+
     @commands.command()
     async def RuntimeError(self, ctx):
         """Raise a runtime error (because why not)"""
