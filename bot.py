@@ -2,6 +2,7 @@ import asyncio
 import discord
 from discord.ext import commands
 import datetime
+import pytz
 import random
 import re
 from . import param
@@ -246,22 +247,24 @@ class Roast(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.content.startswith(self.bot.command_prefix):
-            return  # await self.bot.on_message(message)
-        if message.author != self.bot.user:
-            if (re.match('^[rR]+[Ee][Ee]+$', message.content.strip())
-                    or message.content.strip() == ':lenny: :OGTriggered:'):
-                await message.channel.send(roast_str())
-                self._last_roast = message
-                return
-            old = self._last_roast
-            if old:
-                if message.author == old.author and message.channel == old.channel:
-                    if (message.created_at - old.created_at).total_seconds() < 60:
-                        if message.content.strip() in ['omg', 'bruh']:
-                            await message.channel.send(roast_str())
-                            self._last_roast = None
-                            return
+            return
+        if message.author == self.bot.user:
+            return
+        triggers = ['<:lenny:333101455856762890> <:OGTriggered:433210982647595019>']
+        if (re.match('^[rR]+[Ee][Ee]+$', message.content.strip())
+                or message.content.strip() in triggers):
+            await message.channel.send(roast_str())
+            self._last_roast = message
+            return
+        old = self._last_roast
+        if old:
+            if message.author == old.author and message.channel == old.channel:
+                if (message.created_at - old.created_at).total_seconds() < 60:
+                    if message.content.strip() in ['omg', 'bruh']:
+                        await message.channel.send(roast_str())
                         self._last_roast = None
+                        return
+                    self._last_roast = None
         # if the nemesis of this bot posts a non command message then roast them with
         # 1/20 probability
         try:
@@ -274,12 +277,99 @@ class Roast(commands.Cog):
         return
 
 
+def parse_event(message):
+    tz = pytz.timezone('America/Los_Angeles')
+    lines = [i.strip() for i in message.content.split('\n')]
+    if len(lines) < 5:
+        return 'len < 5'
+    out = dict(message=message)
+    out['name'] = lines[0]
+    keys = ['who', 'what', 'when']
+    for line in lines[1:4]:
+        try:
+            key, value = [i.strip() for i in line.split(':')]
+        except IndexError:
+            return 'key, value error'
+        if key.lower() not in keys:
+            return 'kew without lowe'
+        out[key.lower()] = value
+    for key in keys:
+        if key not in out:
+            return 'key not in out'
+    out['enroll'] = '\n'.join(lines[4:])
+    days_of_week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday',
+                    'sunday']
+    day = None
+    for d in days_of_week:
+        if d in out['when'].lower():
+            day = d
+            break
+    if not day:
+        return 'no day'
+    today = datetime.datetime.now(tz=tz).date()
+    i = 0
+    while (today + datetime.timedelta(days=i)).weekday() != days_of_week.index(day):
+        i += 1
+    day = today + datetime.timedelta(days=i)
+    t = None
+    # parse date/time
+    if ':' in out['when']:
+        try:
+            time = re.findall('\d+:\d+[ ]?[ap]m', out['when'].lower())[0]
+            fmt = '%I:%M %p' if ' ' in time else '%I:%M%p'
+            t = datetime.datetime.strptime(time, fmt)
+        except IndexError:
+            t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0],
+                                           '%H:%M')
+            if 'night' in out['when'].lower() and t.hour < 12:
+                t += datetime.timedelta(hours=12)
+            elif t.hour < 8 and 'morning' not in out['when'].lower():
+                t += datetime.timedelta(hours=12)
+    else:
+        try:
+            time = re.findall('\d+[ ]?[ap]m', out['when'].lower())[0]
+            fmt = '%I %p' if ' ' in time else '%I%p'
+            t = datetime.datetime.strptime(time, fmt)
+        except IndexError:
+            t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0], '%H')
+            if 'night' in out['when'].lower() and t.hour < 12:
+                t += datetime.timedelta(hours=12)
+            elif t.hour < 8 and 'morning' not in out['when'].lower():
+                t += datetime.timedelta(hours=12)
+    if not t:
+        return 'no t'
+    out['datetime'] = datetime.datetime.combine(day, t.time())
+    out['dt_str'] = out['datetime'].strftime('%X %A %x')
+    msg = 'Event "{name}" registered for {dt_str}'.format(**out)
+    print(out)
+    return msg
+
+
 class Events(commands.Cog):
     def __init__(self, bot, channel=None):
         self.bot = bot
         if channel is None:
             channel = param.rc('event_channel')
+        self.channel = channel
 
+    def is_event_channel(self, channel):
+        if type(self.channel) == int:
+            return channel.id == self.channel
+        if hasattr(self.channel, "lower"):
+            print(channel.name, self.channel)
+            return channel.name == self.channel
+        return channel == self.channel
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.author == self.bot.user:
+            return
+        if message.content.startswith(self.bot.command_prefix):
+            return
+        if self.is_event_channel(message.channel):
+            event = parse_event(message)
+            if event:
+                await message.channel.send(event)
 
 class MainBot(commands.Bot):
     def __init__(self, *args, **kwargs):
@@ -292,6 +382,7 @@ class MainBot(commands.Bot):
         self.add_cog(Alerts(self))
         self.add_cog(Debugging(self))
         self.add_cog(Roast(self))
+        # self.add_cog(Events(self))
 
         @self.event
         async def on_ready():

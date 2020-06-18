@@ -3,14 +3,16 @@ import os
 _dir = os.path.split(os.path.realpath(__file__))[0]
 
 defaults = {
-    'channel': 'devoted_chat',
-    'cmd_prefix':  'TDT$',
-    'config_file': os.path.join(_dir, 'tdt.rc'),
-    'token_file':  os.path.join(_dir, 'token.txt'),
-    'roast_file':  os.path.join(_dir, 'roasts.txt'),
-    'nemeses':     ['UnknownElectro#1397'],
-    'ignore_list': ['badass_chat', 'lfg', 'lenny_laboratory', 'manual_page', 'tdt_events',
-                    'movie_night', 'my_games'],
+    'channel':       'devoted_chat',
+    'cmd_prefix':    'TDT$',
+    'config_file':   os.path.join(_dir, 'tdt.rc'),
+    'token_file':    os.path.join(_dir, 'token.txt'),
+    'roast_file':    os.path.join(_dir, 'roasts.txt'),
+    'nemeses':       ['UnknownElectro#1397'],
+    'ignore_list':   ['badass_chat', 'lfg', 'lenny_laboratory', 'manual_page',
+                      'tdt_events', 'movie_night', 'my_games'],
+    'event_channel':  'test',  # 637134842911260673,
+    'log_channel':    'debugging'
 }
 
 
