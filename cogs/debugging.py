@@ -75,7 +75,6 @@ class Debugging(commands.Cog):
         """Do a git pull on own code"""
         git_manage.update()
 
-
     @commands.command(hidden=True)
     async def reload_cogs(self, ctx, option=None):
         """Reloads all cogs that were added as extensions"""
