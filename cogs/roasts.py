@@ -7,7 +7,7 @@ from ..helpers import *
 
 
 def roast_str():
-    return random.choice(param.rc['roasts'])
+    return random.choice(param.rc('roasts'))
 
 
 class Roast(commands.Cog):

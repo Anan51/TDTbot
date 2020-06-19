@@ -14,7 +14,7 @@ def cog_list():
 class MainBot(commands.Bot):
     def __init__(self, *args, **kwargs):
         if 'command_prefix' not in kwargs:
-            kwargs['command_prefix'] = param.rc['cmd_prefix']
+            kwargs['command_prefix'] = param.rc('cmd_prefix')
         if 'loop' not in kwargs:
             kwargs['loop'] = asyncio.new_event_loop()
         super().__init__(*args, **kwargs)
