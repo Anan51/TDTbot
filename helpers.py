@@ -5,7 +5,8 @@ def find_channel(guild, name=None):
     if name is None:
         name = _rc('channel')
     try:
-        return [i for i in guild.channels if i.name.lower() == name.lower()][0]
+        return [i for i in guild.channels
+                if i.name.lower().strip() == name.lower().strip()][0]
     except IndexError:
         return
 

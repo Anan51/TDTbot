@@ -22,18 +22,14 @@ async def wait_until(dt):
 
 
 class _Event(dict):
-    def __init__(self, message, log_channel=None, cog=None):
+    def __init__(self, message, cog, log_channel=None):
         super().__init__()
         self.cog = cog
         self.message = message
         self._pending_alerts = True
         if log_channel is None:
             log_channel = param.rc('log_channel')
-        if hasattr(log_channel, 'lower'):
-            log_channel = find_channel(message.guild, log_channel)
-        elif type(log_channel) == int:
-            cog.bot.get_channel(log_channel)
-        self.log_channel = log_channel
+        self.log_channel = self.cog.bot.find_channel(log_channel)
         tz = pytz.timezone('America/Los_Angeles')
         lines = [i.strip() for i in message.content.split('\n')]
         if len(lines) < 5:
@@ -114,10 +110,12 @@ class _Event(dict):
     def id(self):
         return self['message'].id
 
-    async def msg_log(self):
+    async def record_log(self, log_channel=None):
         after = self['datetime'] - datetime.timedelta(days=6, hours=23)
         log = self.log_message
-        async for msg in self.log_channel.history(limit=200, after=after):
+        if log_channel is None:
+            log_channel = self.log_channel
+        async for msg in log_channel.history(limit=200, after=after):
             if msg.content == log:
                 return
         await self.log_channel.send(log)
@@ -139,6 +137,7 @@ class _Event(dict):
     async def alert(self, dt_min=None, channel=None, suffix=None, wait=True):
         if channel is None:
             channel = getattr(self.cog, 'channel', param.rc('event_channel'))
+        channel = self.cog.bot.find_channel(channel)
         if suffix is None:
             if dt_min is None:
                 suffix = " your event is approaching."
@@ -162,13 +161,28 @@ class _Event(dict):
             self.cog.bot.loop.create_task(self.alert(dt, channel=channel))
         self._pending_alerts = True
 
+    async def log_and_alert(self, dts=None, event_chanel=None, log_channel=None):
+        await self.record_log(log_channel=log_channel)
+        self.set_alerts(dts=dts, channel=event_chanel)
+
 
 class Events(commands.Cog):
     def __init__(self, bot, channel=None):
         self.bot = bot
         if channel is None:
             channel = param.rc('event_channel')
-        self.channel = channel
+        self._channel = channel
+        self._events = []
+        self._hist_checked = False
+
+    @property
+    def channel(self):
+        if hasattr(self._channel, 'id'):
+            return self._channel
+        channel = self.bot.find_channel(self._channel)
+        if channel:
+            self._channel = channel
+            return channel
 
     def is_event_channel(self, channel):
         if type(self.channel) == int:
@@ -181,12 +195,38 @@ class Events(commands.Cog):
     async def on_message(self, message):
         if message.author == self.bot.user:
             return
+        if not self._hist_checked:
+            await self.check_history()
         if message.content.startswith(self.bot.command_prefix):
             return
         if self.is_event_channel(message.channel):
-            event = _Event(message, cog=self)
+            event = _Event(message, self)
             if event:
-                await event.msg_log()
+                if event not in self._events:
+                    self._events.append(event)
+                    await event.log_and_alert(event_chanel=self.channel)
+
+    async def check_history(self, channel=None):
+        if channel is None:
+            channel = self.channel
+        after = datetime.datetime.now() - datetime.timedelta(days=6, hours=23)
+        async for i in channel.history(after=after, limit=200):
+            event = _Event(i, self)
+            if event:
+                if event not in self._events:
+                    self._events.append(event)
+                    await event.log_and_alert(event_chanel=channel)
+        await channel.send('History parsed.')
+        self._hist_checked = True
+
+    @commands.command()
+    async def print_events(self, ctx):
+        msg = '{0}) {1.log_message}'
+        msg = '\n'.join([msg.format(i, e) for i, e in enumerate(self._events)])
+        if msg:
+            await ctx.send(msg)
+        else:
+            ctx.send('No events.')
 
 
 def setup(bot):
