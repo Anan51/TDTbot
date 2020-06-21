@@ -11,7 +11,7 @@ defaults = {
     'nemeses':         ['UnknownElectro#1397'],
     'ignore_list':     ['badass_chat', 'lfg', 'lenny_laboratory', 'manual_page',
                         'tdt_events', 'movie_night', 'my_games'],
-    'event_channel':   637134842911260673,
+    'event_channel':   'tdt_events',
     'log_channel':     'debugging',
     'event_reminders': [60, 0],
 }
