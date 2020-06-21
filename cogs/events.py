@@ -167,11 +167,14 @@ class _Event(dict):
 
 
 class Events(commands.Cog):
-    def __init__(self, bot, channel=None):
+    def __init__(self, bot, channel=None, log_channel=None):
         self.bot = bot
         if channel is None:
             channel = param.rc('event_channel')
         self._channel = channel
+        if log_channel is None:
+            log_channel = param.rc('log_channel')
+        self._log_channel = log_channel
         self._events = []
         self._hist_checked = False
 
@@ -182,6 +185,15 @@ class Events(commands.Cog):
         channel = self.bot.find_channel(self._channel)
         if channel:
             self._channel = channel
+            return channel
+
+    @property
+    def log_channel(self):
+        if hasattr(self._log_channel, 'id'):
+            return self._log_channel
+        channel = self.bot.find_channel(self._log_channel)
+        if channel:
+            self._log_channel = channel
             return channel
 
     def is_event_channel(self, channel):
@@ -216,7 +228,7 @@ class Events(commands.Cog):
                 if event not in self._events:
                     self._events.append(event)
                     await event.log_and_alert(event_chanel=channel)
-        await channel.send('History parsed.')
+        await self.log_channel.send('History parsed.')
         self._hist_checked = True
 
     @commands.command()
