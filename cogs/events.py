@@ -25,7 +25,6 @@ class _Event(dict):
     def __init__(self, message, cog, log_channel=None):
         super().__init__()
         self.cog = cog
-        self.message = message
         self._pending_alerts = True
         if log_channel is None:
             log_channel = param.rc('log_channel')
@@ -34,7 +33,8 @@ class _Event(dict):
         lines = [i.strip() for i in message.content.split('\n')]
         if len(lines) < 5:
             return
-        out = dict(message=message)
+        out = dict(id=message.id)
+        self._message_channel = message.channel
         out['name'] = lines[0]
         keys = ['who', 'what', 'when']
         for line in lines[1:4]:
@@ -94,6 +94,9 @@ class _Event(dict):
         self.update(out)
         return
 
+    async def message(self):
+        return await self._message_channel.fetch_message(self['id'])
+
     @property
     def dt_str(self):
         return self['datetime'].strftime('%X %A %x')
@@ -108,7 +111,7 @@ class _Event(dict):
 
     @property
     def id(self):
-        return self['message'].id
+        return self['id']
 
     async def record_log(self, log_channel=None):
         after = self['datetime'] - datetime.timedelta(days=6, hours=23)
@@ -123,16 +126,12 @@ class _Event(dict):
     def past(self):
         return self['datetime'] < datetime.datetime.now()
 
-    async def update_message(self):
-        self['message'] = await self['message'].channel.fetch_message(self.id)
-
     async def attendees(self):
-        await self.update_message()
-        msg = self.message
+        msg = await self.message()
         out = []
         for rxn in msg.reactions:
             out.extend(await rxn.users().flatten())
-        return out
+        return set(out)
 
     async def alert(self, dt_min=None, channel=None, suffix=None, wait=True):
         if channel is None:
@@ -231,14 +230,31 @@ class Events(commands.Cog):
         await self.log_channel.send('History parsed.')
         self._hist_checked = True
 
-    @commands.command()
-    async def print_events(self, ctx):
-        msg = '{0}) {1.log_message}'
-        msg = '\n'.join([msg.format(i, e) for i, e in enumerate(self._events)])
+    @commands.group()
+    async def events(self, ctx):
+        """<"attendees"> Lists events and optionally attendees."""
+        if ctx.invoked_subcommand is None:
+            msg = '{0}) {1.log_message}'
+            msg = '\n'.join([msg.format(i + 1, e) for i, e in enumerate(self._events)])
+            if msg:
+                await ctx.send(msg)
+            else:
+                ctx.send('No events.')
+
+    @events.command()
+    async def attendees(self, ctx):
+        msg = []
+        fmt = '{0}) {1.name}: {2}'
+        for i, e in enumerate(self._events):
+            message = await e.message()
+            print(e.name, message.reactions)
+            users = [j.display_name for j in await e.attendees()]
+            msg.append(fmt.format(i, e, ', '.join(users)))
+        msg = '\n'.join(msg)
         if msg:
             await ctx.send(msg)
         else:
-            ctx.send('No events.')
+            await ctx.send('No events.')
 
 
 def setup(bot):

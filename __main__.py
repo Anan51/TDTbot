@@ -1,7 +1,10 @@
 import argparse
 import sys
 import time
+import tracemalloc
 from . import param, bot, git_manage, reloader
+
+tracemalloc.start()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--config',

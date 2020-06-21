@@ -50,4 +50,3 @@ class MainBot(commands.Bot):
                 return out[0]
         if hasattr(channel, 'id'):
             return channel
-        raise KeyboardInterrupt
