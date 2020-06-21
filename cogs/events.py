@@ -4,6 +4,7 @@ from discord.ext import commands
 import datetime
 import pytz
 import re
+import traceback
 from .. import param
 from ..helpers import *
 
@@ -11,7 +12,7 @@ from ..helpers import *
 async def wait_until(dt):
     """sleep until the specified datetime"""
     while True:
-        now = datetime.datetime.now()
+        now = datetime.datetime.utcnow()
         remaining = (dt - now).total_seconds()
         if remaining < 86400:
             break
@@ -25,18 +26,11 @@ class _Event(dict):
     """A class to contain event info (dict subclass)."""
     def __init__(self, message, cog, log_channel=None):
         super().__init__()
-        self.cog = cog
-        self._pending_alerts = True
-        if log_channel is None:
-            log_channel = param.rc('log_channel')
-        self.log_channel = self.cog.bot.find_channel(log_channel)
-        tz = pytz.timezone('America/Los_Angeles')
-        out = dict(id=message.id)
-        self._message_channel = message.channel
         # start parsing message for event info
         lines = [i.strip() for i in message.content.split('\n')]
         if len(lines) < 5:
             return
+        out = dict()
         out['name'] = lines[0]
         keys = ['who', 'what', 'when']  # check for and get these
         for line in lines[1:4]:
@@ -60,13 +54,25 @@ class _Event(dict):
                 break
         if not day:
             return
-        now = datetime.datetime.now(tz=tz)
-        today = now.date()
+        # We only get this far if we have a valid event, so set attributes now
+        self.cog = cog
+        self._pending_alerts = True
+        if log_channel is None:
+            log_channel = param.rc('log_channel')
+        self.log_channel = self.cog.bot.find_channel(log_channel)
+        tz = pytz.timezone(param.rc('timezone'))
+        self.tz = tz
+        out['id'] = message.id
+        self._message_channel = message.channel
+        # Attributes finished now deal with timezone crap
+        now = datetime.datetime.now().astimezone(tz).replace(tzinfo=None)
+        today = now.date()  # today in server timezone
         i = 0
+        # parse day of week into datetime
         while (today + datetime.timedelta(days=i)).weekday() != days_of_week.index(day):
             i += 1
         day = today + datetime.timedelta(days=i)
-        # parse date/time
+        # parse time text
         if ':' in out['when']:
             try:
                 time = re.findall('\d+:\d+[ ]?[ap]m', out['when'].lower())[0]
@@ -93,7 +99,9 @@ class _Event(dict):
                     t += datetime.timedelta(hours=12)
         if not t:
             return
-        out['datetime'] = datetime.datetime.combine(day, t.time(), tzinfo=now.tzinfo)
+        dt = tz.localize(datetime.datetime.combine(day, t.time()))
+        out['datetime'] = dt.astimezone(pytz.utc).replace(tzinfo=None)
+        # put the contents of out into self
         self.update(out)
         return
 
@@ -105,7 +113,8 @@ class _Event(dict):
     @property
     def dt_str(self):
         """Datetime string for this event"""
-        return self['datetime'].strftime('%X %A %x')
+        dt = pytz.utc.localize(self['datetime'])
+        return dt.astimezone(self.tz).strftime('%X %A %x')
 
     @property
     def name(self):
@@ -124,8 +133,7 @@ class _Event(dict):
 
     async def record_log(self, log_channel=None):
         """Record the log message in the log channel if it's not there already"""
-        after = self['datetime'].replace(tzinfo=None)
-        after -= datetime.timedelta(days=6, hours=23)
+        after = self['datetime'] - datetime.timedelta(days=6, hours=23)
         log = self.log_message
         if log_channel is None:
             log_channel = self.log_channel
@@ -137,7 +145,7 @@ class _Event(dict):
 
     def past(self):
         """Is this event in the past?"""
-        return self['datetime'] < datetime.datetime.now()
+        return self['datetime'] < datetime.datetime.utcnow()
 
     async def attendees(self):
         """Return set of enrolled attendees"""
@@ -218,6 +226,17 @@ class Events(commands.Cog):
             self._log_channel = channel
             return channel
 
+    @property
+    def event_list(self):
+        """Return a list of active events still to happen"""
+        return [e for e in self._events if not e.past()]
+    
+    def cleanse_old(self):
+        """Remove past events"""
+        old = [e for e in self._events if e.past()]
+        for e in old:
+            self._events.remove(e)
+
     def is_event_channel(self, channel):
         """Is the given channel the event channel"""
         if type(self.channel) == int:
@@ -253,7 +272,7 @@ class Events(commands.Cog):
         if channel is None:
             channel = self.channel
         # only check the last week
-        after = datetime.datetime.now() - datetime.timedelta(days=6, hours=23)
+        after = datetime.datetime.utcnow() - datetime.timedelta(days=6, hours=23)
         async for i in channel.history(after=after, limit=200):
             event = _Event(i, self)
             # if valid event
@@ -269,18 +288,18 @@ class Events(commands.Cog):
         """<"attendees"> Lists events and optionally attendees."""
         if ctx.invoked_subcommand is None:
             msg = '{0}) {1.log_message}'
-            msg = '\n'.join([msg.format(i + 1, e) for i, e in enumerate(self._events)])
+            msg = '\n'.join([msg.format(i + 1, e) for i, e in enumerate(self.event_list)])
             if msg:
                 await ctx.send(msg)
             else:
-                ctx.send('No events.')
+                await ctx.send('No events.')
 
     @events.command()
     async def attendees(self, ctx):
         """Prints event attendees. Subcommand of events; usage 'TDT$events attendees'"""
         msg = []
         fmt = '{0}) {1.name}: {2}'
-        for i, e in enumerate(self._events):
+        for i, e in enumerate(self.event_list):
             message = await e.message()
             users = [j.display_name for j in await e.attendees()]
             msg.append(fmt.format(i + 1, e, ', '.join(users)))
@@ -289,6 +308,26 @@ class Events(commands.Cog):
             await ctx.send(msg)
         else:
             await ctx.send('No events.')
+
+    @events.command()
+    async def dt(self, ctx):
+        """Prints time until events. Subcommand of events; usage 'TDT$events dt'"""
+        try:
+            msg = []
+            now = datetime.datetime.utcnow()
+            fmt = '{0}) {1.name}: {2}'
+            for i, e in enumerate(sorted(self.event_list, key=lambda x: x['datetime'])):
+                dt = e['datetime'] - now
+                msg.append(fmt.format(i + 1, e, dt))
+            msg = '\n'.join(msg)
+            if msg:
+                await ctx.send(msg)
+            else:
+                await ctx.send('No events.')
+        except Exception as e:
+            print(e)
+            print(''.join(traceback.format_tb(e.__traceback__)))
+            raise e
 
 
 def setup(bot):

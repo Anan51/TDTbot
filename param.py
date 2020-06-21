@@ -14,6 +14,7 @@ defaults = {
     'event_channel':   'tdt_events',
     'log_channel':     'debugging',
     'event_reminders': [60, 0],
+    'timezone':        'America/Los_Angeles',
 }
 
 
