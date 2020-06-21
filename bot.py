@@ -4,6 +4,7 @@ from discord.ext import commands
 from glob import glob
 import os
 from . import param
+from . import helpers
 
 
 def cog_list():
@@ -24,7 +25,7 @@ class MainBot(commands.Bot):
 
         @self.event
         async def on_ready():
-            msg = 'We have logged in as {0.user}, running {1.__version__}'
+            msg = 'We have logged in as {0.user}, running discord.py {1.__version__}'
             print(msg.format(self, discord))
             activity = discord.Activity(name='UnknownElectro be a bot',
                                         type=discord.ActivityType.listening)
@@ -38,3 +39,15 @@ class MainBot(commands.Bot):
         if ctx.channel.name in param.rc('ignore_list'):
             return False
         return True
+
+    def find_channel(self, channel):
+        if type(channel) == int:
+            return self.get_channel(int)
+        if hasattr(channel, 'lower'):
+            out = [helpers.find_channel(i, channel) for i in self.guilds]
+            out = [i for i in out if i]
+            if out:
+                return out[0]
+        if hasattr(channel, 'id'):
+            return channel
+        raise KeyboardInterrupt
