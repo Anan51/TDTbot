@@ -249,7 +249,7 @@ class Events(commands.Cog):
             message = await e.message()
             print(e.name, message.reactions)
             users = [j.display_name for j in await e.attendees()]
-            msg.append(fmt.format(i, e, ', '.join(users)))
+            msg.append(fmt.format(i + 1, e, ', '.join(users)))
         msg = '\n'.join(msg)
         if msg:
             await ctx.send(msg)
