@@ -14,7 +14,6 @@ async def wait_until(dt):
     while True:
         now = datetime.datetime.utcnow()
         remaining = (dt - now).total_seconds()
-        print(str(dt - now))
         if remaining < 86400:
             break
         # asyncio.sleep doesn't like long sleeps, so don't sleep more than a day at a time
@@ -169,10 +168,12 @@ class _Event(dict):
         """Schedule/send event alerts mentioning all attendees.
         option dt_min is time before event in minutes.
         """
-        print("In alert")
         if channel is None:
             channel = getattr(self.cog, 'channel', param.rc('event_channel'))
         channel = self.cog.bot.find_channel(channel)
+        dt = self['datetime'] - datetime.timedelta(minutes=dt_min)
+        if dt < datetime.timedelta():
+            dt_min = dt.seconds // 60
         if suffix is None:
             if dt_min is None:
                 suffix = " your event is approaching."
@@ -182,16 +183,14 @@ class _Event(dict):
                 suffix = " your event is starting in {:d} hour(s).".format(dt_min // 60)
             else:
                 suffix = " your event is starting in {:d} minute(s).".format(dt_min)
-        print(self.name, "alert", dt_min)
         if wait:
-            await wait_until(self['datetime'] - datetime.timedelta(minutes=dt_min))
+            await wait_until(dt)
         msg = ' '.join([i.mention for i in await self.attendees()]) + suffix
         await channel.send(msg)
 
     def set_alerts(self, dts=None, channel=None):
         """Set multiple alerts for list of dt (in minutes)"""
         if self._pending_alerts:
-            print("pending alerts")
             return
         if dts is None:
             dts = param.rc('event_reminders')
