@@ -169,6 +169,7 @@ class _Event(dict):
         """Schedule/send event alerts mentioning all attendees.
         option dt_min is time before event in minutes.
         """
+        print("In alert")
         if channel is None:
             channel = getattr(self.cog, 'channel', param.rc('event_channel'))
         channel = self.cog.bot.find_channel(channel)
@@ -190,6 +191,7 @@ class _Event(dict):
     def set_alerts(self, dts=None, channel=None):
         """Set multiple alerts for list of dt (in minutes)"""
         if self._pending_alerts:
+            print("pending alerts")
             return
         if dts is None:
             dts = param.rc('event_reminders')
