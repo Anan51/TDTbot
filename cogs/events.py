@@ -14,6 +14,7 @@ async def wait_until(dt):
     while True:
         now = datetime.datetime.utcnow()
         remaining = (dt - now).total_seconds()
+        print(str(dt - now))
         if remaining < 86400:
             break
         # asyncio.sleep doesn't like long sleeps, so don't sleep more than a day at a time
@@ -180,6 +181,7 @@ class _Event(dict):
                 suffix = " your event is starting in {:d} hour(s).".format(dt_min // 60)
             else:
                 suffix = " your event is starting in {:d} minute(s).".format(dt_min // 60)
+        print(self.name, "alert", dt_min)
         if wait:
             await wait_until(self['datetime'] - datetime.timedelta(minutes=dt_min))
         msg = ' '.join([i.mention for i in await self.attendees()]) + suffix
