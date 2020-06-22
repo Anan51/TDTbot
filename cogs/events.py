@@ -10,14 +10,13 @@ from ..helpers import *
 
 
 async def wait_until(dt):
-    """sleep until the specified datetime"""
+    """sleep until the specified datetime (assumes UTC)"""
     while True:
         now = datetime.datetime.utcnow()
         remaining = (dt - now).total_seconds()
         if remaining < 86400:
             break
-        # asyncio.sleep doesn't like long sleeps, so don't sleep more
-        # than a day at a time
+        # asyncio.sleep doesn't like long sleeps, so don't sleep more than a day at a time
         await asyncio.sleep(86400)
     await asyncio.sleep(remaining)
 
@@ -44,7 +43,9 @@ class _Event(dict):
         for key in keys:
             if key not in out:
                 return
+        # text saying how to enroll in event
         out['enroll'] = '\n'.join(lines[4:])
+        # parse day of week
         days_of_week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday',
                         'saturday', 'sunday']
         day = None
@@ -68,7 +69,7 @@ class _Event(dict):
         now = datetime.datetime.now().astimezone(tz).replace(tzinfo=None)
         today = now.date()  # today in server timezone
         i = 0
-        # parse day of week into datetime
+        # parse day of week into datetime and assume it's the next day with given name
         while (today + datetime.timedelta(days=i)).weekday() != days_of_week.index(day):
             i += 1
         day = today + datetime.timedelta(days=i)
@@ -79,18 +80,21 @@ class _Event(dict):
                 fmt = '%I:%M %p' if ' ' in time else '%I:%M%p'
                 t = datetime.datetime.strptime(time, fmt)
             except IndexError:
+                # if am/pm not provided
                 t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0],
                                                '%H:%M')
                 if 'night' in out['when'].lower() and t.hour < 12:
                     t += datetime.timedelta(hours=12)
                 elif t.hour < 8 and 'morning' not in out['when'].lower():
                     t += datetime.timedelta(hours=12)
+        # no ":" in text so no hour/minute separator
         else:
             try:
                 time = re.findall('\d+[ ]?[ap]m', out['when'].lower())[0]
                 fmt = '%I %p' if ' ' in time else '%I%p'
                 t = datetime.datetime.strptime(time, fmt)
             except IndexError:
+                # if am/pm not provided
                 t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0],
                                                '%H')
                 if 'night' in out['when'].lower() and t.hour < 12:
@@ -99,7 +103,9 @@ class _Event(dict):
                     t += datetime.timedelta(hours=12)
         if not t:
             return
+        # make sure datetime is specified with server timezone
         dt = tz.localize(datetime.datetime.combine(day, t.time()))
+        # convert it to UTC and strip timezone info (required by external libs)
         out['datetime'] = dt.astimezone(pytz.utc).replace(tzinfo=None)
         # put the contents of out into self
         self.update(out)
@@ -113,7 +119,9 @@ class _Event(dict):
     @property
     def dt_str(self):
         """Datetime string for this event"""
+        # assign UTC timezone to datetime object
         dt = pytz.utc.localize(self['datetime'])
+        # convert to server timezone
         return dt.astimezone(self.tz).strftime('%X %A %x')
 
     @property
