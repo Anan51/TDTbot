@@ -58,7 +58,7 @@ class _Event(dict):
             return
         # We only get this far if we have a valid event, so set attributes now
         self.cog = cog
-        self._pending_alerts = True
+        self._pending_alerts = False
         if log_channel is None:
             log_channel = param.rc('log_channel')
         self.log_channel = self.cog.bot.find_channel(log_channel)

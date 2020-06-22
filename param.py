@@ -13,7 +13,7 @@ defaults = {
                         'tdt_events', 'movie_night', 'my_games'],
     'event_channel':   'tdt_events',
     'log_channel':     'debugging',
-    'event_reminders': [60, 15, 0],
+    'event_reminders': [60, 10, 0],
     'timezone':        'America/Los_Angeles',
 }
 
