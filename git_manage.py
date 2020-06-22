@@ -6,6 +6,7 @@ own_repo = git.Repo(directory)
 
 
 def update(repo=None):
+    """Update TDTbot module with a git pull... to git good."""
     if repo is None:
         repo = own_repo
     elif hasattr(repo, 'lower'):

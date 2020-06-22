@@ -2,6 +2,7 @@ from .param import rc as _rc
 
 
 def find_channel(guild, name=None):
+    """Find a channel in a guild based on its name"""
     if name is None:
         name = _rc('channel')
     try:
@@ -12,6 +13,7 @@ def find_channel(guild, name=None):
 
 
 def find_role(guild, name):
+    """Find a role in a guild based on its name"""
     try:
         return [i for i in guild.roles if i.name.lower() == name.lower()][0]
     except IndexError:
