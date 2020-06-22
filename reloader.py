@@ -5,6 +5,7 @@ import importlib
 
 
 def reload_package(package):
+    """Reloads a package/module along with its sub modules"""
     assert(hasattr(package, "__package__"))
     fn = package.__file__
     fn_dir = os.path.dirname(fn) + os.sep

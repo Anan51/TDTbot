@@ -6,10 +6,12 @@ from .. import git_manage
 
 
 class Debugging(commands.Cog):
+    """Cog designed for debugging the bot"""
     def __init__(self, bot):
         self.bot = bot
 
     async def cog_check(self, ctx):
+        """Don't allow everyone to access this cog"""
         a = ctx.author
         if a.roles[0].name in ['Admin', 'Devoted']:
             return True
@@ -34,6 +36,7 @@ class Debugging(commands.Cog):
         """Reboots this bot"""
         await ctx.send("Ok. I will reboot now.")
         print('\nRebooting\n\n\n\n')
+        # This exits the bot loop, allowing __main__ loop to take over
         await self.bot.loop.run_until_complete(self.bot.logout())
 
     @commands.command(hidden=True)
@@ -87,6 +90,7 @@ class Debugging(commands.Cog):
 
     @commands.command(hidden=True)
     async def print(self, ctx, *args):
+        """Print text following command to terminal. This is useful for emojis."""
         print(' '.join(args))
 
 
