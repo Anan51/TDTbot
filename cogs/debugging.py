@@ -85,6 +85,10 @@ class Debugging(commands.Cog):
             self.bot.reload_extension(i)
         await ctx.send(msg.rstrip(', '))
 
+    @commands.command(hidden=True)
+    async def print(self, ctx, *args):
+        print(' '.join(args))
+
 
 def setup(bot):
     bot.add_cog(Debugging(bot))
