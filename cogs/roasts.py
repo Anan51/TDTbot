@@ -50,7 +50,7 @@ class Roast(commands.Cog):
         if old:
             if message.author == old.author and message.channel == old.channel:
                 if (message.created_at - old.created_at).total_seconds() < 60:
-                    if message.content.strip() in ['omg', 'bruh']:
+                    if message.content.lower().strip() in ['omg', 'bruh']:
                         await message.channel.send(roast_str())
                         self._last_roast = None
                         return
