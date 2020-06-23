@@ -171,7 +171,8 @@ class _Event(dict):
         if channel is None:
             channel = getattr(self.cog, 'channel', param.rc('event_channel'))
         channel = self.cog.bot.find_channel(channel)
-        dt = self['datetime'] - datetime.timedelta(minutes=dt_min)
+        dt = (datetime.datetime.utcnow()
+              - self['datetime'] + datetime.timedelta(minutes=dt_min))
         if dt < datetime.timedelta():
             dt_min = dt.seconds // 60
         if suffix is None:
