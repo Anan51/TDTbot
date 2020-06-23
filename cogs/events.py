@@ -291,7 +291,7 @@ class Events(commands.Cog):
                 if event not in self._events:
                     self._events.append(event)
                     await event.log_and_alert(event_chanel=channel)
-        await self.log_channel.send('History parsed.')
+        print('History parsed.')
         self._hist_checked = True
 
     @commands.group()
