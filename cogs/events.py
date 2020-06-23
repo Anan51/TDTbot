@@ -171,10 +171,9 @@ class _Event(dict):
         if channel is None:
             channel = getattr(self.cog, 'channel', param.rc('event_channel'))
         channel = self.cog.bot.find_channel(channel)
-        dt = (datetime.datetime.utcnow()
-              - self['datetime'] + datetime.timedelta(minutes=dt_min))
-        if dt < datetime.timedelta():
-            dt_min = dt.seconds // 60
+        dt = self['datetime'] - datetime.timedelta(minutes=dt_min)
+        if dt < datetime.datetime.utcnow():
+            dt_min = (self['datetime'] - datetime.datetime.utcnow()).seconds // 60
         if suffix is None:
             if dt_min is None:
                 suffix = " your event is approaching."
