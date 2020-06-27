@@ -184,6 +184,14 @@ class _Event(dict):
                     suffix = " your event is starting in an hour."
                 else:
                     suffix = " your event is starting in {:d} hours.".format(dt_min//60)
+            elif dt_min > 60:
+                if dt_min > 120:
+                    suffix = " your event is starting in {:d} hours and {:d} minutes."
+                else:
+                    suffix = " your event is starting in {:d} hour and {:} minutes."
+                suffix = suffix.format(dt_min // 60, dt_min % 60)
+                if dt_min % 60 == 1:
+                    suffix = suffix[:-2] + '.'
             else:
                 if dt_min == 1:
                     suffix = " your event is starting in one minute."
