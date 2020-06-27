@@ -64,10 +64,18 @@ class Roast(commands.Cog):
             return
         # set a trigger list for sending roasts
         triggers = ['<:lenny:333101455856762890> <:OGTriggered:433210982647595019>']
-        # if some form of REEE or a trigger than roast
-        if (re.match('^[rR]+[Ee][Ee]+$', message.content.strip())
-                or message.content.strip() in triggers):
+        # if some trigger then roast
+        if message.content.strip() in triggers:
             await message.channel.send(roast_str())
+            self._last_roast = message
+            return
+        # respond to any form of REEE
+        if re.match('^[rR]+[Ee][Ee]+$', message.content.strip()):
+            r = random.randrange(5)
+            if r < 3:
+                await message.channel.send("NO U")
+            else:
+                await message.channel.send(roast_str())
             self._last_roast = message
             return
         old = self._last_roast
