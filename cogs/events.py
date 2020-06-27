@@ -183,12 +183,12 @@ class _Event(dict):
                 if dt_min == 60:
                     suffix = " your event is starting in an hour."
                 else:
-                    suffix = " your event is starting in {:d} hour(s).".format(dt_min//60)
+                    suffix = " your event is starting in {:d} hours.".format(dt_min//60)
             else:
                 if dt_min == 1:
                     suffix = " your event is starting in one minute."
                 else:
-                    suffix = " your event is starting in {:d} minute(s).".format(dt_min)
+                    suffix = " your event is starting in {:d} minutes.".format(dt_min)
         if wait:
             await wait_until(dt)
         msg = ' '.join([i.mention for i in await self.attendees()]) + suffix
