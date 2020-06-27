@@ -68,7 +68,9 @@ class Roast(commands.Cog):
         # 1/20 probability
         try:
             if message.author.name in self._nemeses:
+                print('Nemesis', message.author)
                 if not random.randrange(20):
+                    print("Decided to roast nemesis.")
                     await message.channel.send(roast_str())
                     self._last_roast = message.author
         except TypeError:
