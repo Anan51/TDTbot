@@ -18,7 +18,7 @@ class Roast(commands.Cog):
         self._nemeses = param.rc('nemeses')
         self._last_roast = None
 
-    @commands.command()
+    @commands.command(aliases=['burn'])
     async def roast(self, ctx, channel: str = None, guild: str = None):
         """<channel (optional)> <server (optional)> sends random roast message"""
         if guild is None:
