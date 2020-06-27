@@ -16,7 +16,6 @@ class Alerts(commands.Cog):
         channel = self.bot.find_channel(param.rc('log_channel'))
         roles = [find_role(member.guild, i) for i in ["Admin", "Devoted"]]
         roles = " ".join([i.mention for i in roles if hasattr(i, 'mention')])
-        print(member, roles, channel)
         if channel is not None:
             await channel.send(roles + ' new member {0.name} joined.'.format(member))
 
