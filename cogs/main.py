@@ -115,23 +115,6 @@ class MainCommands(commands.Cog):
         msg += '\n'.join([str(i + 1) + ') ' + b.display_name for i, b in enumerate(bots)])
         await ctx.send(msg)
 
-    @commands.command()
-    async def nou(self, ctx, channel: str = None, guild: str = None):
-        """<channel (optional)> <server (optional)> NO U"""
-        if guild is None:
-            guild = ctx.guild
-        else:
-            try:
-                guild = [i for i in self.bot.guilds if i.name == guild][0]
-            except IndexError:
-                ctx.send("NO U (need to type a reasonable server name)")
-                return
-        if channel:
-            channel = find_channel(guild, channel)
-        else:
-            channel = ctx.channel
-        await channel.send("NO U")
-
 
 def setup(bot):
     """This is required to add this cog to a bot as an extension"""

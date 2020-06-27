@@ -36,6 +36,23 @@ class Roast(commands.Cog):
         self._last_roast = await channel.fetch_message(channel.last_message_id)
         await channel.send(roast_str())
 
+    @commands.command()
+    async def nou(self, ctx, channel: str = None, guild: str = None):
+        """<channel (optional)> <server (optional)> NO U"""
+        if guild is None:
+            guild = ctx.guild
+        else:
+            try:
+                guild = [i for i in self.bot.guilds if i.name == guild][0]
+            except IndexError:
+                ctx.send("NO U (need to type a reasonable server name)")
+                return
+        if channel:
+            channel = find_channel(guild, channel)
+        else:
+            channel = ctx.channel
+        await channel.send("NO U")
+
     @commands.Cog.listener()
     async def on_message(self, message):
         """Parse messages to see if we should roast even without a command"""
