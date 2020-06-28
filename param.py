@@ -1,14 +1,16 @@
 import os
+import json
 
 _dir = os.path.split(os.path.realpath(__file__))[0]
+_config = os.path.join(_dir, 'config')
 
 # Defaults for parameters
 defaults = {
     'channel':         'devoted_chat',
     'cmd_prefix':      'TDT$',
-    'config_file':     os.path.join(_dir, 'tdt.rc'),
-    'token_file':      os.path.join(_dir, 'token.txt'),
-    'roast_file':      os.path.join(_dir, 'roasts.txt'),
+    'config_file':     os.path.join(_config, 'tdt.json'),
+    'token_file':      os.path.join(_config, 'token.txt'),
+    'roast_file':      os.path.join(_config, 'roasts.txt'),
     'nemeses':         ['UnknownElectro#1397'],
     'ignore_list':     ['badass_chat', 'lfg', 'lenny_laboratory', 'manual_page',
                         'tdt_events', 'movie_night', 'my_games'],
@@ -46,10 +48,10 @@ class Parameters(dict):
             return
         try:
             with open(fn, 'r') as f:
-                lines = filter(None, [i.split('#')[0].strip() for i in f.readlines()])
+                out = json.load(f)
         except IOError:
             return
-        self.update(dict([[i.strip() for i in l.split('=')] for l in lines]))
+        self.update(out)
 
     def read_token(self, fn=None):
         """Read token from file, and update self"""

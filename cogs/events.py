@@ -298,15 +298,18 @@ class Events(commands.Cog):
             channel = self.channel
         # only check the last week
         after = datetime.datetime.utcnow() - datetime.timedelta(days=6, hours=23)
-        async for i in channel.history(after=after, limit=200):
-            event = _Event(i, self)
-            # if valid event
-            if event:
-                if event not in self._events:
-                    self._events.append(event)
-                    await event.log_and_alert(event_chanel=channel)
-        print('History parsed.')
-        self._hist_checked = True
+        try:
+            async for i in channel.history(after=after, limit=200):
+                event = _Event(i, self)
+                # if valid event
+                if event:
+                    if event not in self._events:
+                        self._events.append(event)
+                        await event.log_and_alert(event_chanel=channel)
+            print('History parsed.')
+            self._hist_checked = True
+        except AttributeError:
+            print('FAILURE in check_history')
 
     @commands.group()
     async def events(self, ctx):

@@ -8,11 +8,11 @@ A Discord bot for The Dream Team clan
 4) pytz (installable with `conda` or `pip`)
 
 ### Install
-In the same directory as this README file create a file 'token.txt' with your bot's token in it. See https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token for help on bot tokens.
+In the `config` subdirectory create a file `token.txt` with your bot's token in it. See https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token for help on bot tokens.
 
 ### Usage
 - Run: `python3 -m TDTbot <optional flags>`
 - Help/see options: `python3 -m TDTbot -h`
 
 ### Configuration
-The default config file is 'tdt.rc', defaults can be found near the top of `param.py`.
+The default config file is `config/tdt.json`, defaults can be found near the top of `param.py`.

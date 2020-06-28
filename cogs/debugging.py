@@ -93,6 +93,17 @@ class Debugging(commands.Cog):
         """Print text following command to terminal. This is useful for emojis."""
         print(' '.join(args))
 
+    @commands.command(hidden=True)
+    async def param(self, ctx, *args):
+        """Print param to discord chat."""
+        from .. import param
+        if param.rc:
+            msg = '\n'.join(["{:}: {:}".format(*[i, param.rc[i]]) for i in param.rc
+                             if i not in ['roasts', 'token']])
+            await ctx.send('`' + msg + '`')
+        else:
+            await ctx.send("Param is empty.")
+
 
 def setup(bot):
     bot.add_cog(Debugging(bot))

@@ -15,7 +15,7 @@ class Roast(commands.Cog):
     """Cog to roast people"""
     def __init__(self, bot):
         self.bot = bot
-        self._nemeses = param.rc('nemeses')
+        self._nemeses = [str(i).strip() for i in param.rc('nemeses')]
         self._last_roast = None
 
     @commands.command(aliases=['burn'])
@@ -91,8 +91,6 @@ class Roast(commands.Cog):
                     self._last_roast = None
         # if the nemesis of this bot posts a non command message then roast them with
         # 1/20 probability
-        if "electro" in message.author.name.lower():
-            print("electro", message.author, self._nemeses)
         try:
             if message.author.name in self._nemeses:
                 print('Nemesis', message.author)
