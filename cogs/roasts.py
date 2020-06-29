@@ -89,15 +89,23 @@ class Roast(commands.Cog):
                         self._last_roast = None
                         return
                     self._last_roast = None
-        # if the nemesis of this bot posts a non command message then roast them with
-        # 1/20 probability
+        # if the nemesis of this bot posts a non command message
         try:
             if message.author.name in self._nemeses:
                 print('Nemesis', message.author)
+                # if nemesis posts boomer type word
+                if re.findall('[bz]oome[rt]', message.content):
+                    if not random.randrange(5):  # 20% prob
+                        await message.channel.send(roast_str())
+                    else:  # 80% prob
+                        await message.channel.send("NO U")
+                    self._last_roast = message.author
+                # Roast nemesis with 1/20 probability
                 if not random.randrange(20):
                     print("Decided to roast nemesis.")
                     await message.channel.send(roast_str())
                     self._last_roast = message.author
+        # catch self._nemeses = None
         except TypeError:
             pass
         return
