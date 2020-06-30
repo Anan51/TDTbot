@@ -2,6 +2,7 @@ import datetime
 import discord
 from discord.ext import commands
 import humanize
+import pytz
 from ..helpers import *
 from .. import git_manage
 
@@ -108,19 +109,19 @@ class Debugging(commands.Cog):
     @commands.command(hidden=True)
     async def git_log(self, ctx, *args):
         """Print git log to discord chat."""
-        now = datetime.datetime.now()
+        now = pytz.utc.localize(datetime.datetime.utcnow())
         last_week = now - datetime.timedelta(days=7)
         # only print items from the last week
-        items = [i for i in git_manage.own_repo.active_branch.log()[::-1]
-                 if datetime.datetime.fromtimestamp(i.time[0]) > last_week]
+        items = [i for i in git_manage.own_repo.iter_commits()
+                 if i.committed_datetime > last_week]
 
         def dt(i):
             """Format timestamp to human readable string"""
-            t0 = datetime.datetime.fromtimestamp(i.time[0])
-            return humanize.naturaltime(now - t0)
+            return humanize.naturaltime(now - i.committed_datetime)
 
-        fmt = "{:} {:} <{:}> [{:}]"
-        msg = [fmt.format(dt(i), i.message, i.actor.name, i.newhexsha[:7]) for i in items]
+        fmt = "{:}: {:} <{:}> [{:}]"
+        msg = [fmt.format(dt(i), i.message.strip(), i.author.name, i.hexsha[:7])
+               for i in items]
         await ctx.send('```' + '\n'.join(msg) + '```')
 
 
