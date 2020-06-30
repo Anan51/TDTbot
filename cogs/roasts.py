@@ -94,7 +94,7 @@ class Roast(commands.Cog):
             if message.author.name in self._nemeses:
                 print('Nemesis', message.author)
                 # if nemesis posts boomer type word
-                if re.findall('[bz]oome[rt]', message.content):
+                if re.findall('[bz]oome[rt]', message.content.lower()):
                     if not random.randrange(5):  # 20% prob
                         await message.channel.send(roast_str())
                     else:  # 80% prob
