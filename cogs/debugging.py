@@ -1,6 +1,7 @@
+import datetime
 import discord
 from discord.ext import commands
-import inspect
+import humanize
 from ..helpers import *
 from .. import git_manage
 
@@ -100,9 +101,28 @@ class Debugging(commands.Cog):
         if param.rc:
             msg = '\n'.join(["{:}: {:}".format(*[i, param.rc[i]]) for i in param.rc
                              if i not in ['roasts', 'token']])
-            await ctx.send('`' + msg + '`')
+            await ctx.send('```' + msg + '```')
         else:
             await ctx.send("Param is empty.")
+
+    @commands.command(hidden=True)
+    async def git_log(self, ctx, *args):
+        """Print git log to discord chat."""
+        master = git_manage.own_repo.heads.master
+        now = datetime.datetime.now()
+        last_week = now - datetime.timedelta(days=7)
+        # only print items from the last week
+        items = [i for i in master.log()[::-1]
+                 if datetime.datetime.fromtimestamp(i.time[0]) > last_week]
+
+        def dt(i):
+            """Format timestamp to human readable string"""
+            t0 = datetime.datetime.fromtimestamp(i.time[0])
+            return humanize.naturaltime(now - t0)
+
+        fmt = "{:} {:} <{:}> [{:}]"
+        msg = [fmt.format(dt(i), i.message, i.actor.name, i.newhexsha[:7]) for i in items]
+        await ctx.send('```' + '\n'.join(msg) + '```')
 
 
 def setup(bot):
