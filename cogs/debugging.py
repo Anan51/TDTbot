@@ -79,6 +79,7 @@ class Debugging(commands.Cog):
     async def git_pull(self, ctx):
         """Do a git pull on own code"""
         git_manage.update()
+        await ctx.send("Pulled own code")
 
     @commands.command(hidden=True)
     async def reload_cogs(self, ctx, option=None):
@@ -123,6 +124,22 @@ class Debugging(commands.Cog):
         msg = [fmt.format(dt(i), i.message.strip(), i.author.name, i.hexsha[:7])
                for i in items]
         await ctx.send('```' + '\n'.join(msg) + '```')
+
+    @commands.group(hidden=True)
+    async def git(self, ctx):
+        """Base function for git sub commands"""
+        if ctx.invoked_subcommand is None:
+            await ctx.send('Invalid git command passed...')
+
+    @git.command()
+    async def pull(self, ctx):
+        """Alias for git_pull"""
+        await self.git_pull(ctx)
+
+    @git.command()
+    async def log(self, ctx):
+        """Alias for git_log"""
+        await self.git_log(ctx)
 
 
 def setup(bot):
