@@ -38,7 +38,7 @@ class Debugging(commands.Cog):
         await ctx.send("Ok. I will reboot now.")
         print('\nRebooting\n\n\n\n')
         # This exits the bot loop, allowing __main__ loop to take over
-        await self.bot.loop.run_until_complete(self.bot.logout())
+        await self.bot.loop.run_until_complete(await self.bot.logout())
 
     @commands.command(hidden=True)
     async def channel_id(self, ctx, channel: str = None, guild: str = None):
@@ -108,11 +108,10 @@ class Debugging(commands.Cog):
     @commands.command(hidden=True)
     async def git_log(self, ctx, *args):
         """Print git log to discord chat."""
-        master = git_manage.own_repo.heads.master
         now = datetime.datetime.now()
         last_week = now - datetime.timedelta(days=7)
         # only print items from the last week
-        items = [i for i in master.log()[::-1]
+        items = [i for i in git_manage.own_repo.active_branch.log()[::-1]
                  if datetime.datetime.fromtimestamp(i.time[0]) > last_week]
 
         def dt(i):
