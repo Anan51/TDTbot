@@ -111,6 +111,12 @@ class MainCommands(commands.Cog):
         electro = ctx.guild.get_member_named('UnknownElectro#1397')
         if electro and electro not in bots:
             bots.insert(0, electro)
+        # add other members to bots for fun
+        adds = ['Nowwut#4292']
+        adds = [ctx.guild.get_member_named(i) for i in adds]
+        adds = [i for i in adds if i]
+        bots += adds
+        # construct message
         msg = 'Listing bots for {0.guild}:\n'.format(ctx)
         msg += '\n'.join([str(i + 1) + ') ' + b.display_name for i, b in enumerate(bots)])
         await ctx.send(msg)
