@@ -11,7 +11,7 @@ defaults = {
     'config_file':     os.path.join(_config, 'tdt.json'),
     'token_file':      os.path.join(_config, 'token.txt'),
     'roast_file':      os.path.join(_config, 'roasts.txt'),
-    'nemeses':         ['UnknownElectro#1397'],
+    'nemeses':         ['UnknownElectro'],
     'ignore_list':     ['badass_chat', 'lfg', 'lenny_laboratory', 'manual_page',
                         'tdt_events', 'movie_night', 'my_games'],
     'event_channel':   'tdt_events',
