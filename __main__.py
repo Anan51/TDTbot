@@ -24,8 +24,8 @@ parser.add_argument('-r', '--roasts',
 args = parser.parse_args()
 
 now = 0
-# while it takes more than 15 second to complete this loop
-while time.time() - now > 15:
+# while it takes more than 5 second to complete this loop
+while time.time() - now > 5:
     now = time.time()
     # init param
     param.rc.read_config(args.config)
