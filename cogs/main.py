@@ -112,9 +112,9 @@ class MainCommands(commands.Cog):
         if electro and electro not in bots:
             bots.insert(0, electro)
         # add other members to bots for fun
-        adds = ['Nowwut#4292']
+        adds = param.rc('add_bots')
         adds = [ctx.guild.get_member_named(i) for i in adds]
-        adds = [i for i in adds if i]
+        adds = [i for i in adds if i and i not in bots]
         bots += adds
         # construct message
         msg = 'Listing bots for {0.guild}:\n'.format(ctx)

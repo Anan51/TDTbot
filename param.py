@@ -12,6 +12,7 @@ defaults = {
     'token_file':      os.path.join(_config, 'token.txt'),
     'roast_file':      os.path.join(_config, 'roasts.txt'),
     'nemeses':         ['UnknownElectro'],
+    'add_bots':        ['Nowwut#4292'],
     'ignore_list':     ['badass_chat', 'lfg', 'lenny_laboratory', 'manual_page',
                         'tdt_events', 'movie_night', 'my_games'],
     'event_channel':   'tdt_events',
