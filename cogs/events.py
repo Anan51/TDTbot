@@ -357,6 +357,11 @@ class Events(commands.Cog):
             print(''.join(traceback.format_tb(e.__traceback__)))
             raise e
 
+    @commands.Cog.listener()
+    async def on_ready(self):
+        await asyncio.sleep(5)
+        await self.check_history()
+
 
 def setup(bot):
     bot.add_cog(Events(bot))
