@@ -2,11 +2,15 @@ import asyncio
 import discord
 from discord.ext import commands
 import datetime
+import logging
 import pytz
 import re
 import traceback
 from .. import param
 from ..helpers import *
+
+
+logger = logging.getLogger('discord')
 
 
 async def wait_until(dt):
@@ -306,10 +310,10 @@ class Events(commands.Cog):
                     if event not in self._events:
                         self._events.append(event)
                         await event.log_and_alert(event_chanel=channel)
-            print('History parsed.')
+            logger.printv('History parsed.')
             self._hist_checked = True
         except AttributeError:
-            print('FAILURE in check_history')
+            logger.error('FAILURE in check_history')
 
     @commands.group()
     async def events(self, ctx):
@@ -353,8 +357,8 @@ class Events(commands.Cog):
             else:
                 await ctx.send('No events.')
         except Exception as e:
-            print(e)
-            print(''.join(traceback.format_tb(e.__traceback__)))
+            logger.error(e)
+            logger.error(''.join(traceback.format_tb(e.__traceback__)))
             raise e
 
     @commands.Cog.listener()

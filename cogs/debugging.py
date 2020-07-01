@@ -2,10 +2,13 @@ import datetime
 import discord
 from discord.ext import commands
 import humanize
+import logging
 import pytz
 from ..helpers import *
 from .. import git_manage
 
+
+logger = logging.getLogger('discord')
 
 class Debugging(commands.Cog):
     """Cog designed for debugging the bot"""
@@ -31,13 +34,13 @@ class Debugging(commands.Cog):
     @commands.command(hidden=True)
     async def flush(self, ctx, n: int = 10):
         """<n=10 (optional)> flushes stdout with n newlines"""
-        print('\n' * n)
+        logger.printv('\n' * n)
 
     @commands.command(hidden=True)
     async def reboot(self, ctx):
         """Reboots this bot"""
         await ctx.send("Ok. I will reboot now.")
-        print('\nRebooting\n\n\n\n')
+        logger.printv('\nRebooting\n\n\n\n')
         # This exits the bot loop, allowing __main__ loop to take over
         await self.bot.loop.run_until_complete(await self.bot.logout())
 
@@ -94,7 +97,7 @@ class Debugging(commands.Cog):
     @commands.command(hidden=True)
     async def print(self, ctx, *args):
         """Print text following command to terminal. This is useful for emojis."""
-        print(' '.join(args))
+        logger.printv(' '.join(args))
 
     @commands.command(hidden=True)
     async def param(self, ctx, *args):

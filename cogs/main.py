@@ -1,8 +1,12 @@
 import datetime
 import discord
 from discord.ext import commands
+import logging
 from .. import param
 from ..helpers import *
+
+
+logger = logging.getLogger('discord')
 
 
 class MainCommands(commands.Cog):
@@ -100,7 +104,7 @@ class MainCommands(commands.Cog):
                          for i, m in enumerate(hist)])
         if not msg:
             msg = "No history available."
-        print(str(hist))
+        logger.printv(str(hist))
         await ctx.send(msg)
 
     @commands.command()

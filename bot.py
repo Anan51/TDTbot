@@ -2,9 +2,13 @@ import asyncio
 import discord
 from discord.ext import commands
 from glob import glob
+import logging
 import os
 from . import param
 from . import helpers
+
+
+logger = logging.getLogger('discord')
 
 
 def cog_list():
@@ -34,7 +38,7 @@ class MainBot(commands.Bot):
         async def on_ready():
             """Do something when the bot is ready and active... like say so."""
             msg = 'We have logged in as {0.user}, running discord.py {1.__version__}'
-            print(msg.format(self, discord))
+            logger.printv(msg.format(self, discord))
             # also we can set a non-custom type activity. This is a discord limitation.
             activity = discord.Activity(name='UnknownElectro be a bot',
                                         type=discord.ActivityType.listening)

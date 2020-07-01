@@ -19,6 +19,7 @@ defaults = {
     'log_channel':     'debugging',
     'event_reminders': [360, 60, 0],
     'timezone':        'America/Los_Angeles',
+    'logfile':         os.path.join(_dir, 'logs', 'tdt.log'),
 }
 
 

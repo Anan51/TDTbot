@@ -1,9 +1,13 @@
 import discord
 from discord.ext import commands
+import logging
 import random
 import re
 from .. import param
 from ..helpers import *
+
+
+logger = logging.getLogger('discord')
 
 
 def roast_str():
@@ -92,7 +96,7 @@ class Roast(commands.Cog):
         # if the nemesis of this bot posts a non command message
         try:
             if message.author.name in self._nemeses:
-                print('Nemesis', message.author)
+                logger.printv('Nemesis', message.author)
                 # if nemesis posts boomer type word
                 if re.findall('[bz]oome[rt]', message.content.lower()):
                     if not random.randrange(5):  # 20% prob
@@ -102,7 +106,7 @@ class Roast(commands.Cog):
                     self._last_roast = message.author
                 # Roast nemesis with 1/20 probability
                 if not random.randrange(20):
-                    print("Decided to roast nemesis.")
+                    logger.printv("Decided to roast nemesis.")
                     await message.channel.send(roast_str())
                     self._last_roast = message.author
         # catch self._nemeses = None

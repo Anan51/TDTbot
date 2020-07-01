@@ -23,7 +23,6 @@ def reload_package(package):
                 fn_child = getattr(module_child, "__file__", None)
                 if (fn_child is not None) and fn_child.startswith(fn_dir):
                     if fn_child not in module_visit:
-                        # print("reloading:", fn_child, "from", module)
                         module_visit.add(fn_child)
                         reload_recursive_ex(module_child)
 
