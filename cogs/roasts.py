@@ -96,7 +96,7 @@ class Roast(commands.Cog):
         # if the nemesis of this bot posts a non command message
         try:
             if message.author.name in self._nemeses:
-                logger.printv('Nemesis', message.author)
+                logger.printv('Nemesis: {0.author}'.format(message))
                 # if nemesis posts boomer type word
                 if re.findall('[bz]oome[rt]', message.content.lower()):
                     logger.debug('[bz]oome[rt]')
@@ -106,7 +106,7 @@ class Roast(commands.Cog):
                     else:  # 2/3 prob
                         logger.debug('no u')
                         await message.channel.send("NO U")
-                    self._last_roast = message.author
+                    self._last_roast = message
                     return
                 # regex list of triggers
                 matches = ['your mom', 'shut it bot']
@@ -114,13 +114,13 @@ class Roast(commands.Cog):
                     if re.findall(m, message.content.lower()):
                         logger.debug('Nemesis message matched "{:}"'.format(m))
                         await message.channel.send(roast_str())
-                        self._last_roast = message.author
+                        self._last_roast = message
                         return
                 # Roast nemesis with 1/20 probability
                 if not random.randrange(20):
                     logger.printv("Decided to roast nemesis.")
                     await message.channel.send(roast_str())
-                    self._last_roast = message.author
+                    self._last_roast = message
                     return
         # catch self._nemeses = None
         except TypeError:
