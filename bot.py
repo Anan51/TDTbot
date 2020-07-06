@@ -69,3 +69,9 @@ class MainBot(commands.Bot):
         # id is an attribute of the channel type, so we should be good
         if hasattr(channel, 'id'):
             return channel
+
+    async def on_command_completion(self, ctx):
+        logger.debug('Command "{0.command}" invoked by {0.author}.'.format(ctx))
+
+    async def on_command_error(self, ctx):
+        logger.error('Command "{0.command}" failed. Invoked by {0.author}.'.format(ctx))
