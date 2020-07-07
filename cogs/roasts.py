@@ -70,13 +70,19 @@ class Roast(commands.Cog):
         triggers = ['<:lenny:333101455856762890> <:OGTriggered:433210982647595019>']
         # if some trigger then roast
         if message.content.strip() in triggers:
+            if not random.randrange(3):
+                logger.debug('Ignoring trigger')
+                return
             await message.channel.send(roast_str())
             self._last_roast = message
             return
         # respond to any form of REEE
         if re.match('^[rR]+[Ee][Ee]+$', message.content.strip()):
-            r = random.randrange(5)
+            r = random.randrange(7)
             if r < 2:
+                logger.debug('Ignoring trigger')
+                return
+            if r < 4:
                 await message.channel.send("NO U")
             else:
                 await message.channel.send(roast_str())
@@ -100,6 +106,9 @@ class Roast(commands.Cog):
                 # if nemesis posts boomer type word
                 if re.findall('[bz]oome[rt]', message.content.lower()):
                     logger.debug('[bz]oome[rt]')
+                    if random.randrange(2):
+                        logger.debug('Ignoring trigger')
+                        return
                     if not random.randrange(3):  # 1/3 prob
                         logger.debug('roast')
                         await message.channel.send(roast_str())
@@ -109,15 +118,18 @@ class Roast(commands.Cog):
                     self._last_roast = message
                     return
                 # regex list of triggers
-                matches = ['your mom', 'shut it bot']
+                matches = ['your m[ao]m', 'shut it bot']
                 for m in matches:
+                    if random.randrange(2):
+                        logger.debug('Ignoring trigger')
+                        return
                     if re.findall(m, message.content.lower()):
                         logger.debug('Nemesis message matched "{:}"'.format(m))
                         await message.channel.send(roast_str())
                         self._last_roast = message
                         return
-                # Roast nemesis with 1/20 probability
-                if not random.randrange(20):
+                # Roast nemesis with 1/30 probability
+                if not random.randrange(30):
                     logger.printv("Decided to roast nemesis.")
                     await message.channel.send(roast_str())
                     self._last_roast = message
