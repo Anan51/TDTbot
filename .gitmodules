@@ -1,0 +1,3 @@
+[submodule "psn-api"]
+	path = psn-api
+	url = https://github.com/TDTcode/psn-api
