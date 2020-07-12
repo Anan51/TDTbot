@@ -23,6 +23,64 @@ defaults = {
 }
 
 
+class DataContainer:
+    def __init__(self, fn):
+        self.fn = fn
+        self.data = dict()
+        self._file_data = self._load_own_data()
+        if self._file_data is not None:
+            for i in self._file_data:
+                self.data[i] = self._file_data[i]
+
+    def __getitem__(self, key):
+        try:
+            return self.data[key]
+        except KeyError:
+            pass
+        try:
+            out = self._file_data[key]
+            self.data[key] = out
+            return out
+        except KeyError:
+            pass
+        func = getattr(self, str(key), getattr(self, '_' + str(key)))
+        if callable(func):
+            self.data[key] = func()
+            self._save()
+            return self.data[key]
+        try:
+            self._gen_data(key)
+            out = self.data[key]
+            self._save()
+            return out
+        except (NotImplementedError, KeyError):
+            pass
+        raise KeyError('Could not find or generate "{0}".'.format(key))
+
+    def __setitem__(self, key, value):
+        self.data[key] = value
+        self._save()
+
+    def _load_own_data(self):
+        try:
+            with open(self.fn, 'r') as f:
+                return json.load(f)
+        except IOError:
+            self._gen_data(None)
+            self._save()
+
+    def _save(self):
+        with open(self.fn, 'w') as f:
+            f.write(json.dumps(self.data, indent=4))
+        self._file_data = self._load_own_data()
+
+    def _gen_data(self, *args):
+        raise NotImplementedError
+
+    def keys(self):
+        return list(self.data.keys()) + list(self._file_data.keys())
+
+
 class Parameters(dict):
     """Class providing parameters (dict subclass)"""
     def __init__(self, copy=None, config=None, token=None, roasts=None):

@@ -2,6 +2,6 @@
 *
 # Except these files
 !.gitignore
-!__init__.py
+!*.py
 !users
 !roasts.txt
