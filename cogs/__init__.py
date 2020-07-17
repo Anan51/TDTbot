@@ -1,4 +1,4 @@
-from . alerts import Alerts
+from . welcome import Alerts
 from . debugging import Debugging
 from . events import Events
 from . main import MainCommands
