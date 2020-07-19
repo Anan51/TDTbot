@@ -53,8 +53,10 @@ class Welcome(commands.Cog):
     async def on_raw_reaction_add(self, payload):
         logger.printv('RXN added. mid: {0.message_id}, emoji: {0.emoji}'.format(payload))
         if payload.message_id != 563406038754394112:
+            logger.printv('exit on not message')
             return
         if payload.emoji != "👍":
+            logger.printv('exit on not emoji')
             return
         msg = "{0.display_name} agreed to the code of conduct.".format(payload.member)
         logger.printv(msg)
@@ -62,7 +64,9 @@ class Welcome(commands.Cog):
         log_channel = find_channel(guild, "admin_log")
         async for msg in log_channel.history(limit=200):
             if msg.content == msg:
+                logger.printv('exit on not in hist')
                 return
+        logger.printv('Sending message')
         await self.log_channel.send(msg)
 
 
