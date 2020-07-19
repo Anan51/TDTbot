@@ -55,7 +55,7 @@ class Welcome(commands.Cog):
         if payload.message_id != 563406038754394112:
             logger.printv('exit on not message')
             return
-        if payload.emoji != "👍":
+        if str(payload.emoji) != "👍":
             logger.printv('exit on not emoji')
             return
         msg = "{0.display_name} agreed to the code of conduct.".format(payload.member)
