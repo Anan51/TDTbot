@@ -80,12 +80,14 @@ class MainCommands(commands.Cog):
                                   if 'everyone' not in i.name]))
 
     @commands.command()
-    async def channel_hist(self, ctx, channel: discord.ChannelType = None):
+    async def channel_hist(self, ctx, channel: str = None, n: int = 10):
         """<channel (optional)> shows channel history (past 10 entries)"""
-        if channel is None:
+        if channel:
+            channel = find_channel(ctx.guild, channel)
+        else:
             channel = ctx.channel
-        hist = await channel.history(limit=10).flatten()
-        msg = '\n'.join(["Item {0:d}\n{1.content}".format(i + 1, m)
+        hist = await channel.history(limit=n).flatten()
+        msg = '\n'.join(["Item {0:d} (1.id)\n{1.content}".format(i + 1, m)
                          for i, m in enumerate(hist)])
         if not msg:
             msg = "No history available."
