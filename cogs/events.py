@@ -319,8 +319,8 @@ class Events(commands.Cog):
                         await event.log_and_alert(event_chanel=channel)
             logger.printv('History parsed.')
             self._hist_checked = True
-        except AttributeError:
-            logger.error('FAILURE in check_history')
+        except AttributeError as e:
+            logger.error('FAILURE in check_history:\n' + str(e))
 
     @commands.group()
     async def events(self, ctx):

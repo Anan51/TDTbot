@@ -51,6 +51,7 @@ class Welcome(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
+        logger.printv('RXN added. mid: {0.message_id}, emoji: {0.emoji}'.format(payload))
         if payload.message_id != 563406038754394112:
             return
         if payload.emoji != "👍":
