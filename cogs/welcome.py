@@ -2,6 +2,10 @@ import discord
 from discord.ext import commands
 from .. import param
 from ..helpers import *
+import logging
+
+
+logger = logging.getLogger('discord')
 
 
 async def send_welcome(member):
@@ -46,11 +50,15 @@ class Welcome(commands.Cog):
         await send_welcome(member)
 
     @commands.Cog.listener()
-    async def on_reaction_add(self, rxn, user):
-        if not rxn.message.content.startswith('CODE OF CONDUCT'):
+    async def on_raw_reaction_add(self, payload):
+        if payload.message_id != 563406038754394112:
             return
-        msg = "{0.display_name} agreed to the code of conduct.".format(user)
-        log_channel = find_channel(rxn.message.guild, "admin_log")
+        if payload.emoji != "👍":
+            return
+        msg = "{0.display_name} agreed to the code of conduct.".format(payload.member)
+        logger.printv(msg)
+        guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
+        log_channel = find_channel(guild, "admin_log")
         async for msg in log_channel.history(limit=200):
             if msg.content == msg:
                 return
