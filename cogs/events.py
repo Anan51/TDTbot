@@ -27,7 +27,7 @@ async def wait_until(dt):
 
 class _Event(dict):
     """A class to contain event info (dict subclass)."""
-    def __init__(self, message, cog, log_channel=None):
+    def __init__(self, message, cog, log_channel=None, from_hist=False):
         super().__init__()
         # start parsing message for event info
         lines = [i.strip() for i in message.content.split('\n')]
@@ -62,6 +62,7 @@ class _Event(dict):
         # We only get this far if we have a valid event, so set attributes now
         self.cog = cog
         self._pending_alerts = False
+        self.from_hist = from_hist
         if log_channel is None:
             log_channel = param.rc('log_channel')
         self.log_channel = self.cog.bot.find_channel(log_channel)
@@ -211,7 +212,13 @@ class _Event(dict):
         if self._pending_alerts:
             return
         if dts is None:
-            dts = param.rc('event_reminders')
+            dts = param.rc('event_reminders')[:]
+        if self.from_hist:
+            delta = (self['datetime'] - datetime.datetime.utcnow()).minute
+            tmp = [dt for dt in dts if dt >= delta]
+            if dts != tmp:
+                logger.printv('dts changed for event')
+            dts = tmp
         for dt in dts:
             self.cog.bot.loop.create_task(self.alert(dt, channel=channel))
         self._pending_alerts = True
@@ -304,7 +311,7 @@ class Events(commands.Cog):
         after = datetime.datetime.utcnow() - datetime.timedelta(days=6, hours=23)
         try:
             async for i in channel.history(after=after, limit=200):
-                event = _Event(i, self)
+                event = _Event(i, self, from_hist=True)
                 # if valid event
                 if event:
                     if event not in self._events:
