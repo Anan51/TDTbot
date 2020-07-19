@@ -58,16 +58,16 @@ class Welcome(commands.Cog):
         if str(payload.emoji) != "👍":
             logger.printv('exit on not emoji')
             return
-        msg = "{0.display_name} agreed to the code of conduct.".format(payload.member)
-        logger.printv(msg)
+        out = "{0.display_name} agreed to the code of conduct.".format(payload.member)
+        logger.printv(out)
         guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
         log_channel = find_channel(guild, "admin_log")
         async for msg in log_channel.history(limit=200):
-            if msg.content == msg:
-                logger.printv('exit on not in hist')
+            if msg.content == out:
+                logger.printv('exit on in hist')
                 return
         logger.printv('Sending message')
-        await log_channel.send(msg)
+        await log_channel.send(out)
 
 
 def setup(bot):
