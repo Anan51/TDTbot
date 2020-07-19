@@ -214,7 +214,7 @@ class _Event(dict):
         if dts is None:
             dts = param.rc('event_reminders')[:]
         if self.from_hist:
-            delta = (self['datetime'] - datetime.datetime.utcnow()).minute
+            delta = (self['datetime'] - datetime.datetime.utcnow()).minutes
             tmp = [dt for dt in dts if dt >= delta]
             if dts != tmp:
                 logger.printv('dts changed for event')
