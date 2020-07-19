@@ -1,3 +1,4 @@
+import datetime
 import discord
 from discord.ext import commands
 from .. import param
@@ -41,7 +42,7 @@ class Welcome(commands.Cog):
         roles = " ".join([i.mention for i in roles if hasattr(i, 'mention')])
         if channel is not None:
             await channel.send(roles + ' new member {0.name} joined.'.format(member))
-        # await send_welcome(member)
+        await send_welcome(member)
 
     @commands.command(hidden=True)
     async def test_welcome(self, ctx, member: discord.User = None):
@@ -63,6 +64,12 @@ class Welcome(commands.Cog):
             if msg.content == out:
                 return
         await log_channel.send(out)
+        # if in joined in last 2 weeks
+        if (datetime.datetime.utcnow() - payload.member.joined_at) // 86400 < 14:
+            community = find_role(guild, "Community")
+            if payload.member.top_role < community:
+                reason = "Agreed to cod of conduct."
+                await payload.member.add_roles(community, reason=reason)
 
 
 def setup(bot):
