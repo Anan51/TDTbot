@@ -67,7 +67,7 @@ class Welcome(commands.Cog):
                 logger.printv('exit on not in hist')
                 return
         logger.printv('Sending message')
-        await self.log_channel.send(msg)
+        await log_channel.send(msg)
 
 
 def setup(bot):
