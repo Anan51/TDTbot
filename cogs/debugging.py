@@ -144,6 +144,10 @@ class Debugging(commands.Cog):
         """Alias for git_log"""
         await self.git_log(ctx)
 
+    @commands.command(hidden=True)
+    async def reload_extension(self, name):
+        self.bot.reload_extension(name)
+
 
 def setup(bot):
     bot.add_cog(Debugging(bot))
