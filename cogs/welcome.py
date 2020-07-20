@@ -18,6 +18,8 @@ async def send_welcome(member):
           '1) How did you find out about TDT?\n' \
           '2) What games and platforms do you play?\n' \
           '3) What is you main in-game-name?\n\n' \
+          'If you\'re interested in learning wolf pack (see our #manual_page), DM an ' \
+          'admin.\n\n'\
           'And... finally... we have a code of conduct in our #manual_page that we ' \
           'ask everybody to agree to. Just give it a 👍 if you agree.\n\n' \
           'Whelp, that\'s it! I hope someone gives you a less robotic welcome soon!'
