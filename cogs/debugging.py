@@ -148,6 +148,23 @@ class Debugging(commands.Cog):
     async def reload_extension(self, name):
         self.bot.reload_extension(name)
 
+    @commands.command(hidden=True)
+    async def speak(self, ctx, message, channel: str = None, guild: str = None):
+        """Speak as the bot"""
+        if guild is None:
+            guild = ctx.guild
+        else:
+            try:
+                guild = [i for i in self.bot.guilds if i.name == guild][0]
+            except IndexError:
+                ctx.send('ERROR: server "{0}" not found.'.format(guild))
+                return
+        if channel:
+            channel = find_channel(guild, channel)
+        else:
+            channel = ctx.channel
+        await channel.send(message)
+
 
 def setup(bot):
     bot.add_cog(Debugging(bot))
