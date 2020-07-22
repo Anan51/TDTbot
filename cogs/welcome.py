@@ -22,8 +22,7 @@ async def send_welcome(member):
           'admin.\n\n'\
           'And... finally... we have a code of conduct in our #manual_page that we ' \
           'ask everybody to agree to. Just give it a 👍 if you agree.\n\n' \
-          'Whelp, that\'s it! I hope someone gives you a less robotic welcome soon!\n\n' \
-          'PS: DO NOT RESPOND HERE. NO ONE WILL SEE IT.'
+          'Whelp, that\'s it! I hope someone gives you a less robotic welcome soon!'
     channel = member.dm_channel
     if not channel:
         await member.create_dm()
