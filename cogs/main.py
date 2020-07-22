@@ -134,6 +134,21 @@ class MainCommands(commands.Cog):
             msg = 'From: {0.author}\n"{0.content}"'.format(message)
             await channel.send(msg)
 
+    @commands.command()
+    async def recruits(self, ctx, role: discord.Role = None):
+        """<role (optional)> sorted list of recruit join dates (in UTC)."""
+        if role is None:
+            members = ctx.guild.members
+        else:
+            members = role.members
+        data = dict()
+        for member in members:
+            data[member] = member.joined_at
+        items = sorted(data.items(), key=lambda x: x[1], reverse=True)
+        msg = '\n'.join(['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
+                         for i in items])
+        await ctx.send('```' + msg + '```')
+
 
 def setup(bot):
     """This is required to add this cog to a bot as an extension"""
