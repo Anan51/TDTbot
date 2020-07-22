@@ -127,6 +127,13 @@ class MainCommands(commands.Cog):
         msg += '\n'.join([str(i + 1) + ') ' + b.display_name for i, b in enumerate(bots)])
         await ctx.send(msg)
 
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if type(message.channel) == discord.DMChannel:
+            channel = self.bot.find_channel(param.rc('log_channel'))
+            msg = 'From: {0.author}\n"{0.content}"'.format(message)
+            await channel.send(msg)
+
 
 def setup(bot):
     """This is required to add this cog to a bot as an extension"""
