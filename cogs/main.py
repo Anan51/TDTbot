@@ -129,6 +129,8 @@ class MainCommands(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        if message.author == self.bot.user:
+            return
         if type(message.channel) == discord.DMChannel:
             channel = self.bot.find_channel(param.rc('log_channel'))
             msg = 'From: {0.author}\n"{0.content}"'.format(message)
