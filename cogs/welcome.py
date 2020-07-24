@@ -68,7 +68,7 @@ class Welcome(commands.Cog):
         await log_channel.send(out)
         # if in joined in last 2 weeks
         if (datetime.datetime.utcnow() - payload.member.joined_at).seconds // 86400 < 14:
-            community = find_role(guild, "Community")
+            community = find_role(guild, "Recruit")
             if payload.member.top_role < community:
                 reason = "Agreed to cod of conduct."
                 await payload.member.add_roles(community, reason=reason)
