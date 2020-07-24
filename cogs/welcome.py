@@ -48,12 +48,16 @@ class Welcome(commands.Cog):
 
     @commands.command(hidden=True)
     async def test_welcome(self, ctx, member: discord.User = None):
+        """Send welcome message to an individual for testing"""
         if not member:
             member = ctx.author
         await send_welcome(member)
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
+        """Parse reaction adds for agreeing to code of conduct and rank them up to
+        Recruit"""
+        # if not code of conduct message
         if payload.message_id != 563406038754394112:
             return
         if str(payload.emoji) != "👍":
@@ -62,6 +66,7 @@ class Welcome(commands.Cog):
         logger.printv(out)
         guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
         log_channel = find_channel(guild, "admin_log")
+        # if they've agreed to CoC recently
         async for msg in log_channel.history(limit=200):
             if msg.content == out:
                 return
