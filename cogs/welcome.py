@@ -59,24 +59,37 @@ class Welcome(commands.Cog):
         Recruit"""
         # if not code of conduct message
         if payload.message_id != 563406038754394112:
+            logger.printv(payload.emoji.id)
             return
-        if str(payload.emoji) != "👍":
+        if str(payload.emoji) == "👍":
+            out = "{0.display_name} agreed to the code of conduct.".format(payload.member)
+            logger.printv(out)
+            guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
+            log_channel = find_channel(guild, "admin_log")
+            # if they've agreed to CoC recently
+            async for msg in log_channel.history(limit=200):
+                if msg.content == out:
+                    return
+            await log_channel.send(out)
+            # if in joined in last 2 weeks
+            if (datetime.datetime.utcnow() - payload.member.joined_at).seconds // 86400 < 14:
+                role = find_role(guild, "Recruit")
+                if payload.member.top_role < role:
+                    reason = "Agreed to cod of conduct."
+                    await payload.member.add_roles(role, reason=reason)
             return
-        out = "{0.display_name} agreed to the code of conduct.".format(payload.member)
-        logger.printv(out)
-        guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
-        log_channel = find_channel(guild, "admin_log")
-        # if they've agreed to CoC recently
-        async for msg in log_channel.history(limit=200):
-            if msg.content == out:
-                return
-        await log_channel.send(out)
-        # if in joined in last 2 weeks
-        if (datetime.datetime.utcnow() - payload.member.joined_at).seconds // 86400 < 14:
-            role = find_role(guild, "Recruit")
-            if payload.member.top_role < role:
-                reason = "Agreed to cod of conduct."
-                await payload.member.add_roles(role, reason=reason)
+        if hasattr(payload.emoji, 'id'):
+            role = None
+            guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
+            if payload.emoji.id == 350189008078372865:
+                role = find_role(guild, "PSN D2")
+            if payload.emoji.id == 641083615387713567:
+                role = find_role(guild, "Xbox D2")
+            if payload.emoji.id == 641083208871706664:
+                role = find_role(guild, "D2 PC")
+            if role is not None:
+                if payload.member.top_role >= find_role(guild, "Recruit"):
+                    await payload.member.add_roles(role)
 
 
 def setup(bot):
