@@ -22,7 +22,7 @@ async def send_welcome(member):
           '@member.\n\n'\
           'And... finally... we have a code of conduct in our #manual_page that we ' \
           'ask everybody to agree to. Just give it a 👍 if you agree. If you want me to ' \
-          'give you a Destiny 2 tag, then click the corresponding platform tag on the ' \
+          'give you a Destiny 2 tag, click the corresponding platform tag on the ' \
           'code of conduct after you give the thumbs up.\n\n' \
           'Whelp, that\'s it! I hope someone gives you a less robotic welcome soon!'
     channel = member.dm_channel
