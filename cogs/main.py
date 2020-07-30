@@ -127,6 +127,25 @@ class MainCommands(commands.Cog):
         msg += '\n'.join([str(i + 1) + ') ' + b.display_name for i, b in enumerate(bots)])
         await ctx.send(msg)
 
+    @commands.command()
+    async def blob(self, ctx, n: int = 1, channel: str = None, guild: str = None):
+        """<n (optional)> <channel (optional)> <server (optional)> posts dancing blob"""
+        if guild is None:
+            guild = ctx.guild
+        else:
+            try:
+                guild = [i for i in self.bot.guilds if i.name == guild][0]
+            except IndexError:
+                ctx.send('ERROR: server "{0}" not found.'.format(guild))
+                return
+        if channel:
+            channel = find_channel(guild, channel)
+        else:
+            channel = ctx.channel
+        n = min(10, n)
+        msg = " ".join(["<a:blobDance:738431916910444644>"] * n)
+        await channel.send(msg)
+
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author == self.bot.user:
