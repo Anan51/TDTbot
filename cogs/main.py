@@ -69,9 +69,12 @@ class MainCommands(commands.Cog):
                     data[member] = old_af
         # sort members with most inactive 1st
         items = sorted(data.items(), key=lambda x: x[1])
-        msg = '\n'.join(['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
-                         for i in items])
-        await ctx.send('```' + msg + '```')
+        while items:
+            tmp = items[:20]
+            msg = '\n'.join(['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
+                            for i in tmp])
+            await ctx.send('```' + msg + '```')
+            items = items[20:]
 
     @commands.command()
     async def roles(self, ctx):
