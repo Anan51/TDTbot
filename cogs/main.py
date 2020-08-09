@@ -4,6 +4,7 @@ from discord.ext import commands
 import logging
 from .. import param
 from ..helpers import *
+from ..async_helpers import *
 
 
 logger = logging.getLogger('discord')
@@ -69,12 +70,9 @@ class MainCommands(commands.Cog):
                     data[member] = old_af
         # sort members with most inactive 1st
         items = sorted(data.items(), key=lambda x: x[1])
-        while items:
-            tmp = items[:20]
-            msg = '\n'.join(['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
-                            for i in tmp])
-            await ctx.send('```' + msg + '```')
-            items = items[20:]
+        msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
+               for i in items]
+        await split_send(ctx, msg, style='```')
 
     @commands.command()
     async def roles(self, ctx):
@@ -90,11 +88,11 @@ class MainCommands(commands.Cog):
         else:
             channel = ctx.channel
         hist = await channel.history(limit=n).flatten()
-        msg = '\n'.join(["Item {0:d} (1.id)\n{1.content}".format(i + 1, m)
-                         for i, m in enumerate(hist)])
+        msg = ["Item {0:d} (1.id)\n{1.content}".format(i + 1, m)
+               for i, m in enumerate(hist)]
         if not msg:
             msg = "No history available."
-        await ctx.send(msg)
+        await split_send(msg)
 
     @commands.command()
     async def member_hist(self, ctx, member: discord.Member = None):
@@ -169,9 +167,9 @@ class MainCommands(commands.Cog):
         for member in members:
             data[member] = member.joined_at
         items = sorted(data.items(), key=lambda x: x[1], reverse=True)
-        msg = '\n'.join(['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
-                         for i in items])
-        await ctx.send('```' + msg + '```')
+        msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
+               for i in items]
+        await split_send(ctx, msg, style='```')
 
 
 def setup(bot):
