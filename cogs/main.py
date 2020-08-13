@@ -75,6 +75,52 @@ class MainCommands(commands.Cog):
         await split_send(ctx, msg, style='```')
 
     @commands.command()
+    async def purge(self, ctx, role: discord.Role = None):
+        """<role (optional)> shows members that have been inactive for over a week."""
+        await ctx.send("Hold on while I parse the server history.")
+        if role is None:
+            members = ctx.guild.members
+        else:
+            members = role.members
+        data = dict()
+        # get all channels with a history attribute
+        channels = [i for i in ctx.guild.channels if hasattr(i, "history")]
+        oldest = datetime.datetime.now()  # store the oldest time parsed
+        old_af = datetime.datetime(1, 1, 1)  # just some really old date
+        for channel in channels:
+            try:
+                # loop through messages in history (limit 1000 messages per channel)
+                async for msg in channel.history(limit=1000):
+                    # update oldest
+                    oldest = min(oldest, msg.created_at)
+                    # add/update data for message author
+                    if msg.author in members:
+                        try:
+                            # use the most recent date
+                            data[msg.author] = max(data[msg.author], msg.created_at)
+                        except KeyError:
+                            data[msg.author] = msg.created_at
+            except discord.Forbidden:
+                # We do not have permission to read this channel's history
+                # await ctx.send("Cannot read channel {0}.".format(channel))
+                pass
+        # make sure we have data for each member
+        for member in members:
+            if member not in data:
+                # use join date if it's more recent than oldest
+                if member.joined_at > oldest:
+                    data[member] = member.joined_at
+                else:
+                    data[member] = old_af
+        # sort members with most inactive 1st
+        last_week = datetime.datetime.utcnow() - datetime.timedelta(days=7)
+        items = [i for i in sorted(data.items(), key=lambda x: x[1]) if i[1] < last_week]
+
+        msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
+               for i in items]
+        await split_send(ctx, msg, style='```')
+
+    @commands.command()
     async def roles(self, ctx):
         """List server roles"""
         await ctx.send("\n".join([i.name for i in ctx.guild.roles
