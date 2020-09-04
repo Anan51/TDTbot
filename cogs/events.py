@@ -40,7 +40,7 @@ class _Event(dict):
         for line in lines[1:4]:
             try:
                 key, value = [i.strip() for i in line.split(':')]
-            except IndexError:
+            except (IndexError, ValueError):
                 return
             if key.lower() not in keys:
                 return
