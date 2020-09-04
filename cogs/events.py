@@ -31,7 +31,6 @@ class _Event(dict):
     def __init__(self, message, cog, log_channel=None, from_hist=False):
         super().__init__()
         # start parsing message for event info
-        self.content = message.content
         lines = [i.strip() for i in message.content.split('\n')]
         if len(lines) < 5:
             return
@@ -170,6 +169,19 @@ class _Event(dict):
         for rxn in msg.reactions:
             out.extend(await rxn.users().flatten())
         return set(out)
+
+    async def content(self):
+        """Return message content"""
+        msg = await self.message()
+        return msg.content
+
+    async def ttt(self):
+        """Is this a Trouble in Terrorist Town event?"""
+        content = await self.content().lower()
+        for i in ['ttt', 'terrorist', 'traitor']:
+            if i in content:
+                return True
+        return False
 
     async def alert(self, dt_min=None, channel=None, suffix=None, wait=True):
         """Schedule/send event alerts mentioning all attendees.
@@ -343,7 +355,6 @@ class Events(commands.Cog):
         msg = []
         fmt = '{0}) {1.name}: {2}'
         for i, e in enumerate(self.event_list):
-            message = await e.message()
             users = [j.display_name for j in await e.attendees()]
             msg.append(fmt.format(i + 1, e, ', '.join(users)))
         msg = '\n'.join(msg)
@@ -378,15 +389,30 @@ class Events(commands.Cog):
         await self.check_history()
 
     @commands.command()
-    async def traitor(self, ctx, n: int = 1):
+    async def traitor(self, ctx, n: int = 1, multi: bool = False):
         """Assign and DM a traitor'"""
-        events = [i for i in self.event_list if 'traitor' in i.content.lower]
+        events = [i for i in self.event_list if not i.past()]
+        events = [i for i in events if await i.ttt()]
+        if len(events) > 1 and not multi:
+            raise ValueError('Multiple traitor events registered.')
+        elif not len(events):
+            raise ValueError('No traitor events registered.')
+
         sent = False
         for i, e in events:
-            for t in random.sample(e.attendees, n):
-                await t.dm_channel.send('You are a traitor.')
-                sent = True
-        logger.prinv('Traitor DM(s) sent.')
+            traitors = random.sample(e.attendees, n)
+            for person in await e.attendees():
+                if person in traitors:
+                    await person.dm_channel.send('TRAITOR!')
+                    sent = True
+                else:
+                    await person.dm_channel.send('You are innocent.')
+
+        if sent:
+            logger.prinv('Traitor DM(s) sent.')
+            await ctx.send('Traitor DM(s) sent.')
+        else:
+            raise RuntimeError('No traitor message sent.')
 
 
 def setup(bot):
