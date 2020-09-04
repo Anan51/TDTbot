@@ -391,6 +391,10 @@ class Events(commands.Cog):
     @commands.command()
     async def traitor(self, ctx, n: int = 1, multi: bool = False):
         """Assign and DM a traitor'"""
+        t_msg = 'Traitor: You are the Traitor! Turn on your HUD, try to get the Power ' \
+                'Ammo, and ready your Knives and Grenades!'
+        t_msg = 'Innocent: There is a traitor amongst you... Keep your HUD and Ghost ' \
+                'off and be sure to mute if you die. '
         events = [i for i in self.event_list if not i.past()]
         events = [i for i in events if await i.ttt()]
         if len(events) > 1 and not multi:
@@ -411,10 +415,10 @@ class Events(commands.Cog):
                     await person.create_dm()
                     channel = person.dm_channel
                 if person in traitors:
-                    await channel.send('TRAITOR!' + suf)
+                    await channel.send(t_msg + suf)
                     sent = True
                 else:
-                    await channel.send('You are innocent.' + suf)
+                    await channel.send(t_msg + suf)
 
         if sent:
             logger.printv('Traitor DM(s) sent.')
