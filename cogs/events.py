@@ -177,7 +177,7 @@ class _Event(dict):
 
     async def ttt(self):
         """Is this a Trouble in Terrorist Town event?"""
-        content = await self.content().lower()
+        content = (await self.content()).lower()
         for i in ['ttt', 'terrorist', 'traitor']:
             if i in content:
                 return True
@@ -399,17 +399,25 @@ class Events(commands.Cog):
             raise ValueError('No traitor events registered.')
 
         sent = False
-        for i, e in events:
-            traitors = random.sample(e.attendees, n)
-            for person in await e.attendees():
+        suf = ''
+        for i, e in enumerate(events):
+            if len(events) > 1:
+                suf = ' ({:})'.format(i)
+            attendees = await e.attendees()
+            traitors = random.sample(attendees, n)
+            for person in attendees:
+                channel = person.dm_channel
+                if not channel:
+                    await person.create_dm()
+                    channel = person.dm_channel
                 if person in traitors:
-                    await person.dm_channel.send('TRAITOR!')
+                    await channel.send('TRAITOR!' + suf)
                     sent = True
                 else:
-                    await person.dm_channel.send('You are innocent.')
+                    await channel.send('You are innocent.' + suf)
 
         if sent:
-            logger.prinv('Traitor DM(s) sent.')
+            logger.printv('Traitor DM(s) sent.')
             await ctx.send('Traitor DM(s) sent.')
         else:
             raise RuntimeError('No traitor message sent.')
