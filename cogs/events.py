@@ -4,6 +4,7 @@ from discord.ext import commands
 import datetime
 import logging
 import pytz
+import random
 import re
 import traceback
 from .. import param
@@ -30,6 +31,7 @@ class _Event(dict):
     def __init__(self, message, cog, log_channel=None, from_hist=False):
         super().__init__()
         # start parsing message for event info
+        self.content = message.content
         lines = [i.strip() for i in message.content.split('\n')]
         if len(lines) < 5:
             return
@@ -374,6 +376,17 @@ class Events(commands.Cog):
     async def on_ready(self):
         await asyncio.sleep(5)
         await self.check_history()
+
+    @commands.command()
+    async def traitor(self, ctx, n: int = 1):
+        """Assign and DM a traitor'"""
+        events = [i for i in self.event_list if 'traitor' in i.content.lower]
+        sent = False
+        for i, e in events:
+            for t in random.sample(e.attendees, n):
+                await t.dm_channel.send('You are a traitor.')
+                sent = True
+        logger.prinv('Traitor DM(s) sent.')
 
 
 def setup(bot):
