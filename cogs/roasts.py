@@ -61,8 +61,13 @@ class Roast(commands.Cog):
     async def on_message(self, message):
         """Parse messages to see if we should roast even without a command"""
         # ignore commands
-        if message.content.startswith(self.bot.command_prefix):
-            return
+        try:
+            if message.content.startswith(self.bot.command_prefix):
+                return
+        except TypeError:
+            for prefix in self.bot.command_prefix:
+                if message.content.startswith(prefix):
+                    return
         # ignore messages from this bot
         if message.author == self.bot.user:
             return

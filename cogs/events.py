@@ -307,8 +307,13 @@ class Events(commands.Cog):
         if not self._hist_checked:
             await self.check_history()
         # ignore commands when checking for events
-        if message.content.startswith(self.bot.command_prefix):
-            return
+        try:
+            if message.content.startswith(self.bot.command_prefix):
+                return
+        except TypeError:
+            for prefix in self.bot.command_prefix:
+                if message.content.startswith(prefix):
+                    return
         # if message in event channel, than try to parse it
         if self.is_event_channel(message.channel):
             event = _Event(message, self)
