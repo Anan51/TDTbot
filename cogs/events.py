@@ -406,7 +406,8 @@ class Events(commands.Cog):
     @commands.command()
     async def infected(self, ctx, n: int = 1, multi: bool = False):
         """Assign and DM an infected'"""
-        a_msg = 'Infected: You are the infected! Turn on your HUD, and start infecting.'
+        a_msg = 'You are the Prime Infected: get out your Stay Away and sword and start '\
+                'infecting. You loose your Stay Away after one kill.'
         b_msg = 'Survivor: You’re a survivor... stay alert, they\'re coming...'
         phrases = ['Infection', 'infected']
         await self.assign_rolls(ctx, a_msg, b_msg, phrases, n=n, multi=multi)
