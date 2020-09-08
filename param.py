@@ -7,7 +7,7 @@ _config = os.path.join(_dir, 'config')
 # Defaults for parameters
 defaults = {
     'channel':         'devoted_chat',
-    'cmd_prefix':      'TDT$',
+    'cmd_prefix':      ['TDT$', 'Tdt$', 'tdt$'],
     'config_file':     os.path.join(_config, 'tdt.json'),
     'token_file':      os.path.join(_config, 'token.txt'),
     'roast_file':      os.path.join(_config, 'roasts.txt'),
