@@ -27,6 +27,7 @@ class MainBot(commands.Bot):
             # create a new loop by default. This makes the __main__ loop work.
             # Otherwise we run into issues reusing a closed loop.
             kwargs['loop'] = asyncio.new_event_loop()
+        kwargs['case_insensitive'] = True
         super().__init__(*args, **kwargs)
         # add all our cogs via load_extension
         for cog in cog_list():

@@ -175,11 +175,11 @@ class _Event(dict):
         msg = await self.message()
         return msg.content
 
-    async def ttt(self):
-        """Is this a Trouble in Terrorist Town event?"""
+    async def search(self, phrases):
+        """Does this event contain one of the given phases"""
         content = (await self.content()).lower()
-        for i in ['ttt', 'terrorist', 'traitor']:
-            if i in content:
+        for i in phrases:
+            if i.lower() in content:
                 return True
         return False
 
@@ -393,14 +393,29 @@ class Events(commands.Cog):
         """Assign and DM a traitor'"""
         t_msg = 'Traitor: You are the Traitor! Turn on your HUD, try to get the Power ' \
                 'Ammo, and ready your Knives and Grenades!'
-        t_msg = 'Innocent: There is a traitor amongst you... Keep your HUD and Ghost ' \
-                'off and be sure to mute if you die. '
+        i_msg = 'Innocent: There is a traitor amongst you... Keep your HUD and Ghost ' \
+                'off and be sure to mute if you die.'
+        phrases = ['TTT', 'terrorist', 'traitor']
+        await self.assign_rolls(ctx, t_msg, i_msg, phrases, n=n, multi=multi)
+
+    @commands.command()
+    async def infected(self, ctx, n: int = 1, multi: bool = False):
+        """Assign and DM an infected'"""
+        a_msg = 'Infected: You are the infected! Turn on your HUD, try to get the Power '\
+                'Ammo, and ready your Knives and Grenades!'
+        b_msg = 'Survivor: You’re a survivor... stay alert, they\'re coming...'
+        phrases = ['Infection', 'infected']
+        await self.assign_rolls(ctx, a_msg, b_msg, phrases, n=n, multi=multi)
+
+    async def assign_rolls(self, ctx, a_msg, b_msg, phrases, n=1, multi=False):
+        """Assign and DM a event rolls'"""
+        event_name = phrases[0]
         events = [i for i in self.event_list if not i.past()]
-        events = [i for i in events if await i.ttt()]
+        events = [i for i in events if await i.search(phrases)]
         if len(events) > 1 and not multi:
-            raise ValueError('Multiple traitor events registered.')
+            raise ValueError('Multiple {:} events registered.'.format(event_name))
         elif not len(events):
-            raise ValueError('No traitor events registered.')
+            raise ValueError('No {:} events registered.'.format(event_name))
 
         sent = False
         suf = ''
@@ -408,23 +423,23 @@ class Events(commands.Cog):
             if len(events) > 1:
                 suf = ' ({:})'.format(i)
             attendees = await e.attendees()
-            traitors = random.sample(attendees, n)
+            roll_a = random.sample(attendees, n)
             for person in attendees:
                 channel = person.dm_channel
                 if not channel:
                     await person.create_dm()
                     channel = person.dm_channel
-                if person in traitors:
-                    await channel.send(t_msg + suf)
+                if person in roll_a:
+                    await channel.send(a_msg + suf)
                     sent = True
-                else:
-                    await channel.send(t_msg + suf)
+                else:  # has roll b
+                    await channel.send(b_msg + suf)
 
         if sent:
-            logger.printv('Traitor DM(s) sent.')
-            await ctx.send('Traitor DM(s) sent.')
+            logger.printv('Event roll DM(s) sent.')
+            await ctx.send('Event roll DM(s) sent.')
         else:
-            raise RuntimeError('No traitor message sent.')
+            raise RuntimeError('No event roll messages sent.')
 
 
 def setup(bot):
