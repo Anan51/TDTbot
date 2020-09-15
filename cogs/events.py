@@ -41,12 +41,15 @@ class _Event(dict):
             try:
                 key, value = [i.strip() for i in line.split(':')]
             except (IndexError, ValueError):
+                logger.warning('Missing ":" on message lines.')
                 return
             if key.lower() not in keys:
+                logger.warning('Unknown key "{:}"'.format(key))
                 return
             out[key.lower()] = value
         for key in keys:
             if key not in out:
+                logger.warning('Missing key "{:}"'.format(key))
                 return
         # text saying how to enroll in event
         out['enroll'] = '\n'.join(lines[4:])
@@ -59,6 +62,7 @@ class _Event(dict):
                 day = d
                 break
         if not day:
+            logger.warning("Can't parse day")
             return
         # We only get this far if we have a valid event, so set attributes now
         self.cog = cog
@@ -108,6 +112,7 @@ class _Event(dict):
                 elif t.hour < 8 and 'morning' not in out['when'].lower():
                     t += datetime.timedelta(hours=12)
         if not t:
+            logger.warning('Invalid time')
             return
         # make sure datetime is specified with server timezone
         dt = tz.localize(datetime.datetime.combine(day, t.time()))
