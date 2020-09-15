@@ -177,9 +177,13 @@ class _Event(dict):
 
     async def search(self, phrases):
         """Does this event contain one of the given phases"""
+        print('search')
+        print(phrases)
         content = (await self.content()).lower()
+        print(content)
         for i in phrases:
             if i.lower() in content:
+                print(i, content)
                 return True
         return False
 
@@ -415,8 +419,7 @@ class Events(commands.Cog):
     async def assign_rolls(self, ctx, a_msg, b_msg, phrases, n=1, multi=False):
         """Assign and DM a event rolls'"""
         event_name = phrases[0]
-        events = [i for i in self.event_list if not i.past()]
-        events = [i for i in events if await i.search(phrases)]
+        events = [i for i in self.event_list if await i.search(phrases)]
         if len(events) > 1 and not multi:
             raise ValueError('Multiple {:} events registered.'.format(event_name))
         elif not len(events):
