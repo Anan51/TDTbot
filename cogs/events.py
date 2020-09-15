@@ -39,7 +39,9 @@ class _Event(dict):
         keys = ['who', 'what', 'when']  # check for and get these
         for line in lines[1:4]:
             try:
-                key, value = [i.strip() for i in line.split(':')]
+                tmp = [i.strip() for i in line.split(':')]
+                key = tmp[0]
+                value = " ".join(tmp[1:])
             except (IndexError, ValueError):
                 logger.warning('Missing ":" on message lines.')
                 return
