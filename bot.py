@@ -8,7 +8,7 @@ from . import param
 from . import helpers
 
 
-logger = logging.getLogger('discord')
+logger = logging.getLogger('discord.' + __name__)
 
 
 def cog_list():

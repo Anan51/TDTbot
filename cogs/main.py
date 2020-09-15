@@ -7,7 +7,7 @@ from ..helpers import *
 from ..async_helpers import *
 
 
-logger = logging.getLogger('discord')
+logger = logging.getLogger('discord.' + __name__)
 
 
 class MainCommands(commands.Cog):

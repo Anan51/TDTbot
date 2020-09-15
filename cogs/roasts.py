@@ -7,7 +7,7 @@ from .. import param
 from ..helpers import *
 
 
-logger = logging.getLogger('discord')
+logger = logging.getLogger('discord.' + __name__)
 
 
 def roast_str():

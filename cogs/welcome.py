@@ -6,7 +6,7 @@ from ..helpers import *
 import logging
 
 
-logger = logging.getLogger('discord')
+logger = logging.getLogger('discord.' + __name__)
 
 
 async def send_welcome(member):
