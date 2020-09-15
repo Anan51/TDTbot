@@ -64,7 +64,6 @@ class Welcome(commands.Cog):
         Recruit"""
         # if not code of conduct message
         if payload.message_id != 563406038754394112:
-            logger.printv(payload.emoji.id)
             return
         if str(payload.emoji) == "👍":
             out = "{0.display_name} agreed to the code of conduct.".format(payload.member)
