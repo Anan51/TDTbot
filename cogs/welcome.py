@@ -47,6 +47,9 @@ class Welcome(commands.Cog):
         if channel is not None:
             await channel.send(roles + ' new member {0.name} joined.'.format(member))
         await send_welcome(member)
+        msg = "Welcome to TDT {0.mention} <a:blobDance:738431916910444644>" \
+              " Please read my DM.".format(member)
+        await member.guild.system_channel.send(msg)
 
     @commands.command(hidden=True)
     async def test_welcome(self, ctx, member: discord.User = None):
