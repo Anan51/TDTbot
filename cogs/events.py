@@ -41,7 +41,7 @@ class _Event(dict):
             try:
                 tmp = [i.strip() for i in line.split(':')]
                 key = tmp[0]
-                value = " ".join(tmp[1:])
+                value = ":".join(tmp[1:])
             except (IndexError, ValueError):
                 logger.warning('Missing ":" on message lines.')
                 return
