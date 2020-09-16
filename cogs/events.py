@@ -314,6 +314,13 @@ class Events(commands.Cog):
             return channel.name == self.channel
         return channel == self.channel
 
+    async def enroll_event_if_valid(self, event):
+        # if this is a valid event
+        if event:
+            if event not in self._events:
+                self._events.append(event)
+                await event.log_and_alert(event_chanel=self.channel)
+
     @commands.Cog.listener()
     async def on_message(self, message):
         """Parse messages for new event post"""
@@ -331,14 +338,27 @@ class Events(commands.Cog):
             for prefix in self.bot.command_prefix:
                 if message.content.startswith(prefix):
                     return
-        # if message in event channel, than try to parse it
+        # if message in event channel, then try to parse it
         if self.is_event_channel(message.channel):
-            event = _Event(message, self)
-            # if this is a valid event
-            if event:
-                if event not in self._events:
-                    self._events.append(event)
-                    await event.log_and_alert(event_chanel=self.channel)
+            await self.enroll_event_if_valid(_Event(message, self))
+
+    @commands.Cog.listener()
+    async def on_raw_message_edit(self, payload):
+        """Parse message edits that might be events"""
+        # if message not in event channel, ignore it
+        if not self.is_event_channel(payload.channel_id):
+            return
+        msg_id = payload.message_id
+        n = len(self._events)
+        # remove old versions of this event (before this edit we are now parsing)
+        events = [i for i in range(n) if msg_id == self._events[i]['id']]
+        for i in events:
+            self.event_list.pop(i)
+        # get message object
+        message = await self.channel.fetch_message(msg_id)
+        dt = datetime.timedelta(minutes=5)
+        not_recent = (datetime.datetime.utcnow() - message.created_at) > dt
+        await self.enroll_event_if_valid(_Event(message, self, from_hist=not_recent))
 
     async def check_history(self, channel=None):
         """Check event channel history for any events we missed before we were
@@ -349,12 +369,7 @@ class Events(commands.Cog):
         after = datetime.datetime.utcnow() - datetime.timedelta(days=6, hours=23)
         try:
             async for i in channel.history(after=after, limit=200):
-                event = _Event(i, self, from_hist=True)
-                # if valid event
-                if event:
-                    if event not in self._events:
-                        self._events.append(event)
-                        await event.log_and_alert(event_chanel=channel)
+                await self.enroll_event_if_valid(_Event(i, self, from_hist=True))
             logger.printv('History parsed.')
             self._hist_checked = True
         except AttributeError as e:
@@ -408,6 +423,12 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         await asyncio.sleep(5)
+        await self.check_history()
+
+    @commands.command()
+    async def read_events(self, ctx):
+        """Read and parse the events channel for events. This shouldn't need to be
+        called."""
         await self.check_history()
 
     @commands.command()
