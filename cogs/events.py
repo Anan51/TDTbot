@@ -30,6 +30,7 @@ class _Event(dict):
     """A class to contain event info (dict subclass)."""
     def __init__(self, message, cog, log_channel=None, from_hist=False):
         super().__init__()
+        self._error = None
         # start parsing message for event info
         lines = [i.strip() for i in message.content.split('\n')]
         if len(lines) < 5:
@@ -66,8 +67,7 @@ class _Event(dict):
         if not day:
             logger.warning("Can't parse day")
             if not from_hist:
-                await message.channel.send("Event not registered. Unable to parse day of "
-                                           "week")
+                self._error = "Event not registered. Unable to parse day of week"
             return
         # We only get this far if we have a valid event, so set attributes now
         self.cog = cog
@@ -119,8 +119,7 @@ class _Event(dict):
         if not t:
             logger.warning('Invalid time')
             if not from_hist:
-                await message.channel.send("Event not registered. Unable to parse time "
-                                           "of day")
+                self._error = "Event not registered. Unable to parse time of day"
             return
         # make sure datetime is specified with server timezone
         dt = tz.localize(datetime.datetime.combine(day, t.time()))
@@ -129,6 +128,12 @@ class _Event(dict):
         # put the contents of out into self
         self.update(out)
         return
+
+    async def send_error(self, channel=None):
+        if channel is None:
+            channel = getattr(self.cog, 'channel', param.rc('event_channel'))
+        if self._error:
+            await channel.send(self._error)
 
     async def message(self):
         """Fetch and return the message associated with this event"""
@@ -320,6 +325,8 @@ class Events(commands.Cog):
             if event not in self._events:
                 self._events.append(event)
                 await event.log_and_alert(event_chanel=self.channel)
+        else:
+            event.send_error()
 
     @commands.Cog.listener()
     async def on_message(self, message):
