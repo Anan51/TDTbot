@@ -65,6 +65,9 @@ class _Event(dict):
                 break
         if not day:
             logger.warning("Can't parse day")
+            if not from_hist:
+                await message.channel.send("Event not registered. Unable to parse day of "
+                                           "week")
             return
         # We only get this far if we have a valid event, so set attributes now
         self.cog = cog
@@ -115,6 +118,9 @@ class _Event(dict):
                     t += datetime.timedelta(hours=12)
         if not t:
             logger.warning('Invalid time')
+            if not from_hist:
+                await message.channel.send("Event not registered. Unable to parse time "
+                                           "of day")
             return
         # make sure datetime is specified with server timezone
         dt = tz.localize(datetime.datetime.combine(day, t.time()))
