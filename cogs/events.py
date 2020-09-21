@@ -175,6 +175,11 @@ class _Event(dict):
                 return
         await self.log_channel.send(log)
 
+    def future_or_active(self, hours=6):
+        """Is this event in the past or near future?"""
+        return (datetime.datetime.utcnow() - self['datetime'] <=
+                datetime.timedelta(hours=hours))
+
     def past(self):
         """Is this event in the past?"""
         return self['datetime'] < datetime.datetime.utcnow()
@@ -303,11 +308,11 @@ class Events(commands.Cog):
     @property
     def event_list(self):
         """Return a list of active events still to happen"""
-        return [e for e in self._events if not e.past()]
+        return [e for e in self._events if e.future_or_active()]
     
     def cleanse_old(self):
         """Remove past events"""
-        old = [e for e in self._events if e.past()]
+        old = [e for e in self._events if not e.future_or_active()]
         for e in old:
             self._events.remove(e)
 
