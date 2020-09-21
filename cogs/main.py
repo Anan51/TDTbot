@@ -118,7 +118,7 @@ class MainCommands(commands.Cog):
 
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
-        await split_send(ctx, msg, style='```')
+        await split_send(ctx, sorted(msg), style='```')
 
     @commands.command()
     async def roles(self, ctx):
