@@ -174,9 +174,9 @@ class MainCommands(commands.Cog):
         msg += '\n'.join([str(i + 1) + ') ' + b.display_name for i, b in enumerate(bots)])
         await ctx.send(msg)
 
-    @commands.command()
-    async def blob(self, ctx, n: int = 1, channel: str = None, guild: str = None):
-        """<n (optional)> <channel (optional)> <server (optional)> posts dancing blob"""
+    async def emote(self, ctx, emote, n: int = 1, channel: str = None, guild: str = None):
+        """emote <n (optional)> <channel (optional)> <server (optional)>
+        posts emote"""
         if guild is None:
             guild = ctx.guild
         else:
@@ -190,11 +190,24 @@ class MainCommands(commands.Cog):
         else:
             channel = ctx.channel
         n = min(10, n)
-        msg = " ".join(["<a:blobDance:738431916910444644>"] * n)
+        msg = " ".join([emote] * n)
         await channel.send(msg)
+
+    @commands.command()
+    async def blob(self, ctx, n: int = 1, channel: str = None, guild: str = None):
+        """<n (optional)> <channel (optional)> <server (optional)> posts dancing blob"""
+        emote = "<a:blobDance:738431916910444644>"
+        await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
+
+    @commands.command()
+    async def vibe(self, ctx, n: int = 1, channel: str = None, guild: str = None):
+        """<n (optional)> <channel (optional)> <server (optional)> posts vibing cat"""
+        emote = "<a:vibe:761582456867520532>"
+        await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        """Listen for DMs and post them in the bot log channel"""
         if message.author == self.bot.user:
             return
         if type(message.channel) == discord.DMChannel:
