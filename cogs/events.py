@@ -309,7 +309,7 @@ class Events(commands.Cog):
     def event_list(self):
         """Return a list of active events still to happen"""
         return [e for e in self._events if e.future_or_active()]
-    
+
     def cleanse_old(self):
         """Remove past events"""
         old = [e for e in self._events if not e.future_or_active()]
@@ -331,7 +331,7 @@ class Events(commands.Cog):
                 self._events.append(event)
                 await event.log_and_alert(event_chanel=self.channel)
         else:
-            event.send_error()
+            await event.send_error()
 
     @commands.Cog.listener()
     async def on_message(self, message):
