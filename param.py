@@ -80,6 +80,13 @@ class DataContainer:
     def keys(self):
         return list(self.data.keys()) + list(self._file_data.keys())
 
+    def set_if_not_set(self, key, value):
+        try:
+            return self[key]
+        except KeyError:
+            self[key] = value
+            return self[key]
+
 
 class Parameters(dict):
     """Class providing parameters (dict subclass)"""

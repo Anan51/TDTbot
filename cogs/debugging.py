@@ -10,6 +10,7 @@ from .. import git_manage
 
 logger = logging.getLogger('discord.' + __name__)
 
+
 class Debugging(commands.Cog):
     """Cog designed for debugging the bot"""
     def __init__(self, bot):
