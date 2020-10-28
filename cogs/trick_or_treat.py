@@ -34,6 +34,7 @@ class TrickOrTreat(commands.Cog):
         self._init = False
         self._active_message_id = None
         self._awaiting = None
+        self._last = datetime.datetime.now()
         logger.printv('Finished TrickOrTreat.__init__')
 
     @commands.Cog.listener()
@@ -214,8 +215,9 @@ class TrickOrTreat(commands.Cog):
         if set_timer == 0:
             set_timer = .01
         if set_timer:
-            self.send_later(dt=set_timer)
+            self.send_later(dt=True)
         self._awaiting = None
+        self._last = datetime.datetime.now()
         logger.printv('Finish TrickOrTreat.finish_count (end)')
 
     def count_later(self, **kwargs):
@@ -237,8 +239,9 @@ class TrickOrTreat(commands.Cog):
             else:
                 self.count_later(dt=True, mid=self.message_id)
         if not self.message_id:
-            await self.send_message()
-            return
+            if datetime.datetime.now() - self._last > datetime.timedelta(minutes=15):
+                await self.send_message()
+                return
         if not self._awaiting:
             self.count_later(mid=self.message_id)
 
