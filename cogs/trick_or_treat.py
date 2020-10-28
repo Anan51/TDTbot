@@ -36,6 +36,16 @@ class TrickOrTreat(commands.Cog):
         self._awaiting = None
         logger.printv('Finished TrickOrTreat.__init__')
 
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self, payload):
+        """Parse reaction adds for agreeing to code of conduct and rank them up to
+        Recruit"""
+        # if not code of conduct message
+        if payload.message_id != 563406038754394112:
+            return
+        if str(payload.emoji) == "🎃":
+            payload.member.add_roles(self.role)
+
     @property
     def role(self):
         return find_role(self.channel.guild, _role)
@@ -251,7 +261,8 @@ class TrickOrTreat(commands.Cog):
     async def rankings(self, ctx):
         """Show current rankings for trick or treat"""
         logger.printv('TrickOrTreat.rankings')
-        role = self.role
+        await ctx.send("This command is currently broken")
+
         data = {m: self.get_score(m) for m in role.members}
         users = sorted(data.keys(), key=lambda u: (data[u], u.display_name))
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
