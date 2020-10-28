@@ -21,7 +21,7 @@ _msg = "Trick ({:}) or Treat ({:})!".format(_trick, _treat)
 _bot = 'tdt.trick_or_treat.msg'
 _role = 'SPOOKY'
 _tmin, _tmax = 5 * 60, 15 * 60
-_rule_id = '770363043515203604'
+_rule_id = 770363043515203604
 
 
 class TrickOrTreat(commands.Cog):
@@ -41,10 +41,10 @@ class TrickOrTreat(commands.Cog):
         """Parse reaction adds for agreeing to code of conduct and rank them up to
         Recruit"""
         # if not code of conduct message
-        if payload.message_id != 563406038754394112:
+        if payload.message_id != _rule_id:
             return
         if str(payload.emoji) == "🎃":
-            payload.member.add_roles(self.role)
+            await payload.member.add_roles(self.role)
 
     @property
     def role(self):
@@ -262,7 +262,7 @@ class TrickOrTreat(commands.Cog):
         """Show current rankings for trick or treat"""
         logger.printv('TrickOrTreat.rankings')
         await ctx.send("This command is currently broken")
-
+        role = self.role
         data = {m: self.get_score(m) for m in role.members}
         users = sorted(data.keys(), key=lambda u: (data[u], u.display_name))
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
