@@ -134,10 +134,11 @@ class MainCommands(commands.Cog):
         else:
             channel = ctx.channel
         hist = await channel.history(limit=n).flatten()
-        msg = ["Item {0:d} (1.id)\n{1.content}".format(i + 1, m)
+        msg = ["Item {0:d} {1.id}\n{1.content}".format(i + 1, m)
                for i, m in enumerate(hist)]
         if not msg:
-            msg = "No history available."
+            msg = ["No history available."]
+        print(msg)
         await split_send(msg)
 
     @commands.command()

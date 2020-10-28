@@ -4,6 +4,7 @@ from discord.ext import commands
 from glob import glob
 import logging
 import os
+import traceback
 from . import param
 from . import helpers
 

@@ -41,13 +41,16 @@ class DataContainer:
             out = self._file_data[key]
             self.data[key] = out
             return out
-        except KeyError:
+        except (KeyError, TypeError):
             pass
-        func = getattr(self, str(key), getattr(self, '_' + str(key)))
-        if callable(func):
-            self.data[key] = func()
-            self._save()
-            return self.data[key]
+        try:
+            func = getattr(self, str(key), getattr(self, '_' + str(key)), None)
+            if callable(func):
+                self.data[key] = func()
+                self._save()
+                return self.data[key]
+        except AttributeError:
+            pass
         try:
             self._gen_data(key)
             out = self.data[key]

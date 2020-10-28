@@ -2,6 +2,8 @@ import discord
 
 
 async def split_send(channel, message, deliminator='\n', n=2000, style=''):
+    if not message:
+        return
     if not type(message) in [tuple, list]:
         message = message.split(deliminator)
     msg = message.pop(0)

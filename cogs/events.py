@@ -30,6 +30,7 @@ class _Event(dict):
     """A class to contain event info (dict subclass)."""
     def __init__(self, message, cog, log_channel=None, from_hist=False):
         super().__init__()
+        self.cog = cog
         self._error = None
         # start parsing message for event info
         lines = [i.strip() for i in message.content.split('\n')]
