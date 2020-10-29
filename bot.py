@@ -7,6 +7,7 @@ import os
 import traceback
 from . import param
 from . import helpers
+from .config.users import get_all_user_config_files, UserConfig
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -77,3 +78,11 @@ class MainBot(commands.Bot):
 
     async def on_command_error(self, ctx):
         logger.error('Command "{0.command}" failed. Invoked by {0.author}.'.format(ctx))
+
+    async def get_user_configs(self):
+        files = get_all_user_config_files()
+
+        async def get_user(fn):
+            return await self.fetch_user(int(os.path.split(fn)[-1].split('.')[0]))
+
+        return [UserConfig(await get_user(f)) for f in files]

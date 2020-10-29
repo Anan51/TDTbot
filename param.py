@@ -90,6 +90,9 @@ class DataContainer:
             self[key] = value
             return self[key]
 
+    def __contains__(self, item):
+        return item in self.keys()
+
 
 class Parameters(dict):
     """Class providing parameters (dict subclass)"""
