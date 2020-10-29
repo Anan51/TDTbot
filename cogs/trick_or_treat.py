@@ -27,7 +27,6 @@ _rule_id = 770363043515203604
 class TrickOrTreat(commands.Cog):
     """Cog for trick or treat game"""
     def __init__(self, bot):
-        logger.printv('TrickOrTreat.__init__')
         self.bot = bot
         self._last_member = None
         self._configs = dict()
@@ -35,7 +34,6 @@ class TrickOrTreat(commands.Cog):
         self._active_message_id = None
         self._awaiting = None
         self._last = datetime.datetime.now()
-        logger.printv('Finished TrickOrTreat.__init__')
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
@@ -57,7 +55,6 @@ class TrickOrTreat(commands.Cog):
 
     @property
     def message_id(self):
-        logger.printv('TrickOrTreat.message_id')
         if self._active_message_id is None:
             try:
                 self._active_message_id = self._get_config(self.bot.user).set_if_not_set(_bot, 0)
@@ -95,7 +92,6 @@ class TrickOrTreat(commands.Cog):
         self.bot.loop.create_task(self.send_message(**kwargs))
 
     async def _get_message(self):
-        logger.printv('TrickOrTreat._get_message')
         if self.message_id:
             try:
                 return await self.channel.fetch_message(self.message_id)
@@ -103,14 +99,12 @@ class TrickOrTreat(commands.Cog):
                 self._set_msg_id(0)
 
     def _set_msg_id(self, idn):
-        logger.printv('TrickOrTreat._set_msg_id')
         old = self.message_id
         self._active_message_id = idn
         self._get_config(self.bot.user)[_bot] = idn
         return old
 
     def _get_config(self, user):
-        logger.printv('TrickOrTreat._get_config')
         try:
             return self._configs[user.id]
         except KeyError:
@@ -118,14 +112,12 @@ class TrickOrTreat(commands.Cog):
             return self._configs[user.id]
 
     def apply_delta(self, user, delta):
-        logger.printv('TrickOrTreat.apply_delta')
         config = self._get_config(user)
         old = config.set_if_not_set(_score, _start)
         config[_score] += delta
         return old, delta, old + delta
 
     def get_score(self, user):
-        logger.printv('TrickOrTreat.get_score')
         return self._get_config(user).set_if_not_set(_score, _start)
 
     async def _member(self, user):
@@ -178,10 +170,11 @@ class TrickOrTreat(commands.Cog):
                     await rxn.clear()
                 except discord.HTTPException:
                     pass
-        if not trickers and not treaters:
-            logger.printv('Finish TrickOrTreat.finish_count (no votes)')
+        if len(set(trickers + treaters)) < 2:
+            logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
             self._awaiting = None
             return self.count_later(dt=set_timer, mid=mid)
+        self._last = datetime.datetime.now()
         ntrick -= 1
         ntreat -= 1
         results = ' {:} x {:} vs {:} x {:}'
@@ -217,7 +210,6 @@ class TrickOrTreat(commands.Cog):
         if set_timer:
             self.send_later(dt=True)
         self._awaiting = None
-        self._last = datetime.datetime.now()
         logger.printv('Finish TrickOrTreat.finish_count (end)')
 
     def count_later(self, **kwargs):
@@ -240,7 +232,7 @@ class TrickOrTreat(commands.Cog):
                 self.count_later(dt=True, mid=self.message_id)
         if not self.message_id:
             if datetime.datetime.now() - self._last > datetime.timedelta(minutes=15):
-                await self.send_message()
+                await self.send_message(dt=True)
                 return
         if not self._awaiting:
             self.count_later(mid=self.message_id)
@@ -248,12 +240,10 @@ class TrickOrTreat(commands.Cog):
     @commands.command()
     async def show_points(self, ctx, member: discord.Member = None):
         """<member (optional)> shows trick or treat points"""
-        logger.printv('TrickOrTreat.show_points')
         if member is None:
             member = ctx.author
         txt = "{:} has {:} points.".format(member.display_name, self.get_score(member))
         await ctx.send(txt)
-        logger.printv('Finished TrickOrTreat.show_points')
 
     @commands.command(hidden=True)
     async def print_id(self, ctx):
@@ -263,7 +253,6 @@ class TrickOrTreat(commands.Cog):
     @commands.command()
     async def rankings(self, ctx):
         """Show current rankings for trick or treat"""
-        logger.printv('TrickOrTreat.rankings')
         await ctx.send("This command is currently broken")
         role = self.role
         data = {m: self.get_score(m) for m in role.members}
