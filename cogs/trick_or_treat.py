@@ -265,10 +265,9 @@ class TrickOrTreat(commands.Cog):
     async def rankings(self, ctx):
         configs = await self.bot.get_user_configs()
         players = [c for c in configs if _score in c]
-        data = {self._member(p): p[_score] for p in players}
+        data = {await self._member(p.user): p[_score] for p in players}
         users = sorted(data.keys(), key=lambda u: (data[u], u.display_name))
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
-        print(role, data, role.members, self.channel.guild)
         await split_send(self.channel, summary, style='```')
 
     @commands.command(hidden=True)
