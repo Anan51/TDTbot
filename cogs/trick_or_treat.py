@@ -250,8 +250,8 @@ class TrickOrTreat(commands.Cog):
         """Print current message id"""
         await ctx.send(str(self.message_id))
 
-    @commands.command()
-    async def rankings(self, ctx):
+    @commands.command(hidden=True)
+    async def _old_rankings(self, ctx):
         """Show current rankings for trick or treat"""
         await ctx.send("This command is currently broken")
         role = self.role
@@ -261,6 +261,24 @@ class TrickOrTreat(commands.Cog):
         print(role, data, role.members, self.channel.guild)
         await split_send(self.channel, summary, style='```')
 
+    @commands.command()
+    async def rankings(self, ctx):
+        configs = await self.bot.get_user_configs()
+        players = [c for c in configs if _score in c]
+        data = {self._member(p): p[_score] for p in players}
+        users = sorted(data.keys(), key=lambda u: (data[u], u.display_name))
+        summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
+        print(role, data, role.members, self.channel.guild)
+        await split_send(self.channel, summary, style='```')
+
+    @commands.command(hidden=True)
+    async def set_score(self, ctx, n: int, member: discord.Member = None):
+        if ctx.author != self.bot.owner:
+            raise PermissionError("Only {:} can use this command.".format(self.bot.owner))
+        if member is None:
+            member = ctx.author
+        UserConfig(member)[_score] = n
+        await ctx.send('Set score of {:} to {:}.'.format(member, n))
 
 def setup(bot):
     bot.add_cog(TrickOrTreat(bot))
