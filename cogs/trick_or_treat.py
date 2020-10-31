@@ -63,7 +63,9 @@ class TrickOrTreat(commands.Cog):
         return self._active_message_id
 
     def cog_check(self, ctx):
-        return ctx.channel == self.channel
+        if ctx.channel == self.channel:
+            return True
+        return ctx.channel == self.bot.find_channel(param.rc('log_channel'))
 
     async def send_message(self, dt=0, set_timer=True):
         if dt is True:
@@ -128,7 +130,7 @@ class TrickOrTreat(commands.Cog):
         except AttributeError:
             pass
         try:
-            out = self.channel.guild.fetch_member(user.id)
+            out = await self.channel.guild.fetch_member(user.id)
             if not out:
                 return user
         except discord.HTTPException:
@@ -181,11 +183,11 @@ class TrickOrTreat(commands.Cog):
         results = results.format(ntrick, _trick, ntreat, _treat)
         if ntrick > ntreat:
             dtrick = 0
-            dtreat = -2
+            dtreat = -3
             txt = "The tricksters have won:"
         elif ntrick < ntreat:
             dtrick = 0
-            dtreat = 1
+            dtreat = 2
             txt = "The treaters get a treat!"
         else:
             dtrick = 0
@@ -221,7 +223,6 @@ class TrickOrTreat(commands.Cog):
         """Parse messages for new event post"""
         # ignore all messages from our bot
         if message.author == self.bot.user:
-            print("ignoring self")
             return
         if not self._init:
             self._init = True
@@ -250,34 +251,40 @@ class TrickOrTreat(commands.Cog):
         """Print current message id"""
         await ctx.send(str(self.message_id))
 
-    @commands.command(hidden=True)
-    async def _old_rankings(self, ctx):
+    @commands.command()
+    async def rankings(self, ctx):
         """Show current rankings for trick or treat"""
-        await ctx.send("This command is currently broken")
         role = self.role
         data = {m: self.get_score(m) for m in role.members}
-        users = sorted(data.keys(), key=lambda u: (data[u], u.display_name))
+        users = sorted(data.keys(), key=lambda u: (data[u], u.display_name), reverse=True)
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
         print(role, data, role.members, self.channel.guild)
         await split_send(self.channel, summary, style='```')
 
     @commands.command()
-    async def rankings(self, ctx):
+    async def alt_rankings(self, ctx):
+        """Show current rankings for trick or treat"""
         configs = await self.bot.get_user_configs()
         players = [c for c in configs if _score in c]
         data = {await self._member(p.user): p[_score] for p in players}
-        users = sorted(data.keys(), key=lambda u: (data[u], u.display_name))
+        users = sorted(data.keys(), key=lambda u: (data[u], u.display_name), reverse=True)
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
         await split_send(self.channel, summary, style='```')
 
     @commands.command(hidden=True)
     async def set_score(self, ctx, n: int, member: discord.Member = None):
-        if ctx.author != self.bot.owner:
-            raise PermissionError("Only {:} can use this command.".format(self.bot.owner))
+        if not await self.bot.is_owner(ctx.author):
+            raise PermissionError("Only StellarNemesis can use this command.")
         if member is None:
             member = ctx.author
         UserConfig(member)[_score] = n
         await ctx.send('Set score of {:} to {:}.'.format(member, n))
+
+    @commands.command(hidden=True)
+    async def force_count(self, ctx):
+        if not await self.bot.is_owner(ctx.author):
+            raise PermissionError("Only StellarNemesis can use this command.")
+        self.finish_count(mid=self.message_id)
 
 def setup(bot):
     bot.add_cog(TrickOrTreat(bot))
