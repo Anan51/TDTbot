@@ -269,6 +269,8 @@ class TrickOrTreat(commands.Cog):
     async def rankings(self, ctx):
         """Show current rankings for trick or treat"""
         role = self.role
+        if role is None:
+            return await self.alt_rankings(ctx)
         data = {m: self.get_score(m) for m in role.members}
         users = sorted(data.keys(), key=lambda u: (data[u], u.display_name), reverse=True)
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
@@ -284,7 +286,8 @@ class TrickOrTreat(commands.Cog):
         data = {await self._member(p.user): p[_score] for p in players}
         users = sorted(data.keys(), key=lambda u: (data[u], u.display_name), reverse=True)
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
-        await split_send(self.channel, summary, style='```')
+        channel = self.channel if self._game_on else ctx
+        await split_send(channel, summary, style='```')
 
     @commands.command(hidden=True)
     async def set_score(self, ctx, n: int, member: discord.Member = None):
