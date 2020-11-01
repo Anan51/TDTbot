@@ -6,7 +6,7 @@ import random
 from .. import param
 from ..helpers import *
 from ..config import UserConfig
-from ..async_helpers import split_send
+from ..async_helpers import split_send, sleep
 import logging
 
 
@@ -75,7 +75,7 @@ class TrickOrTreat(commands.Cog):
             return
         if self._awaiting:
             return
-        await asyncio.sleep(dt)
+        await sleep(dt)
         if self.message_id:
             return
         if self._awaiting:
@@ -146,7 +146,7 @@ class TrickOrTreat(commands.Cog):
         logger.printv('TrickOrTreat.finish_count waiting for {:} s'.format(dt))
         if self._awaiting is None:
             self._awaiting = mid
-        await asyncio.sleep(dt)
+        await sleep(dt)
         msg = await self._get_message()
         if not msg:
             if set_timer:
