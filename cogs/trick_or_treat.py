@@ -22,6 +22,7 @@ _bot = 'tdt.trick_or_treat.msg'
 _role = 'SPOOKY'
 _tmin, _tmax = 5 * 60, 15 * 60
 _rule_id = 770363043515203604
+_game_on = False
 
 
 class TrickOrTreat(commands.Cog):
@@ -34,6 +35,7 @@ class TrickOrTreat(commands.Cog):
         self._active_message_id = None
         self._awaiting = None
         self._last = datetime.datetime.now()
+        self._game_on = _game_on
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
@@ -63,11 +65,15 @@ class TrickOrTreat(commands.Cog):
         return self._active_message_id
 
     def cog_check(self, ctx):
+        if not self._game_on:
+            return True
         if ctx.channel == self.channel:
             return True
         return ctx.channel == self.bot.find_channel(param.rc('log_channel'))
 
     async def send_message(self, dt=0, set_timer=True):
+        if not self._game_on:
+            return
         if dt is True:
             dt = random.randint(_tmin, _tmax)
         logger.printv('TrickOrTreat.send_message waiting for {:} s'.format(dt))
@@ -90,6 +96,8 @@ class TrickOrTreat(commands.Cog):
             self.bot.loop.create_task(self.finish_count(dt=set_timer, mid=msg.id))
 
     def send_later(self, **kwargs):
+        if not self._game_on:
+            return
         logger.printv('TrickOrTreat.send_later')
         self.bot.loop.create_task(self.send_message(**kwargs))
 
@@ -141,6 +149,8 @@ class TrickOrTreat(commands.Cog):
         return user
 
     async def finish_count(self, dt=0, set_timer=True, mid=0):
+        if not self._game_on:
+            return
         if dt is True:
             dt = random.randint(_tmin, _tmax)
         logger.printv('TrickOrTreat.finish_count waiting for {:} s'.format(dt))
@@ -183,11 +193,11 @@ class TrickOrTreat(commands.Cog):
         results = results.format(ntrick, _trick, ntreat, _treat)
         if ntrick > ntreat:
             dtrick = 0
-            dtreat = -3
+            dtreat = -6
             txt = "The tricksters have won:"
         elif ntrick < ntreat:
             dtrick = 0
-            dtreat = 2
+            dtreat = 4
             txt = "The treaters get a treat!"
         else:
             dtrick = 0
@@ -215,6 +225,8 @@ class TrickOrTreat(commands.Cog):
         logger.printv('Finish TrickOrTreat.finish_count (end)')
 
     def count_later(self, **kwargs):
+        if not self._game_on:
+            return
         logger.printv('TrickOrTreat.channel')
         self.bot.loop.create_task(self.finish_count(**kwargs))
 
@@ -223,6 +235,8 @@ class TrickOrTreat(commands.Cog):
         """Parse messages for new event post"""
         # ignore all messages from our bot
         if message.author == self.bot.user:
+            return
+        if not self._game_on:
             return
         if not self._init:
             self._init = True
@@ -259,7 +273,8 @@ class TrickOrTreat(commands.Cog):
         users = sorted(data.keys(), key=lambda u: (data[u], u.display_name), reverse=True)
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
         print(role, data, role.members, self.channel.guild)
-        await split_send(self.channel, summary, style='```')
+        channel = self.channel if self._game_on else ctx
+        await split_send(channel, summary, style='```')
 
     @commands.command()
     async def alt_rankings(self, ctx):
@@ -284,7 +299,18 @@ class TrickOrTreat(commands.Cog):
     async def force_count(self, ctx):
         if not await self.bot.is_owner(ctx.author):
             raise PermissionError("Only StellarNemesis can use this command.")
-        self.finish_count(mid=self.message_id)
+        await self.finish_count(mid=self.message_id)
+
+    @commands.command(hidden=True)
+    async def end_game(self, ctx):
+        if not await self.bot.is_owner(ctx.author):
+            raise PermissionError("Only StellarNemesis can use this command.")
+        mid = self.message_id
+        if mid:
+            await self.finish_count(dt=0, set_timer=False, mid=mid)
+        self._game_on = False
+
+        await self.rankings(ctx)
 
 def setup(bot):
     bot.add_cog(TrickOrTreat(bot))
