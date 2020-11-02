@@ -39,10 +39,11 @@ def parse_message(message):
     return out
 
 
-class Testing(commands.Cog):
+class MessageParse(commands.Cog):
     """Cog designed for debugging the bot"""
     def __init__(self, bot):
         self.bot = bot
+        self._stfu = False
 
     async def _can_run(self, ctx):
         """Don't allow everyone to access this cog"""
@@ -60,16 +61,25 @@ class Testing(commands.Cog):
     async def cog_check(self, ctx):
         return await self._can_run(ctx)
 
+    @commands.command(hidden=True)
+    async def stfu(self, ctx):
+        self._stfu = True
+
     @commands.Cog.listener()
     async def on_message(self, message):
+        if self._stfu:
+            return
         if message.author == self.bot.user:
+            return
+        if not await self._can_run(message):
             return
         # await message.channel.send(str(message))
         data = parse_message(message)
         for key in sorted(data.keys()):
             if data[key]:
                 await message.channel.send(key + ":\n```" + str(data[key]) + '```')
+                # print(key + ":\n```" + str(data[key]) + '```')
 
 
 def setup(bot):
-    bot.add_cog(Testing(bot))
+    bot.add_cog(MessageParse(bot))
