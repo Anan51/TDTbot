@@ -64,7 +64,7 @@ class _Entry:
 
     async def score_stats(self):
         votes = await self.votes()
-        if not votes:
+        if len(votes) == 0:
             return dict(n=0, mean=0., votes=votes, std=np.nan, total=0)
         mean = np.average(self._scores, weights=votes)
         std = np.sqrt(np.average((self._scores - mean)**2, weights=votes))
