@@ -4,6 +4,7 @@ from discord.ext import commands
 from glob import glob
 import logging
 import os
+import sys
 import traceback
 from . import param
 from . import helpers
@@ -51,6 +52,7 @@ class MainBot(commands.Bot):
         async def on_command_error(ctx, error):
             """Print errors to the discord channel where the command was given"""
             await ctx.send(str(error))
+            raise error
 
     async def bot_check(self, ctx):
         """Run a check to see if we should respond to the given command."""

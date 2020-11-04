@@ -19,10 +19,11 @@ async def split_send(channel, message, deliminator='\n', n=2000, style=''):
             msg += deliminator + tmp
     await channel.send(style + msg + style)
 
+
 async def sleep(dt):
     now = datetime.datetime.now()
     try:
-        asyncio.sleep(dt)
+        await asyncio.sleep(dt)
     except discord.HTTPException:
         dt -= (datetime.datetime.now() - now).total_seconds()
         time.sleep(dt)

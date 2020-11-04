@@ -315,5 +315,6 @@ class TrickOrTreat(commands.Cog):
 
         await self.rankings(ctx)
 
+
 def setup(bot):
     bot.add_cog(TrickOrTreat(bot))
