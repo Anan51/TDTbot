@@ -24,6 +24,8 @@ class _Entry:
         self.author_id = author_id
         self.key = ':'.join([str(i) for i in [message_id, author_id]])
         self.cog = cog
+        self._message = None
+        self._retrieved = None
 
     def __repr__(self):
         return '{} {}'.format(str(type(self)), self.key)
@@ -31,40 +33,48 @@ class _Entry:
     def __eq__(self, other):
         return self.id == other.id and self.author_id == other.author_id
 
-    async def message(self):
+    async def message(self, dt_max=2.0):
         """Fetch and return the message associated with this event"""
-        # we fetch this every usage to update the reactions
-        return await self.cog.channel.fetch_message(self.id)
+        if self.message() is None:
+            self._retrieved = datetime.datetime.utcnow()
+            self._message = await self.cog.channel.fetch_message(self.id)
+        elif (datetime.datetime.utcnow() - self._retrieved).total_seconds() > dt_max:
+            self._retrieved = datetime.datetime.utcnow()
+            self._message = await self.cog.channel.fetch_message(self.id)
+        return self._message
 
-    async def name(self):
-        msg = await self.message()
-        if msg.content:
-            return msg.content.split(':')[-1]
-        data = parse_message(msg)
+    async def name(self, message=None):
+        if message is None:
+            message = await self.message()
+        if message.content:
+            return message.content.split(':')[-1]
+        data = parse_message(message)
         for i in data['attachments']:
             if i[-1].startswith('image/'):
                 return i[0].filename
-        out = str(msg.created_at)
+        out = str(message.created_at)
         return out
 
-    async def votes(self):
-        message = await self.message()
+    async def votes(self, message=None):
+        if message is None:
+            message = await self.message()
         voted = []
         votes = np.zeros(5, dtype=int)
         for rxn in message.reactions:
             if rxn.emoji in self._emotes:
-                users = [u async for u in rxn.users() if u != self.cog.bot.user and u not in voted]
+                users = [u async for u in rxn.users()
+                         if u != self.cog.bot.user and u not in voted]
                 votes[self._emotes.index(rxn.emoji)] += len(users)
                 voted += users
         return votes
 
     async def add_reactions(self):
-        msg = await self.message()
+        msg = await self.message(dt_max=3.14e7)
         for i in self._emotes:
             await msg.add_reaction(i)
 
-    async def score_stats(self):
-        votes = await self.votes()
+    async def score_stats(self, message=None):
+        votes = await self.votes(message=message)
         if len(votes) == 0:
             return dict(n=0, mean=0., votes=votes, std=np.nan, total=0)
         mean = np.average(self._scores, weights=votes)
@@ -73,8 +83,8 @@ class _Entry:
         out = dict(n=votes.sum(), mean=mean, votes=votes, std=std, total=total)
         return out
 
-    async def summary(self):
-        data = await self.score_stats()
+    async def summary(self, message=None):
+        data = await self.score_stats(message=message)
         out = ", ".join(['{0:}: {1:}'.format(i, data[i]) for i in ['n', 'mean', 'total']])
         return out
 
@@ -141,12 +151,15 @@ class FashionContest(commands.Cog):
             member = ctx.author
         if self._entries is None:
             await self._get_saved_entries()
-        entries = {i: (await i.message()).created_at for i in self._entries
+        entries = {i: (await i.message(dt_max=3.14e7)).created_at for i in self._entries
                    if i.author_id == member.id}
         ordered = sorted(entries, key=entries.get)
         fmt = '{:d}) {} - {}'
-        txt = [fmt.format(i + 1, await e.name(), await e.summary())
-               for i, e in enumerate(ordered)]
+        txt = []
+        for i, e in enumerate(ordered):
+            msg = await e.message()
+            txt.append(fmt.format(i + 1, await e.name(message=msg),
+                                  await e.summary(message=msg)))
         print(txt)
         await split_send(self.channel, txt, style="```")
 
