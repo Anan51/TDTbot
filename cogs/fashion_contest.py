@@ -34,7 +34,6 @@ class _Entry:
         return await self.cog.channel.fetch_message(self.id)
 
     async def name(self):
-        print('name 0')
         msg = await self.message()
         if msg.content:
             return msg.content.split(':')[-1]
@@ -43,7 +42,6 @@ class _Entry:
             if i[-1].startswith('image/'):
                 return i[0].filename
         out = str(msg.created_at)
-        print('name 1')
         return out
 
     async def votes(self):
@@ -69,13 +67,12 @@ class _Entry:
         mean = np.average(self._scores, weights=votes)
         std = np.sqrt(np.average((self._scores - mean)**2, weights=votes))
         total = np.sum(self._scores * votes)
-        return dict(n=votes.sum(), mean=mean, votes=votes, std=std, total=total)
+        out = dict(n=votes.sum(), mean=mean, votes=votes, std=std, total=total)
+        return out
 
     async def summary(self):
-        print('sum 0')
         data = await self.score_stats()
-        out = ", ".join(['{}: {}'.format(i, data[i]) for i in ['n', 'mean', 'total']])
-        print('sum 1')
+        out = ", ".join(['{0:}: {1:}'.format(i, data[i]) for i in ['n', 'mean', 'total']])
         return out
 
 
@@ -142,8 +139,8 @@ class FashionContest(commands.Cog):
         entries = {i: (await i.message()).created_at for i in self._entries
                    if i.author_id == member.id}
         ordered = sorted(entries, key=entries.get)
-        fmt = '{:d}) {} - '
-        txt = [fmt.format(i, await e.name(), await e.summary())
+        fmt = '{:d}) {} - {}'
+        txt = [fmt.format(i + 1, await e.name(), await e.summary())
                for i, e in enumerate(ordered)]
         print(txt)
         await split_send(self.channel, txt, style="```")
