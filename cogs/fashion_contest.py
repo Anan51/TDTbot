@@ -28,6 +28,9 @@ class _Entry:
     def __repr__(self):
         return '{} {}'.format(str(type(self)), self.key)
 
+    def __eq__(self, other):
+        return self.id == other.id and self.author_id == other.author_id
+
     async def message(self):
         """Fetch and return the message associated with this event"""
         # we fetch this every usage to update the reactions
@@ -96,6 +99,8 @@ class FashionContest(commands.Cog):
         return self.bot.find_channel(_channel)
 
     async def enroll_entry(self, entry):
+        if entry in self._entries:
+            return
         await entry.add_reactions()
         try:
             self._entries.append(entry)
