@@ -25,7 +25,7 @@ class _Entry:
         self.key = ':'.join([str(i) for i in [message_id, author_id]])
         self.cog = cog
         self._message = None
-        self._retrieved = None
+        self._retrieved = datetime.datetime.utcfromtimestamp(0)
 
     def __repr__(self):
         return '{} {}'.format(str(type(self)), self.key)
@@ -35,7 +35,7 @@ class _Entry:
 
     async def message(self, dt_max=2.0):
         """Fetch and return the message associated with this event"""
-        if self.message() is None:
+        if self._message is None:
             self._retrieved = datetime.datetime.utcnow()
             self._message = await self.cog.channel.fetch_message(self.id)
         elif (datetime.datetime.utcnow() - self._retrieved).total_seconds() > dt_max:
@@ -75,16 +75,18 @@ class _Entry:
 
     async def score_stats(self, message=None):
         votes = await self.votes(message=message)
-        if len(votes) == 0:
+        try:
+            mean = np.average(self._scores, weights=votes)
+        except ZeroDivisionError:
             return dict(n=0, mean=0., votes=votes, std=np.nan, total=0)
-        mean = np.average(self._scores, weights=votes)
         std = np.sqrt(np.average((self._scores - mean)**2, weights=votes))
         total = np.sum(self._scores * votes)
         out = dict(n=votes.sum(), mean=mean, votes=votes, std=std, total=total)
         return out
 
-    async def summary(self, message=None):
-        data = await self.score_stats(message=message)
+    async def summary(self, data=None, message=None):
+        if data is None:
+            data = await self.score_stats(message=message)
         out = ", ".join(['{0:}: {1:}'.format(i, data[i]) for i in ['n', 'mean', 'total']])
         return out
 
@@ -109,8 +111,12 @@ class FashionContest(commands.Cog):
         return self.bot.find_channel(_channel)
 
     async def enroll_entry(self, entry):
-        if entry in self._entries:
-            return
+        try:
+            for e in self._entries:
+                if entry == e:
+                    return
+        except TypeError:
+            pass
         await entry.add_reactions()
         try:
             self._entries.append(entry)
@@ -123,7 +129,11 @@ class FashionContest(commands.Cog):
         saved = self.bot_config[_bot_key]
         for i in saved:
             message_id, author_id = [int(j) for j in i.split(':')]
-            await self.enroll_entry(_Entry(message_id, author_id, self))
+            try:
+                if message_id not in [e.id for e in self._entries]:
+                    await self.enroll_entry(_Entry(message_id, author_id, self))
+            except TypeError:
+                await self.enroll_entry(_Entry(message_id, author_id, self))
 
     async def _can_run(self, ctx):
         return ctx.channel == self.channel
@@ -137,8 +147,8 @@ class FashionContest(commands.Cog):
             return
         if not await self._can_run(message):
             return
-        if self._entries is None:
-            await self._get_saved_entries()
+        #if self._entries is None:
+        #    await self._get_saved_entries()
         # await message.channel.send(str(message))
         data = parse_message(message)
         for i in data['type']:
@@ -147,16 +157,18 @@ class FashionContest(commands.Cog):
 
     @commands.command()
     async def list_user_posts(self, ctx, member: discord.Member = None):
+        """<member (optional)> lists member's entries"""
         if member is None:
             member = ctx.author
         if self._entries is None:
             await self._get_saved_entries()
-        entries = {i: (await i.message(dt_max=3.14e7)).created_at for i in self._entries
-                   if i.author_id == member.id}
+        entries = {i: (await e.message(dt_max=3.14e7)).created_at
+                   for i, e in enumerate(self._entries) if e.author_id == member.id}
         ordered = sorted(entries, key=entries.get)
         fmt = '{:d}) {} - {}'
         txt = []
-        for i, e in enumerate(ordered):
+        for i, j in enumerate(ordered):
+            e = self._entries[j]
             msg = await e.message()
             txt.append(fmt.format(i + 1, await e.name(message=msg),
                                   await e.summary(message=msg)))
