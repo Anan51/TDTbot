@@ -16,8 +16,9 @@ _bot_key = 'tdt.fashion.entries'
 
 
 class _Entry:
-    emotes = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣']
-    _scores = np.arange(len(emotes), dtype=int) + 1
+    # emotes = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣']
+    emotes = ['👎', '👍']
+    _scores = np.arange(len(emotes), dtype=int) + (0 if len(emotes) == 2 else 1)
 
     def __init__(self, message_id, author_id, cog):
         self.id = message_id
@@ -59,7 +60,7 @@ class _Entry:
         if message is None:
             message = await self.message()
         voted = []
-        votes = np.zeros(5, dtype=int)
+        votes = np.zeros(len(self.emotes), dtype=int)
         for rxn in message.reactions:
             if rxn.emoji in self.emotes:
                 users = [u async for u in rxn.users()
@@ -83,10 +84,16 @@ class _Entry:
         out = dict(n=votes.sum(), mean=mean, votes=votes, std=std, total=total)
         return out
 
-    async def summary(self, data=None, message=None):
+    async def _old_summary(self, data=None, message=None):
         if data is None:
             data = await self.score_stats(message=message)
         out = ", ".join(['{0:}: {1:}'.format(i, data[i]) for i in ['n', 'mean', 'total']])
+        return out
+
+    async def summary(self, data=None, message=None):
+        if data is None:
+            data = await self.score_stats(message=message)
+        out = ", ".join(['{0:} x {1:}'.format(data['votes'][i], self.emotes[i]) for i in range(len(self.emotes))])
         return out
 
 
