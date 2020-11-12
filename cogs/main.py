@@ -139,7 +139,7 @@ class MainCommands(commands.Cog):
         if not msg:
             msg = ["No history available."]
         print(msg)
-        await split_send(msg)
+        await split_send(ctx, msg)
 
     @commands.command()
     async def member_hist(self, ctx, member: discord.Member = None):

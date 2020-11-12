@@ -16,8 +16,8 @@ _bot_key = 'tdt.fashion.entries'
 
 
 class _Entry:
-    _emotes = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣']
-    _scores = np.arange(len(_emotes), dtype=int) + 1
+    emotes = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣']
+    _scores = np.arange(len(emotes), dtype=int) + 1
 
     def __init__(self, message_id, author_id, cog):
         self.id = message_id
@@ -61,16 +61,16 @@ class _Entry:
         voted = []
         votes = np.zeros(5, dtype=int)
         for rxn in message.reactions:
-            if rxn.emoji in self._emotes:
+            if rxn.emoji in self.emotes:
                 users = [u async for u in rxn.users()
                          if u != self.cog.bot.user and u not in voted]
-                votes[self._emotes.index(rxn.emoji)] += len(users)
+                votes[self.emotes.index(rxn.emoji)] += len(users)
                 voted += users
         return votes
 
     async def add_reactions(self):
         msg = await self.message(dt_max=3.14e7)
-        for i in self._emotes:
+        for i in self.emotes:
             await msg.add_reaction(i)
 
     async def score_stats(self, message=None):
@@ -83,8 +83,9 @@ class _Entry:
         out = dict(n=votes.sum(), mean=mean, votes=votes, std=std, total=total)
         return out
 
-    async def summary(self, message=None):
-        data = await self.score_stats(message=message)
+    async def summary(self, data=None, message=None):
+        if data is None:
+            data = await self.score_stats(message=message)
         out = ", ".join(['{0:}: {1:}'.format(i, data[i]) for i in ['n', 'mean', 'total']])
         return out
 
@@ -162,6 +163,38 @@ class FashionContest(commands.Cog):
                                   await e.summary(message=msg)))
         print(txt)
         await split_send(self.channel, txt, style="```")
+
+    @commands.command()
+    async def sort_posts(self, ctx, keyword: str = "total"):
+        _vote = keyword.startswith('votes[') and keyword.endswith(']')
+        _index = None
+        if _vote:
+            _index = int(keyword.split('[')[1].rstrip(']'))
+
+        async def value(entry: _Entry):
+            data = await entry.score_stats()
+            if _vote:
+                out = data['votes'][_index]
+            else:
+                out = data[keyword]
+            return out
+
+        entries = {i: await value(e) for i, e in enumerate(self._entries)}
+        ordered = sorted(entries, key=entries.get, reverse=True)
+        txt = []
+        fmt = '{:d}) {}: {} - {}'
+        for i, j in enumerate(ordered):
+            e: _Entry = self._entries[j]
+            msg = await e.message()
+            name = await e.name(message=msg)
+            data = await e.score_stats(message=msg)
+            summary = await e.summary(data=data)
+            if _vote:
+                tmp = '{}: {}, '.format(e.emotes[_index], data['votes'][_index])
+                summary = tmp + summary
+            author = await self.channel.guild.fetch_member(e.author_id)
+            txt.append(fmt.format(i + 1, author.display_name, name, summary))
+        await split_send(self.channel, txt)
 
 
 def setup(bot):
