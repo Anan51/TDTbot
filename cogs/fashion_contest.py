@@ -11,8 +11,11 @@ from ..config import UserConfig
 
 logger = logging.getLogger('discord.' + __name__)
 
-_channel = param.rc('fashion_channel', default='debugging')
+_channel = param.rc('fashion_channel', default='dresstiny')
+_role = 'Dresstiny'
+_rule_id = 778026917802410014
 _bot_key = 'tdt.fashion.entries'
+_emoji = '<:StrangeCoin:319276617727737866>'
 
 
 class _Entry:
@@ -132,6 +135,20 @@ class FashionContest(commands.Cog):
         if entry.key not in self.bot_config[_bot_key]:
             self.bot_config[_bot_key] += [entry.key]
 
+    @property
+    def role(self):
+        return find_role(self.channel.guild, _role)
+
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self, payload):
+        """Parse reaction adds for agreeing to code of conduct and rank them up to
+        Recruit"""
+        # if not code of conduct message
+        if payload.message_id != _rule_id:
+            return
+        if str(payload.emoji) == _emoji:
+            await payload.member.add_roles(self.role)
+
     async def _get_saved_entries(self):
         saved = self.bot_config[_bot_key]
         for i in saved:
@@ -184,6 +201,7 @@ class FashionContest(commands.Cog):
 
     @commands.command()
     async def sort_posts(self, ctx, keyword: str = "total"):
+        """<keyword=total> Sort all post by option keyword"""
         _vote = keyword.startswith('votes[') and keyword.endswith(']')
         _index = None
         if _vote:
