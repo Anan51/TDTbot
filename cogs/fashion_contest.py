@@ -11,7 +11,7 @@ from ..config import UserConfig
 
 logger = logging.getLogger('discord.' + __name__)
 
-_channel = param.rc('fashion_channel', default='dresstiny')
+_channel = 'dresstiny'
 _role = 'Dresstiny'
 _rule_id = 778026917802410014
 _bot_key = 'tdt.fashion.entries'
@@ -118,7 +118,9 @@ class FashionContest(commands.Cog):
 
     @property
     def channel(self):
-        return self.bot.find_channel(_channel)
+        out = self.bot.find_channel(_channel)
+        # print(out)
+        return out
 
     async def enroll_entry(self, entry):
         try:
@@ -163,7 +165,7 @@ class FashionContest(commands.Cog):
         return ctx.channel == self.channel
 
     async def cog_check(self, ctx):
-        return await self._can_run(ctx)
+        return await self._can_run(ctx) or ctx.channel == self.bot.find_channel('debugging')
 
     @commands.Cog.listener()
     async def on_message(self, message):
