@@ -211,7 +211,7 @@ class FashionContest(commands.Cog):
             txt.append(fmt.format(i + 1, await e.name(message=msg),
                                   await e.summary(message=msg)))
         print(txt)
-        await split_send(self.channel, txt, style="```")
+        await split_send(ctx, txt, style="```")
 
     @commands.command()
     async def sort_posts(self, ctx, keyword: str = "total"):
@@ -244,7 +244,7 @@ class FashionContest(commands.Cog):
                 summary = tmp + summary
             author = await self.channel.guild.fetch_member(e.author_id)
             txt.append(fmt.format(i + 1, author.display_name, name, summary))
-        await split_send(self.channel, txt)
+        await split_send(ctx, txt)
 
 
 def setup(bot):
