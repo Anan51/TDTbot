@@ -196,6 +196,7 @@ class FashionContest(commands.Cog):
     @commands.command()
     async def list_user_posts(self, ctx, member: discord.Member = None):
         """<member (optional)> lists member's entries"""
+        await ctx.send('Please wait while I reload all the posts.')
         if member is None:
             member = ctx.author
         if self._entries is None:
@@ -204,18 +205,18 @@ class FashionContest(commands.Cog):
                    for i, e in enumerate(self._entries) if e.author_id == member.id}
         ordered = sorted(entries, key=entries.get)
         fmt = '{:d}) {} - {}'
-        txt = []
+        txt = ['Posts from {:}:'.format(member.displayname)]
         for i, j in enumerate(ordered):
             e = self._entries[j]
             msg = await e.message()
             txt.append(fmt.format(i + 1, await e.name(message=msg),
                                   await e.summary(message=msg)))
-        print(txt)
         await split_send(ctx, txt, style="```")
 
     @commands.command()
     async def sort_posts(self, ctx, keyword: str = "total"):
         """<keyword=total> Sort all post by option keyword"""
+        await ctx.send('Please wait while I reload all the posts.')
         _vote = keyword.startswith('votes[') and keyword.endswith(']')
         _index = None
         if _vote:
@@ -229,6 +230,8 @@ class FashionContest(commands.Cog):
                 out = data[keyword]
             return out
 
+        if self._entries is None:
+            await self._get_saved_entries()
         entries = {i: await value(e) for i, e in enumerate(self._entries)}
         ordered = sorted(entries, key=entries.get, reverse=True)
         txt = []
@@ -244,7 +247,7 @@ class FashionContest(commands.Cog):
                 summary = tmp + summary
             author = await self.channel.guild.fetch_member(e.author_id)
             txt.append(fmt.format(i + 1, author.display_name, name, summary))
-        await split_send(ctx, txt)
+        await split_send(ctx, txt, style="```")
 
 
 def setup(bot):
