@@ -137,9 +137,11 @@ class FashionContest(commands.Cog):
                     return
         except TypeError:
             pass
-        if (await e.message()) is None:
+        msg = await entry.message()
+        if msg is None:
             return
         await entry.add_reactions()
+        await msg.pin()
         try:
             self._entries.append(entry)
         except AttributeError:
