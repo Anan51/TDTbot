@@ -41,15 +41,23 @@ class _Entry:
         """Fetch and return the message associated with this event"""
         if self._message is None:
             self._retrieved = datetime.datetime.utcnow()
-            self._message = await self.cog.channel.fetch_message(self.id)
+            try:
+                self._message = await self.cog.channel.fetch_message(self.id)
+            except discord.HTTPException:
+                return None
         elif (datetime.datetime.utcnow() - self._retrieved).total_seconds() > dt_max:
             self._retrieved = datetime.datetime.utcnow()
-            self._message = await self.cog.channel.fetch_message(self.id)
+            try:
+                self._message = await self.cog.channel.fetch_message(self.id)
+            except discord.HTTPException:
+                return None
         return self._message
 
     async def name(self, message=None):
         if message is None:
             message = await self.message()
+        if message is None:
+            return None
         if message.content:
             return message.content.split(':')[-1]
         data = parse_message(message)
@@ -129,6 +137,8 @@ class FashionContest(commands.Cog):
                     return
         except TypeError:
             pass
+        if (await e.message()) is None:
+            return
         await entry.add_reactions()
         try:
             self._entries.append(entry)
