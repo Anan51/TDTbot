@@ -12,7 +12,7 @@ from .config.users import get_all_user_config_files, UserConfig
 
 
 logger = logging.getLogger('discord.' + __name__)
-
+intents = discord.Intents.all()
 
 def cog_list():
     """Returns list of the python files in the cog directory that don't start with '_'"""
@@ -24,6 +24,8 @@ class MainBot(commands.Bot):
     """The class that is the TDTbot"""
     def __init__(self, *args, **kwargs):
         # set some defaults for the bot
+        if 'intents' not in kwargs:
+            kwargs['intents'] = intents
         if 'command_prefix' not in kwargs:
             kwargs['command_prefix'] = param.rc('cmd_prefix')
         if 'loop' not in kwargs:
