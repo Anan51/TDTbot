@@ -73,7 +73,7 @@ def init_logging(logfile=None, visual_log_level=logging.PRINTV, verbose=False, *
     for h in list(logger.handlers):
         logger.removeHandler(h)
     if logfile:
-        f_handler = logging.FileHandler(filename=logfile, encoding='utf-8', mode='w')
+        f_handler = logging.FileHandler(filename=logfile, encoding='utf-8', mode='a')
         fmt = '%(asctime)s:%(levelname)s:%(name)s: %(message)s'
         f_handler.setFormatter(logging.Formatter(fmt))
         f_handler.setLevel(0)

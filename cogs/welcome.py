@@ -71,7 +71,7 @@ class Welcome(commands.Cog):
             logger.printv(out)
             guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
             log_channel = find_channel(guild, "admin_log")
-            # if they've agreed to CoC recently
+            # if they've agreed to CoC recently then return
             async for msg in log_channel.history(limit=200):
                 if msg.content == out:
                     return
