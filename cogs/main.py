@@ -206,6 +206,12 @@ class MainCommands(commands.Cog):
         emote = "<a:vibe:761582456867520532>"
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
 
+    @commands.command()
+    async def karen_electro(self, ctx, n: int = 1, channel: str = None, guild: str = None):
+        """<n (optional)> <channel (optional)> <server (optional)> posts vibing cat"""
+        emote = "<:karen_electro:779088291496460300>"
+        await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
+
     @commands.Cog.listener()
     async def on_message(self, message):
         """Listen for DMs and post them in the bot log channel"""
