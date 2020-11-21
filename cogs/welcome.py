@@ -7,6 +7,7 @@ import logging
 
 
 logger = logging.getLogger('discord.' + __name__)
+_CoC_id = 563406038754394112
 
 
 async def send_welcome(member):
@@ -34,6 +35,12 @@ async def send_welcome(member):
 
 class Welcome(commands.Cog):
     """Cog to listen and send alerts"""
+    _emoji_dict = {350189008078372865: "PSN D2",
+                   641083615387713567: "Xbox D2",
+                   641083208871706664: "D2 PC",
+                   646219746886418452: "Stadia D2"
+                   }
+
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
@@ -59,12 +66,23 @@ class Welcome(commands.Cog):
             member = ctx.author
         await send_welcome(member)
 
+    async def _emoji2role(self, payload, emoji=None):
+        if emoji is None:
+            emoji = payload.emoji
+        guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
+        try:
+            role = find_role(guild, self._emoji_dict[emoji.id])
+            if payload.member.top_role >= find_role(guild, "Recruit"):
+                await payload.member.add_roles(role)
+        except KeyError:
+            pass
+
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         """Parse reaction adds for agreeing to code of conduct and rank them up to
         Recruit"""
         # if not code of conduct message
-        if payload.message_id != 563406038754394112:
+        if payload.message_id != _CoC_id:
             return
         if str(payload.emoji) == "👍":
             out = "{0.display_name} agreed to the code of conduct.".format(payload.member)
@@ -81,21 +99,18 @@ class Welcome(commands.Cog):
             if (now - payload.member.joined_at).seconds // 86400 < 14:
                 role = find_role(guild, "Recruit")
                 if payload.member.top_role < role:
-                    reason = "Agreed to cod of conduct."
+                    reason = "Agreed to code of conduct."
                     await payload.member.add_roles(role, reason=reason)
+                # if they reacted before this with a platform role
+                channel = self.bot.find_channel("manual_page")
+                msg = await channel.fetch_message(_CoC_id)
+                for rxn in msg.reactions:
+                    if rxn.emoji.id in self._emoji_dict:
+                        if payload.member in await rxn.users().flatten():
+                            await self._emoji2role(payload, emoji=rxn.emoji)
             return
         if hasattr(payload.emoji, 'id'):
-            role = None
-            guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
-            if payload.emoji.id == 350189008078372865:
-                role = find_role(guild, "PSN D2")
-            if payload.emoji.id == 641083615387713567:
-                role = find_role(guild, "Xbox D2")
-            if payload.emoji.id == 641083208871706664:
-                role = find_role(guild, "D2 PC")
-            if role is not None:
-                if payload.member.top_role >= find_role(guild, "Recruit"):
-                    await payload.member.add_roles(role)
+            await self._emoji2role(payload)
 
 
 def setup(bot):
