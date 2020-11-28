@@ -34,12 +34,12 @@ class _Event(dict):
         self._error = None
         # start parsing message for event info
         lines = [i.strip() for i in message.content.split('\n')]
-        if len(lines) < 5:
+        nlines = len(lines)
+        if nlines < 4:
             return
         out = dict()
-        out['name'] = lines[0]
         keys = ['who', 'what', 'when']  # check for and get these
-        for line in lines[1:4]:
+        for line in lines[nlines - 4: nlines - 1]:
             try:
                 tmp = [i.strip() for i in line.split(':')]
                 key = tmp[0]
@@ -55,6 +55,7 @@ class _Event(dict):
             if key not in out:
                 logger.warning('Missing key "{:}"'.format(key))
                 return
+        out['name'] = lines[0] if len(lines) > 4 else out['what']
         # text saying how to enroll in event
         out['enroll'] = '\n'.join(lines[4:])
         # parse day of week
@@ -75,7 +76,7 @@ class _Event(dict):
         self._pending_alerts = False
         self.from_hist = from_hist
         if log_channel is None:
-            log_channel = param.rc('log_channel')
+            log_channel = getattr(self.cog, 'channel', param.rc('event_channel'))
         self.log_channel = self.cog.bot.find_channel(log_channel)
         tz = pytz.timezone(param.rc('timezone'))
         self.tz = tz
