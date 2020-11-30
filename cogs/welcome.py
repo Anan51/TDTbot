@@ -24,7 +24,8 @@ async def send_welcome(member):
           'And... finally... we have a code of conduct in our #manual_page that we ' \
           'ask everybody to agree to. Just give it a 👍 if you agree. If you want me to ' \
           'give you a Destiny 2 tag, click the corresponding platform tag on the ' \
-          'code of conduct after you give the thumbs up.\n\n' \
+          'code of conduct after you give the thumbs up.\n' \
+          'Also take a look at our YouTube: https://www.youtube.com/c/TDTProductions'\
           'Whelp, that\'s it! I hope someone gives you a less robotic welcome soon!'
     channel = member.dm_channel
     if not channel:
@@ -55,8 +56,9 @@ class Welcome(commands.Cog):
         if channel is not None:
             await channel.send(roles + ' new member {0.name} joined.'.format(member))
         await send_welcome(member)
+        manual = self.bot.find_channel("manual_page")
         msg = "Welcome to TDT {0.mention} <a:blobDance:738431916910444644>" \
-              " Please read my DM.".format(member)
+              " Please read my DM and look at the {1.mention}.".format(member, manual)
         await member.guild.system_channel.send(msg)
 
     @commands.command(hidden=True)
