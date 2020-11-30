@@ -251,4 +251,5 @@ class FashionContest(commands.Cog):
 
 
 def setup(bot):
+    return
     bot.add_cog(FashionContest(bot))
