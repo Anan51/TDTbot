@@ -26,7 +26,7 @@ async def send_welcome(member):
           'give you a Destiny 2 tag, click the corresponding platform tag on the ' \
           'code of conduct after you give the thumbs up.\n' \
           'Also take a look at our YouTube: https://www.youtube.com/c/TDTProductions'\
-          'Whelp, that\'s it! I hope someone gives you a less robotic welcome soon!'
+          '\n\nWhelp, that\'s it! I hope someone gives you a less robotic welcome soon!'
     channel = member.dm_channel
     if not channel:
         await member.create_dm()
