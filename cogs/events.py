@@ -39,21 +39,17 @@ class _Event(dict):
             return
         out = dict()
         keys = ['who', 'what', 'when']  # check for and get these
-        for line in lines[nlines - 4: nlines - 1]:
-            try:
-                tmp = [i.strip() for i in line.split(':')]
-                key = tmp[0]
-                value = ":".join(tmp[1:])
-            except (IndexError, ValueError):
-                logger.warning('Missing ":" on message lines.')
-                return
-            if key.lower() not in keys:
-                logger.warning('Unknown key "{:}"'.format(key))
-                return
-            out[key.lower()] = value
+        for line in lines:
+            for key in keys:
+                if line.lower().strip().startswith(key + ':'):
+                    tmp = [i.strip() for i in line.split(':')]
+                    value = ":".join(tmp[1:])
+                    out[key] = value
         for key in keys:
             if key not in out:
                 logger.warning('Missing key "{:}"'.format(key))
+                print(out)
+                print(lines)
                 return
         out['name'] = lines[0] if len(lines) > 4 else out['what']
         # text saying how to enroll in event
