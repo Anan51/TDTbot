@@ -107,7 +107,7 @@ class Welcome(commands.Cog):
                 channel = self.bot.find_channel("manual_page")
                 msg = await channel.fetch_message(_CoC_id)
                 for rxn in msg.reactions:
-                    if gettattr(rxn.emoji.id, rxn.emoji) in self._emoji_dict:
+                    if getattr(rxn.emoji.id, rxn.emoji) in self._emoji_dict:
                         if payload.member in await rxn.users().flatten():
                             await self._emoji2role(payload, emoji=rxn.emoji)
             return
