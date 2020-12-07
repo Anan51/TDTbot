@@ -16,6 +16,7 @@ class UserConfig(DataContainer):
     def _gen_data(self, *args):
         return
 
+
 def get_all_user_config_files():
     out = os.path.join(os.path.split(__file__)[0], '*.json')
     return glob(out)

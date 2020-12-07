@@ -317,4 +317,5 @@ class TrickOrTreat(commands.Cog):
 
 
 def setup(bot):
+    return
     bot.add_cog(TrickOrTreat(bot))
