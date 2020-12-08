@@ -387,6 +387,9 @@ class Wilds(commands.Cog):
             n -= 1
         if dt is True:
             dt = random.randint(self.tmin, self.tmax)
+        role = find_role(self.channel.guild, "Lone Wolf")
+        if not role.members:
+            return
         logger.printv('Wilds.send_message waiting for {:} s'.format(dt))
         await sleep(dt)
         msg = random.choice(_challenges).rand_task()
