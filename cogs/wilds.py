@@ -193,6 +193,7 @@ class Wilds(commands.Cog):
         self.tmax = tmax
         self._participants = {}
         self._init = False
+        self._active_message_id = None
 
     def __getitem__(self, key):
         try:
@@ -210,6 +211,15 @@ class Wilds(commands.Cog):
             return item.id in self._participants
         except AttributeError:
             return item in self._participants
+
+    @property
+    def message_id(self):
+        if self._active_message_id is None:
+            try:
+                self._active_message_id = self._get_config(self.bot.user).set_if_not_set(_bot, 0)
+            except AttributeError:
+                self._active_message_id = None
+        return self._active_message_id
 
     def enroll(self, user, guild=None):
         if user not in self:
