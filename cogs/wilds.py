@@ -269,8 +269,6 @@ class Wilds(commands.Cog):
         return self.bot.find_channel(_channel)
 
     def cog_check(self, ctx):
-        if not self._game_on:
-            return True
         if ctx.channel == self.channel:
             return True
         return ctx.channel == self.bot.find_channel(param.rc('log_channel'))
@@ -401,8 +399,6 @@ class Wilds(commands.Cog):
             self.send_later(dt=set_timer, set_timer=set_timer, n=n)
 
     def send_later(self, **kwargs):
-        if not self._game_on:
-            return
         self.bot.loop.create_task(self.send_message(**kwargs))
 
 
