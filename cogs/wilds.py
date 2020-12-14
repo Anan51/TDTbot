@@ -16,13 +16,14 @@ logger = logging.getLogger('discord.' + __name__)
 _bot = 'tdt.wilds.msg'
 _channel = "the-wilds"
 _role = "Lone Wolf"
-_tmin, _tmax = 5 * 60, 15 * 60
-_tmin, _tmax = 10, 30
+_tmin, _tmax = 15 * 60, 30 * 60
+#_tmin, _tmax = 10, 30
 
 
 async def admin_check(ctx, bot=None):
     a = ctx.author
-    if a.roles[0].name in ['Admin']:
+    print('admin_check', a, a.top_role)
+    if a.top_role.name in ['Admin']:
         return True
     if ctx.guild.owner == a:
         return True
@@ -67,8 +68,9 @@ class Item:
         self.description = description
 
     def blerb(self):
-        out = '**{}**\n{}\nCost to make:'.format(self.name, self.description)
+        out = '**{}**\n{}\nCost to make: '.format(self.name, self.description)
         out += ', '.join(['{} {}'.format(self.cost[i], i) for i in self.cost])
+        return out
 
 
 _items = [Item("The Call", {"strength": 3, "spirit": 3, "wit": 3}, "Beckon a Trial..."),
@@ -93,7 +95,8 @@ class Challenge:
         self.tasks = tasks
 
     def rand_task(self):
-        return '**{}**\n{}'.format(self.name, random.choice(self.tasks))
+        reward = ', '.join(['{} {}'.format(self.reward[i], i) for i in self.reward])
+        return '**{}** (awards {})\n{}'.format(self.name, reward, random.choice(self.tasks))
 
 _challenges = [Challenge("Of Body", {"strength": 1},
                          ["Win a game where you scored a 5.0 KD or better and were in the top 3 players",
@@ -125,7 +128,7 @@ _challenges = [Challenge("Of Body", {"strength": 1},
                           'When is it time to change coverage points in an Alamo?',
                           'What is "an aggressive engagement tactic to take over a space. All units leap-frog from cover to cover to over take a zone"?',
                           'What is "An aggressive strategy in which all members call a location and YEET a grenade at a enemy location of cover."?',
-                          'What is " A defensive tactic in which a back line player waits looking at a lane in an area where a front line player is battling. The front line player drags the fight into the line of sight of the back line player."?']
+                          'What is "A defensive tactic in which a back line player waits looking at a lane in an area where a front line player is battling. The front line player drags the fight into the line of sight of the back line player."?']
                          ),
                Challenge("Of Soul", {"spirit": 1},
                          ["Win a game where you and your fireteam all have 3.0's or higher (minimum 3 players)",
@@ -194,12 +197,14 @@ class Wilds(commands.Cog):
         self._participants = {}
         self._init = False
         self._active_message_id = None
+        self._configs = dict()
 
     def __getitem__(self, key):
+        print(self._participants)
         try:
             return self._participants[key.id]
         except KeyError:
-            self.enrole(key)
+            self._participants[key.id] = Participant(self.bot, key)
             return self._participants[key.id]
         except AttributeError:
             return self._participants[key]
@@ -221,10 +226,11 @@ class Wilds(commands.Cog):
                 self._active_message_id = None
         return self._active_message_id
 
-    def enroll(self, user, guild=None):
+    async def enroll(self, user, guild=None):
         if guild is not None:
-            role = find_role(guild, "Recruit")
+            role = find_role(guild, "Lone Wolf")
             if role:
+                user = await guild.fetch_member(user.id)
                 await user.add_roles(role)
         self._participants[user.id] = Participant(self.bot, user, guild=guild)
 
@@ -257,7 +263,7 @@ class Wilds(commands.Cog):
                 await self.send_message()
                 return
             dt = int((datetime.datetime.utcnow() - msg.created_at).total_seconds())
-            dt -= random.randint(self.tmin, self.tmax)
+            dt = random.randint(self.tmin, self.tmax) - dt
             await self.send_message(dt)
         if not self.message_id:
             await self.send_message(dt=True)
@@ -297,10 +303,13 @@ class Wilds(commands.Cog):
 
     @commands.command()
     @commands.check(admin_check)
-    async def challenger(self, ctx, member: discord.User):
+    async def challenger(self, ctx, member: discord.Member):
         """<member> Enrols member in the Wilds."""
         # todo: ask Mesome what he want's this to do
-        self.enroll(member, guild=ctx.guild)
+        top_role = member.top_role.name
+        await self.enroll(member, guild=ctx.guild)
+        channel = self.bot.find_channel(param.rc('log_channel'))
+        await channel.send('Enrolled {} ({}) into The Wilds'.format(member.display_name, top_role))
 
     @commands.command()
     @commands.check(admin_check)
@@ -308,7 +317,7 @@ class Wilds(commands.Cog):
                           wit: int):
         """<member> <strength> <spirit> <wit> adds stat points to member"""
         player: Participant = self[member]
-        for i, stat in player.stat_names:
+        for i, stat in enumerate(player.stat_names):
             try:
                 player[stat] += [strength, spirit, wit][i]
             except ValueError:
@@ -365,7 +374,7 @@ class Wilds(commands.Cog):
         for i in item.cost:
             player[i] -= item.cost[i]
         player[item.name] += 1
-        ctx.send('{} has crafted {}'.format(ctx.author.display_name, item.name))
+        await ctx.send('{} has crafted {}'.format(ctx.author.display_name, item.name))
         return
 
     async def _get_message(self):
