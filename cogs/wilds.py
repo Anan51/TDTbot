@@ -98,6 +98,7 @@ class Challenge:
         reward = ', '.join(['{} {}'.format(self.reward[i], i) for i in self.reward])
         return '**{}** (awards {})\n{}'.format(self.name, reward, random.choice(self.tasks))
 
+
 _challenges = [Challenge("Of Body", {"strength": 1},
                          ["Win a game where you scored a 5.0 KD or better and were in the top 3 players",
                           "Win a game where you scored 35 kills or more",
@@ -155,6 +156,7 @@ class Participant:
         self.config = config
 
     def __getitem__(self, item):
+        print("player get:", item)
         if item in self.stat_names:
             return self.config.set_if_not_set(self._stat_base + item, 1)
         if item in _items:
@@ -162,6 +164,7 @@ class Participant:
         KeyError("Invalid key: {:}".format(item))
 
     def __setitem__(self, key, value):
+        print("player set:", key, value)
         if value < 0:
             raise ValueError("Stat values cannot be less than zero.")
         if key in self.stat_names:
@@ -412,6 +415,49 @@ class Wilds(commands.Cog):
 
     def send_later(self, **kwargs):
         self.bot.loop.create_task(self.send_message(**kwargs))
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def wilds_send(self, ctx, *args):
+        """Send a message to the wilds"""
+        arg = ' '.join([str(i) for i in args]).strip()
+        await self.channel.send('"' + arg + '"')
+
+    @commands.command()
+    async def use_item(self, ctx, *args):
+        """Use item for The Wilds"""
+        if not args:
+            return await self.craft(ctx)
+        arg = ' '.join([str(i) for i in args]).strip()
+        if arg.lower() == 'help':
+            return await self.craft(ctx)
+        items_lower = {i.lower(): i for i in _items.keys()}
+        if arg in _items:
+            item = arg
+        elif arg.lower() in items_lower:
+            item = items_lower[arg]
+        else:
+            ctx.send("Unknown item: {:}".format(arg))
+            return
+        player = self[ctx.author]
+        _i = item
+        item = _items[item]
+        if player[_i] <= 0:
+            args = ctx.author.display_name, item.name
+            msg = '{} does not have and {}'.format(*args)
+            ctx.send(msg)
+            return
+        player[item.name] -= 1
+        msg = '{} has used {} and has {} remianing'
+        msg = msg.format(ctx.author.display_name, item.name, player[_i])
+        await ctx.send(msg)
+        admin = find_role(self.channel.guild, "admin")
+        channel = self.bot.find_channel(param.rc('log_channel'))
+        await channel.send(msg + ' ' + admin.mention)
+        if item.name == "Mark of the Trial":
+            ctx.send("Ten bonus challenges will be released over the next few hours.")
+            await self.send_message(n=10)
+        return
 
 
 def setup(bot):
