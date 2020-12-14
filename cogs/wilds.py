@@ -455,7 +455,8 @@ class Wilds(commands.Cog):
         channel = self.bot.find_channel(param.rc('log_channel'))
         await channel.send(msg + ' ' + admin.mention)
         if item.name == "Mark of the Trial":
-            ctx.send("Ten bonus challenges will be released over the next few hours.")
+            await ctx.send("Ten bonus challenges will be released over the next few "
+                           "hours.")
             await self.send_message(n=10)
         return
 
