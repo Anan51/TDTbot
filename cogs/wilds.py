@@ -222,8 +222,11 @@ class Wilds(commands.Cog):
         return self._active_message_id
 
     def enroll(self, user, guild=None):
-        if user not in self:
-            self._participants[user.id] = Participant(self.bot, user, guild=guild)
+        if guild is not None:
+            role = find_role(guild, "Recruit")
+            if role:
+                await user.add_roles(role)
+        self._participants[user.id] = Participant(self.bot, user, guild=guild)
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
@@ -282,7 +285,7 @@ class Wilds(commands.Cog):
 
     @commands.command()
     async def wolf(self, ctx):
-        """<member (optional)> shows trick or treat points"""
+        """<member (optional)> starts enrollment into the wilds"""
         await send_wilds_info(ctx.author)
         admin = find_role(self.channel.guild, "admin")
         channel = ctx.guild.system_channe()
@@ -297,7 +300,7 @@ class Wilds(commands.Cog):
     async def challenger(self, ctx, member: discord.User):
         """<member> Enrols member in the Wilds."""
         # todo: ask Mesome what he want's this to do
-        self.enroll(member)
+        self.enroll(member, guild=ctx.guild)
 
     @commands.command()
     @commands.check(admin_check)
