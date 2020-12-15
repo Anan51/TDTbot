@@ -9,6 +9,7 @@ import re
 import traceback
 from .. import param
 from ..helpers import *
+from ..async_helpers import admin_check
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -440,6 +441,11 @@ class Events(commands.Cog):
         """Read and parse the events channel for events. This shouldn't need to be
         called."""
         await self.check_history()
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def clear_events(self, ctx):
+        await self.channel.purge(limit=200)
 
     @commands.command()
     async def traitor(self, ctx, n: int = 1, multi: bool = False):

@@ -28,3 +28,16 @@ async def sleep(dt):
         dt -= (datetime.datetime.now() - now).total_seconds()
         time.sleep(dt)
     return
+
+
+async def admin_check(ctx, bot=None):
+    a = ctx.author
+    print('admin_check', a, a.top_role)
+    if a.top_role.name in ['Admin']:
+        return True
+    if ctx.guild.owner == a:
+        return True
+    if bot is not None:
+        if await bot.is_owner(a):
+            return True
+    return False

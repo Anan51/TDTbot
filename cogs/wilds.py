@@ -6,7 +6,7 @@ import random
 from .. import param
 from ..helpers import *
 from ..config import UserConfig
-from ..async_helpers import split_send, sleep
+from ..async_helpers import split_send, sleep, admin_check
 import logging
 
 
@@ -18,19 +18,6 @@ _channel = "the-wilds"
 _role = "Lone Wolf"
 _tmin, _tmax = 15 * 60, 30 * 60
 #_tmin, _tmax = 10, 30
-
-
-async def admin_check(ctx, bot=None):
-    a = ctx.author
-    print('admin_check', a, a.top_role)
-    if a.top_role.name in ['Admin']:
-        return True
-    if ctx.guild.owner == a:
-        return True
-    if bot is not None:
-        if await bot.is_owner(a):
-            return True
-    return False
 
 
 async def send_wilds_info(member):
