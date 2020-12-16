@@ -352,7 +352,8 @@ class Wilds(commands.Cog):
         elif arg.lower() in items_lower:
             item = items_lower[arg]
         else:
-            ctx.send("Unknown item: {:}".format(arg))
+            await ctx.send("Unknown item: {:}".format(arg))
+            await split_send(ctx, [i.blerb() for i in _items.values()])
             return
         item = _items[item]
         player = self[ctx.author]
