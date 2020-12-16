@@ -40,4 +40,5 @@ async def admin_check(ctx, bot=None):
     if bot is not None:
         if await bot.is_owner(a):
             return True
+    await.ctx.send('Must be an admin to issue this command.')
     return False

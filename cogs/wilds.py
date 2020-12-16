@@ -73,7 +73,7 @@ _items = [Item("The Call", {"strength": 3, "spirit": 3, "wit": 3}, "Beckon a Tri
                "Challenge spawn rate for ALL Lone Wolves for a few hours.")
           ]
 _items = {i.name: i for i in _items}
-_items.update({i.name.replace(' ', '_'): i for i in _items})
+#_items.update({i.replace(' ', '_'): i for i in _items})
 
 
 class Challenge:
@@ -144,8 +144,6 @@ class Participant:
         self.config = config
 
     def __getitem__(self, item):
-        print("player get:", item)
-        print(self.config.data)
         if item in self.stat_names:
             return self.config.set_if_not_set(self._stat_base + item, 1)
         if item in _items:
@@ -153,7 +151,6 @@ class Participant:
         KeyError("Invalid key: {:}".format(item))
 
     def __setitem__(self, key, value):
-        print("player set:", key, value)
         if value < 0:
             raise ValueError("Stat values cannot be less than zero.")
         if key in self.stat_names:
@@ -162,7 +159,6 @@ class Participant:
             self.config[self._item_base + key.replace(' ', '_')] = value
         else:
             KeyError("Invalid key: {:}".format(key))
-        print(self.config.data)
 
     def stats(self):
         return {i: self[i] for i in self.stat_names}
@@ -172,13 +168,14 @@ class Participant:
         return ', '.join(['{}: {}'.format(i, stats[i]) for i in stats])
 
     def items(self):
-        return {i: self[i.replace(' ', '_')] for i in _items}
+        return {i: self[i] for i in _items}
 
     def item_str(self):
         items = self.items()
         out = ', '.join(['{}: {}'.format(i, items[i]) for i in items if items[i]])
         if not out:
             out = 'No items found.'
+        return out
 
 
 class Wilds(commands.Cog):
@@ -193,7 +190,6 @@ class Wilds(commands.Cog):
         self._configs = dict()
 
     def __getitem__(self, key):
-        print(self._participants)
         try:
             return self._participants[key.id]
         except KeyError:
@@ -362,7 +358,7 @@ class Wilds(commands.Cog):
             if player[i] < item.cost[i]:
                 args = ctx.author.display_name, player[i], i, item.cost[i], item.name
                 msg = '{} has {} {} but {} is required to make {}'.format(*args)
-                ctx.send(msg)
+                await ctx.send(msg)
                 return
         for i in item.cost:
             player[i] -= item.cost[i]
