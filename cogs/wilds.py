@@ -268,6 +268,8 @@ class Wilds(commands.Cog):
         return self.bot.find_channel(_channel)
 
     def cog_check(self, ctx):
+        if ctx.command.name == 'wolf':
+            return True
         if ctx.channel == self.channel:
             return True
         return ctx.channel == self.bot.find_channel(param.rc('log_channel'))
