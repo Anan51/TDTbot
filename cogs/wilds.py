@@ -22,7 +22,7 @@ _tmin, _tmax = 15 * 60, 30 * 60
 
 async def send_wilds_info(member):
     """Sends welcome message to member"""
-    msg = '**The Wilds Rules**' \
+    msg = '**The Wilds Rules**\n' \
           '1. Rewards\n' \
           '  - Immediate promotion or interview for promotion\n' \
           '  - Special Wolf badge\n' \
