@@ -73,6 +73,7 @@ _items = [Item("The Call", {"strength": 3, "spirit": 3, "wit": 3}, "Beckon a Tri
                "Challenge spawn rate for ALL Lone Wolves for a few hours.")
           ]
 _items = {i.name: i for i in _items}
+_items.update({i.name.replace(' ', '_'): i for i in _items})
 
 
 class Challenge:
@@ -144,6 +145,7 @@ class Participant:
 
     def __getitem__(self, item):
         print("player get:", item)
+        print(self.config.data)
         if item in self.stat_names:
             return self.config.set_if_not_set(self._stat_base + item, 1)
         if item in _items:
@@ -160,6 +162,7 @@ class Participant:
             self.config[self._item_base + key.replace(' ', '_')] = value
         else:
             KeyError("Invalid key: {:}".format(key))
+        print(self.config.data)
 
     def stats(self):
         return {i: self[i] for i in self.stat_names}
