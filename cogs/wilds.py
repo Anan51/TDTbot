@@ -41,7 +41,7 @@ async def send_wilds_info(member):
           '  - Use these crafting materials to craft Boons, Marks, or create "The Call".\n' \
           '  - Using "The Call" summons a much: harder "Trial" challenge.\n' \
           '  - Complete all 3 trials to beat The Wilds and earn your reward.\n' \
-          '  - all in game challenges must be verified using a picture posted to the Wilds chat room. Admins will award you materials if they deem you succeeded.'
+          '  - all in game challenges must be verified using a picture/video/eye witness posted to the Wilds chat room. Admins will award you materials if they deem you succeeded.'
     channel = member.dm_channel
     if not channel:
         await member.create_dm()
