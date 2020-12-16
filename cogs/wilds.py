@@ -444,7 +444,7 @@ class Wilds(commands.Cog):
             msg = '{} does not have and {}'.format(*args)
             ctx.send(msg)
             return
-        player[item.name] -= 1
+        player[_i] -= 1
         msg = '{} has used {} and has {} remianing'
         msg = msg.format(ctx.author.display_name, item.name, player[_i])
         await ctx.send(msg)
