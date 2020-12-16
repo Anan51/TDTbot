@@ -283,7 +283,7 @@ class Wilds(commands.Cog):
         """<member (optional)> starts enrollment into the wilds"""
         await send_wilds_info(ctx.author)
         admin = find_role(self.channel.guild, "admin")
-        channel = ctx.guild.system_channe()
+        channel = ctx.guild.system_channel
         if channel is None:
             channel = self.bot.find_channel(param.rc("main_channel", "general_chat"))
         txt = "{:} has entered the wolf command. {:} please ensure they are serious in " \
