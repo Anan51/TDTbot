@@ -289,7 +289,8 @@ class Wilds(commands.Cog):
             channel = self.bot.find_channel(param.rc("main_channel", "general_chat"))
         txt = "{:} has entered the wolf command. {:} please ensure they are serious in " \
               "the {:}.".format(ctx.author.display_name, admin.mention, channel.mention)
-        await ctx.send(txt)
+        debugging = self.bot.find_channel(param.rc('log_channel'))
+        await debugging.send(txt)
 
     @commands.command()
     @commands.check(admin_check)
