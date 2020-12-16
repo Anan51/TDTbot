@@ -41,7 +41,13 @@ async def send_wilds_info(member):
           '  - Use these crafting materials to craft Boons, Marks, or create "The Call".\n' \
           '  - Using "The Call" summons a much: harder "Trial" challenge.\n' \
           '  - Complete all 3 trials to beat The Wilds and earn your reward.\n' \
-          '  - all in game challenges must be verified using a picture/video/eye witness posted to the Wilds chat room. Admins will award you materials if they deem you succeeded.'
+          '  - all in game challenges must be verified using a picture/video/eye witness posted to the Wilds chat room. Admins will award you materials if they deem you succeeded.\n\n' \
+          "Wilds Commands:\n" \
+          "```tdt$craft         Craft item for The Wilds\n" \
+          "tdt$item_check    <member (optional)> Prints member's items.\n" \
+          "tdt$stat_check    <member (optional)> Prints member's stats.\n" \
+          "tdt$use_item      Use item for The Wilds\n" \
+          "tdt$wolf          <member (optional)> starts enrollment into the wilds.```"
     channel = member.dm_channel
     if not channel:
         await member.create_dm()
