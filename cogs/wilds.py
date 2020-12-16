@@ -22,7 +22,8 @@ _tmin, _tmax = 15 * 60, 30 * 60
 
 async def send_wilds_info(member):
     """Sends welcome message to member"""
-    msg = '1. Rewards\n' \
+    msg = '**The Wilds Rules**' \
+          '1. Rewards\n' \
           '  - Immediate promotion or interview for promotion\n' \
           '  - Special Wolf badge\n' \
           '  - Ability to change/set their wolfpack role\n' \
@@ -35,12 +36,12 @@ async def send_wilds_info(member):
           '  - You loose all access to all chat rooms except "the wilds" and the "lfg" chat BUT lfg doesnt allow read message history\n' \
           '  - You must agree to "appear offline" on all gaming profiles.\n' \
           '4. Playing\n' \
-          '  - You will recive challenges, these challenges award special crafting materials.\n' \
+          '  - You will receive challenges, these challenges award special crafting materials.\n' \
           '  - Challenges range from combat, wolfpack knowledge, to teamwork. There is no penalty for failing however no awards will be given for "stale" challenges (admins discretion)\n' \
           '  - Use these crafting materials to craft Boons, Marks, or create "The Call".\n' \
-          '  - Using "The Call" summons a much harder "Trial" challenge.\n' \
+          '  - Using "The Call" summons a much: harder "Trial" challenge.\n' \
           '  - Complete all 3 trials to beat The Wilds and earn your reward.\n' \
-          '  - all in game challenges must be verified using a picture posted to the Wilds chat room. Admins will award you materials if they deem you succeded.'
+          '  - all in game challenges must be verified using a picture posted to the Wilds chat room. Admins will award you materials if they deem you succeeded.'
     channel = member.dm_channel
     if not channel:
         await member.create_dm()
