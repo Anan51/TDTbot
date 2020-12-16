@@ -449,6 +449,11 @@ class Wilds(commands.Cog):
             await self.send_message(n=10)
         return
 
+    @commands.command()
+    @commands.check(admin_check)
+    async def clear_wilds(self, ctx):
+        await self.channel.purge(limit=200)
+
 
 def setup(bot):
     bot.add_cog(Wilds(bot))
