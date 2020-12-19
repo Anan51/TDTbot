@@ -274,7 +274,7 @@ class Wilds(commands.Cog):
         return self.bot.find_channel(_channel)
 
     def cog_check(self, ctx):
-        if ctx.command.name == 'wolf':
+        if ctx.command.name in ['wolf', 'challenger']:
             return True
         if ctx.channel == self.channel:
             return True
@@ -309,6 +309,7 @@ class Wilds(commands.Cog):
         await self.enroll(member, guild=ctx.guild)
         channel = self.bot.find_channel(param.rc('log_channel'))
         await channel.send('Enrolled {} ({}) into The Wilds'.format(member.display_name, top_role))
+        await self.channel.send('{} has entered The Wilds and may only attempt challenges from after this message.'.format(member.display_name))
 
     @commands.command()
     @commands.check(admin_check)
