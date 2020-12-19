@@ -5,6 +5,7 @@ import humanize
 import logging
 import pytz
 from ..helpers import *
+from ..async_helpers import admin_check
 from .. import git_manage
 
 
@@ -18,26 +19,19 @@ class Debugging(commands.Cog):
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
-        a = ctx.author
-        if a.roles[0].name in ['Admin', 'Devoted']:
-            return True
-        if await self.bot.is_owner(a):
-            return True
-        if ctx.guild.owner == a:
-            return True
-        return False
+        return admin_check(ctx)
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def RuntimeError(self, ctx):
         """Raise a runtime error (because why not)"""
         raise RuntimeError("Per user request")
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def flush(self, ctx, n: int = 10):
         """<n=10 (optional)> flushes stdout with n newlines"""
         logger.printv('\n' * n)
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def reboot(self, ctx):
         """Reboots this bot"""
         await ctx.send("Ok. I will reboot now.")
@@ -45,7 +39,7 @@ class Debugging(commands.Cog):
         # This exits the bot loop, allowing __main__ loop to take over
         await self.bot.loop.run_until_complete(await self.bot.logout())
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def channel_id(self, ctx, channel: str = None, guild: str = None):
         """<channel (optional)> <server (optional)> sends random roast message"""
         if guild is None:
@@ -62,7 +56,7 @@ class Debugging(commands.Cog):
             channel = ctx.channel
         await ctx.send('Channel "{0.name}" has id {0.id}.'.format(channel))
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def member_id(self, ctx, member: str = None, guild: str = None):
         """<channel (optional)> <server (optional)> sends random roast message"""
         if guild is None:
@@ -79,13 +73,13 @@ class Debugging(commands.Cog):
             member = ctx.author
         await ctx.send('{0.name} has id {0.id}.'.format(member))
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def git_pull(self, ctx):
         """Do a git pull on own code"""
         git_manage.update()
         await ctx.send("Pulled own code")
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def reload_cogs(self, ctx, option=None):
         """Reloads all cogs that were added as extensions"""
         if option == 'pull':
@@ -95,12 +89,12 @@ class Debugging(commands.Cog):
             self.bot.reload_extension(i)
         await ctx.send(msg.rstrip(', '))
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def print(self, ctx, *args):
         """Print text following command to terminal. This is useful for emojis."""
         logger.printv(' '.join(args))
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def param(self, ctx, *args):
         """Print param to discord chat."""
         from .. import param
@@ -111,7 +105,7 @@ class Debugging(commands.Cog):
         else:
             await ctx.send("Param is empty.")
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def git_log(self, ctx, *args):
         """Print git log to discord chat."""
         now = pytz.utc.localize(datetime.datetime.utcnow())
@@ -129,7 +123,7 @@ class Debugging(commands.Cog):
                for i in items]
         await ctx.send('```' + '\n'.join(msg) + '```')
 
-    @commands.group(hidden=True)
+    @commands.group()
     async def git(self, ctx):
         """Base function for git sub commands"""
         if ctx.invoked_subcommand is None:
@@ -145,11 +139,11 @@ class Debugging(commands.Cog):
         """Alias for git_log"""
         await self.git_log(ctx)
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def reload_extension(self, name):
         self.bot.reload_extension(name)
 
-    @commands.command(hidden=True)
+    @commands.command()
     async def speak(self, ctx, message, channel: str = None, guild: str = None):
         """Speak as the bot"""
         if guild is None:

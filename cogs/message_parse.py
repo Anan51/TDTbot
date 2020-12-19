@@ -3,6 +3,7 @@ from discord.ext import commands
 import logging
 import re
 from ..helpers import *
+from ..async_helpers import admin_check
 from .. import param
 
 
@@ -32,6 +33,7 @@ class MessageParse(commands.Cog):
         return await self._can_run(ctx)
 
     @commands.command(hidden=True)
+    @commands.check(admin_check)
     async def stfu(self, ctx):
         self._stfu = True
 

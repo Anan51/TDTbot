@@ -6,7 +6,7 @@ import random
 from .. import param
 from ..helpers import *
 from ..config import UserConfig
-from ..async_helpers import split_send, sleep
+from ..async_helpers import split_send, sleep, admin_check
 import logging
 
 
@@ -260,7 +260,8 @@ class TrickOrTreat(commands.Cog):
         txt = "{:} has {:} points.".format(member.display_name, self.get_score(member))
         await ctx.send(txt)
 
-    @commands.command(hidden=True)
+    @commands.command()
+    @commands.check(admin_check)
     async def print_id(self, ctx):
         """Print current message id"""
         await ctx.send(str(self.message_id))
@@ -289,25 +290,22 @@ class TrickOrTreat(commands.Cog):
         channel = self.channel if self._game_on else ctx
         await split_send(channel, summary, style='```')
 
-    @commands.command(hidden=True)
+    @commands.command()
+    @commands.check(admin_check)
     async def set_score(self, ctx, n: int, member: discord.Member = None):
-        if not await self.bot.is_owner(ctx.author):
-            raise PermissionError("Only StellarNemesis can use this command.")
         if member is None:
             member = ctx.author
         UserConfig(member)[_score] = n
         await ctx.send('Set score of {:} to {:}.'.format(member, n))
 
-    @commands.command(hidden=True)
+    @commands.command()
+    @commands.check(admin_check)
     async def force_count(self, ctx):
-        if not await self.bot.is_owner(ctx.author):
-            raise PermissionError("Only StellarNemesis can use this command.")
         await self.finish_count(mid=self.message_id)
 
-    @commands.command(hidden=True)
+    @commands.command()
+    @commands.check(admin_check)
     async def end_game(self, ctx):
-        if not await self.bot.is_owner(ctx.author):
-            raise PermissionError("Only StellarNemesis can use this command.")
         mid = self.message_id
         if mid:
             await self.finish_count(dt=0, set_timer=False, mid=mid)

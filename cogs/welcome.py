@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from .. import param
 from ..helpers import *
+from ..async_helpers import admin_check
 import logging
 
 
@@ -61,8 +62,8 @@ class Welcome(commands.Cog):
               " Please read my DM and look at the {1.mention}.".format(member, manual)
         await member.guild.system_channel.send(msg)
 
-    @commands.command(hidden=True)
-    async def test_welcome(self, ctx, member: discord.User = None):
+    @commands.command()
+    async def send_welcome(self, ctx, member: discord.User = None):
         """Send welcome message to an individual for testing"""
         if not member:
             member = ctx.author
