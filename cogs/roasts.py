@@ -21,6 +21,7 @@ class Roast(commands.Cog):
         self.bot = bot
         self._nemeses = [str(i).strip() for i in param.rc('nemeses')]
         self._last_roast = None
+        self._snipes = dict()
 
     @commands.command(aliases=['burn'])
     async def roast(self, ctx, channel: str = None, guild: str = None):
@@ -71,6 +72,15 @@ class Roast(commands.Cog):
         # ignore messages from this bot
         if message.author == self.bot.user:
             return
+        # if author in snipes
+        try:
+            self._snipes[message.author.id] -= 1
+            if self._snipes[message.author.id] <= 0:
+                self._snipes.pop(message.author.id)
+            await message.channel.send(roast_str())
+            self._last_roast = message
+        except KeyError:
+            pass
         # set a trigger list for sending roasts
         triggers = ['<:lenny:333101455856762890> <:OGTriggered:433210982647595019>']
         # if some trigger then roast
@@ -143,6 +153,10 @@ class Roast(commands.Cog):
         except TypeError:
             pass
         return
+
+    @commands.command(hidden=True)
+    async def roast_snipe(self, ctx, user: discord.User, n: int = 1):
+        self._snipes[user.id] = n + self._snipes.get(user.id, 0)
 
 
 def setup(bot):
