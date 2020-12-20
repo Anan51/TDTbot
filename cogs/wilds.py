@@ -352,8 +352,8 @@ class Wilds(commands.Cog):
         if not args:
             await split_send(ctx, [i.blerb() for i in _items.values()])
             return
-        arg = ' '.join([str(i) for i in args]).strip()
-        if arg.lower() == 'help':
+        arg = ' '.join([str(i) for i in args]).strip().lower()
+        if arg == 'help':
             await split_send(ctx, [i.blerb() for i in _items.values()])
             return
         items_lower = {i.lower(): i for i in _items.keys()}
@@ -427,8 +427,8 @@ class Wilds(commands.Cog):
         """Use item for The Wilds"""
         if not args:
             return await self.craft(ctx)
-        arg = ' '.join([str(i) for i in args]).strip()
-        if arg.lower() == 'help':
+        arg = ' '.join([str(i) for i in args]).strip().lower()
+        if arg == 'help':
             return await self.craft(ctx)
         items_lower = {i.lower(): i for i in _items.keys()}
         if arg in _items:
