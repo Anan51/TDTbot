@@ -13,9 +13,11 @@ import logging
 logger = logging.getLogger('discord.' + __name__)
 
 
+_stale = '<:never:588737463376412692>'
 _bot = 'tdt.wilds.msg'
 _channel = "the-wilds"
 _role = "Lone Wolf"
+_hour = 3600
 _tmin, _tmax = 15 * 60, 30 * 60
 #_tmin, _tmax = 10, 30
 
@@ -80,18 +82,39 @@ _items = [Item("The Call", {"strength": 3, "spirit": 3, "wit": 3}, "Beckon a Tri
                "Challenge spawn rate for ALL Lone Wolves for a few hours.")
           ]
 _items = {i.name: i for i in _items}
-#_items.update({i.replace(' ', '_'): i for i in _items})
 
 
 class Challenge:
-    def __init__(self, name, reward, tasks):
+    def __init__(self, name, reward, tasks, stale_last=False, stale_after=None):
         self.name = name
         self.reward = reward
         self.tasks = tasks
+        self.stale_last = stale_last
+        self.stale_after = stale_after
+        self._last = None
 
     def rand_task(self):
         reward = ', '.join(['{} {}'.format(self.reward[i], i) for i in self.reward])
         return '**{}** (awards {})\n{}'.format(self.name, reward, random.choice(self.tasks))
+
+    async def react(self, msg):
+        await asyncio.sleep(self.stale_after)
+        await msg.add_reaction(_stale)
+
+    async def send_to(self, channel, bot_config, loop):
+        msg = await channel.send(self.rand_task())
+        if self.stale_last:
+            if self._last is None:
+                key = 'tdt.the_wilds.' + self.name.replace(' ', '_')
+                tmp = int(bot_config.set_if_not_set(key, 0))
+                if tmp:
+                    self._last = tmp
+            if self._last:
+                last = await channel.fetch_message(self._last)
+                await last.add_reaction(_stale)
+            self._last = msg.id
+        if self.stale_after:
+            loop.create_task(self.react())
 
 
 _challenges = [Challenge("Of Body", {"strength": 1},
@@ -101,7 +124,8 @@ _challenges = [Challenge("Of Body", {"strength": 1},
                           "Win 2 elims top fragging each",
                           'Score a "we ran" medal',
                           'Score an "undefeated" medal',
-                          'Score a "ghost in the night" medal.']
+                          'Score a "ghost in the night" medal.'],
+                         stale_after=_hour
                          ),
                Challenge("Of Mind", {"wit": 1},
                          ['What is the position of the Alpha?',
@@ -125,7 +149,8 @@ _challenges = [Challenge("Of Body", {"strength": 1},
                           'When is it time to change coverage points in an Alamo?',
                           'What is "an aggressive engagement tactic to take over a space. All units leap-frog from cover to cover to over take a zone"?',
                           'What is "An aggressive strategy in which all members call a location and YEET a grenade at a enemy location of cover."?',
-                          'What is "A defensive tactic in which a back line player waits looking at a lane in an area where a front line player is battling. The front line player drags the fight into the line of sight of the back line player."?']
+                          'What is "A defensive tactic in which a back line player waits looking at a lane in an area where a front line player is battling. The front line player drags the fight into the line of sight of the back line player."?'],
+                         stale_last=True
                          ),
                Challenge("Of Soul", {"spirit": 1},
                          ["Win a game where you and your fireteam all have 3.0's or higher (minimum 3 players)",
@@ -133,7 +158,8 @@ _challenges = [Challenge("Of Body", {"strength": 1},
                           'Win a game of comp where you only use blue tier (or lower) weaponry (must have at least one other fireteam member with you)',
                           'Win a game of elim where you have your HUD disabled (must have at least one other fireteam member with you)',
                           'Win a game where a fireteam member scores a undefeated medal.',
-                          'Win a game where no one else in your fireteam speaks except you (minimum 3 players)']
+                          'Win a game where no one else in your fireteam speaks except you (minimum 3 players)'],
+                         stale_after=_hour
                          )
                ]
 
@@ -252,8 +278,29 @@ class Wilds(commands.Cog):
         await asyncio.sleep(5)
         await self._do_init()
 
+    def _is_stale(self, m):
+        if m.author != self.bot.user:
+            return False
+        challenge = None
+        for c in _challenges:
+            if c.name in m.content:
+                challenge = c
+                break
+        if challenge is None:
+            return False
+        dt = (datetime.datetime.utcnow() - m.created_at).total_seconds()
+        if challenge.stale_after:
+            if dt > challenge.stale_after:
+                return True
+        if dt > 24 * _hour:
+            return True
+        return False
+
     async def _do_init(self):
+        """Initialization involving asynchronous functions"""
+        # if we have not run this function yet
         if not self._init:
+            # make sure we have the challenge messages going
             self._init = True
             msg = await self._get_message()
             if not msg:
@@ -262,9 +309,22 @@ class Wilds(commands.Cog):
             dt = int((datetime.datetime.utcnow() - msg.created_at).total_seconds())
             dt = random.randint(self.tmin, self.tmax) - dt
             await self.send_message(dt)
+            # react to stale challenges
+            async for m in self.channel.history(limit=500):
+                if self._is_stale(m):
+                    await m.add_reaction(_stale)
+            return
+        # if we have not yet sent out a challenge
         if not self.message_id:
             await self.send_message(dt=True)
             return
+        # if our challenge message is too old
+        msg = await self._get_message()
+        if msg:
+            dt = int((datetime.datetime.utcnow() - msg.created_at).total_seconds())
+            if dt > self.tmax + 1:
+                await self.send_message()
+                return
 
     @property
     def role(self):
@@ -404,8 +464,9 @@ class Wilds(commands.Cog):
             return
         logger.printv('Wilds.send_message waiting for {:} s'.format(dt))
         await sleep(dt)
-        msg = random.choice(_challenges).rand_task()
-        msg = await self.channel.send(msg)
+        challenge = random.choice(_challenges)
+        msg = await challenge.send_to(self.channel, self._get_config(self.bot.user),
+                                      self.bot.loop)
         self._set_msg_id(msg.id)
         if set_timer == 0:
             set_timer = .01
