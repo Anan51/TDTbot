@@ -157,6 +157,8 @@ class Roast(commands.Cog):
     @commands.command(hidden=True)
     async def roast_snipe(self, ctx, user: discord.User, n: int = 1):
         self._snipes[user.id] = n + self._snipes.get(user.id, 0)
+        if self._snipes[user.id] <= 0:
+            self._snipes.pop(user.id)
 
 
 def setup(bot):
