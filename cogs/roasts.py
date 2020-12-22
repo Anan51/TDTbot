@@ -5,6 +5,7 @@ import random
 import re
 from .. import param
 from ..helpers import *
+from ..async_helpers import admin_check
 
 
 logger = logging.getLogger('discord.' + __name__)
