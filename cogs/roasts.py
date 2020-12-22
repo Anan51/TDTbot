@@ -19,7 +19,7 @@ class Roast(commands.Cog):
     """Cog to roast people"""
     def __init__(self, bot):
         self.bot = bot
-        self._nemeses = [str(i).strip() for i in param.rc('nemeses')]
+        self._nemeses = [i for i in param.rc('nemeses')]
         self._last_roast = None
         self._snipes = dict()
 
@@ -116,7 +116,7 @@ class Roast(commands.Cog):
                     self._last_roast = None
         # if the nemesis of this bot posts a non command message
         try:
-            if message.author.name in self._nemeses:
+            if message.author.id in self._nemeses:
                 logger.printv('Nemesis: {0.author}'.format(message))
                 # if nemesis posts boomer type word
                 if re.findall('[bz]oome[rt]', message.content.lower()):
