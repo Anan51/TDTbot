@@ -155,6 +155,7 @@ class Roast(commands.Cog):
         return
 
     @commands.command(hidden=True)
+    @commands.check(admin_check)
     async def roast_snipe(self, ctx, user: discord.User, n: int = 1):
         self._snipes[user.id] = n + self._snipes.get(user.id, 0)
         if self._snipes[user.id] <= 0:
