@@ -130,8 +130,9 @@ class MainCommands(commands.Cog):
         recruit = find_role(ctx.guild, "Recruit")
         members = []
         async for member in ctx.guild.fetch_members(limit=2000):
-            if member.top_role <= recruit:
-                members.append(member)
+            if not member.bot:
+                if member.top_role <= recruit:
+                    members.append(member)
         data = dict()
         # get all channels with a history attribute
         channels = [i for i in ctx.guild.channels if hasattr(i, "history")]
@@ -169,7 +170,8 @@ class MainCommands(commands.Cog):
         output = []
 
         async def demote(m, dt):
-            await m.remove_roles(m.roles, reason='Inactivity')
+            roles = [r for r in m.roles if r.name not in ['@everyone', 'Nitro Booster']]
+            await m.remove_roles(*roles, reason='Inactivity')
             date = dt.date().isoformat()
             return '{0.display_name} demoted (last active {1})'.format(m, date)
 
@@ -178,10 +180,11 @@ class MainCommands(commands.Cog):
                 output.append(await demote(*i))
             elif i[0].top_role <= recruit:
                 lowers.append(i)
+        await split_send(ctx, output)
 
         async def prompt_kick(m, dt):
             date = dt.date().isoformat()
-            msg = 'Should I kick {0.display_name} (0.discriminator), last active {1}?'
+            msg = 'Should I kick {0.display_name} ({0.name}#{0.discriminator}), last active {1}?'
             msg = await ctx.send(msg.format(m, date))
             await msg.add_reaction('✅')
             await msg.add_reaction('❌')
@@ -316,15 +319,16 @@ class MainCommands(commands.Cog):
         # if reaction is to a kick quarry
         ids = [k[0].id for k in self._kicks]
         if payload.message_id in ids:
-            if payload.emoji in ['✅', '❌']:
+            emoji = str(payload.emoji)
+            if emoji in ['✅', '❌']:
                 guild = await self.bot.fetch_guild(payload.guild_id)
                 if await admin_check(author=payload.member, guild=guild):
-                    if payload.emoji == '✅':
+                    if emoji == '✅':
                         index = ids.index(payload.message_id)
                         msg, member = self._kicks.pop(index)
-                        await member.kick('Inactivity')
+                        await member.kick(reason='Inactivity')
                         await msg.add_reaction('🔨')
-                    if payload.emoji == '❌':
+                    if emoji == '❌':
                         index = ids.index(payload.message_id)
                         msg, member = self._kicks.pop(index)
                         await msg.add_reaction('👌')
