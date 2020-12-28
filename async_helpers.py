@@ -30,15 +30,21 @@ async def sleep(dt):
     return
 
 
-async def admin_check(ctx, bot=None):
-    a = ctx.author
-    print('admin_check', a, a.top_role)
-    if a.top_role.name in ['Admin']:
+async def admin_check(ctx=None, bot=None, author=None, guild=None):
+    if author is None:
+        if ctx is None:
+            raise ValueError("Either ctx or author must be specified")
+        author = ctx.author
+    if guild is None:
+        guild = ctx.guild
+    print('admin_check', author, author.top_role)
+    if author.top_role.name in ['Admin']:
         return True
-    if ctx.guild.owner == a:
-        return True
-    if bot is not None:
-        if await bot.is_owner(a):
+    if guild is not None:
+        if guild.owner == author:
             return True
-    #await ctx.send('Must be an admin to issue this command.')
+    if bot is not None:
+        if await bot.is_owner(author):
+            return True
+    # await ctx.send('Must be an admin to issue this command.')
     return False

@@ -14,6 +14,7 @@ class MainCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
+        self._kicks = []
 
     @commands.command()
     async def guild(self, ctx):
@@ -119,6 +120,77 @@ class MainCommands(commands.Cog):
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
         await split_send(ctx, sorted(msg, key=str.lower), style='```')
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def purge2(self, ctx):
+        """<role (optional)> demote (kick) recruits (rankless) who've been inactive for a
+        week."""
+        await ctx.send("Hold on while I parse the server history.")
+        recruit = find_role(ctx.guild, "Recruit")
+        members = []
+        async for member in ctx.guild.fetch_members(limit=2000):
+            if member.top_role <= recruit:
+                members.append(member)
+        data = dict()
+        # get all channels with a history attribute
+        channels = [i for i in ctx.guild.channels if hasattr(i, "history")]
+        oldest = datetime.datetime.now()  # store the oldest time parsed
+        old_af = datetime.datetime(1, 1, 1)  # just some really old date
+        for channel in channels:
+            try:
+                # loop through messages in history (limit 1000 messages per channel)
+                async for msg in channel.history(limit=1000):
+                    # update oldest
+                    oldest = min(oldest, msg.created_at)
+                    # add/update data for message author
+                    if msg.author in members:
+                        try:
+                            # use the most recent date
+                            data[msg.author] = max(data[msg.author], msg.created_at)
+                        except KeyError:
+                            data[msg.author] = msg.created_at
+            except discord.Forbidden:
+                # We do not have permission to read this channel's history
+                # await ctx.send("Cannot read channel {0}.".format(channel))
+                pass
+        # make sure we have data for each member
+        for member in members:
+            if member not in data:
+                # use join date if it's more recent than oldest
+                if member.joined_at > oldest:
+                    data[member] = member.joined_at
+                else:
+                    data[member] = old_af
+        # sort members with most inactive 1st
+        last_week = datetime.datetime.utcnow() - datetime.timedelta(days=7)
+        items = [i for i in sorted(data.items(), key=lambda x: x[1]) if i[1] < last_week]
+        lowers = []
+        output = []
+
+        async def demote(m, dt):
+            m.remove_roles(m.roles, reason='Inactivity')
+            date = dt.date().isoformat()
+            return '{0.display_name} demoted (last active {1})'.format(m, date)
+
+        for i in items:
+            if i[0].top_role == recruit:
+                output.append(await demote(*i))
+            elif i[0].top_role <= recruit:
+                lowers.append(i)
+
+        async def prompt_kick(m, dt):
+            date = dt.date().isoformat()
+            msg = 'Should I kick {0.display_name} (0.discriminator), last active {1}?'
+            msg = await ctx.send(msg.format(m, date))
+            await msg.add_reaction('✅')
+            await msg.add_reaction('❌')
+            self._kicks.append([msg, m])
+
+        for i in lowers:
+            await prompt_kick(*i)
+
+        return
 
     @commands.command()
     async def roles(self, ctx):
@@ -236,6 +308,26 @@ class MainCommands(commands.Cog):
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
         await split_send(ctx, msg, style='```')
+
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self, payload):
+        """Parse reaction adds for agreeing to code of conduct and rank them up to
+        Recruit"""
+        # if reaction is to a kick quarry
+        ids = [k[0].id for k in self._kicks]
+        if payload.message_id in ids:
+            if payload.emoji in ['✅', '❌']:
+                guild = await self.bot.fetch_guild(payload.guild_id)
+                if await admin_check(author=payload.member, guild=guild):
+                    if payload.emoji == '✅':
+                        index = ids.index(payload.message_id)
+                        msg, member = self._kicks.pop(index)
+                        await member.kick('Inactivity')
+                        await msg.add_reaction('🔨')
+                    if payload.emoji == '❌':
+                        index = ids.index(payload.message_id)
+                        msg, member = self._kicks.pop(index)
+                        await msg.add_reaction('👌')
 
 
 def setup(bot):
