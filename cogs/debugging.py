@@ -19,7 +19,7 @@ class Debugging(commands.Cog):
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
-        return admin_check(ctx)
+        return await admin_check(ctx)
 
     @commands.command()
     async def RuntimeError(self, ctx):

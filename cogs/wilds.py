@@ -114,7 +114,8 @@ class Challenge:
                 await last.add_reaction(_stale)
             self._last = msg.id
         if self.stale_after:
-            loop.create_task(self.react())
+            loop.create_task(self.react(msg))
+        return msg
 
 
 _challenges = [Challenge("Of Body", {"strength": 1},

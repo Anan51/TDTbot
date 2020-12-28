@@ -169,7 +169,7 @@ class MainCommands(commands.Cog):
         output = []
 
         async def demote(m, dt):
-            m.remove_roles(m.roles, reason='Inactivity')
+            await m.remove_roles(m.roles, reason='Inactivity')
             date = dt.date().isoformat()
             return '{0.display_name} demoted (last active {1})'.format(m, date)
 
