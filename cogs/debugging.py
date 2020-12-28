@@ -160,6 +160,23 @@ class Debugging(commands.Cog):
             channel = ctx.channel
         await channel.send(message)
 
+    @commands.command()
+    async def print_roles(self, ctx, member: str = None, guild: str = None):
+        """<channel (optional)> <server (optional)> sends random roast message"""
+        if guild is None:
+            guild = ctx.guild
+        else:
+            try:
+                guild = [i for i in self.bot.guilds if i.name == guild][0]
+            except IndexError:
+                ctx.send('ERROR: server "{0}" not found.'.format(guild))
+                return
+        if member:
+            member = guild.get_member_named(member)
+        else:
+            member = ctx.author
+        print(member.roles)
+
 
 def setup(bot):
     bot.add_cog(Debugging(bot))
