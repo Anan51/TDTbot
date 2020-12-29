@@ -127,7 +127,7 @@ _challenges = [Challenge("Of Body", {"strength": 1},
                           'Score a "we ran" medal',
                           'Score an "undefeated" medal',
                           'Score a "ghost in the night" medal.'],
-                         stale_after=_hour, wight=1.5
+                         stale_after=_hour, weight=1.5
                          ),
                Challenge("Of Mind", {"wit": 1},
                          ['What is the position of the Alpha?',
