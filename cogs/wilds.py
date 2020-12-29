@@ -467,7 +467,7 @@ class Wilds(commands.Cog):
             return
         logger.printv('Wilds.send_message waiting for {:} s'.format(dt))
         await sleep(dt)
-        challenge = random.choices(_challenges)[0]
+        challenge = random.choices(_challenges, weights=_c_weights)[0]
         msg = await challenge.send_to(self.channel, self._get_config(self.bot.user),
                                       self.bot.loop)
         self._set_msg_id(msg.id)
