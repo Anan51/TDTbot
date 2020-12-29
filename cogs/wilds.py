@@ -85,10 +85,11 @@ _items = {i.name: i for i in _items}
 
 
 class Challenge:
-    def __init__(self, name, reward, tasks, stale_last=False, stale_after=None):
+    def __init__(self, name, reward, tasks, stale_last=False, stale_after=None, weight=1):
         self.name = name
         self.reward = reward
         self.tasks = tasks
+        self.weight = weight
         self.stale_last = stale_last
         self.stale_after = stale_after
         self._last = None
@@ -126,7 +127,7 @@ _challenges = [Challenge("Of Body", {"strength": 1},
                           'Score a "we ran" medal',
                           'Score an "undefeated" medal',
                           'Score a "ghost in the night" medal.'],
-                         stale_after=_hour
+                         stale_after=_hour, wight=1.5
                          ),
                Challenge("Of Mind", {"wit": 1},
                          ['What is the position of the Alpha?',
@@ -160,9 +161,10 @@ _challenges = [Challenge("Of Body", {"strength": 1},
                           'Win a game of elim where you have your HUD disabled (must have at least one other fireteam member with you)',
                           'Win a game where a fireteam member scores a undefeated medal.',
                           'Win a game where no one else in your fireteam speaks except you (minimum 3 players)'],
-                         stale_after=_hour
+                         stale_after=_hour, weight=1.5
                          )
                ]
+_c_weights = [c.weight for c in _challenges]
 
 
 class Participant:
@@ -465,7 +467,7 @@ class Wilds(commands.Cog):
             return
         logger.printv('Wilds.send_message waiting for {:} s'.format(dt))
         await sleep(dt)
-        challenge = random.choice(_challenges)
+        challenge = random.choices(_challenges)[0]
         msg = await challenge.send_to(self.channel, self._get_config(self.bot.user),
                                       self.bot.loop)
         self._set_msg_id(msg.id)
