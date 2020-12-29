@@ -69,7 +69,7 @@ class Item:
         return out
 
 
-_items = [Item("The Call", {"strength": 3, "spirit": 3, "wit": 3}, "Beckon a Trial..."),
+_items = [Item("The Call", {"strength": 6, "spirit": 6, "wit": 6}, "Beckon a Trial..."),
           Item("Boon of Preparation", {"strength": 3, "spirit": 1, "wit": 1}, "Victories "
                "award double materials for the next several trials (Doesn't stack)"),
           Item("Boon of Companions", {"strength": 1, "spirit": 1, "wit": 3}, "Admins "
@@ -127,9 +127,9 @@ _challenges = [Challenge("Of Body", {"strength": 1},
                           'Score a "we ran" medal',
                           'Score an "undefeated" medal',
                           'Score a "ghost in the night" medal.'],
-                         stale_after=_hour, weight=1.5
+                         stale_after=3*_hour, weight=2
                          ),
-               Challenge("Of Mind", {"wit": 1},
+               Challenge("Of Mind", {"wit": 2},
                          ['What is the position of the Alpha?',
                           'What are the responsibilities of the Alpha?',
                           'What is the position of the Beta?',
@@ -154,14 +154,14 @@ _challenges = [Challenge("Of Body", {"strength": 1},
                           'What is "A defensive tactic in which a back line player waits looking at a lane in an area where a front line player is battling. The front line player drags the fight into the line of sight of the back line player."?'],
                          stale_last=True
                          ),
-               Challenge("Of Soul", {"spirit": 1},
+               Challenge("Of Soul", {"spirit": 2},
                          ["Win a game where you and your fireteam all have 3.0's or higher (minimum 3 players)",
                           'Win a game of Control where B is kept neutral the whole game.',
                           'Win a game of comp where you only use blue tier (or lower) weaponry (must have at least one other fireteam member with you)',
                           'Win a game of elim where you have your HUD disabled (must have at least one other fireteam member with you)',
                           'Win a game where a fireteam member scores a undefeated medal.',
                           'Win a game where no one else in your fireteam speaks except you (minimum 3 players)'],
-                         stale_after=_hour, weight=1.5
+                         stale_after=3*_hour, weight=3
                          )
                ]
 _c_weights = [c.weight for c in _challenges]
