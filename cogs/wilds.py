@@ -37,8 +37,9 @@ async def send_wilds_info(member):
           '  - You forfeit all rank\n' \
           '  - You loose all access to all chat rooms except "the wilds" and the "lfg" chat BUT lfg doesnt allow read message history\n' \
           '  - You must agree to "appear offline" on all gaming profiles.\n' \
+          '  - You will need to complete group/team challenges.\n' \
           '4. Playing\n' \
-          '  - You will receive challenges, these challenges award special crafting materials.\n' \
+          '  - You will receive challenges, these challenges award special crafting materials and test your strength, teamwork, and knowledge.\n' \
           '  - Challenges range from combat, wolfpack knowledge, to teamwork. There is no penalty for failing however no awards will be given for "stale" challenges (admins discretion)\n' \
           '  - Use these crafting materials to craft Boons, Marks, or create "The Call".\n' \
           '  - Using "The Call" summons a much: harder "Trial" challenge.\n' \
