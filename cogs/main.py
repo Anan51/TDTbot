@@ -179,12 +179,13 @@ class MainCommands(commands.Cog):
             if i[0].top_role == recruit:
                 output.append(await demote(*i))
             elif i[0].top_role <= recruit:
-                lowers.append(i)
+                if i[0].top_role.name not in ['Lone Wolf']:
+                    lowers.append(i)
         await split_send(ctx, output)
 
         async def prompt_kick(m, dt):
             date = dt.date().isoformat()
-            msg = 'Should I kick {0.display_name} ({0.name}#{0.discriminator}), last active {1}?'
+            msg = 'Should I kick {0.display_name} (#{0.discriminator}), last active {1}?'
             msg = await ctx.send(msg.format(m, date))
             await msg.add_reaction('✅')
             await msg.add_reaction('❌')
