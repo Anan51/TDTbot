@@ -72,9 +72,13 @@ class Welcome(commands.Cog):
     async def _emoji2role(self, payload, emoji=None):
         if emoji is None:
             emoji = payload.emoji
+        try:
+            eid = emoji.id
+        except AttributeError:
+            eid = str(emoji)
         guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
         try:
-            role = find_role(guild, self._emoji_dict[emoji.id])
+            role = find_role(guild, self._emoji_dict[eid])
             if payload.member.top_role >= find_role(guild, "Recruit"):
                 await payload.member.add_roles(role)
         except KeyError:
