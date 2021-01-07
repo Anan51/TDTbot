@@ -120,7 +120,7 @@ class Challenge:
         return msg
 
 
-_challenges = [Challenge("Of Body", {"strength": 1},
+_challenges = [Challenge("Of Body", {"strength": 2},
                          ["Win a game where you scored a 5.0 KD or better and were in the top 3 players",
                           "Win a game where you scored 35 kills or more",
                           "Win 2 comp matches",
