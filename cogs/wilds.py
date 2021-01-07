@@ -37,6 +37,7 @@ async def send_wilds_info(member):
           '  - You forfeit all rank\n' \
           '  - You loose all access to all chat rooms except "the wilds" and the "lfg" chat BUT lfg doesnt allow read message history\n' \
           '  - You must agree to "appear offline" on all gaming profiles.\n' \
+          '  - All challenges either test your wolfpack knowledge or require playing Destiny 2\n' \
           '  - You will need to complete group/team challenges.\n' \
           '4. Playing\n' \
           '  - You will receive challenges, these challenges award special crafting materials and test your strength, teamwork, and knowledge.\n' \
