@@ -19,7 +19,7 @@ async def send_welcome(member):
           'in the general chat:\n' \
           '1) How did you find out about TDT?\n' \
           '2) What games and platforms do you play?\n' \
-          '3) Are you a YouTube subscriber? If so, are you a channel member? If so, what\'s your YouTube account name?\n\n'\
+          '3) Are you a YouTube subscriber? If so, are you a channel member?\n\n'\
           'If you\'re interested in learning wolf pack (see our #manual_page), ping ' \
           '@member.\n\n'\
           'And... finally... we have a code of conduct in our #manual_page that we ' \
