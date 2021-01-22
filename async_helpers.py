@@ -48,3 +48,15 @@ async def admin_check(ctx=None, bot=None, author=None, guild=None):
             return True
     # await ctx.send('Must be an admin to issue this command.')
     return False
+
+
+async def wait_until(dt):
+    """sleep until the specified datetime (assumes UTC)"""
+    while True:
+        now = datetime.datetime.utcnow()
+        remaining = (dt - now).total_seconds()
+        if remaining < 86400:
+            break
+        # asyncio.sleep doesn't like long sleeps, so don't sleep more than a day at a time
+        await asyncio.sleep(86400)
+    await asyncio.sleep(remaining)

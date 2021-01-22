@@ -9,22 +9,10 @@ import re
 import traceback
 from .. import param
 from ..helpers import *
-from ..async_helpers import admin_check
+from ..async_helpers import admin_check, wait_until
 
 
 logger = logging.getLogger('discord.' + __name__)
-
-
-async def wait_until(dt):
-    """sleep until the specified datetime (assumes UTC)"""
-    while True:
-        now = datetime.datetime.utcnow()
-        remaining = (dt - now).total_seconds()
-        if remaining < 86400:
-            break
-        # asyncio.sleep doesn't like long sleeps, so don't sleep more than a day at a time
-        await asyncio.sleep(86400)
-    await asyncio.sleep(remaining)
 
 
 class _Event(dict):
