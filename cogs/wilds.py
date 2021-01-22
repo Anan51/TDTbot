@@ -1,12 +1,13 @@
 import asyncio
 import datetime
+import pytz
 import discord
 from discord.ext import commands
 import random
 from .. import param
 from ..helpers import *
 from ..config import UserConfig
-from ..async_helpers import split_send, sleep, admin_check
+from ..async_helpers import split_send, sleep, admin_check, wait_until
 import logging
 
 
@@ -18,8 +19,26 @@ _bot = 'tdt.wilds.msg'
 _channel = "the-wilds"
 _role = "Lone Wolf"
 _hour = 3600
-_tmin, _tmax = 15 * 60, 30 * 60
+_tmin, _tmax = 45 * 60, 75 * 60
 #_tmin, _tmax = 10, 30
+_dday = datetime.timedelta(days=1)
+_dhour = datetime.timedelta(hours=1)
+_dmin = datetime.timedelta(minutes=1)
+_dsec = datetime.timedelta(seconds=1)
+
+
+def time_mod(time, delta, epoch=None, tz=None):
+    if tz is None:
+        tz = time.tzinfo
+    if epoch is None:
+        epoch = datetime.datetime(2000, 1, 1, tzinfo=tz)
+    return (time - epoch) % delta
+
+
+def next_time(delta, epoch=None, tz=None):
+    time = tz.localize(datetime.datetime.now())
+    mod = time_mod(time, delta, epoch=epoch, tz=tz)
+    return time + (delta - mod) + _dsec
 
 
 async def send_wilds_info(member):
@@ -75,13 +94,14 @@ _items = [Item("The Call", {"strength": 6, "spirit": 6, "wit": 6}, "Beckon a Tri
           Item("Boon of Preparation", {"strength": 3, "spirit": 1, "wit": 1}, "Victories "
                "award double materials for the next several trials (Doesn't stack)"),
           Item("Boon of Companions", {"strength": 1, "spirit": 1, "wit": 3}, "Admins "
-               "will grant a random TDT Member access to the wilds chat room for a few "
-               "hours, they can complete challenges for you as well."),
-          Item("Boon of Light", {"strength": 1, "spirit": 3, "wit": 1}, "Allows LFG chat "
-               "history and General chat READ ONLY permissions for ALL Lone Wolves for a "
+               "will grant one random TDT Member and one Community member access to the "
+               "wilds chat room for a few hours, they can complete challenges for you as "
+               "well."),
+          Item("Boon of Light", {"strength": 1, "spirit": 3, "wit": 1}, "Allows read/"
+               "write permissions in the General chat for ALL Lone Wolves for a "
                "few hours."),
-          Item("Mark of the Trial", {"strength": 1, "spirit": 1, "wit": 1}, "Increases "
-               "Challenge spawn rate for ALL Lone Wolves for a few hours.")
+          Item("Mark of the Trial", {"strength": 2, "spirit": 2, "wit": 2}, "Adds "
+               "additional daily bounties for ALL Lone Wolves for a few hours.")
           ]
 _items = {i.name: i for i in _items}
 
@@ -96,16 +116,25 @@ class Challenge:
         self.stale_after = stale_after
         self._last = None
 
-    def rand_task(self):
+    def task_text(self, task=None):
         reward = ', '.join(['{} {}'.format(self.reward[i], i) for i in self.reward])
-        return '**{}** (awards {})\n{}'.format(self.name, reward, random.choice(self.tasks))
+        if task is None:
+            task = random.choice(self.tasks)
+        return '**{}** (awards {})\n{}'.format(self.name, reward, task)
+
+    def pick_n_tasks(self, n=None):
+        out = [self.task_text(i) for i in self.tasks]
+        random.shuffle(out)
+        return out[:n]
 
     async def react(self, msg):
         await asyncio.sleep(self.stale_after)
         await msg.add_reaction(_stale)
 
-    async def send_to(self, channel, bot_config, loop):
-        msg = await channel.send(self.rand_task())
+    async def send_to(self, channel, bot_config, loop, task=None):
+        if task is None:
+            task = self.task_text()
+        msg = await channel.send(task)
         if self.stale_last:
             if self._last is None:
                 key = 'tdt.the_wilds.' + self.name.replace(' ', '_')
@@ -120,6 +149,10 @@ class Challenge:
             loop.create_task(self.react(msg))
         return msg
 
+    async def send_multiple(self, channel, bot_config, loop, n):
+        for t in self.pick_n_tasks(n):
+            await self.send_to(channel, bot_config, loop, task=t)
+
 
 _challenges = [Challenge("Of Body", {"strength": 2},
                          ["Win a game where you scored a 5.0 KD or better and were in the top 3 players",
@@ -129,7 +162,7 @@ _challenges = [Challenge("Of Body", {"strength": 2},
                           'Score a "we ran" medal',
                           'Score an "undefeated" medal',
                           'Score a "ghost in the night" medal.'],
-                         stale_after=3*_hour, weight=2
+                         stale_after=24 * _hour, weight=1
                          ),
                Challenge("Of Mind", {"wit": 2},
                          ['What is the position of the Alpha?',
@@ -163,7 +196,7 @@ _challenges = [Challenge("Of Body", {"strength": 2},
                           'Win a game of elim where you have your HUD disabled (must have at least one other fireteam member with you)',
                           'Win a game where a fireteam member scores a undefeated medal.',
                           'Win a game where no one else in your fireteam speaks except you (minimum 3 players)'],
-                         stale_after=3*_hour, weight=3
+                         stale_after=24 * _hour, weight=1
                          )
                ]
 _c_weights = [c.weight for c in _challenges]
@@ -245,6 +278,27 @@ class Wilds(commands.Cog):
         except AttributeError:
             return item in self._participants
 
+    def init_daily_bounties(self):
+        self.bot.loop.create_task(self.post_daily_bounty(tomorrow=True))
+
+    async def post_daily_bounty(self, additional=False, tomorrow=False):
+        tz = pytz.timezone(param.rc('timezone'))
+        if tomorrow:
+            await wait_until(next_time(_dmin))
+        now = datetime.datetime.now().astimezone(tz).replace(tzinfo=None)
+        if additional:
+            date = now.strftime("%B %d, %Y (%X)")
+            await self.channel.send('**Bonus Bounties for {:}**'.format(date))
+        else:
+            date = now.strftime("%B %d, %Y")
+            await self.channel.send('**Daily Bounties for {:}**'.format(date))
+        for c in _challenges:
+            if c.name in ["Of Body", "Of Soul"]:
+                await c.send_multiple(self.channel, self._get_config(self.bot.user),
+                                      self.bot.loop, 3)
+        if not additional:
+            await self.post_daily_bounty(tomorrow=True)
+
     @property
     def message_id(self):
         if self._active_message_id is None:
@@ -307,6 +361,7 @@ class Wilds(commands.Cog):
         if not self._init:
             # make sure we have the challenge messages going
             self._init = True
+            self.init_daily_bounties()
             msg = await self._get_message()
             if not msg:
                 await self.send_message()
@@ -391,7 +446,25 @@ class Wilds(commands.Cog):
                 player[stat] = 0
                 await ctx.send(msg)
         msg = '{} current stats:\n{}'.format(member.display_name, player.stat_str())
-        await ctx.send(msg)
+        await self.channel.send.send(msg)
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def stealth_stat_adjust(self, ctx, member: discord.User, strength: int,
+                                  spirit: int, wit: int):
+        """<member> <strength> <spirit> <wit> adds stat points to member"""
+        player: Participant = self[member]
+        for i, stat in enumerate(player.stat_names):
+            try:
+                player[stat] += [strength, spirit, wit][i]
+            except ValueError:
+                msg = "Cannot set {:} below zero, setting it to zero instead.".format(
+                    stat)
+                player[stat] = 0
+                await ctx.send(msg)
+        msg = '{} current stats:\n{}'.format(member.display_name, player.stat_str())
+        channel = self.bot.find_channel(param.rc('log_channel'))
+        await channel.send(msg)
 
     @commands.command()
     async def stat_check(self, ctx, member: discord.User = None):
@@ -520,15 +593,58 @@ class Wilds(commands.Cog):
         channel = self.bot.find_channel(param.rc('log_channel'))
         await channel.send(msg + ' ' + admin.mention)
         if item.name == "Mark of the Trial":
-            await ctx.send("Ten bonus challenges will be released over the next few "
-                           "hours.")
-            await self.send_message(n=10)
+            await self.post_daily_bounty(additional=True)
         return
 
     @commands.command()
     @commands.check(admin_check)
     async def clear_wilds(self, ctx):
         await self.channel.purge(limit=200)
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def give_item(self, ctx, member: discord.User = None, *args):
+        """<member> <item>; gives a member an item"""
+        if not args:
+            await split_send(ctx, [i.blerb() for i in _items.values()])
+            return
+        arg = ' '.join([str(i) for i in args]).strip().lower()
+        if arg == 'help':
+            await split_send(ctx, [i.blerb() for i in _items.values()])
+            return
+        items_lower = {i.lower(): i for i in _items.keys()}
+        if arg in _items:
+            item = arg
+        elif arg.lower() in items_lower:
+            item = items_lower[arg]
+        else:
+            await ctx.send("Unknown item: {:}".format(arg))
+            await split_send(ctx, [i.blerb() for i in _items.values()])
+            return
+        item = _items[item]
+        player = self[member]
+        player[item.name] += 1
+        await ctx.send('{} has been given {}'.format(member.display_name, item.name))
+        return
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def print_wilds_user_stats(self, ctx, member: discord.User = None):
+        """<user (optional)>; Prints user's wilds stats"""
+        player = self[member]
+        prefix = _bot + '.'
+        n = len(prefix)
+        out = {i[n:]: player[i] for i in player if i.startswith(prefix)}
+        await ctx.send(str(out))
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def set_wilds_user_stat(self, ctx, member: discord.User, key, value):
+        """<user> <key> <value>"""
+        player = self[member]
+        t = type(player[key])
+        player[key] = t(value)
+        await ctx.send("{:}[{:}] set to {:}".format(member.display_name, key, value))
 
 
 def setup(bot):
