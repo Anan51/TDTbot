@@ -36,9 +36,11 @@ def time_mod(time, delta, epoch=None, tz=None):
 
 
 def next_time(delta, epoch=None, tz=None):
+    if tz is None:
+        tz = pytz.utc
     time = tz.localize(datetime.datetime.now())
-    mod = time_mod(time, delta, epoch=epoch, tz=tz)
-    return time + (delta - mod) + _dsec
+    mod = time_mod(time, delta, epoch=epoch)
+    return time.astimezone(pytz.utc).replace(tzinfo=None) + (delta - mod) + _dsec
 
 
 async def send_wilds_info(member):
@@ -284,7 +286,10 @@ class Wilds(commands.Cog):
     async def post_daily_bounty(self, additional=False, tomorrow=False):
         tz = pytz.timezone(param.rc('timezone'))
         if tomorrow:
-            await wait_until(next_time(_dmin))
+            nt = next_time(_dday, tz=tz)
+            # now = datetime.datetime.now()
+            # print(nt, '|',  now, '|',  nt - now, '|', tz)
+            await wait_until(nt)
         now = datetime.datetime.now().astimezone(tz).replace(tzinfo=None)
         if additional:
             date = now.strftime("%B %d, %Y (%X)")
