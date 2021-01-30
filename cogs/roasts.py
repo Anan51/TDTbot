@@ -92,7 +92,7 @@ class Roast(commands.Cog):
             await message.channel.send(roast_str())
             self._last_roast = message
             return
-        if message.content.strip() == '🍞':
+        if '🍞' in message.content.strip():
             await message.channel.send(roast_str())
             self._last_roast = message
             return
