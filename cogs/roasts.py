@@ -92,6 +92,10 @@ class Roast(commands.Cog):
             await message.channel.send(roast_str())
             self._last_roast = message
             return
+        if message.content.strip() == '🍞':
+            await message.channel.send(roast_str())
+            self._last_roast = message
+            return
         # respond to any form of REEE
         if re.match('^[rR]+[Ee][Ee]+$', message.content.strip()):
             r = random.randrange(7)
