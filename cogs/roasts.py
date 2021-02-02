@@ -93,9 +93,12 @@ class Roast(commands.Cog):
             self._last_roast = message
             return
         if '🍞' in message.content.strip():
-            await message.channel.send(roast_str())
-            self._last_roast = message
-            return
+            if not random.randrange(3):
+                logger.debug('Ignoring trigger')
+            else:
+                await message.channel.send(roast_str())
+                self._last_roast = message
+                return
         # respond to any form of REEE
         if re.match('^[rR]+[Ee][Ee]+$', message.content.strip()):
             r = random.randrange(7)
