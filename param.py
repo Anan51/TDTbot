@@ -13,6 +13,7 @@ defaults = {
     'roast_file':      os.path.join(_config, 'roasts.txt'),
     'nemeses':         [221778796250923008,  # UnknownElectro
                         722927617740767344,  # wator
+                        527171804851339274,  # potto
                         ],
     'add_bots':        ['Nowwut#4292'],
     'ignore_list':     ['badass_chat', 'lfg', 'lenny_laboratory', 'manual_page',
