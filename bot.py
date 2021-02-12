@@ -94,7 +94,7 @@ class MainBot(commands.Bot):
 
     async def emoji2role(self, payload, emoji_dict, emoji=None, message_id=None):
         if message_id is not None:
-            if payload.message_is != message_id:
+            if payload.message_id != message_id:
                 return
         if emoji is None:
             emoji = payload.emoji
@@ -103,8 +103,11 @@ class MainBot(commands.Bot):
         except AttributeError:
             eid = str(emoji)
         guild = [g for g in self.guilds if g.id == payload.guild_id][0]
-        try:
-            role = helpers.find_role(guild, self._emoji_dict[eid])
-            await payload.member.add_roles(role)
-        except KeyError:
-            pass
+        for key in [eid, emoji.name, str(emoji)]:
+            try:
+                role = helpers.find_role(guild, emoji_dict[key])
+                await payload.member.add_roles(role)
+                return
+            except KeyError:
+                pass
+
