@@ -329,10 +329,13 @@ class MainCommands(commands.Cog):
                         msg, member = self._kicks.pop(index)
                         await member.kick(reason='Inactivity')
                         await msg.add_reaction('🔨')
+                        return
                     if emoji == '❌':
                         index = ids.index(payload.message_id)
                         msg, member = self._kicks.pop(index)
                         await msg.add_reaction('👌')
+                        return
+        await self.bot.emoji2role({'👍': "Wit Challenger"}, message_id=809302963990429757)
 
 
 def setup(bot):
