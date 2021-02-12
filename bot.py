@@ -14,6 +14,7 @@ from .config.users import get_all_user_config_files, UserConfig
 logger = logging.getLogger('discord.' + __name__)
 intents = discord.Intents.all()
 
+
 def cog_list():
     """Returns list of the python files in the cog directory that don't start with '_'"""
     out = os.path.join(os.path.split(__file__)[0], 'cogs', '*.py')
@@ -90,3 +91,20 @@ class MainBot(commands.Bot):
             return await self.fetch_user(int(os.path.split(fn)[-1].split('.')[0]))
 
         return [UserConfig(await get_user(f)) for f in files]
+
+    async def emoji2role(self, payload, emoji_dict, emoji=None, message_id=None):
+        if message_id is not None:
+            if payload.message_is != message_id:
+                return
+        if emoji is None:
+            emoji = payload.emoji
+        try:
+            eid = emoji.id
+        except AttributeError:
+            eid = str(emoji)
+        guild = [g for g in self.guilds if g.id == payload.guild_id][0]
+        try:
+            role = helpers.find_role(guild, self._emoji_dict[eid])
+            await payload.member.add_roles(role)
+        except KeyError:
+            pass
