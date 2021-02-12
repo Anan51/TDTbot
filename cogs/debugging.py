@@ -182,13 +182,23 @@ class Debugging(commands.Cog):
         ref = ctx.message.reference
         msg = ctx.message
         if ref:
-            if ref.resolved:
+            if hasattr(ref, 'resolved'):
                 msg = ref.resolved
             else:
                 channel = self.bot.find_channel(ref.channel_id)
-                msg = await channel.fetch_message(ref.message_id)
-        txt = ['{}: {}'.format(i.replace('_', ' '), getattr(msg, i, 'unknown'))
-               for i in ['message_id', 'channel_id', 'guild_id']]
+                if channel is None:
+                    channel = await self.bot.fetch_channel(ref.channel_id)
+                if channel is None:
+                    msg = ref
+                else:
+                    msg = await channel.fetch_message(ref.message_id)
+        if hasattr(msg, 'id'):
+            txt = ['message id: ' + str(msg.id)]
+            txt.append('channel id: ' + str(msg.channel.id))
+            txt.append('guild id: ' + str(msg.guild.id))
+        else:
+            txt = ['{}: {}'.format(i.replace('_', ' '), getattr(msg, i, 'unknown'))
+                   for i in ['message_id', 'channel_id', 'guild_id']]
         if hasattr(msg, 'author'):
             a = msg.author
             txt.append('author: {}'.format(a.display_name))

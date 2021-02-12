@@ -67,7 +67,13 @@ class MainBot(commands.Bot):
         """Attempts to return a Channel type object from different types of inputs"""
         # if int assume it's an id number
         if type(channel) == int:
-            return self.get_channel(int)
+            out = self.get_channel(channel)
+            if out is not None:
+                return
+            for guild in self.guilds:
+                out = guild.get_channel(channel)
+                if out is not None:
+                    return out
         # if string-like assume it's a channel name in a guild we're in
         if hasattr(channel, 'lower'):
             out = [helpers.find_channel(i, channel) for i in self.guilds]
