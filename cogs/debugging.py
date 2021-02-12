@@ -5,7 +5,7 @@ import humanize
 import logging
 import pytz
 from ..helpers import *
-from ..async_helpers import admin_check
+from ..async_helpers import admin_check, split_send
 from .. import git_manage
 
 
@@ -176,6 +176,24 @@ class Debugging(commands.Cog):
         else:
             member = ctx.author
         print(member.roles)
+
+    @commands.command()
+    async def id_this(self, ctx):
+        ref = ctx.message.reference
+        msg = ctx.message
+        if ref:
+            if ref.resolved:
+                msg = ref.resolved
+            else:
+                channel = self.bot.find_channel(ref.channel_id)
+                msg = await channel.fetch_message(ref.message_id)
+        txt = ['{}: {}'.format(i.replace('_', ' '), getattr(msg, i, 'unknown'))
+               for i in ['message_id', 'channel_id', 'guild_id']]
+        if hasattr(msg, 'author'):
+            a = msg.author
+            txt.append('author: {}'.format(a.display_name))
+            txt.append('author id: {0}'.format(a.id))
+        await split_send(ctx, txt)
 
 
 def setup(bot):
