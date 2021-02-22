@@ -193,9 +193,9 @@ class Debugging(commands.Cog):
                 else:
                     msg = await channel.fetch_message(ref.message_id)
         if hasattr(msg, 'id'):
-            txt = ['message id: ' + str(msg.id)]
-            txt.append('channel id: ' + str(msg.channel.id))
-            txt.append('guild id: ' + str(msg.guild.id))
+            txt = ['message id: ' + str(msg.id),
+                   'channel id: ' + str(msg.channel.id),
+                   'guild id: ' + str(msg.guild.id)]
         else:
             txt = ['{}: {}'.format(i.replace('_', ' '), getattr(msg, i, 'unknown'))
                    for i in ['message_id', 'channel_id', 'guild_id']]
@@ -204,6 +204,37 @@ class Debugging(commands.Cog):
             txt.append('author: {}'.format(a.display_name))
             txt.append('author id: {0}'.format(a.id))
         await split_send(ctx, txt)
+
+    @commands.command()
+    async def channel_hist(self, ctx, channel: str = None, n: int = 10):
+        """<channel (optional)> shows channel history (past 10 entries)"""
+        if channel:
+            channel = find_channel(ctx.guild, channel)
+        else:
+            channel = ctx.channel
+        hist = await channel.history(limit=n).flatten()
+        msg = ["Item {0:d} {1.id}\n{1.content}".format(i + 1, m)
+               for i, m in enumerate(hist)]
+        if not msg:
+            msg = ["No history available."]
+        print(msg)
+        await split_send(ctx, msg)
+
+    @commands.command()
+    async def member_hist(self, ctx, member: discord.Member = None):
+        """<member (optional)> shows member history (past 10 entries)"""
+        if member is None:
+            member = ctx.author
+        hist = await member.history(limit=10).flatten()
+        if not hist:
+            user = self.bot.get_user(member.id)
+            hist = await user.history(limit=10).flatten()
+        msg = '\n'.join(["Item {0:d}\n{1.content}".format(i + 1, m)
+                         for i, m in enumerate(hist)])
+        if not msg:
+            msg = "No history available."
+        logger.printv(str(hist))
+        await split_send(ctx, msg)
 
 
 def setup(bot):

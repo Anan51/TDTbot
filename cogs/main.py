@@ -32,6 +32,7 @@ class MainCommands(commands.Cog):
         self._last_member = member
 
     @commands.command()
+    @commands.check(admin_check)
     async def inactivity(self, ctx, role: discord.Role = None):
         """<role (optional)> shows how long members have been inactive for."""
         await ctx.send("Hold on while I parse the server history.")
@@ -76,6 +77,7 @@ class MainCommands(commands.Cog):
         await split_send(ctx, msg, style='```')
 
     @commands.command()
+    @commands.check(admin_check)
     async def purge(self, ctx, role: discord.Role = None):
         """<role (optional)> shows members that have been inactive for over a week."""
         await ctx.send("Hold on while I parse the server history.")
@@ -201,37 +203,6 @@ class MainCommands(commands.Cog):
         """List server roles"""
         await ctx.send("\n".join([i.name for i in ctx.guild.roles
                                   if 'everyone' not in i.name]))
-
-    @commands.command()
-    async def channel_hist(self, ctx, channel: str = None, n: int = 10):
-        """<channel (optional)> shows channel history (past 10 entries)"""
-        if channel:
-            channel = find_channel(ctx.guild, channel)
-        else:
-            channel = ctx.channel
-        hist = await channel.history(limit=n).flatten()
-        msg = ["Item {0:d} {1.id}\n{1.content}".format(i + 1, m)
-               for i, m in enumerate(hist)]
-        if not msg:
-            msg = ["No history available."]
-        print(msg)
-        await split_send(ctx, msg)
-
-    @commands.command()
-    async def member_hist(self, ctx, member: discord.Member = None):
-        """<member (optional)> shows member history (past 10 entries)"""
-        if member is None:
-            member = ctx.author
-        hist = await member.history(limit=10).flatten()
-        if not hist:
-            user = self.bot.get_user(member.id)
-            hist = await user.history(limit=10).flatten()
-        msg = '\n'.join(["Item {0:d}\n{1.content}".format(i + 1, m)
-                         for i, m in enumerate(hist)])
-        if not msg:
-            msg = "No history available."
-        logger.printv(str(hist))
-        await ctx.send(msg)
 
     @commands.command()
     async def bots(self, ctx):
