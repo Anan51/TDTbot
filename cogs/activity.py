@@ -2,6 +2,7 @@ import datetime
 import discord
 from discord.ext import commands
 import logging
+import pickle
 import shelve
 import os
 from .. import param
@@ -10,6 +11,7 @@ from ..async_helpers import *
 
 
 logger = logging.getLogger('discord.' + __name__)
+_limit = 100
 _epoch = datetime.datetime(2000, 1, 1)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'activity.dbm')
@@ -20,7 +22,7 @@ def _int_time(in_time=None, epoch=None):
         in_time = datetime.datetime.utcnow()
     if epoch is None:
         epoch = _epoch
-    return int(in_time - epoch)
+    return int((in_time - epoch).total_seconds())
 
 
 class _ActivityFile:
@@ -33,36 +35,44 @@ class _ActivityFile:
         self.file.close()
 
     def __getitem__(self, key):
-        return self.file[key]
+        return self.file[str(key)]
 
     def __setitem__(self, key, value):
-        self.file[key] = value
+        self.file[str(key)] = value
 
-    @property
-    def get(self):
-        return self.file.get
+    def get(self, key, default):
+        return self.file.get(str(key), default)
 
     def __contains__(self, item):
-        return item in self.file
+        return str(item) in self.file
 
     def keys(self):
         return list(self.file.keys())
 
+    def items(self):
+        return self.file.items()
+
     def update_activity(self, user_id, in_time=None):
         now = _int_time(in_time=in_time)
-        user_id = int(user_id)
-        self[user_id] = max(now, self.file.get(user_id, 0))
+        user_id = str(int(user_id))
+        if user_id in self:
+            try:
+                self[user_id] = max(now, self[user_id])
+            except pickle.UnpicklingError:
+                self[user_id] = now
+        else:
+            self[user_id] = now
 
     def inactive(self, dt=None, return_dict=False):
         if dt is None:
             dt = datetime.timedelta(days=7)
-        dt = int(dt)
+        dt = int(dt.total_seconds())
         now = _int_time()
         if return_dict:
-            return {i: now - self.file.get(i, 0) for i in self.file
+            return {int(i): self.file.get(i, 0) for i in self.file
                     if now - self.file.get(i, 0) > dt}
         else:
-            return [i for i in self.file if now - self.file.get(i, 0) > dt]
+            return [int(i) for i in self.file if now - self.file.get(i, 0) > dt]
 
 
 class Activity(commands.Cog):
@@ -72,6 +82,7 @@ class Activity(commands.Cog):
         self._kicks = []
         self.data = _ActivityFile()
         self._init = False
+        self._init_finished = False
         self._debug = debug
 
     async def cog_check(self, ctx):
@@ -87,9 +98,10 @@ class Activity(commands.Cog):
         if self._init:
             return
         self._init = True
-        data = await self._hist_search(limit=5000, use_ids=True)
+        data = await self._hist_search(limit=_limit, use_ids=True)
         for i in data:
             self.data.update_activity(i, data[i])
+        self._init_finished = True
 
     async def _hist_search(self, guild=None, members=None, limit=1000, use_ids=False,
                            ctx=None):
@@ -293,11 +305,11 @@ class Activity(commands.Cog):
         """<role (optional)> shows how long members have been inactive for."""
         await ctx.send("Hold on while I parse the server history.")
         await self._async_init()
-        inactive = self.data.file
+        inactive = self.data.inactive(dt=datetime.timedelta(seconds=-1), return_dict=True)
         if role is not None:
             tmp = [i.id for i in role.members]
             inactive = {i: inactive[i] for i in inactive if i in tmp}
-        items = [(ctx.guild.fetch_member(i[0]), _epoch + datetime.timedelta(seconds=i[1]))
+        items = [(await ctx.guild.fetch_member(i[0]), _epoch + datetime.timedelta(seconds=i[1]))
                  for i in sorted(inactive.items(), key=lambda x: x[1])]
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
@@ -308,11 +320,11 @@ class Activity(commands.Cog):
         """<role (optional)> shows members that have been inactive for over a week."""
         await ctx.send("Hold on while I parse the server history.")
         await self._async_init()
-        inactive = self.data.inactive()
+        inactive = self.data.inactive(return_dict=True)
         if role is not None:
             tmp = [i.id for i in role.members]
             inactive = {i: inactive[i] for i in inactive if i in tmp}
-        items = [(ctx.guild.fetch_member(i[0]), _epoch + datetime.timedelta(seconds=i[1]))
+        items = [(await ctx.guild.fetch_member(i[0]), _epoch + datetime.timedelta(seconds=i[1]))
                  for i in sorted(inactive.items(), key=lambda x: x[1])]
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
@@ -325,10 +337,11 @@ class Activity(commands.Cog):
         await self._async_init()
         recruit = find_role(ctx.guild, "Recruit")
         inactive = self.data.inactive()
+        inactive = self.data.inactive(return_dict=True)
         if role is not None:
             tmp = [i.id for i in role.members]
             inactive = {i: inactive[i] for i in inactive if i in tmp}
-        items = [(ctx.guild.fetch_member(i[0]), _epoch + datetime.timedelta(seconds=i[1]))
+        items = [(await ctx.guild.fetch_member(i[0]), _epoch + datetime.timedelta(seconds=i[1]))
                  for i in sorted(inactive.items(), key=lambda x: x[1])]
 
         lowers = []
@@ -373,7 +386,7 @@ class Activity(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         """Parse reactions"""
-        self.data.update_activity(payload.userid)
+        self.data.update_activity(payload.user_id)
         # if reaction is to a kick quarry
         ids = [k[0].id for k in self._kicks]
         if payload.message_id in ids:
@@ -393,6 +406,18 @@ class Activity(commands.Cog):
                         msg, member = self._kicks.pop(index)
                         await msg.add_reaction('👌')
                         return
+
+    @commands.command()
+    async def activity_init_status(self, ctx):
+        await ctx.send('init = {0._init}, init_finished = {0._init_finished}.'.format(self))
+
+    @commands.command()
+    async def raw_inactivity(self, ctx, member: discord.Member = None):
+        if member is None:
+            member = ctx.author
+        raw = self.data[member.id]
+        date = (_epoch + datetime.timedelta(seconds=raw)).date().isoformat()
+        await ctx.send('raw: {}, formated: {}'.format(raw, date))
 
 
 def setup(bot):

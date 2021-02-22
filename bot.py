@@ -38,7 +38,7 @@ class MainBot(commands.Bot):
         # add all our cogs via load_extension
         for cog in cog_list():
             # ensure that cogs is a submodule of our base module
-            cog = __package__ + '.cogs.' + os.path.split(cog)[-1].rstrip('.py')
+            cog = __package__ + '.cogs.' + os.path.split(cog)[-1].split('.')[0]
             self.load_extension(cog)
 
         @self.event
