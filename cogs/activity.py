@@ -195,7 +195,7 @@ class Activity(commands.Cog):
         await split_send(ctx, msg, style='```')
 
     @commands.command()
-    async def old_purge(self, ctx, role: discord.Role = None):
+    async def purge(self, ctx, role: discord.Role = None):
         """<role (optional)> shows members that have been inactive for over a week."""
         await ctx.send("Hold on while I parse the server history.")
         if role is None:
@@ -241,7 +241,7 @@ class Activity(commands.Cog):
         await split_send(ctx, sorted(msg, key=str.lower), style='```')
 
     @commands.command()
-    async def old_purge2(self, ctx):
+    async def purge2(self, ctx):
         """Demote (kick) recruits (rankless) who've been inactive for a
         week."""
         await ctx.send("Hold on while I parse the server history.")
@@ -301,7 +301,7 @@ class Activity(commands.Cog):
         return
 
     @commands.command()
-    async def inactivity(self, ctx, role: discord.Role = None):
+    async def new_inactivity(self, ctx, role: discord.Role = None):
         """<role (optional)> shows how long members have been inactive for."""
         await ctx.send("Hold on while I parse the server history.")
         await self._async_init()
@@ -316,7 +316,7 @@ class Activity(commands.Cog):
         await split_send(ctx, sorted(msg, key=str.lower), style='```')
 
     @commands.command()
-    async def purge(self, ctx, role: discord.Role = None):
+    async def new_purge(self, ctx, role: discord.Role = None):
         """<role (optional)> shows members that have been inactive for over a week."""
         await ctx.send("Hold on while I parse the server history.")
         await self._async_init()
@@ -331,7 +331,7 @@ class Activity(commands.Cog):
         await split_send(ctx, sorted(msg, key=str.lower), style='```')
 
     @commands.command()
-    async def purge2(self, ctx, role: discord.Role = None):
+    async def new_purge2(self, ctx, role: discord.Role = None):
         """<role (optional)> shows members that have been inactive for over a week."""
         await ctx.send("Hold on while I parse the server history.")
         await self._async_init()
@@ -349,7 +349,7 @@ class Activity(commands.Cog):
 
         for i in items:
             if i[0].top_role == recruit:
-                output.append(await self._demote(*i))
+                output.append(await self._demote(*i, debug=True))
             elif i[0].top_role <= recruit:
                 if i[0].top_role.name not in ['Lone Wolf']:
                     lowers.append(i)
@@ -360,9 +360,11 @@ class Activity(commands.Cog):
 
         return
 
-    async def _demote(self, m, dt):
+    async def _demote(self, m, dt, debug=None):
+        if debug is None:
+            debug = self._debug
         roles = [r for r in m.roles if r.name not in ['@everyone', 'Nitro Booster']]
-        if not self._debug:
+        if not debug:
             await m.remove_roles(*roles, reason='Inactivity')
         date = dt.date().isoformat()
         return '{0.display_name} demoted (last active {1})'.format(m, date)
@@ -422,4 +424,4 @@ class Activity(commands.Cog):
 
 def setup(bot):
     """This is required to add this cog to a bot as an extension"""
-    bot.add_cog(Activity(bot, debug=True))
+    bot.add_cog(Activity(bot))
