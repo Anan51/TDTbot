@@ -123,6 +123,8 @@ class Welcome(commands.Cog):
         if hasattr(payload.emoji, 'id'):
             await self._emoji2role(payload)
 
+    # todo: welcome back
+
 
 def setup(bot):
     bot.add_cog(Welcome(bot))
