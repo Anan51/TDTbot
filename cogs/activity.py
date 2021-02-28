@@ -100,6 +100,7 @@ class Activity(commands.Cog):
         self._init = False
         self._init_finished = False
         self._debug = debug
+        self._cached_search = None
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
@@ -164,6 +165,8 @@ class Activity(commands.Cog):
                     data[key] = member.joined_at
                 else:
                     data[key] = old_af
+        self._cached_search = data.copy()
+        self._cached_search['use_ids'] = use_ids
         return data
 
     @commands.command()
@@ -421,12 +424,26 @@ class Activity(commands.Cog):
         await ctx.send('init = {0._init}, init_finished = {0._init_finished}.'.format(self))
 
     @commands.command()
-    async def raw_inactivity(self, ctx, member: discord.Member = None):
+    async def parse_cached(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
-        raw = self.data[member.id]
-        date = (_epoch + datetime.timedelta(seconds=raw)).date().isoformat()
-        await ctx.send('raw: {}, formated: {}'.format(raw, date))
+        name = member.display_name
+        if self._cached_search.get('use_ids'):
+            member = member.id
+        value = self._cached_search[member]
+        date = _epoch + datetime.timedelta(seconds=value)
+        msg = ' '.join([str(i) for i in [name, value, date]])
+        await ctx.send()
+
+    @commands.command()
+    async def parse_data(self, ctx, member: discord.Member = None):
+        if member is None:
+            member = ctx.author
+        name = member.display_name
+        value = self.data[member.id]
+        date = _epoch + datetime.timedelta(seconds=value)
+        msg = ' '.join([str(i) for i in [name, value, date]])
+        await ctx.send()
 
 
 def setup(bot):
