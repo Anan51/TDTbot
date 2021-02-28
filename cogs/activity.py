@@ -327,7 +327,7 @@ class Activity(commands.Cog):
             items = [i for i in items if role in i[0].roles]
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
-        await split_send(ctx, sorted(msg, key=str.lower), style='```')
+        await split_send(ctx, msg, style='```')
 
     @commands.command()
     async def new_purge(self, ctx, role: discord.Role = None):
