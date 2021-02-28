@@ -74,6 +74,22 @@ class _ActivityFile:
         else:
             return [int(i) for i in self.file if now - self.file.get(i, 0) > dt]
 
+    async def fetch_and_sort(self, guild, inactive=None, dt=None):
+        if inactive is None:
+            inactive = self.inactive(dt=dt, return_dict=True)
+        inactive = sorted(inactive.items(), key=lambda x: x[1])
+        out = []
+        for i in inactive:
+            member = guild.get_member(i[0])
+            if member is None:
+                try:
+                    member = await guild.fetch_member(i[0])
+                except discord.errors.NotFound:
+                    continue
+            if member is not None:
+                out.append([member, _epoch + datetime.timedelta(seconds=i[1])])
+        return out
+
 
 class Activity(commands.Cog):
     def __init__(self, bot, debug=False):
@@ -305,12 +321,10 @@ class Activity(commands.Cog):
         """<role (optional)> shows how long members have been inactive for."""
         await ctx.send("Hold on while I parse the server history.")
         await self._async_init()
-        inactive = self.data.inactive(dt=datetime.timedelta(seconds=-1), return_dict=True)
+        dt = datetime.timedelta(seconds=-1)
+        items = await self.data.fetch_and_sort(ctx.guild, dt=dt)
         if role is not None:
-            tmp = [i.id for i in role.members]
-            inactive = {i: inactive[i] for i in inactive if i in tmp}
-        items = [(await ctx.guild.fetch_member(i[0]), _epoch + datetime.timedelta(seconds=i[1]))
-                 for i in sorted(inactive.items(), key=lambda x: x[1])]
+            items = [i for i in items if role in i[0].roles]
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
         await split_send(ctx, sorted(msg, key=str.lower), style='```')
@@ -320,12 +334,9 @@ class Activity(commands.Cog):
         """<role (optional)> shows members that have been inactive for over a week."""
         await ctx.send("Hold on while I parse the server history.")
         await self._async_init()
-        inactive = self.data.inactive(return_dict=True)
+        items = await self.data.fetch_and_sort(ctx.guild)
         if role is not None:
-            tmp = [i.id for i in role.members]
-            inactive = {i: inactive[i] for i in inactive if i in tmp}
-        items = [(await ctx.guild.fetch_member(i[0]), _epoch + datetime.timedelta(seconds=i[1]))
-                 for i in sorted(inactive.items(), key=lambda x: x[1])]
+            items = [i for i in items if role in i[0].roles]
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
         await split_send(ctx, sorted(msg, key=str.lower), style='```')
@@ -336,13 +347,9 @@ class Activity(commands.Cog):
         await ctx.send("Hold on while I parse the server history.")
         await self._async_init()
         recruit = find_role(ctx.guild, "Recruit")
-        inactive = self.data.inactive()
-        inactive = self.data.inactive(return_dict=True)
+        items = await self.data.fetch_and_sort(ctx.guild)
         if role is not None:
-            tmp = [i.id for i in role.members]
-            inactive = {i: inactive[i] for i in inactive if i in tmp}
-        items = [(await ctx.guild.fetch_member(i[0]), _epoch + datetime.timedelta(seconds=i[1]))
-                 for i in sorted(inactive.items(), key=lambda x: x[1])]
+            items = [i for i in items if role in i[0].roles]
 
         lowers = []
         output = []
