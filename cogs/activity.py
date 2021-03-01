@@ -115,16 +115,16 @@ class Activity(commands.Cog):
         if self._init:
             return
         self._init = True
-        data = await self._hist_search(limit=100, use_ids=True)
+        data = await self._hist_search(limit=100, use_ids=True, save=True)
         for i in data:
             self.data.update_activity(i, data[i])
-        data = await self._hist_search(limit=_limit, use_ids=True)
+        data = await self._hist_search(limit=_limit, use_ids=True, save=True)
         for i in data:
             self.data.update_activity(i, data[i])
         self._init_finished = True
 
     async def _hist_search(self, guild=None, members=None, limit=1000, use_ids=False,
-                           ctx=None):
+                           ctx=None, save=None):
         if guild is None:
             if ctx is None:
                 guild = [g for g in self.bot.guilds if g.name == "The Dream Team"][0]
@@ -155,12 +155,11 @@ class Activity(commands.Cog):
                             data[key] = msg.created_at
             except discord.Forbidden:
                 # We do not have permission to read this channel's history
-                # await ctx.send("Cannot read channel {0}.".format(channel))
-                pass
+                logger.printv("Cannot read channel {0}.".format(channel))
         # make sure we have data for each member
         for member in members:
-            if member not in data:
-                key = member
+            key = member
+            if key not in data:
                 if use_ids:
                     key = key.id
                 # use join date if it's more recent than oldest
@@ -169,8 +168,11 @@ class Activity(commands.Cog):
                 else:
                     data[key] = old_af
                     print('old af: {}'.format(member))
-        self._cached_search = data.copy()
-        self._cached_search['use_ids'] = use_ids
+        if save is None and self._cached_search is None:
+            save = True
+        if save:
+            self._cached_search = data.copy()
+            self._cached_search['use_ids'] = use_ids
         return data
 
     @commands.command()
