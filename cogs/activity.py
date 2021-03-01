@@ -11,7 +11,7 @@ from ..async_helpers import *
 
 
 logger = logging.getLogger('discord.' + __name__)
-_limit = 100
+_limit = 5000
 _epoch = datetime.datetime(2000, 1, 1)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'activity.dbm')
@@ -115,6 +115,9 @@ class Activity(commands.Cog):
         if self._init:
             return
         self._init = True
+        data = await self._hist_search(limit=100, use_ids=True)
+        for i in data:
+            self.data.update_activity(i, data[i])
         data = await self._hist_search(limit=_limit, use_ids=True)
         for i in data:
             self.data.update_activity(i, data[i])
@@ -133,7 +136,7 @@ class Activity(commands.Cog):
         # get all channels with a history attribute
         channels = [i for i in guild.channels if hasattr(i, "history")]
         oldest = datetime.datetime.now()  # store the oldest time parsed
-        old_af = datetime.datetime(1, 1, 1)  # just some really old date
+        old_af = _epoch  # just some really old date
         for channel in channels:
             try:
                 # loop through messages in history (limit 1000 messages per channel)
@@ -165,6 +168,7 @@ class Activity(commands.Cog):
                     data[key] = member.joined_at
                 else:
                     data[key] = old_af
+                    print('old af: {}'.format(member))
         self._cached_search = data.copy()
         self._cached_search['use_ids'] = use_ids
         return data
@@ -431,9 +435,9 @@ class Activity(commands.Cog):
         if self._cached_search.get('use_ids'):
             member = member.id
         value = self._cached_search[member]
-        date = _epoch + datetime.timedelta(seconds=value)
-        msg = ' '.join([str(i) for i in [name, value, date]])
-        await ctx.send()
+        print(member, value)
+        msg = ' '.join([str(i) for i in [name, value]])
+        await ctx.send(msg)
 
     @commands.command()
     async def parse_data(self, ctx, member: discord.Member = None):
@@ -443,7 +447,7 @@ class Activity(commands.Cog):
         value = self.data[member.id]
         date = _epoch + datetime.timedelta(seconds=value)
         msg = ' '.join([str(i) for i in [name, value, date]])
-        await ctx.send()
+        await ctx.send(msg)
 
 
 def setup(bot):
