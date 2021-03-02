@@ -159,9 +159,9 @@ class Activity(commands.Cog):
         # make sure we have data for each member
         for member in members:
             key = member
+            if use_ids:
+                key = key.id
             if key not in data:
-                if use_ids:
-                    key = key.id
                 # use join date if it's more recent than oldest
                 if member.joined_at > oldest:
                     data[key] = member.joined_at
