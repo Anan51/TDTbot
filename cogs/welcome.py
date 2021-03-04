@@ -49,6 +49,24 @@ class Welcome(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
+        self._manual_channel = None
+
+    @property
+    def manual_channel(self):
+        if self._manual_channel is None:
+            self._manual_channel = self.bot.find_channel("manual_page")
+        return self._manual_channel
+
+    async def fetch_coc(self):
+        return await self.manual_channel.fetch_message(_CoC_id)
+
+    @commands.command()
+    async def coc_reactions(self, ctx, member: discord.User = None):
+        if member is None:
+            member = ctx.author
+        msg = await self.fetch_coc()
+        rxns = [rxn async for rxn in msg.reactions if await rxn.members.find(member)]
+        await ctx.send(''.join([str(rxn.emoji) for rxn in rxns]))
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
@@ -60,7 +78,7 @@ class Welcome(commands.Cog):
         if channel is not None:
             await channel.send(roles + ' new member {0.name} joined.'.format(member))
         await send_welcome(member)
-        manual = self.bot.find_channel("manual_page")
+        manual = self.manual_channel
         msg = "Welcome to TDT {0.mention} <a:blobDance:738431916910444644>" \
               " Please read my DM and look at the {1.mention}.".format(member, manual)
         await member.guild.system_channel.send(msg)
@@ -112,10 +130,8 @@ class Welcome(commands.Cog):
                     reason = "Agreed to code of conduct."
                     await payload.member.add_roles(role, reason=reason)
                 # if they reacted before this with a platform role
-                channel = self.bot.find_channel("manual_page")
-                msg = await channel.fetch_message(_CoC_id)
+                msg = await self.fetch_coc()
                 for rxn in msg.reactions:
-
                     if getattr(rxn.emoji, 'id', rxn.emoji) in self._emoji_dict:
                         if payload.member in await rxn.users().flatten():
                             await self._emoji2role(payload, emoji=rxn.emoji)
