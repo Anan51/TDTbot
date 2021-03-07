@@ -65,8 +65,9 @@ class Welcome(commands.Cog):
         if member is None:
             member = ctx.author
         msg = await self.fetch_coc()
-        rxns = [rxn async for rxn in msg.reactions if await rxn.members.find(member)]
-        await ctx.send(''.join([str(rxn.emoji) for rxn in rxns]))
+        rxns = [rxn for rxn in msg.reactions if await rxn.users().find(lambda u: u == member)]
+        print(rxns)
+        await ctx.send(''.join(['{}'.format(rxn.emoji) for rxn in rxns]))
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
