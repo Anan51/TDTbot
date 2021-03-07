@@ -65,8 +65,8 @@ class Welcome(commands.Cog):
         if member is None:
             member = ctx.author
         msg = await self.fetch_coc()
-        rxns = [rxn for rxn in msg.reactions if await rxn.users().find(lambda u: u == member)]
-        print(rxns)
+        rxns = [rxn for rxn in msg.reactions
+                if await rxn.users().find(lambda u: u == member)]
         await ctx.send(''.join(['{}'.format(rxn.emoji) for rxn in rxns]))
 
     @commands.Cog.listener()
@@ -84,7 +84,8 @@ class Welcome(commands.Cog):
               " Please read my DM and look at the {1.mention}.".format(member, manual)
         await member.guild.system_channel.send(msg)
         msg = await self.fetch_coc()
-        rxns = [rxn async for rxn in msg.reactions if await rxn.members.find(member)]
+        rxns = [rxn for rxn in msg.reactions
+                if await rxn.users().find(lambda u: u == member)]
         # check for welcome back
         if "👍" in [str(rxn.emoji) for rxn in rxns]:
             msg = "... Or I guess I should say welcome back!"
