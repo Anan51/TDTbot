@@ -83,6 +83,19 @@ class Welcome(commands.Cog):
         msg = "Welcome to TDT {0.mention} <a:blobDance:738431916910444644>" \
               " Please read my DM and look at the {1.mention}.".format(member, manual)
         await member.guild.system_channel.send(msg)
+        msg = await self.fetch_coc()
+        rxns = [rxn async for rxn in msg.reactions if await rxn.members.find(member)]
+        # check for welcome back
+        if "👍" in [str(rxn.emoji) for rxn in rxns]:
+            msg = "... Or I guess I should say welcome back!"
+            roles = [await self.bot.emoji2role(None, self._emoji_dict, emoji=rxn.emoji,
+                                               member=member, guild=member.guild)
+                     for rxn in rxns]
+            roles = ["`{}`".format(role) for role in roles if role]
+            if roles:
+                msg += "\nI've restored your " + ', '.join(roles) + ' role'
+                msg += 's.' if len(roles) > 1 else '.'
+            await member.guild.system_channel.send(msg)
 
     @commands.command()
     async def send_welcome(self, ctx, member: discord.User = None):
@@ -91,21 +104,6 @@ class Welcome(commands.Cog):
             member = ctx.author
         await send_welcome(member)
 
-    async def _emoji2role(self, payload, emoji=None):
-        if emoji is None:
-            emoji = payload.emoji
-        try:
-            eid = emoji.id
-        except AttributeError:
-            eid = str(emoji)
-        guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
-        try:
-            role = find_role(guild, self._emoji_dict[eid])
-            if payload.member.top_role >= find_role(guild, "Recruit"):
-                await payload.member.add_roles(role)
-        except KeyError:
-            pass
-
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         """Parse reaction adds for agreeing to code of conduct and rank them up to
@@ -113,10 +111,13 @@ class Welcome(commands.Cog):
         # if not code of conduct message
         if payload.message_id != _CoC_id:
             return
+        guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
+        recruit = find_role(guild, "Recruit")
+        args = payload, self._emoji_dict
+        kwargs = dict(guild=guild, min_role=recruit)
         if str(payload.emoji) == "👍":
             out = "{0.display_name} agreed to the code of conduct.".format(payload.member)
             logger.printv(out)
-            guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
             log_channel = find_channel(guild, "admin_log")
             # if they've agreed to CoC recently then return
             async for msg in log_channel.history(limit=200):
@@ -126,21 +127,18 @@ class Welcome(commands.Cog):
             now = datetime.datetime.utcnow()
             # if in joined in last 2 weeks
             if (now - payload.member.joined_at).seconds // 86400 < 14:
-                role = find_role(guild, "Recruit")
-                if payload.member.top_role < role:
+                if payload.member.top_role < recruit:
                     reason = "Agreed to code of conduct."
-                    await payload.member.add_roles(role, reason=reason)
+                    await payload.member.add_roles(recruit, reason=reason)
                 # if they reacted before this with a platform role
                 msg = await self.fetch_coc()
                 for rxn in msg.reactions:
                     if getattr(rxn.emoji, 'id', rxn.emoji) in self._emoji_dict:
                         if payload.member in await rxn.users().flatten():
-                            await self._emoji2role(payload, emoji=rxn.emoji)
+                            await self.bot.emoji2role(*args, emoji=rxn.emoji, **kwargs)
             return
         if hasattr(payload.emoji, 'id'):
-            await self._emoji2role(payload)
-
-    # todo: welcome back
+            await self.bot.emoji2role(*args, **kwargs)
 
 
 def setup(bot):

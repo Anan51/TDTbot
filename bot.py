@@ -98,7 +98,13 @@ class MainBot(commands.Bot):
 
         return [UserConfig(await get_user(f)) for f in files]
 
-    async def emoji2role(self, payload, emoji_dict, emoji=None, message_id=None):
+    async def emoji2role(self, payload, emoji_dict, emoji=None, message_id=None,
+                         member=None, guild=None, min_role=None):
+        if member is None:
+            member = payload.member
+        if min_role is not None:
+            if member.top_role < min_role:
+                return
         if message_id is not None:
             if payload.message_id != message_id:
                 return
@@ -108,12 +114,15 @@ class MainBot(commands.Bot):
             eid = emoji.id
         except AttributeError:
             eid = str(emoji)
-        guild = [g for g in self.guilds if g.id == payload.guild_id][0]
+        if guild is None:
+            guild = [g for g in self.guilds if g.id == payload.guild_id][0]
+        if type(guild) == int:
+            guild = self.guilds[guild]
         for key in [eid, emoji.name, str(emoji)]:
             try:
                 role = helpers.find_role(guild, emoji_dict[key])
-                await payload.member.add_roles(role)
-                return
+                await member.add_roles(role)
+                return role
             except KeyError:
                 pass
 

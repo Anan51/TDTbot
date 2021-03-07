@@ -169,8 +169,6 @@ class Roast(commands.Cog):
         if self._snipes[user.id] <= 0:
             self._snipes.pop(user.id)
 
-    # todo: anti-weeb
-
 
 def setup(bot):
     bot.add_cog(Roast(bot))
