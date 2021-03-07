@@ -118,7 +118,8 @@ class MainBot(commands.Bot):
             guild = [g for g in self.guilds if g.id == payload.guild_id][0]
         if type(guild) == int:
             guild = self.guilds[guild]
-        for key in [eid, emoji.name, str(emoji)]:
+
+        for key in [i for i in [eid, getattr(emoji, 'name', None), str(emoji)] if i]:
             try:
                 role = helpers.find_role(guild, emoji_dict[key])
                 await member.add_roles(role)

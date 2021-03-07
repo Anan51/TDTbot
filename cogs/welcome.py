@@ -43,7 +43,8 @@ class Welcome(commands.Cog):
     _emoji_dict = {350189008078372865: "PSN D2",
                    641083615387713567: "Xbox D2",
                    641083208871706664: "D2 PC",
-                   646219746886418452: "Stadia D2"
+                   646219746886418452: "Stadia D2",
+                   "👍": "Recruit",
                    }
 
     def __init__(self, bot):
