@@ -124,6 +124,8 @@ class MainBot(commands.Bot):
                 role = helpers.find_role(guild, emoji_dict[key])
                 await member.add_roles(role)
                 return role
+            except AttributeError:
+                logger.printv('Role attr err: {}->{}'.format(key, role))
             except KeyError:
                 pass
 
