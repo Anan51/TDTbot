@@ -176,182 +176,25 @@ class Activity(commands.Cog):
         return data
 
     @commands.command()
-    async def old_inactivity(self, ctx, role: discord.Role = None):
+    async def inactivity(self, ctx, role: discord.Role = None, dt: int = None):
         """<role (optional)> shows how long members have been inactive for."""
         await ctx.send("Hold on while I parse the server history.")
-        if role is None:
-            members = ctx.guild.members
+        await self._async_init()
+        if dt is None:
+            dt = datetime.timedelta(seconds=-1)
         else:
-            members = role.members
-        data = dict()
-        # get all channels with a history attribute
-        channels = [i for i in ctx.guild.channels if hasattr(i, "history")]
-        oldest = datetime.datetime.now()  # store the oldest time parsed
-        old_af = datetime.datetime(1, 1, 1)  # just some really old date
-        for channel in channels:
-            try:
-                # loop through messages in history (limit 1000 messages per channel)
-                async for msg in channel.history(limit=1000):
-                    # update oldest
-                    oldest = min(oldest, msg.created_at)
-                    # add/update data for message author
-                    if msg.author in members:
-                        try:
-                            # use the most recent date
-                            data[msg.author] = max(data[msg.author], msg.created_at)
-                        except KeyError:
-                            data[msg.author] = msg.created_at
-            except discord.Forbidden:
-                # We do not have permission to read this channel's history
-                # await ctx.send("Cannot read channel {0}.".format(channel))
-                pass
-        # make sure we have data for each member
-        for member in members:
-            if member not in data:
-                # use join date if it's more recent than oldest
-                if member.joined_at > oldest:
-                    data[member] = member.joined_at
-                else:
-                    data[member] = old_af
-        # sort members with most inactive 1st
-        items = sorted(data.items(), key=lambda x: x[1])
+            dt = datetime.timedelta(days=dt)
+        items = await self.data.fetch_and_sort(ctx.guild, dt=dt)
+        if role in ['none', 'None']:
+            role = None
+        if role is not None:
+            items = [i for i in items if role in i[0].roles]
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
         await split_send(ctx, msg, style='```')
 
     @commands.command()
     async def purge(self, ctx, role: discord.Role = None):
-        """<role (optional)> shows members that have been inactive for over a week."""
-        await ctx.send("Hold on while I parse the server history.")
-        if role is None:
-            members = ctx.guild.members
-        else:
-            members = role.members
-        data = dict()
-        # get all channels with a history attribute
-        channels = [i for i in ctx.guild.channels if hasattr(i, "history")]
-        oldest = datetime.datetime.now()  # store the oldest time parsed
-        old_af = datetime.datetime(1, 1, 1)  # just some really old date
-        for channel in channels:
-            try:
-                # loop through messages in history (limit 1000 messages per channel)
-                async for msg in channel.history(limit=1000):
-                    # update oldest
-                    oldest = min(oldest, msg.created_at)
-                    # add/update data for message author
-                    if msg.author in members:
-                        try:
-                            # use the most recent date
-                            data[msg.author] = max(data[msg.author], msg.created_at)
-                        except KeyError:
-                            data[msg.author] = msg.created_at
-            except discord.Forbidden:
-                # We do not have permission to read this channel's history
-                # await ctx.send("Cannot read channel {0}.".format(channel))
-                pass
-        # make sure we have data for each member
-        for member in members:
-            if member not in data:
-                # use join date if it's more recent than oldest
-                if member.joined_at > oldest:
-                    data[member] = member.joined_at
-                else:
-                    data[member] = old_af
-        # sort members with most inactive 1st
-        last_week = datetime.datetime.utcnow() - datetime.timedelta(days=7)
-        items = [i for i in sorted(data.items(), key=lambda x: x[1]) if i[1] < last_week]
-
-        msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
-               for i in items]
-        await split_send(ctx, sorted(msg, key=str.lower), style='```')
-
-    @commands.command()
-    async def purge2(self, ctx):
-        """Demote (kick) recruits (rankless) who've been inactive for a
-        week."""
-        await ctx.send("Hold on while I parse the server history.")
-        recruit = find_role(ctx.guild, "Recruit")
-        members = []
-        async for member in ctx.guild.fetch_members(limit=2000):
-            if not member.bot:
-                if member.top_role <= recruit:
-                    members.append(member)
-        data = dict()
-        # get all channels with a history attribute
-        channels = [i for i in ctx.guild.channels if hasattr(i, "history")]
-        oldest = datetime.datetime.now()  # store the oldest time parsed
-        old_af = datetime.datetime(1, 1, 1)  # just some really old date
-        for channel in channels:
-            try:
-                # loop through messages in history (limit 1000 messages per channel)
-                async for msg in channel.history(limit=1000):
-                    # update oldest
-                    oldest = min(oldest, msg.created_at)
-                    # add/update data for message author
-                    if msg.author in members:
-                        try:
-                            # use the most recent date
-                            data[msg.author] = max(data[msg.author], msg.created_at)
-                        except KeyError:
-                            data[msg.author] = msg.created_at
-            except discord.Forbidden:
-                # We do not have permission to read this channel's history
-                # await ctx.send("Cannot read channel {0}.".format(channel))
-                pass
-        # make sure we have data for each member
-        for member in members:
-            if member not in data:
-                # use join date if it's more recent than oldest
-                if member.joined_at > oldest:
-                    data[member] = member.joined_at
-                else:
-                    data[member] = old_af
-        # sort members with most inactive 1st
-        last_week = datetime.datetime.utcnow() - datetime.timedelta(days=7)
-        items = [i for i in sorted(data.items(), key=lambda x: x[1]) if i[1] < last_week]
-        lowers = []
-        output = []
-
-        for i in items:
-            if i[0].top_role == recruit:
-                output.append(await self._demote(*i))
-            elif i[0].top_role <= recruit:
-                if i[0].top_role.name not in ['Lone Wolf']:
-                    lowers.append(i)
-        await split_send(ctx, output)
-
-        for i in lowers:
-            await self._prompt_kick(*i)
-
-        return
-
-    @commands.command()
-    async def new_inactivity(self, ctx, role: discord.Role = None):
-        """<role (optional)> shows how long members have been inactive for."""
-        await ctx.send("Hold on while I parse the server history.")
-        await self._async_init()
-        dt = datetime.timedelta(seconds=-1)
-        items = await self.data.fetch_and_sort(ctx.guild, dt=dt)
-        if role is not None:
-            items = [i for i in items if role in i[0].roles]
-        msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
-               for i in items]
-        await split_send(ctx, msg, style='```')
-
-    @commands.command()
-    async def new_purge(self, ctx, role: discord.Role = None):
-        """<role (optional)> shows members that have been inactive for over a week."""
-        await ctx.send("Hold on while I parse the server history.")
-        await self._async_init()
-        items = await self.data.fetch_and_sort(ctx.guild)
-        if role is not None:
-            items = [i for i in items if role in i[0].roles]
-        msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
-               for i in items]
-        await split_send(ctx, sorted(msg, key=str.lower), style='```')
-
-    @commands.command()
-    async def new_purge2(self, ctx, role: discord.Role = None):
         """<role (optional)> shows members that have been inactive for over a week."""
         await ctx.send("Hold on while I parse the server history.")
         await self._async_init()
@@ -375,6 +218,12 @@ class Activity(commands.Cog):
             await self._prompt_kick(*i)
 
         return
+
+    @commands.command()
+    async def purge2(self, ctx, role: discord.Role = None):
+        """Depreciated name for what is now purge"""
+        await ctx.send("This command is now depreciated. I will run tdt$purge instead.")
+        return await self.purge(ctx, role=role)
 
     async def _demote(self, m, dt, debug=None):
         if debug is None:
