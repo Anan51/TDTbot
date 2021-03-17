@@ -164,7 +164,7 @@ _challenges = [Challenge("Of Body", {"strength": 2},
                           'Score a "we ran" medal',
                           'Score an "undefeated" medal',
                           'Score a "ghost in the night" medal.'],
-                         stale_after=24 * _hour, weight=1
+                         stale_after=24 * _hour, weight=0
                          ),
                Challenge("Of Mind", {"wit": 2},
                          ['What is the position of the Alpha?',
@@ -189,7 +189,7 @@ _challenges = [Challenge("Of Body", {"strength": 2},
                           'What is "an aggressive engagement tactic to take over a space. All units leap-frog from cover to cover to over take a zone"?',
                           'What is "An aggressive strategy in which all members call a location and YEET a grenade at a enemy location of cover."?',
                           'What is "A defensive tactic in which a back line player waits looking at a lane in an area where a front line player is battling. The front line player drags the fight into the line of sight of the back line player."?'],
-                         stale_last=True
+                         stale_last=True, weight=1
                          ),
                Challenge("Of Soul", {"spirit": 2},
                          ["Win a game where you and your fireteam all have 3.0's or higher (minimum 3 players)",
@@ -198,7 +198,7 @@ _challenges = [Challenge("Of Body", {"strength": 2},
                           'Win a game of elim where you have your HUD disabled (must have at least one other fireteam member with you)',
                           'Win a game where a fireteam member scores a undefeated medal.',
                           'Win a game where no one else in your fireteam speaks except you (minimum 3 players)'],
-                         stale_after=24 * _hour, weight=1
+                         stale_after=24 * _hour, weight=0
                          )
                ]
 _c_weights = [c.weight for c in _challenges]
