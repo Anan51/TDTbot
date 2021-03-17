@@ -451,7 +451,7 @@ class Wilds(commands.Cog):
                 player[stat] = 0
                 await ctx.send(msg)
         msg = '{} current stats:\n{}'.format(member.display_name, player.stat_str())
-        await self.channel.send.send(msg)
+        await self.channel.send(msg)
 
     @commands.command()
     @commands.check(admin_check)
