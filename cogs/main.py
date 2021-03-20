@@ -122,6 +122,65 @@ class MainCommands(commands.Cog):
         await self.bot.emoji2role(payload, {'👍': "Wit Challengers"}, message_id=809302963990429757)
         await self.bot.emoji2role(payload, {'🏆': "Tourney Challengers"}, message_id=822744897505067018)
 
+    @commands.command()
+    @commands.check(admin_check)
+    async def add_roles(self, ctx, role: discord.Role, emote: str = None,
+                        msg_id: int = None, channel: discord.abc.Messageable = None):
+        """<role> <emote (optional)> <message id (optional)> <channel (optional)>
+        For all members who have already reacted to given message with given emote,
+        assign them the given role.
+
+        Can be used as a reply to a message, in this case:
+        <message id> defaults to the message that's being replied to.
+        <emote> defaults to the emote with the most reactions.
+        <channel> defaults to the channel where this command was entered."""
+
+        ref = ctx.message.reference
+        if channel is None:
+            channel = ctx.channel
+        msg = None
+        if msg_id is not None:
+            msg = await channel.fetch_message(msg_id)
+        if msg is None and msg_id is None and ref:
+            if hasattr(ref, 'resolved'):
+                msg = ref.resolved
+            else:
+                channel = self.bot.find_channel(ref.channel_id)
+                if channel is None:
+                    channel = await self.bot.fetch_channel(ref.channel_id)
+                if channel is None:
+                    msg = ref
+                else:
+                    msg = await channel.fetch_message(ref.message_id)
+        if not msg:
+            raise ValueError("Cannot identify message.")
+        rxns = sorted([rxn for rxn in msg.reactions], key=lambda x: x.count, reverse=True)
+        try:
+            if emote is not None:
+                rxns = [rxn for rxn in rxns if emotes_equal(emote, rxn.emoji)]
+            else:
+                emote = rxns[0].emoji
+            users = await rxns[0].users().flatten()
+        except IndexError:
+            users = []
+        n = 0
+        errors = []
+        for user in users:
+            try:
+                await user.add_roles(role)
+                n += 1
+            except Exception as e:
+                err = "Cannot add {} role to user {} with error {}."
+                errors.append(err.format(role, user, e))
+        if errors:
+            await split_send(ctx, errors, style='```')
+        out = 'Added role {} to {} player{} who reacted with {} to message {}.'
+        out.format(role, n, 's' if n > 1 else 0, emote, msg.id)
+        try:
+            msg.reply(out, mention_author=False)
+        except (discord.HTTPException, discord.Forbidden, discord.InvalidArgument):
+            ctx.send(out)
+
 
 def setup(bot):
     """This is required to add this cog to a bot as an extension"""
