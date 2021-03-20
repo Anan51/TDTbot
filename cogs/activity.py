@@ -210,7 +210,7 @@ class Activity(commands.Cog):
             if i[0].top_role == recruit:
                 output.append(await self._demote(*i, debug=True))
             elif i[0].top_role <= recruit:
-                if i[0].top_role.name not in ['Lone Wolf']:
+                if i[0].top_role.name not in ['Lone Wolf'] and not i[0].bot:
                     lowers.append(i)
         await split_send(ctx, output)
 
