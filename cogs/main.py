@@ -120,6 +120,7 @@ class MainCommands(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         await self.bot.emoji2role(payload, {'👍': "Wit Challengers"}, message_id=809302963990429757)
+        await self.bot.emoji2role(payload, {'🏆': "Tourney Challengers"}, message_id=822744897505067018)
 
 
 def setup(bot):
