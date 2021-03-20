@@ -90,3 +90,18 @@ def parse_message(message):
     _type = sorted(list(set(_type)))
     out['type'] = _type
     return out
+
+
+def emotes_equal(a, b):
+    alist = [a] + [getattr(a, attr, None) for attr in ['id', 'name']] + [str(a)]
+    alist = [i for i in alist if i]
+    blist = [b] + [getattr(b, attr, None) for attr in ['id', 'name']] + [str(b)]
+    blist = [i for i in blist if i]
+    for i in alist:
+        for j in blist:
+            try:
+                if i == j:
+                    return True
+            except (ValueError, TypeError):
+                pass
+    return False
