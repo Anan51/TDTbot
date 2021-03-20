@@ -110,22 +110,19 @@ class MainBot(commands.Bot):
                 return
         if emoji is None:
             emoji = payload.emoji
-        try:
-            eid = emoji.id
-        except AttributeError:
-            eid = str(emoji)
         if guild is None:
             guild = [g for g in self.guilds if g.id == payload.guild_id][0]
         if type(guild) == int:
             guild = self.guilds[guild]
 
-        for key in [i for i in [eid, getattr(emoji, 'name', None), str(emoji)] if i]:
+        keys = [i for i in emoji_dict if helpers.emotes_equal(i, emoji)]
+        if len(keys) == 1:
+            key = keys[0]
+            role = helpers.find_role(guild, emoji_dict[key])
             try:
-                role = helpers.find_role(guild, emoji_dict[key])
                 await member.add_roles(role)
                 return role
             except AttributeError:
                 logger.printv('Role attr err: {}->{}'.format(key, role))
-            except KeyError:
-                pass
-
+        elif len(keys) > 1:
+            logger.printv('Multiple matches: {}'.format({i: emoji_dict[i] for i in keys}))
