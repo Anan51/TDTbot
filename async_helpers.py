@@ -38,7 +38,7 @@ async def admin_check(ctx=None, bot=None, author=None, guild=None):
     if guild is None:
         guild = ctx.guild
     print('admin_check', author, author.top_role)
-    if author.top_role.name in ['Admin']:
+    if author.top_role.name in ['Admin', 'Devoted']:
         return True
     if guild is not None:
         if guild.owner == author:
