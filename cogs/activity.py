@@ -11,6 +11,7 @@ from ..async_helpers import *
 
 
 logger = logging.getLogger('discord.' + __name__)
+_days_inactive = 14
 _limit = 5000
 _epoch = datetime.datetime(2000, 1, 1)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
@@ -65,7 +66,7 @@ class _ActivityFile:
 
     def inactive(self, dt=None, return_dict=False):
         if dt is None:
-            dt = datetime.timedelta(days=7)
+            dt = datetime.timedelta(days=_days_inactive)
         dt = int(dt.total_seconds())
         now = _int_time()
         if return_dict:
@@ -196,8 +197,11 @@ class Activity(commands.Cog):
     @commands.command()
     async def purge(self, ctx, role: discord.Role = None):
         """<role (optional)> shows members that have been inactive for over a week."""
+        if self._debug:
+            await ctx.send("`<Running in debug mode>`")
         await ctx.send("Hold on while I parse the server history.")
-        await self._async_init()
+        if not self._debug:
+            await self._async_init()
         recruit = find_role(ctx.guild, "Recruit")
         items = await self.data.fetch_and_sort(ctx.guild)
         if role is not None:
@@ -212,6 +216,8 @@ class Activity(commands.Cog):
             elif i[0].top_role <= recruit:
                 if i[0].top_role.name not in ['Lone Wolf'] and not i[0].bot:
                     lowers.append(i)
+                else:
+                    print('Skipping', i)
         await split_send(ctx, output)
 
         for i in lowers:
@@ -303,4 +309,4 @@ class Activity(commands.Cog):
 
 def setup(bot):
     """This is required to add this cog to a bot as an extension"""
-    bot.add_cog(Activity(bot))
+    bot.add_cog(Activity(bot, debug=False))
