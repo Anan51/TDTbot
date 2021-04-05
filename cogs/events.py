@@ -197,7 +197,7 @@ class _Event(dict):
                 return True
         return False
 
-    async def alert(self, dt_min=None, channel=None, suffix=None, wait=True):
+    async def alert(self, dt_min=None, channel=None, eta=None, wait=True, prefix=None):
         """Schedule/send event alerts mentioning all attendees.
         option dt_min is time before event in minutes.
         """
@@ -207,32 +207,34 @@ class _Event(dict):
         dt = self['datetime'] - datetime.timedelta(minutes=dt_min)
         if dt < datetime.datetime.utcnow():
             dt_min = (self['datetime'] - datetime.datetime.utcnow()).seconds // 60
-        if suffix is None:
+        if prefix is None:
+            prefix = 'Your event "{0.name}"'.format(self)
+        if eta is None:
             if dt_min is None:
-                suffix = " your event is approaching."
+                eta = "is approaching."
             elif dt_min == 0:
-                suffix = " your event is starting now."
+                eta = "is starting now."
             elif dt_min % 60 == 0:
                 if dt_min == 60:
-                    suffix = " your event is starting in an hour."
+                    eta = "is starting in an hour."
                 else:
-                    suffix = " your event is starting in {:d} hours.".format(dt_min//60)
+                    eta = "is starting in {:d} hours.".format(dt_min // 60)
             elif dt_min > 60:
                 if dt_min > 120:
-                    suffix = " your event is starting in {:d} hours and {:d} minutes."
+                    eta = "is starting in {:d} hours and {:d} minutes."
                 else:
-                    suffix = " your event is starting in {:d} hour and {:} minutes."
-                suffix = suffix.format(dt_min // 60, dt_min % 60)
+                    eta = "is starting in {:d} hour and {:} minutes."
+                eta = eta.format(dt_min // 60, dt_min % 60)
                 if dt_min % 60 == 1:
-                    suffix = suffix[:-2] + '.'
+                    eta = eta[:-2] + '.'
             else:
                 if dt_min == 1:
-                    suffix = " your event is starting in one minute."
+                    eta = "is starting in one minute."
                 else:
-                    suffix = " your event is starting in {:d} minutes.".format(dt_min)
+                    eta = "is starting in {:d} minutes.".format(dt_min)
         if wait:
             await wait_until(dt)
-        msg = ' '.join([i.mention for i in await self.attendees()]) + suffix
+        msg = ' '.join([prefix, eta] + [i.mention for i in await self.attendees()])
         await channel.send(msg)
 
     def set_alerts(self, dts=None, channel=None):
