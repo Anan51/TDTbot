@@ -248,6 +248,10 @@ class Debugging(commands.Cog):
         <channel> defaults to the channel where this command was entered."""
 
         ref = ctx.message.reference
+        try:
+            emote = int(emote)
+        except ValueError:
+            pass
         if channel is None:
             channel = ctx.channel
         msg = None
