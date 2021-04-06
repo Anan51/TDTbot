@@ -236,6 +236,40 @@ class Debugging(commands.Cog):
         logger.printv(str(hist))
         await split_send(ctx, msg)
 
+    @commands.command()
+    @commands.check(admin_check)
+    async def clear_rxn(self, ctx, emote: str, msg_id: int = None,
+                        channel: discord.abc.Messageable = None):
+        """<emote> <message id (optional)> <channel (optional)>
+        Clear all of the specified reaction for the message
+
+        Can be used as a reply to a message, in this case:
+        <message id> defaults to the message that's being replied to.
+        <channel> defaults to the channel where this command was entered."""
+
+        ref = ctx.message.reference
+        if channel is None:
+            channel = ctx.channel
+        msg = None
+        if msg_id is not None:
+            msg = await channel.fetch_message(msg_id)
+        if msg is None and msg_id is None and ref:
+            if hasattr(ref, 'resolved'):
+                msg = ref.resolved
+            else:
+                channel = self.bot.find_channel(ref.channel_id)
+                if channel is None:
+                    channel = await self.bot.fetch_channel(ref.channel_id)
+                if channel is None:
+                    msg = ref
+                else:
+                    msg = await channel.fetch_message(ref.message_id)
+        if not msg:
+            raise ValueError("Cannot identify message.")
+        rxns = [rxn for rxn in msg.reactions if emotes_equal(emote, rxn.emoji)]
+        if rxns:
+            await rxns[0].clear()
+
 
 def setup(bot):
     bot.add_cog(Debugging(bot))
