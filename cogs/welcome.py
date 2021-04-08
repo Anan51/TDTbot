@@ -19,7 +19,8 @@ async def send_welcome(member):
           'in the general chat:\n' \
           '1) How did you find out about TDT?\n' \
           '2) What games and platforms do you play?\n' \
-          '3) Are you a YouTube subscriber? If so, are you a channel member?\n\n'\
+          '3) Are you a YouTube subscriber?\n' \
+          '4) Are you a Patreon supporter?\n\n'\
           'If you\'re interested in learning wolf pack (see our #manual_page), ping ' \
           '@member.\n\n'\
           'And... finally... we have a code of conduct in our #manual_page that we ' \
@@ -30,7 +31,8 @@ async def send_welcome(member):
           'Also find us on social media:\n'\
           'YT channel membership: https://www.youtube.com/channel/UCKBCsmU53MBzCm_wNZY7hLA/join\n'\
           'Twitter: https://twitter.com/productions_tdt\n'\
-          'Instagram: https://www.instagram.com/tdt_productions_'
+          'Instagram: https://www.instagram.com/tdt_productions_\n'\
+          'Patreon: https://www.patreon.com/TDTPatreon'
     channel = member.dm_channel
     if not channel:
         await member.create_dm()
