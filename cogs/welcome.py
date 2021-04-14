@@ -84,7 +84,7 @@ class Welcome(commands.Cog):
         roles = [find_role(member.guild, i) for i in ["Admin", "Devoted"]]
         roles = " ".join([i.mention for i in roles if hasattr(i, 'mention')])
         if channel is not None:
-            await channel.send(roles + ' new member {0.name} joined.'.format(member))
+            await channel.send('New member {0.name} joined.'.format(member))
         await send_welcome(member)
         manual = self.manual_channel
         msg = "Welcome to TDT {0.mention} <a:blobDance:738431916910444644>" \
