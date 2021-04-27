@@ -97,9 +97,12 @@ class MainCommands(commands.Cog):
         """Listen for DMs and post them in the bot log channel"""
         if message.author == self.bot.user:
             return
+        # if DM
         if type(message.channel) == discord.DMChannel:
             channel = self.bot.find_channel(param.rc('log_channel'))
-            msg = 'From: {0.author}\n"{0.content}"'.format(message)
+            roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
+            msg = ' '.join(roles) + '\n'
+            msg += 'From: {0.author}\n"{0.content}"'.format(message)
             await channel.send(msg)
 
     @commands.command()
