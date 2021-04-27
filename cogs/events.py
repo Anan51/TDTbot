@@ -436,6 +436,19 @@ class Events(commands.Cog):
     @commands.check(admin_check)
     async def clear_events(self, ctx):
         await self.channel.purge(limit=200)
+        msg = '**<Prototype Event Name>**\n' \
+              'What: <a name or short description>\n' \
+              'Who: <Who can join or role mention>\n' \
+              'When: <time and day of week in PST only>\n' \
+              'React with <some emoji> to reserve your spot.'
+        msg = await self.channel.send('```' + msg + '```')
+        emoji = 'rebel_skuratnum_200x200'
+        try:
+            rxn = [e for e in self.channel.guild.emojis if e.name == emoji][0]
+            if rxn:
+                await msg.add_reaction(rxn)
+        except IndexError:
+            pass
 
     @commands.command()
     async def traitor(self, ctx, n: int = 1, multi: bool = False):
