@@ -23,7 +23,7 @@ async def send_welcome(member):
           '4) Are you a Patreon supporter?\n\n'\
           'If you\'re interested in learning wolf pack (see our #manual_page), ping ' \
           '@member, and if you want to send any feedback to the TDT admins then leave ' \
-          'me a DM\n\n'\
+          'me a DM.\n\n'\
           'And... finally... we have a code of conduct in our #manual_page that we ' \
           'ask everybody to agree to. Just give it a 👍 if you agree. If you want me to ' \
           'give you a Destiny 2 tag, click the corresponding platform tag on the ' \
