@@ -47,7 +47,7 @@ class MainBot(commands.Bot):
             msg = 'We have logged in as {0.user}, running discord.py {1.__version__}'
             logger.printv(msg.format(self, discord))
             # also we can set a non-custom type activity. This is a discord limitation.
-            activity = discord.Activity(name='UnknownElectro be a bot',
+            activity = discord.Activity(name='your suggestions and issues, DM me',
                                         type=discord.ActivityType.listening)
             await self.change_presence(activity=activity)
 
