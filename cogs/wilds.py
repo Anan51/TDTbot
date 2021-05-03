@@ -94,14 +94,13 @@ class Item:
 
 _items = [Item("The Call", {"strength": 6, "spirit": 6, "wit": 6}, "Beckon a Trial..."),
           Item("Boon of Preparation", {"strength": 3, "spirit": 1, "wit": 1}, "Victories "
-               "award double materials for the next several trials (Doesn't stack)"),
+               "award double materials for the next several challenges (Doesn't stack)"),
           Item("Boon of Companions", {"strength": 1, "spirit": 1, "wit": 3}, "Admins "
                "will grant one random TDT Member and one Community member access to the "
                "wilds chat room for a few hours, they can complete challenges for you as "
                "well."),
-          Item("Boon of Light", {"strength": 1, "spirit": 3, "wit": 1}, "Allows read/"
-               "write permissions in the General chat for ALL Lone Wolves for a "
-               "few hours."),
+          Item("Boon of Light", {"strength": 1, "spirit": 3, "wit": 1}, "Makes any "
+               "active trial slightly easier (stackable)."),
           Item("Mark of the Trial", {"strength": 2, "spirit": 2, "wit": 2}, "Adds "
                "additional daily bounties for ALL Lone Wolves for a few hours.")
           ]
