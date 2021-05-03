@@ -80,4 +80,4 @@ async def git_log(channel, *args):
     fmt = "{:}: {:} <{:}> [{:}]"
     msg = [fmt.format(dt(i), i.message.strip(), i.author.name, i.hexsha[:7])
            for i in items]
-    await channel.send('```' + '\n'.join(msg) + '```')
+    await split_send(channel, msg, style='```')
