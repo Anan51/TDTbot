@@ -1,9 +1,6 @@
-import datetime
 import discord
 from discord.ext import commands
-import humanize
 import logging
-import pytz
 from ..helpers import *
 from ..async_helpers import admin_check, git_log, split_send
 from .. import git_manage
