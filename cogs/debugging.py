@@ -5,7 +5,7 @@ import humanize
 import logging
 import pytz
 from ..helpers import *
-from ..async_helpers import admin_check, split_send
+from ..async_helpers import admin_check, git_log, split_send
 from .. import git_manage
 
 
@@ -108,20 +108,7 @@ class Debugging(commands.Cog):
     @commands.command()
     async def git_log(self, ctx, *args):
         """Print git log to discord chat."""
-        now = pytz.utc.localize(datetime.datetime.utcnow())
-        last_week = now - datetime.timedelta(days=7)
-        # only print items from the last week
-        items = [i for i in git_manage.own_repo.iter_commits()
-                 if i.committed_datetime > last_week]
-
-        def dt(i):
-            """Format timestamp to human readable string"""
-            return humanize.naturaltime(now - i.committed_datetime)
-
-        fmt = "{:}: {:} <{:}> [{:}]"
-        msg = [fmt.format(dt(i), i.message.strip(), i.author.name, i.hexsha[:7])
-               for i in items]
-        await ctx.send('```' + '\n'.join(msg) + '```')
+        return await git_log(ctx, *args)
 
     @commands.group()
     async def git(self, ctx):

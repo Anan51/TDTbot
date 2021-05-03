@@ -1,7 +1,10 @@
 import asyncio
 import datetime
 import discord
+import humanize
+import pytz
 import time
+from . import git_manage
 
 
 async def split_send(channel, message, deliminator='\n', n=2000, style=''):
@@ -60,3 +63,21 @@ async def wait_until(dt):
         # asyncio.sleep doesn't like long sleeps, so don't sleep more than a day at a time
         await asyncio.sleep(86400)
     await asyncio.sleep(remaining)
+
+
+async def git_log(channel, *args):
+    """Print git log to discord chat."""
+    now = pytz.utc.localize(datetime.datetime.utcnow())
+    last_week = now - datetime.timedelta(days=7)
+    # only print items from the last week
+    items = [i for i in git_manage.own_repo.iter_commits()
+             if i.committed_datetime > last_week]
+
+    def dt(i):
+        """Format timestamp to human readable string"""
+        return humanize.naturaltime(now - i.committed_datetime)
+
+    fmt = "{:}: {:} <{:}> [{:}]"
+    msg = [fmt.format(dt(i), i.message.strip(), i.author.name, i.hexsha[:7])
+           for i in items]
+    await channel.send('```' + '\n'.join(msg) + '```')
