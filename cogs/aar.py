@@ -1,0 +1,45 @@
+import datetime
+import discord
+from discord.ext import commands
+import logging
+import pytz
+from ..async_helpers import git_log
+from ..helpers import *
+from .. import param
+
+
+logger = logging.getLogger('discord.' + __name__)
+_tz = pytz.timezone(param.rc('timezone'))
+
+
+class AAR(commands.Cog):
+    """Cog designed to handel Stellar's AAR, cause he's lazy"""
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        """Parse messages for Mesome asking for AARs"""
+        # if not devoted_chat channel
+        if message.channel.id != 660299299128606733:
+            return
+        # if not Mesome, return
+        try:
+            if message.author != message.guild.owner:
+                return
+        except AttributeError:
+            return
+        # assign UTC timezone to message creation timestamp
+        dt = pytz.utc.localize(message.created_at)
+        # convert to server timezone
+        dt = dt.astimezone(_tz)
+        # if it is not sunday return
+        if dt.today().weekday() != 6:
+            return
+        # Now it is time to print Stellar's AAR
+        await message.channel.send("Stellar's AAR:")
+        await git_log(message.channel)
+
+
+def setup(bot):
+    bot.add_cog(AAR(bot))
