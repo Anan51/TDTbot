@@ -16,8 +16,8 @@ defaults = {
                         527171804851339274,  # potto
                         ],
     'add_bots':        ['Nowwut#4292'],
-    'ignore_list':     ['badass_chat', 'lfg', 'lenny_laboratory', 'manual_page',
-                        'tdt_events', 'movie_night', 'my_games'],
+    'ignore_list':     ['lfg', 'lenny_laboratory', 'manual_page',
+                        'tdt_events', 'devoted_chat'],
     'event_channel':   'tdt_events',
     'log_channel':     'debugging',
     'fashion_channel': 'debugging',
