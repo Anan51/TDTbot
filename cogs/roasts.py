@@ -91,18 +91,19 @@ class Roast(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_message_delete(self, payload):
         if payload.message_id in self._roasts:
-            now = datetime.datetime.utcnow()
+            now = datetime.datetime.utcnow().replace(tzinfo=None)
             guild = await self.bot.fetch_guild(payload.guild_id)
             opt = dict(action=_m_delete, after=now - _min)
             out = []
             async for entry in guild.audit_logs(**opt):
-                if entry.target == guild.me:
-                    if entry.extra.channel.id == payload.channel_id:
-                        if entry.user not in [self.bot.owner, guild.owner]:
-                            out.append([entry.user, abs(now - entry.created_at)])
+                if abs(entry.created_at - now) < _min:
+                    if entry.target == self.bot.user:
+                        if entry.extra.channel.id == payload.channel_id:
+                            if entry.user not in [self.bot.owner, guild.owner]:
+                                out.append([entry.user, abs(now - entry.created_at)])
             if out:
                 user = sorted(out, key=lambda x: x[1])[0][0]
-                channel = await guild.fetch_channel(payload.channel_id)
+                channel = find_channel(guild, payload.channel_id)
                 await self._send_roast(channel, prefix=user.mention)
 
     @commands.Cog.listener()
