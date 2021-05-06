@@ -1,14 +1,18 @@
+import datetime
 import discord
 from discord.ext import commands
 import logging
 import random
 import re
+import sys
 from .. import param
 from ..helpers import *
 from ..async_helpers import admin_check
 
 
 logger = logging.getLogger('discord.' + __name__)
+_m_delete = discord.AuditLogAction.message_delete
+_min = datetime.timedelta(seconds=60)
 
 
 def roast_str():
@@ -23,6 +27,19 @@ class Roast(commands.Cog):
         self._nemeses = [i for i in param.rc('nemeses')]
         self._last_roast = None
         self._snipes = dict()
+        self._roasts = []
+
+    def _log_roast(self, mid):
+        while sys.getsizeof(self._roasts) > 1048576:
+            self._roasts.pop(0)
+        self._roasts.append(mid)
+
+    async def _send_roast(self, channel, prefix=None):
+        msg = roast_str()
+        if prefix is not None:
+            msg = prefix.rstrip() + ' ' + channel
+        msg = await channel.send(msg)
+        self._log_roast(msg.id)
 
     @commands.command(aliases=['burn'])
     async def roast(self, ctx, channel: str = None, guild: str = None):
@@ -40,7 +57,7 @@ class Roast(commands.Cog):
         else:
             channel = ctx.channel
         self._last_roast = await channel.fetch_message(channel.last_message_id)
-        await channel.send(roast_str())
+        await self._send_roast(channel)
 
     @commands.command()
     async def nou(self, ctx, channel: str = None, guild: str = None):
@@ -58,6 +75,23 @@ class Roast(commands.Cog):
         else:
             channel = ctx.channel
         await channel.send("NO U")
+
+    @commands.Cog.listener()
+    async def on_raw_message_delete(self, payload):
+        if payload.message_id in self._roasts:
+            now = datetime.datetime.utcnow()
+            guild = await self.bot.fetch_guild(payload.guild_id)
+            opt = dict(action=_m_delete, after=now - _min)
+            out = []
+            async for entry in guild.audit_logs(**opt):
+                if entry.target == guild.me:
+                    if entry.extra.channel.id == payload.channel_id:
+                        if entry.user not in [self.bot.owner, guild.owner]:
+                            out.append([entry.user, abs(now - entry.created_at)])
+            if out:
+                user = sorted(out, key=lambda x: x[1])[0][0]
+                channel = await guild.fetch_channel(payload.channel_id)
+                await self._send_roast(channel, prefix=user.mention)
 
     @commands.Cog.listener()
     async def on_message(self, message):
