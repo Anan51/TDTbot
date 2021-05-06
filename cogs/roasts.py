@@ -175,7 +175,7 @@ class Roast(commands.Cog):
                     self._last_roast = message
                     return
                 # regex list of triggers
-                matches = ['your m[ao]m', 'shut it bot']
+                matches = ['your m[ao]m', 'shut it bot', 'aaa+']
                 for m in matches:
                     if random.randrange(2):
                         logger.debug('Ignoring trigger')
