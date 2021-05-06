@@ -101,6 +101,13 @@ class LFG(commands.Cog):
         self._debug = debug
         self._cached_search = None
 
+    def _get_emoji(self, role, guild):
+        emoji = _role2emoji.get(role, role)
+        try:
+            return [e for e in guild.emojis if e.name == emoji][0]
+        except IndexError:
+            return ''
+
     @commands.Cog.listener()
     async def on_ready(self):
         await asyncio.sleep(5)
@@ -148,7 +155,7 @@ class LFG(commands.Cog):
             member = ctx.author
         tot, data = self.data.member_summary(member.id)
         out = 'Total: {}; '.format(tot)
-        out += ', '.join(['{} :{}:'.format(value, _role2emoji.get(role, role)) for
+        out += ', '.join(['{} :{}:'.format(value, self._get_emoji(role, ctx.guild)) for
                           role, value in data.items()])
         await ctx.send(out)
 
