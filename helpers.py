@@ -13,7 +13,7 @@ def find_channel(guild, channel=None):
         try:
             return [i for i in guild.channels if i.id == channel][0]
         except IndexError:
-            pass
+            return
     except ValueError:
         pass
     try:

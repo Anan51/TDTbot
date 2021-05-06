@@ -103,7 +103,7 @@ class Roast(commands.Cog):
                                 out.append([entry.user, abs(now - entry.created_at)])
             if out:
                 user = sorted(out, key=lambda x: x[1])[0][0]
-                channel = find_channel(guild, payload.channel_id)
+                channel = await self.bot.fetch_channel(payload.channel_id)
                 await self._send_roast(channel, prefix=user.mention)
 
     @commands.Cog.listener()
