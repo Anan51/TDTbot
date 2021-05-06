@@ -53,7 +53,7 @@ class Roast(commands.Cog):
         return True
 
     @commands.command(aliases=['burn'])
-    async def roast(self, ctx, channel: str = None, guild: str = None):
+    async def roast(self, ctx, channel: discord.TextChannel = None, guild: str = None):
         """<channel (optional)> <server (optional)> sends random roast message"""
         if guild is None:
             guild = ctx.guild
@@ -71,7 +71,7 @@ class Roast(commands.Cog):
         await self._send_roast(channel, parse_ignore=False, sender=ctx.author, last=last)
 
     @commands.command()
-    async def nou(self, ctx, channel: str = None, guild: str = None):
+    async def nou(self, ctx, channel: discord.TextChannel = None, guild: str = None):
         """<channel (optional)> <server (optional)> NO U"""
         if guild is None:
             guild = ctx.guild

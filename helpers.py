@@ -2,17 +2,30 @@ from .param import rc as _rc
 import re
 
 
-def find_channel(guild, name=None):
+def find_channel(guild, channel=None):
     """Find a channel in a guild based on its name"""
-    if name is None:
-        name = _rc('channel')
+    if channel is None:
+        channel = _rc('channel')
+    if type(channel) not in [str, int]:
+        return channel
+    try:
+        channel = int(channel)
+        try:
+            return [i for i in guild.channels if i.id == channel][0]
+        except IndexError:
+            pass
+    except ValueError:
+        pass
     try:
         return [i for i in guild.channels
-                if i.name.lower().strip() == name.lower().strip()][0]
+                if i.name.lower().strip() == channel.lower().strip()][0]
     except IndexError:
-        if name.startswith('#'):
-            return find_channel(guild, name.lstrip('#'))
-        return
+        pass
+    if channel.startswith('#'):
+        return find_channel(guild, channel.lstrip('#'))
+    if channel.startswith('<#') and channel.endswith('>'):
+        return find_channel(guild, channel[2:-1])
+    return
 
 
 def find_role(guild, name):

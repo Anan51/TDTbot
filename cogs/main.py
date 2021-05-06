@@ -55,7 +55,7 @@ class MainCommands(commands.Cog):
         msg += '\n'.join([str(i + 1) + ') ' + b.display_name for i, b in enumerate(bots)])
         await ctx.send(msg)
 
-    async def emote(self, ctx, emote, n: int = 1, channel: str = None, guild: str = None):
+    async def emote(self, ctx, emote, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
         """emote <n (optional)> <channel (optional)> <server (optional)>
         posts emote"""
         if guild is None:
@@ -75,19 +75,19 @@ class MainCommands(commands.Cog):
         await channel.send(msg)
 
     @commands.command()
-    async def blob(self, ctx, n: int = 1, channel: str = None, guild: str = None):
+    async def blob(self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
         """<n (optional)> <channel (optional)> <server (optional)> posts dancing blob"""
         emote = "<a:blobDance:738431916910444644>"
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
 
     @commands.command()
-    async def vibe(self, ctx, n: int = 1, channel: str = None, guild: str = None):
+    async def vibe(self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
         """<n (optional)> <channel (optional)> <server (optional)> posts vibing cat"""
         emote = "<a:vibe:761582456867520532>"
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
 
     @commands.command()
-    async def karen_electro(self, ctx, n: int = 1, channel: str = None, guild: str = None):
+    async def karen_electro(self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
         """<n (optional)> <channel (optional)> <server (optional)> posts vibing cat"""
         emote = "<:karen_electro:779088291496460300>"
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)

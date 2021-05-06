@@ -37,7 +37,7 @@ class Debugging(commands.Cog):
         await self.bot.loop.run_until_complete(await self.bot.logout())
 
     @commands.command()
-    async def channel_id(self, ctx, channel: str = None, guild: str = None):
+    async def channel_id(self, ctx, channel: discord.TextChannel = None, guild: str = None):
         """<channel (optional)> <server (optional)> sends random roast message"""
         if guild is None:
             guild = ctx.guild
@@ -128,7 +128,7 @@ class Debugging(commands.Cog):
         self.bot.reload_extension(name)
 
     @commands.command()
-    async def speak(self, ctx, message, channel: str = None, guild: str = None):
+    async def speak(self, ctx, message, channel: discord.TextChannel = None, guild: str = None):
         """Speak as the bot"""
         if guild is None:
             guild = ctx.guild
@@ -190,7 +190,7 @@ class Debugging(commands.Cog):
         await split_send(ctx, txt)
 
     @commands.command()
-    async def channel_hist(self, ctx, channel: str = None, n: int = 10):
+    async def channel_hist(self, ctx, channel: discord.TextChannel = None, n: int = 10):
         """<channel (optional)> shows channel history (past 10 entries)"""
         if channel:
             channel = find_channel(ctx.guild, channel)
