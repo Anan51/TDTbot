@@ -127,7 +127,7 @@ class Roast(commands.Cog):
             self._last_roast = message
             return
         if '🍞' in message.content.strip():
-            if not random.randrange(3):
+            if random.randrange(3):
                 logger.debug('Ignoring trigger')
             else:
                 await message.channel.send(roast_str())
