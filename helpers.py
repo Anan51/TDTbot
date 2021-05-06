@@ -10,6 +10,8 @@ def find_channel(guild, name=None):
         return [i for i in guild.channels
                 if i.name.lower().strip() == name.lower().strip()][0]
     except IndexError:
+        if name.startswith('#'):
+            return find_channel(guild, name.lstrip('#'))
         return
 
 
