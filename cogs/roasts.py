@@ -9,7 +9,6 @@ from .. import param
 from ..helpers import *
 from ..async_helpers import admin_check
 
-
 logger = logging.getLogger('discord.' + __name__)
 _m_delete = discord.AuditLogAction.message_delete
 _min = datetime.timedelta(seconds=60)
@@ -22,6 +21,7 @@ def roast_str():
 
 class Roast(commands.Cog):
     """Cog to roast people"""
+
     def __init__(self, bot):
         self.bot = bot
         self._nemeses = [i for i in param.rc('nemeses')]
@@ -34,12 +34,23 @@ class Roast(commands.Cog):
             self._roasts.pop(0)
         self._roasts.append(mid)
 
-    async def _send_roast(self, channel, prefix=None):
-        msg = roast_str()
+    async def _send_roast(self, channel, prefix=None, parse_ignore=True, sender=None,
+                          last=None, roast=None):
+        if parse_ignore and channel.name in param.rc('ignore_list', []):
+            return
+        if sender is not None:
+            perm = channel.permissions_for(sender)
+            if not perm.send_messages:
+                msg = '{:} does not have send privileges in {:}.'
+                raise discord.Forbidden(msg.format(sender, channel))
+        msg = roast_str() if roast is None else roast
         if prefix is not None:
-            msg = prefix.rstrip() + ' ' + channel
+            msg = prefix.rstrip() + ' ' + msg
         msg = await channel.send(msg)
         self._log_roast(msg.id)
+        if last is not None:
+            self._last_roast = last
+        return True
 
     @commands.command(aliases=['burn'])
     async def roast(self, ctx, channel: str = None, guild: str = None):
@@ -56,8 +67,8 @@ class Roast(commands.Cog):
             channel = find_channel(guild, channel)
         else:
             channel = ctx.channel
-        self._last_roast = await channel.fetch_message(channel.last_message_id)
-        await self._send_roast(channel)
+        last = await channel.fetch_message(channel.last_message_id)
+        await self._send_roast(channel, parse_ignore=False, sender=ctx.author, last=last)
 
     @commands.command()
     async def nou(self, ctx, channel: str = None, guild: str = None):
@@ -74,7 +85,8 @@ class Roast(commands.Cog):
             channel = find_channel(guild, channel)
         else:
             channel = ctx.channel
-        await channel.send("NO U")
+        await self._send_roast(channel, parse_ignore=False, sender=ctx.author,
+                               roast="NO U")
 
     @commands.Cog.listener()
     async def on_raw_message_delete(self, payload):
@@ -109,11 +121,12 @@ class Roast(commands.Cog):
             return
         # if author in snipes
         try:
-            self._snipes[message.author.id] -= 1
+            if self._snipes[message.author.id] > 0:
+                if await self._send_roast(message.channel, last=message):
+                    self._snipes[message.author.id] -= 1
             if self._snipes[message.author.id] <= 0:
                 self._snipes.pop(message.author.id)
-            await message.channel.send(roast_str())
-            self._last_roast = message
+            return
         except KeyError:
             pass
         # set a trigger list for sending roasts
@@ -123,15 +136,13 @@ class Roast(commands.Cog):
             if not random.randrange(3):
                 logger.debug('Ignoring trigger')
                 return
-            await message.channel.send(roast_str())
-            self._last_roast = message
+            await self._send_roast(message.channel, last=message)
             return
         if '🍞' in message.content.strip():
             if random.randrange(3):
                 logger.debug('Ignoring trigger')
             else:
-                await message.channel.send(roast_str())
-                self._last_roast = message
+                await self._send_roast(message.channel, last=message)
                 return
         # respond to any form of REEE
         if re.match('^[rR]+[Ee][Ee]+$', message.content.strip()):
@@ -140,10 +151,9 @@ class Roast(commands.Cog):
                 logger.debug('Ignoring trigger')
                 return
             if r < 4:
-                await message.channel.send("NO U")
+                await self._send_roast(message.channel, last=message, roast="NO U")
             else:
-                await message.channel.send(roast_str())
-            self._last_roast = message
+                await self._send_roast(message.channel, last=message)
             return
         old = self._last_roast
         if old:
@@ -151,8 +161,9 @@ class Roast(commands.Cog):
             if message.author == old.author and message.channel == old.channel:
                 # if this message is < 1 min from the last one
                 if (message.created_at - old.created_at).total_seconds() < 120:
-                    if message.content.lower().strip() in ['omg', 'bruh']:
-                        await message.channel.send(roast_str())
+                    if (message.content.lower().strip() in ['omg', 'bruh']
+                            or re.findall('aaa+', message.content.lower())):
+                        await self._send_roast(message.channel)
                         self._last_roast = None
                         return
                     self._last_roast = None
@@ -168,11 +179,11 @@ class Roast(commands.Cog):
                         return
                     if not random.randrange(3):  # 1/3 prob
                         logger.debug('roast')
-                        await message.channel.send(roast_str())
+                        await self._send_roast(message.channel, last=message)
                     else:  # 2/3 prob
                         logger.debug('no u')
-                        await message.channel.send("NO U")
-                    self._last_roast = message
+                        await self._send_roast(message.channel, last=message,
+                                               roast="NO U")
                     return
                 # regex list of triggers
                 matches = ['your m[ao]m', 'shut it bot', 'aaa+']
@@ -182,14 +193,12 @@ class Roast(commands.Cog):
                         return
                     if re.findall(m, message.content.lower()):
                         logger.debug('Nemesis message matched "{:}"'.format(m))
-                        await message.channel.send(roast_str())
-                        self._last_roast = message
+                        await self._send_roast(message.channel, last=message)
                         return
                 # Roast nemesis with 1/30 probability
                 if not random.randrange(30):
                     logger.printv("Decided to roast nemesis.")
-                    await message.channel.send(roast_str())
-                    self._last_roast = message
+                    await self._send_roast(message.channel, last=message)
                     return
         # catch self._nemeses = None
         except TypeError:
