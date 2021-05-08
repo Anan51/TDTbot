@@ -102,7 +102,7 @@ _items = [Item("The Call", {"strength": 6, "spirit": 6, "wit": 6}, "Beckon a Tri
           Item("Boon of Light", {"strength": 1, "spirit": 3, "wit": 1}, "Makes any "
                "active trial slightly easier (stackable)."),
           Item("Mark of the Trial", {"strength": 2, "spirit": 2, "wit": 2}, "Adds "
-               "additional daily bounties for ALL Lone Wolves for a few hours.")
+               "additional daily challenges for ALL Lone Wolves for a few hours.")
           ]
 _items = {i.name: i for i in _items}
 
@@ -295,7 +295,7 @@ class Wilds(commands.Cog):
             await self.channel.send('**Bonus Bounties for {:}**'.format(date))
         else:
             date = now.strftime("%B %d, %Y")
-            await self.channel.send('**Daily Bounties for {:}**'.format(date))
+            await self.channel.send('**Daily Challenges for {:}**'.format(date))
         for c in _challenges:
             if c.name in ["Of Body", "Of Soul"]:
                 await c.send_multiple(self.channel, self._get_config(self.bot.user),
