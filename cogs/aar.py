@@ -10,12 +10,14 @@ from .. import param
 
 logger = logging.getLogger('discord.' + __name__)
 _tz = pytz.timezone(param.rc('timezone'))
+_day = datetime.timedelta(days=1)
 
 
 class AAR(commands.Cog):
     """Cog designed to handel Stellar's AAR, cause he's lazy"""
     def __init__(self, bot):
         self.bot = bot
+        self._last_post = None
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -29,6 +31,12 @@ class AAR(commands.Cog):
                 return
         except AttributeError:
             return
+        if 'aar' not in message.content.lower():
+            return
+        # if we posted an AAR in the last day, return
+        if self._last_post is not None:
+            if datetime.datetime.utcnow() - self._last_post < _day:
+                return
         # assign UTC timezone to message creation timestamp
         dt = pytz.utc.localize(message.created_at)
         # convert to server timezone
@@ -39,6 +47,7 @@ class AAR(commands.Cog):
         # Now it is time to print Stellar's AAR
         await message.channel.send("Stellar's AAR:")
         await git_log(message.channel)
+        self._last_post = datetime.datetime.utcnow()
 
 
 def setup(bot):
