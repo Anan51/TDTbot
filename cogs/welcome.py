@@ -11,7 +11,7 @@ logger = logging.getLogger('discord.' + __name__)
 _CoC_id = 563406038754394112
 
 
-async def send_welcome(member):
+async def send_welcome(member, channel=None, retry=None):
     """Sends welcome message to member"""
     msg = 'Greetings {0.name}! Part of my duties as TDTbot are to welcome ' \
           'newcomers to The Dream Team. \n\nSo welcome!\n\nWe have a few questions ' \
@@ -34,11 +34,19 @@ async def send_welcome(member):
           'Twitter: https://twitter.com/productions_tdt\n'\
           'Instagram: https://www.instagram.com/tdt_productions_\n'\
           'Patreon: https://www.patreon.com/TDTPatreon'
-    channel = member.dm_channel
-    if not channel:
-        await member.create_dm()
-        channel = member.dm_channel
-    await channel.send(msg.format(member))
+    try:
+        if channel is None:
+            channel = member.dm_channel
+            if not channel:
+                await member.create_dm()
+                channel = member.dm_channel
+        return await channel.send(msg.format(member))
+    except discord.Forbidden as e:
+        if retry is not None:
+            msg = '{:} I am unable to DM you so I am posting my standard welcome DM here.'
+            await retry.send(msg.format(member.mention))
+            return await retry.send(msg.format(member))
+        raise e
 
 
 class Welcome(commands.Cog):
@@ -86,7 +94,11 @@ class Welcome(commands.Cog):
         roles = " ".join([i.mention for i in roles if hasattr(i, 'mention')])
         if channel is not None:
             await channel.send('New member {0.name} joined.'.format(member))
-        await send_welcome(member)
+        retry = False
+        try:
+            await send_welcome(member)
+        except discord.Forbidden:
+            retry = True
         manual = self.manual_channel
         msg = "Welcome to TDT {0.mention} <a:blobDance:738431916910444644>" \
               " Please read my DM and look at the {1.mention}.".format(member, manual)
@@ -105,6 +117,8 @@ class Welcome(commands.Cog):
                 msg += "\nI've restored your " + ', '.join(roles) + ' role'
                 msg += 's.' if len(roles) > 1 else '.'
             await member.guild.system_channel.send(msg)
+        if retry:
+            await send_welcome(member, retry=member.guild.system_channel)
 
     @commands.command()
     async def send_welcome(self, ctx, member: discord.User = None):
