@@ -19,24 +19,6 @@ class Debugging(commands.Cog):
         return await admin_check(ctx)
 
     @commands.command()
-    async def RuntimeError(self, ctx):
-        """Raise a runtime error (because why not)"""
-        raise RuntimeError("Per user request")
-
-    @commands.command()
-    async def flush(self, ctx, n: int = 10):
-        """<n=10 (optional)> flushes stdout with n newlines"""
-        logger.printv('\n' * n)
-
-    @commands.command()
-    async def reboot(self, ctx):
-        """Reboots this bot"""
-        await ctx.send("Ok. I will reboot now.")
-        logger.printv('\nRebooting\n\n\n\n')
-        # This exits the bot loop, allowing __main__ loop to take over
-        await self.bot.loop.run_until_complete(await self.bot.logout())
-
-    @commands.command()
     async def channel_id(self, ctx, channel: discord.TextChannel = None, guild: str = None):
         """<channel (optional)> <server (optional)> sends random roast message"""
         if guild is None:
@@ -71,16 +53,10 @@ class Debugging(commands.Cog):
         await ctx.send('{0.name} has id {0.id}.'.format(member))
 
     @commands.command()
-    async def git_pull(self, ctx):
-        """Do a git pull on own code"""
-        git_manage.update()
-        await ctx.send("Pulled own code")
-
-    @commands.command()
     async def reload_cogs(self, ctx, option=None):
         """Reloads all cogs that were added as extensions"""
         if option == 'pull':
-            await self.git_pull(ctx)
+            git_manage.update()
         msg = 'Reloading ' + ', '.join([i.split('.')[-1] for i in self.bot.extensions])
         for i in self.bot.extensions:
             self.bot.reload_extension(i)
@@ -103,63 +79,8 @@ class Debugging(commands.Cog):
             await ctx.send("Param is empty.")
 
     @commands.command()
-    async def git_log(self, ctx, *args):
-        """Print git log to discord chat."""
-        return await git_log(ctx, *args)
-
-    @commands.group()
-    async def git(self, ctx):
-        """Base function for git sub commands"""
-        if ctx.invoked_subcommand is None:
-            await ctx.send('Invalid git command passed...')
-
-    @git.command()
-    async def pull(self, ctx):
-        """Alias for git_pull"""
-        await self.git_pull(ctx)
-
-    @git.command()
-    async def log(self, ctx):
-        """Alias for git_log"""
-        await self.git_log(ctx)
-
-    @commands.command()
     async def reload_extension(self, name):
         self.bot.reload_extension(name)
-
-    @commands.command()
-    async def speak(self, ctx, message, channel: discord.TextChannel = None, guild: str = None):
-        """Speak as the bot"""
-        if guild is None:
-            guild = ctx.guild
-        else:
-            try:
-                guild = [i for i in self.bot.guilds if i.name == guild][0]
-            except IndexError:
-                ctx.send('ERROR: server "{0}" not found.'.format(guild))
-                return
-        if channel:
-            channel = find_channel(guild, channel)
-        else:
-            channel = ctx.channel
-        await channel.send(message)
-
-    @commands.command()
-    async def print_roles(self, ctx, member: str = None, guild: str = None):
-        """<channel (optional)> <server (optional)> sends random roast message"""
-        if guild is None:
-            guild = ctx.guild
-        else:
-            try:
-                guild = [i for i in self.bot.guilds if i.name == guild][0]
-            except IndexError:
-                ctx.send('ERROR: server "{0}" not found.'.format(guild))
-                return
-        if member:
-            member = guild.get_member_named(member)
-        else:
-            member = ctx.author
-        print(member.roles)
 
     @commands.command()
     async def id_this(self, ctx):
@@ -219,44 +140,6 @@ class Debugging(commands.Cog):
             msg = "No history available."
         logger.printv(str(hist))
         await split_send(ctx, msg)
-
-    @commands.command()
-    @commands.check(admin_check)
-    async def clear_rxn(self, ctx, emote: str, msg_id: int = None,
-                        channel: discord.abc.Messageable = None):
-        """<emote> <message id (optional)> <channel (optional)>
-        Clear all of the specified reaction for the message
-
-        Can be used as a reply to a message, in this case:
-        <message id> defaults to the message that's being replied to.
-        <channel> defaults to the channel where this command was entered."""
-
-        ref = ctx.message.reference
-        try:
-            emote = int(emote)
-        except ValueError:
-            pass
-        if channel is None:
-            channel = ctx.channel
-        msg = None
-        if msg_id is not None:
-            msg = await channel.fetch_message(msg_id)
-        if msg is None and msg_id is None and ref:
-            if hasattr(ref, 'resolved'):
-                msg = ref.resolved
-            else:
-                channel = self.bot.find_channel(ref.channel_id)
-                if channel is None:
-                    channel = await self.bot.fetch_channel(ref.channel_id)
-                if channel is None:
-                    msg = ref
-                else:
-                    msg = await channel.fetch_message(ref.message_id)
-        if not msg:
-            raise ValueError("Cannot identify message.")
-        rxns = [rxn for rxn in msg.reactions if emotes_equal(emote, rxn.emoji)]
-        if rxns:
-            await rxns[0].clear()
 
 
 def setup(bot):
