@@ -18,7 +18,7 @@ class AdminTools(commands.Cog):
     """Cog designed for debugging the bot"""
     def __init__(self, bot):
         self.bot = bot
-        self.stickies = PermaDict()
+        self.stickies = PermaDict(_dbm)
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
@@ -131,7 +131,7 @@ class AdminTools(commands.Cog):
                 return
             for mid in self.stickies[message.channel.id]:
                 msg = await message.channel.fetch_message(mid)
-                msg = message.channel.send(msg.content, referece=msg.referece, 
+                msg = message.channel.send(msg.content, referece=msg.referece,
                                            mention_author=False)
                 self._rm_sticky(msg.id, msg.channel.id)
                 self._add_sticky(msg)
