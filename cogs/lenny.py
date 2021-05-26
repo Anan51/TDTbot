@@ -11,13 +11,13 @@ _emojis = ['👍', '💩']
 
 
 class Lenny(commands.Cog):
-    """Cog for trick or treat game"""
+    """Cog for Lenny Laboratory posts"""
     def __init__(self, bot):
         self.bot = bot
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        """Parse messages for new event post"""
+        """Parse messages for new memes and add reactions"""
         # ignore non-lenny channels
         if message.channel.id != _channel:
             return
@@ -39,6 +39,25 @@ class Lenny(commands.Cog):
                     for e in _emojis:
                         await message.add_reaction(e)
                     break
+
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self, payload):
+        """Count reactions and pin or delete based on counts"""
+        if payload.channel_id != _channel:
+            return
+        if not [emotes_equal(payload.emoji, e) for e in _emojis]:
+            return
+        channel = self.bot.get_channel(payload.channel_id)
+        msg = await channel.fetch_message(payload.message_id)
+        count = dict()
+        for rxn in msg.reactions:
+            for e in _emojis:
+                if emotes_equal(rxn.emoji, e):
+                    count[e] = rxn.count
+        if count[_emojis[1]] >= 20:
+            await msg.delete()
+        elif count[_emojis[0]] >= 100:
+            await msg.pin()
 
 
 def setup(bot):
