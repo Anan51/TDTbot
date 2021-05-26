@@ -34,9 +34,11 @@ class Lenny(commands.Cog):
             return
         data = parse_message(message)
         for i in data['type']:
-            if i.startswith('image/') or i.startswith('url'):
-                for e in _emojis:
-                    await message.add_reaction(e)
+            for kind in ['image/', 'video/', 'url']:
+                if i.startswith(kind):
+                    for e in _emojis:
+                        await message.add_reaction(e)
+                    break
 
 
 def setup(bot):
