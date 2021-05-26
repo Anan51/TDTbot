@@ -1,5 +1,6 @@
 import os
 import json
+import shelve
 
 _dir = os.path.split(os.path.realpath(__file__))[0]
 _config = os.path.join(_dir, 'config')
@@ -157,6 +158,37 @@ class Parameters(dict):
         else:
             self['roasts'] = lines
         return self['roasts']
+
+
+class PermaDict:
+    def __init__(self, fn):
+        self.fn = fn
+        self.file = shelve.open(fn)
+
+    def __del__(self):
+        self.file.sync()
+        self.file.close()
+
+    def __getitem__(self, key):
+        return self.file[str(key)]
+
+    def __setitem__(self, key, value):
+        self.file[str(key)] = value
+
+    def get(self, key, default):
+        return self.file.get(str(key), default)
+
+    def __contains__(self, item):
+        return str(item) in self.file
+
+    def keys(self):
+        return list(self.file.keys())
+
+    def items(self):
+        return self.file.items()
+
+    def delete(self, key):
+        del self.file[str(key)]
 
 
 rc = Parameters(copy=defaults)

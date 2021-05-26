@@ -1,18 +1,24 @@
 import discord
 from discord.ext import commands
+import os
 import logging
+import time
+from ..param import PermaDict
 from ..helpers import *
 from ..async_helpers import admin_check, git_log, split_send
 from .. import git_manage
 
 
 logger = logging.getLogger('discord.' + __name__)
+_dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
+_dbm = os.path.join(_dbm, 'config', 'admin_tools_sticky.dbm')
 
 
 class AdminTools(commands.Cog):
     """Cog designed for debugging the bot"""
     def __init__(self, bot):
         self.bot = bot
+        self.stickies = PermaDict()
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
@@ -79,6 +85,56 @@ class AdminTools(commands.Cog):
         else:
             channel = ctx.channel
         await channel.send(message)
+
+    def _add_sticky(self, msg):
+        self.stickies[msg.channel.id] = self.stickies.get(msg.channel.id, []) + [msg.id]
+
+    def _rm_sticky(self, message_id, channel_id):
+        self.stickies[channel_id].pop(message_id)
+        if not self.stickies[channel_id]:
+            self.stickies.delete(channel_id)
+
+    @commands.command()
+    async def sticky(self, ctx, message, channel: discord.TextChannel = None,
+                     reply: discord.Message = None):
+        if channel is None:
+            channel = ctx.channel
+        msg = channel.send(message, referece=reply, mention_author=False)
+        self._add_sticky(msg)
+
+    @commands.command(aliases=['wd40'])
+    async def unsticky(self, ctx, message: discord.Message = None):
+        if message is None:
+            ref = ctx.message.reference
+            self._remove_sticky(ref.message_id, ref.channel_id)
+        else:
+            self._remove_sticky(message.id, message.channel.id)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        sleep = False
+        if message.author == self.bot.user:
+            sleep = True
+        else:
+            try:
+                if message.content.startswith(self.bot.command_prefix):
+                    sleep = True
+            except TypeError:
+                for prefix in self.bot.command_prefix:
+                    if message.content.startswith(prefix):
+                        sleep = True
+                        break
+        if sleep:
+            time.sleep(1)
+        if message.channel.id in self.stickies:
+            if message.id in self.stickies[message.channel.id]:
+                return
+            for mid in self.stickies[message.channel.id]:
+                msg = await message.channel.fetch_message(mid)
+                msg = message.channel.send(msg.content, referece=msg.referece, 
+                                           mention_author=False)
+                self._rm_sticky(msg.id, msg.channel.id)
+                self._add_sticky(msg)
 
 
 def setup(bot):
