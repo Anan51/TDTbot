@@ -20,7 +20,7 @@ async def send_welcome(member, channel=None, retry=None):
           '1) How did you find out about TDT?\n' \
           '2) What games and platforms do you play?\n' \
           '3) Are you a YouTube subscriber?\n' \
-          '4) Are you a Patreon supporter?\n\n'\
+          '4) Are you a Patreon supporter, or a Twitch sub. If so, whats your account name??\n\n'\
           'If you\'re interested in learning wolf pack (see our #manual_page), ping ' \
           '@member, and if you want to send any feedback to the TDT admins then leave ' \
           'me a DM.\n\n'\
