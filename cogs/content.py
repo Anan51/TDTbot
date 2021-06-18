@@ -3,7 +3,7 @@ from discord.ext import commands
 import logging
 import os
 import requests
-import pytube
+from urllib import request
 from urllib.parse import urlparse, parse_qs
 from .. import param
 from ..param import PermaDict
@@ -14,7 +14,7 @@ logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'content_videos.dbm')
 _tdt_channel = "UCKBCsmU53MBzCm_wNZY7hLA"
-
+_channel_tag = '<meta itemprop="channelId" content="{}">'.format(_tdt_channel)
 
 # https://stackoverflow.com/a/67969583/2275975
 def ttv_streaming(channel='tdt_ttv'):
@@ -88,16 +88,13 @@ class Content(commands.Cog):
                     await self.channel.send('https://www.twitch.tv/tdt_ttv now streaming')
                 continue
             yt_id = extract_video_id(i)
-            if message.channel == self.channel:
-                msg = f"yt:{yt_id} | url:{i}"
-                await self.channel.send(msg)
             if yt_id:
-                yt = pytube.YouTube(i)
-                if message.channel == self.channel:
-                    msg = f"yt_channel:{yt.channel_id}"
-                    await self.channel.send(msg)
-                if yt.channel_id == _tdt_channel:
-                    await self.channel.send('watching ' + yt.url)
+                tdt_channel = False
+                with request.urlopen(i) as response:
+                    # set the correct charset below
+                    tdt_channel = _channel_tag in response.read().decode('utf-8')
+                if tdt_channel:
+                    await self.channel.send('watching ' + i)
                 continue
 
 
