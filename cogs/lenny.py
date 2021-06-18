@@ -49,7 +49,7 @@ class Lenny(commands.Cog):
             return
         channel = self.bot.get_channel(payload.channel_id)
         msg = await channel.fetch_message(payload.message_id)
-        count = dict()
+        count = {e: 0 for e in _emojis}
         for rxn in msg.reactions:
             for e in _emojis:
                 if emotes_equal(rxn.emoji, e):
