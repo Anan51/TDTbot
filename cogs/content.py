@@ -1,16 +1,14 @@
 import discord
 from discord.ext import commands
+import logging
 import os
 import requests
-import tweepy
 import pytube
 from urllib.parse import urlparse, parse_qs
 from .. import param
 from ..param import PermaDict
 from ..helpers import *
 from ..async_helpers import admin_check
-import logging
-
 
 logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
@@ -41,21 +39,31 @@ def extract_video_id(url):
         if query.path[:3] == '/v/': return query.path.split('/')[2]
         # below is optional for playlists
         if query.path[:9] == '/playlist': return parse_qs(query.query)['list'][0]
-   # returns None for invalid YouTube url
+    # returns None for invalid YouTube url
+
 
 # yt: https://pytube.io/en/latest/index.html
 # twitter: https://realpython.com/twitter-bot-python-tweepy/
+# psn: https://github_com.jam.dev/isFakeAccount/psnawp
 
 
 class Content(commands.Cog):
     """Cog designed for debugging the bot"""
+
     def __init__(self, bot):
         self.bot = bot
         self.videos = PermaDict(_dbm)
+        self._channel = None
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
         return await admin_check(ctx)
+
+    @property
+    def channel(self):
+        if self._channel is None:
+            self._channel = self.bot.find_channel(param.rc('log_channel'))
+        return self._channel
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -77,15 +85,19 @@ class Content(commands.Cog):
             # if twitch url is streaming
             if i == 'https://www.twitch.tv/tdt_ttv':
                 if ttv_streaming():
-                    channel = self.bot.find_channel(param.rc('log_channel'))
-                    await channel.send('https://www.twitch.tv/tdt_ttv now streaming')
+                    await self.channel.send('https://www.twitch.tv/tdt_ttv now streaming')
                 continue
             yt_id = extract_video_id(i)
+            if message.channel == self.channel:
+                msg = f"yt:{yt_id} | url:{i}"
+                await self.channel.send(msg)
             if yt_id:
                 yt = pytube.YouTube(i)
+                if message.channel == self.channel:
+                    msg = f"yt_channel:{yt.channel_id}"
+                    await self.channel.send(msg)
                 if yt.channel_id == _tdt_channel:
-                    channel = self.bot.find_channel(param.rc('log_channel'))
-                    await channel.send('watching ' + yt.url)
+                    await self.channel.send('watching ' + yt.url)
                 continue
 
 
