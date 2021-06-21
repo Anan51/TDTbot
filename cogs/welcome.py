@@ -66,12 +66,19 @@ class Welcome(commands.Cog):
         self.bot = bot
         self._last_member = None
         self._manual_channel = None
+        self._log_channel = None
 
     @property
     def manual_channel(self):
         if self._manual_channel is None:
             self._manual_channel = self.bot.find_channel("manual_page")
         return self._manual_channel
+
+    @property
+    def log_channel(self):
+        if self._log_channel is None:
+            self._log_channel = self.bot.find_channel("admin_log")
+        return self._log_channel
 
     async def fetch_coc(self):
         return await self.manual_channel.fetch_message(_CoC_id)
@@ -89,7 +96,7 @@ class Welcome(commands.Cog):
     async def on_member_join(self, member):
         """Alert admin type roles on new member joining"""
         logger.printv('New member {0.name} joined'.format(member))
-        channel = self.bot.find_channel(param.rc('log_channel'))
+        channel = self.log_channel
         roles = [find_role(member.guild, i) for i in ["Admin", "Devoted"]]
         roles = " ".join([i.mention for i in roles if hasattr(i, 'mention')])
         if channel is not None:
