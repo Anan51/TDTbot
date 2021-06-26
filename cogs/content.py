@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import datetime
 import logging
 import os
 import requests
@@ -9,12 +10,16 @@ from .. import param
 from ..param import PermaDict
 from ..helpers import *
 from ..async_helpers import admin_check
+from ..twitter import tweet
 
 logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'content_videos.dbm')
 _tdt_channel = "UCKBCsmU53MBzCm_wNZY7hLA"
 _channel_tag = '<meta itemprop="channelId" content="{}">'.format(_tdt_channel)
+_month = 30*24*60*60
+_ttv_cooldown = datetime.timedelta(minutes=5)
+
 
 # https://stackoverflow.com/a/67969583/2275975
 def ttv_streaming(channel='tdt_ttv'):
@@ -42,7 +47,6 @@ def extract_video_id(url):
     # returns None for invalid YouTube url
 
 
-# yt: https://pytube.io/en/latest/index.html
 # twitter: https://realpython.com/twitter-bot-python-tweepy/
 # psn: https://github_com.jam.dev/isFakeAccount/psnawp
 
@@ -54,6 +58,7 @@ class Content(commands.Cog):
         self.bot = bot
         self.videos = PermaDict(_dbm)
         self._channel = None
+        self._ttv_cooldown = None
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
@@ -64,6 +69,17 @@ class Content(commands.Cog):
         if self._channel is None:
             self._channel = self.bot.find_channel(param.rc('log_channel'))
         return self._channel
+
+    def _add_yt_id(self, yt_id):
+        """Add YouTube ID to video is not already there and clear old videos"""
+        if yt_id in self.videos:
+            return False
+        now = int_time(datetime.datetime.utcnow())
+        self.videos[yt_id] = now
+        del_list = [i for i in self.videos if self.videos[i] < now - _month]
+        for i in del_list:
+            self.videos.pop(i)
+        return True
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -85,7 +101,13 @@ class Content(commands.Cog):
             # if twitch url is streaming
             if i == 'https://www.twitch.tv/tdt_ttv':
                 if ttv_streaming():
+                    now = datetime.datetime.utcnow()
+                    if self._ttv_cooldown is not None:
+                        if self._ttv_cooldown > now:
+                            continue
                     await self.channel.send('https://www.twitch.tv/tdt_ttv now streaming')
+                    tweet(i)
+                    self._ttv_cooldown = now + _ttv_cooldown
                 continue
             yt_id = extract_video_id(i)
             if yt_id:
@@ -94,7 +116,9 @@ class Content(commands.Cog):
                     # set the correct charset below
                     tdt_channel = _channel_tag in response.read().decode('utf-8')
                 if tdt_channel:
-                    await self.channel.send('watching ' + i)
+                    if self._add_yt_id(yt_id):
+                        await self.channel.send('watching ' + i)
+                        tweet(i)
                 continue
 
 
