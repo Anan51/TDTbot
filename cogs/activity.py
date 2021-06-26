@@ -13,17 +13,9 @@ from ..async_helpers import *
 logger = logging.getLogger('discord.' + __name__)
 _days_inactive = 14
 _limit = 5000
-_epoch = datetime.datetime(2000, 1, 1)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'activity.dbm')
-
-
-def _int_time(in_time=None, epoch=None):
-    if in_time is None:
-        in_time = datetime.datetime.utcnow()
-    if epoch is None:
-        epoch = _epoch
-    return int((in_time - epoch).total_seconds())
+_epoch = epoch
 
 
 class _ActivityFile:

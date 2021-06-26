@@ -1,5 +1,9 @@
 from .param import rc as _rc
 import re
+import datetime
+
+
+epoch = datetime.datetime(2000, 1, 1)
 
 
 def find_channel(guild, channel=None):
@@ -120,3 +124,11 @@ def emotes_equal(a, b):
             except (ValueError, TypeError):
                 pass
     return False
+
+
+def int_time(in_time=None, t0=None):
+    if in_time is None:
+        in_time = datetime.datetime.utcnow()
+    if t0 is None:
+        t0 = epoch
+    return int((in_time - t0).total_seconds())
