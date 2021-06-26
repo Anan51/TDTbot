@@ -46,7 +46,7 @@ class _ActivityFile:
         return self.file.items()
 
     def update_activity(self, user_id, in_time=None):
-        now = _int_time(in_time=in_time)
+        now = int_time(in_time=in_time)
         user_id = str(int(user_id))
         if user_id in self:
             try:
@@ -60,7 +60,7 @@ class _ActivityFile:
         if dt is None:
             dt = datetime.timedelta(days=_days_inactive)
         dt = int(dt.total_seconds())
-        now = _int_time()
+        now = int_time()
         if return_dict:
             return {int(i): self.file.get(i, 0) for i in self.file
                     if now - self.file.get(i, 0) > dt}
