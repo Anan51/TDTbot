@@ -52,6 +52,10 @@ class Roast(commands.Cog):
             self._last_roast = last
         return True
 
+    async def cog_check(self, ctx):
+        """Don't allow everyone to access this cog"""
+        return await admin_check(ctx)
+
     @commands.command(aliases=['burn'])
     async def roast(self, ctx, channel: discord.TextChannel = None, guild: str = None):
         """<channel (optional)> <server (optional)> sends random roast message"""
