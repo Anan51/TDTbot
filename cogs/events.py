@@ -13,6 +13,13 @@ from ..async_helpers import admin_check, wait_until
 
 
 logger = logging.getLogger('discord.' + __name__)
+_prototype = "**<Prototype Event Name>**\n"\
+             "What: <a bots example event>\n"\
+             "Who: <@TDTbot>\n"\
+             "When: <Sunday at 4:20pm PT>\n"\
+             "React with <insert emoji> to reserve your spot.\n"\
+             "(all times will be counted in Pacific Timezone)\n"\
+             "(don't include the <> characters in your post)"
 
 
 class _Event(dict):
@@ -436,11 +443,7 @@ class Events(commands.Cog):
     @commands.check(admin_check)
     async def clear_events(self, ctx):
         await self.channel.purge(limit=200)
-        msg = '**<Prototype Event Name>**\n' \
-              'What: <a name or short description>\n' \
-              'Who: <Who can join or role mention>\n' \
-              'When: <time and day of week in PST only>\n' \
-              'React with <some emoji> to reserve your spot.'
+        msg = _prototype
         msg = await self.channel.send('```' + msg + '```')
         emoji = 'rebel_skuratnum_200x200'
         try:
