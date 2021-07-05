@@ -442,16 +442,32 @@ class Events(commands.Cog):
     @commands.command()
     @commands.check(admin_check)
     async def clear_events(self, ctx):
-        await self.channel.purge(limit=200)
-        msg = _prototype
-        msg = await self.channel.send('```' + msg + '```')
-        emoji = 'rebel_skuratnum_200x200'
-        try:
-            rxn = [e for e in self.channel.guild.emojis if e.name == emoji][0]
-            if rxn:
-                await msg.add_reaction(rxn)
-        except IndexError:
-            pass
+        before = None
+        ref = ctx.message.reference
+        if ref:
+            if hasattr(ref, 'resolved'):
+                msg = ref.resolved
+            else:
+                channel = self.bot.find_channel(ref.channel_id)
+                if channel is None:
+                    channel = await self.bot.fetch_channel(ref.channel_id)
+                if channel is None:
+                    msg = ref
+                else:
+                    msg = await channel.fetch_message(ref.message_id)
+            before = msg.created_at
+        await self.channel.purge(limit=200, before=before)
+        if before is None:
+            msg = _prototype
+            msg = await self.channel.send('```' + msg + '```')
+            emoji = 'rebel_skuratnum_200x200'
+            try:
+                rxn = [e for e in self.channel.guild.emojis if e.name == emoji][0]
+                if rxn:
+                    await msg.add_reaction(rxn)
+            except IndexError:
+                pass
+            return
 
     @commands.command()
     async def traitor(self, ctx, n: int = 1, multi: bool = False):
