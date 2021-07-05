@@ -441,8 +441,13 @@ class Events(commands.Cog):
 
     @commands.command()
     @commands.check(admin_check)
-    async def clear_events(self, ctx):
+    async def clear_events(self, ctx, limit: int = 200):
+        """<limit=200 (optional)> Clear the events channel.
+        "limit" sets the max number of messages deleted.
+        If this command is used as a reply then it will clear messages before that message
+        """
         before = None
+        check = None
         ref = ctx.message.reference
         if ref:
             if hasattr(ref, 'resolved'):
@@ -456,7 +461,15 @@ class Events(commands.Cog):
                 else:
                     msg = await channel.fetch_message(ref.message_id)
             before = msg.created_at
-        await self.channel.purge(limit=200, before=before)
+
+            def purge_check(message):
+                if message.author != self.bot.user:
+                    return True
+                return message.content != _prototype
+
+            check = purge_check
+
+        await self.channel.purge(limit=limit, before=before, check=check)
         if before is None:
             msg = _prototype
             msg = await self.channel.send('```' + msg + '```')
@@ -468,6 +481,9 @@ class Events(commands.Cog):
             except IndexError:
                 pass
             return
+        if ctx.channel == self.channel:
+            await asyncio.sleep(5)
+            await ctx.message.delete()
 
     @commands.command()
     async def traitor(self, ctx, n: int = 1, multi: bool = False):
