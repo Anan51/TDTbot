@@ -98,7 +98,12 @@ def parse_filetype(filepath: str):
 def parse_message(message):
     out = dict()
     out['urls'] = [i for i in message.content.split(' ') if valid_url(i)]
-    out['attachments'] = [[i] + parse_filetype(i.filename) for i in message.attachments]
+    try:
+        out['attachments'] = [[i] + parse_filetype(i.filename) for i in message.attachments]
+    except TypeError as e:
+        print(str(message.attachments))
+        print(str([parse_filetype(i.filename) for i in message.attachments]))
+        raise e
     out['content'] = message.content
     _type = []
     if out['urls']:
