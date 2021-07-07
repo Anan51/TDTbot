@@ -9,7 +9,7 @@ from urllib.parse import urlparse, parse_qs
 from .. import param
 from ..param import PermaDict
 from ..helpers import *
-from ..async_helpers import admin_check
+from ..async_helpers import admin_check, split_send
 from ..twitter import tweet
 
 logger = logging.getLogger('discord.' + __name__)
@@ -122,6 +122,17 @@ class Content(commands.Cog):
                         await self.channel.send('watching ' + i)
                         tweet(i)
                 continue
+
+    @commands.command()
+    async def clear_yt_data(self, ctx):
+        keys = self.videos.keys()
+        for key in keys:
+            self.videos.delete(key)
+
+    @commands.command()
+    async def print_yt_data(self, ctx):
+        lines = ["{}: {}".format(*i) for i in self.videos.items()]
+        await split_send(ctx, lines, style='```')
 
 
 def setup(bot):
