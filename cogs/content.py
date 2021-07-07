@@ -111,10 +111,12 @@ class Content(commands.Cog):
                 continue
             yt_id = extract_video_id(i)
             if yt_id:
+                logger.printv('yt: {} {}'.format(i, yt_id))
                 tdt_channel = False
                 with request.urlopen(i) as response:
                     # set the correct charset below
                     tdt_channel = _channel_tag in response.read().decode('utf-8')
+                logger.printv('yt channel: {}'.format(tdt_channel))
                 if tdt_channel:
                     if self._add_yt_id(yt_id):
                         await self.channel.send('watching ' + i)
