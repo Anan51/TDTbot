@@ -16,7 +16,7 @@ defaults = {
                         722927617740767344,  # wator
                         527171804851339274,  # potto
                         ],
-    'add_bots':        ['Nowwut#4292'],
+    'add_bots':        [],
     'ignore_list':     ['lfg', 'lenny_laboratory', 'manual_page',
                         'tdt_events', 'devoted_chat'],
     'event_channel':   'tdt_events',
