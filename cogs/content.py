@@ -22,7 +22,7 @@ _ttv_cooldown = datetime.timedelta(minutes=5)
 
 
 # https://stackoverflow.com/a/67969583/2275975
-def ttv_streaming(channel='tdt_ttv'):
+def ttv_streaming(channel='tdt_streams'):
     contents = requests.get('https://www.twitch.tv/' + channel).content.decode('utf-8')
     return 'isLiveBroadcast' in contents
 
