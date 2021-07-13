@@ -76,7 +76,7 @@ class Content(commands.Cog):
             return False
         now = int_time(datetime.datetime.utcnow())
         self.videos[yt_id] = now
-        del_list = [i for i in self.videos if self.videos[i] < now - _month]
+        del_list = [i for i in self.videos.keys() if self.videos[i] < now - _month]
         for i in del_list:
             self.videos.pop(i)
         return True
