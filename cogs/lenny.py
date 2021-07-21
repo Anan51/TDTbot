@@ -58,6 +58,7 @@ class Lenny(commands.Cog):
             await msg.delete()
         elif count[_emojis[0]] >= 21:
             await msg.pin()
+            await msg.add_reaction("🌶️")
 
 
 def setup(bot):
