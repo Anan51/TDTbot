@@ -54,9 +54,9 @@ class Lenny(commands.Cog):
             for e in _emojis:
                 if emotes_equal(rxn.emoji, e):
                     count[e] = rxn.count
-        if count[_emojis[1]] >= 10:
+        if count[_emojis[1]] >= 6:
             await msg.delete()
-        elif count[_emojis[0]] >= 10:
+        elif count[_emojis[0]] >= 21:
             await msg.pin()
 
 
