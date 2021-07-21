@@ -19,11 +19,24 @@ _tdt_channel = "UCKBCsmU53MBzCm_wNZY7hLA"
 _channel_tag = '<meta itemprop="channelId" content="{}">'.format(_tdt_channel)
 _month = 30*24*60*60
 _ttv_cooldown = datetime.timedelta(minutes=5)
+_ttv_channel = 'tdt_streams'
+_ttv_root = 'https://www.twitch.tv/'
+# general_chat, content_hub, shaxxs_lodge
+_listening_channels = [867464907266719754, 867464907266719754, 867464907266719754]
+
+
+def twitch_url(channel=None):
+    if channel is None:
+        channel = _ttv_channel
+    if '/' in channel:
+        return channel
+    else:
+        return _ttv_root + channel
 
 
 # https://stackoverflow.com/a/67969583/2275975
-def ttv_streaming(channel='tdt_streams'):
-    contents = requests.get('https://www.twitch.tv/' + channel).content.decode('utf-8')
+def ttv_streaming(channel=None):
+    contents = requests.get(twitch_url(channel)).content.decode('utf-8')
     return 'isLiveBroadcast' in contents
 
 
@@ -84,6 +97,9 @@ class Content(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         """Parse messages for new memes and add reactions"""
+        # ignore messages outside listening_channels
+        if message.channel.id not in _listening_channels:
+            return
         # ignore commands
         try:
             if message.content.startswith(self.bot.command_prefix):
@@ -97,23 +113,20 @@ class Content(commands.Cog):
             return
         data = parse_message(message)
         for i in data['urls']:
-            i = i.rstrip('/')
+            i = i.rstrip('/').strip()
             # if twitch url is streaming
-            if i == 'https://www.twitch.tv/tdt_ttv':
-                if ttv_streaming():
+            if i == twitch_url():
+                if ttv_streaming(i):
                     now = datetime.datetime.utcnow()
                     if self._ttv_cooldown is not None:
                         if self._ttv_cooldown > now:
                             continue
-                    await self.channel.send('https://www.twitch.tv/tdt_ttv now streaming')
+                    await self.channel.send(i + ' now streaming')
                     tweet(i)
                     self._ttv_cooldown = now + _ttv_cooldown
                 continue
             yt_id = extract_video_id(i)
             if yt_id:
-                # ignore messages not from content_hub channel
-                if message.channel.id == 782901700990074910:
-                    return
                 tdt_channel = False
                 with request.urlopen(i) as response:
                     # set the correct charset below
