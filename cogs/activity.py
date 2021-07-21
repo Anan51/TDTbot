@@ -148,7 +148,7 @@ class Activity(commands.Cog):
                             data[key] = msg.created_at
             except discord.Forbidden:
                 # We do not have permission to read this channel's history
-                logger.printv("Cannot read channel {0}.".format(channel))
+                logger.debug("Cannot read channel {0}.".format(channel))
         # make sure we have data for each member
         for member in members:
             key = member
@@ -160,7 +160,7 @@ class Activity(commands.Cog):
                     data[key] = member.joined_at
                 else:
                     data[key] = old_af
-                    print('old af: {}'.format(member))
+                    logger.debug('old af: {}'.format(member))
         if save is None and self._cached_search is None:
             save = True
         if save:

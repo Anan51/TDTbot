@@ -381,7 +381,7 @@ class Events(commands.Cog):
             async for i in channel.history(after=after, limit=200):
                 if i.author != self.bot.user:
                     await self.enroll_event_if_valid(_Event(i, self, from_hist=True))
-            logger.printv('History parsed.')
+            logger.debug('History parsed.')
             self._hist_checked = True
         except AttributeError as e:
             logger.error('FAILURE in check_history:\n' + str(e))
