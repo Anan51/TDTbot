@@ -4,7 +4,6 @@ import sys
 import time
 import tracemalloc
 from . import log_init
-from . import param, bot, git_manage, reloader
 
 # for traceback info to debug
 tracemalloc.start()
@@ -39,6 +38,7 @@ reissue, startup = None, None
 # while it takes more than 5 second to complete this loop
 while time.time() - now > 5:
     now = time.time()
+    from . import param, bot, git_manage, reloader
     # init param
     param.rc.read_config(args.config)
     token = param.rc.read_token(args.token)
@@ -49,7 +49,7 @@ while time.time() - now > 5:
     log_init.init_logging(**kwargs)
 
     # init bot
-    tdt_bot = bot.MainBot()
+    tdt_bot = bot.MainBot(reissue=reissue, startup=startup)
     try:
         # start bot loop
         tdt_bot.run(token)
@@ -71,4 +71,5 @@ while time.time() - now > 5:
         importlib.reload(git_manage)
         importlib.reload(reloader)
         importlib.reload(bot)
+    del param, bot, git_manage, reloader
     logger.printv("End of loop.")

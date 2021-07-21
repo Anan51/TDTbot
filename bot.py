@@ -5,6 +5,7 @@ from discord.ext import commands
 from glob import glob
 import logging
 import os
+import pytz
 import sys
 import traceback
 from . import param
@@ -56,16 +57,21 @@ class MainBot(commands.Bot):
                                         type=discord.ActivityType.listening)
             await self.change_presence(activity=activity)
             if self.reissue is not None:
-                now = datetime.datetime.now()
+                logger.printv('Reissue detected.')
+                now = pytz.utc.localize(datetime.datetime.now())
+                await asyncio.sleep(1)
                 hour, week = helpers.hour, helpers.week
                 look_back = min(now - hour, self.startup, git_manage.last_updated())
                 log = git_manage.git_log_items(look_back=max(look_back, now - week))
+                logger.printv('Reboot complete.')
+                channel = self.find_channel(self.reissue.channel.id)
                 if log:
-                    await self.reissue.send("Reboot complete. Git updates detected:")
-                    await async_helpers.split_send(self.reissue, log, style='```')
+                    await channel.send("Reboot complete. Git updates detected:")
+                    await async_helpers.split_send(channel, log, style='```')
                 else:
-                    await self.reissue.send("Reboot complete.")
-            self.startup = datetime.datetime.now()
+                    await channel.send("Reboot complete.")
+            self.reissue = None
+            self.startup = pytz.utc.localize(datetime.datetime.now())
 
         @self.event
         async def on_command_error(ctx, error):
@@ -85,7 +91,7 @@ class MainBot(commands.Bot):
         if type(channel) == int:
             out = self.get_channel(channel)
             if out is not None:
-                return
+                return out
             for guild in self.guilds:
                 out = guild.get_channel(channel)
                 if out is not None:

@@ -21,12 +21,12 @@ def update(repo=None):
 def git_log_items(repo=None, look_back=None):
     """Returns a list of formatted git log items. "repo" defaults to this one.
     "look_back" (datetime) defaults to 7 days ago"""
+    now = pytz.utc.localize(datetime.datetime.utcnow())
     if repo is None:
         repo = own_repo
     if look_back is None:
         look_back = datetime.timedelta(days=7)
     if isinstance(look_back, datetime.timedelta):
-        now = pytz.utc.localize(datetime.datetime.utcnow())
         look_back = now - abs(look_back)
     # only print items from the last week
     items = [i for i in repo.iter_commits() if i.committed_datetime > look_back]
@@ -43,4 +43,4 @@ def git_log_items(repo=None, look_back=None):
 def last_updated(repo=None):
     if repo is None:
         repo = own_repo
-    return datetime.datetime.fromtimestamp(repo.head.committed_date)
+    return repo.head.commit.committed_datetime
