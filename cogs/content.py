@@ -111,6 +111,9 @@ class Content(commands.Cog):
                 continue
             yt_id = extract_video_id(i)
             if yt_id:
+                # ignore messages not from content_hub channel
+                if message.channel.id == 782901700990074910:
+                    return
                 tdt_channel = False
                 with request.urlopen(i) as response:
                     # set the correct charset below
