@@ -66,6 +66,7 @@ class AdminTools(commands.Cog):
         """Reboots this bot"""
         await ctx.send("Ok. I will reboot now.")
         logger.printv('\nRebooting\n\n\n\n')
+        self.bot.reissue = ctx
         # This exits the bot loop, allowing __main__ loop to take over
         await self.bot.loop.run_until_complete(await self.bot.logout())
 

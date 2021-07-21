@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import discord
 from discord.ext import commands
 from glob import glob
@@ -8,6 +9,8 @@ import sys
 import traceback
 from . import param
 from . import helpers
+from . import async_helpers
+from . import git_manage
 from .config.users import get_all_user_config_files, UserConfig
 
 
@@ -23,7 +26,9 @@ def cog_list():
 
 class MainBot(commands.Bot):
     """The class that is the TDTbot"""
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, reissue=None, startup=None, **kwargs):
+        self.reissue = reissue
+        self.startup = datetime.datetime.now() if startup is None else startup
         # set some defaults for the bot
         if 'intents' not in kwargs:
             kwargs['intents'] = intents
@@ -50,6 +55,17 @@ class MainBot(commands.Bot):
             activity = discord.Activity(name='your suggestions and issues, DM me',
                                         type=discord.ActivityType.listening)
             await self.change_presence(activity=activity)
+            if self.reissue is not None:
+                now = datetime.datetime.now()
+                hour, week = helpers.hour, helpers.week
+                look_back = min(now - hour, self.startup, git_manage.last_updated())
+                log = git_manage.git_log_items(look_back=max(look_back, now - week))
+                if log:
+                    await self.reissue.send("Reboot complete. Git updates detected:")
+                    await async_helpers.split_send(self.reissue, log, style='```')
+                else:
+                    await self.reissue.send("Reboot complete.")
+            self.startup = datetime.datetime.now()
 
         @self.event
         async def on_command_error(ctx, error):

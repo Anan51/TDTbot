@@ -1,4 +1,5 @@
 import argparse
+import importlib
 import sys
 import time
 import tracemalloc
@@ -34,6 +35,7 @@ args = parser.parse_args()
 
 now = 0
 logger = log_init.logger
+reissue, startup = None, None
 # while it takes more than 5 second to complete this loop
 while time.time() - now > 5:
     now = time.time()
@@ -61,7 +63,12 @@ while time.time() - now > 5:
         git_manage.update()
     except Exception as e:
         logger.error(e)
+    reissue, startup = tdt_bot.reissue, tdt_bot.startup
     # reload all packages
-    reloader.reload_package(sys.modules[__name__])
-    reloader.reload_package(sys.modules[__name__])
+    for i in range(2):
+        reloader.reload_package(sys.modules[__name__])
+        importlib.reload(param)
+        importlib.reload(git_manage)
+        importlib.reload(reloader)
+        importlib.reload(bot)
     logger.printv("End of loop.")
