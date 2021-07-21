@@ -27,6 +27,8 @@ class _Event(dict):
     def __init__(self, message, cog, log_channel=None, from_hist=False):
         super().__init__()
         self.cog = cog
+        if message.author == cog.bot.user:
+            return
         self._error = None
         # start parsing message for event info
         lines = [i.strip() for i in message.content.split('\n')]
@@ -377,7 +379,8 @@ class Events(commands.Cog):
         after = datetime.datetime.utcnow() - datetime.timedelta(days=6, hours=23)
         try:
             async for i in channel.history(after=after, limit=200):
-                await self.enroll_event_if_valid(_Event(i, self, from_hist=True))
+                if i.author != self.bot.user:
+                    await self.enroll_event_if_valid(_Event(i, self, from_hist=True))
             logger.printv('History parsed.')
             self._hist_checked = True
         except AttributeError as e:
