@@ -21,8 +21,8 @@ _month = 30*24*60*60
 _ttv_cooldown = datetime.timedelta(minutes=5)
 _ttv_channel = 'tdt_streams'
 _ttv_root = 'https://www.twitch.tv/'
-# general_chat, content_hub, shaxxs_lodge
-_listening_channels = [867464907266719754, 867464907266719754, 867464907266719754,
+# general_chat, content_hub, shaxxs_lodge, debugging
+_listening_channels = [867464907266719754, 782901700990074910, 867464907266719754,
                        721427624483749991]
 
 
