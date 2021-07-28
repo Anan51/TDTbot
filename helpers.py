@@ -56,7 +56,7 @@ def valid_url(url):
     return re.match(_regex, url) is not None
 
 
-def parse_filetype(filepath: str):
+def parse_filetype(filepath: str, force_list=True):
     _types = dict(jpg="image/jpeg",
                   jpeg="image/jpeg",
                   jpx="image/jpx",
@@ -95,13 +95,16 @@ def parse_filetype(filepath: str):
         for ext in _types:
             if filepath.endswith(ext):
                 return [ext, _types[ext]]
+    if force_list:
+        return []
 
 
 def parse_message(message):
     out = dict()
     out['urls'] = [i for i in message.content.split(' ') if valid_url(i)]
     try:
-        out['attachments'] = [[i] + parse_filetype(i.filename) for i in message.attachments]
+        out['attachments'] = [[i] + parse_filetype(i.filename, force_list=True)
+                              for i in message.attachments]
     except TypeError as e:
         print(str(message.attachments))
         print(str([parse_filetype(i.filename) for i in message.attachments]))
