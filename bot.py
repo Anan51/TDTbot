@@ -144,7 +144,10 @@ class MainBot(commands.Bot):
             try:
                 await member.add_roles(role)
                 return role
-            except AttributeError:
+            except AttributeError as e:
                 logger.printv('Role attr err: {}->{}'.format(key, role))
+                logger.printv('      member : "{}"'.format(member))
+                logger.printv(payload)
+                logger.printv(e)
         elif len(keys) > 1:
             logger.printv('Multiple matches: {}'.format({i: emoji_dict[i] for i in keys}))
