@@ -2,9 +2,12 @@ import asyncio
 import datetime
 import discord
 import humanize
+import logging
 import pytz
 import time
 from . import git_manage
+
+logger = logging.getLogger('discord.' + __name__)
 
 
 async def split_send(channel, message, deliminator='\n', n=2000, style=''):
@@ -40,7 +43,7 @@ async def admin_check(ctx=None, bot=None, author=None, guild=None):
         author = ctx.author
     if guild is None:
         guild = ctx.guild
-    print('admin_check', author, author.top_role)
+    logger.debug('admin_check', author, author.top_role)
     if author.top_role.name in ['Admin', 'Devoted']:
         return True
     if guild is not None:

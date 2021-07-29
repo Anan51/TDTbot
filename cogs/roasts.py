@@ -175,7 +175,7 @@ class Roast(commands.Cog):
         # if the nemesis of this bot posts a non command message
         try:
             if message.author.id in self._nemeses:
-                logger.printv('Nemesis: {0.author}'.format(message))
+                logger.debug('Nemesis: {0.author}'.format(message))
                 # if nemesis posts boomer type word
                 if re.findall('[bz]oome[rt]', message.content.lower()):
                     logger.debug('[bz]oome[rt]')
