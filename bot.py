@@ -149,3 +149,11 @@ class MainBot(commands.Bot):
                 logger.printv('Role attr err: {}->{}->{}'.format(key, role0, role))
         elif len(keys) > 1:
             logger.printv('Multiple matches: {}'.format({i: emoji_dict[i] for i in keys}))
+
+    def restart_time(self):
+        t = self.startup
+        try:
+            t = max(t, pytz.utc.localize(self.reissue.message.created_at))
+        except AttributeError:
+            pass
+        return t

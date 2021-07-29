@@ -169,6 +169,16 @@ class _Event(dict):
         async for msg in log_channel.history(limit=200, after=after):
             if msg.content == log:
                 return
+        # if we are registering this event from history
+        if self.from_hist:
+            msg = await self.message()
+            # if this message was edited more than 10 min after creation
+            if msg.edited_at > msg.created_at + 10 * minute:
+                t = pytz.utc.localize(msg.created_at + 1 * day)
+                # and the event post/message is more than a day older then reboot
+                if self.cog.bot.restart_time() > t:
+                    # exit and don't post log
+                    return
         await self.log_channel.send(log)
 
     def future_or_active(self, hours=6):
