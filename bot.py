@@ -140,14 +140,12 @@ class MainBot(commands.Bot):
         keys = [i for i in emoji_dict if helpers.emotes_equal(i, emoji)]
         if len(keys) == 1:
             key = keys[0]
-            role = helpers.find_role(guild, emoji_dict[key])
+            role0 = emoji_dict[key]
+            role = helpers.find_role(guild, role0)
             try:
                 await member.add_roles(role)
                 return role
             except AttributeError as e:
-                logger.printv('Role attr err: {}->{}'.format(key, role))
-                logger.printv('      member : "{}"'.format(member))
-                logger.printv(payload)
-                logger.printv(e)
+                logger.printv('Role attr err: {}->{}->{}'.format(key, role0, role))
         elif len(keys) > 1:
             logger.printv('Multiple matches: {}'.format({i: emoji_dict[i] for i in keys}))
