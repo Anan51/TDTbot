@@ -187,6 +187,18 @@ class Activity(commands.Cog):
         await split_send(ctx, msg, style='```')
 
     @commands.command()
+    @commands.check(admin_check)
+    async def set_activity_debug(self, ctx):
+        self._debug = True
+        await ctx.send("Activity cog now in debugging mode.")
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def unset_activity_debug(self, ctx):
+        self._debug = False
+        await ctx.send("Activity cog now in normal mode.")
+
+    @commands.command()
     async def purge(self, ctx, role: discord.Role = None):
         """<role (optional)> shows members that have been inactive for over a week."""
         if self._debug:
