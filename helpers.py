@@ -4,8 +4,11 @@ import datetime
 
 
 epoch = datetime.datetime(2000, 1, 1)
+minute = datetime.timedelta(seconds=60)
 hour = datetime.timedelta(seconds=3600)
+day = datetime.timedelta(days=1)
 week = datetime.timedelta(days=7)
+month = datetime.timedelta(days=30)
 
 
 def find_channel(guild, channel=None):
