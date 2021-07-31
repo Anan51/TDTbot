@@ -243,8 +243,6 @@ class Activity(commands.Cog):
             await m.remove_roles(*roles, reason='Inactivity')
         date = dt.date().isoformat()
         if not debug:
-            m = await m.guild.fetch_member(m.id)
-            print(m.roles)
             return '{0.display_name} demoted (last active {1})'.format(m, date)
         else:
             return '{0.display_name} (not) demoted (last active {1})'.format(m, date)
