@@ -216,7 +216,7 @@ class Activity(commands.Cog):
 
         for i in items:
             if i[0].top_role == recruit:
-                output.append(await self._demote(*i, debug=True))
+                output.append(await self._demote(*i))
             elif i[0].top_role <= recruit:
                 if i[0].top_role.name not in ['Lone Wolf'] and not i[0].bot:
                     lowers.append(i)
