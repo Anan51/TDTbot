@@ -242,7 +242,13 @@ class Activity(commands.Cog):
         if not debug:
             await m.remove_roles(*roles, reason='Inactivity')
         date = dt.date().isoformat()
-        return '{0.display_name} demoted (last active {1})'.format(m, date)
+        if not debug:
+            m = await m.guild.fetch_member(m.id)
+            print(m.roles)
+            return '{0.display_name} demoted (last active {1})'.format(m, date)
+        else:
+            return '{0.display_name} (not) demoted (last active {1})'.format(m, date)
+
 
     async def _prompt_kick(self, m, dt, channel=None):
         if channel is None:
