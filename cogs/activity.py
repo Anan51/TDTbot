@@ -247,7 +247,6 @@ class Activity(commands.Cog):
         else:
             return '{0.display_name} (not) demoted (last active {1})'.format(m, date)
 
-
     async def _prompt_kick(self, m, dt, channel=None):
         if channel is None:
             channel = self.bot.find_channel(param.rc('log_channel'))
