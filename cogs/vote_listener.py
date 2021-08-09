@@ -67,7 +67,7 @@ class Listener:
                 await msg.add_reaction(self.react_with)
 
 
-class Lenny(commands.Cog):
+class VoteListener(commands.Cog):
     """Cog for Lenny Laboratory posts"""
     def __init__(self, bot):
         self.bot = bot
@@ -105,4 +105,4 @@ class Lenny(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Lenny(bot))
+    bot.add_cog(VoteListener(bot))
