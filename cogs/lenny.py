@@ -5,21 +5,81 @@ import logging
 
 
 logger = logging.getLogger('discord.' + __name__)
+_listeners = {562412283268169739: {'react_with': '🌶️'},
+              746441485917880330: {'emojis': ['🌶️', '💩']}}
 
-_channel = 562412283268169739
-_emojis = ['👍', '💩']
+
+class Listener:
+    def __init__(self, channel_id, emojis=None, react_with=None, kinds=None, pin_tresh=20,
+                 del_thresh=5):
+        self.channel_id = channel_id
+        self.emojis = ['👍', '💩'] if emojis is None else emojis
+        self.react_with = react_with
+        self.kinds = []
+        self.kinds.extend(['image/', 'video/', 'url'] if kinds is None else kinds)
+        self.pin_tresh = pin_tresh
+        self.del_thresh = del_thresh
+
+    def good_message(self, message):
+        if 'any' in self.kinds:
+            return True
+        data = parse_message(message)
+        for i in data['type']:
+            for kind in self.kinds:
+                if i.startswith(kind):
+                    return True
+        if 'text_only' in self.kinds:
+            return True
+        return False
+
+    async def add_rxns(self, message, check_first=True):
+        if check_first:
+            if not self.good_message(message):
+                return
+        for e in self.emojis:
+            await message.add_reaction(e)
+
+    async def parse_rxn(self, payload, bot):
+        if not [emotes_equal(payload.emoji, e) for e in self.emojis]:
+            return
+        channel = bot.get_channel(payload.channel_id)
+        msg = await channel.fetch_message(payload.message_id)
+        count = {e: 0 for e in self.emojis}
+        ive_reacted = 0
+        for rxn in msg.reactions:
+            for e in self.emojis:
+                if emotes_equal(rxn.emoji, e):
+                    count[e] = rxn.count
+                    if rxn.me:
+                        ive_reacted += 1
+                        # ignore bot reactions in the count
+                        count[e] -= 1
+        # if the bot hasn't posted the correct reactions this isn't a voting post
+        if ive_reacted < len(self.emojis):
+            msg = 'Not official vote: {} < {}.'
+            logger.printv(msg.format(ive_reacted), len(self.emojis))
+            return
+        if count[self.emojis[1]] >= self.del_thresh:
+            await msg.delete()
+        elif count[self.emojis[0]] >= self.pin_tresh:
+            await msg.pin()
+            if self.react_with:
+                await msg.add_reaction(self.react_with)
 
 
 class Lenny(commands.Cog):
     """Cog for Lenny Laboratory posts"""
     def __init__(self, bot):
         self.bot = bot
+        self.listeners = {key: Listener(key, **_listeners[key]) for key in _listeners}
 
     @commands.Cog.listener()
     async def on_message(self, message):
         """Parse messages for new memes and add reactions"""
-        # ignore non-lenny channels
-        if message.channel.id != _channel:
+        # ignore channels we are not listening
+        try:
+            listener = self.listeners[message.channel.id]
+        except KeyError:
             return
         # ignore commands
         try:
@@ -32,33 +92,16 @@ class Lenny(commands.Cog):
         # ignore messages from this bot
         if message.author == self.bot.user:
             return
-        data = parse_message(message)
-        for i in data['type']:
-            for kind in ['image/', 'video/', 'url']:
-                if i.startswith(kind):
-                    for e in _emojis:
-                        await message.add_reaction(e)
-                    break
+        await listener.add_rxns(message)
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         """Count reactions and pin or delete based on counts"""
-        if payload.channel_id != _channel:
+        try:
+            listener = self.listeners[payload.channel_id]
+        except KeyError:
             return
-        if not [emotes_equal(payload.emoji, e) for e in _emojis]:
-            return
-        channel = self.bot.get_channel(payload.channel_id)
-        msg = await channel.fetch_message(payload.message_id)
-        count = {e: 0 for e in _emojis}
-        for rxn in msg.reactions:
-            for e in _emojis:
-                if emotes_equal(rxn.emoji, e):
-                    count[e] = rxn.count
-        if count[_emojis[1]] >= 6:
-            await msg.delete()
-        elif count[_emojis[0]] >= 21:
-            await msg.pin()
-            await msg.add_reaction("🌶️")
+        await listener.parse_rxn(payload, self.bot)
 
 
 def setup(bot):
