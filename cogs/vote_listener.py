@@ -5,8 +5,8 @@ import logging
 
 
 logger = logging.getLogger('discord.' + __name__)
-_listeners = {562412283268169739: {'react_with': '🌶️'},
-              746441485917880330: {'emojis': ['🌶️', '💩']}}
+_listeners = {562412283268169739: {'react_with': '🌶️'},      # lenny_laboratory
+              746441485917880330: {'emojis': ['🌶️', '💩']}}  # spicy_clips
 
 
 class Listener:
@@ -20,7 +20,7 @@ class Listener:
         self.pin_tresh = pin_tresh
         self.del_thresh = del_thresh
 
-    def good_message(self, message):
+    def voting_message(self, message):
         if 'any' in self.kinds:
             return True
         data = parse_message(message)
@@ -32,20 +32,21 @@ class Listener:
             return True
         return False
 
-    async def add_rxns(self, message, check_first=True):
+    async def init_votes(self, message, check_first=True):
         if check_first:
-            if not self.good_message(message):
+            if not self.voting_message(message):
                 return
         for e in self.emojis:
             await message.add_reaction(e)
 
-    async def parse_rxn(self, payload, bot):
+    async def parse_votes(self, payload, bot):
         if not [emotes_equal(payload.emoji, e) for e in self.emojis]:
             return
         channel = bot.get_channel(payload.channel_id)
         msg = await channel.fetch_message(payload.message_id)
         count = {e: 0 for e in self.emojis}
         ive_reacted = 0
+        # check reactions
         for rxn in msg.reactions:
             for e in self.emojis:
                 if emotes_equal(rxn.emoji, e):
@@ -92,7 +93,7 @@ class VoteListener(commands.Cog):
         # ignore messages from this bot
         if message.author == self.bot.user:
             return
-        await listener.add_rxns(message)
+        await listener.init_votes(message)
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
@@ -101,7 +102,7 @@ class VoteListener(commands.Cog):
             listener = self.listeners[payload.channel_id]
         except KeyError:
             return
-        await listener.parse_rxn(payload, self.bot)
+        await listener.parse_votes(payload, self.bot)
 
 
 def setup(bot):
