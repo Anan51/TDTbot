@@ -40,6 +40,8 @@ class Listener:
             await message.add_reaction(e)
 
     async def parse_votes(self, payload, bot):
+        if payload.member == bot.user:
+            return
         if not [emotes_equal(payload.emoji, e) for e in self.emojis]:
             return
         channel = bot.get_channel(payload.channel_id)
@@ -58,7 +60,7 @@ class Listener:
         # if the bot hasn't posted the correct reactions this isn't a voting post
         if ive_reacted < len(self.emojis):
             msg = 'Not official vote: {} < {}.'
-            logger.printv(msg.format(ive_reacted), len(self.emojis))
+            logger.printv(msg.format(ive_reacted, len(self.emojis)))
             return
         if count[self.emojis[1]] >= self.del_thresh:
             await msg.delete()
