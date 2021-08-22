@@ -18,6 +18,8 @@ _tmax = datetime.timedelta(days=90)
 _role2emoji = {'pc': 'steam'}
 _tz = pytz.timezone(param.rc('timezone'))
 
+# todo: auto react(drop or update?), CoC rxn for role/multi-lfgs
+
 
 class _ActivityFile:
     def __init__(self, fn=_dbm):
@@ -91,6 +93,8 @@ class _ActivityFile:
 
 
 class LFG(commands.Cog):
+    channels = [560270058224615425, 878403478987366490, 878403991195766844]
+
     def __init__(self, bot, debug=False):
         self.bot = bot
         self._last_member = None
@@ -127,7 +131,7 @@ class LFG(commands.Cog):
     async def on_message(self, message):
         """Parse messages for new lfg post"""
         # if not lfg channel
-        if message.channel.id != 560270058224615425:
+        if message.channel.id in self.channels:
             return
         roles_tagged = []
         for role in message.role_mentions:
