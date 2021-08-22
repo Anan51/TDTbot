@@ -15,6 +15,8 @@ _day = datetime.timedelta(days=1)
 
 class AAR(commands.Cog):
     """Cog designed to handel Stellar's AAR, cause he's lazy"""
+    channel = 481904729597935626
+
     def __init__(self, bot):
         self.bot = bot
         self._last_post = None
@@ -23,7 +25,7 @@ class AAR(commands.Cog):
     async def on_message(self, message):
         """Parse messages for Mesome asking for AARs"""
         # if not devoted_chat channel
-        if message.channel.id != 660299299128606733:
+        if message.channel.id != self.channel:
             return
         # if not Mesome, return
         try:
