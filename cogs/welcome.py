@@ -9,6 +9,11 @@ import logging
 
 logger = logging.getLogger('discord.' + __name__)
 _CoC_id = 563406038754394112
+# todo: game roles (D2 rotating) => role emoji
+# todo: tdt$add_supporter
+# todo: tdt$remove_supporter
+# todo: tdt$list_supporter
+# todo: use_ids as much as possible
 
 
 async def send_welcome(member, channel=None, retry=None):
@@ -51,14 +56,7 @@ async def send_welcome(member, channel=None, retry=None):
 
 class Welcome(commands.Cog):
     """Cog to listen and send alerts"""
-    _emoji_dict = {350189008078372865: "PSN D2",
-                   641083615387713567: "Xbox D2",
-                   641083208871706664: "PC D2",
-                   646219746886418452: "Stadia D2",
-                   829096377547358258: "PSN D2",
-                   829096405809234010: "Xbox D2",
-                   829096631143497798: "PC D2",
-                   829096464717709313: "Stadia D2",
+    _emoji_dict = {878802171913732118: 878812130453905420,
                    "👍": "Recruit",
                    }
 
