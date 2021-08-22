@@ -40,7 +40,10 @@ def find_channel(guild, channel=None):
 def find_role(guild, name):
     """Find a role in a guild based on its name"""
     try:
-        return [i for i in guild.roles if i.name.lower() == name.lower()][0]
+        if isinstance(name, int):
+            return [i for i in guild.roles if i.id == name][0]
+        else:
+            return [i for i in guild.roles if i.name.lower() == name.lower()][0]
     except IndexError:
         return
 
