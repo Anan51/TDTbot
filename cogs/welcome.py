@@ -56,7 +56,10 @@ async def send_welcome(member, channel=None, retry=None):
 
 class Welcome(commands.Cog):
     """Cog to listen and send alerts"""
-    _emoji_dict = {878802171913732118: 878812130453905420,
+    # emoji: channel
+    _emoji_dict = {878802171913732118: 878812130453905420,  # destiny 2
+                   878806389399625789: 879069434428399646,  # minecraft
+                   878807665038491668: 879069368649134160,  # apex
                    "👍": "Recruit",
                    }
 
