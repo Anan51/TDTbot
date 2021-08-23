@@ -120,6 +120,26 @@ class MainBot(commands.Bot):
 
         return [UserConfig(await get_user(f)) for f in files]
 
+    async def get_or_fetch_user(self, user_id, guild=None):
+        if isinstance(guild, discord.ext.commands.Context):
+            guild = guild.guild
+        if isinstance(guild, int):
+            try:
+                guild = [i for i in self.guilds if i.id == guild][0]
+            except IndexError:
+                guild = None
+        if guild is not None:
+            out = guild.get_member(user_id)
+            if out is not None:
+                return out
+            out = await guild.fetch_member(user_id)
+            if out is not None:
+                return out
+        out = self.bot.get_user()
+        if out is not None:
+            return out
+        return await self.bot.fetch_user(user_id)
+
     async def emoji2role(self, payload, emoji_dict, emoji=None, message_id=None,
                          member=None, guild=None, min_role=None):
         if member is None:
