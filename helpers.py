@@ -1,6 +1,7 @@
 from .param import rc as _rc
 import re
 import datetime
+import pytz
 
 
 epoch = datetime.datetime(2000, 1, 1)
@@ -148,3 +149,13 @@ def int_time(in_time=None, t0=None):
     if t0 is None:
         t0 = epoch
     return int((in_time - t0).total_seconds())
+
+
+def seconds_to_datetime(in_time, t0=None, localize=True):
+    if t0 is None:
+        t0 = epoch
+    dt = t0 + datetime.timedelta(seconds=in_time)
+    localize = pytz.utc if localize is True else localize
+    if localize:
+        dt = localize.localize(dt)
+    return dt
