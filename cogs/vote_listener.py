@@ -26,8 +26,13 @@ class Listener:
         data = parse_message(message)
         for i in data['type']:
             for kind in self.kinds:
-                if i.startswith(kind):
-                    return True
+                try:
+                    if i.startswith(kind):
+                        return True
+                except AttributeError as e:
+                    print(e)
+                    print(kind)
+                    print(data)
         if 'text_only' in self.kinds:
             return True
         return False
