@@ -197,7 +197,6 @@ class _Event(dict):
         """Return set of enrolled attendees"""
         msg = await self.message()
         out = []
-        # TODO: parse message for correct emoji instead of using all reactions
         for rxn in msg.reactions:
             out.extend(await rxn.users().flatten())
         return set(out)
