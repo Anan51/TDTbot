@@ -37,16 +37,19 @@ class Supporters(commands.Cog):
         self.data[member.id] = [now, alias]
         reason = "User is a paid supporter"
         role = find_role(ctx.guild, _supporter_rank)
-        if member.top_role < role:
-            try:
+        if not isinstance(member, discord.Member):
+            tmp = ctx.guild.get_member(member.id)
+            member = tmp if tmp else member
+        try:
+            if member.top_role < role:
                 await member.add_roles(role, reason=reason)
                 recruit = find_role(ctx.guild, roles.recruit)
                 if recruit in member.roles:
                     await member.remove_roles(recruit)
-            except discord.Forbidden:
-                msg = 'Unable to promote {}, you must do so manually.'
-                await ctx.send(msg.format(member))
-                return
+        except (AttributeError, discord.Forbidden):
+            msg = 'Unable to promote {}, you must do so manually.'
+            await ctx.send(msg.format(member))
+            return
         await ctx.message.add_reaction('👍')
 
     def _str(self, member):
@@ -70,7 +73,8 @@ class Supporters(commands.Cog):
     async def delete_supporter(self, ctx, member: _user_t):
         self.data.delete(member.id)
         try:
-            await ctx.send("Removed {}.".format(member))
+            msg = "Removed {}. Role changes must be done manually."
+            await ctx.send(msg.format(member))
         except KeyError:
             await ctx.send('No member "{}" found in supporters.'.format(member))
 
