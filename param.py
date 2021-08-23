@@ -191,4 +191,12 @@ class PermaDict:
         del self.file[str(key)]
 
 
+class IntPermaDict(PermaDict):
+    def __setitem__(self, key, value):
+        self.file[str(int(key))] = value
+
+    def keys(self):
+        return [int(k) for k in self.file.keys()]
+
+
 rc = Parameters(copy=defaults)

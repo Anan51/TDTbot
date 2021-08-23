@@ -3,7 +3,6 @@ import discord
 from discord.ext import commands
 import logging
 import pytz
-import shelve
 from .. import param
 from ..helpers import *
 from ..async_helpers import admin_check, split_send
@@ -18,7 +17,7 @@ class Supporters(commands.Cog):
     """Store and list supporters"""
     def __init__(self, bot):
         self.bot = bot
-        self.data = shelve.open(_dbm)
+        self.data = param.IntPermaDict(_dbm)
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
