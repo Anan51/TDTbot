@@ -192,8 +192,8 @@ class Activity(commands.Cog):
             elif i[0].top_role <= recruit:
                 if i[0].top_role.name not in ['Lone Wolf'] and not i[0].bot:
                     lowers.append(i)
-                else:
-                    print('Skipping', i)
+                elif not i[0].bot:
+                    logger.printv('Skipping', i)
         await split_send(ctx, output)
 
         for i in lowers:
