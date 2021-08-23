@@ -3,7 +3,6 @@ import discord
 from discord.ext import commands
 import logging
 import pickle
-import shelve
 import os
 from .. import param
 from ..helpers import *
@@ -18,33 +17,7 @@ _dbm = os.path.join(_dbm, 'config', 'activity.dbm')
 _epoch = epoch
 
 
-class _ActivityFile:
-    def __init__(self, fn=_dbm):
-        self.fn = fn
-        self.file = shelve.open(fn)
-
-    def __del__(self):
-        self.file.sync()
-        self.file.close()
-
-    def __getitem__(self, key):
-        return self.file[str(key)]
-
-    def __setitem__(self, key, value):
-        self.file[str(key)] = value
-
-    def get(self, key, default):
-        return self.file.get(str(key), default)
-
-    def __contains__(self, item):
-        return str(item) in self.file
-
-    def keys(self):
-        return list(self.file.keys())
-
-    def items(self):
-        return self.file.items()
-
+class _ActivityFile(param.IntPermaDict):
     def update_activity(self, user_id, in_time=None):
         now = int_time(in_time=in_time)
         user_id = str(int(user_id))
@@ -89,7 +62,7 @@ class Activity(commands.Cog):
         self.bot = bot
         self._last_member = None
         self._kicks = []
-        self.data = _ActivityFile()
+        self.data = _ActivityFile(_dbm)
         self._init = False
         self._init_finished = False
         self._debug = debug

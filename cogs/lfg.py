@@ -3,7 +3,6 @@ from discord.ext import commands
 import datetime
 import pytz
 import pickle
-import shelve
 import logging
 import os
 from .. import param
@@ -21,32 +20,10 @@ _tz = pytz.timezone(param.rc('timezone'))
 # todo: auto react(drop or update?), CoC rxn for role/multi-lfgs
 
 
-class _ActivityFile:
-    def __init__(self, fn=_dbm):
-        self.fn = fn
-        self.file = shelve.open(fn)
-
-    def __del__(self):
-        self.file.sync()
-        self.file.close()
-
-    def __getitem__(self, key):
-        return self.file[str(key)]
-
-    def __setitem__(self, key, value):
-        self.file[str(key)] = value
-
-    def get(self, key, default):
-        return self.file.get(str(key), default)
-
-    def __contains__(self, item):
-        return str(item) in self.file
-
-    def keys(self):
-        return list(self.file.keys())
-
-    def items(self):
-        return self.file.items()
+class _ActivityFile(param.IntPermaDict):
+    def __init__(self, cog, fn=_dbm):
+        self.cog = cog
+        super().__init__(fn)
 
     def _clear_old(self, key):
         old = (datetime.datetime.utcnow() - _tmax).timestamp()
