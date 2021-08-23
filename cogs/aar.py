@@ -21,6 +21,16 @@ class AAR(commands.Cog):
         self.bot = bot
         self._last_post = None
 
+    async def _aar(self, channel=None):
+        channel = self.channel if channel is None else channel
+        await channel.send("Stellar's AAR:")
+        await git_log(channel)
+        self._last_post = datetime.datetime.utcnow()
+
+    @commands.command()
+    async def aar(self, ctx):
+        await self._aar(ctx.channel)
+
     @commands.Cog.listener()
     async def on_message(self, message):
         """Parse messages for Mesome asking for AARs"""
@@ -47,9 +57,7 @@ class AAR(commands.Cog):
         if dt.today().weekday() != 6:
             return
         # Now it is time to print Stellar's AAR
-        await message.channel.send("Stellar's AAR:")
-        await git_log(message.channel)
-        self._last_post = datetime.datetime.utcnow()
+        await self._aar()
 
 
 def setup(bot):
