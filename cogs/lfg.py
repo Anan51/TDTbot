@@ -88,7 +88,7 @@ class LFG(commands.Cog):
         self.bot = bot
         self._last_member = None
         self._kicks = []
-        self.data = _ActivityFile()
+        self.data = _ActivityFile(self)
         self._init = False
         self._init_finished = False
         self._debug = debug
