@@ -74,8 +74,10 @@ class Supporters(commands.Cog):
                 f = lambda x: members[x].display_name
             elif sort_by == 'alias':
                 f = lambda x: self.data[x][0] + '~~~' + members[x].display_name
+            else:
+                await ctx.send("Unknown sort option.")
             keys = sorted(keys, key=f, reverse=reverse)
-        lines = [self._str(key) for key in keys]
+        lines = [self._str(members[key]) for key in keys]
         if lines:
             await split_send(ctx, lines)
         else:
