@@ -34,7 +34,7 @@ class _ActivityFile(param.IntPermaDict):
         dt = int(dt.total_seconds())
         now = int_time()
         if return_dict:
-            return {int(i): self.get(i, 0) for i in self
+            return {int(i): self.get(i, 0) for i in self.file
                     if now - self.get(i, 0) > dt}
         else:
             return [int(i) for i in self if now - self.get(i, 0) > dt]
