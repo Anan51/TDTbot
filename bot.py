@@ -170,6 +170,11 @@ class MainBot(commands.Bot):
         elif len(keys) > 1:
             logger.printv('Multiple matches: {}'.format({i: emoji_dict[i] for i in keys}))
 
+    def tdt(self):
+        for g in self.guilds:
+            if g.id == 164589623459184640:
+                return g
+
     def restart_time(self):
         t = self.startup
         try:
