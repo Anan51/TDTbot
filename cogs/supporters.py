@@ -33,6 +33,18 @@ class Supporters(commands.Cog):
         alias = ' '.join([str(i) for i in args])
         now = int_time()
         self.data[member.id] = [now, alias]
+        reason = "User is a paid supporter"
+        role = find_role(ctx.guild, _supporter_rank)
+        if member.top_role < role:
+            try:
+                await member.add_roles(role, reason=reason)
+                recruit = find_role(ctx.guild, roles.recruit)
+                if recruit in member.roles:
+                    await member.remove_roles(recruit)
+            except discord.Forbidden:
+                msg = 'Unable to promote {}, you must do so manually.'
+                await ctx.send(msg.format(member))
+                return
         await ctx.message.add_reaction('👍')
 
     def _str(self, member):
