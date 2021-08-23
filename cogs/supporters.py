@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import logging
 import pytz
+from typing import Union
 from .. import param, roles
 from ..helpers import *
 from ..async_helpers import admin_check, split_send
@@ -12,6 +13,7 @@ logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'supporters.dbm')
 _supporter_rank = roles.community
+_user_t = Union[discord.Member, discord.User]
 
 
 class Supporters(commands.Cog):
@@ -25,7 +27,7 @@ class Supporters(commands.Cog):
         return await admin_check(ctx)
 
     @commands.command()
-    async def add_supporter(self, ctx, member: discord.User, *args):
+    async def add_supporter(self, ctx, member: _user_t, *args):
         """<member> <supporter name (optional)>: adds member to supporter list."""
         if member.id in self.data:
             await ctx.send('Member "{}" already in supporters.'.format(member))
@@ -58,9 +60,17 @@ class Supporters(commands.Cog):
         return msg
 
     @commands.command()
-    async def retrieve_supporter(self, ctx, member: discord.User):
+    async def retrieve_supporter(self, ctx, member: _user_t):
         try:
             await ctx.send(self._str(member))
+        except KeyError:
+            await ctx.send('No member "{}" found in supporters.'.format(member))
+
+    @commands.command()
+    async def delete_supporter(self, ctx, member: _user_t):
+        self.data.delete(member.id)
+        try:
+            await ctx.send("Removed {}.".format(member))
         except KeyError:
             await ctx.send('No member "{}" found in supporters.'.format(member))
 
