@@ -112,7 +112,9 @@ class Welcome(commands.Cog):
         # check for welcome back
         if "👍" in [str(rxn.emoji) for rxn in rxns]:
             msg = "... Or I guess I should say welcome back!"
-            _roles = [await self.bot.emoji2role(None, self._emoji_dict, emoji=rxn.emoji,
+            emoji_dict = {"👍": _recruit}
+            emoji_dict.update(self._emoji_dict)
+            _roles = [await self.bot.emoji2role(None, emoji_dict, emoji=rxn.emoji,
                                                 member=member, guild=member.guild)
                       for rxn in rxns]
             _roles = ["`{}`".format(role) for role in _roles if role]
