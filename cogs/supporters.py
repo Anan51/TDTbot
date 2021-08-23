@@ -55,12 +55,18 @@ class Supporters(commands.Cog):
     @commands.command()
     async def list_supporters(self, ctx, sort_by=None):
         """<optional sort key>: lists all supporters.keys
-        sorting keys: date - enrollment date and time
-                      id   - user id number
-                      name - user name"""
+        sorting keys: alias      - supporter username/alias
+                      date       - enrollment date and time
+                      id         - user id number
+                      name       - user name
+                      <prefix>_r - reverse order (e.g. id_r)"""
         keys = self.data.keys()
         members = {key: await self.bot.get_or_fetch_user(key, ctx) for key in keys}
         if sort_by is not None:
+            reverse = False
+            if sort_by.endswith('_r'):
+                reverse = True
+                sort_by = sort_by[:-2]
             if sort_by in ['date', 'datetime']:
                 f = lambda x: self.data[x][0]
             elif sort_by == 'id':
@@ -69,9 +75,12 @@ class Supporters(commands.Cog):
                 f = lambda x: members[x].display_name
             elif sort_by == 'alias':
                 f = lambda x: self.data[x][0] + '~~~' + members[x].display_name
-            keys = sorted(keys, key=f)
+            keys = sorted(keys, key=f, reverse=reverse)
         lines = [self._str(key) for key in keys]
-        await split_send(ctx, lines)
+        if lines:
+            await split_send(ctx, lines)
+        else:
+            await ctx.send("Empty supporter data.")
 
 
 def setup(bot):
