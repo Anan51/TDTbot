@@ -9,10 +9,6 @@ import logging
 
 logger = logging.getLogger('discord.' + __name__)
 _CoC_id = 563406038754394112
-# todo: game roles (D2 rotating) => role emoji
-# todo: tdt$add_supporter
-# todo: tdt$remove_supporter
-# todo: tdt$list_supporter
 # todo: use_ids as much as possible
 
 
