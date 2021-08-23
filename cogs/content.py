@@ -88,7 +88,7 @@ class Content(commands.Cog):
         """Add YouTube ID to video is not already there and clear old videos"""
         if yt_id in self.videos:
             return False
-        now = int_time(datetime.datetime.utcnow())
+        now = int_time()
         self.videos[yt_id] = now
         del_list = [i for i in self.videos.keys() if self.videos[i] < now - _month]
         for i in del_list:
