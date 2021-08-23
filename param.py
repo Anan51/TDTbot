@@ -190,6 +190,9 @@ class PermaDict:
     def delete(self, key):
         del self.file[str(key)]
 
+    def pop(self, key):
+        return self.file.pop(str(key))
+
 
 class IntPermaDict(PermaDict):
     def __setitem__(self, key, value):
