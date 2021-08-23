@@ -5,7 +5,7 @@ import pytz
 import pickle
 import logging
 import os
-from .. import param
+from .. import param, roles
 from ..helpers import *
 from ..async_helpers import *
 
@@ -14,7 +14,9 @@ logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'lfg.dbm')
 _tmax = datetime.timedelta(days=90)
-_role2emoji = {'pc': 'steam'}
+_role2emoji = {roles.destiny_2: 878802171913732118,
+               roles.minecraft: 878806389399625789,
+               roles.apex: 878807665038491668}
 _tz = pytz.timezone(param.rc('timezone'))
 
 # todo: auto react(drop or update?), CoC rxn for role/multi-lfgs
@@ -32,14 +34,25 @@ class _ActivityFile(param.IntPermaDict):
             for p in pops:
                 self[key].pop(p)
 
-    def update_pings(self, msg, roles):
+    def update_pings(self, msg, _roles):
         user_id = msg.author.id
         self._clear_old(user_id)
-        entry = [msg.id, msg.created_at.timestamp()] + roles
+        entry = [msg.id, msg.created_at.timestamp()] + _roles
         if user_id in self:
             self[user_id].append(entry)
         else:
             self[user_id] = [entry]
+
+    def _get_role_id(self, role):
+        if isinstance(role, int):
+            return role
+        out = find_role(self.cog.bot.tdt, role)
+        if out is None:
+            out = find_role(self.cog.bot.tdt, "d2 " + role)
+        return out
+
+    def _row_to_role_ids(self, row):
+        return filter(None, [self._get_role_id(r) for r in row[2:]])
 
     def _fmt_row(self, row):
         msg = row[0]
@@ -47,8 +60,9 @@ class _ActivityFile(param.IntPermaDict):
         dt = pytz.utc.localize(datetime.datetime.fromtimestamp(row[1]))
         # convert to server timezone
         dt = dt.astimezone(_tz)
-        roles = ' '.join([':{}:'.format(_role2emoji.get(i, i)) for i in row[2:]])
-        return roles + ' {}; message ID: {}'.format(dt, msg)
+        _roles = [r for r in self._row_to_role_ids(row) if r in _role2emoji]
+        _roles = ' '.join([':{}:'.format(_role2emoji[r]) for r in _roles])
+        return _roles + ' {}; message ID: {}'.format(dt, msg)
 
     def member_list(self, mid):
         out = []
@@ -58,15 +72,13 @@ class _ActivityFile(param.IntPermaDict):
 
     def member_summary(self, mid):
         data = self[mid]
-        tot = len(data)
-        roles = dict()
+        tot = 0
+        _roles = dict()
         for d in data:
-            for role in d[2:]:
-                if role in roles:
-                    roles[role] += 1
-                else:
-                    roles[role] = 1
-        return tot, roles
+            for role in self._row_to_role_ids(d):
+                tot += 1
+                _roles[role.id] = _roles.get(role, 0) + 1
+        return tot, _roles
 
 
 class LFG(commands.Cog):
@@ -112,13 +124,13 @@ class LFG(commands.Cog):
             return
         roles_tagged = []
         for role in message.role_mentions:
-            if role.name.endswith(' D2'):
-                name = role.name[:-3].lower()
-                # role -> emoji
-                emoji = _role2emoji.get(name, name)
+            try:
+                emoji = _role2emoji[role.id]
                 emoji = [e for e in message.guild.emojis if e.name == emoji][0]
                 await message.add_reaction(emoji)
-                roles_tagged.append(name)
+                roles_tagged.append(role.id)
+            except KeyError:
+                pass
         if roles_tagged:
             self.data.update_pings(message, roles_tagged)
 

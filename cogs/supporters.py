@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 import logging
 import pytz
-from .. import param
+from .. import param, roles
 from ..helpers import *
 from ..async_helpers import admin_check, split_send
 
@@ -11,6 +11,7 @@ from ..async_helpers import admin_check, split_send
 logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'supporters.dbm')
+_supporter_rank = roles.community
 
 
 class Supporters(commands.Cog):

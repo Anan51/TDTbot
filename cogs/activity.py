@@ -4,7 +4,7 @@ from discord.ext import commands
 import logging
 import pickle
 import os
-from .. import param
+from .. import param, roles
 from ..helpers import *
 from ..async_helpers import *
 
@@ -20,7 +20,6 @@ _epoch = epoch
 class _ActivityFile(param.IntPermaDict):
     def update_activity(self, user_id, in_time=None):
         now = int_time(in_time=in_time)
-        user_id = str(int(user_id))
         if user_id in self:
             try:
                 self[user_id] = max(now, self[user_id])
@@ -35,10 +34,10 @@ class _ActivityFile(param.IntPermaDict):
         dt = int(dt.total_seconds())
         now = int_time()
         if return_dict:
-            return {int(i): self.file.get(i, 0) for i in self.file
-                    if now - self.file.get(i, 0) > dt}
+            return {int(i): self.get(i, 0) for i in self
+                    if now - self.get(i, 0) > dt}
         else:
-            return [int(i) for i in self.file if now - self.file.get(i, 0) > dt]
+            return [int(i) for i in self if now - self.get(i, 0) > dt]
 
     async def fetch_and_sort(self, guild, inactive=None, dt=None):
         if inactive is None:
@@ -179,7 +178,7 @@ class Activity(commands.Cog):
         await ctx.send("Hold on while I parse the server history.")
         if not self._debug:
             await self._async_init()
-        recruit = find_role(ctx.guild, "Recruit")
+        recruit = find_role(ctx.guild, roles.recruit)
         items = await self.data.fetch_and_sort(ctx.guild)
         if role is not None:
             items = [i for i in items if role in i[0].roles]
@@ -211,9 +210,9 @@ class Activity(commands.Cog):
     async def _demote(self, m, dt, debug=None):
         if debug is None:
             debug = self._debug
-        roles = [r for r in m.roles if r.name not in ['@everyone', 'Nitro Booster']]
+        _roles = [r for r in m.roles if r.name not in ['@everyone', 'Nitro Booster']]
         if not debug:
-            await m.remove_roles(*roles, reason='Inactivity')
+            await m.remove_roles(*_roles, reason='Inactivity')
         date = dt.date().isoformat()
         if not debug:
             return '{0.display_name} demoted (last active {1})'.format(m, date)

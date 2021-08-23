@@ -5,7 +5,7 @@ import humanize
 import logging
 import pytz
 import time
-from . import git_manage
+from . import git_manage, roles
 
 logger = logging.getLogger('discord.' + __name__)
 
@@ -44,7 +44,7 @@ async def admin_check(ctx=None, bot=None, author=None, guild=None):
     if guild is None:
         guild = ctx.guild
     logger.debug('admin_check', author, author.top_role)
-    if author.top_role.name in ['Admin', 'Devoted']:
+    if author.top_role.id in [roles.admin, roles.devoted]:
         return True
     if guild is not None:
         if guild.owner == author:

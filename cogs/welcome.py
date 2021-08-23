@@ -1,7 +1,7 @@
 import datetime
 import discord
 from discord.ext import commands
-from .. import param
+from .. import param, roles
 from ..helpers import *
 from ..async_helpers import admin_check
 import logging
@@ -9,7 +9,7 @@ import logging
 
 logger = logging.getLogger('discord.' + __name__)
 _CoC_id = 563406038754394112
-# todo: use_ids as much as possible
+_recruit = roles.recruit
 
 
 async def send_welcome(member, channel=None, retry=None):
@@ -52,11 +52,10 @@ async def send_welcome(member, channel=None, retry=None):
 
 class Welcome(commands.Cog):
     """Cog to listen and send alerts"""
-    # emoji: channel
-    _emoji_dict = {878802171913732118: 878812130453905420,  # destiny 2
-                   878806389399625789: 879069434428399646,  # minecraft
-                   878807665038491668: 879069368649134160,  # apex
-                   "👍": "Recruit",
+    # emoji: role
+    _emoji_dict = {878802171913732118: roles.destiny_2,
+                   878806389399625789: roles.minecraft,
+                   878807665038491668: roles.apex,
                    }
 
     def __init__(self, bot):
@@ -94,8 +93,8 @@ class Welcome(commands.Cog):
         """Alert admin type roles on new member joining"""
         logger.printv('New member {0.name} joined'.format(member))
         channel = self.log_channel
-        roles = [find_role(member.guild, i) for i in ["Admin", "Devoted"]]
-        roles = " ".join([i.mention for i in roles if hasattr(i, 'mention')])
+        _roles = [find_role(member.guild, i) for i in ["Admin", "Devoted"]]
+        _roles = " ".join([i.mention for i in _roles if hasattr(i, 'mention')])
         if channel is not None:
             await channel.send('New member {0.name} joined.'.format(member))
         retry = False
@@ -113,13 +112,13 @@ class Welcome(commands.Cog):
         # check for welcome back
         if "👍" in [str(rxn.emoji) for rxn in rxns]:
             msg = "... Or I guess I should say welcome back!"
-            roles = [await self.bot.emoji2role(None, self._emoji_dict, emoji=rxn.emoji,
-                                               member=member, guild=member.guild)
-                     for rxn in rxns]
-            roles = ["`{}`".format(role) for role in roles if role]
-            if roles:
-                msg += "\nI've restored your " + ', '.join(roles) + ' role'
-                msg += 's.' if len(roles) > 1 else '.'
+            _roles = [await self.bot.emoji2role(None, self._emoji_dict, emoji=rxn.emoji,
+                                                member=member, guild=member.guild)
+                      for rxn in rxns]
+            _roles = ["`{}`".format(role) for role in _roles if role]
+            if _roles:
+                msg += "\nI've restored your " + ', '.join(_roles) + ' role'
+                msg += 's.' if len(_roles) > 1 else '.'
             await member.guild.system_channel.send(msg)
         if retry:
             await send_welcome(member, retry=member.guild.system_channel)
@@ -139,7 +138,7 @@ class Welcome(commands.Cog):
         if payload.message_id != _CoC_id:
             return
         guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
-        recruit = find_role(guild, "Recruit")
+        recruit = find_role(guild, _recruit)
         args = payload, self._emoji_dict
         kwargs = dict(guild=guild, min_role=recruit)
         if str(payload.emoji) == "👍":

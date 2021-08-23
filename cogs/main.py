@@ -2,7 +2,7 @@ import datetime
 import discord
 from discord.ext import commands
 import logging
-from .. import param
+from .. import param, users
 from ..helpers import *
 from ..async_helpers import *
 
@@ -42,7 +42,7 @@ class MainCommands(commands.Cog):
         """Lists server bots"""
         bots = [m for m in ctx.guild.members if m.bot]
         # electro is a bot, so make sure he's included
-        electro = ctx.guild.get_member_named('UnknownElectro#1397')
+        electro = await self.bot.get_or_fetch_user(users.electro, ctx.guild)
         if electro and electro not in bots:
             bots.insert(0, electro)
         # add other members to bots for fun
@@ -55,7 +55,8 @@ class MainCommands(commands.Cog):
         msg += '\n'.join([str(i + 1) + ') ' + b.display_name for i, b in enumerate(bots)])
         await ctx.send(msg)
 
-    async def emote(self, ctx, emote, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
+    async def emote(self, ctx, emote, n: int = 1, channel: discord.TextChannel = None,
+                    guild: str = None):
         """emote <n (optional)> <channel (optional)> <server (optional)>
         posts emote"""
         if guild is None:
@@ -75,7 +76,8 @@ class MainCommands(commands.Cog):
         await channel.send(msg)
 
     @commands.command()
-    async def blob(self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
+    async def blob(self, ctx, n: int = 1, channel: discord.TextChannel = None,
+                   guild: str = None):
         """<n (optional)> <channel (optional)> <server (optional)> posts dancing blob"""
         emote = "<a:blobDance:738431916910444644>"
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
