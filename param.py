@@ -86,7 +86,7 @@ class DataContainer:
         raise NotImplementedError
 
     def keys(self):
-        return list(self.data.keys()) + list(self._file_data.keys())
+        return set(list(self.data.keys()) + list(self._file_data.keys()))
 
     def set_if_not_set(self, key, value):
         try:
@@ -115,7 +115,7 @@ class Parameters(dict):
         return self.dget(key, default)
 
     def dget(self, key, default=None):
-        """Like get, but check the defaults first"""
+        """Like get, but check the defaults if we don't have the key"""
         return self.get(key, defaults.get(key, default))
 
     def read_config(self, fn=None):
