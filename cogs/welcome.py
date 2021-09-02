@@ -54,6 +54,8 @@ class Welcome(commands.Cog):
     """Cog to listen and send alerts"""
     # emoji: role
     _emoji_dict = {878802171913732118: roles.destiny_2,
+                   "🎮": roles.d2_console,
+                   "🖥️": roles.d2_pc,
                    878806389399625789: roles.minecraft,
                    878807665038491668: roles.apex,
                    }
