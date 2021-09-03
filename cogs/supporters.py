@@ -76,7 +76,7 @@ class Supporters(commands.Cog):
         except KeyError:
             await ctx.send('No member "{}" found in supporters.'.format(member))
 
-    @commands.command()
+    @commands.command(aliases=['remove_supporter'])
     async def delete_supporter(self, ctx, member: _user_t):
         self.data.delete(member.id)
         try:
