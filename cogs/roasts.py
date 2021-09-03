@@ -27,6 +27,7 @@ class Roast(commands.Cog):
         self._nemeses = [i for i in param.rc('nemeses')]
         self._last_roast = None
         self._snipes = dict()
+        self._botting = dict()
         self._roasts = []
 
     def _log_roast(self, mid):
@@ -124,7 +125,16 @@ class Roast(commands.Cog):
         # ignore messages from this bot
         if message.author == self.bot.user:
             return
-        # if author in snipes
+        # if author in botting
+        try:
+            if self._botting[message.author.id] > 0:
+                await message.add_reaction()
+                self._botting[message.author.id] -= 1
+            if self._botting[message.author.id] <= 0:
+                self._botting.pop(message.author.id)
+        except KeyError:
+            pass
+            # if author in snipes
         try:
             if self._snipes[message.author.id] > 0:
                 if await self._send_roast(message.channel, last=message):
@@ -216,6 +226,13 @@ class Roast(commands.Cog):
         self._snipes[user.id] = n + self._snipes.get(user.id, 0)
         if self._snipes[user.id] <= 0:
             self._snipes.pop(user.id)
+
+    @commands.command(hidden=True)
+    @commands.check(admin_check)
+    async def you_are_a_bot(self, ctx, user: discord.User, n: int = 1):
+        self._botting[user.id] = n + self._botting.get(user.id, 0)
+        if self._botting[user.id] <= 0:
+            self._botting.pop(user.id)
 
 
 def setup(bot):
