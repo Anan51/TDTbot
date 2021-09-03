@@ -29,10 +29,17 @@ class Supporters(commands.Cog):
     @commands.command()
     async def add_supporter(self, ctx, member: _user_t, *args):
         """<member> <supporter name (optional)>: adds member to supporter list."""
-        if member.id in self.data:
-            await ctx.send('Member "{}" already in supporters.'.format(member))
-            return
         alias = ' '.join([str(i) for i in args])
+        if member.id in self.data:
+            msg = 'Member "{}" already in supporters.'.format(member)
+            if alias:
+                if not self.data[member.id][1]:
+                    msg += '\nAdding supporter info "{:}".'.format(alias)
+                else:
+                    msg += 'Modifying supporter info from "{:}" to "{:}".'
+                    msg.format(self.data[member.id][1], alias)
+            await ctx.send(msg)
+
         now = int_time()
         self.data[member.id] = [now, alias]
         reason = "User is a paid supporter"
