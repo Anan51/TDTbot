@@ -128,7 +128,7 @@ class Roast(commands.Cog):
         # if author in botting
         try:
             if self._botting[message.author.id] > 0:
-                await message.add_reaction()
+                await message.add_reaction("🤖")
                 self._botting[message.author.id] -= 1
             if self._botting[message.author.id] <= 0:
                 self._botting.pop(message.author.id)
