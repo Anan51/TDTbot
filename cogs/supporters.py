@@ -34,9 +34,9 @@ class Supporters(commands.Cog):
             msg = 'Member "{}" already in supporters.'.format(member)
             if alias:
                 if not self.data[member.id][1]:
-                    msg += '\nAdding supporter info "{:}".'.format(alias)
+                    msg += '\nAdding supporter info "{}".'.format(alias)
                 else:
-                    msg += 'Modifying supporter info from "{:}" to "{:}".'
+                    msg += '\nModifying supporter info from "{}" to "{}".'
                     msg.format(self.data[member.id][1], alias)
             await ctx.send(msg)
 
