@@ -10,6 +10,7 @@ import logging
 logger = logging.getLogger('discord.' + __name__)
 _CoC_id = 563406038754394112
 _recruit = roles.recruit
+_log_in_discord = False
 
 
 async def send_welcome(member, channel=None, retry=None):
@@ -94,11 +95,12 @@ class Welcome(commands.Cog):
     async def on_member_join(self, member):
         """Alert admin type roles on new member joining"""
         logger.printv('New member {0.name} joined'.format(member))
-        channel = self.log_channel
         _roles = [find_role(member.guild, i) for i in ["Admin", "Devoted"]]
         _roles = " ".join([i.mention for i in _roles if hasattr(i, 'mention')])
-        if channel is not None:
-            await channel.send('New member {0.name} joined.'.format(member))
+        if _log_in_discord:
+            log_channel = self.log_channel
+            if log_channel is not None:
+                await log_channel.send('New member {0.name} joined.'.format(member))
         retry = False
         try:
             await send_welcome(member)
@@ -148,12 +150,13 @@ class Welcome(commands.Cog):
         if str(payload.emoji) == "👍":
             out = "{0.display_name} agreed to the code of conduct.".format(payload.member)
             logger.printv(out)
-            log_channel = find_channel(guild, "admin_log")
-            # if they've agreed to CoC recently then return
-            async for msg in log_channel.history(limit=200):
-                if msg.content == out:
-                    return
-            await log_channel.send(out)
+            if _log_in_discord:
+                log_channel = find_channel(guild, "admin_log")
+                # if they've agreed to CoC recently then return
+                async for msg in log_channel.history(limit=200):
+                    if msg.content == out:
+                        return
+                await log_channel.send(out)
             now = datetime.datetime.utcnow()
             # if in joined in last 2 weeks
             if (now - payload.member.joined_at).seconds // 86400 < 14:
