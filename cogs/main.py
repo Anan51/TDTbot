@@ -97,8 +97,17 @@ class MainCommands(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         """Listen for DMs and post them in the bot log channel"""
+        # ignore messages from this bot
         if message.author == self.bot.user:
             return
+        # ignore commands
+        try:
+            if message.content.startswith(self.bot.command_prefix):
+                return
+        except TypeError:
+            for prefix in self.bot.command_prefix:
+                if message.content.startswith(prefix):
+                    return
         # if DM
         if type(message.channel) == discord.DMChannel:
             channel = self.bot.find_channel(param.rc('log_channel'))
