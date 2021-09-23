@@ -10,7 +10,7 @@ logger = logging.getLogger('discord.' + __name__)
 
 
 def _owner(ctx):
-    return ctx.bot.owner == ctx.author
+    return await ctx.bot.is_owner(ctx.author)
 
 
 class Debugging(commands.Cog):
