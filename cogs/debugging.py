@@ -9,7 +9,7 @@ from .. import git_manage
 logger = logging.getLogger('discord.' + __name__)
 
 
-def _owner(ctx):
+async def _owner(ctx):
     return await ctx.bot.is_owner(ctx.author)
 
 
