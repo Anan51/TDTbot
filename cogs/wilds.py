@@ -650,6 +650,12 @@ class Wilds(commands.Cog):
         player[key] = t(value)
         await ctx.send("{:}[{:}] set to {:}".format(member.display_name, key, value))
 
+    @commands.command()
+    @commands.check(admin_check)
+    async def post_wilds_help(self, ctx):
+        """Post Wilds Help"""
+        await ctx.send(await ctx.send_help(self))
+
 
 def setup(bot):
     bot.add_cog(Wilds(bot))
