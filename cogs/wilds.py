@@ -654,7 +654,8 @@ class Wilds(commands.Cog):
     @commands.check(admin_check)
     async def post_wilds_help(self, ctx):
         """Post Wilds Help"""
-        await self.bot.help_command.
+        #await self.bot.help_command.
+        pass
 
 
 def setup(bot):
