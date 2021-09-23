@@ -150,7 +150,7 @@ class Debugging(commands.Cog):
     async def exec(self, ctx, *args):
         out = []
         var_data = dict(out=out, self=self)
-        cmd = ' '.join(args)
+        cmd = ' '.join(args).strip().strip('`"\'')
         await ctx.send("Running the following code:\n```\n" + cmd + "\n```")
         exec(cmd)
         if out:
