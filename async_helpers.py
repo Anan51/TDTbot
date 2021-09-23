@@ -43,9 +43,12 @@ async def admin_check(ctx=None, bot=None, author=None, guild=None):
         author = ctx.author
     if guild is None:
         guild = ctx.guild
-    logger.debug('admin_check', author, author.top_role)
-    if author.top_role.id in [roles.admin, roles.devoted]:
-        return True
+    logger.debug('admin_check', author, getattr(author, "top_role", "NO_ROLE"))
+    try:
+        if author.top_role.id in [roles.admin, roles.devoted]:
+            return True
+    except AttributeError:
+        pass
     if guild is not None:
         if guild.owner == author:
             return True
