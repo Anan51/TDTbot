@@ -9,6 +9,10 @@ from .. import git_manage
 logger = logging.getLogger('discord.' + __name__)
 
 
+def _owner(ctx):
+    return ctx.bot.owner == ctx.author
+
+
 class Debugging(commands.Cog):
     """Cog designed for debugging the bot"""
     def __init__(self, bot):
@@ -17,9 +21,6 @@ class Debugging(commands.Cog):
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
         return await admin_check(ctx)
-
-    def _owner(self, ctx):
-        return self.bot.owner == ctx.author
 
     @commands.command()
     async def channel_id(self, ctx, channel: discord.TextChannel = None, guild: str = None):
