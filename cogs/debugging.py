@@ -18,6 +18,9 @@ class Debugging(commands.Cog):
         """Don't allow everyone to access this cog"""
         return await admin_check(ctx)
 
+    def _owner(self, ctx):
+        return self.bot.owner == ctx.author
+
     @commands.command()
     async def channel_id(self, ctx, channel: discord.TextChannel = None, guild: str = None):
         """<channel (optional)> <server (optional)> sends random roast message"""
@@ -140,6 +143,20 @@ class Debugging(commands.Cog):
             msg = "No history available."
         logger.printv(str(hist))
         await split_send(ctx, msg)
+
+    @commands.command()
+    @commands.check(_owner)
+    async def exec(self, ctx, *args):
+        out = []
+        var_data = dict(out=out, self=self)
+        cmd = ' '.join(args)
+        await ctx.send("Running the following code:\n```\n" + cmd + "\n```")
+        exec(cmd)
+        if out:
+            n = len(str(len(out)))
+            fmt = '{:0' + str(n) + 'd}) `{:}`'
+            out = ['Outputs:'] + [fmt.format(i, o) for i, o in enumerate(out)]
+            await split_send(ctx, out)
 
 
 def setup(bot):
