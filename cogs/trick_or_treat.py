@@ -10,19 +10,24 @@ from ..async_helpers import split_send, sleep, admin_check
 import logging
 
 
-logger = logging.getLogger('discord.' + __name__)
+logger = logging.getLogger("discord." + __name__)
+year = "{:04d}".format(datetime.datetime.utcnow().year)
 
-_trick = "😈"
-_treat = "🍬"
-_channel = "the_neighborhood"
-_start = 0
-_score = "tdt.trick_or_treat.score"
+# main settings:
+_channel = "the_neighborhood"   # trick-or-treat channel name or id
+_rule_id = 770363043515203604   # message id for rules/reaction check
+_game_on = False                # flag to run game
+_role = "SPOOKY"                # role name or id for game participation
+# secondary settings
+_tmin, _tmax = 5 * 60, 15 * 60  # min/max time between rounds
+_start = 0                      # starting score
+_trick = "😈"                   # trick emoji
+_treat = "🍬"                   # treat emoji
+_enroll = "🎃"                  # enroll in game emoji/reaction
 _msg = "Trick ({:}) or Treat ({:})!".format(_trick, _treat)
-_bot = 'tdt.trick_or_treat.msg'
-_role = 'SPOOKY'
-_tmin, _tmax = 5 * 60, 15 * 60
-_rule_id = 770363043515203604
-_game_on = False
+# keywords for player/bot config storage
+_score = "tdt.trick_or_treat.score." + year
+_bot = "tdt.trick_or_treat.msg." + year
 
 
 class TrickOrTreat(commands.Cog):
@@ -36,56 +41,81 @@ class TrickOrTreat(commands.Cog):
         self._awaiting = None
         self._last = datetime.datetime.now()
         self._game_on = _game_on
+        self._role = None
+        self._channel = None
+        self._log = None
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
-        """Parse reaction adds for agreeing to code of conduct and rank them up to
-        Recruit"""
+        """Parse reaction adds for enrolling people in trick-or-treat game"""
         # if not code of conduct message
         if payload.message_id != _rule_id:
             return
-        if str(payload.emoji) == "🎃":
+        if str(payload.emoji) == _enroll:
             await payload.member.add_roles(self.role)
 
     @property
     def role(self):
-        return find_role(self.channel.guild, _role)
+        """Trick-or-treat role"""
+        if self._role is None:
+            self._role = find_role(self.channel.guild, _role)
+        return self._role
 
     @property
     def channel(self):
-        return self.bot.find_channel(_channel)
+        """Trick-or-treat channel"""
+        if self._channel is None:
+            self._channel = self.bot.find_channel(_channel)
+        return self._channel
+
+    @property
+    def log(self):
+        """Log channel"""
+        if self._log is None:
+            self._log = self.bot.find_channel(param.rc('log_channel'))
+        return self._log
 
     @property
     def message_id(self):
+        """Active trick-or-treat game message id"""
         if self._active_message_id is None:
             try:
-                self._active_message_id = self._get_config(self.bot.user).set_if_not_set(_bot, 0)
+                self._active_message_id = self._get_config().set_if_not_set(_bot, 0)
             except AttributeError:
                 self._active_message_id = None
         return self._active_message_id
 
     def cog_check(self, ctx):
+        """Permission check for this cog"""
+        # if game is not active, we can access this cog from any channel
         if not self._game_on:
             return True
+        # otherwise only the designated channel and log channel have access
         if ctx.channel == self.channel:
             return True
-        return ctx.channel == self.bot.find_channel(param.rc('log_channel'))
+        return ctx.channel == self.log
 
     async def send_message(self, dt=0, set_timer=True):
+        """Send trick-or-treat message"""
+        # if game is not active then quit
         if not self._game_on:
+            return
+        # if we have an active game message already then quit
+        if self.message_id:
+            return
+        # if we are awaiting responses then quit
+        if self._awaiting:
             return
         if dt is True:
             dt = random.randint(_tmin, _tmax)
-        logger.printv('TrickOrTreat.send_message waiting for {:} s'.format(dt))
-        if self.message_id:
-            return
-        if self._awaiting:
-            return
         await sleep(dt)
+        # ensure some funny business didn't happen while we were waiting
         if self.message_id:
             return
         if self._awaiting:
             return
+        logger.printv('TrickOrTreat.send_message waiting for {:} s'.format(dt))
+        # send new active game message
         msg = await self.channel.send(_msg)
         self._set_msg_id(msg.id)
         await msg.add_reaction(_trick)
@@ -93,15 +123,18 @@ class TrickOrTreat(commands.Cog):
         if set_timer == 0:
             set_timer = .01
         if set_timer:
+            # launch task for delayed count tally/finish
             self.bot.loop.create_task(self.finish_count(dt=set_timer, mid=msg.id))
 
     def send_later(self, **kwargs):
+        """Non-async wrapper for send_message"""
         if not self._game_on:
             return
         logger.printv('TrickOrTreat.send_later')
         self.bot.loop.create_task(self.send_message(**kwargs))
 
     async def _get_message(self):
+        """Get active game message id"""
         if self.message_id:
             try:
                 return await self.channel.fetch_message(self.message_id)
@@ -109,12 +142,16 @@ class TrickOrTreat(commands.Cog):
                 self._set_msg_id(0)
 
     def _set_msg_id(self, idn):
+        """set active message id and return old one"""
         old = self.message_id
         self._active_message_id = idn
         self._get_config(self.bot.user)[_bot] = idn
         return old
 
-    def _get_config(self, user):
+    def _get_config(self, user=None):
+        """Get a user's config file"""
+        if user is None:
+            user = self.bot.user
         try:
             return self._configs[user.id]
         except KeyError:
@@ -122,15 +159,18 @@ class TrickOrTreat(commands.Cog):
             return self._configs[user.id]
 
     def apply_delta(self, user, delta):
+        """Update user's score by delta"""
         config = self._get_config(user)
         old = config.set_if_not_set(_score, _start)
         config[_score] += delta
         return old, delta, old + delta
 
     def get_score(self, user):
+        """Return a user's current score"""
         return self._get_config(user).set_if_not_set(_score, _start)
 
     async def _member(self, user):
+        """Get a user/member object"""
         try:
             out = [m for m in self.role.members if m.id == user.id]
             if out:
@@ -149,6 +189,7 @@ class TrickOrTreat(commands.Cog):
         return user
 
     async def finish_count(self, dt=0, set_timer=True, mid=0):
+        """Finish/tally count on active game message"""
         if not self._game_on:
             return
         if dt is True:
@@ -231,13 +272,11 @@ class TrickOrTreat(commands.Cog):
         self.bot.loop.create_task(self.finish_count(**kwargs))
 
     @commands.Cog.listener()
-    async def on_message(self, message):
-        """Parse messages for new event post"""
-        # ignore all messages from our bot
-        if message.author == self.bot.user:
-            return
-        if not self._game_on:
-            return
+    async def on_ready(self):
+        await asyncio.sleep(5)
+        await self._async_init()
+
+    async def _async_init(self):
         if not self._init:
             self._init = True
             if not await self._get_message():
@@ -251,6 +290,17 @@ class TrickOrTreat(commands.Cog):
                 return
         if not self._awaiting:
             self.count_later(mid=self.message_id)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        """Parse messages"""
+        # ignore all messages from our bot
+        if message.author == self.bot.user:
+            return
+        if not self._game_on:
+            return
+        await self._async_init()
+
 
     @commands.command()
     async def show_points(self, ctx, member: discord.Member = None):
@@ -315,5 +365,4 @@ class TrickOrTreat(commands.Cog):
 
 
 def setup(bot):
-    return
     bot.add_cog(TrickOrTreat(bot))
