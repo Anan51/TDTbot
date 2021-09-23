@@ -252,7 +252,7 @@ class Participant:
 
 
 class Wilds(commands.Cog):
-    """Cog for trick or treat game"""
+    """Cog for The Wilds/Trials of the Wolf"""
     def __init__(self, bot, tmin=_tmin, tmax=_tmax):
         self.bot = bot
         self.tmin = tmin
