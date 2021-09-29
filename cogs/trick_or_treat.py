@@ -28,6 +28,11 @@ _msg = "Trick ({:}) or Treat ({:})!".format(_trick, _treat)
 # keywords for player/bot config storage
 _score = "tdt.trick_or_treat.score." + year
 _bot = "tdt.trick_or_treat.msg." + year
+# deltas for voting outcomes (trickers, treaters)
+_deltas = [(0, -6),  # trickers win
+           (0, 4),   # treaters win
+           (0, 0)    # tie
+           ]
 
 
 class TrickOrTreat(commands.Cog):
@@ -233,16 +238,13 @@ class TrickOrTreat(commands.Cog):
         results = ' {:} x {:} vs {:} x {:}'
         results = results.format(ntrick, _trick, ntreat, _treat)
         if ntrick > ntreat:
-            dtrick = 0
-            dtreat = -6
+            dtrick, dtreat = _deltas[0]
             txt = "The tricksters have won:"
         elif ntrick < ntreat:
-            dtrick = 0
-            dtreat = 4
+            dtrick, dtreat = _deltas[1]
             txt = "The treaters get a treat!"
         else:
-            dtrick = 0
-            dtreat = 0
+            dtrick, dtreat = _deltas[2]
             txt = "Tied voting."
         txt += results
         trickers = [await self._member(u) for u in trickers]
