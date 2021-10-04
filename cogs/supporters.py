@@ -59,13 +59,13 @@ class Supporters(commands.Cog):
             return
         await ctx.message.add_reaction('👍')
 
-    def _str(self, member):
-        if not isinstance(member, int):
+    def _str(self, member, mid):
+        if not isinstance(member, int) and member is not None:
             enroll, alias = self.data[member.id]
             msg = str(member)
         else:
-            enroll, alias = self.data[member]
-            msg = 'id: ' + str(member)
+            enroll, alias = self.data[mid]
+            msg = 'id: ' + str(mid)
         tz = pytz.timezone(param.rc('timezone'))
         enroll = seconds_to_datetime(enroll).astimezone(tz).strftime("%c")
 
@@ -100,7 +100,7 @@ class Supporters(commands.Cog):
                       <prefix>_r - reverse order (e.g. id_r)"""
         keys = self.data.keys()
         members = {key: await self.bot.get_or_fetch_user(key, ctx, fallback=True)
-                   for key in keys}
+                   for key in keys if key}
         if sort_by is not None:
             reverse = False
             if sort_by.endswith('_r'):
@@ -117,7 +117,7 @@ class Supporters(commands.Cog):
             else:
                 await ctx.send("Unknown sort option.")
             keys = sorted(keys, key=f, reverse=reverse)
-        lines = [self._str(members[key]) for key in keys]
+        lines = [self._str(members[key], key) for key in keys]
         if lines:
             await split_send(ctx, lines)
         else:

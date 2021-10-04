@@ -138,11 +138,11 @@ class MainBot(commands.Bot):
                 out = None
             if out is not None:
                 return out
-        out = self.bot.get_user()
+        out = self.get_user(user_id)
         if out is not None:
             return out
         try:
-            out = await self.bot.fetch_user(user_id)
+            out = await self.fetch_user(user_id)
         except discord.errors.NotFound:
             out = None
         if fallback and out is None:
