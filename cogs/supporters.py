@@ -60,10 +60,15 @@ class Supporters(commands.Cog):
         await ctx.message.add_reaction('👍')
 
     def _str(self, member):
-        enroll, alias = self.data[member.id]
+        if not isinstance(member, int):
+            enroll, alias = self.data[member.id]
+            msg = str(member)
+        else:
+            enroll, alias = self.data[member]
+            msg = 'id: ' + str(member)
         tz = pytz.timezone(param.rc('timezone'))
         enroll = seconds_to_datetime(enroll).astimezone(tz).strftime("%c")
-        msg = str(member)
+
         if alias:
             msg += ' (' + alias + ')'
         msg += ' Enrolled at: ' + enroll
@@ -94,7 +99,8 @@ class Supporters(commands.Cog):
                       name       - user name
                       <prefix>_r - reverse order (e.g. id_r)"""
         keys = self.data.keys()
-        members = {key: await self.bot.get_or_fetch_user(key, ctx) for key in keys}
+        members = {key: await self.bot.get_or_fetch_user(key, ctx, fallback=True)
+                   for key in keys}
         if sort_by is not None:
             reverse = False
             if sort_by.endswith('_r'):
