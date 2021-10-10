@@ -234,7 +234,7 @@ class TrickOrTreat(commands.Cog):
         results = ' {:} x {:} vs {:} x {:}'
         results = results.format(ntrick, _trick, ntreat, _treat)
         ntot = ntrick + ntreat
-        delta = random.randint(1, ntreat)
+        delta = random.randint(3, ntot * 5)
         if ntrick > ntreat:
             dtrick, dtreat = 0, -3 * delta
             txt = "The tricksters have won:"
