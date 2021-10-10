@@ -18,6 +18,7 @@ _channel = "the_neighborhood"   # trick-or-treat channel name or id
 _rule_id = 892838986882617385   # message id for rules/reaction check
 _game_on = True                 # flag to run game
 _role = "SPOOKY"                # role name or id for game participation
+_nmin = 3                       # minimum number of votes to start count
 # secondary settings
 _tmin, _tmax = 5 * 60, 15 * 60  # min/max time between rounds
 _start = 0                      # starting score
@@ -28,11 +29,6 @@ _msg = "Trick ({:}) or Treat ({:})!".format(_trick, _treat)
 # keywords for player/bot config storage
 _score = "tdt.trick_or_treat.score." + year
 _bot = "tdt.trick_or_treat.msg." + year
-# deltas for voting outcomes (trickers, treaters)
-_deltas = [(0, -6),  # trickers win
-           (0, 4),   # treaters win
-           (0, 0)    # tie
-           ]
 
 
 class TrickOrTreat(commands.Cog):
@@ -228,7 +224,7 @@ class TrickOrTreat(commands.Cog):
                     await rxn.clear()
                 except discord.HTTPException:
                     pass
-        if len(set(trickers + treaters)) < 2:
+        if len(set(trickers + treaters)) < _nmin:
             logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
             self._awaiting = None
             return self.count_later(dt=set_timer, mid=mid)
@@ -237,14 +233,16 @@ class TrickOrTreat(commands.Cog):
         ntreat -= 1
         results = ' {:} x {:} vs {:} x {:}'
         results = results.format(ntrick, _trick, ntreat, _treat)
+        ntot = ntrick + ntreat
+        delta = random.randint(1, ntreat)
         if ntrick > ntreat:
-            dtrick, dtreat = _deltas[0]
+            dtrick, dtreat = 0, -3 * delta
             txt = "The tricksters have won:"
         elif ntrick < ntreat:
-            dtrick, dtreat = _deltas[1]
+            dtrick, dtreat = 0, 2 * delta
             txt = "The treaters get a treat!"
         else:
-            dtrick, dtreat = _deltas[2]
+            dtrick, dtreat = 0, 0
             txt = "Tied voting."
         txt += results
         trickers = [await self._member(u) for u in trickers]
