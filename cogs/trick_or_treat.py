@@ -30,6 +30,17 @@ _msg = "Trick ({:}) or Treat ({:})!".format(_trick, _treat)
 _score = "tdt.trick_or_treat.score." + year
 _bot = "tdt.trick_or_treat.msg." + year
 
+# alt accounts
+_alts = {547171042565685250: [856003669090369536, 522962175690539008],  # eyes
+         }
+_all_alts = []
+for i in _alts.values():
+    _all_alts.extend(i)
+
+
+def sign(x):
+    return bool(x > 0) - bool(x < 0)
+
 
 class TrickOrTreat(commands.Cog):
     """Cog for trick or treat game"""
@@ -212,19 +223,46 @@ class TrickOrTreat(commands.Cog):
         trickers = []
         treaters = []
         ntrick, ntreat = 0, 0
+        # tally up the votes
         for rxn in msg.reactions:
             if rxn.emoji == _trick:
                 ntrick = rxn.count
                 trickers = [user async for user in rxn.users() if user != self.bot.user]
+                noa_trick = [u for u in trickers if u.id not in _all_alts]
             elif rxn.emoji == _treat:
                 ntreat = rxn.count
                 treaters = [user async for user in rxn.users() if user != self.bot.user]
+                noa_treat = [u for u in trickers if u.id not in _all_alts]
             else:
                 try:
                     await rxn.clear()
                 except discord.HTTPException:
                     pass
-        if len(set(trickers + treaters)) < _nmin:
+        voters = set(trickers + treaters)
+        noa_voters = [u for u in voters if u.id not in _all_alts]
+        ntot, noa_tot = len(voters), len(set(noa_trick + noa_treat))
+        if ntot > noa_tot:
+            alting = [u for u in noa_voters if u.id in _all_alts]
+            alts_used = list(set([u for u in treaters + trickers is u in _all_alts]))
+        else:
+            alting = []
+            alts_used = []
+        if noa_tot >= _nmin > ntot:
+            if random.randint(0, 1):
+                logger.printv('Finish TrickOrTreat.finish_count (too few real votes)')
+                self._awaiting = None
+                if not random.randint(0, 2):
+                    alt = random.choice(alts_used)
+                    for rxn in msg.reactions:
+                        if rxn.emoji in [_trick, _treat]:
+                            try:
+                                rxn.remove(alt)
+                                msg = 'Removed reaction {} by alt "{}"'
+                                logger.printv(msg.format(rxn.emoji, alt))
+                            except (discord.HTTPException, discord.Forbidden, discord.Not):
+                                pass
+                return self.count_later(dt=set_timer, mid=mid)
+        elif len(set(trickers + treaters)) < _nmin:
             logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
             self._awaiting = None
             return self.count_later(dt=set_timer, mid=mid)
@@ -233,8 +271,17 @@ class TrickOrTreat(commands.Cog):
         ntreat -= 1
         results = ' {:} x {:} vs {:} x {:}'
         results = results.format(ntrick, _trick, ntreat, _treat)
-        ntot = ntrick + ntreat
+        ntot = max(noa_tot, 1)
         delta = random.randint(3, ntot * 5)
+        stealth_nerf = 0
+        if alts_used:
+            alting = [u for u in noa_voters if u.id in _all_alts]
+            if noa_tot == len(alting):
+                delta = random.randint(1, 3)
+            else:
+                stealth_nerf = 1
+                if sign(ntrick - ntreat) != sign(len(noa_trick) - len(noa_treat)):
+                    stealth_nerf = 2
         if ntrick > ntreat:
             dtrick, dtreat = 0, -3 * delta
             txt = "The tricksters have won:"
@@ -245,6 +292,12 @@ class TrickOrTreat(commands.Cog):
             dtrick, dtreat = 0, 0
             txt = "Tied voting."
         txt += results
+        if stealth_nerf:
+            for u in alting:
+                delt = -abs(dtrick) * stealth_nerf
+                msg = 'Stealth nerf "{}" by {} ({})'.format(u, delt, stealth_nerf)
+                logger.printv(msg)
+                self.apply_delta(u, delt)
         trickers = [await self._member(u) for u in trickers]
         treaters = [await self._member(u) for u in treaters]
         deltas = {user: dtrick for user in trickers}
