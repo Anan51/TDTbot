@@ -243,7 +243,7 @@ class TrickOrTreat(commands.Cog):
         ntot, noa_tot = len(voters), len(set(noa_trick + noa_treat))
         if ntot > noa_tot:
             alting = [u for u in noa_voters if u.id in _all_alts]
-            alts_used = list(set([u for u in treaters + trickers is u in _all_alts]))
+            alts_used = list(set([u for u in treaters + trickers if u in _all_alts]))
         else:
             alting = []
             alts_used = []
