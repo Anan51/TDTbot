@@ -32,6 +32,7 @@ _bot = "tdt.trick_or_treat.msg." + year
 
 # alt accounts
 _alts = {547171042565685250: [856003669090369536, 522962175690539008],  # eyes
+         604505229593149462: [901988686277804073, 901984697805049916],  # bob
          }
 _all_alts = []
 for i in _alts.values():
