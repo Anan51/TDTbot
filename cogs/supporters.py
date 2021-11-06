@@ -91,7 +91,7 @@ class Supporters(commands.Cog):
             await ctx.send('No member "{}" found in supporters.'.format(member))
 
     @commands.command()
-    async def list_supporters(self, ctx, sort_by=None):
+    async def list_supporters(self, ctx, sort_by='alias'):
         """<optional sort key>: lists all supporters.keys
         sorting keys: alias      - supporter username/alias
                       date       - enrollment date and time
@@ -113,7 +113,7 @@ class Supporters(commands.Cog):
             elif sort_by == 'name':
                 f = lambda x: members[x].display_name
             elif sort_by == 'alias':
-                f = lambda x: self.data[x][0] + '~~~' + members[x].display_name
+                f = lambda x: self.data[x][1] + '~~~' + members[x].display_name
             else:
                 await ctx.send("Unknown sort option.")
             keys = sorted(keys, key=f, reverse=reverse)
