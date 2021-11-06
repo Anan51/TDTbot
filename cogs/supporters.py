@@ -113,7 +113,7 @@ class Supporters(commands.Cog):
             elif sort_by == 'name':
                 f = lambda x: members[x].display_name
             elif sort_by == 'alias':
-                f = lambda x: self.data[x][1] + '~~~' + members[x].display_name
+                f = lambda x: self.data[x][1] + '~~~' + getattr(members[x], 'display_name', members[x].name)
             else:
                 await ctx.send("Unknown sort option.")
             keys = sorted(keys, key=f, reverse=reverse)
