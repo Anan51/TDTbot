@@ -128,6 +128,7 @@ class Content(commands.Cog):
                 continue
             yt_id = extract_video_id(i)
             if yt_id:
+                continue
                 tdt_channel = False
                 with request.urlopen(i) as response:
                     # set the correct charset below
@@ -151,5 +152,4 @@ class Content(commands.Cog):
 
 
 def setup(bot):
-    return
     bot.add_cog(Content(bot))
