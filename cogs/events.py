@@ -88,7 +88,8 @@ class _Event(dict):
             # parse time text
             if ':' in out['when']:
                 try:
-                    time = re.findall('\d+:\d+[ ]?[ap]m', out['when'].lower())[0]
+                    time = re.findall('\d+:\d+[ ]?[ap][.]?m[.]?', out['when'].lower())[0]
+                    time = time.replace('.', '')
                     fmt = '%I:%M %p' if ' ' in time else '%I:%M%p'
                     t = datetime.datetime.strptime(time, fmt)
                 except IndexError:
@@ -127,10 +128,14 @@ class _Event(dict):
             return
         except Exception as e:
             logger.printv("Error parsing event!")
+            logger.printv(e)
             logger.printv("=" * 30)
             logger.printv(message.content)
             logger.printv("=" * 30)
-            raise e
+            #raise e
+            for i in self.keys():
+                self.pop(i)
+            return
 
     async def send_error(self, channel=None):
         if channel is None:
