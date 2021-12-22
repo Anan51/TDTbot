@@ -30,6 +30,7 @@ class _Event(dict):
         if message.author == cog.bot.user:
             return
         self._error = None
+        self._comments = []
         # start parsing message for event info
         lines = [i.strip() for i in message.content.split('\n')]
         nlines = len(lines)
@@ -87,7 +88,7 @@ class _Event(dict):
             day = today + datetime.timedelta(days=i)
             # parse time text
             time_text = out['when'].lower().strip()
-            search = '([0-9]{1,2})([:. -])?([0-9]{2})?[ ]?([ap][.]?m)?'
+            search = '([0-9]{1,2})([:. -])?([0-9]{2})?[ ]?([ap][.]?m[.]?)?[ ]?(\w+)?'
             time = re.findall(search, time_text)
             if not time:
                 logger.warning("Can't parse time")
@@ -97,7 +98,18 @@ class _Event(dict):
             time = time[0]
             hour = int(time[0])
             minute = int(time[2] if time[2] else 0)
-            am_pm = time[3].lower().replace('.', '')
+            am_pm = time[3].strip().replace('.', '')
+            # parse timezone, default to server timezone (US/Pacific)
+            timezone = tz
+            tz_parsed = False
+            if time[4]:
+                try:
+                    timezone = parse_timezone(time[4])
+                except pytz.exceptions.UnknownTimeZoneError:
+                    pass
+                else:
+                    tz_parsed = True
+                    self._comments.append('Timezone "{}" parsed as: "{}"'.format(time[4], timezone.zone))
             # if am/pm not provided
             if not am_pm:
                 if 'night' in out['when'].lower() and hour < 12:
@@ -109,8 +121,13 @@ class _Event(dict):
             if am_pm == 'pm' and hour < 12:
                 hour += 12
             t = datetime.time(hour, minute)
-            # make sure datetime is specified with server timezone
-            dt = tz.localize(datetime.datetime.combine(day, t))
+            # make sure datetime is specified with parsed timezone
+            dt = timezone.localize(datetime.datetime.combine(day, t))
+            if tz_parsed:
+                abrv = timezone.localize(datetime.datetime.now(), is_dst=None).tzname().lower()
+                if time[4] != abrv and len(time[4]) in [3, 4]:
+                    msg = 'I think you meant "{}" instead of "{}".'
+                    self._comments.append(msg.format(abrv.upper(), time[4].upper()))
             # convert it to UTC and strip timezone info (required by external libs)
             out['datetime'] = dt.astimezone(pytz.utc).replace(tzinfo=None)
             # put the contents of out into self
@@ -145,7 +162,7 @@ class _Event(dict):
         # assign UTC timezone to datetime object
         dt = pytz.utc.localize(self['datetime'])
         # convert to server timezone
-        return dt.astimezone(self.tz).strftime('%X %A %x')
+        return dt.astimezone(self.tz).strftime('%X %A %x %Z')
 
     @property
     def name(self):
@@ -155,7 +172,8 @@ class _Event(dict):
     @property
     def log_message(self):
         """Return the string we want to send to the log when registering this event"""
-        return 'Event "{0.name}" registered for {0.dt_str}'.format(self)
+        out = ['Event "{0.name}" registered for {0.dt_str}'.format(self)] + self._comments
+        return '\n'.join(out)
 
     @property
     def id(self):

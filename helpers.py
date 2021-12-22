@@ -159,3 +159,40 @@ def seconds_to_datetime(in_time, t0=None, localize=True):
     if localize:
         dt = localize.localize(dt)
     return dt
+
+
+def parse_timezone(tz, self_call=False, check_abbr=True):
+    try:
+        return pytz.timezone(tz)
+    except pytz.exceptions.UnknownTimeZoneError:
+        pass
+    if check_abbr is True:
+        check_abbr = {'hst': 'US/Hawaii',
+                      'hdt': 'US/Hawaii',
+                      'ahst': 'US/Alaska',
+                      'ahdt': 'US/Alaska',
+                      'pst': 'US/Pacific',
+                      'pdt': 'US/Pacific',
+                      'mst': 'US/Mountain',
+                      'mdt': 'US/Mountain',
+                      'cst': 'US/Central',
+                      'cdt': 'US/Central',
+                      'est': 'US/Eastern',
+                      'edt': 'US/Eastern',
+                      'cet': 'Europe/Berlin',
+                      'cest': 'Europe/Berlin',
+                      'eet': 'Europe/Helsinki',
+                      'eest': 'Europe/Helsinki',
+                      'wet': 'Europe/Lisbon',
+                      'west': 'Europe/Lisbon',
+                      'bst': 'Europe/London',
+                      'gmt': 'Europe/London',
+                      }
+    if check_abbr:
+        if tz.lower() in check_abbr:
+            return pytz.timezone(tz)
+    if not self_call:
+        if ' ' in tz:
+            return parse_timezone(tz.replace(' ', '_'), self_call=True,
+                                  check_abbr=check_abbr)
+   return pytz.timezone(tz)

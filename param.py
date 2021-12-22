@@ -22,7 +22,7 @@ defaults = {
     'log_channel':     'debugging',
     'fashion_channel': 'debugging',
     'event_reminders': [360, 60, 0],
-    'timezone':        'America/Los_Angeles',
+    'timezone':        'US/Pacific',
     'logfile':         os.path.join(_dir, 'logs', 'tdt.log'),
 }
 
