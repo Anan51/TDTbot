@@ -195,4 +195,4 @@ def parse_timezone(tz, self_call=False, check_abbr=True):
         if ' ' in tz:
             return parse_timezone(tz.replace(' ', '_'), self_call=True,
                                   check_abbr=check_abbr)
-   return pytz.timezone(tz)
+    return pytz.timezone(tz)
