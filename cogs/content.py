@@ -123,7 +123,7 @@ class Content(commands.Cog):
                         if self._ttv_cooldown > now:
                             continue
                     await self.channel.send(i + ' now streaming')
-                    tweet(i)
+                    tweet('We are live!\n' + i)
                     self._ttv_cooldown = now + _ttv_cooldown
                 continue
             yt_id = extract_video_id(i)
