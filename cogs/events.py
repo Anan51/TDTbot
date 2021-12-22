@@ -86,39 +86,29 @@ class _Event(dict):
                 i += 1
             day = today + datetime.timedelta(days=i)
             # parse time text
-            if ':' in out['when']:
-                try:
-                    time = re.findall('\d+:\d+[ ]?[ap][.]?m[.]?', out['when'].lower())[0]
-                    time = time.replace('.', '')
-                    fmt = '%I:%M %p' if ' ' in time else '%I:%M%p'
-                    t = datetime.datetime.strptime(time, fmt)
-                except IndexError:
-                    # if am/pm not provided
-                    t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0],
-                                                   '%H:%M')
-                    if 'night' in out['when'].lower() and t.hour < 12:
-                        t += datetime.timedelta(hours=12)
-                    elif t.hour < 8 and 'morning' not in out['when'].lower():
-                        t += datetime.timedelta(hours=12)
-            # no ":" in text so no hour/minute separator
-            else:
-                try:
-                    time = re.findall('\d+[ ]?[ap]m', out['when'].lower())[0]
-                    fmt = '%I %p' if ' ' in time else '%I%p'
-                    t = datetime.datetime.strptime(time, fmt)
-                except IndexError:
-                    # if am/pm not provided
-                    t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0],
-                                                   '%H')
-                    if 'night' in out['when'].lower() and t.hour < 12:
-                        t += datetime.timedelta(hours=12)
-                    elif t.hour < 8 and 'morning' not in out['when'].lower():
-                        t += datetime.timedelta(hours=12)
-            if not t:
-                logger.warning('Invalid time')
+            time_text = out['when'].lower().strip()
+            search = '([0-9]{1,2})([:. -])?([0-9]{2})[ ]?([ap][.]?m)?'
+            time = re.findall(search, time_text)
+            if not time:
+                logger.warning("Can't parse time")
                 if not from_hist:
-                    self._error = "Event not registered. Unable to parse time of day"
+                    self._error = "Event not registered. Unable to parse time"
                 return
+            time = time[0]
+            hour = int(time[0])
+            minute = int(time[2])
+            am_pm = time[3].lower().replace('.', '')
+            # if am/pm not provided
+            if not am_pm:
+                if 'night' in out['when'].lower() and hour < 12:
+                    am_pm = 'pm'
+                elif hour < 8 and 'morning' not in out['when'].lower():
+                    am_pm = 'pm'
+                elif hour < 12:
+                    am_pm = 'am'
+            if am_pm == 'pm' and hour < 12:
+                hour += 12
+            t = datetime.time(hour, minute)
             # make sure datetime is specified with server timezone
             dt = tz.localize(datetime.datetime.combine(day, t.time()))
             # convert it to UTC and strip timezone info (required by external libs)
@@ -132,9 +122,9 @@ class _Event(dict):
             logger.printv("=" * 30)
             logger.printv(message.content)
             logger.printv("=" * 30)
-            #raise e
-            for i in self.keys():
-                self.pop(i)
+            if not from_hist:
+                self._error = "Event not registered. Unable to parse event.\n" \
+                              "Sorry, I'm not much smarter than Electro."
             return
 
     async def send_error(self, channel=None):
