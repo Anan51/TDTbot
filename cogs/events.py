@@ -65,65 +65,72 @@ class _Event(dict):
             if not from_hist:
                 self._error = "Event not registered. Unable to parse day of week"
             return
-        # We only get this far if we have a valid event, so set attributes now
-        self.cog = cog
-        self._pending_alerts = False
-        self.from_hist = from_hist
-        if log_channel is None:
-            log_channel = getattr(self.cog, 'channel', param.rc('event_channel'))
-        self.log_channel = self.cog.bot.find_channel(log_channel)
-        tz = pytz.timezone(param.rc('timezone'))
-        self.tz = tz
-        out['id'] = message.id
-        self._message_channel = message.channel
-        # Attributes finished now deal with timezone crap
-        now = datetime.datetime.now().astimezone(tz).replace(tzinfo=None)
-        today = now.date()  # today in server timezone
-        i = 0
-        # parse day of week into datetime and assume it's the next day with given name
-        while (today + datetime.timedelta(days=i)).weekday() != days_of_week.index(day):
-            i += 1
-        day = today + datetime.timedelta(days=i)
-        # parse time text
-        if ':' in out['when']:
-            try:
-                time = re.findall('\d+:\d+[ ]?[ap]m', out['when'].lower())[0]
-                fmt = '%I:%M %p' if ' ' in time else '%I:%M%p'
-                t = datetime.datetime.strptime(time, fmt)
-            except IndexError:
-                # if am/pm not provided
-                t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0],
-                                               '%H:%M')
-                if 'night' in out['when'].lower() and t.hour < 12:
-                    t += datetime.timedelta(hours=12)
-                elif t.hour < 8 and 'morning' not in out['when'].lower():
-                    t += datetime.timedelta(hours=12)
-        # no ":" in text so no hour/minute separator
-        else:
-            try:
-                time = re.findall('\d+[ ]?[ap]m', out['when'].lower())[0]
-                fmt = '%I %p' if ' ' in time else '%I%p'
-                t = datetime.datetime.strptime(time, fmt)
-            except IndexError:
-                # if am/pm not provided
-                t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0],
-                                               '%H')
-                if 'night' in out['when'].lower() and t.hour < 12:
-                    t += datetime.timedelta(hours=12)
-                elif t.hour < 8 and 'morning' not in out['when'].lower():
-                    t += datetime.timedelta(hours=12)
-        if not t:
-            logger.warning('Invalid time')
-            if not from_hist:
-                self._error = "Event not registered. Unable to parse time of day"
+        try:
+            # We only get this far if we have a valid event, so set attributes now
+            self.cog = cog
+            self._pending_alerts = False
+            self.from_hist = from_hist
+            if log_channel is None:
+                log_channel = getattr(self.cog, 'channel', param.rc('event_channel'))
+            self.log_channel = self.cog.bot.find_channel(log_channel)
+            tz = pytz.timezone(param.rc('timezone'))
+            self.tz = tz
+            out['id'] = message.id
+            self._message_channel = message.channel
+            # Attributes finished now deal with timezone crap
+            now = datetime.datetime.now().astimezone(tz).replace(tzinfo=None)
+            today = now.date()  # today in server timezone
+            i = 0
+            # parse day of week into datetime and assume it's the next day with given name
+            while (today + datetime.timedelta(days=i)).weekday() != days_of_week.index(day):
+                i += 1
+            day = today + datetime.timedelta(days=i)
+            # parse time text
+            if ':' in out['when']:
+                try:
+                    time = re.findall('\d+:\d+[ ]?[ap]m', out['when'].lower())[0]
+                    fmt = '%I:%M %p' if ' ' in time else '%I:%M%p'
+                    t = datetime.datetime.strptime(time, fmt)
+                except IndexError:
+                    # if am/pm not provided
+                    t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0],
+                                                   '%H:%M')
+                    if 'night' in out['when'].lower() and t.hour < 12:
+                        t += datetime.timedelta(hours=12)
+                    elif t.hour < 8 and 'morning' not in out['when'].lower():
+                        t += datetime.timedelta(hours=12)
+            # no ":" in text so no hour/minute separator
+            else:
+                try:
+                    time = re.findall('\d+[ ]?[ap]m', out['when'].lower())[0]
+                    fmt = '%I %p' if ' ' in time else '%I%p'
+                    t = datetime.datetime.strptime(time, fmt)
+                except IndexError:
+                    # if am/pm not provided
+                    t = datetime.datetime.strptime(re.findall('\d', out['when'].lower())[0],
+                                                   '%H')
+                    if 'night' in out['when'].lower() and t.hour < 12:
+                        t += datetime.timedelta(hours=12)
+                    elif t.hour < 8 and 'morning' not in out['when'].lower():
+                        t += datetime.timedelta(hours=12)
+            if not t:
+                logger.warning('Invalid time')
+                if not from_hist:
+                    self._error = "Event not registered. Unable to parse time of day"
+                return
+            # make sure datetime is specified with server timezone
+            dt = tz.localize(datetime.datetime.combine(day, t.time()))
+            # convert it to UTC and strip timezone info (required by external libs)
+            out['datetime'] = dt.astimezone(pytz.utc).replace(tzinfo=None)
+            # put the contents of out into self
+            self.update(out)
             return
-        # make sure datetime is specified with server timezone
-        dt = tz.localize(datetime.datetime.combine(day, t.time()))
-        # convert it to UTC and strip timezone info (required by external libs)
-        out['datetime'] = dt.astimezone(pytz.utc).replace(tzinfo=None)
-        # put the contents of out into self
-        self.update(out)
-        return
+        except Exception as e:
+            logger.printv("Error parsing event!")
+            logger.printv("=" * 30)
+            logger.printv(message.content)
+            logger.printv("=" * 30)
+            raise e
 
     async def send_error(self, channel=None):
         if channel is None:
