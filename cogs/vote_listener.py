@@ -65,7 +65,7 @@ class Listener:
         # if the bot hasn't posted the correct reactions this isn't a voting post
         if ive_reacted < len(self.emojis):
             msg = 'Not official vote: {} < {}.'
-            logger.printv(msg.format(ive_reacted, len(self.emojis)))
+            logger.debug(msg.format(ive_reacted, len(self.emojis)))
             return
         if count[self.emojis[1]] >= self.del_thresh:
             await msg.delete()
