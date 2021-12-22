@@ -87,7 +87,7 @@ class _Event(dict):
             day = today + datetime.timedelta(days=i)
             # parse time text
             time_text = out['when'].lower().strip()
-            search = '([0-9]{1,2})([:. -])?([0-9]{2})[ ]?([ap][.]?m)?'
+            search = '([0-9]{1,2})([:. -])?([0-9]{2})?[ ]?([ap][.]?m)?'
             time = re.findall(search, time_text)
             if not time:
                 logger.warning("Can't parse time")
@@ -96,7 +96,7 @@ class _Event(dict):
                 raise ValueError
             time = time[0]
             hour = int(time[0])
-            minute = int(time[2])
+            minute = int(time[2] if time[2] else 0)
             am_pm = time[3].lower().replace('.', '')
             # if am/pm not provided
             if not am_pm:
