@@ -544,7 +544,7 @@ class Wilds(commands.Cog):
         role = find_role(self.channel.guild, "Lone Wolf")
         if not role.members:
             return
-        logger.printv('Wilds.send_message waiting for {:} s'.format(dt))
+        logger.debug('Wilds.send_message waiting for {:} s'.format(dt))
         await sleep(dt)
         challenge = random.choices(_challenges, weights=_c_weights)[0]
         msg = await challenge.send_to(self.channel, self._get_config(self.bot.user),
