@@ -60,12 +60,12 @@ class _Event(dict):
             if d in out['when'].lower():
                 day = d
                 break
-        if not day:
-            logger.warning("Can't parse day")
-            if not from_hist:
-                self._error = "Event not registered. Unable to parse day of week"
-            return
         try:
+            if not day:
+                logger.warning("Can't parse day")
+                if not from_hist:
+                    self._error = "Event not registered. Unable to parse day of week"
+                raise ValueError
             # We only get this far if we have a valid event, so set attributes now
             self.cog = cog
             self._pending_alerts = False
@@ -93,7 +93,7 @@ class _Event(dict):
                 logger.warning("Can't parse time")
                 if not from_hist:
                     self._error = "Event not registered. Unable to parse time"
-                return
+                raise ValueError
             time = time[0]
             hour = int(time[0])
             minute = int(time[2])
