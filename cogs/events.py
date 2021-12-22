@@ -110,7 +110,7 @@ class _Event(dict):
                 hour += 12
             t = datetime.time(hour, minute)
             # make sure datetime is specified with server timezone
-            dt = tz.localize(datetime.datetime.combine(day, t.time()))
+            dt = tz.localize(datetime.datetime.combine(day, t))
             # convert it to UTC and strip timezone info (required by external libs)
             out['datetime'] = dt.astimezone(pytz.utc).replace(tzinfo=None)
             # put the contents of out into self
@@ -119,6 +119,7 @@ class _Event(dict):
         except Exception as e:
             logger.printv("Error parsing event!")
             logger.printv(e)
+            logger.printv(traceback.format_exc())
             logger.printv("=" * 30)
             logger.printv(message.content)
             logger.printv("=" * 30)
