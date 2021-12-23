@@ -96,7 +96,7 @@ class MainCommands(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        """Listen for DMs and post them in the bot log channel"""
+        """Template for message listeners"""
         # ignore messages from this bot
         if message.author == self.bot.user:
             return
@@ -108,13 +108,8 @@ class MainCommands(commands.Cog):
             for prefix in self.bot.command_prefix:
                 if message.content.startswith(prefix):
                     return
-        # if DM
-        if type(message.channel) == discord.DMChannel:
-            channel = self.bot.find_channel(param.rc('log_channel'))
-            roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
-            msg = ' '.join(roles) + '\n'
-            msg += 'From: {0.author}\n"{0.content}"'.format(message)
-            await channel.send(msg)
+        # Do something with the message below
+        return
 
     @commands.command()
     async def recruits(self, ctx, role: discord.Role = None):
