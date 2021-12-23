@@ -196,7 +196,7 @@ def parse_timezone(tz, self_call=False, check_abbr=True):
                       }
     if check_abbr:
         if tz.lower() in check_abbr:
-            return pytz.timezone(check_abbr[tz])
+            return pytz.timezone(check_abbr[tz.lower()])
     if not self_call:
         if ' ' in tz:
             return parse_timezone(tz.replace(' ', '_'), self_call=True,
