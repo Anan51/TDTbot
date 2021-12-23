@@ -106,7 +106,8 @@ class _Event(dict):
                 try:
                     timezone = parse_timezone(time[4])
                 except pytz.exceptions.UnknownTimeZoneError:
-                    pass
+                    logger.printv('timezone parse "{}" fail.'.format(time[4]))
+                    logger.printv(traceback.format_exc())
                 else:
                     tz_parsed = True
                     self._comments.append('Timezone "{}" parsed as: "{}"'.format(time[4], timezone.zone))
