@@ -79,11 +79,17 @@ class DirectMessages(commands.Cog):
             roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
             msg = ' '.join(roles) + '\n'
             msg += 'From: {0.author}\n"{0.content}"'.format(message)
+            urls = []
             if message.attachments:
                 msg += '\nAttachments:\n'
                 msg += '```\n{}\n```'.format(message.attachments)
+                for attachment in message.attachments:
+                    if attachment.url and attachment.url not in urls:
+                        urls.append(attachment.url)
             sent = await channel.send(msg)
             self[sent.id] = message.channel.id
+            if urls:
+                await split_send(channel, urls)
             return
         # if message from log channel
         if message.channel == self.channel:
@@ -93,6 +99,7 @@ class DirectMessages(commands.Cog):
                     if message.reference.message_id in self:
                         channel = self.bot.get_channel(self[message.reference.message_id])
                         await channel.send(message.content)
+                        await message.add_reaction('✅')
 
 
 def setup(bot):
