@@ -31,14 +31,26 @@ class DirectMessages(commands.Cog):
             self._configs[user.id] = UserConfig(user)
             return self._configs[user.id]
 
+    @property
+    def data(self):
+        """Get the data file for the bot"""
+        try:
+            return self._get_config()[_bot]
+        except KeyError:
+            self._get_config()[_bot] = {}
+            return self._get_config()[_bot]
+
     def __getitem__(self, item):
-        return self._get_config()[item]
+        return self.data[item]
 
     def __setitem__(self, key, value):
-        self._get_config()[key] = value
+        self.data[key] = value
 
     def __contains__(self, item):
-        return item in self._get_config()
+        return item in self.data
+
+    def keys(self):
+        return self.data.keys()
 
     @property
     def channel(self):
@@ -72,7 +84,7 @@ class DirectMessages(commands.Cog):
             return
         # if message from log channel
         if message.channel == self.channel:
-            if admin_check(bot=self.self, author=message.author, guild=self.channel.guild):
+            if admin_check(bot=self.bot, author=message.author, guild=self.channel.guild):
                 # if message is reply to a previous message
                 if message.reference:
                     if message.reference.message_id in self:
