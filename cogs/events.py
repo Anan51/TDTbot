@@ -9,7 +9,7 @@ import re
 import traceback
 from .. import param
 from ..helpers import *
-from ..async_helpers import admin_check, wait_until
+from ..async_helpers import admin_check, wait_until, split_send
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -173,8 +173,7 @@ class _Event(dict):
     @property
     def log_message(self):
         """Return the string we want to send to the log when registering this event"""
-        out = ['Event "{0.name}" registered for {0.dt_str}'.format(self)] + self._comments
-        return '\n'.join(out)
+        return 'Event "{0.name}" registered for {0.dt_str}'.format(self)
 
     @property
     def id(self):
@@ -204,6 +203,9 @@ class _Event(dict):
                     if self.cog.bot.restart_time() > t:
                         # exit and don't post log
                         return
+        else:
+            if self._comments:
+                await split_send(self.log_channel, self._comments)
         await self.log_channel.send(log)
 
     def future_or_active(self, hours=6):
