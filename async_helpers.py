@@ -11,6 +11,8 @@ logger = logging.getLogger('discord.' + __name__)
 
 
 async def split_send(channel, message, deliminator='\n', n=2000, style=''):
+    """Split a message into chunks and send them in chunks."""
+    out = []
     if not message:
         return
     if not type(message) in [tuple, list]:
@@ -19,11 +21,12 @@ async def split_send(channel, message, deliminator='\n', n=2000, style=''):
     while message:
         tmp = message.pop(0)
         if len(msg + deliminator + tmp + style * 2) >= n:
-            await channel.send(style + msg + style)
+            out.append(await channel.send(style + msg + style))
             msg = tmp
         else:
             msg += deliminator + tmp
-    await channel.send(style + msg + style)
+    out.append(await channel.send(style + msg + style))
+    return out
 
 
 async def sleep(dt):

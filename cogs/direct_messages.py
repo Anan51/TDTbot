@@ -79,17 +79,19 @@ class DirectMessages(commands.Cog):
             roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
             msg = ' '.join(roles) + '\n'
             msg += 'From: {0.author}\n"{0.content}"'.format(message)
+            sent = [await channel.send(msg)]
             urls = []
             if message.attachments:
-                msg += '\nAttachments:\n'
+                msg = '\nAttachments:\n'
                 msg += '```\n{}\n```'.format(message.attachments)
                 for attachment in message.attachments:
                     if attachment.url and attachment.url not in urls:
                         urls.append(attachment.url)
-            sent = await channel.send(msg)
-            self[sent.id] = message.channel.id
+                sent.append(await channel.send(msg))
             if urls:
-                await split_send(channel, urls)
+                sent.extend(await split_send(channel, urls))
+            for i in sent:
+                self[i.id] = message.channel.id
             return
         # if message from log channel
         if message.channel == self.channel:
