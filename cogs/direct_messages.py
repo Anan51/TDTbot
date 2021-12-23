@@ -79,6 +79,9 @@ class DirectMessages(commands.Cog):
             roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
             msg = ' '.join(roles) + '\n'
             msg += 'From: {0.author}\n"{0.content}"'.format(message)
+            if message.attachments:
+                msg += '\nAttachments:\n'
+                msg += '```\n{}\n```'.format(message.attachments)
             sent = await channel.send(msg)
             self[sent.id] = message.channel.id
             return
