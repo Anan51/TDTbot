@@ -26,19 +26,23 @@ class AdminTools(commands.Cog):
 
     @commands.command()
     async def clear_rxn(self, ctx, emote: str, msg_id: int = None,
-                        channel: discord.abc.Messageable = None):
+                        channel: [discord.abc.Messageable, int] = None):
         """<emote> <message id (optional)> <channel (optional)>
         Clear all of the specified reaction for the message
 
         Can be used as a reply to a message, in this case:
         <message id> defaults to the message that's being replied to.
         <channel> defaults to the channel where this command was entered."""
-
+        logger.printv('clear_rxn: {}'.format(dict(ctx=ctx, emote=emote, msg_id=msg_id, channel=channel)))
         ref = ctx.message.reference
         try:
             emote = int(emote)
         except ValueError:
             pass
+        if isinstance(channel, int):
+            channel = self.bot.find_channel(channel)
+            if channel is None:
+                channel = await self.bot.fetch_channel(channel)
         if channel is None:
             channel = ctx.channel
         msg = None

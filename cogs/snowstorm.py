@@ -300,6 +300,7 @@ class Snowstorm(commands.Cog):
                 noa_treat = [u for u in trickers if u.id not in _all_alts]
             else:
                 try:
+                    logger.printv('snowstorm.finish_count: removing rxn {}'.format(rxn))
                     await rxn.clear()
                 except discord.HTTPException:
                     pass
