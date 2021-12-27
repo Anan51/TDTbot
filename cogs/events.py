@@ -88,13 +88,14 @@ class _Event(dict):
             day = today + datetime.timedelta(days=i)
             # parse time text
             time_text = out['when'].lower().strip()
-            search = '([0-9]{1,2})([:. -])?([0-9]{2})?[ ]?([ap][.]?m[.]?)?[ ]?(\w+)?'
+            search = r'([0-9]{1,2})([:. -])?([0-9]{2})?[ ]?([ap][.]?m[.]?)?[ ]?(\w+)?'
             time = re.findall(search, time_text)
             if not time:
                 logger.warning("Can't parse time")
                 if not from_hist:
                     self._error = "Event not registered. Unable to parse time"
                 raise ValueError
+            logger.printv('Time: {}'.format(time))
             time = time[0]
             hour = int(time[0])
             minute = int(time[2] if time[2] else 0)
