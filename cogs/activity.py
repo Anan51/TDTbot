@@ -7,6 +7,7 @@ import os
 from .. import param, roles
 from ..helpers import *
 from ..async_helpers import *
+from .supporters import supporters_fn
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -172,6 +173,38 @@ class Activity(commands.Cog):
 
     @commands.command()
     async def purge(self, ctx, role: discord.Role = None):
+        """<role (optional)> purges the activity data for the given role."""
+        if self._debug:
+            await ctx.send("`<Running in debug mode>`")
+        await ctx.send("Hold on while I purge the activity data.")
+        if role is None:
+            role = find_role(ctx.guild, roles.community)
+        items = await self.data.fetch_and_sort(ctx.guild, dt=datetime.timedelta(days=30))
+        support = param.IntPermaDict(supporters_fn)
+        if role is not None:
+            items = [i for i in items if role == i[0].top_role]
+
+        output = []
+
+        support = param.IntPermaDict(supporters_fn)
+        recruit = find_role(ctx.guild, roles.recruit)
+        for m, date in items:
+            if m.id in support:
+                if self._debug:
+                    output.append('{0.display_name} in supporters (last active {1})'.format(m, date.isoformat()))
+                continue
+            if not self._debug:
+                _roles = [r.name for r in m.roles if r > recruit]
+                await m.remove_roles(_roles)
+                await m.add_roles(recruit)
+                output.append('{0.display_name} demoted (last active {1})'.format(m, date))
+            else:
+                output.append('{0.display_name} (not) demoted (last active {1})'.format(m, date))
+        await split_send(ctx, output)
+        return
+
+    @commands.command()
+    async def full_purge(self, ctx, role: discord.Role = None):
         """<role (optional)> shows members that have been inactive for over a week."""
         if self._debug:
             await ctx.send("`<Running in debug mode>`")
@@ -188,7 +221,7 @@ class Activity(commands.Cog):
 
         for i in items:
             if i[0].top_role == recruit:
-                output.append(await self._demote(*i))
+                output.append(await self._clear_roles(*i))
             elif i[0].top_role <= recruit:
                 if i[0].top_role.name not in ['Lone Wolf'] and not i[0].bot:
                     lowers.append(i)
@@ -200,6 +233,18 @@ class Activity(commands.Cog):
             await self._prompt_kick(*i)
 
         return
+
+    async def _clear_roles(self, m, dt, debug=None):
+        if debug is None:
+            debug = self._debug
+        _roles = [r for r in m.roles if r.name not in ['@everyone', 'Nitro Booster']]
+        if not debug:
+            await m.remove_roles(_roles, reason='Inactivity')
+        date = dt.date().isoformat()
+        if not debug:
+            return '{0.display_name} demoted (last active {1})'.format(m, date)
+        else:
+            return '{0.display_name} (not) demoted (last active {1})'.format(m, date)
 
     async def _prompt_kick(self, m, dt, channel=None):
         if channel is None:

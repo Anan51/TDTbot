@@ -10,8 +10,8 @@ from ..async_helpers import admin_check, split_send
 
 
 logger = logging.getLogger('discord.' + __name__)
-_dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
-_dbm = os.path.join(_dbm, 'config', 'supporters.dbm')
+supporters_fn = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
+supporters_fn = os.path.join(supporters_fn, 'config', 'supporters.dbm')
 _supporter_rank = roles.community
 _user_t = Union[discord.Member, discord.User]
 
@@ -20,7 +20,7 @@ class Supporters(commands.Cog):
     """Store and list supporters"""
     def __init__(self, bot):
         self.bot = bot
-        self.data = param.IntPermaDict(_dbm)
+        self.data = param.IntPermaDict(supporters_fn)
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
