@@ -201,24 +201,6 @@ class Activity(commands.Cog):
 
         return
 
-    @commands.command()
-    async def purge2(self, ctx, role: discord.Role = None):
-        """Depreciated name for what is now purge"""
-        await ctx.send("This command is now depreciated. I will run tdt$purge instead.")
-        return await self.purge(ctx, role=role)
-
-    async def _demote(self, m, dt, debug=None):
-        if debug is None:
-            debug = self._debug
-        _roles = [r for r in m.roles if r.name not in ['@everyone', 'Nitro Booster']]
-        if not debug:
-            await m.remove_roles(*_roles, reason='Inactivity')
-        date = dt.date().isoformat()
-        if not debug:
-            return '{0.display_name} demoted (last active {1})'.format(m, date)
-        else:
-            return '{0.display_name} (not) demoted (last active {1})'.format(m, date)
-
     async def _prompt_kick(self, m, dt, channel=None):
         if channel is None:
             channel = self.bot.find_channel(param.rc('log_channel'))
