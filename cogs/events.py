@@ -95,7 +95,7 @@ class _Event(dict):
                 if not from_hist:
                     self._error = "Event not registered. Unable to parse time"
                 raise ValueError
-            logger.printv('Time: {}'.format(time))
+            logger.debug('Time: {}'.format(time))
             time = time[0]
             hour = int(time[0])
             minute = int(time[2] if time[2] else 0)
@@ -353,10 +353,18 @@ class Events(commands.Cog):
 
     def is_event_channel(self, channel):
         """Is the given channel the event channel"""
-        if type(self.channel) == int:
-            return channel.id == self.channel
+        if channel == self.channel:
+            return True
+        if channel == self.channel.id:
+            return True
+        if isinstance(self._channel, int):
+            return channel.id == self.channel.id
         if hasattr(self.channel, "lower"):
-            return channel.name == self.channel
+            try:
+                cid = int(self.channel)
+                return self.channel.id == channel.id
+            except ValueError:
+                return channel.name == self.channel
         return channel == self.channel
 
     async def enroll_event_if_valid(self, event):
