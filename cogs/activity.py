@@ -172,27 +172,26 @@ class Activity(commands.Cog):
         await ctx.send("Activity cog now in normal mode.")
 
     @commands.command()
-    async def purge(self, ctx, role: discord.Role = None):
+    async def purge(self, ctx, skip_supporters: bool = False):
         """<role (optional)> purges the activity data for the given role."""
         if self._debug:
             await ctx.send("`<Running in debug mode>`")
         await ctx.send("Hold on while I purge the activity data.")
-        if role is None:
-            role = find_role(ctx.guild, roles.community)
+        com = find_role(ctx.guild, roles.community)
+        com_p = find_role(ctx.guild, roles.community_plus)
         items = await self.data.fetch_and_sort(ctx.guild, dt=datetime.timedelta(days=30))
-        support = param.IntPermaDict(supporters_fn)
-        if role is not None:
-            items = [i for i in items if role == i[0].top_role]
+        items = [i for i in items if i[0].top_role in [com, com_p]]
 
         output = []
 
-        support = param.IntPermaDict(supporters_fn)
         recruit = find_role(ctx.guild, roles.recruit)
         for m, date in items:
-            if m.id in support:
-                if self._debug:
-                    output.append('{0.display_name} in supporters (last active {1})'.format(m, date.isoformat()))
-                continue
+            if skip_supporters:
+                support = param.IntPermaDict(supporters_fn)
+                if m.id in support:
+                    if self._debug:
+                        output.append('{0.display_name} in supporters (last active {1})'.format(m, date.isoformat()))
+                    continue
             if not self._debug:
                 _roles = [r.name for r in m.roles if r > recruit]
                 await m.remove_roles(_roles)
