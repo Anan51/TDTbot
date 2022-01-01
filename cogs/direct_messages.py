@@ -95,7 +95,7 @@ class DirectMessages(commands.Cog):
             return
         # if message from log channel
         if message.channel == self.channel:
-            if admin_check(bot=self.bot, author=message.author, guild=self.channel.guild):
+            if await admin_check(bot=self.bot, author=message.author, guild=self.channel.guild):
                 # if message is reply to a previous message
                 if message.reference:
                     if message.reference.message_id in self:
