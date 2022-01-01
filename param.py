@@ -20,6 +20,7 @@ defaults = {
                         'tdt_events', 'devoted_chat'],
     'event_channel':   'tdt_events',
     'log_channel':     'debugging',
+    'chron_channel':   'debugging',
     'fashion_channel': 'debugging',
     'event_reminders': [360, 60, 0],
     'timezone':        'US/Pacific',
