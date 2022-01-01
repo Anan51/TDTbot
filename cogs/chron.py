@@ -17,7 +17,7 @@ class ChronTask:
         self.cog = cog
         self.freq = freq.lower()
         if isinstance(offset, dict):
-            self.offset = datetime.timedelta(**offset)
+            offset = datetime.timedelta(**offset)
         self.offset = offset
         if isinstance(func, str):
             if '.' in func:
@@ -39,18 +39,21 @@ class ChronTask:
         if self.context is True:
             self.context = await self.cog.manifest_context()
         if self.context:
-            if not isinstance(args[0], discord.Context):
+            if not args:
+                args.append(self.context)
+            elif not isinstance(args[0], discord.Context):
                 args.insert(0, self.context)
         dt = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         if self.freq == 'monthly':
             next = dt.replace(month=dt.month + 1, day=1)
         elif self.freq == 'weekly':
-            next = dt.date() + datetime.timedelta(days=7-dt.weekday())
+            next = dt + datetime.timedelta(days=7-dt.weekday())
         elif self.freq == 'daily':
-            next = dt.date() + datetime.timedelta(days=1)
+            next = dt + datetime.timedelta(days=1)
         else:
             raise ValueError('Invalid frequency')
-        next = self.tz.localize(next) + self.offset
+        next = self.tz.localize(next + self.offset)
+        next = next.astimezone(pytz.utc).replace(tzinfo=None)
         await wait_until(next)
         await self.func(args, **self.kwargs)
         await asyncio.sleep(2)
@@ -111,8 +114,12 @@ class Chron(commands.Cog):
             if message.author.id == self.bot.user.id:
                 continue
             msg = message
-            if message.author == self.bot.owner:
+            if await self.bot.is_owner(message.author):
                 break
         if not msg:
             raise ValueError('No message found')
         return await self.bot.get_context(msg)
+
+
+def setup(bot):
+        bot.add_cog(Chron(bot))
