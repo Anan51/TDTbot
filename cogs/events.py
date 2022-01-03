@@ -545,8 +545,8 @@ class Events(commands.Cog):
             if message.id in event_ids:
                 return False
             if message.author != self.bot.user:
-                return True
-            return message.content != _prototype
+                return False
+            return True
 
         await self.channel.purge(limit=limit, check=check)
 
