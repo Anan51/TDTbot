@@ -533,6 +533,21 @@ class Events(commands.Cog):
             await asyncio.sleep(5)
             await ctx.message.delete()
 
+    async def scrub_events(self, ctx, limit: int = 200):
+        """<limit=200 (optional)> Clear the events channel of non-event messages.
+        "limit" sets the max number of messages deleted.
+        """
+        event_ids = [e.id for e in self._events]
+
+        def check(message):
+            if message.id in event_ids:
+                return False
+            if message.author != self.bot.user:
+                return True
+            return message.content != _prototype
+
+        await self.channel.purge(limit=limit, check=check)
+
     @commands.command()
     async def traitor(self, ctx, n: int = 1, multi: bool = False):
         """Assign and DM a traitor'"""
