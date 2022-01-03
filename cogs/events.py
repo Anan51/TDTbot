@@ -533,6 +533,8 @@ class Events(commands.Cog):
             await asyncio.sleep(5)
             await ctx.message.delete()
 
+    @commands.command()
+    @commands.check(admin_check)
     async def scrub_events(self, ctx, limit: int = 200):
         """<limit=200 (optional)> Clear the events channel of non-event messages.
         "limit" sets the max number of messages deleted.
