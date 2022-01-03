@@ -539,6 +539,15 @@ class Events(commands.Cog):
         """<limit=200 (optional)> Clear the events channel of non-event messages.
         "limit" sets the max number of messages deleted.
         """
+        n = 0
+        clocks = '🕛🕧🕐🕜🕑🕝🕒🕞🕓🕟🕔🕠🕕🕡🕖🕢🕗🕣🕘🕤🕙🕥🕚🕦'
+        while not self._hist_checked:
+            if n == 0:
+                msg = await ctx.send('Waiting for event history to be checked.')
+            elif n <= len(clocks):
+                await msg.add_reaction(clocks[n - 1])
+            await asyncio.sleep(5)
+            n += 1
         event_ids = [e.id for e in self._events]
 
         def check(message):
@@ -549,6 +558,8 @@ class Events(commands.Cog):
             return True
 
         await self.channel.purge(limit=limit, check=check)
+        if n > 0:
+            await ctx.send('Done.')
 
     @commands.command()
     async def traitor(self, ctx, n: int = 1, multi: bool = False):
