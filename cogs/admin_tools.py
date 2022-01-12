@@ -104,7 +104,7 @@ class AdminTools(commands.Cog):
                      reply: discord.Message = None):
         if channel is None:
             channel = ctx.channel
-        msg = channel.send(message, reference=reply, mention_author=False)
+        msg = await channel.send(message, reference=reply, mention_author=False)
         self._add_sticky(msg)
 
     @commands.command(aliases=['wd40'])
