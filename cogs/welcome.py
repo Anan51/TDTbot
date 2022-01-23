@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import discord
 from discord.ext import commands
@@ -66,6 +67,18 @@ class Welcome(commands.Cog):
         self._last_member = None
         self._manual_channel = None
         self._log_channel = None
+        self._init = False
+
+    async def _async_init(self):
+        if self._init:
+            return
+        await self.clean_manual_page(None)
+        self._init = True
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        await asyncio.sleep(5)
+        await self._async_init()
 
     @property
     def manual_channel(self):
@@ -115,6 +128,7 @@ class Welcome(commands.Cog):
                 if await rxn.users().find(lambda u: u == member)]
         # check for welcome back
         if "👍" in [str(rxn.emoji) for rxn in rxns]:
+            old = msg
             msg = "... Or I guess I should say welcome back!"
             emoji_dict = {"👍": _recruit}
             emoji_dict.update(self._emoji_dict)
@@ -125,7 +139,7 @@ class Welcome(commands.Cog):
             if _roles:
                 msg += "\nI've restored your " + ', '.join(_roles) + ' role'
                 msg += 's.' if len(_roles) > 1 else '.'
-            await member.guild.system_channel.send(msg)
+            await member.guild.system_channel.send(msg, reference=old)
         if retry:
             await send_welcome(member, retry=member.guild.system_channel)
 
@@ -142,6 +156,10 @@ class Welcome(commands.Cog):
         Recruit"""
         # if not code of conduct message
         if payload.message_id != _CoC_id:
+            if payload.channel_id == self.manual_channel.id:
+                msg = await self.manual_channel.fetch_message(payload.message_id)
+                for rxn in msg.reactions:
+                    await rxn.clear()
             return
         guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
         recruit = find_role(guild, _recruit)
@@ -172,6 +190,28 @@ class Welcome(commands.Cog):
             return
         if hasattr(payload.emoji, 'id'):
             await self.bot.emoji2role(*args, **kwargs)
+        await self.clean_coc(None)
+
+    @commands.command()
+    async def clean_coc(self, ctx):
+        """Clean up reactions to the CoC message"""
+        msg = await self.fetch_coc()
+        for rxn in msg.reactions:
+            if getattr(rxn.emoji, 'id', rxn.emoji) not in list(self._emoji_dict) + ["👍"]:
+                # await rxn.clear()
+                print('Cleaned up reactions to CoC', rxn.emoji)
+
+    @commands.command()
+    async def clean_manual_page(self, ctx):
+        """Clean up reactions in the manual page"""
+        channel = self.manual_channel
+        history = await channel.history(limit=None).flatten()
+        for msg in history:
+            if msg != await self.fetch_coc():
+                for rxn in msg.reactions:
+                    # await rxn.clear()
+                    print('Cleaned up reactions to manual page', msg, rxn.emoji)
+
 
 
 def setup(bot):
