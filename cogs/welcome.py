@@ -219,7 +219,7 @@ class Welcome(commands.Cog):
         """Remove reactions from a message"""
         if msg.id in _protected:
             return
-        if msg == self.coc_msg:
+        if msg.id == _CoC_id:
             return
         if guild is None:
             guild = msg.guild

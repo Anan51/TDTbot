@@ -95,7 +95,10 @@ class AdminTools(commands.Cog):
         self.stickies[msg.channel.id] = self.stickies.get(msg.channel.id, []) + [msg.id]
 
     def _rm_sticky(self, message_id, channel_id):
-        self.stickies[channel_id].pop(message_id)
+        try:
+            self.stickies[channel_id].pop(message_id)
+        except IndexError:
+            pass
         if not self.stickies[channel_id]:
             self.stickies.delete(channel_id)
 
@@ -136,8 +139,8 @@ class AdminTools(commands.Cog):
                 return
             for mid in self.stickies[message.channel.id]:
                 msg = await message.channel.fetch_message(mid)
-                msg = message.channel.send(msg.content, reference=msg.reference,
-                                           mention_author=False)
+                msg = await message.channel.send(msg.content, reference=msg.reference,
+                                                 mention_author=False)
                 self._rm_sticky(msg.id, msg.channel.id)
                 self._add_sticky(msg)
 
