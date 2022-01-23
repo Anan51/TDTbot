@@ -12,6 +12,10 @@ logger = logging.getLogger('discord.' + __name__)
 _CoC_id = 563406038754394112
 _recruit = roles.recruit
 _log_in_discord = False
+# clear reactions on manual page reactions to message posted before this
+_before = datetime.datetime(2022, 1, 22, 0, 0, 0)
+# don't clear reactions from these messages
+_protected = [_CoC_id]
 
 
 async def send_welcome(member, channel=None, retry=None):
@@ -154,12 +158,15 @@ class Welcome(commands.Cog):
     async def on_raw_reaction_add(self, payload):
         """Parse reaction adds for agreeing to code of conduct and rank them up to
         Recruit"""
+        # if bot
+        if payload.user_id == self.bot.user.id:
+            return
         # if not code of conduct message
         if payload.message_id != _CoC_id:
+            # if reaction is in manual page and not protected
             if payload.channel_id == self.manual_channel.id:
                 msg = await self.manual_channel.fetch_message(payload.message_id)
-                for rxn in msg.reactions:
-                    await rxn.clear()
+                await self.safely_remove_reactions(msg)
             return
         guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
         recruit = find_role(guild, _recruit)
@@ -198,20 +205,39 @@ class Welcome(commands.Cog):
         msg = await self.fetch_coc()
         for rxn in msg.reactions:
             if getattr(rxn.emoji, 'id', rxn.emoji) not in list(self._emoji_dict) + ["👍"]:
-                # await rxn.clear()
-                print('Cleaned up reactions to CoC', rxn.emoji)
+                await rxn.clear()
 
     @commands.command()
     async def clean_manual_page(self, ctx):
         """Clean up reactions in the manual page"""
         channel = self.manual_channel
-        history = await channel.history(limit=None).flatten()
+        history = await channel.history(limit=200, before=_before).flatten()
         for msg in history:
-            if msg != await self.fetch_coc():
-                for rxn in msg.reactions:
-                    # await rxn.clear()
-                    print('Cleaned up reactions to manual page', msg, rxn.emoji)
+            await self.safely_remove_reactions(msg)
 
+    async def safely_remove_reactions(self, msg, guild=None):
+        """Remove reactions from a message"""
+        if msg.id in _protected:
+            return
+        if msg == self.coc_msg:
+            return
+        if guild is None:
+            guild = msg.guild
+        admin = find_role(guild, roles.admin)
+        for rxn in msg.reactions:
+            top_role = None
+            async for user in rxn.users():
+                if top_role is None:
+                    try:
+                        role = user.top_role
+                    except AttributeError:
+                        role = None
+                    try:
+                        top_role = max(role, top_role)
+                    except TypeError:
+                        top_role = role
+            if top_role < admin:
+                await rxn.clear()
 
 
 def setup(bot):
