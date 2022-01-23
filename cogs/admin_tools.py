@@ -136,7 +136,7 @@ class AdminTools(commands.Cog):
                 return
             for mid in self.stickies[message.channel.id]:
                 msg = await message.channel.fetch_message(mid)
-                msg = message.channel.send(msg.content, referece=msg.referece,
+                msg = message.channel.send(msg.content, reference=msg.reference,
                                            mention_author=False)
                 self._rm_sticky(msg.id, msg.channel.id)
                 self._add_sticky(msg)
