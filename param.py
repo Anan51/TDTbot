@@ -12,6 +12,7 @@ defaults = {
     'config_file':     os.path.join(_config, 'tdt.json'),
     'token_file':      os.path.join(_config, 'token.txt'),
     'roast_file':      os.path.join(_config, 'roasts.txt'),
+    'lore_file':       os.path.join(_config, 'lore.txt'),
     'nemeses':         [221778796250923008,  # UnknownElectro
                         722927617740767344,  # wator
                         ],
