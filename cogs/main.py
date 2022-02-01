@@ -190,6 +190,11 @@ class MainCommands(commands.Cog):
         except (discord.HTTPException, discord.Forbidden, discord.InvalidArgument):
             ctx.send(out)
 
+    @commands.command()
+    async def source(self, ctx):
+        """Source code for this bot."""
+        await ctx.send('My source code is available at https://github.com/TDTcode/TDTbot')
+
 
 def setup(bot):
     """This is required to add this cog to a bot as an extension"""
