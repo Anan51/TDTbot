@@ -16,7 +16,7 @@ class Lore(commands.Cog):
         """
         Lore
         """
-        with open(param.lore_file, 'r') as f:
+        with open(param.rc('lore_file'), 'r') as f:
             content = f.read()
             lores = [i for i in content.split('\n\n') if i]
         await ctx.send(random.choice(lores))
