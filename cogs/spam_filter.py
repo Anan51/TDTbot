@@ -10,6 +10,7 @@ import re
 
 
 logger = logging.getLogger('discord.' + __name__)
+_startup_debugging = True
 spam_msg = "I have parsed this message as spam. Please don't spam. This is a bot and I don't like spam. ({:})"
 
 
@@ -20,6 +21,8 @@ class SpamFilter(commands.Cog):
         self._tdt = None
         self._com = None
         self._admin = None
+        self._debug = _startup_debugging
+        self._log_channel = None
 
     async def _async_init(self):
         if self._init:
@@ -27,7 +30,14 @@ class SpamFilter(commands.Cog):
         _ = self.tdt
         _ = self.com
         _ = self.admin
+        self._log_channel = self.bot.find_channel("admin_log")
         self._init = True
+
+    @property
+    def log_channel(self):
+        if self._log_channel is None:
+            self._log_channel = self.bot.find_channel("admin_log")
+        return self._log_channel
 
     @property
     def tdt(self):
@@ -56,6 +66,10 @@ class SpamFilter(commands.Cog):
         """Reply to a spam post"""
         await message.channel.send(spam_msg.format(self.admin.mention), reference=message)
 
+    async def log_spam(self, message):
+        msg = "Spam message detected:\n{0.content}\n{0.link}"
+        return await self.log_channel.send(msg.format(message))
+
     @commands.Cog.listener()
     async def on_message(self, message):
         """Parse messages for spam posts"""
@@ -72,16 +86,41 @@ class SpamFilter(commands.Cog):
         if isinstance(message.author, discord.Member):
             if message.author.top_role <= self.com:
                 low_role = True
-        print('=> SPAM DETECTED:', message)
-        return
+        if self._debug:
+            return self.log_spam(message)
         if low_role:
             try:
                 await message.delete()
             except discord.Forbidden:
                 if not isinstance(message.channel, discord.DMChannel):
-                    await self.reply_to_spam(message)
+                    try:
+                        await self.reply_to_spam(message)
+                    except discord.Forbidden:
+                        await self.log_spam(message)
         else:
             await self.reply_to_spam(message)
+
+    @commands.group()
+    @commands.check(admin_check)
+    async def spam_debug(self, ctx):
+        """Base function for spam_debug sub commands"""
+        if ctx.invoked_subcommand is None:
+            msg = 'Spam debugging is set to {}. Use `tdt$spam_debug [on/off]` to change value.'
+            await ctx.send(msg.format(self._debug))
+
+    @spam_debug.command()
+    @commands.check(admin_check)
+    async def on(self, ctx):
+        """Turn spam debugging on."""
+        self._debug = True
+        await ctx.send("Spam filter is now in debugging mode.")
+
+    @spam_debug.command()
+    @commands.check(admin_check)
+    async def off(self, ctx):
+        """Turn spam debugging off."""
+        self._debug = False
+        await ctx.send("Spam filter is NOT in debugging mode.")
 
 
 def setup(bot):
