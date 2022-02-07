@@ -66,10 +66,14 @@ class SpamFilter(commands.Cog):
             await self._async_init()
         if not isinstance(message.author, discord.Member):
             message.author = await self.bot.get_or_fetch_user(message.author.id)
+        if not re.search(r'https://dis[discorde]{4}(.gift|[.]?com)+/[\w]+( |$)', message.content):
+            return
         low_role = False
         if isinstance(message.author, discord.Member):
             if message.author.top_role <= self.com:
                 low_role = True
+        print('=> SPAM DETECTED:', message)
+        return
         if low_role:
             try:
                 await message.delete()
@@ -82,3 +86,4 @@ class SpamFilter(commands.Cog):
 
 def setup(bot):
     bot.add_cog(SpamFilter(bot))
+
