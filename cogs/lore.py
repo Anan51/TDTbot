@@ -45,24 +45,35 @@ class Lore(commands.Cog):
         """
         with open(param.rc('lore_file'), 'r') as f:
             content = f.read()
-        lores = re.finditer(_regex, content, re.MULTILINE)
+        lores = [i for i in re.finditer(_regex, content, re.MULTILINE) if i]
         if not args:
-            return await ctx.send(random.choice(lores))
+            return await ctx.send(format_card(random.choice(lores)))
         else:
             num = None
             try:
                 if str(int(args[-1])) == args[-1].strip():
-                    title = ' '.join(args)
+                    title = ' '.join(args[:-1])
                     num = roman_num(int(args[-1]))
                 else:
+                    if re.matchall("^[IVXLCM]+$", args[-1].upper().strip()):
+                        title = ' '.join(args[:-1])
+                        num = ' '.join(args[:-1]).upper().strip()
                     raise ValueError
             except ValueError:
                 title = " ".join(args)
             title = title.lower().strip()
             cards = [i for i in lores if i['title'].lower().strip() == title]
             if num:
-                cards = [i for i in cards if i['number'] == num.upper()]
-            return await ctx.send(random.choice(cards))
+                num = num.upper().strip()
+                tmp = [i for i in cards if i['number'].strip() == num]
+                cards = tmp if tmp else cards
+            print(title, "|", num)
+            print([(i['title'], i['number']) for i in lores])
+            try:
+                return await ctx.send(format_card(random.choice(cards)))
+            except IndexError:
+                msg = 'No lore card matches "{:}".'
+                return await ctx.send(msg.format(" ".join(args)))
 
 
 def setup(bot):
