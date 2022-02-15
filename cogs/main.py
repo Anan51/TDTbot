@@ -130,6 +130,8 @@ class MainCommands(commands.Cog):
     async def on_raw_reaction_add(self, payload):
         await self.bot.emoji2role(payload, {'👍': "Wit Challengers"}, message_id=809302963990429757)
         await self.bot.emoji2role(payload, {'🏆': "Tourney Challengers"}, message_id=822744897505067018)
+        _roles = {i: i for i in ['alpha', 'beta', 'gamma', 'omega']}
+        await self.bot.emoji2role(payload, _roles, message_id=332355011919085582)
 
     @commands.command()
     @commands.check(admin_check)
