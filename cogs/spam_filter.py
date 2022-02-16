@@ -80,7 +80,7 @@ class SpamFilter(commands.Cog):
             await self._async_init()
         if not isinstance(message.author, discord.Member):
             message.author = await self.bot.get_or_fetch_user(message.author.id)
-        if not re.search(r'https://dis[discorde]{4}(.gift|[.]?com)+/[\w]+( |$)', message.content):
+        if not re.search(r'https://dis[discorle]{3,6}(.gift|[.]?com)+/[\w]+( |$)', message.content):
             return
         low_role = False
         if isinstance(message.author, discord.Member):
