@@ -41,6 +41,7 @@ class MainBot(commands.Bot):
             kwargs['loop'] = asyncio.new_event_loop()
         kwargs['case_insensitive'] = True
         super().__init__(*args, **kwargs)
+        self._emoji_role_data = []
         # add all our cogs via load_extension
         for cog in cog_list():
             # ensure that cogs is a submodule of our base module
@@ -78,6 +79,19 @@ class MainBot(commands.Bot):
             """Print errors to the discord channel where the command was given"""
             await ctx.send(str(error))
             raise error
+
+        @self.event
+        async def on_raw_reaction_add(payload):
+            """Handle emoji reactions"""
+            for args_, kwargs_ in self._emoji_role_data:
+                await self.emoji2role(payload, *args_, **kwargs_)
+
+        @self.event
+        async def on_raw_reaction_remove(payload):
+            """Handle emoji reactions"""
+            for args_, kwargs_ in self._emoji_role_data:
+                kwargs_['delete'] = True
+                await self.emoji2role(payload, *args_, **kwargs_)
 
     async def bot_check(self, ctx):
         """Run a check to see if we should respond to the given command."""
@@ -150,7 +164,7 @@ class MainBot(commands.Bot):
         return None
 
     async def emoji2role(self, payload, emoji_dict, emoji=None, message_id=None,
-                         member=None, guild=None, min_role=None):
+                         member=None, guild=None, min_role=None, delete=False):
         if member is None:
             member = payload.member
         if min_role is not None:
@@ -172,7 +186,10 @@ class MainBot(commands.Bot):
             role0 = emoji_dict[key]
             role = helpers.find_role(guild, role0)
             try:
-                await member.add_roles(role)
+                if delete:
+                    await member.remove_roles(role)
+                else:
+                    await member.add_roles(role)
                 return role
             except AttributeError as e:
                 logger.printv('Role attr err: {}->{}->{}'.format(key, role0, role))
