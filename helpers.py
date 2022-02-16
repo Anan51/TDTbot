@@ -148,6 +148,10 @@ def int_time(in_time=None, t0=None):
         in_time = datetime.datetime.utcnow()
     if t0 is None:
         t0 = epoch
+    if isinstance(t0, str) and t0.lower() == 'unix':
+        t0 = 0
+    if isinstance(t0, int):
+        t0 = datetime.datetime.utcfromtimestamp(t0)
     return int((in_time - t0).total_seconds())
 
 
