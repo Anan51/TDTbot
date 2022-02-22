@@ -7,6 +7,7 @@ import pytz
 import random
 import re
 import traceback
+
 from .. import param
 from ..helpers import *
 from ..async_helpers import admin_check, wait_until, split_send
@@ -53,14 +54,21 @@ class _Event(dict):
         out['name'] = lines[0] if len(lines) > 4 else out['what']
         # text saying how to enroll in event
         out['enroll'] = '\n'.join(lines[4:])
-        # parse day of week
-        days_of_week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday',
-                        'saturday', 'sunday']
         day = None
-        for d in days_of_week:
-            if d in out['when'].lower():
-                day = d
-                break
+        # check for unix timestamp
+        unix_timestamp = re.match(r'<t:(\d+:[tTdDfFR])>', out['when'])
+        if unix_timestamp:
+            dt = unix_timestamp.group(1)
+            dt = datetime.datetime.fromtimestamp(int(dt[:10]), tz=pytz.utc)
+            day = dt.strftime('%A')
+        # parse day of week
+        if day is None:
+            days_of_week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday',
+                            'saturday', 'sunday']
+            for d in days_of_week:
+                if d in out['when'].lower():
+                    day = d
+                    break
         try:
             if not day:
                 logger.warning("Can't parse day")
@@ -78,58 +86,59 @@ class _Event(dict):
             self.tz = tz
             out['id'] = message.id
             self._message_channel = message.channel
-            # Attributes finished now deal with timezone crap
+            # Attributes finished, now deal with timezone crap
             now = datetime.datetime.now().astimezone(tz).replace(tzinfo=None)
             today = now.date()  # today in server timezone
-            i = 0
-            # parse day of week into datetime and assume it's the next day with given name
-            while (today + datetime.timedelta(days=i)).weekday() != days_of_week.index(day):
-                i += 1
-            day = today + datetime.timedelta(days=i)
-            # parse time text
-            time_text = out['when'].lower().strip()
-            search = r'([0-9]{1,2})([:. -])?([0-9]{2})?[ ]?([ap][.]?m[.]?)?[ ]?(\w+)?'
-            time = re.findall(search, time_text)
-            if not time:
-                logger.warning("Can't parse time")
-                if not from_hist:
-                    self._error = "Event not registered. Unable to parse time"
-                raise ValueError
-            logger.debug('Time: {}'.format(time))
-            time = time[0]
-            hour = int(time[0])
-            minute = int(time[2] if time[2] else 0)
-            am_pm = time[3].strip().replace('.', '')
-            # parse timezone, default to server timezone (US/Pacific)
-            timezone = tz
-            tz_parsed = False
-            if time[4]:
-                try:
-                    timezone = parse_timezone(time[4])
-                except pytz.exceptions.UnknownTimeZoneError:
-                    logger.printv('timezone parse "{}" fail.'.format(time[4]))
-                    logger.printv(traceback.format_exc())
-                else:
-                    tz_parsed = True
-                    self._comments.append('Timezone "{}" parsed as: "{}"'.format(time[4], timezone.zone))
-            # if am/pm not provided
-            if not am_pm:
-                if 'night' in out['when'].lower() and hour < 12:
-                    am_pm = 'pm'
-                elif hour < 8 and 'morning' not in out['when'].lower():
-                    am_pm = 'pm'
-                elif hour < 12:
-                    am_pm = 'am'
-            if am_pm == 'pm' and hour < 12:
-                hour += 12
-            t = datetime.time(hour, minute)
-            # make sure datetime is specified with parsed timezone
-            dt = timezone.localize(datetime.datetime.combine(day, t))
-            if tz_parsed:
-                abrv = timezone.localize(datetime.datetime.now(), is_dst=None).tzname().lower()
-                if time[4] != abrv and len(time[4]) in [3, 4]:
-                    msg = 'I think you meant "{}" instead of "{}".'
-                    self._comments.append(msg.format(abrv.upper(), time[4].upper()))
+            if not unix_timestamp:
+                i = 0
+                # parse day of week into datetime and assume it's the next day with given name
+                while (today + datetime.timedelta(days=i)).weekday() != days_of_week.index(day):
+                    i += 1
+                day = today + datetime.timedelta(days=i)
+                # parse time text
+                time_text = out['when'].lower().strip()
+                search = r'([0-9]{1,2})([:. -])?([0-9]{2})?[ ]?([ap][.]?m[.]?)?[ ]?(\w+)?'
+                time = re.findall(search, time_text)
+                if not time:
+                    logger.warning("Can't parse time")
+                    if not from_hist:
+                        self._error = "Event not registered. Unable to parse time"
+                    raise ValueError
+                logger.debug('Time: {}'.format(time))
+                time = time[0]
+                hour = int(time[0])
+                minute = int(time[2] if time[2] else 0)
+                am_pm = time[3].strip().replace('.', '')
+                # parse timezone, default to server timezone (US/Pacific)
+                timezone = tz
+                tz_parsed = False
+                if time[4]:
+                    try:
+                        timezone = parse_timezone(time[4])
+                    except pytz.exceptions.UnknownTimeZoneError:
+                        logger.printv('timezone parse "{}" fail.'.format(time[4]))
+                        logger.printv(traceback.format_exc())
+                    else:
+                        tz_parsed = True
+                        self._comments.append('Timezone "{}" parsed as: "{}"'.format(time[4], timezone.zone))
+                # if am/pm not provided
+                if not am_pm:
+                    if 'night' in out['when'].lower() and hour < 12:
+                        am_pm = 'pm'
+                    elif hour < 8 and 'morning' not in out['when'].lower():
+                        am_pm = 'pm'
+                    elif hour < 12:
+                        am_pm = 'am'
+                if am_pm == 'pm' and hour < 12:
+                    hour += 12
+                t = datetime.time(hour, minute)
+                # make sure datetime is specified with parsed timezone
+                dt = timezone.localize(datetime.datetime.combine(day, t))
+                if tz_parsed:
+                    abrv = timezone.localize(datetime.datetime.now(), is_dst=None).tzname().lower()
+                    if time[4] != abrv and len(time[4]) in [3, 4]:
+                        msg = 'I think you meant "{}" instead of "{}".'
+                        self._comments.append(msg.format(abrv.upper(), time[4].upper()))
             # convert it to UTC and strip timezone info (required by external libs)
             out['datetime'] = dt.astimezone(pytz.utc).replace(tzinfo=None)
             # put the contents of out into self
@@ -165,6 +174,11 @@ class _Event(dict):
         dt = pytz.utc.localize(self['datetime'])
         # convert to server timezone
         return dt.astimezone(self.tz).strftime('%X %A %x %Z')
+
+    def unix_timestamp(self, mode='R'):
+        """Unix timestamp for this event"""
+        dt = pytz.utc.localize(self['datetime'])
+        return '<t:{:d}:{:}>'.format(int(dt.timestamp()), mode)
 
     @property
     def name(self):
@@ -278,6 +292,10 @@ class _Event(dict):
                     eta = "is starting in one minute."
                 else:
                     eta = "is starting in {:d} minutes.".format(dt_min)
+        if eta == 'UNIX':
+            dt = self['datetime'].timestamp()
+            eta = 'is starting in <t:{:d}:R>'.format(
+                (self['datetime'] - datetime.datetime.utcnow()).seconds)
         if wait:
             await wait_until(dt)
         msg = ' '.join([prefix, eta] + [i.mention for i in await self.attendees()])
@@ -441,6 +459,13 @@ class Events(commands.Cog):
                 await ctx.send(msg)
             else:
                 await ctx.send('No events.')
+
+    @commands.command()
+    async def unix_times(self, ctx):
+        """List Unix times of events."""
+        msg = ['{0}) {1.name} {2} {3}'.format(i, e, e.unix_timestamp('F'), e.unix_timestamp())
+               for i, e in enumerate(self.event_list)]
+        await split_send(ctx, msg)
 
     @events.command()
     async def attendees(self, ctx):
