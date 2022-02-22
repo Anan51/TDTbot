@@ -131,7 +131,7 @@ class MainCommands(commands.Cog):
         await self.bot.emoji2role(payload, {'👍': "Wit Challengers"}, message_id=809302963990429757)
         await self.bot.emoji2role(payload, {'🏆': "Tourney Challengers"}, message_id=822744897505067018)
         _roles = {i: i for i in ['alpha', 'beta', 'gamma', 'omega']}
-        await self.bot.emoji2role(payload, _roles, message_id=943278519394402314)
+        await self.bot.emoji2role(payload, _roles, message_id=945717800788447282)
 
     @commands.command()
     @commands.check(admin_check)
