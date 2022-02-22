@@ -8,7 +8,6 @@ import random
 import re
 import traceback
 
-import async_helpers
 from .. import param
 from ..helpers import *
 from ..async_helpers import admin_check, wait_until, split_send
@@ -466,7 +465,7 @@ class Events(commands.Cog):
         """List Unix times of events."""
         msg = ['{0}) {1.name} {2} {3}'.format(i, e, e.unix_timestamp('F'), e.unix_timestamp())
                for i, e in enumerate(self.event_list)]
-        await async_helpers.split_send(ctx, msg)
+        await split_send(ctx, msg)
 
     @events.command()
     async def attendees(self, ctx):
