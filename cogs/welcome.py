@@ -10,12 +10,13 @@ import logging
 
 logger = logging.getLogger('discord.' + __name__)
 _CoC_id = 563406038754394112
+_wolfpack_id = 332355011919085582
 _recruit = roles.recruit
 _log_in_discord = False
 # clear reactions on manual page reactions to message posted before this
 _before = datetime.datetime(2022, 1, 22, 0, 0, 0)
 # don't clear reactions from these messages
-_protected = [_CoC_id]
+_protected = [_CoC_id, _wolfpack_id]
 
 
 async def send_welcome(member, channel=None, retry=None):
