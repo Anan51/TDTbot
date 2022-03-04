@@ -15,6 +15,7 @@ defaults = {
     'lore_file':       os.path.join(_config, 'lore.md'),
     'nemeses':         [221778796250923008,  # UnknownElectro
                         722927617740767344,  # wator
+                        533862306132787200, # em
                         ],
     'add_bots':        [],
     'ignore_list':     ['lfg', 'lenny_laboratory', 'manual_page',
