@@ -116,6 +116,7 @@ class FashionContest(commands.Cog):
         self._channel = _channel
         self._entries = None
         self._bot_config = None
+        self.bot.enroll_emoji_role({_emoji: _role}, message_id=_rule_id)
 
     @property
     def bot_config(self):
@@ -152,16 +153,6 @@ class FashionContest(commands.Cog):
     @property
     def role(self):
         return find_role(self.channel.guild, _role)
-
-    @commands.Cog.listener()
-    async def on_raw_reaction_add(self, payload):
-        """Parse reaction adds for agreeing to code of conduct and rank them up to
-        Recruit"""
-        # if not code of conduct message
-        if payload.message_id != _rule_id:
-            return
-        if str(payload.emoji) == _emoji:
-            await payload.member.add_roles(self.role)
 
     async def _get_saved_entries(self):
         saved = self.bot_config[_bot_key]

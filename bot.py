@@ -163,8 +163,17 @@ class MainBot(commands.Bot):
             return user_id
         return None
 
+    def enroll_emoji_role(self, *args, **kwargs):
+        """Enroll a function to handle an emoji reaction"""
+        if not args:
+            raise ValueError("Must provide at least one argument")
+        if not isinstance(args[0], dict):
+            raise ValueError("First argument must be a dict")
+        self._emoji_role_data.append((args, kwargs))
+
     async def emoji2role(self, payload, emoji_dict, emoji=None, message_id=None,
-                         member=None, guild=None, min_role=None, delete=False):
+                         member=None, guild=None, min_role=None, delete=False,
+                         remove=None):
         if member is None:
             member = payload.member
         if min_role is not None:
@@ -181,6 +190,13 @@ class MainBot(commands.Bot):
             guild = self.guilds[guild]
 
         keys = [i for i in emoji_dict if helpers.emotes_equal(i, emoji)]
+        if remove is not None:
+            if not isinstance(remove, list) and not isinstance(remove, tuple):
+                remove = [remove]
+            for i in remove:
+                if not isinstance(i, discord.Role):
+                    i = helpers.find_role(guild, i)
+                await member.remove_roles(i)
         if len(keys) == 1:
             key = keys[0]
             role0 = emoji_dict[key]

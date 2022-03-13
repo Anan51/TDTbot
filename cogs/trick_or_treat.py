@@ -57,15 +57,7 @@ class TrickOrTreat(commands.Cog):
         self._role = None
         self._channel = None
         self._log = None
-
-    @commands.Cog.listener()
-    async def on_raw_reaction_add(self, payload):
-        """Parse reaction adds for enrolling people in trick-or-treat game"""
-        # if not code of conduct message
-        if payload.message_id != _rule_id:
-            return
-        if str(payload.emoji) == _enroll:
-            await payload.member.add_roles(self.role)
+        self.bot.enroll_emoji_role({_enroll: _role}, message_id=_rule_id)
 
     @property
     def role(self):
