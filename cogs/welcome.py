@@ -222,6 +222,8 @@ class Welcome(commands.Cog):
             return
         if msg.id == _CoC_id:
             return
+        if msg.id == 945717800788447282:  # wolfpack roles
+            return
         if guild is None:
             guild = msg.guild
         admin = find_role(guild, roles.admin)
