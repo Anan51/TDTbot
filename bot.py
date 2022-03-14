@@ -176,20 +176,16 @@ class MainBot(commands.Bot):
                          remove=None):
         if member is None:
             member = payload.member
-        if min_role is not None:
-            if member.top_role < min_role:
-                return
+        if member is None:
+            data = dict(payload=payload, emoji_dict=emoji_dict, emoji=emoji, message_id=None,
+                         member=None, guild=None, min_role=None, delete=False, remove=None)
+            data = {i: j for i, j in data.items() if j is not None}
+            msg = "Member is None object"
+            msg += '\n' + '\n'.join(['{}: {}'.format(i, j) for i, j in data.items()])
+            logger.printv(msg)
         if message_id is not None:
             if payload.message_id != message_id:
                 return
-        if emoji is None:
-            emoji = payload.emoji
-        if guild is None:
-            guild = [g for g in self.guilds if g.id == payload.guild_id][0]
-        if type(guild) == int:
-            guild = self.guilds[guild]
-
-        keys = [i for i in emoji_dict if helpers.emotes_equal(i, emoji)]
         if remove is not None:
             if not isinstance(remove, list) and not isinstance(remove, tuple):
                 remove = [remove]
@@ -197,6 +193,19 @@ class MainBot(commands.Bot):
                 if not isinstance(i, discord.Role):
                     i = helpers.find_role(guild, i)
                 await member.remove_roles(i)
+        if guild is None:
+            guild = [g for g in self.guilds if g.id == payload.guild_id][0]
+        if type(guild) == int:
+            guild = self.guilds[guild]
+        if min_role is not None and not delete:
+            if not isinstance(min_role, discord.Role):
+                min_role = helpers.find_role(guild, min_role)
+            if member.top_role < min_role:
+                return
+        if emoji is None:
+            emoji = payload.emoji
+
+        keys = [i for i in emoji_dict if helpers.emotes_equal(i, emoji)]
         if len(keys) == 1:
             key = keys[0]
             role0 = emoji_dict[key]
