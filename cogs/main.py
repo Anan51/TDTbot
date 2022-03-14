@@ -15,6 +15,11 @@ class MainCommands(commands.Cog):
         self.bot = bot
         self._last_member = None
         self._kicks = []
+        self.bot.enroll_emoji_role({'👍': "Wit Challengers"}, message_id=809302963990429757)
+        self.bot.enroll_emoji_role({'🏆': "Tourney Challengers"}, message_id=822744897505067018)
+        _roles = ['alpha', 'beta', 'gamma', 'omega']
+        _dict = {i: i for i in _roles}
+        self.bot.enroll_emoji_role(_dict, message_id=945717800788447282, remove=_roles, min_role='Recruit')
 
     @commands.command()
     async def guild(self, ctx):
@@ -125,13 +130,6 @@ class MainCommands(commands.Cog):
         msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
                for i in items]
         await split_send(ctx, msg, style='```')
-
-    @commands.Cog.listener()
-    async def on_raw_reaction_add(self, payload):
-        await self.bot.emoji2role(payload, {'👍': "Wit Challengers"}, message_id=809302963990429757)
-        await self.bot.emoji2role(payload, {'🏆': "Tourney Challengers"}, message_id=822744897505067018)
-        _roles = {i: i for i in ['alpha', 'beta', 'gamma', 'omega']}
-        await self.bot.emoji2role(payload, _roles, message_id=945717800788447282)
 
     @commands.command()
     @commands.check(admin_check)

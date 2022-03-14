@@ -163,22 +163,52 @@ class MainBot(commands.Bot):
             return user_id
         return None
 
+    def enroll_emoji_role(self, *args, **kwargs):
+        """Enroll a function to handle an emoji reaction"""
+        if not args:
+            raise ValueError("Must provide at least one argument")
+        if not isinstance(args[0], dict):
+            raise ValueError("First argument must be a dict")
+        self._emoji_role_data.append((args, kwargs))
+
     async def emoji2role(self, payload, emoji_dict, emoji=None, message_id=None,
-                         member=None, guild=None, min_role=None, delete=False):
-        if member is None:
-            member = payload.member
-        if min_role is not None:
-            if member.top_role < min_role:
-                return
+                         member=None, guild=None, min_role=None, delete=False,
+                         remove=None):
+        """Handle an emoji reaction"""
         if message_id is not None:
             if payload.message_id != message_id:
                 return
-        if emoji is None:
-            emoji = payload.emoji
+        if self.user.id in [payload.user_id, (payload.member, 'id', None)]:
+            return
         if guild is None:
             guild = [g for g in self.guilds if g.id == payload.guild_id][0]
         if type(guild) == int:
             guild = self.guilds[guild]
+        if member is None:
+            member = payload.member
+            if member is None:
+                member = await self.get_or_fetch_user(payload.user_id, guild)
+        if min_role is not None and not delete:
+            if not isinstance(min_role, discord.Role):
+                min_role = helpers.find_role(guild, min_role)
+            if member.top_role < min_role:
+                return
+        if emoji is None:
+            emoji = payload.emoji
+        if member is None:
+            data = dict(payload=payload, emoji_dict=emoji_dict, emoji=emoji, message_id=message_id,
+                        member=member, guild=guild, min_role=min_role, delete=delete, remove=remove)
+            data = {i: j for i, j in data.items() if j is not None}
+            msg = "Member is None object"
+            msg += '\n' + '\n'.join(['{}: {}'.format(i, j) for i, j in data.items()])
+            logger.printv(msg)
+        if remove is not None:
+            if not isinstance(remove, list) and not isinstance(remove, tuple):
+                remove = [remove]
+            for i in remove:
+                if not isinstance(i, discord.Role):
+                    i = helpers.find_role(guild, i)
+                await member.remove_roles(i)
 
         keys = [i for i in emoji_dict if helpers.emotes_equal(i, emoji)]
         if len(keys) == 1:
