@@ -178,12 +178,16 @@ class MainBot(commands.Bot):
         if message_id is not None:
             if payload.message_id != message_id:
                 return
-        if member is None:
-            member = payload.member
+        if self.user.id in [payload.user_id, (payload.member, 'id', None)]:
+            return
         if guild is None:
             guild = [g for g in self.guilds if g.id == payload.guild_id][0]
         if type(guild) == int:
             guild = self.guilds[guild]
+        if member is None:
+            member = payload.member
+            if member is None:
+                member = await self.get_or_fetch_user(payload.user_id, guild)
         if min_role is not None and not delete:
             if not isinstance(min_role, discord.Role):
                 min_role = helpers.find_role(guild, min_role)
