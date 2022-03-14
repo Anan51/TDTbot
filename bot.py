@@ -89,9 +89,11 @@ class MainBot(commands.Bot):
         @self.event
         async def on_raw_reaction_remove(payload):
             """Handle emoji reactions"""
+            kwargs = {}
             for args_, kwargs_ in self._emoji_role_data:
-                kwargs_['delete'] = True
-                await self.emoji2role(payload, *args_, **kwargs_)
+                kwargs.update(kwargs_)
+                kwargs['delete'] = True
+                await self.emoji2role(payload, *args_, **kwargs)
 
     async def bot_check(self, ctx):
         """Run a check to see if we should respond to the given command."""
@@ -195,26 +197,29 @@ class MainBot(commands.Bot):
                 return
         if emoji is None:
             emoji = payload.emoji
-        if member is None:
+        if 1:# member is None:
             data = dict(payload=payload, emoji_dict=emoji_dict, emoji=emoji, message_id=message_id,
                         member=member, guild=guild, min_role=min_role, delete=delete, remove=remove)
             data = {i: j for i, j in data.items() if j is not None}
             msg = "Member is None object"
             msg += '\n' + '\n'.join(['{}: {}'.format(i, j) for i, j in data.items()])
             logger.printv(msg)
-        if remove is not None:
-            if not isinstance(remove, list) and not isinstance(remove, tuple):
-                remove = [remove]
-            for i in remove:
-                if not isinstance(i, discord.Role):
-                    i = helpers.find_role(guild, i)
-                await member.remove_roles(i)
 
         keys = [i for i in emoji_dict if helpers.emotes_equal(i, emoji)]
         if len(keys) == 1:
             key = keys[0]
             role0 = emoji_dict[key]
             role = helpers.find_role(guild, role0)
+            if remove is not None:
+                if not isinstance(remove, list) and not isinstance(remove, tuple):
+                    remove = [remove]
+
+                for i in remove:
+                    if not isinstance(i, discord.Role):
+                        i = helpers.find_role(guild, i)
+                    if i == role:
+                        continue
+                    await member.remove_roles(i)
             try:
                 if delete:
                     await member.remove_roles(role)
