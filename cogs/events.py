@@ -7,6 +7,7 @@ import pytz
 import random
 import re
 import traceback
+from typing import Union
 
 from .. import param
 from ..helpers import *
@@ -14,6 +15,7 @@ from ..async_helpers import admin_check, wait_until, split_send
 
 
 logger = logging.getLogger('discord.' + __name__)
+_stale_emoji = '🔕'
 _prototype = "**<Prototype Event Name>**\n"\
              "What: <a bots example event>\n"\
              "Who: <@TDTbot>\n"\
@@ -21,6 +23,14 @@ _prototype = "**<Prototype Event Name>**\n"\
              "React with <insert emoji> to reserve your spot.\n"\
              "(all times will be counted in Pacific Timezone)\n"\
              "(don't include the <> characters in your post)"
+
+
+async def is_stale(message, user):
+    rxns = [rxn for rxn in message.reactions if rxn.emoji == _stale_emoji]
+    if rxns:
+        if user in rxns[0].users:
+            return True
+    return False
 
 
 class _Event(dict):
@@ -223,6 +233,15 @@ class _Event(dict):
                 await split_send(self.log_channel, self._comments)
         await self.log_channel.send(log)
 
+    async def make_stale(self):
+        msg = await self.message()
+        await msg.add_reaction(_stale_emoji)
+
+    async def _is_stale_q(self, msg=None):
+        if msg is None:
+            msg = await self.message()
+        return is_stale(msg, self.bot.user)
+
     def future_or_active(self, hours=6):
         """Is this event in the past or near future?"""
         return (datetime.datetime.utcnow() - self['datetime'] <=
@@ -230,7 +249,8 @@ class _Event(dict):
 
     def past(self):
         """Is this event in the past?"""
-        return self['datetime'] < datetime.datetime.utcnow()
+        if self['datetime'] < datetime.datetime.utcnow():
+            return True
 
     async def attendees(self):
         """Return set of enrolled attendees"""
@@ -300,6 +320,8 @@ class _Event(dict):
             await wait_until(dt)
         msg = ' '.join([prefix, eta] + [i.mention for i in await self.attendees()])
         await channel.send(msg)
+        if dt == 0:
+            await self.make_stale()
 
     def set_alerts(self, dts=None, channel=None):
         """Set multiple alerts for list of dt (in minutes)"""
@@ -413,6 +435,9 @@ class Events(commands.Cog):
                     return
         # if message in event channel, then try to parse it
         if self.is_event_channel(message.channel):
+            # if event is stale ignore it
+            if is_stale(message, self.bot.user):
+                return
             await self.enroll_event_if_valid(_Event(message, self))
 
     @commands.Cog.listener()
@@ -637,6 +662,28 @@ class Events(commands.Cog):
             await ctx.send('Event roll DM(s) sent.')
         else:
             raise RuntimeError('No event roll messages sent.')
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def make_event_stale(self, ctx, event: Union[int, str]):
+        """<event id/name> Make an event stale"""
+        try:
+            event = int(event)
+        except ValueError:
+            pass
+        if isinstance(event, int):
+            events = [i for i in self._events if i['id'] == event]
+        elif event == 'all':
+            events = self._events
+        else:
+            events = [i for i in self._events if i.search(event)]
+        out = []
+        for i in events:
+            await i.make_stale()
+            out.append('Event {:} made stale.'.format(i['name']))
+        if not out:
+            out = ['No events matching "{}" found.'.format(event)]
+        await split_send(ctx, out)
 
 
 def setup(bot):

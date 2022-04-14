@@ -193,7 +193,7 @@ class Activity(commands.Cog):
                         output.append('{0.display_name} in supporters (last active {1})'.format(m, date.isoformat()))
                     continue
             if not self._debug:
-                _roles = [r.name for r in m.roles if r > recruit]
+                _roles = [r for r in m.roles if r > recruit]
 
                 await m.remove_roles(*_roles)
                 await m.add_roles(recruit)
