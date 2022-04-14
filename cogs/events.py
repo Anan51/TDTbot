@@ -25,15 +25,20 @@ _prototype = "**<Prototype Event Name>**\n"\
              "(don't include the <> characters in your post)"
 
 
+async def is_stale(message, user):
+    rxns = [rxn for rxn in message.reactions if rxn.emoji == _stale_emoji]
+    if rxns:
+        if user in rxns[0].users:
+            return True
+    return False
+
+
 class _Event(dict):
     """A class to contain event info (dict subclass)."""
     def __init__(self, message, cog, log_channel=None, from_hist=False):
         super().__init__()
         self.cog = cog
         if message.author == cog.bot.user:
-            return
-        if await self._is_stale_q(message):
-            logger.printv('Event {} is stale'.format(message.id))
             return
         self._error = None
         self._comments = []
@@ -235,11 +240,7 @@ class _Event(dict):
     async def _is_stale_q(self, msg=None):
         if msg is None:
             msg = await self.message()
-        rxns = [rxn for rxn in msg.reactions if rxn.emoji == _stale_emoji]
-        if rxns:
-            if self.bot.user in rxns[0].users:
-                return True
-        return False
+        return is_stale(msg, self.bot.user)
 
     def future_or_active(self, hours=6):
         """Is this event in the past or near future?"""
@@ -250,7 +251,6 @@ class _Event(dict):
         """Is this event in the past?"""
         if self['datetime'] < datetime.datetime.utcnow():
             return True
-        return await self._is_stale_q()
 
     async def attendees(self):
         """Return set of enrolled attendees"""
@@ -435,6 +435,9 @@ class Events(commands.Cog):
                     return
         # if message in event channel, then try to parse it
         if self.is_event_channel(message.channel):
+            # if event is stale ignore it
+            if is_stale(message, self.bot.user):
+                return
             await self.enroll_event_if_valid(_Event(message, self))
 
     @commands.Cog.listener()
