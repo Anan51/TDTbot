@@ -194,7 +194,8 @@ class Activity(commands.Cog):
                     continue
             if not self._debug:
                 _roles = [r.name for r in m.roles if r > recruit]
-                await m.remove_roles(_roles)
+
+                await m.remove_roles(*_roles)
                 await m.add_roles(recruit)
                 output.append('{0.display_name} demoted (last active {1})'.format(m, date))
             else:
