@@ -130,7 +130,7 @@ class _Event(dict):
                         logger.printv(traceback.format_exc())
                     else:
                         tz_parsed = True
-                        self._comments.append('Timezone "{}" parsed as: "{}"'.format(time[4], timezone.zone))
+                        # self._comments.append('Timezone "{}" parsed as: "{}"'.format(time[4], timezone.zone))
                 # if am/pm not provided
                 if not am_pm:
                     if 'night' in out['when'].lower() and hour < 12:
@@ -198,7 +198,7 @@ class _Event(dict):
     @property
     def log_message(self):
         """Return the string we want to send to the log when registering this event"""
-        return 'Event "{0.name}" registered for {0.dt_str}'.format(self)
+        return 'Event "{}" registered for {}'.format(self.name, self.unix_timestamp('F'))
 
     @property
     def id(self):
@@ -313,9 +313,7 @@ class _Event(dict):
                 else:
                     eta = "is starting in {:d} minutes.".format(dt_min)
         if eta == 'UNIX':
-            dt = self['datetime'].timestamp()
-            eta = 'is starting in <t:{:d}:R>'.format(
-                (self['datetime'] - datetime.datetime.utcnow()).seconds)
+            eta = 'is starting {} ({})'.format(self.unix_timestamp(), self.unix_timestamp('F'))
         if wait:
             await wait_until(dt)
         msg = ' '.join([prefix, eta] + [i.mention for i in await self.attendees()])
