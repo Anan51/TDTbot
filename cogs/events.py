@@ -610,26 +610,30 @@ class Events(commands.Cog):
             await ctx.send('Done.')
 
     @commands.command()
-    async def traitor(self, ctx, n: int = 1, multi: bool = False):
+    async def traitor(self, ctx, multi: bool = False):
         """Assign and DM a traitor'"""
         t_msg = 'Traitor: You are the Traitor! Turn on your HUD, try to get the Power ' \
                 'Ammo, and ready your Knives and Grenades!'
+        d_msg = 'Detective: You are the Detective! Turn off your HUD. ' \
+                'Equip a Kvostov and Erianas to protect the innocents.'
         i_msg = 'Innocent: There is a traitor amongst you... Keep your HUD and Ghost ' \
                 'off and be sure to mute if you die.'
+        roles = {t_msg: 1, i_msg: None}
         phrases = ['TTT', 'terrorist', 'traitor']
-        await self.assign_rolls(ctx, t_msg, i_msg, phrases, n=n, multi=multi)
+        await self.assign_rolls(ctx, roles, phrases, multi=multi)
 
     @commands.command()
-    async def infected(self, ctx, n: int = 1, multi: bool = False):
+    async def infected(self, ctx, multi: bool = False):
         """Assign and DM an infected'"""
         a_msg = 'You are the Prime Infected: get out your Stay Away and sword and start '\
                 'infecting. You loose your Stay Away after one kill.'
         b_msg = 'Survivor: You’re a survivor... stay alert, they\'re coming...'
+        roles = {a_msg: 1, b_msg: None}
         phrases = ['Infection', 'infected']
-        await self.assign_rolls(ctx, a_msg, b_msg, phrases, n=n, multi=multi)
+        await self.assign_rolls(ctx, roles, phrases, multi=multi)
 
-    async def assign_rolls(self, ctx, a_msg, b_msg, phrases, n=1, multi=False):
-        """Assign and DM a event rolls'"""
+    async def assign_rolls(self, ctx, roles, phrases, multi=False):
+        """Assign and DM event rolls'"""
         event_name = phrases[0]
         events = [i for i in self.event_list if await i.search(phrases)]
         if len(events) > 1 and not multi:
@@ -637,27 +641,38 @@ class Events(commands.Cog):
         elif not len(events):
             raise ValueError('No {:} events registered.'.format(event_name))
 
-        sent = False
+        sent = []
         suf = ''
         for i, e in enumerate(events):
             if len(events) > 1:
                 suf = ' ({:})'.format(i)
             attendees = await e.attendees()
-            roll_a = random.sample(attendees, n)
-            for person in attendees:
-                channel = person.dm_channel
-                if not channel:
-                    await person.create_dm()
+            assignments = {}
+            for role, num in roles.items():
+                if num is None:
+                    continue
+                if num > 0:
+                    assignments[role] = random.sample(attendees, num)
+                    for a in assignments[role]:
+                        attendees.remove(a)
+            for role, num in roles.items():
+                if num is None:
+                    assignments[role] = attendees
+                    for a in assignments[role]:
+                        attendees.remove(a)
+            for role, people in assignments.items():
+                for person in people:
                     channel = person.dm_channel
-                if person in roll_a:
-                    await channel.send(a_msg + suf)
-                    sent = True
-                else:  # has roll b
-                    await channel.send(b_msg + suf)
+                    if not channel:
+                        await person.create_dm()
+                        channel = person.dm_channel
+                    await channel.send(role + suf)
+                    sent.append(person)
 
         if sent:
-            logger.printv('Event roll DM(s) sent.')
-            await ctx.send('Event roll DM(s) sent.')
+            msg = '{:} event rolls sent to {:}.'.format(event_name, sent)
+            logger.printv(msg)
+            await ctx.send(msg)
         else:
             raise RuntimeError('No event roll messages sent.')
 
