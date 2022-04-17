@@ -65,7 +65,7 @@ Gundam had around 10+ kills. And last but not least, the warrior coming up last 
 Yes. 4 Kills. In survival... Thus "Four Kills" was born into this universe. 
 
 
-##Tha MaFukn 🅱️eef franks
+## Tha MaFukn 🅱️eef franks
 
 ### Tha MaFukn 🅱️eef franks I
 In the times of ol', there were two schools of philosophy
