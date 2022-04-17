@@ -197,7 +197,7 @@ class MainBot(commands.Bot):
                 return
         if emoji is None:
             emoji = payload.emoji
-        if 1:# member is None:
+        if member is None:
             data = dict(payload=payload, emoji_dict=emoji_dict, emoji=emoji, message_id=message_id,
                         member=member, guild=guild, min_role=min_role, delete=delete, remove=remove)
             data = {i: j for i, j in data.items() if j is not None}
