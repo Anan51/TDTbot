@@ -72,7 +72,7 @@ class AdminTools(commands.Cog):
         logger.printv('\nRebooting\n\n\n\n')
         self.bot.reissue = ctx
         # This exits the bot loop, allowing __main__ loop to take over
-        await self.bot.loop.run_until_complete(await self.bot.logout())
+        await self.bot.loop.run_until_complete(await self.bot.close())
 
     @commands.command()
     async def speak(self, ctx, message, channel: discord.TextChannel = None, guild: str = None):
