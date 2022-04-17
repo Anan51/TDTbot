@@ -434,7 +434,7 @@ class Events(commands.Cog):
         # if message in event channel, then try to parse it
         if self.is_event_channel(message.channel):
             # if event is stale ignore it
-            if is_stale(message, self.bot.user):
+            if await is_stale(message, self.bot.user):
                 return
             await self.enroll_event_if_valid(_Event(message, self))
 
@@ -618,7 +618,7 @@ class Events(commands.Cog):
                 'Equip a Kvostov and Erianas to protect the innocents.'
         i_msg = 'Innocent: There is a traitor amongst you... Keep your HUD and Ghost ' \
                 'off and be sure to mute if you die.'
-        roles = {t_msg: 1, i_msg: None}
+        roles = {t_msg: 1, d_msg: 1, i_msg: None}
         phrases = ['TTT', 'terrorist', 'traitor']
         await self.assign_rolls(ctx, roles, phrases, multi=multi)
 
@@ -657,7 +657,7 @@ class Events(commands.Cog):
                         attendees.remove(a)
             for role, num in roles.items():
                 if num is None:
-                    assignments[role] = attendees
+                    assignments[role] = list(attendees)[:]
                     for a in assignments[role]:
                         attendees.remove(a)
             for role, people in assignments.items():
@@ -667,10 +667,10 @@ class Events(commands.Cog):
                         await person.create_dm()
                         channel = person.dm_channel
                     await channel.send(role + suf)
-                    sent.append(person)
+                    sent.append(person.display_name)
 
         if sent:
-            msg = '{:} event rolls sent to {:}.'.format(event_name, sent)
+            msg = '{:} event rolls sent to {:}.'.format(event_name, ', '.join(sent))
             logger.printv(msg)
             await ctx.send(msg)
         else:
