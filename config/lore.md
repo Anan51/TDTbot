@@ -12,7 +12,7 @@ When the fires were still cold, the first four to form the wolfpack were the alp
 ## Assimilation of the Dispatch
 
 ### Assimilation of the Dispatch I
-Before the Red War, there was a Dispatch of 3. A Doctor, a Lizzard, and a Gundam. One day, while sharpening his skills in the crucible, the Lizzard played against a warrior of the crucible. The warrior was impressed with the Lizzard's skills, and extended an invitation to their clan, The Dream Team. The lizzard  stipulated that he would joined only if the 2 members of the Dispatch want to join.
+Before the Red War, there was a Dispatch of 3. A Doctor, a Lizzard, and a Gundam. One day, while sharpening his skills in the crucible, the Lizzard played against a warrior of the crucible. The warrior was impressed with the Lizzard's skills, and extended an invitation to their clan, The Dream Team. The lizzard stipulated that he would join only if the 2 members of the Dispatch want to join.
 
 ### Assimilation of the dispatch II
 The lizzard took that invitation to the other 2 members of the clan, and after some time, everyone agreed to join the warrior's clan, despite the cheesy name. After some time getting to know the people in the clan, they decided that it was the right choice to do so.
