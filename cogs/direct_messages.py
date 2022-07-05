@@ -1,7 +1,8 @@
 import discord  # type: ignore
 from discord.ext import commands  # type: ignore
 import logging
-from .. import param
+import os
+from .. import param, users
 from ..config import UserConfig
 from ..helpers import find_role
 from ..async_helpers import admin_check, parse_payload, split_send
@@ -9,7 +10,8 @@ from ..async_helpers import admin_check, parse_payload, split_send
 
 logger = logging.getLogger('discord.' + __name__)
 
-_bot = "tdt.dms"
+_dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
+_dbm = os.path.join(_dbm, 'config', 'direct_messages.dbm')
 
 
 class DirectMessages(commands.Cog):
@@ -19,6 +21,13 @@ class DirectMessages(commands.Cog):
         self._kicks = {}
         self._configs = {}
         self._channel = None
+        self.data = param.IntPermaDict(_dbm)
+
+    async def cog_check(self, ctx):
+        """Don't allow everyone to access this cog"""
+        if not await admin_check(ctx):
+            return False
+        return ctx.channel == self.channel
 
     def _get_config(self, user=None):
         """Get a user's config file"""
@@ -29,15 +38,6 @@ class DirectMessages(commands.Cog):
         except KeyError:
             self._configs[user.id] = UserConfig(user)
             return self._configs[user.id]
-
-    @property
-    def data(self):
-        """Get the data file for the bot"""
-        try:
-            return self._get_config()[_bot]
-        except KeyError:
-            self._get_config()[_bot] = {}
-            return self._get_config()[_bot]
 
     def __getitem__(self, item):
         return self.data[item]
@@ -58,6 +58,19 @@ class DirectMessages(commands.Cog):
             self._channel = self.bot.find_channel(param.rc('log_channel'))
         return self._channel
 
+    @commands.command()
+    async def send_dm(self, ctx, target: discord.User, *args):
+        msg = " ".join(args)
+        channel = target.dm_channel
+        if channel is None:
+            channel = await target.create_dm()
+        await split_send(channel, msg)
+
+    @commands.command()
+    async def dm_data(self, ctx):
+        lines = ["{}: {}".format(i, self[i]) for i in self.keys()]
+        await split_send(ctx, lines, style='```')
+
     @commands.Cog.listener()
     async def on_message(self, message):
         """Listen for DMs and post them in the bot log channel"""
@@ -75,6 +88,7 @@ class DirectMessages(commands.Cog):
         # if DM
         if type(message.channel) == discord.DMChannel:
             channel = self.bot.find_channel(param.rc('log_channel'))
+            # roles = [find_role(channel.guild, i).name for i in ["admin", "devoted"]]
             roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
             msg = ' '.join(roles) + '\n'
             msg += 'From: {0.author}\n"{0.content}"'.format(message)
@@ -108,13 +122,17 @@ class DirectMessages(commands.Cog):
         # if bot
         if payload.user_id == self.bot.user.id:
             return
+        if payload.user_id == users.stellar:
+            print(payload)
         # if message is from a DM
         if payload.message_id in self:
             data = await parse_payload(payload, self.bot, "guid", "member")
             member, guild = data["member"], data["guild"]
             emoji = payload.emoji.name.lower()
+            print(payload.emoji, payload.emoji.name)
+            print(payload)
             # if reaction is a kick
-            if "foot" in emoji or "shoe" in emoji:
+            if "foot" in emoji or "shoe" in emoji or "chancla" in emoji or emoji in ["👟", "🦶", "👞"]:
                 # if emoji poster is admin or devoted
                 if await admin_check(bot=self.bot, author=member, guild=guild):
                     channel = await self.bot.fetch_channel(self[payload.message_id])
@@ -131,7 +149,7 @@ class DirectMessages(commands.Cog):
             # if emoji poster is admin or devoted
             if await admin_check(bot=self.bot, author=member, guild=guild):
                 if payload.emoji.name == '✅':
-                    member = await self.bot.get_or_fetch_user(self._kicks[payload.message_id])
+                    member = await self.bot.get_or_fetch_user(self._kicks[payload.message_id], guild=guild)
                     await member.kick()
                     await self.channel.send("{} has been kicked".format(member))
                     del self._kicks[payload.message_id]
