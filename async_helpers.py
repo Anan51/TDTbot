@@ -78,6 +78,7 @@ async def git_log(channel, *args):
 
 
 async def parse_payload(payload, bot, *fields):
+    fields = list(fields)
     if not fields:
         fields = ['guild', 'member']
     reqiers = {'member': ['guild'],
