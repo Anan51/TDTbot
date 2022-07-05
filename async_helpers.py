@@ -77,3 +77,36 @@ async def wait_until(dt):
 async def git_log(channel, *args):
     """Print git log to discord chat."""
     await split_send(channel, git_manage.git_log_items(), style='```')
+
+
+async def parse_payload(payload, bot, *fields):
+    if not fields:
+        fields = ['guild', 'member']
+    reqiers = {'member': ['guild'],
+               'messsage': ['channel']}
+
+    for i in fields:
+        add = reqiers.get(i, [])
+        for j in add:
+            if j not in fields:
+                fields.append(j)
+
+    out = dict()
+    if "guild" in fields:
+        try:
+            out["guild"] = [g for g in bot.guilds if g.id == payload.guild_id][0]
+        except IndexError:
+            out['guild'] = await bot.fetch_guild(payload.guild_id)
+    if "member" in fields:
+        member = payload.member
+        if not member:
+            member = await bot.get_or_fetch_user(payload.user_id, out["guild"])
+        out["member"] = member
+    if "channel" in fields:
+        channel = bot.find_channel(payload.channel_id)
+        if channel is None:
+            channel = await bot.fetch_channel(payload.channel_id)
+        out["channel"] = channel
+    if "message" in fields:
+        out["message"] = await out["channel"].fetch_message(payload.message_id)
+    return out
