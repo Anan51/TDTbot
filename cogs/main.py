@@ -1,12 +1,29 @@
 import discord  # type: ignore
 from discord.ext import commands  # type: ignore
 import logging
-from .. import param, users
+from typing import Tuple
+from .. import param, users, roles
 from ..helpers import emotes_equal, find_channel
 from ..async_helpers import admin_check, split_send
 
 
 logger = logging.getLogger('discord.' + __name__)
+
+
+async def _parings_perms(ctx=None, bot=None, author=None, guild=None):
+    if author is None:
+        if ctx is None:
+            raise ValueError("Either ctx or author must be specified")
+        author = ctx.author
+    if guild is None:
+        guild = ctx.guild
+    logger.debug('parings_perms_check', author, getattr(author, "top_role", "NO_ROLE"))
+    try:
+        if author.top_role.id in [roles.admin, roles.devoted, roles.member]:
+            return True
+    except AttributeError:
+        pass
+    return False
 
 
 class MainCommands(commands.Cog):
@@ -195,16 +212,19 @@ class MainCommands(commands.Cog):
         await ctx.send('My source code is available at https://github.com/TDTcode/TDTbot')
 
     @commands.command()
-    async def pairings(self, ctx, *args: tuple[discord.Role]):
+    @commands.check(_parings_perms)
+    async def pairings(self, ctx, *args):
         """<role1> <role2> <role3> ... <roleN>
         1v1 parings for members in listed roles."""
         from random import shuffle
+        converter = commands.RoleConverter()
 
         if not args:
             await ctx.send("Please specify at least one role.")
             return
         people = []
         for role in args:
+            role = await converter.convert(ctx, role)
             people.extend(role.members)
         if not people:
             await ctx.send("No members found in specified roles.")
@@ -214,7 +234,7 @@ class MainCommands(commands.Cog):
         n = len(people)
         i = 0
         matches = []
-        while i < n:
+        while i < n - 1:
             matches.append("{} vs {}".format(people[i].mention, people[i+1].mention))
             i += 2
         if n % 2:
