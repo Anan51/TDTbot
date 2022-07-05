@@ -1,11 +1,11 @@
-import discord
-from discord.ext import commands
+import discord  # type: ignore
+from discord.ext import commands  # type: ignore
 import os
 import logging
 import time
 from typing import Union
 from ..param import PermaDict
-from ..helpers import *
+from ..helpers import emotes_equal, find_channel
 from ..async_helpers import admin_check
 
 

@@ -1,11 +1,10 @@
-import datetime
-import discord
-from discord.ext import commands
+import discord  # type: ignore
+from discord.ext import commands  # type: ignore
 import logging
-from .. import param, users
+from .. import param
 from ..config import UserConfig
-from ..helpers import *
-from ..async_helpers import *
+from ..helpers import find_role
+from ..async_helpers import admin_check, parse_payload, split_send
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -111,13 +110,13 @@ class DirectMessages(commands.Cog):
             return
         # if message is from a DM
         if payload.message_id in self:
-            data = parse_payload(payload, self.bot, "guid", "member")
+            data = await parse_payload(payload, self.bot, "guid", "member")
             member, guild = data["member"], data["guild"]
             emoji = payload.emoji.name.lower()
             # if reaction is a kick
             if "foot" in emoji or "shoe" in emoji:
                 # if emoji poster is admin or devoted
-                if await admin_check(bot=self.bot, author=member, guild=self.channel.guild):
+                if await admin_check(bot=self.bot, author=member, guild=guild):
                     channel = await self.bot.fetch_channel(self[payload.message_id])
                     recipient = channel.recipient
                     msg = "Are you sure you want to kick {}?".format(recipient)
@@ -127,10 +126,10 @@ class DirectMessages(commands.Cog):
                     self._kicks[msg.id] = recipient.id
         # if reacting to a kick prompt
         elif payload.message_id in self._kicks:
-            data = parse_payload(payload, self.bot, "guid", "member")
+            data = await parse_payload(payload, self.bot, "guid", "member")
             member, guild = data["member"], data["guild"]
             # if emoji poster is admin or devoted
-            if await admin_check(bot=self.bot, author=member, guild=self.channel.guild):
+            if await admin_check(bot=self.bot, author=member, guild=guild):
                 if payload.emoji.name == '✅':
                     member = await self.bot.get_or_fetch_user(self._kicks[payload.message_id])
                     await member.kick()

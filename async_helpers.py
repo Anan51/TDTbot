@@ -1,9 +1,7 @@
 import asyncio
 import datetime
-import discord
-import humanize
+import discord  # type: ignore
 import logging
-import pytz
 import time
 from . import git_manage, roles
 

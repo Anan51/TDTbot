@@ -1,10 +1,9 @@
-import datetime
-import discord
-from discord.ext import commands
+import discord  # type: ignore
+from discord.ext import commands  # type: ignore
 import logging
 from .. import param, users
-from ..helpers import *
-from ..async_helpers import *
+from ..helpers import emotes_equal, find_channel
+from ..async_helpers import admin_check, split_send
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -194,6 +193,33 @@ class MainCommands(commands.Cog):
     async def source(self, ctx):
         """Source code for this bot."""
         await ctx.send('My source code is available at https://github.com/TDTcode/TDTbot')
+
+    @commands.command()
+    async def pairings(self, ctx, *args: tuple[discord.Role]):
+        """<role1> <role2> <role3> ... <roleN>
+        1v1 parings for members in listed roles."""
+        from random import shuffle
+
+        if not args:
+            await ctx.send("Please specify at least one role.")
+            return
+        people = []
+        for role in args:
+            people.extend(role.members)
+        if not people:
+            await ctx.send("No members found in specified roles.")
+            return
+        people = list(set(people))
+        shuffle(people)
+        n = len(people)
+        i = 0
+        matches = []
+        while i < n:
+            matches.append("{} vs {}".format(people[i].mention, people[i+1].mention))
+            i += 2
+        if n % 2:
+            matches.append("{} has no match.".format(people[-1].mention))
+        await split_send(ctx, matches)
 
 
 def setup(bot):
