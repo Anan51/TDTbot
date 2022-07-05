@@ -3,10 +3,10 @@ from discord.ext import commands
 import os
 import logging
 import time
+from typing import Union
 from ..param import PermaDict
 from ..helpers import *
-from ..async_helpers import admin_check, git_log, split_send
-from .. import git_manage
+from ..async_helpers import admin_check
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -26,7 +26,7 @@ class AdminTools(commands.Cog):
 
     @commands.command()
     async def clear_rxn(self, ctx, emote: str, msg_id: int = None,
-                        channel: [discord.abc.Messageable, int] = None):
+                        channel: Union[discord.abc.Messageable, int] = None):
         """<emote> <message id (optional)> <channel (optional)>
         Clear all of the specified reaction for the message
 
