@@ -1,4 +1,4 @@
-import discord  # type: ignore
+import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import os
 import logging

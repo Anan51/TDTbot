@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 import random
 from .. import param
-from ..helpers import *
+from ..helpers import find_role
 from ..config import UserConfig
 from ..async_helpers import split_send, sleep, admin_check, wait_until
 import logging
@@ -20,7 +20,7 @@ _channel = "the-wilds"
 _role = "Lone Wolf"
 _hour = 3600
 _tmin, _tmax = 45 * 60, 75 * 60
-#_tmin, _tmax = 10, 30
+# _tmin, _tmax = 10, 30
 _dday = datetime.timedelta(days=1)
 _dhour = datetime.timedelta(hours=1)
 _dmin = datetime.timedelta(minutes=1)
@@ -654,7 +654,7 @@ class Wilds(commands.Cog):
     @commands.check(admin_check)
     async def post_wilds_help(self, ctx):
         """Post Wilds Help"""
-        #await self.bot.help_command.
+        # await self.bot.help_command.
         pass
 
 

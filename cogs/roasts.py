@@ -1,12 +1,12 @@
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import datetime
-import discord
-from discord.ext import commands
 import logging
 import random
 import re
 import sys
 from .. import param
-from ..helpers import *
+from ..helpers import find_channel
 from ..async_helpers import admin_check
 
 logger = logging.getLogger('discord.' + __name__)

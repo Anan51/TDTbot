@@ -1,8 +1,7 @@
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import logging
-from ..helpers import *
-from ..async_helpers import admin_check, git_log, split_send
+from ..async_helpers import admin_check, git_log
 from .. import git_manage
 
 

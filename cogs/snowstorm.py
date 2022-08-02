@@ -1,10 +1,10 @@
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
-import discord
-from discord.ext import commands
 import random
 from .. import param
-from ..helpers import *
+from ..helpers import find_role
 from ..config import UserConfig
 from ..async_helpers import split_send, sleep, admin_check
 import logging
@@ -36,6 +36,19 @@ _snow_name = "snow (grams)"
 _name_base = "tdt.snowstorm." + _year + "."
 _score = _name_base + "score"
 _bot = _name_base
+
+# holdovers from trick_or_treat.py copy
+_trick = "😈"                   # trick emoji
+_treat = "🍬"                   # treat emoji
+_nmin = 3                     # minimum number of votes to start count
+# alt accounts
+_alts = {547171042565685250: [856003669090369536, 522962175690539008],  # eyes
+         604505229593149462: [901988686277804073, 901984697805049916],  # bob
+         }
+_all_alts = []
+for i in _alts.values():
+    _all_alts.extend(i)
+# end of holdovers from trick_or_treat.py copy
 
 
 class Item:

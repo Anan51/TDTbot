@@ -1,8 +1,8 @@
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import logging
-from ..helpers import *
-from ..async_helpers import admin_check, git_log, split_send
+from ..helpers import find_channel
+from ..async_helpers import admin_check, split_send
 from .. import git_manage
 
 
@@ -149,7 +149,7 @@ class Debugging(commands.Cog):
     @commands.check(_owner)
     async def exec(self, ctx, *args):
         out = []
-        var_data = dict(out=out, self=self)
+        var_data = dict(out=out, self=self)  # noqa: F841
         cmd = ' '.join(args).strip().strip('`"\'')
         await ctx.send("Running the following code:\n```\n" + cmd + "\n```")
         exec(cmd)

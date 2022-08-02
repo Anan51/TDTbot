@@ -1,11 +1,10 @@
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
+import datetime
 import logging
-import re
 import numpy as np
-from ..helpers import *
-from ..async_helpers import *
-from .. import param
+from ..helpers import parse_message, find_role
+from ..async_helpers import split_send
 from ..config import UserConfig
 
 
@@ -176,7 +175,7 @@ class FashionContest(commands.Cog):
             return
         if not await self._can_run(message):
             return
-        #if self._entries is None:
+        # if self._entries is None:
         #    await self._get_saved_entries()
         # await message.channel.send(str(message))
         data = parse_message(message)

@@ -1,6 +1,6 @@
 import asyncio
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import datetime
 import logging
 import pytz
@@ -10,7 +10,7 @@ import traceback
 from typing import Union
 
 from .. import param
-from ..helpers import *
+from ..helpers import parse_timezone, minute, day
 from ..async_helpers import admin_check, wait_until, split_send
 
 
@@ -399,7 +399,7 @@ class Events(commands.Cog):
             return channel.id == self.channel.id
         if hasattr(self.channel, "lower"):
             try:
-                cid = int(self.channel)
+                int(self.channel)
                 return self.channel.id == channel.id
             except ValueError:
                 return channel.name == self.channel

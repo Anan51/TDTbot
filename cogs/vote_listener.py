@@ -1,6 +1,6 @@
-import discord
-from discord.ext import commands
-from ..helpers import *
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
+from ..helpers import emotes_equal, parse_message
 import logging
 
 

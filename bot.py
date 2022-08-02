@@ -1,13 +1,13 @@
 import asyncio
 import datetime
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 from glob import glob
 import logging
 import os
 import pytz
-import sys
-import traceback
+import sys  # type: ignore # noqa: F401
+import traceback  # type: ignore # noqa: F401
 from . import param
 from . import helpers
 from . import async_helpers
@@ -226,7 +226,7 @@ class MainBot(commands.Bot):
                 else:
                     await member.add_roles(role)
                 return role
-            except AttributeError as e:
+            except AttributeError:
                 logger.printv('Role attr err: {}->{}->{}'.format(key, role0, role))
         elif len(keys) > 1:
             logger.printv('Multiple matches: {}'.format({i: emoji_dict[i] for i in keys}))

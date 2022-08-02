@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 from .. import param
 import random
 import logging

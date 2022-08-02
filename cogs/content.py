@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import datetime
 import logging
 import os
@@ -8,7 +8,7 @@ from urllib import request
 from urllib.parse import urlparse, parse_qs
 from .. import param
 from ..param import PermaDict
-from ..helpers import *
+from ..helpers import int_time, parse_message
 from ..async_helpers import admin_check, split_send
 from ..twitter import tweet
 
@@ -50,14 +50,20 @@ def extract_video_id(url):
     # - http://www.youtube.com/embed/SA2iWivDJiE
     # - http://www.youtube.com/v/SA2iWivDJiE?version=3&amp;hl=en_US
     query = urlparse(url)
-    if query.hostname == 'youtu.be': return query.path[1:]
+    if query.hostname == 'youtu.be':
+        return query.path[1:]
     if query.hostname in {'www.youtube.com', 'youtube.com'}:
-        if query.path == '/watch': return parse_qs(query.query)['v'][0]
-        if query.path[:7] == '/watch/': return query.path.split('/')[1]
-        if query.path[:7] == '/embed/': return query.path.split('/')[2]
-        if query.path[:3] == '/v/': return query.path.split('/')[2]
+        if query.path == '/watch':
+            return parse_qs(query.query)['v'][0]
+        if query.path[:7] == '/watch/':
+            return query.path.split('/')[1]
+        if query.path[:7] == '/embed/':
+            return query.path.split('/')[2]
+        if query.path[:3] == '/v/':
+            return query.path.split('/')[2]
         # below is optional for playlists
-        if query.path[:9] == '/playlist': return parse_qs(query.query)['list'][0]
+        if query.path[:9] == '/playlist':
+            return parse_qs(query.query)['list'][0]
     # returns None for invalid YouTube url
 
 

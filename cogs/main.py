@@ -1,7 +1,7 @@
 import discord  # type: ignore
 from discord.ext import commands  # type: ignore
 import logging
-from typing import Tuple
+# from typing import Tuple
 from .. import param, users, roles
 from ..helpers import emotes_equal, find_channel
 from ..async_helpers import admin_check, split_send

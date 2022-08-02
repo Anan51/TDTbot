@@ -1,13 +1,14 @@
+import asyncio
 import datetime
-import discord
-from discord.ext import commands
+import pytz
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import logging
-import pickle
-import os
-from .. import param, roles
-from ..helpers import *
-from ..async_helpers import *
+from .. import param
+# from ..helpers import *
+from ..async_helpers import admin_check, wait_until
 
+logger = logging.getLogger('discord.' + __name__)
 
 _mesome = 160087397873221632
 
@@ -122,4 +123,4 @@ class Chron(commands.Cog):
 
 
 def setup(bot):
-        bot.add_cog(Chron(bot))
+    bot.add_cog(Chron(bot))

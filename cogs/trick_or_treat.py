@@ -1,10 +1,10 @@
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
-import discord
-from discord.ext import commands
 import random
 from .. import param
-from ..helpers import *
+from ..helpers import find_role
 from ..config import UserConfig
 from ..async_helpers import split_send, sleep, admin_check
 import logging
@@ -347,7 +347,6 @@ class TrickOrTreat(commands.Cog):
         if not self._game_on:
             return
         await self._async_init()
-
 
     @commands.command()
     async def show_points(self, ctx, member: discord.Member = None):

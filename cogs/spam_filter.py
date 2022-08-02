@@ -1,9 +1,8 @@
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import asyncio
-import datetime
-import discord
-from discord.ext import commands
-from .. import param, roles
-from ..helpers import *
+from .. import roles
+from ..helpers import find_role
 from ..async_helpers import admin_check
 import logging
 import re
@@ -125,4 +124,3 @@ class SpamFilter(commands.Cog):
 
 def setup(bot):
     bot.add_cog(SpamFilter(bot))
-

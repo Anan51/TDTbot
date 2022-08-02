@@ -1,5 +1,5 @@
 import os
-import tweepy
+import tweepy  # type: ignore
 import logging
 
 
@@ -13,8 +13,8 @@ class AuthKeys:
     def __init__(self, fn):
         self.fn = fn
         with open(_auth_file) as f:
-            lines = [l.split('#')[0].strip() for l in f.readlines()]
-            lines = [l for l in lines if l]
+            lines = [line.split('#')[0].strip() for line in f.readlines()]
+            lines = [line for line in lines if line]
         self.api_key = lines[0]
         self.api_secret = lines[1]
         self.bearer = lines[2]

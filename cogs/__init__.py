@@ -1,3 +1,4 @@
+# flake8: noqa
 from . welcome import Welcome
 from . debugging import Debugging
 from . events import Events

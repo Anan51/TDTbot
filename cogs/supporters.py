@@ -1,11 +1,11 @@
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import os
-import discord
-from discord.ext import commands
 import logging
 import pytz
 from typing import Union
 from .. import param, roles
-from ..helpers import *
+from ..helpers import int_time, find_role, seconds_to_datetime
 from ..async_helpers import admin_check, split_send
 
 
@@ -107,15 +107,15 @@ class Supporters(commands.Cog):
                 reverse = True
                 sort_by = sort_by[:-2]
             if sort_by in ['date', 'datetime']:
-                f = lambda x: self.data[x][0]
+                f = lambda x: self.data[x][0]  # noqa: E731
             elif sort_by == 'id':
-                f = lambda x: x
+                f = lambda x: x  # noqa: E731
             elif sort_by == 'name':
-                f = lambda x: members[x].display_name
+                f = lambda x: members[x].display_name  # noqa: E731
             elif sort_by == 'alias':
-                f = lambda x: self.data[x][1] + '~~~' + \
-                              getattr(members[x], 'display_name',
-                                      getattr(members[x], 'name', ''))
+                def f(x):
+                    out = self.data[x][1] + '~~~'
+                    return out + getattr(members[x], 'display_name', getattr(members[x], 'name', ''))
             else:
                 await ctx.send("Unknown sort option.")
             keys = sorted(keys, key=f, reverse=reverse)

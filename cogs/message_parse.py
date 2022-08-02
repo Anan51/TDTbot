@@ -1,8 +1,7 @@
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import logging
-import re
-from ..helpers import *
+from ..helpers import parse_message
 from ..async_helpers import admin_check
 from .. import param
 

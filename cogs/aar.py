@@ -1,10 +1,10 @@
 import datetime
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import logging
 import pytz
 from ..async_helpers import git_log
-from ..helpers import *
+# from ..helpers import *
 from .. import param
 
 

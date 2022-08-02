@@ -1,7 +1,7 @@
-import git
+import git  # type: ignore
 import os
 import datetime
-import humanize
+import humanize  # type: ignore
 import pytz
 
 directory = os.path.split(os.path.realpath(__file__))[0]
