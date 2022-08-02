@@ -1,8 +1,8 @@
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
 import pytz
-import discord
-from discord.ext import commands
 import random
 from .. import param
 from ..helpers import find_role
