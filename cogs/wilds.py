@@ -658,4 +658,5 @@ class Wilds(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Wilds(bot))
+    #bot.add_cog(Wilds(bot))
+    pass
