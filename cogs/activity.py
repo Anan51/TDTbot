@@ -196,9 +196,12 @@ class Activity(commands.Cog):
             if not self._debug:
                 _roles = [r for r in m.roles if r > recruit]
 
-                await m.remove_roles(*_roles)
-                await m.add_roles(recruit)
-                output.append('{0.display_name} demoted (last active {1})'.format(m, date))
+                try:
+                    await m.remove_roles(*_roles)
+                    await m.add_roles(recruit)
+                    output.append('{0.display_name} demoted (last active {1})'.format(m, date))
+                except discord.Forbidden:
+                    output.append('⚠️{0.display_name} cannot be demoted (last active {1})'.format(m, date))
             else:
                 output.append('{0.display_name} (not) demoted (last active {1})'.format(m, date))
         await split_send(ctx, output)
