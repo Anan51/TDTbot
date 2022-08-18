@@ -68,7 +68,7 @@ class Activity(commands.Cog):
         self._init_finished = False
         self._debug = debug
         self._cached_search = None
-        self._my_role
+        self._my_role = None
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
