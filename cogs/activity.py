@@ -68,6 +68,7 @@ class Activity(commands.Cog):
         self._init_finished = False
         self._debug = debug
         self._cached_search = None
+        self._my_role
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
@@ -88,6 +89,10 @@ class Activity(commands.Cog):
         data = await self._hist_search(limit=_limit, use_ids=True, save=True)
         for i in data:
             self.data.update_activity(i, data[i])
+        try:
+            self._my_role = await self.bot.get_or_fetch_user(self.bot.user.id).top_role
+        except AttributeError:
+            pass
         self._init_finished = True
 
     async def _hist_search(self, guild=None, members=None, limit=1000, use_ids=False,
@@ -184,6 +189,7 @@ class Activity(commands.Cog):
         items = [i for i in items if i[0].top_role in [com, com_p]]
 
         output = []
+        errors = []
 
         recruit = find_role(ctx.guild, roles.recruit)
         for m, date in items:
@@ -197,14 +203,16 @@ class Activity(commands.Cog):
                 _roles = [r for r in m.roles if r > recruit]
 
                 try:
+                    if self._my_role and m.top_role > self._my_role:
+                        raise discord.Forbidden()
                     await m.remove_roles(*_roles)
                     await m.add_roles(recruit)
                     output.append('{0.display_name} demoted (last active {1})'.format(m, date))
                 except discord.Forbidden:
-                    output.append('⚠️{0.display_name} cannot be demoted (last active {1})'.format(m, date))
+                    errors.append('⚠️{0.display_name} cannot be demoted (last active {1})'.format(m, date))
             else:
                 output.append('{0.display_name} (not) demoted (last active {1})'.format(m, date))
-        await split_send(ctx, output)
+        await split_send(ctx, errors + output)
         return
 
     @commands.command()
