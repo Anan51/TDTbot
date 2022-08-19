@@ -1,5 +1,6 @@
 import discord  # type: ignore
 from discord.ext import commands  # type: ignore
+import asyncio
 import logging
 import os
 from .. import param, users
@@ -22,9 +23,33 @@ class DirectMessages(commands.Cog):
         self._configs = {}
         self._channel = None
         self.data = param.IntPermaDict(_dbm)
+        self._init = False
+        self._init_finished = False
+        self._chancla = None
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        await asyncio.sleep(5)
+        await self._async_init()
+
+    async def _async_init(self):
+        if self._init:
+            return
+        self._init = True
+        guild = self.bot.tdt()
+        try:
+            self._chancla = [e for e in guild.emojis if e.name == "Chancla"][0]
+        except IndexError:
+            pass
+        self._init_finished = True
+
+    @property
+    def chancla(self):
+        return self._chancla
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
+        await self._async_init()
         if not await admin_check(ctx):
             return False
         return ctx.channel == self.channel
@@ -74,6 +99,7 @@ class DirectMessages(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         """Listen for DMs and post them in the bot log channel"""
+        await self._async_init()
         # ignore messages from this bot
         if message.author == self.bot.user:
             return
@@ -115,10 +141,18 @@ class DirectMessages(commands.Cog):
                         channel = self.bot.get_channel(self[message.reference.message_id])
                         await channel.send(message.content)
                         await message.add_reaction('✅')
+                        # check for discord links in message
+                        if "https://discord.gg" in message.content:
+                            emojis = [self.chancla if self.chancla else '👟', '⬅️', '❓']
+                            for emoji in emojis:
+                                await message.add_reaction(emoji)
+                                await asyncio.sleep(.1)
+
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         """Handle emoji reactions to DMs"""
+        await self._async_init()
         # if bot
         if payload.user_id == self.bot.user.id:
             return
