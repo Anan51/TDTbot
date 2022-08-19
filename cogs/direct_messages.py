@@ -148,7 +148,6 @@ class DirectMessages(commands.Cog):
                                 await message.add_reaction(emoji)
                                 await asyncio.sleep(.1)
 
-
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         """Handle emoji reactions to DMs"""
