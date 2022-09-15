@@ -105,6 +105,7 @@ class AdminTools(commands.Cog):
     @commands.command()
     async def sticky(self, ctx, message, channel: discord.TextChannel = None,
                      reply: discord.Message = None):
+        """<message> <channel (optional)> <reply (optional)> - Make a sticky message (untested)"""
         if channel is None:
             channel = ctx.channel
         msg = await channel.send(message, reference=reply, mention_author=False)
@@ -112,6 +113,7 @@ class AdminTools(commands.Cog):
 
     @commands.command(aliases=['wd40'])
     async def unsticky(self, ctx, message: discord.Message = None):
+        """<message> - Remove a sticky message"""
         if message is None:
             ref = ctx.message.reference
             self._remove_sticky(ref.message_id, ref.channel_id)

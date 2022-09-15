@@ -223,6 +223,7 @@ class Roast(commands.Cog):
     @commands.command(hidden=True)
     @commands.check(admin_check)
     async def roast_snipe(self, ctx, user: discord.User, n: int = 1):
+        """<user> <int (optional:1)> - Roast a user n times"""
         self._snipes[user.id] = n
         if self._snipes[user.id] <= 0:
             self._snipes.pop(user.id)
@@ -230,6 +231,7 @@ class Roast(commands.Cog):
     @commands.command(hidden=True)
     @commands.check(admin_check)
     async def you_are_a_bot(self, ctx, user: discord.User, n: int = 1):
+        """<user> <int (optional:1)> - Bot a user n times"""
         self._botting[user.id] = n
         if self._botting[user.id] <= 0:
             self._botting.pop(user.id)

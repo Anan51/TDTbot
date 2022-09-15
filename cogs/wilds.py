@@ -602,6 +602,7 @@ class Wilds(commands.Cog):
     @commands.command()
     @commands.check(admin_check)
     async def clear_wilds(self, ctx):
+        """Clears the wilds chat"""
         await self.channel.purge(limit=200)
 
     @commands.command()
@@ -658,5 +659,5 @@ class Wilds(commands.Cog):
 
 
 def setup(bot):
-    #bot.add_cog(Wilds(bot))
+    # bot.add_cog(Wilds(bot))
     pass

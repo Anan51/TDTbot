@@ -34,6 +34,7 @@ class MessageParse(commands.Cog):
     @commands.command(hidden=True)
     @commands.check(admin_check)
     async def stfu(self, ctx):
+        """Silent this cog"""
         self._stfu = True
 
     @commands.Cog.listener()

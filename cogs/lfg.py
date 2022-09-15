@@ -137,6 +137,7 @@ class LFG(commands.Cog):
     @commands.command()
     @commands.check(admin_check)
     async def ping_data(self, ctx, member: discord.User = None):
+        """<member (optional:caller)> - Show ping data for a member"""
         if member is None:
             member = ctx.author
         await split_send(ctx, self.data.member_list(member.id))
@@ -144,6 +145,7 @@ class LFG(commands.Cog):
     @commands.command()
     @commands.check(admin_check)
     async def ping_summary(self, ctx, member: discord.User = None):
+        """<member (optional:caller)> - Show ping summary for a member"""
         if member is None:
             member = ctx.author
         tot, data = self.data.member_summary(member.id)

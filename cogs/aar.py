@@ -36,6 +36,7 @@ class AAR(commands.Cog):
 
     @commands.command()
     async def aar(self, ctx):
+        """Post Stellar's AAR"""
         await self._aar(ctx.channel)
 
     @commands.Cog.listener()

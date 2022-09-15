@@ -85,6 +85,7 @@ class DirectMessages(commands.Cog):
 
     @commands.command()
     async def send_dm(self, ctx, target: discord.User, *args):
+        """<user> <message> sends a direct message to a user"""
         msg = " ".join(args)
         channel = target.dm_channel
         if channel is None:
@@ -93,6 +94,7 @@ class DirectMessages(commands.Cog):
 
     @commands.command()
     async def dm_data(self, ctx):
+        """Prints the direct message data"""
         lines = ["{}: {}".format(i, self[i]) for i in self.keys()]
         await split_send(ctx, lines, style='```')
 

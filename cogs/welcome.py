@@ -102,6 +102,7 @@ class Welcome(commands.Cog):
 
     @commands.command()
     async def coc_reactions(self, ctx, member: discord.User = None):
+        """<member> - Prints the reactions to the code of conduct by member"""
         if member is None:
             member = ctx.author
         msg = await self.fetch_coc()

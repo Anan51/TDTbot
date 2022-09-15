@@ -168,12 +168,14 @@ class Activity(commands.Cog):
     @commands.command()
     @commands.check(admin_check)
     async def set_activity_debug(self, ctx):
+        """Turns on debug mode for activity."""
         self._debug = True
         await ctx.send("Activity cog now in debugging mode.")
 
     @commands.command()
     @commands.check(admin_check)
     async def unset_activity_debug(self, ctx):
+        """Turns off debug mode for activity."""
         self._debug = False
         await ctx.send("Activity cog now in normal mode.")
 
@@ -300,10 +302,12 @@ class Activity(commands.Cog):
 
     @commands.command()
     async def activity_init_status(self, ctx):
+        """Shows the status of the activity init."""
         await ctx.send('init = {0._init}, init_finished = {0._init_finished}.'.format(self))
 
     @commands.command()
     async def parse_cached(self, ctx, member: discord.Member = None):
+        """<member (optional:caller)> parses the cached activity data for a member."""
         if member is None:
             member = ctx.author
         name = member.display_name
@@ -316,6 +320,7 @@ class Activity(commands.Cog):
 
     @commands.command()
     async def parse_data(self, ctx, member: discord.Member = None):
+        """<member (optional:caller)> parses the activity data for a member."""
         if member is None:
             member = ctx.author
         name = member.display_name

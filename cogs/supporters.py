@@ -76,6 +76,7 @@ class Supporters(commands.Cog):
 
     @commands.command()
     async def retrieve_supporter(self, ctx, member: _user_t):
+        """<member>: retrieves supporter info for member."""
         try:
             await ctx.send(self._str(member))
         except KeyError:
@@ -83,6 +84,7 @@ class Supporters(commands.Cog):
 
     @commands.command(aliases=['remove_supporter'])
     async def delete_supporter(self, ctx, member: _user_t):
+        """<member>: removes member from supporter list."""
         self.data.delete(member.id)
         try:
             msg = "Removed {}. Role changes must be done manually."

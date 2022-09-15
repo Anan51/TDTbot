@@ -389,6 +389,7 @@ class TrickOrTreat(commands.Cog):
     @commands.command()
     @commands.check(admin_check)
     async def set_score(self, ctx, n: int, member: discord.Member = None):
+        """<n> <member (optional:caller)> sets trick or treat points"""
         if member is None:
             member = ctx.author
         UserConfig(member)[_score] = n
@@ -397,11 +398,13 @@ class TrickOrTreat(commands.Cog):
     @commands.command()
     @commands.check(admin_check)
     async def force_count(self, ctx):
+        """Force a count"""
         await self.finish_count(mid=self.message_id)
 
     @commands.command()
     @commands.check(admin_check)
     async def end_game(self, ctx):
+        """Finish Trick or Treat game"""
         mid = self.message_id
         if mid:
             await self.finish_count(dt=0, set_timer=False, mid=mid)

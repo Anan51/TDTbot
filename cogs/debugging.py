@@ -84,10 +84,12 @@ class Debugging(commands.Cog):
 
     @commands.command()
     async def reload_extension(self, name):
+        """<name> - Reloads an extension"""
         self.bot.reload_extension(name)
 
     @commands.command()
     async def id_this(self, ctx):
+        """Prints the id of message, ser, and channel"""
         ref = ctx.message.reference
         msg = ctx.message
         if ref:
@@ -148,6 +150,7 @@ class Debugging(commands.Cog):
     @commands.command()
     @commands.check(_owner)
     async def exec(self, ctx, *args):
+        """<code> - Execute code. Items in `out` get printed to discord."""
         out = []
         var_data = dict(out=out, self=self)  # noqa: F841
         cmd = ' '.join(args).strip().strip('`"\'')

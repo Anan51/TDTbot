@@ -147,12 +147,14 @@ class Content(commands.Cog):
 
     @commands.command()
     async def clear_yt_data(self, ctx):
+        """Clear YouTube data"""
         keys = self.videos.keys()
         for key in keys:
             self.videos.delete(key)
 
     @commands.command()
     async def print_yt_data(self, ctx):
+        """Print YouTube data"""
         lines = ["{}: {}".format(*i) for i in self.videos.items()]
         await split_send(ctx, lines, style='```')
 
