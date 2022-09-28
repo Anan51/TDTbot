@@ -85,6 +85,8 @@ def phase_to_emoji(phase=None):
     x = (phase * len(phases) + .5) % len(phases)
     return phases[int(x)]
 
+# todo: add start/stop datetimes; scale points with time.
+
 
 class TrickOrTreat(commands.Cog):
     """Cog for trick or treat game"""
