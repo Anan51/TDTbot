@@ -16,12 +16,11 @@ year = "{:04d}".format(datetime.datetime.utcnow().year)
 # main settings:
 _channel = "the_neighborhood"   # trick-or-treat channel name or id
 _rule_id = 892838986882617385   # message id for rules/reaction check
-_game_on = False                # flag to run game
+_game_on = True                 # flag to run game
 _role = "SPOOKY"                # role name or id for game participation
-_nmin = 3                       # minimum number of votes to start count
+_nmin = 2, 5                    # minimum number (range) of votes to start count
 # secondary settings
-_tmin, _tmax = 5 * 60, 15 * 60  # min/max time between rounds
-_start = 0                      # starting score
+_start = 0                     # starting score
 _trick = "😈"                   # trick emoji
 _treat = "🍬"                   # treat emoji
 _enroll = "🎃"                  # enroll in game emoji/reaction
@@ -41,6 +40,18 @@ for i in _alts.values():
 
 def sign(x):
     return bool(x > 0) - bool(x < 0)
+
+
+def random_time(nlast=5, add_random=True):
+    """Return a random time in seconds."""
+    if add_random:
+        nlast += random.uniform(-1, 1)
+    nlast = min(max(1, nlast), 10)
+    shape = 22 - 2 * nlast
+    scale = -1.4 * nlast + 16.4
+    ratio = 5 * (16 - nlast) * 60
+    t = (random.weibullvariate(shape, scale) + .5) * ratio
+    return min(max(30, t), 3600)
 
 
 class TrickOrTreat(commands.Cog):
@@ -112,7 +123,7 @@ class TrickOrTreat(commands.Cog):
         if self._awaiting:
             return
         if dt is True:
-            dt = random.randint(_tmin, _tmax)
+            dt = random_time()
         await sleep(dt)
         # ensure some funny business didn't happen while we were waiting
         if self.message_id:
@@ -193,12 +204,12 @@ class TrickOrTreat(commands.Cog):
             return out
         return user
 
-    async def finish_count(self, dt=0, set_timer=True, mid=0):
+    async def finish_count(self, dt=0, set_timer=True, mid=0, nmin=None, nlast=None):
         """Finish/tally count on active game message"""
         if not self._game_on:
             return
         if dt is True:
-            dt = random.randint(_tmin, _tmax)
+            dt = random_time()
         logger.printv('TrickOrTreat.finish_count waiting for {:} s'.format(dt))
         if self._awaiting is None:
             self._awaiting = mid
@@ -241,7 +252,9 @@ class TrickOrTreat(commands.Cog):
         else:
             alting = []
             alts_used = []
-        if noa_tot >= _nmin > ntot:
+        if nmin is None:
+            nmin = random.randint(_nmin[0], _nmin[1])
+        if noa_tot >= nmin > ntot:
             if random.randint(0, 1):
                 logger.printv('Finish TrickOrTreat.finish_count (too few real votes)')
                 self._awaiting = None
@@ -255,18 +268,18 @@ class TrickOrTreat(commands.Cog):
                                 logger.printv(msg.format(rxn.emoji, alt))
                             except (discord.HTTPException, discord.Forbidden, discord.Not):
                                 pass
-                return self.count_later(dt=set_timer, mid=mid)
-        elif len(set(trickers + treaters)) < _nmin:
+                return self.count_later(dt=set_timer, mid=mid, nlast=max(noa_tot, nlast - 1))
+        elif len(set(trickers + treaters)) < nmin:
             logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
             self._awaiting = None
-            return self.count_later(dt=set_timer, mid=mid)
+            return self.count_later(dt=set_timer, mid=mid, nlast=max(noa_tot, nlast - 1))
         self._last = datetime.datetime.now()
         ntrick -= 1
         ntreat -= 1
         results = ' {:} x {:} vs {:} x {:}'
         results = results.format(ntrick, _trick, ntreat, _treat)
         ntot = max(noa_tot, 1)
-        delta = random.randint(3, ntot * 5)
+        delta = random.randint(1, ntot * 1)
         stealth_nerf = 0
         if alts_used:
             alting = [u for u in noa_voters if u.id in _all_alts]
