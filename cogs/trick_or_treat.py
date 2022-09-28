@@ -4,7 +4,7 @@ import asyncio
 import datetime
 import random
 from .. import param
-from ..helpers import find_role
+from ..helpers import find_role, second
 from ..config import UserConfig
 from ..async_helpers import split_send, sleep, admin_check
 import logging
@@ -55,7 +55,7 @@ def random_time(nlast=5, add_random=True):
     nlast = min(max(1, nlast), 10)
     shape = 22 - 2 * nlast
     scale = -1.4 * nlast + 16.4
-    ratio = 5 * (16 - nlast) * 60
+    ratio = 5 * (16 - nlast)
     t = (random.weibullvariate(shape, scale) + .5) * ratio
     return min(max(30, t), 3600)
 
@@ -136,7 +136,8 @@ class TrickOrTreat(commands.Cog):
             return
         if self._awaiting:
             return
-        logger.printv('TrickOrTreat.send_message waiting for {:} s'.format(dt))
+        msg = 'TrickOrTreat.send_message waiting for {:} s ({:})'
+        logger.printv(msg.format(dt, datetime.datetime.now() + dt * second))
         # send new active game message
         msg = await self.channel.send(_msg)
         self._set_msg_id(msg.id)
@@ -210,13 +211,14 @@ class TrickOrTreat(commands.Cog):
             return out
         return user
 
-    async def finish_count(self, dt=0, set_timer=True, mid=0, nmin=None, nlast=None):
+    async def finish_count(self, dt=0, set_timer=True, mid=0, nmin=None, nlast=5):
         """Finish/tally count on active game message"""
         if not self._game_on:
             return
         if dt is True:
             dt = random_time()
-        logger.printv('TrickOrTreat.finish_count waiting for {:} s'.format(dt))
+        msg = 'TrickOrTreat.finish_count waiting for {:} s ({:})'
+        logger.printv(msg.format(dt, datetime.datetime.now() + dt * second))
         if self._awaiting is None:
             self._awaiting = mid
         await sleep(dt)
