@@ -8,6 +8,12 @@ from ..helpers import find_role
 from ..config import UserConfig
 from ..async_helpers import split_send, sleep, admin_check
 import logging
+try:
+    import ephem
+    moon = ephem.Moon()
+except ImportError:
+    moon = None
+    print("ephem not installed, moon phase will not be available")
 
 
 logger = logging.getLogger("discord." + __name__)
@@ -254,6 +260,7 @@ class TrickOrTreat(commands.Cog):
             alts_used = []
         if nmin is None:
             nmin = random.randint(_nmin[0], _nmin[1])
+        # if alt accounts are used
         if noa_tot >= nmin > ntot:
             if random.randint(0, 1):
                 logger.printv('Finish TrickOrTreat.finish_count (too few real votes)')
@@ -269,6 +276,7 @@ class TrickOrTreat(commands.Cog):
                             except (discord.HTTPException, discord.Forbidden, discord.Not):
                                 pass
                 return self.count_later(dt=set_timer, mid=mid, nlast=max(noa_tot, nlast - 1))
+        # if not enough votes
         elif len(set(trickers + treaters)) < nmin:
             logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
             self._awaiting = None
@@ -305,8 +313,19 @@ class TrickOrTreat(commands.Cog):
                 msg = 'Stealth nerf "{}" by {} ({})'.format(u, delt, stealth_nerf)
                 logger.printv(msg)
                 self.apply_delta(u, delt)
+        # based on moon phase swap trickers/treaters
+        phase = .5
+        if moon:
+            moon.compute()
+            phase = moon.phase
         trickers = [await self._member(u) for u in trickers]
         treaters = [await self._member(u) for u in treaters]
+        if random.random() < .05 * phase:
+            await self.channel.send("👻 Tricksters are now the treaters and vice versa! 👻")
+            tmp = trickers
+            trickers = treaters
+            treaters = tmp
+        # apply deltas
         deltas = {user: dtrick for user in trickers}
         for user in treaters:
             deltas[user] = deltas.get(user, 0) + dtreat
