@@ -60,6 +60,32 @@ def random_time(nlast=5, add_random=True):
     return min(max(30, t), 3600)
 
 
+def get_phase(dt=None):
+    """Returns a floating-point number from 0-1. where 0=new, 0.5=full, 1=new"""
+    # Ephem stores its date numbers as floating points, which the following uses
+    # to conveniently extract the percent time between one new moon and the next
+    # This corresponds (somewhat roughly) to the phase of the moon.
+
+    if dt is None:
+        dt = datetime.datetime.now()
+    date = ephem.Date(dt)
+
+    nnm = ephem.next_new_moon    (date)
+    pnm = ephem.previous_new_moon(date)
+
+    lunation = (date-pnm)/(nnm-pnm)
+
+    return lunation
+
+
+def phase_to_emoji(phase=None):
+    """Convert lunar phase (not illumination fraction) to nearest emoji"""
+    phase = get_phase() if phase is None else phase
+    phases = "🌑🌒🌓🌔🌕🌖🌗🌘"
+    x = (phase * len(phases) + .5) % len(phases)
+    return phases[int(x)]
+
+
 class TrickOrTreat(commands.Cog):
     """Cog for trick or treat game"""
     def __init__(self, bot):
@@ -319,11 +345,19 @@ class TrickOrTreat(commands.Cog):
         phase = .5
         if moon:
             moon.compute()
-            phase = moon.phase
+            phase = moon.phase * 0.01
+        else:
+            print("No moon phase damage")
         trickers = [await self._member(u) for u in trickers]
         treaters = [await self._member(u) for u in treaters]
         if random.random() < .05 * phase:
-            await self.channel.send("👻 Tricksters are now the treaters and vice versa! 👻")
+            msg = "{:}The light of the moon brings forth a treat for the tricksters, and a trick for the treaters.{:}"
+            a = b = ""
+            if moon:
+                luna = phase_to_emoji()
+                a = luna + " "
+                b = " " + luna
+            await self.channel.send(msg.format(a, b))
             tmp = trickers
             trickers = treaters
             treaters = tmp
