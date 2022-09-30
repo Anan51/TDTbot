@@ -135,9 +135,14 @@ class Activity(commands.Cog):
                 key = key.id
             if key not in data:
                 # use join date if it's more recent than oldest
-                if member.joined_at > oldest:
-                    data[key] = member.joined_at
-                else:
+                try:
+                    if member.joined_at > oldest:
+                        data[key] = member.joined_at
+                    else:
+                        data[key] = old_af
+                        logger.debug('old af: {}'.format(member))
+                except TypeError:
+                    print("no member join date", member)
                     data[key] = old_af
                     logger.debug('old af: {}'.format(member))
         if save is None and self._cached_search is None:
