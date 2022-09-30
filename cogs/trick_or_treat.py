@@ -1,12 +1,14 @@
+from tkinter import Scale
 import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
+import pytz
 import random
 from .. import param
-from ..helpers import find_role, second
+from ..helpers import find_role, second, day
 from ..config import UserConfig
-from ..async_helpers import split_send, sleep, admin_check
+from ..async_helpers import split_send, sleep, admin_check, wait_until
 import logging
 try:
     import ephem
@@ -21,7 +23,7 @@ year = "{:04d}".format(datetime.datetime.utcnow().year)
 
 # main settings:
 _channel = "the_neighborhood"   # trick-or-treat channel name or id
-_rule_id = 892838986882617385   # message id for rules/reaction check
+_rule_id = None                 # message id for rules/reaction check
 _game_on = True                 # flag to run game
 _role = "SPOOKY"                # role name or id for game participation
 _nmin = 2, 5                    # minimum number (range) of votes to start count
@@ -34,6 +36,14 @@ _msg = "Trick ({:}) or Treat ({:})!".format(_trick, _treat)
 # keywords for player/bot config storage
 _score = "tdt.trick_or_treat.score." + year
 _bot = "tdt.trick_or_treat.msg." + year
+# start/stop datetime
+_tz = pytz.timezone(param.rc('timezone'))
+_start_time = datetime.datetime(2021, 10, 1, 0, 0, 0, 0, _tz)
+_start_time = datetime.datetime(2021, 9, 1, 0, 0, 0, 0, _tz)  # test
+_stop_time = datetime.datetime(2021, 11, 1, 0, 0, 0, 0, _tz)
+# manual page
+_manual = 558136628590280704
+_manual = 1024393928679624784  # test
 
 # alt accounts
 _alts = {547171042565685250: [856003669090369536, 522962175690539008],  # eyes
@@ -70,7 +80,7 @@ def get_phase(dt=None):
         dt = datetime.datetime.now()
     date = ephem.Date(dt)
 
-    nnm = ephem.next_new_moon    (date)
+    nnm = ephem.next_new_moon(date)
     pnm = ephem.previous_new_moon(date)
 
     lunation = (date-pnm)/(nnm-pnm)
@@ -84,8 +94,6 @@ def phase_to_emoji(phase=None):
     phases = "🌑🌒🌓🌔🌕🌖🌗🌘"
     x = (phase * len(phases) + .5) % len(phases)
     return phases[int(x)]
-
-# todo: add start/stop datetimes; scale points with time.
 
 
 class TrickOrTreat(commands.Cog):
@@ -102,7 +110,63 @@ class TrickOrTreat(commands.Cog):
         self._role = None
         self._channel = None
         self._log = None
-        self.bot.enroll_emoji_role({_enroll: _role}, message_id=_rule_id)
+        self._rule_id = _rule_id
+        self._enrolled = False
+        self._init = False
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        await asyncio.sleep(5)
+        await self._async_init()
+
+    async def _async_init(self):
+        if self._init:
+            return
+        if self.game_on:
+            await self._post_or_fetch_start_message()
+        elif datetime.datetime.now() < _start_time:
+            await wait_until(_start_time)
+            await asyncio.sleep(1)
+            await self._post_or_fetch_start_message()
+        self._init = True
+
+    def _enroll_emoji_role(self):
+        if self._enrolled:
+            return
+        if not self._rule_id:
+            return
+        self.bot.enroll_emoji_role({_enroll: _role}, message_id=self._rule_id)
+        self._enrolled = True
+
+    async def _post_or_fetch_start_message(self):
+        if self._rule_id:
+            self._enroll_emoji_role()
+            return self._rule_id
+        msg = "**Candy Cartel**\nIn this world it's trick or be treated. Click the {:} reaction below to sign up for our seasonal trick or treating game. Outsmart, coerce, and backstab your friends to become this neighborhood candy king. The winner is announced at the end of the October month and is given a 1 month special title/role which operates like being promoted to community rank!"
+        msg = msg.format(_enroll)
+        channel = self.bot.fetch_channel(_manual)
+        async for message in channel.history(limit=200):
+            if message.author == self.bot.user and message.content == msg:
+                self._rule_id = message.id
+                self._enroll_emoji_role()
+                return message.id
+        message = await channel.send(msg)
+        await message.add_reaction(_enroll)
+        self._rule_id = message.id
+        self._enroll_emoji_role()
+        return message.id
+
+    @property
+    def game_on(self):
+        """Return game on/off flag"""
+        self._enroll_emoji_role()
+        if not self._game_on:
+            return False
+        if self._game_on == "auto":
+            return _start_time <= datetime.datetime.now() <= _stop_time
+        if self._game_on is True:
+            return True
+        return True
 
     @property
     def role(self):
@@ -138,7 +202,7 @@ class TrickOrTreat(commands.Cog):
     def cog_check(self, ctx):
         """Permission check for this cog"""
         # if game is not active, we can access this cog from any channel
-        if not self._game_on:
+        if not self.game_on:
             return True
         # otherwise only the designated channel and log channel have access
         if ctx.channel == self.channel:
@@ -148,7 +212,7 @@ class TrickOrTreat(commands.Cog):
     async def send_message(self, dt=0, set_timer=True):
         """Send trick-or-treat message"""
         # if game is not active then quit
-        if not self._game_on:
+        if not self.game_on:
             return
         # if we have an active game message already then quit
         if self.message_id:
@@ -179,7 +243,7 @@ class TrickOrTreat(commands.Cog):
 
     def send_later(self, **kwargs):
         """Non-async wrapper for send_message"""
-        if not self._game_on:
+        if not self.game_on:
             return
         logger.printv('TrickOrTreat.send_later')
         self.bot.loop.create_task(self.send_message(**kwargs))
@@ -241,7 +305,7 @@ class TrickOrTreat(commands.Cog):
 
     async def finish_count(self, dt=0, set_timer=True, mid=0, nmin=None, nlast=5):
         """Finish/tally count on active game message"""
-        if not self._game_on:
+        if not self.game_on:
             return
         if dt is True:
             dt = random_time()
@@ -317,7 +381,8 @@ class TrickOrTreat(commands.Cog):
         results = ' {:} x {:} vs {:} x {:}'
         results = results.format(ntrick, _trick, ntreat, _treat)
         ntot = max(noa_tot, 1)
-        delta = random.randint(1, ntot * 1)
+        scale = (_stop_time - _start_time) / max(_stop_time - datetime.datetime.now(), day)
+        delta = random.randint(1, ntot * scale)
         stealth_nerf = 0
         if alts_used:
             alting = [u for u in noa_voters if u.id in _all_alts]
@@ -352,7 +417,8 @@ class TrickOrTreat(commands.Cog):
             print("No moon phase damage")
         trickers = [await self._member(u) for u in trickers]
         treaters = [await self._member(u) for u in treaters]
-        if random.random() < .05 * phase:
+        # if random.random() < .05 * phase:
+        if 1:  # test
             msg = "{:}The light of the moon brings forth a treat for the tricksters, and a trick for the treaters.{:}"
             a = b = ""
             if moon:
@@ -383,7 +449,7 @@ class TrickOrTreat(commands.Cog):
         logger.printv('Finish TrickOrTreat.finish_count (end)')
 
     def count_later(self, **kwargs):
-        if not self._game_on:
+        if not self.game_on:
             return
         logger.printv('TrickOrTreat.channel')
         self.bot.loop.create_task(self.finish_count(**kwargs))
@@ -414,7 +480,7 @@ class TrickOrTreat(commands.Cog):
         # ignore all messages from our bot
         if message.author == self.bot.user:
             return
-        if not self._game_on:
+        if not self.game_on:
             return
         await self._async_init()
 
@@ -442,7 +508,7 @@ class TrickOrTreat(commands.Cog):
         users = sorted(data.keys(), key=lambda u: (data[u], u.display_name), reverse=True)
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
         print(role, data, role.members, self.channel.guild)
-        channel = self.channel if self._game_on else ctx
+        channel = self.channel if self.game_on else ctx
         await split_send(channel, summary, style='```')
 
     @commands.command()
@@ -453,7 +519,7 @@ class TrickOrTreat(commands.Cog):
         data = {await self._member(p.user): p[_score] for p in players}
         users = sorted(data.keys(), key=lambda u: (data[u], u.display_name), reverse=True)
         summary = ['{0.display_name} : {1}'.format(u, data[u]) for u in users]
-        channel = self.channel if self._game_on else ctx
+        channel = self.channel if self.game_on else ctx
         await split_send(channel, summary, style='```')
 
     @commands.command()
