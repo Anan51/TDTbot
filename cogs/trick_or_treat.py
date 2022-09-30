@@ -24,7 +24,7 @@ year = "{:04d}".format(datetime.datetime.utcnow().year)
 # main settings:
 _channel = "the_neighborhood"   # trick-or-treat channel name or id
 _rule_id = None                 # message id for rules/reaction check
-_game_on = True                 # flag to run game
+_game_on = "auto"               # flag to run game
 _role = "SPOOKY"                # role name or id for game participation
 _nmin = 2, 5                    # minimum number (range) of votes to start count
 # secondary settings
@@ -36,14 +36,16 @@ _msg = "Trick ({:}) or Treat ({:})!".format(_trick, _treat)
 # keywords for player/bot config storage
 _score = "tdt.trick_or_treat.score." + year
 _bot = "tdt.trick_or_treat.msg." + year
+_nlast = "tdt.trick_or_treat.nlast." + year
 # start/stop datetime
 _tz = pytz.timezone(param.rc('timezone'))
-_start_time = datetime.datetime(2021, 10, 1, 0, 0, 0, 0, _tz)
-_start_time = datetime.datetime(2021, 9, 1, 0, 0, 0, 0, _tz)  # test
-_stop_time = datetime.datetime(2021, 11, 1, 0, 0, 0, 0, _tz)
+_start_time = datetime.datetime(2022, 10, 1, 0, 0, 0, 0, _tz)
+_stop_time = datetime.datetime(2022, 11, 1, 0, 0, 0, 0, _tz)
+_start_time = _start_time.astimezone(pytz.utc).replace(tzinfo=None)
+_stop_time = _stop_time.astimezone(pytz.utc).replace(tzinfo=None)
+
 # manual page
 _manual = 558136628590280704
-_manual = 1024393928679624784  # test
 
 # alt accounts
 _alts = {547171042565685250: [856003669090369536, 522962175690539008],  # eyes
@@ -58,8 +60,10 @@ def sign(x):
     return bool(x > 0) - bool(x < 0)
 
 
-def random_time(nlast=5, add_random=True):
+def random_time(nlast=None, add_random=True):
     """Return a random time in seconds."""
+    if nlast is None:
+        nlast = 5
     if add_random:
         nlast += random.uniform(-1, 1)
     nlast = min(max(1, nlast), 10)
@@ -112,23 +116,7 @@ class TrickOrTreat(commands.Cog):
         self._log = None
         self._rule_id = _rule_id
         self._enrolled = False
-        self._init = False
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        await asyncio.sleep(5)
-        await self._async_init()
-
-    async def _async_init(self):
-        if self._init:
-            return
-        if self.game_on:
-            await self._post_or_fetch_start_message()
-        elif datetime.datetime.now() < _start_time:
-            await wait_until(_start_time)
-            await asyncio.sleep(1)
-            await self._post_or_fetch_start_message()
-        self._init = True
+        self._lock = False
 
     def _enroll_emoji_role(self):
         if self._enrolled:
@@ -144,7 +132,7 @@ class TrickOrTreat(commands.Cog):
             return self._rule_id
         msg = "**Candy Cartel**\nIn this world it's trick or be treated. Click the {:} reaction below to sign up for our seasonal trick or treating game. Outsmart, coerce, and backstab your friends to become this neighborhood candy king. The winner is announced at the end of the October month and is given a 1 month special title/role which operates like being promoted to community rank!"
         msg = msg.format(_enroll)
-        channel = self.bot.fetch_channel(_manual)
+        channel = await self.bot.fetch_channel(_manual)
         async for message in channel.history(limit=200):
             if message.author == self.bot.user and message.content == msg:
                 self._rule_id = message.id
@@ -163,7 +151,7 @@ class TrickOrTreat(commands.Cog):
         if not self._game_on:
             return False
         if self._game_on == "auto":
-            return _start_time <= datetime.datetime.now() <= _stop_time
+            return _start_time <= datetime.datetime.utcnow() <= _stop_time
         if self._game_on is True:
             return True
         return True
@@ -209,17 +197,22 @@ class TrickOrTreat(commands.Cog):
             return True
         return ctx.channel == self.log
 
-    async def send_message(self, dt=0, set_timer=True):
+    async def send_message(self, dt=0, set_timer=True, nlast=None):
         """Send trick-or-treat message"""
+        # print("send_message", dt, set_timer, nlast)
         # if game is not active then quit
         if not self.game_on:
+            # print("sm: return not game on")
             return
         # if we have an active game message already then quit
         if self.message_id:
+            # print("sm: return active", self.message_id)
             return
         # if we are awaiting responses then quit
         if self._awaiting:
+            # print("sm: return awaiting", self._awaiting)
             return
+        # print("msg dt", dt)
         if dt is True:
             dt = random_time()
         await sleep(dt)
@@ -239,7 +232,7 @@ class TrickOrTreat(commands.Cog):
             set_timer = .01
         if set_timer:
             # launch task for delayed count tally/finish
-            self.bot.loop.create_task(self.finish_count(dt=set_timer, mid=msg.id))
+            self.bot.loop.create_task(self.finish_count(dt=set_timer, mid=msg.id, nlast=nlast))
 
     def send_later(self, **kwargs):
         """Non-async wrapper for send_message"""
@@ -303,150 +296,176 @@ class TrickOrTreat(commands.Cog):
             return out
         return user
 
-    async def finish_count(self, dt=0, set_timer=True, mid=0, nmin=None, nlast=5):
+    async def finish_count(self, dt=0, set_timer=True, mid=0, nmin=None, nlast=None):
         """Finish/tally count on active game message"""
-        if not self.game_on:
+        # print("finish_count", dt, set_timer, mid, nmin, nlast, self._lock)
+        if self._lock:
+            # print("lock return")
             return
-        if dt is True:
-            dt = random_time()
-        msg = 'TrickOrTreat.finish_count waiting for {:} s ({:})'
-        logger.printv(msg.format(dt, datetime.datetime.now() + dt * second))
-        if self._awaiting is None:
-            self._awaiting = mid
-        await sleep(dt)
-        msg = await self._get_message()
-        if not msg:
-            if set_timer:
-                logger.printv('Finish TrickOrTreat.finish_count (no message)')
-                self._awaiting = None
-                return await self.send_message(dt=set_timer)
-        if msg.id != mid:
-            logger.printv('Finish TrickOrTreat.finish_count (bad id)')
-            self._awaiting = None
-            return
-        trickers = []
-        treaters = []
-        ntrick, ntreat = 0, 0
-        # tally up the votes
-        for rxn in msg.reactions:
-            if rxn.emoji == _trick:
-                ntrick = rxn.count
-                trickers = [user async for user in rxn.users() if user != self.bot.user]
-                noa_trick = [u for u in trickers if u.id not in _all_alts]
-            elif rxn.emoji == _treat:
-                ntreat = rxn.count
-                treaters = [user async for user in rxn.users() if user != self.bot.user]
-                noa_treat = [u for u in trickers if u.id not in _all_alts]
+        self._lock = True
+        try:
+            if nlast is None:
+                nlast = self._get_config().set_if_not_set(_nlast, 5)
             else:
-                try:
-                    logger.printv('trick_or_treat.finish_count: removing rxn {}'.format(rxn))
-                    await rxn.clear()
-                except discord.HTTPException:
-                    pass
-        voters = set(trickers + treaters)
-        noa_voters = [u for u in voters if u.id not in _all_alts]
-        ntot, noa_tot = len(voters), len(set(noa_trick + noa_treat))
-        if ntot > noa_tot:
-            alting = [u for u in noa_voters if u.id in _all_alts]
-            alts_used = list(set([u for u in treaters + trickers if u in _all_alts]))
-        else:
-            alting = []
-            alts_used = []
-        if nmin is None:
-            nmin = random.randint(_nmin[0], _nmin[1])
-        # if alt accounts are used
-        if noa_tot >= nmin > ntot:
-            if random.randint(0, 1):
-                logger.printv('Finish TrickOrTreat.finish_count (too few real votes)')
+                self._get_config()[_nlast] = nlast
+            if self._game_on is False:
+                # print("finish_count return no game")
+                self._lock = False
+                return
+            if dt is True:
+                dt = random_time()
+            msg = 'TrickOrTreat.finish_count waiting for {:} s ({:})'
+            logger.printv(msg.format(dt, datetime.datetime.now() + dt * second))
+            if self._awaiting is None:
+                self._awaiting = mid
+            await sleep(dt)
+            msg = await self._get_message()
+            if not msg:
+                if set_timer:
+                    logger.printv('Finish TrickOrTreat.finish_count (no message)')
+                    self._awaiting = None
+                    self._lock = False
+                    return await self.send_message(dt=2)
+            if msg.id != mid:
+                logger.printv('Finish TrickOrTreat.finish_count (bad id)')
                 self._awaiting = None
-                if not random.randint(0, 2):
-                    alt = random.choice(alts_used)
-                    for rxn in msg.reactions:
-                        if rxn.emoji in [_trick, _treat]:
-                            try:
-                                rxn.remove(alt)
-                                msg = 'Removed reaction {} by alt "{}"'
-                                logger.printv(msg.format(rxn.emoji, alt))
-                            except (discord.HTTPException, discord.Forbidden, discord.Not):
-                                pass
+                self._lock = False
+                return
+            trickers = []
+            treaters = []
+            ntrick, ntreat = 0, 0
+            noa_trick, noa_treat = [], []
+            # tally up the votes
+            for rxn in msg.reactions:
+                if rxn.emoji == _trick:
+                    ntrick = rxn.count
+                    trickers = [user async for user in rxn.users() if user != self.bot.user]
+                    noa_trick = [u for u in trickers if u.id not in _all_alts]
+                elif rxn.emoji == _treat:
+                    ntreat = rxn.count
+                    treaters = [user async for user in rxn.users() if user != self.bot.user]
+                    noa_treat = [u for u in trickers if u.id not in _all_alts]
+                else:
+                    try:
+                        logger.printv('trick_or_treat.finish_count: removing rxn {}'.format(rxn))
+                        await rxn.clear()
+                    except discord.HTTPException:
+                        pass
+            voters = set(trickers + treaters)
+            noa_voters = [u for u in voters if u.id not in _all_alts]
+            ntot, noa_tot = len(voters), len(set(noa_trick + noa_treat))
+            if ntot > noa_tot:
+                alting = [u for u in noa_voters if u.id in _all_alts]
+                alts_used = list(set([u for u in treaters + trickers if u in _all_alts]))
+            else:
+                alting = []
+                alts_used = []
+            if nmin is None:
+                nmin = random.randint(_nmin[0], _nmin[1])
+            # if alt accounts are used
+            if noa_tot >= nmin > ntot:
+                if random.randint(0, 1):
+                    logger.printv('Finish TrickOrTreat.finish_count (too few real votes)')
+                    self._awaiting = None
+                    if not random.randint(0, 2):
+                        alt = random.choice(alts_used)
+                        for rxn in msg.reactions:
+                            if rxn.emoji in [_trick, _treat]:
+                                try:
+                                    rxn.remove(alt)
+                                    msg = 'Removed reaction {} by alt "{}"'
+                                    logger.printv(msg.format(rxn.emoji, alt))
+                                except (discord.HTTPException, discord.Forbidden, discord.Not):
+                                    pass
+                    self._lock = False
+                    return self.count_later(dt=set_timer, mid=mid, nlast=max(noa_tot, nlast - 1))
+            # if not enough votes
+            elif len(set(trickers + treaters)) < nmin:
+                logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
+                #self._awaiting = None
+                self._lock = False
                 return self.count_later(dt=set_timer, mid=mid, nlast=max(noa_tot, nlast - 1))
-        # if not enough votes
-        elif len(set(trickers + treaters)) < nmin:
-            logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
-            self._awaiting = None
-            return self.count_later(dt=set_timer, mid=mid, nlast=max(noa_tot, nlast - 1))
-        self._last = datetime.datetime.now()
-        ntrick -= 1
-        ntreat -= 1
-        results = ' {:} x {:} vs {:} x {:}'
-        results = results.format(ntrick, _trick, ntreat, _treat)
-        ntot = max(noa_tot, 1)
-        scale = (_stop_time - _start_time) / max(_stop_time - datetime.datetime.now(), day)
-        delta = random.randint(1, ntot * scale)
-        stealth_nerf = 0
-        if alts_used:
-            alting = [u for u in noa_voters if u.id in _all_alts]
-            if noa_tot == len(alting):
-                delta = random.randint(1, 3)
+            self._last = datetime.datetime.now()
+            ntrick -= 1
+            ntreat -= 1
+            results = ' {:} x {:} vs {:} x {:}'
+            results = results.format(ntrick, _trick, ntreat, _treat)
+            ntot = max(noa_tot, 1)
+            scale = (_stop_time - _start_time) / max(_stop_time - datetime.datetime.utcnow(), day)
+            scale = max(1, int(scale + .5))
+            delta = random.randint(1, ntot * scale)
+            stealth_nerf = 0
+            if alts_used:
+                alting = [u for u in noa_voters if u.id in _all_alts]
+                if noa_tot == len(alting):
+                    delta = random.randint(1, 3)
+                else:
+                    stealth_nerf = 1
+                    if sign(ntrick - ntreat) != sign(len(noa_trick) - len(noa_treat)):
+                        stealth_nerf = 2
+            if ntrick > ntreat:
+                dtrick, dtreat = 0, -3 * delta
+                txt = "The tricksters have won:"
+            elif ntrick < ntreat:
+                dtrick, dtreat = 0, 2 * delta
+                txt = "The treaters get a treat!"
             else:
-                stealth_nerf = 1
-                if sign(ntrick - ntreat) != sign(len(noa_trick) - len(noa_treat)):
-                    stealth_nerf = 2
-        if ntrick > ntreat:
-            dtrick, dtreat = 0, -3 * delta
-            txt = "The tricksters have won:"
-        elif ntrick < ntreat:
-            dtrick, dtreat = 0, 2 * delta
-            txt = "The treaters get a treat!"
-        else:
-            dtrick, dtreat = 0, 0
-            txt = "Tied voting."
-        txt += results
-        if stealth_nerf:
-            for u in alting:
-                delt = -abs(dtrick) * stealth_nerf
-                msg = 'Stealth nerf "{}" by {} ({})'.format(u, delt, stealth_nerf)
-                logger.printv(msg)
-                self.apply_delta(u, delt)
-        # based on moon phase swap trickers/treaters
-        phase = .5
-        if moon:
-            moon.compute()
-            phase = moon.phase * 0.01
-        else:
-            print("No moon phase damage")
-        trickers = [await self._member(u) for u in trickers]
-        treaters = [await self._member(u) for u in treaters]
-        # if random.random() < .05 * phase:
-        if 1:  # test
-            msg = "{:}The light of the moon brings forth a treat for the tricksters, and a trick for the treaters.{:}"
-            a = b = ""
+                dtrick, dtreat = 0, 0
+                txt = "Tied voting."
+            txt += results
+            if stealth_nerf:
+                for u in alting:
+                    delt = -abs(dtrick) * stealth_nerf
+                    msg = 'Stealth nerf "{}" by {} ({})'.format(u, delt, stealth_nerf)
+                    logger.printv(msg)
+                    self.apply_delta(u, delt)
+            # based on moon phase swap trickers/treaters
+            phase = .5
             if moon:
-                luna = phase_to_emoji()
-                a = luna + " "
-                b = " " + luna
-            await self.channel.send(msg.format(a, b))
-            tmp = trickers
-            trickers = treaters
-            treaters = tmp
-        # apply deltas
-        deltas = {user: dtrick for user in trickers}
-        for user in treaters:
-            deltas[user] = deltas.get(user, 0) + dtreat
-        users = sorted(deltas.keys(), key=lambda u: u.display_name)
-        fmt = "{0.display_name} : {1:d}{2:+d} => {3:d} (current)"
-        summary = [fmt.format(u, *self.apply_delta(u, deltas[u]))
-                   for u in users if deltas[u]]
-        print("summary", summary)
-        await self.channel.send(txt)
-        await split_send(self.channel, summary, style='```')
-        self._set_msg_id(0)
-        if set_timer == 0:
-            set_timer = .01
-        if set_timer:
-            self.send_later(dt=True)
-        self._awaiting = None
-        logger.printv('Finish TrickOrTreat.finish_count (end)')
+                moon.compute()
+                phase = moon.phase * 0.01
+            else:
+                print("No moon phase data")
+            trickers = [await self._member(u) for u in trickers]
+            treaters = [await self._member(u) for u in treaters]
+            if random.random() < .05 * phase:
+                msg = "{:}The light of the moon brings forth a treat for the tricksters, and a trick for the treaters.{:}"
+                a = b = ""
+                if moon:
+                    luna = phase_to_emoji()
+                    a = luna + " "
+                    b = " " + luna
+                await self.channel.send(msg.format(a, b))
+                tmp = trickers
+                trickers = treaters
+                treaters = tmp
+            # apply deltas
+            deltas = {user: dtrick for user in trickers}
+            for user in treaters:
+                deltas[user] = deltas.get(user, 0) + dtreat
+            users = sorted(deltas.keys(), key=lambda u: u.display_name)
+            fmt = "{0.display_name} : {1:d}{2:+d} => {3:d} (current)"
+            summary = [fmt.format(u, *self.apply_delta(u, deltas[u]))
+                    for u in users if deltas[u]]
+            # print("summary", summary)
+            await self.channel.send(txt)
+            await split_send(self.channel, summary, style='```')
+            self._set_msg_id(0)
+            if self._game_on == "auto" and datetime.datetime.utcnow() > _stop_time:
+                self._awaiting = None
+                msg = "Thank you all for playing this year. Here is the final tally:"
+                await self.channel.send(msg)
+                await self.rankings(self.channel)
+                self._game_on = False
+                logger.printv('Finish TrickOrTreat.finish_count (Finished Game)')
+            if set_timer == 0:
+                set_timer = .01
+            self.send_later(dt=1)
+            self._awaiting = None
+            self._lock = False
+            logger.printv('Finish TrickOrTreat.finish_count (end)')
+        finally:
+            self._lock = False
 
     def count_later(self, **kwargs):
         if not self.game_on:
@@ -456,22 +475,33 @@ class TrickOrTreat(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
+        # print("on_ready")
         await asyncio.sleep(5)
         await self._async_init()
 
     async def _async_init(self):
+        # print("_async_init")
+        sent = False
         if not self._init:
+            if not self._rule_id:
+                if self.game_on:
+                    await self._post_or_fetch_start_message()
+                elif datetime.datetime.now() < _start_time:
+                    await wait_until(_start_time)
+                    await asyncio.sleep(1)
+                    await self._post_or_fetch_start_message()
             self._init = True
             if not await self._get_message():
-                await self.send_message()
+                await self.send_message(dt=3)
                 return
             else:
                 self.count_later(dt=True, mid=self.message_id)
+                sent = True
         if not self.message_id:
-            if datetime.datetime.now() - self._last > datetime.timedelta(minutes=15):
-                await self.send_message(dt=True)
+            if datetime.datetime.now() - self._last > datetime.timedelta(minutes=5):
+                await self.send_message(dt=1)
                 return
-        if not self._awaiting:
+        if not self._awaiting and not sent:
             self.count_later(mid=self.message_id)
 
     @commands.Cog.listener()
@@ -545,9 +575,45 @@ class TrickOrTreat(commands.Cog):
         if mid:
             await self.finish_count(dt=0, set_timer=False, mid=mid)
         self._game_on = False
-
         await self.rankings(ctx)
 
+    @commands.command()
+    @commands.check(admin_check)
+    async def clear_neighborhood(self, ctx, limit: int = 200):
+        """<limit=200 (optional)> Clear the events channel.
+        "limit" sets the max number of messages deleted.
+        If this command is used as a reply then it will clear messages before that message
+        """
+        before = None
+        check = None
+        ref = ctx.message.reference
+        if ref:
+            if hasattr(ref, 'resolved'):
+                msg = ref.resolved
+            else:
+                channel = self.bot.find_channel(ref.channel_id)
+                if channel is None:
+                    channel = await self.bot.fetch_channel(ref.channel_id)
+                if channel is None:
+                    msg = ref
+                else:
+                    msg = await channel.fetch_message(ref.message_id)
+            before = msg.created_at
+
+            def purge_check(message):
+                if message.author != self.bot.user:
+                    return True
+                return message.content != _prototype
+
+            check = purge_check
+
+        await self.channel.purge(limit=limit, before=before, check=check)
+        if ctx.channel == self.channel:
+            await asyncio.sleep(5)
+            try:
+                await ctx.message.delete()
+            except discord.errors.NotFound:
+                pass
 
 def setup(bot):
     bot.add_cog(TrickOrTreat(bot))
