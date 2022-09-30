@@ -15,7 +15,7 @@ _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'lfg.dbm')
 _tmax = datetime.timedelta(days=90)
 _role2emoji = {roles.destiny_2: 878802171913732118,
-               roles.halo: 921452928055791718,
+               roles.minecraft: 878806389399625789,
                roles.apex: 878807665038491668}
 _tz = pytz.timezone(param.rc('timezone'))
 
