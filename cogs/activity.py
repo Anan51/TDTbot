@@ -90,7 +90,7 @@ class Activity(commands.Cog):
         for i in data:
             self.data.update_activity(i, data[i])
         try:
-            self._my_role = await self.bot.get_or_fetch_user(self.bot.user.id).top_role
+            self._my_role = (await self.bot.get_or_fetch_user(self.bot.user.id)).top_role
         except AttributeError:
             pass
         self._init_finished = True
