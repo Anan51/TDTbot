@@ -471,6 +471,8 @@ class TrickOrTreat(commands.Cog):
         if not self.game_on:
             return
         logger.printv('TrickOrTreat.channel')
+        if kwargs.get('nlast', None) is not None:
+            self._get_config()[_nlast] = kwargs.get('nlast')
         self.bot.loop.create_task(self.finish_count(**kwargs))
 
     @commands.Cog.listener()
