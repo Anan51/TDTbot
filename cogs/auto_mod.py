@@ -1,7 +1,7 @@
 import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
-# from .. import roles
+from .. import param  # roles
 # from ..helpers import find_channel, find_role
 # from ..async_helpers import admin_check
 import logging
@@ -38,7 +38,7 @@ class AutoMod(commands.Cog):
     @property
     def log_channel(self):
         if self._log_channel is None:
-            self._log_channel = self.bot.find_channel("admin_log")
+            self._log_channel = self.bot.find_channel(param.rc('log_channel'))
         return self._log_channel
 
     @commands.Cog.listener()
