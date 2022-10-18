@@ -2,7 +2,8 @@ import discord  # type: ignore
 from discord.ext import commands  # type: ignore
 import logging
 # from typing import Tuple
-from .. import param, users, roles
+from .. import param
+from ..param import messages, roles
 from ..helpers import emotes_equal, find_channel
 from ..async_helpers import admin_check, split_send
 
@@ -35,7 +36,7 @@ class MainCommands(commands.Cog):
         self.bot.enroll_emoji_role({'🏆': "Tourney Challengers"}, message_id=822744897505067018)
         _roles = ['alpha', 'beta', 'gamma', 'omega']
         _dict = {i: i for i in _roles}
-        self.bot.enroll_emoji_role(_dict, message_id=945717800788447282, remove=_roles, min_role='Recruit')
+        self.bot.enroll_emoji_role(_dict, message_id=messages.wolfpack, remove=_roles, min_role='Recruit')
 
     @commands.command()
     async def guild(self, ctx):

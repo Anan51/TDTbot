@@ -23,6 +23,7 @@ class AutoMod(commands.Cog):
         self.bot = bot
         self._log_channel = None
         self._init = False
+        self._mentions = None
 
     async def _async_init(self):
         if self._init:

@@ -15,7 +15,7 @@ _day = datetime.timedelta(days=1)
 
 class AAR(commands.Cog):
     """Cog designed to handel Stellar's AAR, cause he's lazy"""
-    channel_id = 889587767212900362
+    channel_id = param.channels.bounty_board
 
     def __init__(self, bot):
         self.bot = bot

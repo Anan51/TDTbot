@@ -3,7 +3,8 @@ import datetime
 import discord  # type: ignore
 import logging
 import time
-from . import git_manage, roles
+from . import git_manage
+from .param import roles
 
 logger = logging.getLogger('discord.' + __name__)
 

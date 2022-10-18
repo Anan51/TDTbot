@@ -5,6 +5,63 @@ import shelve
 _dir = os.path.split(os.path.realpath(__file__))[0]
 _config = os.path.join(_dir, 'config')
 
+
+class _Struct(object):
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
+
+
+channels = _Struct(debugging=721427624483749991,
+                   manual_page=558136628590280704,
+                   general_chat=867464907266719754,
+                   content_hub=782901700990074910,
+                   shaxxs_lodge=867464907266719754,
+                   bounty_board=889587767212900362,
+                   lfg_pvp=560270058224615425,
+                   lfg_pve=878403478987366490,
+                   lfg_shenanigans=878403991195766844,
+                   lenny_laboratory=562412283268169739,
+                   spicy_clips=746441485917880330
+                   )
+
+emojis = _Struct(destiny_2=878802171913732118,
+                 minecraft=878806389399625789,
+                 apex=878807665038491668,
+                 StrangeCoin=319276617727737866,
+                 lenny=333101455856762890,
+                 OGTriggered=433210982647595019,
+                 never=588737463376412692,
+                 )
+
+guilds = _Struct(tdt=64589623459184640)
+
+messages = _Struct(CoC=563406038754394112,
+                   wolfpack=945717800788447282,
+                   trick_or_treat=1025676700043972688,
+                   )
+
+roles = _Struct(
+                # main roles
+                recruit=563067424719634452,
+                community=736052778396287026,
+                community_plus=857702905934250025,
+                member=318266595187228672,
+                devoted=611745292899057694,
+                admin=318255861002928129,
+                # game roles
+                apex=879069368649134160,
+                destiny_2=878812130453905420,
+                minecraft=1024825607059669043,
+                )
+
+users = _Struct(electro=221778796250923008,
+                mesome=160087397873221632,
+                stellar=332355011919085582,
+                wator=722927617740767344,
+                em=533862306132787200,
+                )
+
+
 # Defaults for parameters
 defaults = {
     'channel':         'devoted_chat',
@@ -13,10 +70,7 @@ defaults = {
     'token_file':      os.path.join(_config, 'token.txt'),
     'roast_file':      os.path.join(_config, 'roasts.txt'),
     'lore_file':       os.path.join(_config, 'lore.md'),
-    'nemeses':         [221778796250923008,  # UnknownElectro
-                        722927617740767344,  # wator
-                        533862306132787200,  # em
-                        ],
+    'nemeses':         [users.electro, users.wator, users.em],
     'add_bots':        [],
     'ignore_list':     ['lfg', 'lenny_laboratory', 'manual_page',
                         'tdt_events', 'devoted_chat'],

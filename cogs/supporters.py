@@ -4,7 +4,7 @@ import os
 import logging
 import pytz
 from typing import Union
-from .. import param, roles
+from .. import param
 from ..helpers import int_time, find_role, seconds_to_datetime
 from ..async_helpers import admin_check, split_send
 
@@ -14,6 +14,7 @@ supporters_fn = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 supporters_fn = os.path.join(supporters_fn, 'config', 'supporters.dbm')
 _supporter_rank = roles.community
 _user_t = Union[discord.Member, discord.User]
+roles = param.roles
 
 
 class Supporters(commands.Cog):

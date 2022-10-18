@@ -45,7 +45,7 @@ _start_time = _start_time.astimezone(pytz.utc).replace(tzinfo=None)
 _stop_time = _stop_time.astimezone(pytz.utc).replace(tzinfo=None)
 
 # manual page
-_manual = 558136628590280704
+_manual = param.channels.manual_page
 
 # alt accounts
 _alts = {547171042565685250: [856003669090369536, 522962175690539008],  # eyes

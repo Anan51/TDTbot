@@ -1,12 +1,13 @@
 import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 from ..helpers import emotes_equal, parse_message
+from ..param import channels
 import logging
 
 
 logger = logging.getLogger('discord.' + __name__)
-_listeners = {562412283268169739: {'react_with': '🌶️'},      # lenny_laboratory
-              746441485917880330: {'emojis': ['🌶️', '💩']}}  # spicy_clips
+_listeners = {channels.lenny_laboratory: {'react_with': '🌶️'},
+              channels.spicy_clips: {'emojis': ['🌶️', '💩']}}
 
 
 class Listener:

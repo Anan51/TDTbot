@@ -10,7 +10,7 @@ from ..async_helpers import admin_check, wait_until
 
 logger = logging.getLogger('discord.' + __name__)
 
-_mesome = 160087397873221632
+_mesome = param.users.mesome
 
 
 class ChronTask:

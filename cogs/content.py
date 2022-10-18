@@ -7,7 +7,7 @@ import requests
 from urllib import request
 from urllib.parse import urlparse, parse_qs
 from .. import param
-from ..param import PermaDict
+from ..param import PermaDict, channels
 from ..helpers import int_time, parse_message
 from ..async_helpers import admin_check, split_send
 from ..twitter import tweet
@@ -21,9 +21,8 @@ _month = 30*24*60*60
 _ttv_cooldown = datetime.timedelta(minutes=5)
 _ttv_channel = 'tdt_streams'
 _ttv_root = 'https://www.twitch.tv/'
-# general_chat, content_hub, shaxxs_lodge, debugging
-_listening_channels = [867464907266719754, 782901700990074910, 867464907266719754,
-                       721427624483749991]
+_listening_channels = [channels.general_chat, channels.content_hub, channels.shaxxs_lodge,
+                       channels.debugging]
 
 
 def twitch_url(channel=None):

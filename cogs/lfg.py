@@ -5,7 +5,8 @@ import datetime
 import pytz
 import logging
 import os
-from .. import param, roles
+from .. import param
+from ..param import channels, emojis, roles
 from ..helpers import find_role
 from ..async_helpers import admin_check, split_send
 
@@ -14,9 +15,9 @@ logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'lfg.dbm')
 _tmax = datetime.timedelta(days=90)
-_role2emoji = {roles.destiny_2: 878802171913732118,
-               roles.minecraft: 878806389399625789,
-               roles.apex: 878807665038491668}
+_role2emoji = {roles.destiny_2: emojis.destiny_2,
+               roles.minecraft: emojis.minecraft,
+               roles.apex: emojis.apex}
 _tz = pytz.timezone(param.rc('timezone'))
 
 # todo: auto react(drop or update?), CoC rxn for role/multi-lfgs
@@ -82,7 +83,7 @@ class _ActivityFile(param.IntPermaDict):
 
 
 class LFG(commands.Cog):
-    channels = [560270058224615425, 878403478987366490, 878403991195766844]
+    channels = [channels.lfg_pvp, channels.lfg_pve, channels.lfg_shenanigans]
 
     def __init__(self, bot, debug=False):
         self.bot = bot

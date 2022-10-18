@@ -233,7 +233,7 @@ class MainBot(commands.Bot):
 
     def tdt(self):
         for g in self.guilds:
-            if g.id == 164589623459184640:
+            if g.id == param.guilds.tdt:
                 return g
 
     def restart_time(self):

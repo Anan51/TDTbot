@@ -1,7 +1,7 @@
 import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
-from .. import roles
+from ..param import roles
 from ..helpers import find_role
 from ..async_helpers import admin_check
 import logging

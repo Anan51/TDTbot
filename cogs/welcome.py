@@ -2,16 +2,16 @@ import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
-from .. import roles
 from ..helpers import find_channel, find_role
+from ..param import emojis, messages, roles
 # from ..async_helpers import admin_check
 import logging
 
 
 logger = logging.getLogger('discord.' + __name__)
-_CoC_id = 563406038754394112
-_wolfpack_id = 332355011919085582
-_trick_or_treat = 1025676700043972688
+_CoC_id = messages.CoC
+_wolfpack_id = messages.wolfpack
+_trick_or_treat = messages.trick_or_treat
 _recruit = roles.recruit
 _log_in_discord = False
 # clear reactions on manual page reactions to message posted before this
@@ -61,9 +61,9 @@ async def send_welcome(member, channel=None, retry=None):
 class Welcome(commands.Cog):
     """Cog to listen and send alerts"""
     # emoji: role
-    _emoji_dict = {878802171913732118: roles.destiny_2,
-                   878807665038491668: roles.apex,
-                   878806389399625789: roles.minecraft,
+    _emoji_dict = {emojis.destiny_2: roles.destiny_2,
+                   emojis.apex: roles.apex,
+                   emojis.minecraft: roles.minecraft,
                    }
 
     def __init__(self, bot):
