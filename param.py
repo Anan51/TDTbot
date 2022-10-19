@@ -33,7 +33,7 @@ emojis = _Struct(destiny_2=878802171913732118,
                  never=588737463376412692,
                  )
 
-guilds = _Struct(tdt=64589623459184640)
+guilds = _Struct(tdt=164589623459184640)
 
 messages = _Struct(CoC=563406038754394112,
                    wolfpack=945717800788447282,

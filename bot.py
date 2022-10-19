@@ -235,6 +235,7 @@ class MainBot(commands.Bot):
         for g in self.guilds:
             if g.id == param.guilds.tdt:
                 return g
+        raise RuntimeError("No tdt guild found")
 
     def restart_time(self):
         t = self.startup

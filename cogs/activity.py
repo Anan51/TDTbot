@@ -5,12 +5,13 @@ from discord.ext import commands  # type: ignore
 import logging
 import pickle
 import os
-from .. import param, roles
+from .. import param
 from ..helpers import epoch, int_time, find_role
 from ..async_helpers import admin_check, split_send
 from .supporters import supporters_fn
 
 
+roles = param.roles
 logger = logging.getLogger('discord.' + __name__)
 _days_inactive = 14
 _limit = 5000

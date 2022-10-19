@@ -9,12 +9,12 @@ from ..helpers import int_time, find_role, seconds_to_datetime
 from ..async_helpers import admin_check, split_send
 
 
+roles = param.roles
 logger = logging.getLogger('discord.' + __name__)
 supporters_fn = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 supporters_fn = os.path.join(supporters_fn, 'config', 'supporters.dbm')
 _supporter_rank = roles.community
 _user_t = Union[discord.Member, discord.User]
-roles = param.roles
 
 
 class Supporters(commands.Cog):

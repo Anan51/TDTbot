@@ -3,7 +3,7 @@ from discord.ext import commands  # type: ignore
 import asyncio
 import logging
 import os
-from .. import param, users
+from .. import param
 from ..config import UserConfig
 from ..helpers import find_role
 from ..async_helpers import admin_check, parse_payload, split_send
@@ -11,6 +11,7 @@ from ..async_helpers import admin_check, parse_payload, split_send
 
 logger = logging.getLogger('discord.' + __name__)
 
+users = param.users
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'direct_messages.dbm')
 
