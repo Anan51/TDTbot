@@ -1,0 +1,14 @@
+name: tdtbot
+channels:
+  - defaults
+dependencies:
+  - python>=3.8
+  - pip>=20.1
+  - pytz
+  - humanize
+  - numpy>=1.19.2
+  - pip:
+    - gitpython
+    - pynacl
+    - tweepy[async]
+    - discord.py[voice]
