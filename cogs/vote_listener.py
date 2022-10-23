@@ -2,6 +2,7 @@ import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 from ..helpers import emotes_equal, parse_message
 from ..param import channels
+from ..version import usingV2
 import logging
 
 
@@ -113,5 +114,10 @@ class VoteListener(commands.Cog):
         await listener.parse_votes(payload, self.bot)
 
 
-def setup(bot):
-    bot.add_cog(VoteListener(bot))
+if usingV2:
+    async def setup(bot):
+        cog = VoteListener(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(VoteListener(bot))

@@ -207,3 +207,15 @@ def parse_timezone(tz, self_call=False, check_abbr=True):
             return parse_timezone(tz.replace(' ', '_'), self_call=True,
                                   check_abbr=check_abbr)
     return pytz.timezone(tz)
+
+
+def localize(dt):
+    if dt.tzinfo is None:
+        return pytz.utc.localize(dt)
+    return dt
+
+
+def delocalize(dt):
+    if dt.tzinfo is None:
+        return dt
+    return dt.astimezone(pytz.utc).replace(tzinfo=None)

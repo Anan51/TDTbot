@@ -9,6 +9,7 @@ from .. import param
 from ..param import channels, emojis, roles
 from ..helpers import find_role
 from ..async_helpers import admin_check, split_send
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -156,6 +157,10 @@ class LFG(commands.Cog):
         await ctx.send(out)
 
 
-def setup(bot):
-    """This is required to add this cog to a bot as an extension"""
-    bot.add_cog(LFG(bot))
+if usingV2:
+    async def setup(bot):
+        cog = LFG(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(LFG(bot))

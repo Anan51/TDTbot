@@ -7,6 +7,7 @@ from .. import param
 from ..helpers import find_role
 from ..config import UserConfig
 from ..async_helpers import split_send, sleep, admin_check
+from ..version import usingV2
 import logging
 
 
@@ -487,6 +488,12 @@ class Snowstorm(commands.Cog):
         await self.rankings(ctx)
 
 
-def setup(bot):
-    return
-    bot.add_cog(Snowstorm(bot))
+if usingV2:
+    async def setup(bot):
+        return
+        cog = Snowstorm(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        return
+        bot.add_cog(Snowstorm(bot))

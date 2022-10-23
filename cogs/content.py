@@ -11,6 +11,7 @@ from ..param import PermaDict, channels
 from ..helpers import int_time, parse_message
 from ..async_helpers import admin_check, split_send
 from ..twitter import tweet
+from ..version import usingV2
 
 logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
@@ -158,5 +159,10 @@ class Content(commands.Cog):
         await split_send(ctx, lines, style='```')
 
 
-def setup(bot):
-    bot.add_cog(Content(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Content(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Content(bot))

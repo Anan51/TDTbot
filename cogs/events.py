@@ -10,8 +10,9 @@ import traceback
 from typing import Union
 
 from .. import param
-from ..helpers import parse_timezone, minute, day
+from ..helpers import parse_timezone, minute, day, localize
 from ..async_helpers import admin_check, wait_until, split_send
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -150,7 +151,7 @@ class _Event(dict):
                         msg = 'I think you meant "{}" instead of "{}".'
                         self._comments.append(msg.format(abrv.upper(), time[4].upper()))
             # convert it to UTC and strip timezone info (required by external libs)
-            out['datetime'] = dt.astimezone(pytz.utc).replace(tzinfo=None)
+            out['datetime'] = dt.astimezone(pytz.utc)
             # put the contents of out into self
             self.update(out)
             return
@@ -244,12 +245,12 @@ class _Event(dict):
 
     def future_or_active(self, hours=6):
         """Is this event in the past or near future?"""
-        return (datetime.datetime.utcnow() - self['datetime'] <=
+        return (localize(datetime.datetime.utcnow()) - localize(self['datetime']) <=
                 datetime.timedelta(hours=hours))
 
     def past(self):
         """Is this event in the past?"""
-        if self['datetime'] < datetime.datetime.utcnow():
+        if localize(self['datetime']) < localize(datetime.datetime.utcnow()):
             return True
 
     async def attendees(self):
@@ -284,9 +285,9 @@ class _Event(dict):
         if channel is None:
             channel = getattr(self.cog, 'channel', param.rc('event_channel'))
         channel = self.cog.bot.find_channel(channel)
-        dt = self['datetime'] - datetime.timedelta(minutes=dt_min)
-        if dt < datetime.datetime.utcnow():
-            dt_min = (self['datetime'] - datetime.datetime.utcnow()).seconds // 60
+        dt = localize(self['datetime']) - datetime.timedelta(minutes=dt_min)
+        if dt < localize(datetime.datetime.utcnow()):
+            dt_min = (localize(self['datetime']) - localize(datetime.datetime.utcnow())).seconds // 60
         if prefix is None:
             prefix = 'Your event "{0.name}"'.format(self)
         if eta is None:
@@ -328,7 +329,7 @@ class _Event(dict):
         if dts is None:
             dts = param.rc('event_reminders')[:]
         if self.from_hist:
-            delta = self['datetime'] - datetime.datetime.utcnow()
+            delta = localize(self['datetime']) - localize(datetime.datetime.utcnow())
             tmp = [dt for dt in dts if datetime.timedelta(minutes=dt) <= delta]
             if dts != tmp:
                 logger.printv('dts changed for event {0.name}'.format(self))
@@ -512,7 +513,7 @@ class Events(commands.Cog):
             now = datetime.datetime.utcnow()
             fmt = '{0}) {1.name}: {2}'
             for i, e in enumerate(sorted(self.event_list, key=lambda x: x['datetime'])):
-                dt = e['datetime'] - now
+                dt = localize(e['datetime']) - localize(now)
                 msg.append(fmt.format(i + 1, e, dt))
             msg = '\n'.join(msg)
             if msg:
@@ -699,5 +700,10 @@ class Events(commands.Cog):
         await split_send(ctx, out)
 
 
-def setup(bot):
-    bot.add_cog(Events(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Events(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Events(bot))

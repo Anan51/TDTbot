@@ -4,6 +4,7 @@ import asyncio
 from ..param import roles
 from ..helpers import find_role
 from ..async_helpers import admin_check
+from ..version import usingV2
 import logging
 import re
 
@@ -122,5 +123,10 @@ class SpamFilter(commands.Cog):
         await ctx.send("Spam filter is NOT in debugging mode.")
 
 
-def setup(bot):
-    bot.add_cog(SpamFilter(bot))
+if usingV2:
+    async def setup(bot):
+        cog = SpamFilter(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(SpamFilter(bot))

@@ -7,6 +7,7 @@ from typing import Union
 from ..param import PermaDict
 from ..helpers import emotes_equal, find_channel
 from ..async_helpers import admin_check
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -147,5 +148,10 @@ class AdminTools(commands.Cog):
                 self._add_sticky(msg)
 
 
-def setup(bot):
-    bot.add_cog(AdminTools(bot))
+if usingV2:
+    async def setup(bot):
+        cog = AdminTools(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(AdminTools(bot))

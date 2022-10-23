@@ -6,7 +6,8 @@ import logging
 import pickle
 import os
 from .. import param
-from ..helpers import epoch, int_time, find_role
+from ..version import usingV2
+from ..helpers import epoch, int_time, find_role, localize
 from ..async_helpers import admin_check, split_send
 from .supporters import supporters_fn
 
@@ -108,14 +109,14 @@ class Activity(commands.Cog):
         data = dict()
         # get all channels with a history attribute
         channels = [i for i in guild.channels if hasattr(i, "history")]
-        oldest = datetime.datetime.now()  # store the oldest time parsed
+        oldest = datetime.datetime.utcnow()  # store the oldest time parsed
         old_af = _epoch  # just some really old date
         for channel in channels:
             try:
                 # loop through messages in history (limit 1000 messages per channel)
                 async for msg in channel.history(limit=limit):
                     # update oldest
-                    oldest = min(oldest, msg.created_at)
+                    oldest = min(oldest, localize(msg.created_at))
                     # add/update data for message author
                     if msg.author in members:
                         key = msg.author
@@ -123,7 +124,7 @@ class Activity(commands.Cog):
                             key = key.id
                         try:
                             # use the most recent date
-                            data[key] = max(data[key], msg.created_at)
+                            data[key] = max(localize(data[key]), localize(msg.created_at))
                         except KeyError:
                             data[key] = msg.created_at
             except discord.Forbidden:
@@ -137,7 +138,7 @@ class Activity(commands.Cog):
             if key not in data:
                 # use join date if it's more recent than oldest
                 try:
-                    if member.joined_at > oldest:
+                    if localize(member.joined_at) > oldest:
                         data[key] = member.joined_at
                     else:
                         data[key] = old_af
@@ -336,6 +337,10 @@ class Activity(commands.Cog):
         await ctx.send(msg)
 
 
-def setup(bot):
-    """This is required to add this cog to a bot as an extension"""
-    bot.add_cog(Activity(bot, debug=False))
+if usingV2:
+    async def setup(bot):
+        cog = Activity(bot, debug=False)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Activity(bot, debug=False))

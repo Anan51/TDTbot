@@ -4,6 +4,7 @@ import logging
 from ..helpers import find_channel
 from ..async_helpers import admin_check, split_send
 from .. import git_manage
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -163,5 +164,10 @@ class Debugging(commands.Cog):
             await split_send(ctx, out)
 
 
-def setup(bot):
-    bot.add_cog(Debugging(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Debugging(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Debugging(bot))

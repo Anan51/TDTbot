@@ -8,6 +8,7 @@ import sys
 from .. import param
 from ..helpers import find_channel
 from ..async_helpers import admin_check
+from ..version import usingV2
 
 logger = logging.getLogger('discord.' + __name__)
 _m_delete = discord.AuditLogAction.message_delete
@@ -237,5 +238,10 @@ class Roast(commands.Cog):
             self._botting.pop(user.id)
 
 
-def setup(bot):
-    bot.add_cog(Roast(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Roast(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Roast(bot))

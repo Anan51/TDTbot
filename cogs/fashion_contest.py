@@ -6,6 +6,7 @@ import numpy as np
 from ..helpers import parse_message, find_role
 from ..async_helpers import split_send
 from ..config import UserConfig
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -240,6 +241,12 @@ class FashionContest(commands.Cog):
         await split_send(ctx, txt, style="```")
 
 
-def setup(bot):
-    return
-    bot.add_cog(FashionContest(bot))
+if usingV2:
+    async def setup(bot):
+        return
+        cog = FashionContest(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        return
+        bot.add_cog(FashionContest(bot))

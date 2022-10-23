@@ -4,6 +4,7 @@ import asyncio
 import datetime
 from ..helpers import find_channel, find_role
 from ..param import emojis, messages, roles
+from ..version import usingV2
 # from ..async_helpers import admin_check
 import logging
 
@@ -243,5 +244,10 @@ class Welcome(commands.Cog):
                 await rxn.clear()
 
 
-def setup(bot):
-    bot.add_cog(Welcome(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Welcome(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Welcome(bot))

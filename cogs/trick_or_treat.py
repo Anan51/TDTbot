@@ -1,4 +1,3 @@
-from tkinter import Scale
 import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
@@ -9,6 +8,7 @@ from .. import param
 from ..helpers import find_role, second, day
 from ..config import UserConfig
 from ..async_helpers import split_send, sleep, admin_check, wait_until
+from ..version import usingV2
 import logging
 try:
     import ephem
@@ -130,7 +130,7 @@ class TrickOrTreat(commands.Cog):
         if self._rule_id:
             self._enroll_emoji_role()
             return self._rule_id
-        msg = "**Candy Cartel**\nIn this world it's trick or be treated. Click the {:} reaction below to sign up for our seasonal trick or treating game. Outsmart, coerce, and backstab your friends to become this neighborhood candy king. The winner is announced at the end of the October month and is given a 1 month special title/role which operates like being promoted to community rank!"
+        msg = "**Candy Cartel**\nIn this world it's trick or be treated. Click the {:} reaction below to sign up for our seasonal trick or treating game. Outsmart, coerce, and backstab your friends to become this neighborhood candy king. The winner is announced at the end of the October month and is given a 1 month special title/role which operates like being promoted to community rank!"  # noqa: E501
         msg = msg.format(_enroll)
         channel = await self.bot.fetch_channel(_manual)
         async for message in channel.history(limit=200):
@@ -382,7 +382,7 @@ class TrickOrTreat(commands.Cog):
             # if not enough votes
             elif len(set(trickers + treaters)) < nmin:
                 logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
-                #self._awaiting = None
+                # self._awaiting = None
                 self._lock = False
                 return self.count_later(dt=set_timer, mid=mid, nlast=max(noa_tot, nlast - 1))
             self._last = datetime.datetime.now()
@@ -428,8 +428,8 @@ class TrickOrTreat(commands.Cog):
                 print("No moon phase data")
             trickers = [await self._member(u) for u in trickers]
             treaters = [await self._member(u) for u in treaters]
+            msg = "{:}The light of the moon brings forth a treat for the tricksters, and a trick for the treaters.{:}"
             if random.random() < .05 * phase:
-                msg = "{:}The light of the moon brings forth a treat for the tricksters, and a trick for the treaters.{:}"
                 a = b = ""
                 if moon:
                     luna = phase_to_emoji()
@@ -446,7 +446,7 @@ class TrickOrTreat(commands.Cog):
             users = sorted(deltas.keys(), key=lambda u: u.display_name)
             fmt = "{0.display_name} : {1:d}{2:+d} => {3:d} (current)"
             summary = [fmt.format(u, *self.apply_delta(u, deltas[u]))
-                    for u in users if deltas[u]]
+                       for u in users if deltas[u]]
             # print("summary", summary)
             await self.channel.send(txt)
             await split_send(self.channel, summary, style='```')
@@ -605,7 +605,7 @@ class TrickOrTreat(commands.Cog):
             def purge_check(message):
                 if message.author != self.bot.user:
                     return True
-                return message.content != _prototype
+                return message.content != ""
 
             check = purge_check
 
@@ -617,5 +617,11 @@ class TrickOrTreat(commands.Cog):
             except discord.errors.NotFound:
                 pass
 
-def setup(bot):
-    bot.add_cog(TrickOrTreat(bot))
+
+if usingV2:
+    async def setup(bot):
+        cog = TrickOrTreat(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(TrickOrTreat(bot))
