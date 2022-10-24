@@ -21,7 +21,7 @@ channels = _Struct(debugging=721427624483749991,
                    lfg_pve=878403478987366490,
                    lfg_shenanigans=878403991195766844,
                    lenny_laboratory=562412283268169739,
-                   spicy_clips=746441485917880330
+                   spicy_clips=746441485917880330,
                    )
 
 emojis = _Struct(destiny_2=878802171913732118,
@@ -39,6 +39,7 @@ guilds = _Struct(tdt=164589623459184640)
 messages = _Struct(CoC=563406038754394112,
                    wolfpack=945717800788447282,
                    trick_or_treat=1025676700043972688,
+                   games=563406038754394112,
                    )
 
 roles = _Struct(
