@@ -27,6 +27,7 @@ channels = _Struct(debugging=721427624483749991,
 emojis = _Struct(destiny_2=878802171913732118,
                  minecraft=878806389399625789,
                  apex=878807665038491668,
+                 overwatch2=1034231911591190599,
                  StrangeCoin=319276617727737866,
                  lenny=333101455856762890,
                  OGTriggered=433210982647595019,
@@ -52,6 +53,7 @@ roles = _Struct(
                 apex=879069368649134160,
                 destiny_2=878812130453905420,
                 minecraft=1024825607059669043,
+                overwatch2=1034230093872111708,
                 )
 
 users = _Struct(electro=221778796250923008,
