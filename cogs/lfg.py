@@ -17,7 +17,7 @@ _dbm = os.path.join(_dbm, 'config', 'lfg.dbm')
 _tmax = datetime.timedelta(days=90)
 _role2emoji = {roles.destiny_2: emojis.destiny_2,
                roles.minecraft: emojis.minecraft,
-               roles.apex: emojis.apex}
+               roles.overwatch2: emojis.overwatch2}
 _tz = pytz.timezone(param.rc('timezone'))
 
 # todo: auto react(drop or update?), CoC rxn for role/multi-lfgs

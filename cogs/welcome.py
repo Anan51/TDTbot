@@ -62,7 +62,7 @@ class Welcome(commands.Cog):
     """Cog to listen and send alerts"""
     # emoji: role
     _emoji_dict = {emojis.destiny_2: roles.destiny_2,
-                   emojis.apex: roles.apex,
+                   emojis.overwatch2: roles.overwatch2,
                    emojis.minecraft: roles.minecraft,
                    }
 
