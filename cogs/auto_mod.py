@@ -2,7 +2,7 @@ import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
 from .. import param  # roles
-from ..helpers import find_channel, find_role
+from ..helpers import find_role
 from ..async_helpers import split_send
 import logging
 import re
@@ -12,11 +12,11 @@ logger = logging.getLogger('discord.' + __name__)
 
 
 # below are unacceptable words and phrases
-_bad_words = ['fag', 'faggot', 'nigger', "debug_testing_bad_word"]
+_bad_words = ['fag', 'faggot', 'nigger', 'nigga', "debug_testing_bad_word"]
 _searches = [r'(?i)\bkill\byourself\b',
              r'\b(https:\/\/)?discord\.gg(\/\w+)\b',
              ]
-_searches += [r'(?i)\b{:}\b'.format(i) for i in _bad_words]
+_searches += [r'(?i)\b{:}[s]?\b'.format(i) for i in _bad_words]
 
 
 class AutoMod(commands.Cog):
@@ -82,7 +82,7 @@ class AutoMod(commands.Cog):
                        "In: {:} ({:})\n".format(message.channel.mention, message.channel.name),
                        self.mentions,
                        ]
-                await split_sent(self.log_channel, msg)
+                await split_send(self.log_channel, msg)
                 msg = "I have parsed this message as spam as against the Code of Conduct (CoC) and deleted it.\n"
                 msg += "Please read the CoC: " + await self.fetch_coc_link()
                 await message.channel.send(msg, reference=message)
