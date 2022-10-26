@@ -13,11 +13,11 @@ logger = logging.getLogger('discord.' + __name__)
 
 
 # below are unacceptable words and phrases
-_bad_words = ['fag', 'faggot', 'nigger', "debug_testing_bad_word"]
+_bad_words = ['fag', 'faggot', 'nigger', 'nigga', "debug_testing_bad_word"]
 _searches = [r'(?i)\bkill\byourself\b',
              r'\b(https:\/\/)?discord\.gg(\/\w+)\b',
              ]
-_searches += [r'(?i)\b{:}\b'.format(i) for i in _bad_words]
+_searches += [r'(?i)\b{:}[s]?\b'.format(i) for i in _bad_words]
 
 
 class AutoMod(commands.Cog):
