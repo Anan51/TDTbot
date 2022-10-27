@@ -41,9 +41,9 @@ class AutoMod(commands.Cog):
 
     @property
     def mentions(self):
-        if self._mentions is not None:
-            self._mentions = [find_role(self.bot.tdt(), i).mention
-                              for i in ["admin", "devoted"]]
+        if self._mentions is None:
+            self._mentions = " ".join([find_role(self.bot.tdt(), i).mention
+                                      for i in ["admin", "devoted"]])
         return self._mentions
 
     @property
@@ -55,8 +55,8 @@ class AutoMod(commands.Cog):
     async def fetch_coc_link(self):
         if self._coc_link:
             return self._coc_link
-        channel = self.bot.find_channel(param.rc('manual_page'))
-        msg = await channel.fetch_message(param.messages.coc)
+        channel = self.bot.find_channel('manual_page')
+        msg = await channel.fetch_message(param.messages.CoC)
         self._coc_link = msg.jump_url
         return self._coc_link
 
@@ -76,11 +76,11 @@ class AutoMod(commands.Cog):
             return
         for search in _searches:
             if re.search(search, message.content):
-                msg = ["I have parsed this message as spam as against the CoC and deleted it:\n",
-                       "```{:}```\n".format(message.content),
-                       "From: {:} ({:}, {:})\n".format(message.author.mention, message.author.name, message.author.id),
-                       "In: {:} ({:})\n".format(message.channel.mention, message.channel.name),
-                       self.mentions,
+                msg = ["I have parsed this message as spam as against the CoC and deleted it:",
+                       "```{:}```".format(message.content),
+                       "From: {:} ({:}, {:})".format(message.author.mention, message.author.name, message.author.id),
+                       "In: {:} ({:})".format(message.channel.mention, message.channel.name),
+                       "{:}".format(self.mentions),
                        ]
                 await split_send(self.log_channel, msg)
                 msg = "I have parsed this message as spam as against the Code of Conduct (CoC) and deleted it.\n"
