@@ -14,8 +14,9 @@ logger = logging.getLogger('discord.' + __name__)
 
 # below are unacceptable words and phrases
 _bad_words = ['fag', 'faggot', 'nigger', 'nigga', "debug_testing_bad_word"]
+_discord_link = r'\b(https:\/\/)?discord\.gg(\/\w+)\b'
 _searches = [r'(?i)\bkill\byourself\b',
-             r'\b(https:\/\/)?discord\.gg(\/\w+)\b',
+             _discord_link,
              ]
 _searches += [r'(?i)\b{:}[s]?\b'.format(i) for i in _bad_words]
 
@@ -77,6 +78,10 @@ class AutoMod(commands.Cog):
             return
         for search in _searches:
             if re.search(search, message.content):
+                if search == _discord_link:
+                    if message.channel.id in [param.channels.tdt_events,
+                                              param.channels.content_hub]:
+                        return
                 msg = ["I have parsed this message as spam as against the CoC and deleted it:",
                        "```{:}```".format(message.content),
                        "From: {:} ({:}, {:})".format(message.author.mention, message.author.name, message.author.id),
