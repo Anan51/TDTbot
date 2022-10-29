@@ -22,6 +22,8 @@ channels = _Struct(debugging=721427624483749991,
                    lfg_shenanigans=878403991195766844,
                    lenny_laboratory=562412283268169739,
                    spicy_clips=746441485917880330,
+                   tdt_events=637134842911260673,
+                   content_hub=782901700990074910,
                    )
 
 emojis = _Struct(destiny_2=878802171913732118,
