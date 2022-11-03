@@ -24,7 +24,7 @@ year = "{:04d}".format(datetime.datetime.utcnow().year)
 # main settings:
 _channel = "the_neighborhood"   # trick-or-treat channel name or id
 _rule_id = None                 # message id for rules/reaction check
-_game_on = "auto"               # flag to run game
+_game_on = False                # flag to run game
 _role = "SPOOKY"                # role name or id for game participation
 _nmin = 2, 5                    # minimum number (range) of votes to start count
 # secondary settings
@@ -620,8 +620,10 @@ class TrickOrTreat(commands.Cog):
 
 if usingV2:
     async def setup(bot):
-        cog = TrickOrTreat(bot)
-        await bot.add_cog(cog)
+        if _game_on:
+            cog = TrickOrTreat(bot)
+            await bot.add_cog(cog)
 else:
     def setup(bot):
-        bot.add_cog(TrickOrTreat(bot))
+        if _game_on:
+            bot.add_cog(TrickOrTreat(bot))
