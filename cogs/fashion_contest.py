@@ -13,7 +13,7 @@ logger = logging.getLogger('discord.' + __name__)
 _channel = 'dresstiny'
 _role = 'Dresstiny'
 _rule_id = 778026917802410014
-_bot_key = 'tdt.fashion.entries'
+_bot_key = 'tdt.fashion.entries.2022'
 _emoji = '<:StrangeCoin:319276617727737866>'
 
 
@@ -241,5 +241,4 @@ class FashionContest(commands.Cog):
 
 
 def setup(bot):
-    return
     bot.add_cog(FashionContest(bot))
