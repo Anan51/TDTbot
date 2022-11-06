@@ -116,7 +116,7 @@ class Activity(commands.Cog):
                 # loop through messages in history (limit 1000 messages per channel)
                 async for msg in channel.history(limit=limit):
                     # update oldest
-                    oldest = min(oldest, localize(msg.created_at))
+                    oldest = min(localize(oldest), localize(msg.created_at))
                     # add/update data for message author
                     if msg.author in members:
                         key = msg.author

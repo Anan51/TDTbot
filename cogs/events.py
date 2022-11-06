@@ -10,7 +10,7 @@ import traceback
 from typing import Union
 
 from .. import param
-from ..helpers import parse_timezone, minute, day, localize
+from ..helpers import parse_timezone, minute, day, localize, delocalize
 from ..async_helpers import admin_check, wait_until, split_send
 from ..version import usingV2
 
@@ -182,13 +182,13 @@ class _Event(dict):
     def dt_str(self):
         """Datetime string for this event"""
         # assign UTC timezone to datetime object
-        dt = pytz.utc.localize(self['datetime'])
+        dt = localize(self['datetime'])
         # convert to server timezone
         return dt.astimezone(self.tz).strftime('%X %A %x %Z')
 
     def unix_timestamp(self, mode='R'):
         """Unix timestamp for this event"""
-        dt = pytz.utc.localize(self['datetime'])
+        dt = localize(self['datetime'])
         return '<t:{:d}:{:}>'.format(int(dt.timestamp()), mode)
 
     @property
@@ -213,7 +213,7 @@ class _Event(dict):
         if log_channel is None:
             log_channel = self.log_channel
         # check log if the log_message is already there
-        async for msg in log_channel.history(limit=200, after=after):
+        async for msg in log_channel.history(limit=200, after=delocalize(after)):
             if msg.content == log:
                 return
         # if we are registering this event from history
@@ -224,9 +224,11 @@ class _Event(dict):
             # if this message was edited more than 10 min after creation
             if not (msg.edited_at is None or msg.created_at is None):
                 if msg.edited_at > msg.created_at + 10 * minute:
-                    t = pytz.utc.localize(msg.created_at + 1 * day)
+                    t = localize(msg.created_at + 1 * day)
                     # and the event post/message is more than a day older then reboot
-                    if self.cog.bot.restart_time() > t:
+                    print(localize(self.cog.bot.restart_time()))
+                    print(localize(t))
+                    if localize(self.cog.bot.restart_time()) > localize(t):
                         # exit and don't post log
                         return
         else:
