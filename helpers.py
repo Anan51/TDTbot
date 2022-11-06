@@ -212,7 +212,7 @@ def parse_timezone(tz, self_call=False, check_abbr=True):
 def localize(dt):
     if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
         try:
-            return dt.astimezone(pytz.utc).replace(tzinfo=None)
+            return dt.astimezone(pytz.utc)
         except ValueError:
             pass
     return dt
