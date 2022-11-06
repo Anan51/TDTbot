@@ -39,6 +39,7 @@ class _Event(dict):
     def __init__(self, message, cog, log_channel=None, from_hist=False):
         super().__init__()
         self.cog = cog
+        self.children = []
         if message.author == cog.bot.user:
             return
         self._error = None
@@ -171,7 +172,8 @@ class _Event(dict):
         if channel is None:
             channel = getattr(self.cog, 'channel', param.rc('event_channel'))
         if self._error:
-            await channel.send(self._error)
+            msg = await channel.send(self._error)
+            self.children.append(msg)
 
     async def message(self):
         """Fetch and return the message associated with this event"""
@@ -254,6 +256,7 @@ class _Event(dict):
         """Is this event in the past?"""
         if localize(self['datetime']) < localize(datetime.datetime.utcnow()):
             return True
+        return False
 
     async def attendees(self):
         """Return set of enrolled attendees"""
@@ -320,9 +323,13 @@ class _Event(dict):
         if wait:
             await wait_until(dt)
         msg = ' '.join([prefix, eta] + [i.mention for i in await self.attendees()])
-        await channel.send(msg)
-        if dt == 0:
+        msg = await channel.send(msg)
+        self.children.append(msg)
+        if dt == 0:  # todo: fix this
             await self.make_stale()
+        if dt_min == 0 and self.past():
+            await self.make_stale()
+            await self._clear(wait=None)
 
     def set_alerts(self, dts=None, channel=None):
         """Set multiple alerts for list of dt (in minutes)"""
@@ -346,6 +353,23 @@ class _Event(dict):
         """Record log_message and set alerts"""
         await self.record_log(log_channel=log_channel)
         self.set_alerts(dts=dts, channel=event_chanel)
+
+    async def _clear(self, wait=0):
+        if wait != 0:
+            if wait is None:
+                wait = datetime.timedelta(days=1)
+            if isinstance(wait, float):
+                wait = datetime.timedelta(hours=wait)
+            if isinstance(wait, datetime.timedelta):
+                wait = localize(self['datetime']) + wait
+            await wait_until(wait)
+        for msg in self.children:
+            await msg.delete()
+        self.children = []
+        msg = await self.message()
+        await msg.delete()
+        for i in self:
+            del self[i]
 
 
 class Events(commands.Cog):
@@ -546,7 +570,6 @@ class Events(commands.Cog):
         If this command is used as a reply then it will clear messages before that message
         """
         before = None
-        check = None
         ref = ctx.message.reference
         if ref:
             if hasattr(ref, 'resolved'):
@@ -560,15 +583,16 @@ class Events(commands.Cog):
                 else:
                     msg = await channel.fetch_message(ref.message_id)
             before = msg.created_at
+            active = [i['id'] for i in self._events if not i.past()]
 
-            def purge_check(message):
-                if message.author != self.bot.user:
-                    return True
-                return message.content != _prototype
+        def purge_check(message):
+            if before:
+                if message.author == self.bot.user:
+                    return message.content != _prototype
+            if message.id in active:
+                return False
 
-            check = purge_check
-
-        await self.channel.purge(limit=limit, before=before, check=check)
+        await self.channel.purge(limit=limit, before=before, check=purge_check)
         if before is None:
             msg = _prototype
             msg = await self.channel.send('```' + msg + '```')
