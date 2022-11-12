@@ -236,7 +236,8 @@ class _Event(dict):
         else:
             if self._comments:
                 await split_send(self.log_channel, self._comments)
-        await self.log_channel.send(log)
+        msg = await self.log_channel.send(log)
+        self.children.append(msg)
 
     async def make_stale(self):
         msg = await self.message()
@@ -588,9 +589,10 @@ class Events(commands.Cog):
         def purge_check(message):
             if before:
                 if message.author == self.bot.user:
-                    return message.content != _prototype
+                    return message.content == _prototype
             if message.id in active:
                 return False
+            return True
 
         await self.channel.purge(limit=limit, before=before, check=purge_check)
         if before is None:
