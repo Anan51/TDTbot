@@ -584,12 +584,16 @@ class Events(commands.Cog):
                 else:
                     msg = await channel.fetch_message(ref.message_id)
             before = msg.created_at
-            active = [i['id'] for i in self._events if not i.past()]
+            active = []
+            for i in self._events:
+                if not i.past():
+                    active.append(i['id'])
+                    active.extend([j.id for j in i.children])
 
         def purge_check(message):
             if before:
-                if message.author == self.bot.user:
-                    return message.content == _prototype
+                if message.author == self.bot.user and message.content == _prototype:
+                    return False
             if message.id in active:
                 return False
             return True
