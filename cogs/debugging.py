@@ -133,6 +133,22 @@ class Debugging(commands.Cog):
         await split_send(ctx, msg)
 
     @commands.command()
+    async def channel_pins(self, ctx, channel: discord.TextChannel = None):
+        """<channel (optional)> shows channel pins"""
+        if channel:
+            if hasattr(channel, "lower"):
+                channel = find_channel(ctx.guild, channel)
+        else:
+            channel = ctx.channel
+        pins = await channel.pins()
+        msg = ["Item {0:d} {1.id}\n{1.content}".format(i + 1, m)
+               for i, m in enumerate(pins)]
+        if not msg:
+            msg = ["No pins available."]
+        print(msg)
+        await split_send(ctx, msg)
+
+    @commands.command()
     async def member_hist(self, ctx, member: discord.Member = None):
         """<member (optional)> shows member history (past 10 entries)"""
         if member is None:
