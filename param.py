@@ -33,6 +33,7 @@ emojis = _Struct(destiny_2=878802171913732118,
                  lenny=333101455856762890,
                  OGTriggered=433210982647595019,
                  never=588737463376412692,
+                 call_of_duty=1046956126513664061,
                  )
 
 guilds = _Struct(tdt=164589623459184640)
@@ -56,6 +57,7 @@ roles = _Struct(
                 destiny_2=878812130453905420,
                 minecraft=1024825607059669043,
                 overwatch2=1034230093872111708,
+                call_of_duty=1034230036078788638,
                 )
 
 users = _Struct(electro=221778796250923008,
