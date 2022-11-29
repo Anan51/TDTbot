@@ -33,7 +33,7 @@ emojis = _Struct(destiny_2=878802171913732118,
                  lenny=333101455856762890,
                  OGTriggered=433210982647595019,
                  never=588737463376412692,
-                 call_of_duty=1046956126513664061,
+                 call_of_duty=1046956005361188904,
                  )
 
 guilds = _Struct(tdt=164589623459184640)
