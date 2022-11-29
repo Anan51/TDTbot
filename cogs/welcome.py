@@ -64,7 +64,7 @@ class Welcome(commands.Cog):
     # emoji: role
     _emoji_dict = {emojis.destiny_2: roles.destiny_2,
                    emojis.overwatch2: roles.overwatch2,
-                   emojis.minecraft: roles.minecraft,
+                   emojis.call_of_duty: roles.call_of_duty,
                    }
 
     def __init__(self, bot):
