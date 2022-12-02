@@ -481,7 +481,7 @@ class Events(commands.Cog):
         # get message object
         message = await self.channel.fetch_message(msg_id)
         dt = datetime.timedelta(minutes=5)
-        not_recent = (datetime.datetime.utcnow() - message.created_at) > dt
+        not_recent = (datetime.datetime.now() - localize(message.created_at)) > dt
         await self.enroll_event_if_valid(_Event(message, self, from_hist=not_recent))
 
     async def check_history(self, channel=None):

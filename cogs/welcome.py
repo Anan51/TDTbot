@@ -2,7 +2,7 @@ import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
-from ..helpers import find_channel, find_role
+from ..helpers import find_channel, find_role, localize
 from ..param import emojis, messages, roles
 from ..version import usingV2
 # from ..async_helpers import admin_check
@@ -130,8 +130,12 @@ class Welcome(commands.Cog):
               " Please read my DM and look at the {1.mention}.".format(member, manual)
         await member.guild.system_channel.send(msg)
         msg = await self.fetch_coc()
-        rxns = [rxn for rxn in msg.reactions
-                if await rxn.users().find(lambda u: u == member)]
+        rxns = []
+        for rxn in msg.reactions:
+            async for user in rxn.users():
+                if user == member:
+                    rxns.append(rxn)
+                    break
         # check for welcome back
         if "👍" in [str(rxn.emoji) for rxn in rxns]:
             old = msg
@@ -184,9 +188,9 @@ class Welcome(commands.Cog):
                     if msg.content == out:
                         return
                 await log_channel.send(out)
-            now = datetime.datetime.utcnow()
+            now = localize(datetime.datetime.utcnow())
             # if in joined in last 2 weeks
-            if (now - payload.member.joined_at).seconds // 86400 < 14:
+            if (now - localize(payload.member.joined_at)).seconds // 86400 < 14:
                 if payload.member.top_role < recruit:
                     reason = "Agreed to code of conduct."
                     await payload.member.add_roles(recruit, reason=reason)
