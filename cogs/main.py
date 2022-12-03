@@ -187,7 +187,7 @@ class MainCommands(commands.Cog):
                 rxns = [rxn for rxn in rxns if emotes_equal(emote, rxn.emoji)]
             else:
                 emote = rxns[0].emoji
-            users = await rxns[0].users().flatten()
+            users = [u async for u in rxns[0].users()]
         except IndexError:
             users = []
         n = 0

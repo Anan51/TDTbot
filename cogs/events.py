@@ -264,7 +264,7 @@ class _Event(dict):
         msg = await self.message()
         out = []
         for rxn in msg.reactions:
-            out.extend(await rxn.users().flatten())
+            out.extend([u async for u in rxn.users()])
         return set(out)
 
     async def content(self):

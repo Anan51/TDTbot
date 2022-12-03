@@ -198,7 +198,7 @@ class Welcome(commands.Cog):
                 msg = await self.fetch_coc()
                 for rxn in msg.reactions:
                     if getattr(rxn.emoji, 'id', rxn.emoji) in self._emoji_dict:
-                        if payload.member in await rxn.users().flatten():
+                        if payload.member in [u async for u in rxn.users()]:
                             await self.bot.emoji2role(*args, emoji=rxn.emoji, **kwargs)
             return
         if hasattr(payload.emoji, 'id'):
@@ -217,7 +217,7 @@ class Welcome(commands.Cog):
     async def clean_manual_page(self, ctx):
         """Clean up reactions in the manual page"""
         channel = self.manual_channel
-        history = await channel.history(limit=200, before=_before).flatten()
+        history = [h async for u in channel.history(limit=200, before=_before)]
         for msg in history:
             await self.safely_remove_reactions(msg)
 

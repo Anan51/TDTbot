@@ -124,7 +124,7 @@ class Debugging(commands.Cog):
             channel = find_channel(ctx.guild, channel)
         else:
             channel = ctx.channel
-        hist = await channel.history(limit=n).flatten()
+        hist = [h async for h in channel.history(limit=n)]
         msg = ["Item {0:d} {1.id}\n{1.content}".format(i + 1, m)
                for i, m in enumerate(hist)]
         if not msg:
@@ -153,10 +153,10 @@ class Debugging(commands.Cog):
         """<member (optional)> shows member history (past 10 entries)"""
         if member is None:
             member = ctx.author
-        hist = await member.history(limit=10).flatten()
+        hist = [h async for h in member.history(limit=10)]
         if not hist:
             user = self.bot.get_user(member.id)
-            hist = await user.history(limit=10).flatten()
+            hist = [h async for h in user.history(limit=10)]
         msg = '\n'.join(["Item {0:d}\n{1.content}".format(i + 1, m)
                          for i, m in enumerate(hist)])
         if not msg:
