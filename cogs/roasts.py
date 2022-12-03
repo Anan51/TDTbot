@@ -29,6 +29,7 @@ class Roast(commands.Cog):
         self._last_roast = None
         self._snipes = dict()
         self._botting = dict()
+        self._react_snipe = dict()
         self._roasts = []
 
     def _log_roast(self, mid):
@@ -135,7 +136,16 @@ class Roast(commands.Cog):
                 self._botting.pop(message.author.id)
         except KeyError:
             pass
-            # if author in snipes
+        # if author in react_snipe
+        try:
+            if self._react_snipe[message.author.id][1] > 0:
+                await message.add_reaction(self._react_snipe[message.author.id][0])
+                self._react_snipe[message.author.id][1] -= 1
+            if self._react_snipe[message.author.id][1] <= 0:
+                self._react_snipe.pop(message.author.id)
+        except KeyError:
+            pass
+        # if author in snipes
         try:
             if self._snipes[message.author.id] > 0:
                 if await self._send_roast(message.channel, last=message):
@@ -236,6 +246,15 @@ class Roast(commands.Cog):
         self._botting[user.id] = n
         if self._botting[user.id] <= 0:
             self._botting.pop(user.id)
+
+    @commands.command(hidden=True)
+    @commands.check(admin_check)
+    async def react_snipe(self, ctx, user: discord.User, emoji: discord.Emoji,
+                          n: int = 1):
+        """<user> <emoji> <int (optional:1)> - React to user with emoji n times"""
+        self._react_snipe[user.id] = [emoji, n]
+        if self._react_snipe[user.id][1] <= 0:
+            self._react_snipe.pop(user.id)
 
 
 if usingV2:
