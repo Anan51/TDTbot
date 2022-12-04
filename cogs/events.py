@@ -571,6 +571,7 @@ class Events(commands.Cog):
         If this command is used as a reply then it will clear messages before that message
         """
         before = None
+        active = []
         ref = ctx.message.reference
         if ref:
             if hasattr(ref, 'resolved'):
@@ -584,7 +585,6 @@ class Events(commands.Cog):
                 else:
                     msg = await channel.fetch_message(ref.message_id)
             before = msg.created_at
-            active = []
             for i in self._events:
                 if not i.past():
                     active.append(i['id'])
