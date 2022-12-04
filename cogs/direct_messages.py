@@ -142,7 +142,10 @@ class DirectMessages(commands.Cog):
                 # if message is reply to a previous message
                 if message.reference:
                     if message.reference.message_id in self:
-                        channel = self.bot.get_channel(self[message.reference.message_id])
+                        cid = self[message.reference.message_id]
+                        channel = self.bot.get_channel(cid)
+                        if not channel:
+                            channel = await self.bot.fetch_channel(cid)
                         await channel.send(message.content)
                         await message.add_reaction('✅')
                         # check for discord links in message
