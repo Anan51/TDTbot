@@ -30,10 +30,10 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
     @commands.command()
     async def blind_beggar(self, ctx):
         msg = """**Blind Beggar**
-                 - A man sat next to a small caravan perks up as you approach. "Oh please, champion." the man says in a dehydrated voice "spare some coin for a blind man?" You look the man up and down. He is wearing a tattered yellow shawl with withered greyish brown shorts.
-                 **Give him a Coin** tdt$blind_gift
-                 **Leave him** tdt$blind_leave
-                 ||**Draw Your Weapon** tdt$blind_hostile||"""
+- A man sat next to a small caravan perks up as you approach. "Oh please, champion." the man says in a dehydrated voice "spare some coin for a blind man?" You look the man up and down. He is wearing a tattered yellow shawl with withered greyish brown shorts.
+**Give him a Coin** tdt$blind_gift
+**Leave him** tdt$blind_leave
+🔐 Silver Tongue:||**Draw Your Weapon** tdt$blind_hostile||"""
         await ctx.send(msg)
 
     @commands.command()
