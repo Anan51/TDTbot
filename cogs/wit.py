@@ -15,17 +15,29 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
     def __init__(self, bot):
         self.bot = bot
         self._init = False
+        self._init_finished = False
+        self._gold = None
 
-    #async def _async_init(self):
-    #    if self._init:
-    #        return
-    #    await self.clean_manual_page(None)
-    #    self._init = True
+    async def _async_init(self):
+        if self._init:
+            return
+        await self.clean_manual_page(None)
+        self._init = True
+        guild = self.bot.tdt()
+        try:
+            self._gold = [e for e in guild.emojis if e.name == "gold"][0]
+        except IndexError:
+            pass
+        self._init_finished = True
 
-    #@commands.Cog.listener()
-    #async def on_ready(self):
-    #    await asyncio.sleep(5)
-    #    await self._async_init()
+    @commands.Cog.listener()
+    async def on_ready(self):
+        await asyncio.sleep(5)
+        await self._async_init()
+
+    @property
+    def gold(self):
+        return self._gold
 
     @commands.command()
     async def blind_beggar(self, ctx):
@@ -48,7 +60,8 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def blind_hostile(self, ctx):
-        msg = """You deftly draw your weapon on the man. Despite the weapon making no noise the man reacts immediately "wait!... I m-mean." You brandish your weapon aggressively at him, "What a sorry excuse of a human, faking blindness. You disgust me. Get out of here! Go on!" The man springs to his feet and scrambles away in a hurry, leaving 2 coins behind (+2 :gold:)"""
+        msg = """You deftly draw your weapon on the man. Despite the weapon making no noise the man reacts immediately "wait!... I m-mean." You brandish your weapon aggressively at him, "What a sorry excuse of a human, faking blindness. You disgust me. Get out of here! Go on!" The man springs to his feet and scrambles away in a hurry, leaving 2 coins behind (+2 """
+        msg += (self.gold+" )") if self.gold else ":gold:)"
         await ctx.send(msg)
 
 
