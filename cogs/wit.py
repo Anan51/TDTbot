@@ -34,22 +34,22 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
                  **Give him a Coin** tdt$blind_gift
                  **Leave him** tdt$blind_leave
                  ||**Draw Your Weapon** tdt$blind_hostile||"""
-        ctx.send(msg)
+        await ctx.send(msg)
 
     @commands.command()
     async def blind_gift(self, ctx):
         msg = """You give the man a coin and go about your way."""
-        ctx.send(msg)
+        await ctx.send(msg)
 
     @commands.command()
     async def blind_leave(self, ctx):
         msg = """You purse your lips at the man. You pat your satchel to make sure it hasn't been lifted and go about your way."""
-        ctx.send(msg)
+        await ctx.send(msg)
 
     @commands.command()
     async def blind_hostile(self, ctx):
         msg = """You deftly draw your weapon on the man. Despite the weapon making no noise the man reacts immediately "wait!... I m-mean." You brandish your weapon aggressively at him, "What a sorry excuse of a human, faking blindness. You disgust me. Get out of here! Go on!" The man springs to his feet and scrambles away in a hurry, leaving 2 coins behind (+2 :gold:)"""
-        ctx.send(msg)
+        await ctx.send(msg)
 
 
 if usingV2:
