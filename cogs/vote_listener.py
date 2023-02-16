@@ -9,7 +9,7 @@ import logging
 
 logger = logging.getLogger('discord.' + __name__)
 _listeners = {channels.lenny_laboratory: {'react_with': '🌶️'},
-              channels.spicy_clips: {'emojis': ['🌶️', '💩']}}
+              channels.spicy_clips: {'emojis': ['🌶️', '💩'], 'del_thresh': 10}}
 
 
 class Listener:
