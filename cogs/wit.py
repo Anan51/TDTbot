@@ -198,11 +198,6 @@ Behavior: gain permanent __Empower__ for every 5 damage taken
 
     @commands.command()
     async def reach_enemy(self, ctx):
-        msg = """_"""
-        await ctx.send(msg)
-
-    @commands.command()
-    async def _(self, ctx):
         encounters = [
             """__**RED WING**__
 ❤️ : 2
