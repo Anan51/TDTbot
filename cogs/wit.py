@@ -2,6 +2,7 @@ import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
+import random
 from ..helpers import find_channel, find_role, localize
 from ..param import emojis, messages, roles
 from ..version import usingV2
@@ -169,25 +170,113 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         msg = """You squat down along the first row of spears, they are crudely made BUT not flimsily made. You recognize a few of the markings and knots used on the fastenings; they are fenric. "That makes sense" you say out loud to yourself. You think you might be able to remove one of the spears ( 🎲 < 6: failure | 🎲 > 7: Acquire one **Relentless Fang** from the Loot Table)"""
         await ctx.send(msg)
 
-#    @commands.command()
-#    async def _(self, ctx):
-#        msg = """_"""
-#        await ctx.send(msg)
-#
-#    @commands.command()
-#    async def _(self, ctx):
-#        msg = """_"""
-#        await ctx.send(msg)
-#
-#    @commands.command()
-#    async def _(self, ctx):
-#        msg = """_"""
-#        await ctx.send(msg)
-#
-#    @commands.command()
-#    async def _(self, ctx):
-#        msg = """_"""
-#        await ctx.send(msg)
+    @commands.command()
+    async def champions_landing_boss(self, ctx):
+        msg = """__**THE GATEKEEPER**__
+❤️ : 15 x👥
+💰 : !r 1d3 Lesser
+Behavior: Shields are Immune to Precision and Piercing damage
+—————————————————
+1-3   | **Swat** 💥💥 to ALL players
+4-8   | **Prevent** (-3 🎲) 🛡️🛡️x👥 🔀 +❤️
+9-10 | **Looming** (+2 🎲) Gain __Empower__
+11+    | **Flatten** (-8 🎲) 💥🚫🛡️ to ALL players 🔀 skip their turn"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def reach_boss(self, ctx):
+        msg = """__**THE GREAT SERPANT**__
+❤️ : 20 x 👥
+💰 : 2d10 basic
+Behavior: gain permanent __Empower__ for every 5 damage taken
+—————————————————
+1-2   | **Fangs** (+1  🎲) 💥🎯 to the highest HP player
+3-7   | **Scales** (-2 🎲) 🛡️🛡️🛡️ x 👥
+8-10 | **Weep** (+4 🎲) Cause __Weak__x3 to ALL players
+11+   | **Hypnotic Speech** (-4 🎲) summon a random enemy"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def reach_enemy(self, ctx):
+        msg = """_"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def _(self, ctx):
+        encounters = [
+            """__**RED WING**__
+❤️ : 2
+💰 : 1 <:gold:1058304371940655185>
+Behavior: take 1/2 damage, rounds down
+—————————————————
+1-2   | **Peck** 💥💥⚡to the highest HP player
+3-8   | **Flap** (+5 🎲) <:stealthIcon:943248201790677052>
+9-10 | **Caw** (-10 🎲) Summon another Red Wing""",
+
+            """__**MARROW MITE**__
+❤️ : 8
+💰 : 1d5 lesser
+Behavior: at 2 HP become immune for the rest of the turn
+—————————————————
+1-6   | **Gnaw** (+2 🎲) 💥💥 to a random player 🔀❤️
+7-8   | **Curl** (-2 🎲) 🛡️🛡️🛡️🛡️🛡️
+9-10 | **Burrow** leave the encounter and yield no loot""",
+
+            """__**SPINED CONSTRICTOR**__
+❤️ : 5
+💰 : 4 <:gold:1058304371940655185>
+Behavior: successful attacks makes the target lose their next turn
+—————————————————
+1-3   | **Wrap** (-2 🎲) 💥 random player
+4-7   | **Slither** (+5 🎲) 🛡️🛡️<:stealthIcon:943248201790677052>
+8-10 | **Spray Venom** (-3 🎲) 💥 to ALL players 🔀 Cause __Burn__x5""",
+
+            """__**MUSTARD SLUG**__
+❤️ : 6
+💰 : 1d5 lesser
+Behavior: taking damage causes __vulnerable__ to the attacker
+—————————————————
+1-3   | **Corrosive Sludge** (-2 🎲) 💥💥🎯 random player
+4-7   | **Gas** (+5 🎲) 🛡️ 🔀  __Vulnerable__ to ALL players
+8-10 | **Mucous** (-3 🎲) Cause __Vulnerable__x3 to ALL players""",
+
+            """__**FENRIC THUG**__
+❤️ : 8
+💰 : 1d7 lesser
+Behavior: When this takes damage, gain <:stealthIcon:943248201790677052> for the rest of the turn
+—————————————————
+1-3   | **Shiv** (+2  🎲) 💥💥⚡ random player
+4-7   | **Shifty** (+4 🎲) 🛡️🛡️🔀 Cause __Weak__
+8-10 | **Mug** 💥 🚫 lowest HP 🔀 lose 1 <:gold:1058304371940655185>""",
+
+            """__**MALOKOLYTES**__
+❤️ : 4
+💰 : 1d6 basic
+Behavior: upon death, summon another malocolyte with half of your max HP (unless max is 1)
+—————————————————
+1-3   | **Sacrificial Dagger** (-6 🎲) 💥💥💥 random player
+4-9   | **Bad Omen** (+6 🎲) 🛡️🛡️
+10     | **Dark Ritual** (-6 🎲) ⚡ double your current max HP""",
+
+            """__**CONFUSED ADVENTURERS**__
+❤️ : 10
+💰 : 1d10 lesser
+Behavior: May be immediately defeated if you have the Silver Tongued passive
+—————————————————
+1-4   | **Spear** 💥🛡️🎯 random player
+5-8   | **Defend** 🛡️🛡️ to ALL PvEnemies
+9-10 | **Courage** (-3 🎲) Give __Empower__ to ALL PvEnemies""",
+
+            """__**MARROW MINERS**__
+❤️ : 12
+💰 : 1d5 basic
+Behavior: after 5 turns, cause 💥🚫 to all players
+—————————————————
+1-3   | **Pickaxe** (+2 🎲) 💥💥 lowest HP player 🔀 -5 🎲
+4-7   | **Hardhat** 🛡️🛡️🛡️ 🔀 gain __Heal__
+8-10 | **Greed** (-10 🎲) Gain __Empower__x2 for every 10 <:gold:1058304371940655185> your party has""",
+        ]
+        await ctx.send(random.choice(encounters))
 
 
 if usingV2:
