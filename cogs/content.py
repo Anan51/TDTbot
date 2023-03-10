@@ -10,8 +10,13 @@ from .. import param
 from ..param import PermaDict, channels
 from ..helpers import int_time, parse_message
 from ..async_helpers import admin_check, split_send
-from ..twitter import tweet
+# from ..twitter import tweet
 from ..version import usingV2
+
+
+def tweet(message):
+    pass
+
 
 logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
