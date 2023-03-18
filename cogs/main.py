@@ -135,6 +135,7 @@ class MainCommands(commands.Cog):
         return
 
     @commands.command()
+    @commands.check(admin_check)
     async def recruits(self, ctx, role: discord.Role = None):
         """<role (optional)> sorted list of recruit join dates (in UTC)."""
         if role is None:
