@@ -5,7 +5,7 @@ import logging
 import os
 from .. import param
 from ..config import UserConfig
-from ..helpers import find_role
+from ..helpers import find_role, emotes_equal
 from ..async_helpers import admin_check, parse_payload, split_send
 from ..version import usingV2
 
@@ -15,6 +15,8 @@ logger = logging.getLogger('discord.' + __name__)
 users = param.users
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'direct_messages.dbm')
+_tdt_bruh = '<:TDT_Bruh:{:}>'.format(param.emojis.tdt_bruh)
+_default_msg = "Your message has been reviewed by TDT admins and devoted, thanks."
 
 
 class DirectMessages(commands.Cog):
@@ -135,6 +137,7 @@ class DirectMessages(commands.Cog):
                 sent.extend(await split_send(channel, urls))
             for i in sent:
                 self[i.id] = message.channel.id
+            await sent[-1].add_reaction(_tdt_bruh)
             return
         # if message from log channel
         if message.channel == self.channel:
@@ -182,6 +185,21 @@ class DirectMessages(commands.Cog):
                     await msg.add_reaction('✅')
                     await msg.add_reaction('❌')
                     self._kicks[msg.id] = recipient.id
+            # reaction for default response
+            if payload.emoji.id == param.emojis.tdt_bruh:
+                message = await self.bot.fetch_message(payload.channel_id, payload.message_id)
+                # if bot already reacted/replyed, return
+                for rxn in message.reactions:
+                    if emotes_equal('✅', rxn.emoji):
+                        if self.bot.user in rxn.users:
+                            return
+                cid = self[payload.message_id]
+                channel = self.bot.get_channel(cid)
+                if not channel:
+                    channel = await self.bot.fetch_channel(cid)
+                await channel.send(_default_msg)
+                await message.add_reaction('✅')
+                await message.reply('sent: `{:}`'.format(_default_msg))
         # if reacting to a kick prompt
         elif payload.message_id in self._kicks:
             data = await parse_payload(payload, self.bot, "guid", "member")
