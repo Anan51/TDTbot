@@ -123,6 +123,8 @@ class DirectMessages(commands.Cog):
             # roles = [find_role(channel.guild, i).name for i in ["admin", "devoted"]]
             roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
             msg = ' '.join(roles) + '\n'
+            if message.author.id == param.users.stellar:
+                msg = '`' + msg + '`'
             msg += 'From: {0.author}\n"{0.content}"'.format(message)
             sent = [await channel.send(msg)]
             urls = []
@@ -178,7 +180,7 @@ class DirectMessages(commands.Cog):
             if "foot" in emoji or "shoe" in emoji or "chancla" in emoji or emoji in ["👟", "🦶", "👞"]:
                 # if emoji poster is admin or devoted
                 if await admin_check(bot=self.bot, author=member, guild=guild):
-                    channel = await self.bot.fetch_channel(self[payload.message_id])
+                    channel = await self.channel.fetch_channel(self[payload.message_id])
                     recipient = channel.recipient
                     msg = "Are you sure you want to kick {}?".format(recipient)
                     msg = await self.channel.send(msg)
