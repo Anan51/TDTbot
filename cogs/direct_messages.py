@@ -120,11 +120,12 @@ class DirectMessages(commands.Cog):
         # if DM
         if type(message.channel) == discord.DMChannel:
             channel = self.bot.find_channel(param.rc('log_channel'))
-            # roles = [find_role(channel.guild, i).name for i in ["admin", "devoted"]]
-            roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
-            msg = ' '.join(roles) + '\n'
             if message.author.id == param.users.stellar:
-                msg = '`' + msg + '`'
+                roles = ['@' + find_role(channel.guild, i).name for i in ["admin", "devoted"]]
+                msg = '`' + ' '.join(roles) + '`\n'
+            else:
+                roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
+                msg = ' '.join(roles) + '\n'
             msg += 'From: {0.author}\n"{0.content}"'.format(message)
             sent = [await channel.send(msg)]
             urls = []
@@ -189,11 +190,11 @@ class DirectMessages(commands.Cog):
                     self._kicks[msg.id] = recipient.id
             # reaction for default response
             if payload.emoji.id == param.emojis.tdt_bruh:
-                message = await self.bot.fetch_message(payload.channel_id, payload.message_id)
+                message = await self.channel.fetch_message(payload.message_id)
                 # if bot already reacted/replyed, return
                 for rxn in message.reactions:
                     if emotes_equal('✅', rxn.emoji):
-                        if self.bot.user in rxn.users:
+                        if self.bot.user in ():
                             return
                 cid = self[payload.message_id]
                 channel = self.bot.get_channel(cid)
