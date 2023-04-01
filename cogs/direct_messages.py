@@ -219,7 +219,7 @@ class DirectMessages(commands.Cog):
                 channel = self.bot.get_channel(cid)
                 if not channel:
                     channel = await self.bot.fetch_channel(cid)
-                await channel.send(_default_msg)
+                await channel.send(_spicy_msg)
                 await message.add_reaction('🔥')
                 await message.reply(_spicy_msg)
         # if reacting to a kick prompt
