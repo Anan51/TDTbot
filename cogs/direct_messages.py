@@ -17,6 +17,9 @@ _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'direct_messages.dbm')
 _tdt_bruh = '<:TDT_Bruh:{:}>'.format(param.emojis.tdt_bruh)
 _default_msg = "Your message has been reviewed by TDT admins and devoted, thanks."
+_spicy_msg = """To access the spicy channel:
+First you need to head over to the manual_page and react with 👍 on the code of conduct, to give you the recruit role.
+This unlocks the spicy_clips channel where you can post your clips and vote for other's clips."""
 
 
 class DirectMessages(commands.Cog):
@@ -141,6 +144,8 @@ class DirectMessages(commands.Cog):
             for i in sent:
                 self[i.id] = message.channel.id
             await sent[-1].add_reaction(_tdt_bruh)
+            if "spicy clips" in message.content.lower():
+                await sent[-1].add_reaction('🌶️')
             return
         # if message from log channel
         if message.channel == self.channel:
@@ -203,6 +208,20 @@ class DirectMessages(commands.Cog):
                 await channel.send(_default_msg)
                 await message.add_reaction('✅')
                 await message.reply('sent: `{:}`'.format(_default_msg))
+            if emotes_equal('🌶️', payload.emoji):
+                message = await self.channel.fetch_message(payload.message_id)
+                # if bot already reacted/replyed, return
+                for rxn in message.reactions:
+                    if emotes_equal('🔥', rxn.emoji):
+                        if self.bot.user in ():
+                            return
+                cid = self[payload.message_id]
+                channel = self.bot.get_channel(cid)
+                if not channel:
+                    channel = await self.bot.fetch_channel(cid)
+                await channel.send(_default_msg)
+                await message.add_reaction('🔥')
+                await message.reply(_spicy_msg)
         # if reacting to a kick prompt
         elif payload.message_id in self._kicks:
             data = await parse_payload(payload, self.bot, "guid", "member")
