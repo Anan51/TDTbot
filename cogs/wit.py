@@ -39,7 +39,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @property
     def gold(self):
-        return self._gold if self._gold else ":gold:"
+        return self._gold if self._gold else "<:gold:1058304371940655185>"
 
 # blind_beggar
     @commands.command()
@@ -81,13 +81,11 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
     @commands.command()
     async def blind_threaten(self, ctx):
         msg = """You deftly draw your weapon on the man. He doesnt respond. You know this man isnt trying to trick you. You say a quick prayer then you give the man some money. He hears the coins hit the bag and says "oh thank you! May YHWH bless your kindness. (-1 <:gold:1058304371940655185> (You may spend 6 <:gold:1058304371940655185> to upgrade your Annointed passive to: __Angel__ :rosette: "If you have __protect__ and your HP reaches zero, lose all stacks but gain 1 HP" for the rest of the run)"""
-        msg += (self.gold+" )")
         await ctx.send(msg)
 
     @commands.command()
     async def blind_hostile(self, ctx):
-        msg = """You deftly draw your weapon on the man. Despite the weapon making no noise the man reacts immediately "wait!... I m-mean." You brandish your weapon aggressively at him, "What a sorry excuse of a human, faking blindness. You disgust me. Get out of here! Go on!" The man springs to his feet and scrambles away in a hurry, leaving 2 coins behind (+2 <:gold:1058304371940655185>) """
-        msg += (self.gold+" )")
+        msg = """You deftly draw your weapon on the man. Despite the weapon making no noise the man reacts immediately "wait!... I m-mean." You brandish your weapon aggressively at him, "What a sorry excuse of a human, faking blindness. You disgust me. Get out of here! Go on!" The man springs to his feet and scrambles away in a hurry, leaving 2 coins behind (+2 <:gold:1058304371940655185>)"""
         await ctx.send(msg)
 
 # fracturing_cliff
