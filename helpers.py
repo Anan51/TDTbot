@@ -153,7 +153,7 @@ def int_time(in_time=None, t0=None):
         t0 = 0
     if isinstance(t0, int):
         t0 = datetime.datetime.utcfromtimestamp(t0)
-    return int((in_time - t0).total_seconds())
+    return int((localize(in_time) - localize(t0)).total_seconds())
 
 
 def seconds_to_datetime(in_time, t0=None, localize=True):
@@ -207,3 +207,19 @@ def parse_timezone(tz, self_call=False, check_abbr=True):
             return parse_timezone(tz.replace(' ', '_'), self_call=True,
                                   check_abbr=check_abbr)
     return pytz.timezone(tz)
+
+
+def localize(dt):
+    if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
+        try:
+            return dt.astimezone(pytz.utc)
+        except ValueError:
+            pass
+    return dt
+
+
+def delocalize(dt):
+    if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
+        return dt
+    return dt.astimezone(pytz.utc).replace(tzinfo=None)
+

@@ -6,6 +6,7 @@ from .. import param
 from ..param import messages, roles
 from ..helpers import emotes_equal, find_channel
 from ..async_helpers import admin_check, split_send
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -64,7 +65,7 @@ class MainCommands(commands.Cog):
         """Lists server bots"""
         bots = [m for m in ctx.guild.members if m.bot]
         # electro is a bot, so make sure he's included
-        electro = await self.bot.get_or_fetch_user(users.electro, ctx.guild)
+        electro = await self.bot.get_or_fetch_user(param.users.electro, ctx.guild)
         if electro and electro not in bots:
             bots.insert(0, electro)
         # add other members to bots for fun
@@ -134,6 +135,7 @@ class MainCommands(commands.Cog):
         return
 
     @commands.command()
+    @commands.check(admin_check)
     async def recruits(self, ctx, role: discord.Role = None):
         """<role (optional)> sorted list of recruit join dates (in UTC)."""
         if role is None:
@@ -186,7 +188,7 @@ class MainCommands(commands.Cog):
                 rxns = [rxn for rxn in rxns if emotes_equal(emote, rxn.emoji)]
             else:
                 emote = rxns[0].emoji
-            users = await rxns[0].users().flatten()
+            users = [u async for u in rxns[0].users()]
         except IndexError:
             users = []
         n = 0
@@ -243,6 +245,10 @@ class MainCommands(commands.Cog):
         await split_send(ctx, matches)
 
 
-def setup(bot):
-    """This is required to add this cog to a bot as an extension"""
-    bot.add_cog(MainCommands(bot))
+if usingV2:
+    async def setup(bot):
+        cog = MainCommands(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(MainCommands(bot))

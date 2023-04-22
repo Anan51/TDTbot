@@ -7,6 +7,7 @@ from typing import Union
 from .. import param
 from ..helpers import int_time, find_role, seconds_to_datetime
 from ..async_helpers import admin_check, split_send
+from ..version import usingV2
 
 
 roles = param.roles
@@ -129,5 +130,10 @@ class Supporters(commands.Cog):
             await ctx.send("Empty supporter data.")
 
 
-def setup(bot):
-    bot.add_cog(Supporters(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Supporters(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Supporters(bot))

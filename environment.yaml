@@ -3,10 +3,11 @@ channels:
   - defaults
 dependencies:
   - python>=3.8
-  - pip>=20.1
+  - pip
   - pytz
   - humanize
-  - numpy>=1.19.2
+  - numpy
+  - ephem
   - pip:
     - gitpython
     - pynacl

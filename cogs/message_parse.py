@@ -4,6 +4,7 @@ import logging
 from ..helpers import parse_message
 from ..async_helpers import admin_check
 from .. import param
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -53,5 +54,10 @@ class MessageParse(commands.Cog):
                 # print(key + ":\n```" + str(data[key]) + '```')
 
 
-def setup(bot):
-    bot.add_cog(MessageParse(bot))
+if usingV2:
+    async def setup(bot):
+        cog = MessageParse(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(MessageParse(bot))

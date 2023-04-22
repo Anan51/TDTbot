@@ -5,8 +5,9 @@ import logging
 import os
 from .. import param
 from ..config import UserConfig
-from ..helpers import find_role
+from ..helpers import find_role, emotes_equal
 from ..async_helpers import admin_check, parse_payload, split_send
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -14,6 +15,11 @@ logger = logging.getLogger('discord.' + __name__)
 users = param.users
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'direct_messages.dbm')
+_tdt_bruh = '<:TDT_Bruh:{:}>'.format(param.emojis.tdt_bruh)
+_default_msg = "Your message has been reviewed by TDT admins and devoted, thanks."
+_spicy_msg = """To access the spicy channel:
+First you need to head over to the manual_page and react with 👍 on the code of conduct, to give you the recruit role.
+This unlocks the spicy_clips channel where you can post your clips and vote for other's clips."""
 
 
 class DirectMessages(commands.Cog):
@@ -117,9 +123,12 @@ class DirectMessages(commands.Cog):
         # if DM
         if type(message.channel) == discord.DMChannel:
             channel = self.bot.find_channel(param.rc('log_channel'))
-            # roles = [find_role(channel.guild, i).name for i in ["admin", "devoted"]]
-            roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
-            msg = ' '.join(roles) + '\n'
+            if message.author.id == param.users.stellar:
+                roles = ['@' + find_role(channel.guild, i).name for i in ["admin", "devoted"]]
+                msg = '`' + ' '.join(roles) + '`\n'
+            else:
+                roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
+                msg = ' '.join(roles) + '\n'
             msg += 'From: {0.author}\n"{0.content}"'.format(message)
             sent = [await channel.send(msg)]
             urls = []
@@ -134,6 +143,9 @@ class DirectMessages(commands.Cog):
                 sent.extend(await split_send(channel, urls))
             for i in sent:
                 self[i.id] = message.channel.id
+            await sent[-1].add_reaction(_tdt_bruh)
+            if "spicy clips" in message.content.lower():
+                await sent[-1].add_reaction('🌶️')
             return
         # if message from log channel
         if message.channel == self.channel:
@@ -141,7 +153,10 @@ class DirectMessages(commands.Cog):
                 # if message is reply to a previous message
                 if message.reference:
                     if message.reference.message_id in self:
-                        channel = self.bot.get_channel(self[message.reference.message_id])
+                        cid = self[message.reference.message_id]
+                        channel = self.bot.get_channel(cid)
+                        if not channel:
+                            channel = await self.bot.fetch_channel(cid)
                         await channel.send(message.content)
                         await message.add_reaction('✅')
                         # check for discord links in message
@@ -171,13 +186,42 @@ class DirectMessages(commands.Cog):
             if "foot" in emoji or "shoe" in emoji or "chancla" in emoji or emoji in ["👟", "🦶", "👞"]:
                 # if emoji poster is admin or devoted
                 if await admin_check(bot=self.bot, author=member, guild=guild):
-                    channel = await self.bot.fetch_channel(self[payload.message_id])
+                    channel = await self.channel.fetch_channel(self[payload.message_id])
                     recipient = channel.recipient
                     msg = "Are you sure you want to kick {}?".format(recipient)
                     msg = await self.channel.send(msg)
                     await msg.add_reaction('✅')
                     await msg.add_reaction('❌')
                     self._kicks[msg.id] = recipient.id
+            # reaction for default response
+            if payload.emoji.id == param.emojis.tdt_bruh:
+                message = await self.channel.fetch_message(payload.message_id)
+                # if bot already reacted/replyed, return
+                for rxn in message.reactions:
+                    if emotes_equal('✅', rxn.emoji):
+                        if self.bot.user in ():
+                            return
+                cid = self[payload.message_id]
+                channel = self.bot.get_channel(cid)
+                if not channel:
+                    channel = await self.bot.fetch_channel(cid)
+                await channel.send(_default_msg)
+                await message.add_reaction('✅')
+                await message.reply('sent: `{:}`'.format(_default_msg))
+            if emotes_equal('🌶️', payload.emoji):
+                message = await self.channel.fetch_message(payload.message_id)
+                # if bot already reacted/replyed, return
+                for rxn in message.reactions:
+                    if emotes_equal('🔥', rxn.emoji):
+                        if self.bot.user in ():
+                            return
+                cid = self[payload.message_id]
+                channel = self.bot.get_channel(cid)
+                if not channel:
+                    channel = await self.bot.fetch_channel(cid)
+                await channel.send(_spicy_msg)
+                await message.add_reaction('🔥')
+                await message.reply(_spicy_msg)
         # if reacting to a kick prompt
         elif payload.message_id in self._kicks:
             data = await parse_payload(payload, self.bot, "guid", "member")
@@ -195,6 +239,10 @@ class DirectMessages(commands.Cog):
                     del self._kicks[payload.message_id]
 
 
-def setup(bot):
-    """This is required to add this cog to a bot as an extension"""
-    bot.add_cog(DirectMessages(bot))
+if usingV2:
+    async def setup(bot):
+        cog = DirectMessages(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(DirectMessages(bot))

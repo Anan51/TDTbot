@@ -10,8 +10,9 @@ import traceback
 from typing import Union
 
 from .. import param
-from ..helpers import parse_timezone, minute, day
+from ..helpers import parse_timezone, minute, day, localize, delocalize
 from ..async_helpers import admin_check, wait_until, split_send
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -38,6 +39,7 @@ class _Event(dict):
     def __init__(self, message, cog, log_channel=None, from_hist=False):
         super().__init__()
         self.cog = cog
+        self.children = []
         if message.author == cog.bot.user:
             return
         self._error = None
@@ -150,7 +152,7 @@ class _Event(dict):
                         msg = 'I think you meant "{}" instead of "{}".'
                         self._comments.append(msg.format(abrv.upper(), time[4].upper()))
             # convert it to UTC and strip timezone info (required by external libs)
-            out['datetime'] = dt.astimezone(pytz.utc).replace(tzinfo=None)
+            out['datetime'] = dt.astimezone(pytz.utc)
             # put the contents of out into self
             self.update(out)
             return
@@ -170,7 +172,8 @@ class _Event(dict):
         if channel is None:
             channel = getattr(self.cog, 'channel', param.rc('event_channel'))
         if self._error:
-            await channel.send(self._error)
+            msg = await channel.send(self._error)
+            self.children.append(msg)
 
     async def message(self):
         """Fetch and return the message associated with this event"""
@@ -181,13 +184,13 @@ class _Event(dict):
     def dt_str(self):
         """Datetime string for this event"""
         # assign UTC timezone to datetime object
-        dt = pytz.utc.localize(self['datetime'])
+        dt = localize(self['datetime'])
         # convert to server timezone
         return dt.astimezone(self.tz).strftime('%X %A %x %Z')
 
     def unix_timestamp(self, mode='R'):
         """Unix timestamp for this event"""
-        dt = pytz.utc.localize(self['datetime'])
+        dt = localize(self['datetime'])
         return '<t:{:d}:{:}>'.format(int(dt.timestamp()), mode)
 
     @property
@@ -212,7 +215,7 @@ class _Event(dict):
         if log_channel is None:
             log_channel = self.log_channel
         # check log if the log_message is already there
-        async for msg in log_channel.history(limit=200, after=after):
+        async for msg in log_channel.history(limit=200, after=delocalize(after)):
             if msg.content == log:
                 return
         # if we are registering this event from history
@@ -223,15 +226,18 @@ class _Event(dict):
             # if this message was edited more than 10 min after creation
             if not (msg.edited_at is None or msg.created_at is None):
                 if msg.edited_at > msg.created_at + 10 * minute:
-                    t = pytz.utc.localize(msg.created_at + 1 * day)
+                    t = localize(msg.created_at + 1 * day)
                     # and the event post/message is more than a day older then reboot
-                    if self.cog.bot.restart_time() > t:
+                    print(localize(self.cog.bot.restart_time()))
+                    print(localize(t))
+                    if localize(self.cog.bot.restart_time()) > localize(t):
                         # exit and don't post log
                         return
         else:
             if self._comments:
                 await split_send(self.log_channel, self._comments)
-        await self.log_channel.send(log)
+        msg = await self.log_channel.send(log)
+        self.children.append(msg)
 
     async def make_stale(self):
         msg = await self.message()
@@ -244,20 +250,21 @@ class _Event(dict):
 
     def future_or_active(self, hours=6):
         """Is this event in the past or near future?"""
-        return (datetime.datetime.utcnow() - self['datetime'] <=
+        return (localize(datetime.datetime.utcnow()) - localize(self['datetime']) <=
                 datetime.timedelta(hours=hours))
 
     def past(self):
         """Is this event in the past?"""
-        if self['datetime'] < datetime.datetime.utcnow():
+        if localize(self['datetime']) < localize(datetime.datetime.utcnow()):
             return True
+        return False
 
     async def attendees(self):
         """Return set of enrolled attendees"""
         msg = await self.message()
         out = []
         for rxn in msg.reactions:
-            out.extend(await rxn.users().flatten())
+            out.extend([u async for u in rxn.users()])
         return set(out)
 
     async def content(self):
@@ -284,9 +291,9 @@ class _Event(dict):
         if channel is None:
             channel = getattr(self.cog, 'channel', param.rc('event_channel'))
         channel = self.cog.bot.find_channel(channel)
-        dt = self['datetime'] - datetime.timedelta(minutes=dt_min)
-        if dt < datetime.datetime.utcnow():
-            dt_min = (self['datetime'] - datetime.datetime.utcnow()).seconds // 60
+        dt = localize(self['datetime']) - datetime.timedelta(minutes=dt_min)
+        if dt < localize(datetime.datetime.utcnow()):
+            dt_min = (localize(self['datetime']) - localize(datetime.datetime.utcnow())).seconds // 60
         if prefix is None:
             prefix = 'Your event "{0.name}"'.format(self)
         if eta is None:
@@ -317,9 +324,13 @@ class _Event(dict):
         if wait:
             await wait_until(dt)
         msg = ' '.join([prefix, eta] + [i.mention for i in await self.attendees()])
-        await channel.send(msg)
-        if dt == 0:
+        msg = await channel.send(msg)
+        self.children.append(msg)
+        if dt == 0:  # todo: fix this
             await self.make_stale()
+        if dt_min == 0 and self.past():
+            await self.make_stale()
+            await self._clear(wait=None)
 
     def set_alerts(self, dts=None, channel=None):
         """Set multiple alerts for list of dt (in minutes)"""
@@ -328,7 +339,7 @@ class _Event(dict):
         if dts is None:
             dts = param.rc('event_reminders')[:]
         if self.from_hist:
-            delta = self['datetime'] - datetime.datetime.utcnow()
+            delta = localize(self['datetime']) - localize(datetime.datetime.utcnow())
             tmp = [dt for dt in dts if datetime.timedelta(minutes=dt) <= delta]
             if dts != tmp:
                 logger.printv('dts changed for event {0.name}'.format(self))
@@ -343,6 +354,23 @@ class _Event(dict):
         """Record log_message and set alerts"""
         await self.record_log(log_channel=log_channel)
         self.set_alerts(dts=dts, channel=event_chanel)
+
+    async def _clear(self, wait=0):
+        if wait != 0:
+            if wait is None:
+                wait = datetime.timedelta(days=1)
+            if isinstance(wait, float):
+                wait = datetime.timedelta(hours=wait)
+            if isinstance(wait, datetime.timedelta):
+                wait = localize(self['datetime']) + wait
+            await wait_until(wait)
+        for msg in self.children:
+            await msg.delete()
+        self.children = []
+        msg = await self.message()
+        await msg.delete()
+        for i in self:
+            del self[i]
 
 
 class Events(commands.Cog):
@@ -453,7 +481,7 @@ class Events(commands.Cog):
         # get message object
         message = await self.channel.fetch_message(msg_id)
         dt = datetime.timedelta(minutes=5)
-        not_recent = (datetime.datetime.utcnow() - message.created_at) > dt
+        not_recent = (localize(datetime.datetime.now()) - localize(message.created_at)) > dt
         await self.enroll_event_if_valid(_Event(message, self, from_hist=not_recent))
 
     async def check_history(self, channel=None):
@@ -512,7 +540,7 @@ class Events(commands.Cog):
             now = datetime.datetime.utcnow()
             fmt = '{0}) {1.name}: {2}'
             for i, e in enumerate(sorted(self.event_list, key=lambda x: x['datetime'])):
-                dt = e['datetime'] - now
+                dt = localize(e['datetime']) - localize(now)
                 msg.append(fmt.format(i + 1, e, dt))
             msg = '\n'.join(msg)
             if msg:
@@ -543,7 +571,7 @@ class Events(commands.Cog):
         If this command is used as a reply then it will clear messages before that message
         """
         before = None
-        check = None
+        active = []
         ref = ctx.message.reference
         if ref:
             if hasattr(ref, 'resolved'):
@@ -557,15 +585,20 @@ class Events(commands.Cog):
                 else:
                     msg = await channel.fetch_message(ref.message_id)
             before = msg.created_at
+            for i in self._events:
+                if not i.past():
+                    active.append(i['id'])
+                    active.extend([j.id for j in i.children])
 
-            def purge_check(message):
-                if message.author != self.bot.user:
-                    return True
-                return message.content != _prototype
+        def purge_check(message):
+            if before:
+                if message.author == self.bot.user and message.content == _prototype:
+                    return False
+            if message.id in active:
+                return False
+            return True
 
-            check = purge_check
-
-        await self.channel.purge(limit=limit, before=before, check=check)
+        await self.channel.purge(limit=limit, before=before, check=purge_check)
         if before is None:
             msg = _prototype
             msg = await self.channel.send('```' + msg + '```')
@@ -699,5 +732,10 @@ class Events(commands.Cog):
         await split_send(ctx, out)
 
 
-def setup(bot):
-    bot.add_cog(Events(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Events(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Events(bot))

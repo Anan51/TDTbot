@@ -6,7 +6,7 @@ import pytz
 from ..async_helpers import git_log
 # from ..helpers import *
 from .. import param
-
+from ..version import usingV2
 
 logger = logging.getLogger('discord.' + __name__)
 _tz = pytz.timezone(param.rc('timezone'))
@@ -68,5 +68,10 @@ class AAR(commands.Cog):
         await self._aar()
 
 
-def setup(bot):
-    bot.add_cog(AAR(bot))
+if usingV2:
+    async def setup(bot):
+        cog = AAR(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(AAR(bot))

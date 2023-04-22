@@ -2,6 +2,7 @@ import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import logging
 from ..async_helpers import admin_check, git_log
+from ..version import usingV2
 from .. import git_manage
 
 
@@ -45,5 +46,10 @@ class GitTools(commands.Cog):
         await self.git_log(ctx)
 
 
-def setup(bot):
-    bot.add_cog(GitTools(bot))
+if usingV2:
+    async def setup(bot):
+        cog = GitTools(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(GitTools(bot))

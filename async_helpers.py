@@ -5,6 +5,7 @@ import logging
 import time
 from . import git_manage
 from .param import roles
+from .helpers import localize
 
 logger = logging.getLogger('discord.' + __name__)
 
@@ -64,8 +65,8 @@ async def admin_check(ctx=None, bot=None, author=None, guild=None):
 async def wait_until(dt):
     """sleep until the specified datetime (assumes UTC)"""
     while True:
-        now = datetime.datetime.utcnow()
-        remaining = (dt - now).total_seconds()
+        now = localize(datetime.datetime.utcnow())
+        remaining = (localize(dt) - now).total_seconds()
         if remaining < 86400:
             break
         # asyncio.sleep doesn't like long sleeps, so don't sleep more than a day at a time

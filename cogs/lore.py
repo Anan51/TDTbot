@@ -4,6 +4,7 @@ from .. import param
 import random
 import logging
 import re
+from ..version import usingV2
 
 logger = logging.getLogger('discord.' + __name__)
 _regex = r"### ?(?P<title>(?:\s?\w)+?) ?(?P<number>[IVXLCM]+)\n(?P<card>(?:.+\n?)+)"
@@ -76,5 +77,10 @@ class Lore(commands.Cog):
                 return await ctx.send(msg.format(" ".join(args)))
 
 
-def setup(bot):
-    bot.add_cog(Lore(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Lore(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Lore(bot))

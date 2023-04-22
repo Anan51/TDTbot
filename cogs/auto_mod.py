@@ -4,6 +4,7 @@ import asyncio
 from .. import param  # roles
 from ..helpers import find_role
 from ..async_helpers import split_send
+from ..version import usingV2
 import logging
 import re
 
@@ -95,5 +96,10 @@ class AutoMod(commands.Cog):
                 return
 
 
-def setup(bot):
-    bot.add_cog(AutoMod(bot))
+if usingV2:
+    async def setup(bot):
+        cog = AutoMod(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(AutoMod(bot))

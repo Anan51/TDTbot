@@ -4,6 +4,7 @@ import logging
 from ..helpers import find_channel
 from ..async_helpers import admin_check, split_send
 from .. import git_manage
+from ..version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -123,7 +124,7 @@ class Debugging(commands.Cog):
             channel = find_channel(ctx.guild, channel)
         else:
             channel = ctx.channel
-        hist = await channel.history(limit=n).flatten()
+        hist = [h async for h in channel.history(limit=n)]
         msg = ["Item {0:d} {1.id}\n{1.content}".format(i + 1, m)
                for i, m in enumerate(hist)]
         if not msg:
@@ -132,14 +133,30 @@ class Debugging(commands.Cog):
         await split_send(ctx, msg)
 
     @commands.command()
+    async def channel_pins(self, ctx, channel: discord.TextChannel = None):
+        """<channel (optional)> shows channel pins"""
+        if channel:
+            if hasattr(channel, "lower"):
+                channel = find_channel(ctx.guild, channel)
+        else:
+            channel = ctx.channel
+        pins = await channel.pins()
+        msg = ["Item {0:d} {1.id}\n{1.content}".format(i + 1, m)
+               for i, m in enumerate(pins)]
+        if not msg:
+            msg = ["No pins available."]
+        print(msg)
+        await split_send(ctx, msg)
+
+    @commands.command()
     async def member_hist(self, ctx, member: discord.Member = None):
         """<member (optional)> shows member history (past 10 entries)"""
         if member is None:
             member = ctx.author
-        hist = await member.history(limit=10).flatten()
+        hist = [h async for h in member.history(limit=10)]
         if not hist:
             user = self.bot.get_user(member.id)
-            hist = await user.history(limit=10).flatten()
+            hist = [h async for h in user.history(limit=10)]
         msg = '\n'.join(["Item {0:d}\n{1.content}".format(i + 1, m)
                          for i, m in enumerate(hist)])
         if not msg:
@@ -163,5 +180,10 @@ class Debugging(commands.Cog):
             await split_send(ctx, out)
 
 
-def setup(bot):
-    bot.add_cog(Debugging(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Debugging(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Debugging(bot))

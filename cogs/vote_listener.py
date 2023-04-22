@@ -1,13 +1,15 @@
 import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
-from ..helpers import emotes_equal, parse_message
+import datetime
+from ..helpers import emotes_equal, parse_message, localize
 from ..param import channels
+from ..version import usingV2
 import logging
 
 
 logger = logging.getLogger('discord.' + __name__)
 _listeners = {channels.lenny_laboratory: {'react_with': '🌶️'},
-              channels.spicy_clips: {'emojis': ['🌶️', '💩']}}
+              channels.spicy_clips: {'emojis': ['🌶️', '💩'], 'del_thresh': 10}}
 
 
 class Listener:
@@ -71,6 +73,13 @@ class Listener:
         if count[self.emojis[1]] >= self.del_thresh:
             await msg.delete()
         elif count[self.emojis[0]] >= self.pin_tresh:
+            pins = await channel.pins()
+            for pin in pins[48:]:
+                await pin.unpin()
+            for pin in pins[40:]:
+                dt = datetime.datetime.now() - localize(pin.created_at)
+                if dt >= datetime.timedelta(days=90):
+                    await pin.unpin()
             await msg.pin()
             if self.react_with:
                 await msg.add_reaction(self.react_with)
@@ -113,5 +122,10 @@ class VoteListener(commands.Cog):
         await listener.parse_votes(payload, self.bot)
 
 
-def setup(bot):
-    bot.add_cog(VoteListener(bot))
+if usingV2:
+    async def setup(bot):
+        cog = VoteListener(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(VoteListener(bot))

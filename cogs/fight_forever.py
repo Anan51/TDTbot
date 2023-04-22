@@ -1,9 +1,10 @@
 import os
-import discord
-from discord.ext import commands
+import discord  # type: ignore # noqa: F401
+from discord.ext import commands  # type: ignore
 import logging
 from ..config import UserConfig
 from .. import param
+from ..version import usingV2
 # from ..helpers import *
 # from ..async_helpers import admin_check, split_send
 
@@ -41,6 +42,12 @@ class FightForever(commands.Cog):
             return self._configs[user.id]
 
 
-def setup(bot):
-    # bot.add_cog(FightForever(bot))
-    pass
+if usingV2:
+    async def setup(bot):
+        return
+        cog = FightForever(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        return
+        bot.add_cog(FightForever(bot))

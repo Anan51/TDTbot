@@ -7,6 +7,7 @@ import logging
 from .. import param
 # from ..helpers import *
 from ..async_helpers import admin_check, wait_until
+from ..version import usingV2
 
 logger = logging.getLogger('discord.' + __name__)
 
@@ -122,5 +123,10 @@ class Chron(commands.Cog):
         return await self.bot.get_context(msg)
 
 
-def setup(bot):
-    bot.add_cog(Chron(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Chron(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Chron(bot))

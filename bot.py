@@ -13,6 +13,7 @@ from . import helpers
 from . import async_helpers
 from . import git_manage
 from .config.users import get_all_user_config_files, UserConfig
+from .version import usingV2
 
 
 logger = logging.getLogger('discord.' + __name__)
@@ -42,11 +43,13 @@ class MainBot(commands.Bot):
         kwargs['case_insensitive'] = True
         super().__init__(*args, **kwargs)
         self._emoji_role_data = []
+        self.usingV2 = usingV2
         # add all our cogs via load_extension
-        for cog in cog_list():
-            # ensure that cogs is a submodule of our base module
-            cog = __package__ + '.cogs.' + os.path.split(cog)[-1].split('.')[0]
-            self.load_extension(cog)
+        if not usingV2:
+            for cog in cog_list():
+                # ensure that cogs is a submodule of our base module
+                cog = __package__ + '.cogs.' + os.path.split(cog)[-1].split('.')[0]
+                self.load_extension(cog)
 
         @self.event
         async def on_ready():
@@ -57,6 +60,12 @@ class MainBot(commands.Bot):
             activity = discord.Activity(name='your suggestions and issues, DM me',
                                         type=discord.ActivityType.listening)
             await self.change_presence(activity=activity)
+            # add all our cogs via load_extension
+            if usingV2:
+                for cog in cog_list():
+                    # ensure that cogs is a submodule of our base module
+                    cog = __package__ + '.cogs.' + os.path.split(cog)[-1].split('.')[0]
+                    await self.load_extension(cog)
             if self.reissue is not None:
                 logger.printv('Reissue detected.')
                 now = pytz.utc.localize(datetime.datetime.now())

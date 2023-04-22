@@ -2,8 +2,9 @@ import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
-from ..helpers import find_channel, find_role
+from ..helpers import find_channel, find_role, localize
 from ..param import emojis, messages, roles
+from ..version import usingV2
 # from ..async_helpers import admin_check
 import logging
 
@@ -63,7 +64,7 @@ class Welcome(commands.Cog):
     # emoji: role
     _emoji_dict = {emojis.destiny_2: roles.destiny_2,
                    emojis.overwatch2: roles.overwatch2,
-                   emojis.minecraft: roles.minecraft,
+                   emojis.call_of_duty: roles.call_of_duty,
                    }
 
     def __init__(self, bot):
@@ -129,8 +130,12 @@ class Welcome(commands.Cog):
               " Please read my DM and look at the {1.mention}.".format(member, manual)
         await member.guild.system_channel.send(msg)
         msg = await self.fetch_coc()
-        rxns = [rxn for rxn in msg.reactions
-                if await rxn.users().find(lambda u: u == member)]
+        rxns = []
+        for rxn in msg.reactions:
+            async for user in rxn.users():
+                if user == member:
+                    rxns.append(rxn)
+                    break
         # check for welcome back
         if "👍" in [str(rxn.emoji) for rxn in rxns]:
             old = msg
@@ -183,9 +188,9 @@ class Welcome(commands.Cog):
                     if msg.content == out:
                         return
                 await log_channel.send(out)
-            now = datetime.datetime.utcnow()
+            now = localize(datetime.datetime.utcnow())
             # if in joined in last 2 weeks
-            if (now - payload.member.joined_at).seconds // 86400 < 14:
+            if (now - localize(payload.member.joined_at)).seconds // 86400 < 14:
                 if payload.member.top_role < recruit:
                     reason = "Agreed to code of conduct."
                     await payload.member.add_roles(recruit, reason=reason)
@@ -193,7 +198,7 @@ class Welcome(commands.Cog):
                 msg = await self.fetch_coc()
                 for rxn in msg.reactions:
                     if getattr(rxn.emoji, 'id', rxn.emoji) in self._emoji_dict:
-                        if payload.member in await rxn.users().flatten():
+                        if payload.member in [u async for u in rxn.users()]:
                             await self.bot.emoji2role(*args, emoji=rxn.emoji, **kwargs)
             return
         if hasattr(payload.emoji, 'id'):
@@ -212,7 +217,7 @@ class Welcome(commands.Cog):
     async def clean_manual_page(self, ctx):
         """Clean up reactions in the manual page"""
         channel = self.manual_channel
-        history = await channel.history(limit=200, before=_before).flatten()
+        history = [h async for u in channel.history(limit=200, before=_before)]
         for msg in history:
             await self.safely_remove_reactions(msg)
 
@@ -243,5 +248,10 @@ class Welcome(commands.Cog):
                 await rxn.clear()
 
 
-def setup(bot):
-    bot.add_cog(Welcome(bot))
+if usingV2:
+    async def setup(bot):
+        cog = Welcome(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        bot.add_cog(Welcome(bot))

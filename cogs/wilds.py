@@ -8,6 +8,7 @@ from .. import param
 from ..helpers import find_role
 from ..config import UserConfig
 from ..async_helpers import split_send, sleep, admin_check, wait_until
+from ..version import usingV2
 import logging
 
 
@@ -658,6 +659,12 @@ class Wilds(commands.Cog):
         pass
 
 
-def setup(bot):
-    # bot.add_cog(Wilds(bot))
-    pass
+if usingV2:
+    async def setup(bot):
+        return
+        cog = Wilds(bot)
+        await bot.add_cog(cog)
+else:
+    def setup(bot):
+        return
+        bot.add_cog(Wilds(bot))
