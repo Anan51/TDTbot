@@ -12,6 +12,7 @@ import logging
 
 logger = logging.getLogger('discord.' + __name__)
 
+
 class Wit(commands.Cog, command_attrs=dict(hidden=True)):
     def __init__(self, bot):
         self.bot = bot
@@ -41,9 +42,25 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         return self._gold if self._gold else ":gold:"
 
 # blind_beggar
-
     @commands.command()
     async def blind_beggar(self, ctx):
+        encounters = ['blind_beggar_a',
+                      'blind_beggar_b',
+                      ]
+        encounter = getattr(self, random.choice(encounters))
+        return await encounter(ctx)
+
+    @commands.command()
+    async def blind_beggar_a(self, ctx):
+        msg = """**Blind Beggar**
+- A man sat next to a small caravan perks up as you approach. "Oh please, champion." the man says in a dehydrated voice "spare some coin for a blind man?" You look the man up and down. He is wearing a tattered yellow shawl with withered greyish brown shorts.
+**Give him a Coin** tdt$blind_gift
+**Leave him** tdt$blind_leave
+🔐 Silver Tongue:||**Draw Your Weapon** tdt$blind_hostile||"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def blind_beggar_b(self, ctx):
         msg = """**__Blind Beggar__**
 - A man sat next to a small caravan perks up as you approach. "Oh please, champion." the man says in a dehydrated voice "spare some coin for a blind man?" You look the man up and down. He is wearing a tattered yellow shawl with withered greyish brown shorts.
 **Give him a Coin** tdt$blind_gift
@@ -64,6 +81,12 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
     @commands.command()
     async def blind_threaten(self, ctx):
         msg = """You deftly draw your weapon on the man. He doesnt respond. You know this man isnt trying to trick you. You say a quick prayer then you give the man some money. He hears the coins hit the bag and says "oh thank you! May YHWH bless your kindness. (-1 <:gold:1058304371940655185> (You may spend 6 <:gold:1058304371940655185> to upgrade your Annointed passive to: __Angel__ :rosette: "If you have __protect__ and your HP reaches zero, lose all stacks but gain 1 HP" for the rest of the run)"""
+        msg += (self.gold+" )")
+        await ctx.send(msg)
+
+    @commands.command()
+    async def blind_hostile(self, ctx):
+        msg = """You deftly draw your weapon on the man. Despite the weapon making no noise the man reacts immediately "wait!... I m-mean." You brandish your weapon aggressively at him, "What a sorry excuse of a human, faking blindness. You disgust me. Get out of here! Go on!" The man springs to his feet and scrambles away in a hurry, leaving 2 coins behind (+2 :gold:) """
         msg += (self.gold+" )")
         await ctx.send(msg)
 
