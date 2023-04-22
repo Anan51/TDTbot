@@ -44,11 +44,11 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def blind_beggar(self, ctx):
-        msg = """**Blind Beggar**
+        msg = """**__Blind Beggar__**
 - A man sat next to a small caravan perks up as you approach. "Oh please, champion." the man says in a dehydrated voice "spare some coin for a blind man?" You look the man up and down. He is wearing a tattered yellow shawl with withered greyish brown shorts.
 **Give him a Coin** tdt$blind_gift
 **Leave him** tdt$blind_leave
-🔐 Silver Tongue:||**Draw Your Weapon** tdt$blind_hostile||"""
+:droplet: Annointed: ||**Draw Your Weapon** tdt$blind_threaten||"""
         await ctx.send(msg)
 
     @commands.command()
@@ -62,8 +62,8 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         await ctx.send(msg)
 
     @commands.command()
-    async def blind_hostile(self, ctx):
-        msg = """You deftly draw your weapon on the man. Despite the weapon making no noise the man reacts immediately "wait!... I m-mean." You brandish your weapon aggressively at him, "What a sorry excuse of a human, faking blindness. You disgust me. Get out of here! Go on!" The man springs to his feet and scrambles away in a hurry, leaving 2 coins behind (+2 """
+    async def blind_threaten(self, ctx):
+        msg = """You deftly draw your weapon on the man. He doesnt respond. You know this man isnt trying to trick you. You say a quick prayer then you give the man some money. He hears the coins hit the bag and says "oh thank you! May YHWH bless your kindness. (-1 <:gold:1058304371940655185> (You may spend 6 <:gold:1058304371940655185> to upgrade your Annointed passive to: __Angel__ :rosette: "If you have __protect__ and your HP reaches zero, lose all stacks but gain 1 HP" for the rest of the run)"""
         msg += (self.gold+" )")
         await ctx.send(msg)
 
@@ -273,6 +273,121 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 8-10 | **Greed** (-10 🎲) Gain __Empower__x2 for every 10 <:gold:1058304371940655185> your party has""",
         ]
         await ctx.send(random.choice(encounters))
+
+# Abandoned Feast
+    @commands.command()
+    async def abandoned_feast(self, ctx):
+        msg = """**__Abandoned Feast__**
+- You walk past a stone brick building and decide to check it out. Inside the smell of food greets you as you walk into a massive dining hall with a wide spread of cooked meats, breads, and potatoes adorning the banquet. Your starving but this seems a bit too good to be true...
+**Take a small bite** tdt$feast_snack
+**Eat as much as you can** tdt$feast_buffet
+:mountain_snow: Highlander: ||**Unmatched apatite** tdt$feast_devour||"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def feast_snack(self, ctx):
+        msg = """You take a few bites of food and leave the rest. (+2 :heart: and +2 :large_blue_diamond:)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def feast_buffet(self, ctx):
+        msg = """You try to consume as much as humanly possible... you start to feel sleepy (+4 :heart: and +4 :large_blue_diamond:, 🎲 < 8: go back 3 places in your journey)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def feast_devour(self, ctx):
+        msg = """You immediately recognize this feast. This is a traditional highlander feast. You know exactly what to do. (You may spend 7 <:gold:1058304371940655185> to upgrade your Highlander passive to: __True Scottsman__ :scotland: "You now have no MP cap" for the rest of the run)"""
+        await ctx.send(msg)
+
+# Hoisted Sack
+    @commands.command()
+    async def hoisted_sack(self, ctx):
+        msg = """**__Hoisted Sack__**
+- Your walking through a man-made trail when a brown sack hanging from a tree catches your eye. Its extremely high up and will take a bit of dexterity to get it down. Or you could just leave it be.
+**Climb the Tree** tdt$sack_climb
+**Leave the Loot** tdt$sack_leave
+:bow_and_arrow: Elvish: ||**Intuition** tdt$sack_search||"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def sack_climb(self, ctx):
+        msg = """You gather your strength then attempt to reach the sack dangling from the branches. ( 🎲 < 5: summon enemy | 🎲 > 5: !r 1d5 lesser chest)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def sack_leave(self, ctx):
+        msg = """You leave the sack. Its probably someone's stuff anyways."""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def sack_search(self, ctx):
+        msg = """You remember using this trick yourself back when you were younger. This is to keep away wild animals which means there is probably a camp not too far nearby. Sure enough after a bit of searching you find an elvish camp. It seems it has been overtaken by some thugs but there is still an Elvish scroll bound around a book that they werent capable of opening. (You may spend 2 :heart: to upgrade your Elvish passive to: __Pure Blood__ :woman_elf: "If your opponent reaches **3** or more stacks of Weak, they lose their next turn and all stacks" for the rest of the run)"""
+        await ctx.send(msg)
+
+# Fork in the Road
+    @commands.command()
+    async def fork_in_the_road(self, ctx):
+        msg = """**__Fork in the Road__**
+- As you continue through the forest, you come to a choice on paths. You can chose to go left which onlooks an array of strange looking plants and trees or right which leads to a rickety bridge. There is another path straight forward but it seems to lead to an outpost which some local bandits have set ablaze.
+**Left** tdt$fork_left
+**Right** tdt$fork_right
+:fire: Draconic: ||**Straight Forward** tdt$fork_straight||"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def fork_left(self, ctx):
+        msg = """You decide to play it safe and go towards the vegitation. (Do another encounter)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def fork_right(self, ctx):
+        msg = """You head towards the bridge. You know its risky but you at least understand your risks. You carefully try to cross the bridge ( 🎲 < 3: -3 ❤️ )"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def fork_straight(self, ctx):
+        msg = """You were born of fire. You march straight through the outpost, fearlessly. You find some gold in one of the buildings. (+3 <:gold:1058304371940655185> )"""
+        await ctx.send(msg)
+
+# Desperate Traveler
+    @commands.command()
+    async def desperate_traveler(self, ctx):
+        msg = """**__Desperate Traveler__**
+- A woman with a broken weapon comes sprinting towards you. She looks panicked and scared. "HELP!" She cries out "Someone help!" you look past her and see a band of vicious looking creatures chasing after her
+**Ignore the woman** tdt$traveler_ignore
+**Fight the pursuers** tdt$traveler_fight
+:mechanical_arm:  Sentian: ||**Deploy Smoke Screen** tdt$traveler_smoke||"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def traveler_ignore(self, ctx):
+        msg = """You clearly make eye contact with the woman, but dip behind a tree to avoid detection by her pursuers (-1 :game_die: on all future encounter rolls)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def traveler_fight(self, ctx):
+        msg = """You beckon the woman to stand behind you and prepare for a fight. (Summon two random enemies per party member)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def traveler_smoke(self, ctx):
+        msg = """You fire a smoke bomb behind the woman. She is fearful at first but understands your intent a moment later. You call her over to a hiding spot. She obeys. Once on the other side of the smoke, the enemies cannot find you and decide to give up. "You saved me." she says with a thick romanian accent. You look down at her and say nothing. "Please..." she fumbles through her bag "take one" she offers you a potion (gain one !r 1d10 potion)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def reach_encounter(self, ctx):
+        encounters = ['desperate_traveler',
+                      'fork_in_the_road',
+                      'hoisted_sack',
+                      'abandoned_feast',
+                      'shin_splints',
+                      'clingweed',
+                      'blood_puddle',
+                      'fracturing_cliff',
+                      'blind_beggar',
+                      ]
+        encounter = getattr(self, random.choice(encounters))
+        return await encounter(ctx)
 
 
 if usingV2:
