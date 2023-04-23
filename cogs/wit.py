@@ -126,7 +126,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def blood_collect(self, ctx):
-        msg = """You grab one of your empty water satchels and draw close to the pool, but before you can even get the lid off your satchel you are attacked! ( 🎲 < 8: use tdt$reach_2 | 🎲 > 9: +5 <:gold:1058304371940655185>)"""
+        msg = """You grab one of your empty water satchels and draw close to the pool, but before you can even get the lid off your satchel you are attacked! ( 🎲 < 8: use tdt$reach_enemy | 🎲 > 9: +5 <:gold:1058304371940655185>)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -172,7 +172,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         msg = """**__Shin Splints__**
 - You are rather mindlessly walking along the worn path. The sun is beating down against your head through the ravine of trees. You are keeping your eyes on the path but when you looks back up you see a field of bone-forged spears planted and fastened into the ground. The spears are pointed towards your approach, and they look sharp.
 **Squeeze Past Them** tdt$shin_squeeze
-**Swat Them out of the Way** tdt$shin_swat
+**Swat Them out of the Way** tdt$shin_attack
 📚 Educated: ||**Remove a Spear** tdt$shin_remove||"""
         await ctx.send(msg)
 
@@ -215,7 +215,8 @@ Behavior: gain permanent __Empower__ for every 5 damage taken
 1-2   | **Fangs** (+1  🎲) 💥🎯 to the highest HP player
 3-7   | **Scales** (-2 🎲) 🛡️🛡️🛡️ x 👥
 8-10 | **Weep** (+4 🎲) Cause __Weak__x3 to ALL players
-11+   | **Hypnotic Speech** (-4 🎲) summon a random enemy"""
+11+   | **Hypnotic Speech** (-4 🎲) summon a random enemy
+https://youtu.be/wlF0-Qs2xkI"""
         await ctx.send(msg)
 
     @commands.command()
