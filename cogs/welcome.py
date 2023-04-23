@@ -217,7 +217,7 @@ class Welcome(commands.Cog):
     async def clean_manual_page(self, ctx):
         """Clean up reactions in the manual page"""
         channel = self.manual_channel
-        history = [h async for u in channel.history(limit=200, before=_before)]
+        history = [h async for h in channel.history(limit=200, before=_before)]
         for msg in history:
             await self.safely_remove_reactions(msg)
 
