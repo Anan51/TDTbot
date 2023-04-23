@@ -222,4 +222,3 @@ def delocalize(dt):
     if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
         return dt
     return dt.astimezone(pytz.utc).replace(tzinfo=None)
-
