@@ -77,7 +77,7 @@ class Listener:
             for pin in pins[48:]:
                 await pin.unpin()
             for pin in pins[40:]:
-                dt = datetime.datetime.now() - localize(pin.created_at)
+                dt = localize(datetime.datetime.now()) - localize(pin.created_at)
                 if dt >= datetime.timedelta(days=90):
                     await pin.unpin()
             await msg.pin()
