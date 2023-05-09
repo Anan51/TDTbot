@@ -411,6 +411,101 @@ Behavior: after 5 turns, cause 💥🚫 to all players
         encounter = getattr(self, random.choice(encounters))
         return await encounter(ctx)
 
+    @commands.command()
+    async def underwash_enemy(self, ctx):
+        encounters = [
+            """__**UNCLEAN WALKER**__
+❤️ : 5
+💰 : 1d10 🧪
+Behavior: at the end of turn 3, lower all players max HP and MP by 1 for the rest of the run
+—————————————————
+1-5   | **Breathe** (+2 🎲) __Weak__, __Vulnerable__, __Burn__ to ALL but itself
+6-8   | **Fester** (+3 🎲) ⚡🛡️❤️
+9-10 | **Spore** (-2 🎲) if you took less than 3 damage this turn, skip all players turns once.""",
+
+            """__**SITE CONTAMINATE PURIFIER**__
+❤️ : 10
+💰 : 1d10 🗡️
+Behavior: Immune to negative effects
+—————————————————
+1-3   | **Secure** 💥💥 to ALL players 🔀 dispell all __effects__ stacks
+4-6   | **Contain** (+2 🎲) ALL players gain __Weak__x3
+7-10 | **Protect** (-4 🎲) Disable any active player status moves. All other PvEnemies gain __Protect__x3""",
+
+            """__**TOCK**__
+❤️ : 8
+💰 : 2d5 <:gold:1058304371940655185>
+Behavior: at the end of turn 5, deal 20 damage to everything
+—————————————————
+1-4   | **Sidearm** 💥⚡🎯
+5-8   | **Harden** (+2 🎲) 🛡️🛡️
+8-10 | **Beacon** (-5 🎲) if this took no damage this turn, summon another enemy""",
+
+            """__**H3-nry,  THE PROTOTYPE**__
+❤️ : 1
+💰 : !r 1d3 lesser
+Behavior: Summon 1 more Henry's on battle start
+—————————————————
+1-3   | **BLAST** 💥💥💥💥 to ALL players
+4-8   | **BLAST** 💥💥💥💥 to lowest HP players
+9-10 | **BLAST** 💥💥💥💥 to highest HP players""",
+
+            """__**DESPERATE CHAMPION**__
+❤️ : 12
+💰 : !r 1d7 Basic
+Behavior: When this takes damage, gain __Empower__. Can be immediately dismissed if you are doing a Champion Run.
+—————————————————
+1-4   | **Momentum** (+2 🎲) 💥 lowest HP
+5-8   | **Deflect** (+2 🎲) <:stealthIcon:943248201790677052> 🔀 -4 🎲 if you have 🎯
+9-10 | **Pin Point** (-2 🎲) Your next 💥 has 🎯""",
+
+            """__**MIMIC NYMPH**__
+❤️ : Target's HP
+💰 : !r 7d3 <:gold:1058304371940655185>
+Behavior: Select a random player at the start of the game. This will only ever attack that
+—————————————————
+1-3   | **Copy** Use targets first move.
+4-6   | **Imitate** Use targets second move.
+7-10 | **Plagiarize** Use targets third move.""",
+
+            """__**HIGAURD**__
+❤️ : 7
+💰 : 1 Higuard Key
+Behavior: If this takes 3 or more damage in one turn, summon another Higuard in 2 turns
+—————————————————
+1-3   | **Polearm** 💥💥🛡️
+4-7   | **Sentry Line** 🛡️🛡️ to ALL PvE 🔀 💥
+8-10 | **Bolas Shot** (-4 🎲) Cause __Vulnerable__x2 and __Weak__x2""",
+
+            """__**NECROZOAN SLUDGE**__
+❤️ : 8
+💰 : !r 1d10 basic
+Behavior: at 4, 2, and 1 remaining HP summon a copy of itself. Loot only drops for completing the fight.
+—————————————————
+1-4   | **Infect** 💥 lowest HP 🔀 ❤️, cause __Weak__ and __Will__
+5-8   | **Consume** <:stealthIcon:943248201790677052>  🔀 Gain __Protect__
+9-10 | **Replicate** All PvEnemies gain __Healing__ for each stack of __Protect__ this has. Remove all protect stacks.""",
+
+            """__**RAZOR FIN**__
+❤️ : 10
+💰 : !r 1d10 🧪  + 5 <:gold:1058304371940655185>
+Behavior: Cannot take more than 4 damage a turn
+—————————————————
+1-2   | **Thrash** 💥⚡🚫
+3-8   | **Submerge** 🛡️🛡️ immune to 🚫
+9-10 | **Gills** Dispell all player __effects__ 🔀 gain __Empower__ per dispelled""",
+
+            """__**BLACKHAND GANG MARAUDER**__
+❤️ : 4
+💰 : 2 Higuard Keys
+Behavior: +2 to all dice rolls (including speed ties)
+—————————————————
+1-2   | **Seeing Red** 💥💥 🔀 -3 <:gold:1058304371940655185> per damage dealt
+3-7   | **Trick Step** Ignore 1 incoming 💥 🔀 -6 🎲; Your next 💥 has 🚫🎯
+8-10 | **Sapping Powder** (-2 🎲) Random player has -2 🔷"""
+        ]
+        await ctx.send(random.choice(encounters))
+
 
 if usingV2:
     async def setup(bot):
