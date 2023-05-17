@@ -80,7 +80,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def blind_threaten(self, ctx):
-        msg = """You deftly draw your weapon on the man. He doesnt respond. You know this man isnt trying to trick you. You say a quick prayer then you give the man some money. He hears the coins hit the bag and says "oh thank you! May YHWH bless your kindness. (-1 <:gold:1058304371940655185> (You may spend 6 <:gold:1058304371940655185> to upgrade your Annointed passive to: __Angel__ :rosette: "If you have __protect__ and your HP reaches zero, lose all stacks but gain 1 HP" for the rest of the run)"""
+        msg = """You deftly draw your weapon on the man. He doesnt respond. You know this man isnt trying to trick you. You say a quick prayer then you give the man some money. He hears the coins hit the bag and says "oh thank you! May YHWH bless your kindness. (-1 <:gold:1058304371940655185> (You may spend 6 <:gold:1058304371940655185> to upgrade your Annointed passive to: __Angel__ :rosette: "Once per combat: if you have __protect__ and your HP reaches zero, lose all stacks but survive with 1 HP." for the rest of the run)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -111,7 +111,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def cliff_dash(self, ctx):
-        msg = """You nimbly sprint along the cliff face and make it safely to the other side. You're feeling pretty good about yourself (Gain +1 🎲 on all random encounter rolls)"""
+        msg = """You nimbly sprint along the cliff face and make it safely to the other side. You're feeling pretty good about yourself (Start the next combat with __Empower__x2)"""
         await ctx.send(msg)
 
 # Blood Puddle
@@ -152,12 +152,12 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def cling_cut(self, ctx):
-        msg = """You draw your weapon and destroy the tendrils attaching to your flesh. ( 🎲 < 4: Lose your passive for the rest of the run | 🎲 > 5: Lose 3 🔷)"""
+        msg = """You draw your weapon and destroy the tendrils attaching to your flesh. ( 🎲 < 4: Gain: __Sapped__ 💤 "Disable all other passives" | 🎲 > 5: Lose 3 🔷)"""
         await ctx.send(msg)
 
     @commands.command()
     async def cling_relax(self, ctx):
-        msg = """You conclude the plant is drawn to motion and struggling. You try to relax. The plants reach towards you slows!.. but it doesnt stop. Before you realize it you are surrounded with vines each with a sticky sap like substance on their leaflets you attempt to fight back but its too late, your are slowly being pulled down against the bridge. ( 🎲 < 7: a teammate may spend 1 🔷 for you to try again otherwise: lose your passive for the rest of the run)"""
+        msg = """You conclude the plant is drawn to motion and struggling. You try to relax. The plants reach towards you slows!.. but it doesnt stop. Before you realize it you are surrounded with vines each with a sticky sap like substance on their leaflets you attempt to fight back but its too late, your are slowly being pulled down against the bridge. ( 🎲 < 7: You or a teammate may spend 1 🔷 for you to try again otherwise: Gain: __Sapped__ 💤 "Disable all other passives" )"""
         await ctx.send(msg)
 
     @commands.command()
@@ -207,7 +207,8 @@ https://www.youtube.com/watch?v=0uAsD6lQV1I"""
 
     @commands.command()
     async def reach_boss(self, ctx):
-        msg = """__**THE GREAT SERPANT**__
+        encounters = [
+            """__**THE GREAT SERPANT**__
 ❤️ : 20 x 👥
 💰 : 2d10 basic
 Behavior: gain permanent __Empower__ for every 5 damage taken
@@ -216,8 +217,31 @@ Behavior: gain permanent __Empower__ for every 5 damage taken
 3-7   | **Scales** (-2 🎲) 🛡️🛡️🛡️ x 👥
 8-10 | **Weep** (+4 🎲) Cause __Weak__x3 to ALL players
 11+   | **Hypnotic Speech** (-4 🎲) summon a random enemy
-https://youtu.be/wlF0-Qs2xkI"""
-        await ctx.send(msg)
+https://youtu.be/wlF0-Qs2xkI""",
+
+            """__**FLOW-MASTER GRIGORI**__
+:heart: : 10 x:busts_in_silhouette:
+:moneybag: : 1d19 :dagger:, +6 Comp Points
+Behavior: At even minutes this gains a stack of __Protect__ permanently, at odd minutes this gains a stack of __Empower__ permanently.
+—————————————————
+1-4   | **Beat** (:game_die: = 11) :boom::zap:
+5-7   | **Groove** (:game_die: = 1) :shield: :twisted_rightwards_arrows: deal :boom: per blocked
+8-10 | **Rhythm** (:game_die: = 5) +3:heart:
+11+    | **Change Up** Immune. Nullify all status moves used this turn.
+https://www.youtube.com/watch?v=16y1AkoZkmQ""",
+
+            """__**SLIGGO THE GREEN**__
+:heart: : 30 x:busts_in_silhouette:
+:moneybag: : 3d10 :test_tube:, +6 Comp Points
+Behavior: When a player deals damage to this, they gain __Heal__. Sliggo cannot lose more than half its current HP every turn (unless at 1 of course).
+—————————————————
+1-5   | **Envelop** :boom::boom: Highest HP :twisted_rightwards_arrows: +3 :game_die:, gain __Heal__, target loses 2 :large_blue_diamond:
+6-8   | **Absorb** Gain __Heal__x2 per damage taken this turn
+9-10 | **Dissolve** (+ 2 :game_die:) Cause __Burn__x3
+11+    | **Divide and Conquer** If this has __heal__ greater than its HP, summon another Sliggo with equal stats. Otherwise cause __weak__ and __vulnerable__ and gain __heal__x2
+https://www.youtube.com/watch?v=iMH49ieL4es""",
+            ]
+        await ctx.send(random.choice(encounters))
 
     @commands.command()
     async def reach_enemy(self, ctx):
@@ -308,7 +332,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def feast_snack(self, ctx):
-        msg = """You take a few bites of food and leave the rest. (+2 :heart: and +2 :large_blue_diamond:)"""
+        msg = """You take a few bites of food and leave the rest. (+1 :heart: and +1 :large_blue_diamond:)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -318,7 +342,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def feast_devour(self, ctx):
-        msg = """You immediately recognize this feast. This is a traditional highlander feast. You know exactly what to do. (You may spend 7 <:gold:1058304371940655185> to upgrade your Highlander passive to: __True Scottsman__ :scotland: "You now have no MP cap" for the rest of the run)"""
+        msg = """You immediately recognize this feast. This is a traditional highlander feast. You know exactly what to do. (You may spend 7 <:gold:1058304371940655185> to upgrade your Highlander passive to: __True Scottsman__ :scotland: "Your max MP is now equal to your current HP. Gain 50% of your new max MP" for the rest of the run)"""
         await ctx.send(msg)
 
 # Hoisted Sack
@@ -343,7 +367,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def sack_search(self, ctx):
-        msg = """You remember using this trick yourself back when you were younger. This is to keep away wild animals which means there is probably a camp not too far nearby. Sure enough after a bit of searching you find an elvish camp. It seems it has been overtaken by some thugs but there is still an Elvish scroll bound around a book that they werent capable of opening. (You may spend 2 :heart: to upgrade your Elvish passive to: __Pure Blood__ :woman_elf: "If your opponent reaches **3** or more stacks of Weak, they lose their next turn and all stacks" for the rest of the run)"""
+        msg = """You remember using this trick yourself back when you were younger. This is to keep away wild animals which means there is probably a camp not too far nearby. Sure enough after a bit of searching you find an elvish camp. It seems it has been overtaken by some thugs but there is still an Elvish scroll bound around a book that they werent capable of opening. (You may spend 2 :heart: to upgrade your Elvish passive to: __Pure Blood__ :woman_elf: "While an enemy has __Weak__ they cannot cause __effects__")"""
         await ctx.send(msg)
 
 # Fork in the Road
@@ -383,12 +407,12 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def traveler_ignore(self, ctx):
-        msg = """You clearly make eye contact with the woman, but dip behind a tree to avoid detection by her pursuers (-1 :game_die: on all future encounter rolls)"""
+        msg = """You clearly make eye contact with the woman, but dip behind a tree to avoid detection by her pursuers. You are racked with guilt (Gain: __Fearful__ :rooster: Start each combat with __Vulnerable__x3)"""
         await ctx.send(msg)
 
     @commands.command()
     async def traveler_fight(self, ctx):
-        msg = """You beckon the woman to stand behind you and prepare for a fight. (Summon two random enemies per party member)"""
+        msg = """You beckon the woman to stand behind you and prepare for a fight. (Summon two random enemies per party member. Gain __empower__ and __protect__ at the start of THIS combat. Gain a bonus Artifact if you win (one per team))"""
         await ctx.send(msg)
 
     @commands.command()
@@ -502,9 +526,44 @@ Behavior: +2 to all dice rolls (including speed ties)
 —————————————————
 1-2   | **Seeing Red** 💥💥 🔀 -3 <:gold:1058304371940655185> per damage dealt
 3-7   | **Trick Step** Ignore 1 incoming 💥 🔀 -6 🎲; Your next 💥 has 🚫🎯
-8-10 | **Sapping Powder** (-2 🎲) Random player has -2 🔷"""
+8-10 | **Sapping Powder** (-2 🎲) Random player has -2 🔷""",
+
+            """**__Card Dealer__**
+- You pass by a small collection of people gathered around a a wooden box with some cards on it. On the other side of the box a man with a shaggy coat and white gloves is slinging the cards here and there then asking a disheveled looking fellow on the other side to take a guess. The man thumbs his chin for a bit then reluctantly motions for more cards "OOOoh." The card slinger cries, "Looks like its not your lucky day." The card dealer pockets some gold then he sees you standing there. He eyes up your gold pouch then says "Come on over stranger. Take a card!" (Roll !r 2d11)
+**Hit** tdt$card_hit
+**Stand** tdt$card_stand
+:closed_lock_with_key: Silver Tongue: ||**Slight of Hand** tdt$card_trick||""",
         ]
         await ctx.send(random.choice(encounters))
+
+    @commands.command()
+    async def card_hit(self, ctx):
+        msg = """You look at your cards and decide to take another (Roll !r 1d11)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def card_hitcard_stand(self, ctx):
+        msg = """You decide you are happy with your card total. ( Roll !r 3d15, if your card total is greater than this BUT not over 21 you gain 10 <:gold:1058304371940655185>. If not, then lose 10 <:gold:1058304371940655185> )"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def card_hitcard_trick(self, ctx):
+        msg = """You suspect trickery is at play here. You eye the amounts being rewarded and being taken and you realize there is about an 80% chance you will lose which doesnt make sense. You watch closely then discover the secret: the man is playing with a trick deck. You are impressed at his cunning if not slightly disgusted at his thievery. You decide to wait a while until everyone else clears out then you ask him to teach you his tricks... for a price of course. (You may spend 20 <:gold:1058304371940655185> to upgrade your Silver Tongue passive to: __Gilded Tongue__ :money_with_wings: "Shops are now 5 gold cheaper, gain 1 <:gold:1058304371940655185> whenever you reach a new level" for the rest of the run)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def underwash_boss(self, ctx):
+        msg = """__**THE TRAITOR: JUDGE-23**__
+:heart: : 12
+:moneybag: : 1d19 :dagger:, 1d10 :gold:, 1d10 :test_tube:
+Behavior: Summon another JUDGE-23 per :busts_in_silhouette:. Whenever a player gains an __effect__ this gains __Empower__
+—————————————————
+1-4   | **Heresy** (+1 :game_die:) :boom: targets random players. Repeats 2 times (w buffs applied).
+5-7   | **Martyr** (-2 :game_die:) Cause __Weak__x2 to ALL players per damage taken. If this would have died this turn, all players gain __burn__x99 instead.
+8-10 | **Doomsayer** If this took no damage, ALL players gain __Vulnerable__ at the start of every turn.
+11+   | **Judgement** :boom::boom::boom::no_entry_sign: to ALL. If a player dies, repeat.
+https://www.youtube.com/watch?v=bMfvZmhqW0A&pp=ygUTZ29kIHNoYXR0ZXJpbmcgc3Rhcg%3D%3D"""
+        await ctx.send(msg)
 
 
 if usingV2:
