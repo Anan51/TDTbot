@@ -531,7 +531,7 @@ Behavior: +2 to all dice rolls (including speed ties)
         await ctx.send(random.choice(encounters))
 
     @commands.command()
-    async def meh(self, ctx):
+    async def underwash_encounter(self, ctx):
         encounters = [
             """**__Card Dealer__**
 - You pass by a small collection of people gathered around a a wooden box with some cards on it. On the other side of the box a man with a shaggy coat and white gloves is slinging the cards here and there then asking a disheveled looking fellow on the other side to take a guess. The man thumbs his chin for a bit then reluctantly motions for more cards "OOOoh." The card slinger cries, "Looks like its not your lucky day." The card dealer pockets some gold then he sees you standing there. He eyes up your gold pouch then says "Come on over stranger. Take a card!" (Roll !r 2d11)
