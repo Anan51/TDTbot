@@ -6,11 +6,127 @@ import random
 # from ..helpers import find_channel, find_role, localize
 # from ..param import emojis, messages, roles
 from ..version import usingV2
-# from ..async_helpers import admin_check
+from ..async_helpers import split_send
 import logging
 
 
 logger = logging.getLogger('discord.' + __name__)
+
+
+def parse_roll(roll_str, max_sides=None):
+    out = [int(e) for e in roll_str.split("d")]
+    if max_sides:
+        out[1] = min(out[1], max_sides)
+    if not out[0]:
+        out[0] = 1
+    return out
+
+
+def roll(*args, max_sides=None):
+    if len(args) == 1 and hasattr(args[0], "lower"):
+        args = parse_roll(args[0], max_sides=max_sides)
+    return [random.randint(1, args[1]) for _ in range(args[0])]
+
+
+def gen_weapon(roll_str):
+    prefixes = [
+        "**Basic**: No bonus",
+        "**Ornate**: +10 in :gold: value",
+        "**Lightweight**: +⚡",
+        "**Relentless**: +🚫",
+        "**Honed**: +🎯",
+        "**Heavy**: +🛡️",
+        "**Invigorating**: 🔀 +🔷",
+        "**Vital**: 🔀 +❤️",
+        "**Concealed**: + <:stealthIcon:943248201790677052>",
+        "**Superior**: +💥/ +🛡️ / +effect",
+    ]
+    weapons = [
+        "**Knife**: 💥",
+        "**Buckler**: 🛡️🛡️",
+        "**Kunai**: 💥⚡ ",
+        "**Axe**: 💥🚫 ",
+        "**Crossbow**: 💥🎯",
+        "**Halberd**: 💥🛡️ ",
+        "**Focus Stone**: 💥🔀+🔷",
+        "**Siphon Stone**: 💥🔀+❤️ ",
+        "**Fang**: 💥<:stealthIcon:943248201790677052> ",
+        "**Broadsword**: 💥💥",
+        "**Spell Book** (-3 🔷): Grant ALL allies any effectx2",
+        "**Wand** (-4 🔷): Double a target's active effect stacks",
+        "**Runic Flintlock** (-1 🔷):💥; 1/6 chance to TRIPLE successful damage",
+        "**Graven Shield** (-1 🔷): 🛡️ to ALL allies, ignores 🚫 🔀 cause Weak per blocked",
+        "**Gilded Hammer** (-2 🔷): 🛡️🛡️ 🔀 💥 to ALL enemies per block",
+        "**Tome** (-4 🔷): Summon a Dire Wolf",
+        "**Scroll** (-4 🔷): Your next turn is twice as powerful",
+        "**Enchanted Blade** (-4 🔷): 💥💥💥 to ALL enemies",
+        "**Staff** (-2 🔷): deal 💥 per each friendly effect stack you have ",
+        "REDACTED]]",
+    ]
+    rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(weapons)))
+    return [(prefixes[r[0] - 1], weapons[r[1] - 1]) for r in rolls]
+
+
+def gen_potion(roll_str):
+    prefixes = [
+        "**Tincture of**: -Effect",
+        "**Potion of**: No bonus",
+        "**Tonic of**: Roll Potion Effect list twice, -Effect",
+        "**Elixir of**: +Effect",
+        "**Grand Mixture of**: ++Effect",
+        "**Splash Tincture of**: -Effect to ALL allies/enemies",
+        "**Splash Potion of**: to ALL allies/enemies",
+        "**Splash Tonic of**: Roll Potion Effect list twice, -Effect, to ALL allies/enemies",
+        "**Splash Elixir of**: +Effect to ALL allies/enemies",
+        "**Grand Splash Mixture of**: ++Effect to ALL allies/enemies]",
+    ]
+    potions = [
+        "**Regeneration**: +50% ❤️ ( +/-25% per effect prefix)",
+        "**Rejuvenation**: +50% 🔷 ( +/-25% per effect prefix)",
+        "**Strength**: Empower x3",
+        "**Toughness**: Protect x3",
+        "**Healing**: Heal x5",
+        "**Weakness**: Weak x3",
+        "**Sapping**: Vulnerable x3",
+        "**Flames**: Burn x5",
+        "**Frost**: Skip your targets next 1 turn(s)",
+        "**Proficiency**: +🚫🎯⚡ for the next 1 turn(s)",
+        ]
+    rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(potions)))
+    return [(prefixes[r[0] - 1], potions[r[1] - 1]) for r in rolls]
+
+
+def gen_artifact(roll_str):
+    artifacts = [
+        "Ring of Momentum: 💍 Kills grant Empower x3",
+        "Safety Hook: 🪝 Gain Protect whenever a shield fails to block damage",
+        "Vitamins: 💊 Start each combat with Heal",
+        "Lucky Clover: 🍀 All enemies gain Weak the first time you run out of MP",
+        "War Drum: 🥁 All enemies have Vulnerable when you are at 1/2 your max HP",
+        "Eternal Lantern: 🪔 All future weapons gain: \"🔀 cause Burn\" for the rest of this run",
+        "Cook Book: 🍔 You may raise your max HP and MP by 2 at Camp Sites instead of resting",
+        "Safety Scissors: ✂️ Once per world, you may escape an encounter or combat, go to the next level, but award no loot. May not be used on a boss ",
+        "Port-a-Forge: 🛠️ You may upgrade one item or skill (give it the \"Superior\" prefix) for 10 gold whenever you arrive at a shop ",
+        "Ancient Key: 🗝️ Double the loot you can store this run",
+    ]
+    return [artifacts[r - 1] for r in roll(roll_str, max_sides=len(artifacts))]
+
+
+def item_card(item):
+    if isinstance(item, tuple) and len(item) == 2:
+        import re
+        prefix, kind = item
+        p_name = re.match(r"\*\*(.*)\*\*", prefix).group(1)
+        k_name = re.match(r"\*\*(.*)\*\*", kind).group(1)
+        return f"**__{p_name} {k_name}__**\n{prefix}\n{kind}"
+    return item
+
+
+def gen_shop():
+    items = gen_weapon("3d19")
+    items.extend(gen_potion("3d10"))
+    items.extend(gen_artifact("3d10"))
+    return [item_card(item) for item in items]
 
 
 class Wit(commands.Cog, command_attrs=dict(hidden=True)):
@@ -663,6 +779,10 @@ Behavior: Summon another JUDGE-23 per :busts_in_silhouette:. Whenever a player g
 11+   | **Judgement** :boom::boom::boom::no_entry_sign: to ALL. If a player dies, repeat.
 https://www.youtube.com/watch?v=bMfvZmhqW0A&pp=ygUTZ29kIHNoYXR0ZXJpbmcgc3Rhcg%3D%3D"""
         await ctx.send(msg)
+
+    @commands.command()
+    async def wit_shop(self, ctx):
+        await split_send(ctx, gen_shop(), "\n\n")
 
 
 if usingV2:
