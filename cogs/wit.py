@@ -538,6 +538,26 @@ Behavior: +2 to all dice rolls (including speed ties)
 **Hit** tdt$card_hit
 **Stand** tdt$card_stand
 :closed_lock_with_key: Silver Tongue: ||**Slight of Hand** tdt$card_trick||""",
+            """**__Purifying Clinic__**
+- The street ends at a unkempt medical clinic... at least you think it is. There is a small line of weary and sick looking people out front and a haphazardly placed cross above the door painted in some kind of red paint. A few volunteer guards are standing outside making sure no one decides to try anything drastic. They are under-armed.
+**Get Medical Help** tdt$clinic_heal
+**Help Some Outside** tdt$clinic_help
+📚  Educated: ||**Study and Observe** tdt$clinic_study||""",
+            """**__The Salesman__**
+- "Potions! Get your high quality Ether Potions here! Finest in the underwash! Straight from the Judges tap!" You are intrigued. You walk over to the man and realize that he is no human. Half of his body has been spliced together with some kind of rat-like Fenric. Below patches of some of his fur are orange scales that, if you didnt know better, looked like scabs. He sees you eyeing him over and says "Hey there. You look like the type that could use a quality potion or two. Here:" he holds out a small flask "On the house." You take a bit of the flask and inquire what it does, the salesman replies "Wonderous things!"... you're dubious
+**Take a sip** tdt$salesman_sip
+**Take a big gulp** tdt$salesman_gulp
+:fire:  Draconic: ||**Smell it** tdt$salesman_smell||""",
+            """**__Abandoned Chest__**
+- You are sneaking your way through the streets, hoping none of the creatures or Higuard notice you when you come across a small, strangely secluded room with a chest sitting on the far wall. The pace looks abandoned save for a few piles of bones here and there... was this some kind of old dungeon?
+**Open the Chest** tdt$chest_open
+**Go on your way** tdt$chest_leave
+:fox:  Fenric: ||**Listen to the Room** tdt$chest_listen||""",
+            """**__Crying Child__**
+- You are making your way long the streets when a group of children come out to meet you "Please adventurer" one little girl with golden hair cries out "You have to help us!" The other children look horrified at her. "what areyou doing?" one of the boys say ot her. She keeps looking towards you "Please. Our friend, she's very sick.. she has..." The girl chokes down a sob "She has Necrosis. The doctors wont even see her please she-" the girl covers her face and tears pour through her fingers
+**Turn her away** tdt$child_leave
+**See what you can do** tdt$child_help
+:droplet: Anointed: ||**Pray and Try to Help** tdt$child_pray||""",
         ]
         await ctx.send(random.choice(encounters))
 
@@ -554,6 +574,80 @@ Behavior: +2 to all dice rolls (including speed ties)
     @commands.command()
     async def card_hitcard_trick(self, ctx):
         msg = """You suspect trickery is at play here. You eye the amounts being rewarded and being taken and you realize there is about an 80% chance you will lose which doesnt make sense. You watch closely then discover the secret: the man is playing with a trick deck. You are impressed at his cunning if not slightly disgusted at his thievery. You decide to wait a while until everyone else clears out then you ask him to teach you his tricks... for a price of course. (You may spend 20 <:gold:1058304371940655185> to upgrade your Silver Tongue passive to: __Gilded Tongue__ :money_with_wings: "Shops are now 5 gold cheaper, gain 1 <:gold:1058304371940655185> whenever you reach a new level" for the rest of the run)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def clinic_heal(self, ctx):
+        msg = """"Hello there." a woman with greasy black hair, dark bags under her eyes, and a smile says to you. "Do you need healing? I can offer my services if you have something in exchange." (10 Gold or 1 Higuard Key to attempt to remove a curse/negative passive: :game_die: < 9 : remove 1 passive)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def clinic_help(self, ctx):
+        msg = """"I might be able to help you and your cause" you say to an old woman wearily trying to take care of the line of people. "That-" she looks at her guards "That would be fine, but you need to lay down your weapons." You are nervous about leaving your weapons out in such a public place, but it would be worth it if you can help. (:game_die: > 3 : gain 5 :gold: and give a weapon :twisted_rightwards_arrows: gain __heal__ | :game_die: < 2: discard one weapon )"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def clinic_study(self, ctx):
+        msg = """"You ask the woman if you can sit and observe how she works. She is clearly skilled in medicines and also working the more complicated machinery. She is hesitant. You offer some gold and keys in exchange for her inconvenience" (You may spend 10 :gold: and 1 Higuard Key to upgrade your Educated passive to: __Scholar__ :brain:  "Recreate your character with an additional 14 :sparkles: to your total" lasts for the rest of this run)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def salesman_sip(self, ctx):
+        msg = """You take a timid sip of the liquid. The salesman eyes you over with a smirk on his lips. You begin to feel... something... You look back up to see the salesman has vanished
+( :game_die: < 2: lose your primary passive | :game_die: 3-7: nothing happens | :game_die: > 8: gain a second passive (roll 1d10 for it from the creation engines lineage list) )"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def salesman_gulp(self, ctx):
+        msg = """You drain the flask into your stomach with gusto. The salesman cant help but cackle. "tastes good right?" his mouth flops open and he drools at the thought. He begins to sniff the air "ahhh yes you're in for a ride"
+( :game_die: < 5: lose your primary passive | :game_die: > 5: gain a second passive (roll 1d10 for it from the creation engines lineage list) and __Will__x2)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def salesman_smell(self, ctx):
+        msg = """You look the salesman in the eye. Your gaze makes him cower slightly. You take a sniff of the flask while maintaining eye contact... the salesman is visibly sweating. "This is a transformation tonic. I can smell my peoples blood in it. Its unmistakable" The salesman begins to fidget with something in his pocket "ahh well, y-you see... th-this is specially designed for uhh-" You hand the liquid back to him "If you wish to leave here alive you better get rid of this right now" His eyes grow wide, then narrow back down and a sneer crawls across his face. "and what are ya gonna do if I dont?" In flash you kick a nearby box into the ally and light it ablaze with a gust from your lungs. Fear grips him as he recoils back. "I-I'm sory I-I-I will g-get rid of it! H-here! Take it! Im sorry! Its yours!" he drops a relic on the table, hastily drops the flask, and scurries away on all fours. (You may spend 4 :heart:  to upgrade your Draconic passive to: __Scale of Ancients__ :dragon_face:   "Blocking an attack causes __Burn__ to the attacker per each damage blocked. Dealing damage to a burning target triggers all its burn damage all at once and removes the Burn stacks" lasts for the rest of this run)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def chest_open(self, ctx):
+        msg = """You decide to open the chest. You quietly approach it, looking around for traps. There doesnt seem to be any...
+( :game_die: < 9: its a mimic. Fight the enemy in spoiler tags below | :game_die: =10 : huh. its just loot (roll !r d10 lesser))
+
+||__**MIMIC NYMPH**__
+:heart: : Target's HP
+:moneybag: : !r 7d3 :gold:
+Behavior: Select a random player at the start of the game. This will only ever attack that
+—————————————————
+1-3   | **Copy** Use targets first move.
+4-6   | **Imitate** Use targets second move.
+7-10 | **Plagiarize** Use targets third move.||"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def chest_leave(self, ctx):
+        msg = """You decide to leave the chest. Something doesnt feel right. (do another encounter)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def chest_listen(self, ctx):
+        msg = """Something in the air clues you in that this isnt a normal chest. You perk up your ears, close your eyes, and listen. You hear the sounds of the wood creaking. The sounds of the waterway rushing outside. The drops of the the Ether seeping in through the stone walls. The sounds of... breathing... Its faint, but you can identify that that breathing is coming from the chest. Its a mimic. You have heard about these and you know how to deal with it. You stand up as tall as you can and begin clanging your weapon on the ground and growling and roaring. You bear your fangs and make as much noise as you can. After a little while, the mimic begins to slowly back away towards a hole in the house, revealing a pile of gold where it was digesting (gain !r 1d10 gold)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def child_leave(self, ctx):
+        msg = """You tell the little girl you cant help. "But why!" She cries out holding back sobs. You tell her necrosis is too dangerous and she should find a doctor. "The doctors wont help" she says. You say that you are sorry, but neither can you."""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def child_help(self, ctx):
+        msg = """You nod and go into the the shack the girl is standing outside of. Inside the situation is dire. The room is dimly lit with candles that are struggling to stay lit under the influence of the necrosis. A woman, about 16-20 years old is neck deep in the thick black substance, its beginning to pin her to the wall and it looks like it has already overtaken her feet completely. The womans hands are restrained to the bed. shards of glass bottles dot the ground, some of them with bits of dried blood on them. "It felt so good at first." The woman says "I wasnt hurting anyone, it just brought me pleasure. Isnt life about finding pleasure?" A chill runs down your spine. "Let me guess, you are going to tell me that this is wrong?" You stare blankly "That I am not allowed to feel this way." You hear something whisper in your mind...
+
+(You can either use your mana to try to sever the woman from the necrosis (!r 1d20, anything below a 12 is a success and you lose 2 stacks of __will__) or you can coax the necorsis onto you (gain 5 stacks of __Will__, gain a Higuard key))"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def child_pray(self, ctx):
+        msg = """You nod and go into the the shack the girl is standing outside of. Inside the situation is dire. The room is dimly lit with candles that are struggling to stay lit under the influence of the necrosis. A woman, about 16-20 years old is neck deep in the thick black substance, its beginning to pin her to the wall and it looks like it has already overtaken her feet completely. The womans hands are restrained to the bed. shards of glass dot the ground, some of them with bits of dried blood on them. "YOU STAY AWAY FROM ME!" The woman screams. "MARY! THIS MAN IS GOING TO TRY TO HURT ME!" she cries out. The little girl doesnt waver. You walk forward and stretch out your hand towards her head. The chains holding her in place rattle wildly as she tries to reach for bits of broken glass bottles scattered along the floor. You place your hand firmly on her hand and invoke a prayer to YHWH. "NO PLESE! SPARE US! WE NEVER HARMED THE CHILDREN" The womans voice is desperate. A light gleams from your hand as the necrosis scatters or evaporates. You open your eyes to see the woman no longer gripped with the black substance. Shes sobbing. You release her chains. The little girl runs towards her and puts her arms around her. The womans wrists are purple with bruising. The lights flicker as the girl turns towards you and says "Thank you." Her tears no longer stain her shirt. (Lose 10 stacks of __Will__)"""
         await ctx.send(msg)
 
     @commands.command()
