@@ -116,15 +116,16 @@ def item_card(item, gold=None):
     import re
     gold_str = ""
     prefix, kind, price = item
-    if prefix is None:
-        name = re.match(r"\*\*(.*)\*\*", kind).group(1)
-    else:
-        name = re.match(r"\*\*(.*)\*\*", prefix).group(1) + " " + re.match(r"\*\*(.*)\*\*", kind).group(1)
     if gold is not None and gold is not False:
         gold = 0 if gold is True else gold
         gold += price
         gold_str = f" ({gold} <:gold:1058304371940655185>)"
-    return f"**__{name}__**{gold_str}\n{prefix}\n{kind}"
+    if prefix is None:
+        name = re.match(r"\*\*(.*)\*\*", kind).group(1)
+        return f"**__{name}__**{gold_str}\n{kind}"
+    else:
+        name = re.match(r"\*\*(.*)\*\*", prefix).group(1) + " " + re.match(r"\*\*(.*)\*\*", kind).group(1)
+        return f"**__{name}__**{gold_str}\n{prefix}\n{kind}"
 
 
 def gen_shop():
