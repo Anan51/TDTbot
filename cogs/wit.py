@@ -64,7 +64,7 @@ def gen_weapon(roll_str):
         "REDACTED]]",
     ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(weapons)))
-    return [(prefixes[r[0] - 1], weapons[r[1] - 1]) for r in rolls]
+    return [(prefixes[r[0] - 1], weapons[r[1] - 1], r[0] + r[1]) for r in rolls]
 
 
 def gen_potion(roll_str):
@@ -93,7 +93,7 @@ def gen_potion(roll_str):
         "**Proficiency**: +🚫🎯⚡ for the next 1 turn(s)",
         ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(potions)))
-    return [(prefixes[r[0] - 1], potions[r[1] - 1]) for r in rolls]
+    return [(prefixes[r[0] - 1], potions[r[1] - 1], r[0] + r[1]) for r in rolls]
 
 
 def gen_artifact(roll_str):
@@ -109,24 +109,29 @@ def gen_artifact(roll_str):
         "**Port-a-Forge**: 🛠️ You may upgrade one item or skill (give it the \"Superior\" prefix) for 10 gold whenever you arrive at a shop ",
         "**Ancient Key**: 🗝️ Double the loot you can store this run",
     ]
-    return [artifacts[r - 1] for r in roll(roll_str, max_sides=len(artifacts))]
+    return [(None, artifacts[r - 1], r) for r in roll(roll_str, max_sides=len(artifacts))]
 
 
-def item_card(item):
-    if isinstance(item, tuple) and len(item) == 2:
-        import re
-        prefix, kind = item
-        p_name = re.match(r"\*\*(.*)\*\*", prefix).group(1)
-        k_name = re.match(r"\*\*(.*)\*\*", kind).group(1)
-        return f"**__{p_name} {k_name}__**\n{prefix}\n{kind}"
-    return item
+def item_card(item, gold=None):
+    import re
+    gold_str = ""
+    prefix, kind, price = item
+    if prefix is None:
+        name = re.match(r"\*\*(.*)\*\*", kind).group(1)
+    else:
+        name = re.match(r"\*\*(.*)\*\*", prefix).group(1) + " " + re.match(r"\*\*(.*)\*\*", kind).group(1)
+    if gold is not None and gold is not False:
+        gold = 0 if gold is True else gold
+        gold += price
+        gold_str = f" ({gold} <:gold:1058304371940655185>)"
+    return f"**__{name}__**{gold_str}\n{prefix}\n{kind}"
 
 
 def gen_shop():
     items = gen_weapon("3d19")
     items.extend(gen_potion("3d10"))
     items.extend(gen_artifact("3d10"))
-    return [item_card(item) for item in items]
+    return [item_card(item, gold=5) for item in items]
 
 
 class Wit(commands.Cog, command_attrs=dict(hidden=True)):
