@@ -98,16 +98,16 @@ def gen_potion(roll_str):
 
 def gen_artifact(roll_str):
     artifacts = [
-        "Ring of Momentum: 💍 Kills grant Empower x3",
-        "Safety Hook: 🪝 Gain Protect whenever a shield fails to block damage",
-        "Vitamins: 💊 Start each combat with Heal",
-        "Lucky Clover: 🍀 All enemies gain Weak the first time you run out of MP",
-        "War Drum: 🥁 All enemies have Vulnerable when you are at 1/2 your max HP",
-        "Eternal Lantern: 🪔 All future weapons gain: \"🔀 cause Burn\" for the rest of this run",
-        "Cook Book: 🍔 You may raise your max HP and MP by 2 at Camp Sites instead of resting",
-        "Safety Scissors: ✂️ Once per world, you may escape an encounter or combat, go to the next level, but award no loot. May not be used on a boss ",
-        "Port-a-Forge: 🛠️ You may upgrade one item or skill (give it the \"Superior\" prefix) for 10 gold whenever you arrive at a shop ",
-        "Ancient Key: 🗝️ Double the loot you can store this run",
+        "**Ring of Momentum**: 💍 Kills grant Empower x3",
+        "**Safety Hook**: 🪝 Gain Protect whenever a shield fails to block damage",
+        "**Vitamins**: 💊 Start each combat with Heal",
+        "**Lucky Clover**: 🍀 All enemies gain Weak the first time you run out of MP",
+        "**War Drum**: 🥁 All enemies have Vulnerable when you are at 1/2 your max HP",
+        "**Eternal Lantern**: 🪔 All future weapons gain: \"🔀 cause Burn\" for the rest of this run",
+        "**Cook Book**: 🍔 You may raise your max HP and MP by 2 at Camp Sites instead of resting",
+        "**Safety Scissors**: ✂️ Once per world, you may escape an encounter or combat, go to the next level, but award no loot. May not be used on a boss ",
+        "**Port-a-Forge**: 🛠️ You may upgrade one item or skill (give it the \"Superior\" prefix) for 10 gold whenever you arrive at a shop ",
+        "**Ancient Key**: 🗝️ Double the loot you can store this run",
     ]
     return [artifacts[r - 1] for r in roll(roll_str, max_sides=len(artifacts))]
 
