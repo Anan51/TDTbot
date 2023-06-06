@@ -220,7 +220,7 @@ Behavior: gain permanent __Empower__ for every 5 damage taken
 https://youtu.be/wlF0-Qs2xkI""",
 
             """__**FLOW-MASTER GRIGORI**__
-:heart: : 10 x:busts_in_silhouette:
+:heart: : 15 x:busts_in_silhouette:
 :moneybag: : 1d19 :dagger:, +6 Comp Points
 Behavior: At even minutes this gains a stack of __Protect__ permanently, at odd minutes this gains a stack of __Empower__ permanently.
 —————————————————
