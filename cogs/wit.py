@@ -614,7 +614,7 @@ Behavior: Select a random player at the start of the game. This will only ever a
 4-6   | **Imitate** Use targets second move.
 7-10 | **Plagiarize** Use targets third move.""",
 
-            """__**HIGAURD**__
+            """__**HIGUARD**__
 ❤️ : 7
 💰 : 1 Higuard Key
 Behavior: If this takes 3 or more damage in one turn, summon another Higuard in 2 turns
