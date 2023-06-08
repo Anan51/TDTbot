@@ -637,9 +637,9 @@ Behavior: at 4, 2, and 1 remaining HP summon a copy of itself. Loot only drops f
 💰 : !r 1d10 🧪  + 5 <:gold:1058304371940655185>
 Behavior: Cannot take more than 4 damage a turn
 —————————————————
-1-2   | **Thrash** 💥⚡🚫
-3-8   | **Submerge** 🛡️🛡️ immune to 🚫
-9-10 | **Gills** Dispell all player __effects__ 🔀 gain __Empower__ per dispelled""",
+1-4   | **Thrash** 💥⚡🚫
+5-7   | **Submerge** 🛡️🛡️ immune to 🚫
+8-10 | **Gills** Dispell all player __effects__ 🔀 gain __Empower__ per dispelled""",
 
             """__**BLACKHAND GANG MARAUDER**__
 ❤️ : 4
