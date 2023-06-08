@@ -689,12 +689,12 @@ Behavior: +2 to all dice rolls (including speed ties)
         await ctx.send(msg)
 
     @commands.command()
-    async def card_hitcard_stand(self, ctx):
+    async def card_stand(self, ctx):
         msg = """You decide you are happy with your card total. ( Roll !r 3d15, if your card total is greater than this BUT not over 21 you gain 10 <:gold:1058304371940655185>. If not, then lose 10 <:gold:1058304371940655185> )"""
         await ctx.send(msg)
 
     @commands.command()
-    async def card_hitcard_trick(self, ctx):
+    async def card_trick(self, ctx):
         msg = """You suspect trickery is at play here. You eye the amounts being rewarded and being taken and you realize there is about an 80% chance you will lose which doesnt make sense. You watch closely then discover the secret: the man is playing with a trick deck. You are impressed at his cunning if not slightly disgusted at his thievery. You decide to wait a while until everyone else clears out then you ask him to teach you his tricks... for a price of course. (You may spend 20 <:gold:1058304371940655185> to upgrade your Silver Tongue passive to: __Gilded Tongue__ :money_with_wings: "Shops are now 5 gold cheaper, gain 1 <:gold:1058304371940655185> whenever you reach a new level" for the rest of the run)"""
         await ctx.send(msg)
 
