@@ -31,7 +31,7 @@ def roll(*args, max_sides=None):
 def gen_weapon(roll_str):
     prefixes = [
         "**Basic**: No bonus",
-        "**Ornate**: +10 in :gold: value",
+        "**Ornate**: +10 in <:gold:1058304371940655185> value",
         "**Lightweight**: +⚡",
         "**Relentless**: +🚫",
         "**Honed**: +🎯",
@@ -710,12 +710,12 @@ Behavior: +2 to all dice rolls (including speed ties)
 
     @commands.command()
     async def clinic_help(self, ctx):
-        msg = """"I might be able to help you and your cause" you say to an old woman wearily trying to take care of the line of people. "That-" she looks at her guards "That would be fine, but you need to lay down your weapons." You are nervous about leaving your weapons out in such a public place, but it would be worth it if you can help. (:game_die: > 3 : gain 5 :gold: and give a weapon :twisted_rightwards_arrows: gain __heal__ | :game_die: < 2: discard one weapon )"""
+        msg = """"I might be able to help you and your cause" you say to an old woman wearily trying to take care of the line of people. "That-" she looks at her guards "That would be fine, but you need to lay down your weapons." You are nervous about leaving your weapons out in such a public place, but it would be worth it if you can help. (:game_die: > 3 : gain 5 <:gold:1058304371940655185> and give a weapon :twisted_rightwards_arrows: gain __heal__ | :game_die: < 2: discard one weapon )"""
         await ctx.send(msg)
 
     @commands.command()
     async def clinic_study(self, ctx):
-        msg = """"You ask the woman if you can sit and observe how she works. She is clearly skilled in medicines and also working the more complicated machinery. She is hesitant. You offer some gold and keys in exchange for her inconvenience" (You may spend 10 :gold: and 1 Higuard Key to upgrade your Educated passive to: __Scholar__ :brain:  "Recreate your character with an additional 14 :sparkles: to your total" lasts for the rest of this run)"""
+        msg = """"You ask the woman if you can sit and observe how she works. She is clearly skilled in medicines and also working the more complicated machinery. She is hesitant. You offer some gold and keys in exchange for her inconvenience" (You may spend 10 <:gold:1058304371940655185> and 1 Higuard Key to upgrade your Educated passive to: __Scholar__ :brain:  "Recreate your character with an additional 14 :sparkles: to your total" lasts for the rest of this run)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -742,7 +742,7 @@ Behavior: +2 to all dice rolls (including speed ties)
 
 ||__**MIMIC NYMPH**__
 :heart: : Target's HP
-:moneybag: : !r 7d3 :gold:
+:moneybag: : !r 7d3 <:gold:1058304371940655185>
 Behavior: Select a random player at the start of the game. This will only ever attack that
 —————————————————
 1-3   | **Copy** Use targets first move.
@@ -784,7 +784,7 @@ Behavior: Select a random player at the start of the game. This will only ever a
 
     @commands.command()
     async def flood_branch(self, ctx):
-        msg = "You see an off shoot of the main pipe directly above you with a ladder leading up, you muster your strength and jump up to reach it just in time for the watter to blast through the pipe below you. Your feet get drenched, but you are fine. You climb to the top and push off the metallic cover only to see you aer now in the middle of an enemies camp... (Fight a Major, +5 :gold: if you win)"
+        msg = "You see an off shoot of the main pipe directly above you with a ladder leading up, you muster your strength and jump up to reach it just in time for the watter to blast through the pipe below you. Your feet get drenched, but you are fine. You climb to the top and push off the metallic cover only to see you aer now in the middle of an enemies camp... (Fight a Major, +5 <:gold:1058304371940655185> if you win)"
         await ctx.send(msg)
 
     @commands.command()
@@ -796,7 +796,7 @@ Behavior: Select a random player at the start of the game. This will only ever a
     async def underwash_boss(self, ctx):
         msg = """__**THE TRAITOR: JUDGE-23**__
 :heart: : 12
-:moneybag: : 1d19 :dagger:, 1d10 :gold:, 1d10 :test_tube:
+:moneybag: : 1d19 :dagger:, 1d10 <:gold:1058304371940655185>, 1d10 :test_tube:
 Behavior: Summon another JUDGE-23 per :busts_in_silhouette:. Whenever a player gains an __effect__ this gains __Empower__
 —————————————————
 1-4   | **Heresy** (+1 :game_die:) :boom: targets random players. Repeats 2 times (w buffs applied).
