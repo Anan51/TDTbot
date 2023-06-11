@@ -680,6 +680,11 @@ Behavior: +2 to all dice rolls (including speed ties)
 **Turn her away** tdt$child_leave
 **See what you can do** tdt$child_help
 :droplet: Anointed: ||**Pray and Try to Help** tdt$child_pray||""",
+            """**__A Strange Sound__**
+- You are about to cross over a bridge when you notice that it is out. It looks to have been abandoned for years. After some debate you head towards a large pipe that runs parallel to to the blue river above in the cave ceiling. As you are crossing through, making small splashes in the dirty green water, you hear a strange noise coming from behind you... You stop and listen... Is that?.. WATER! and LOTS of it!
+**Run for it** tdt$flood_run
+**Find an Off Shoot** tdt$flood_branch
+:tooth:  Giant: ||**Brace yourself** tdt$flood_brace||""",
         ]
         await ctx.send(random.choice(encounters))
 
@@ -770,6 +775,21 @@ Behavior: Select a random player at the start of the game. This will only ever a
     @commands.command()
     async def child_pray(self, ctx):
         msg = """You nod and go into the the shack the girl is standing outside of. Inside the situation is dire. The room is dimly lit with candles that are struggling to stay lit under the influence of the necrosis. A woman, about 16-20 years old is neck deep in the thick black substance, its beginning to pin her to the wall and it looks like it has already overtaken her feet completely. The womans hands are restrained to the bed. shards of glass dot the ground, some of them with bits of dried blood on them. "YOU STAY AWAY FROM ME!" The woman screams. "MARY! THIS MAN IS GOING TO TRY TO HURT ME!" she cries out. The little girl doesnt waver. You walk forward and stretch out your hand towards her head. The chains holding her in place rattle wildly as she tries to reach for bits of broken glass bottles scattered along the floor. You place your hand firmly on her hand and invoke a prayer to YHWH. "NO PLESE! SPARE US! WE NEVER HARMED THE CHILDREN" The womans voice is desperate. A light gleams from your hand as the necrosis scatters or evaporates. You open your eyes to see the woman no longer gripped with the black substance. Shes sobbing. You release her chains. The little girl runs towards her and puts her arms around her. The womans wrists are purple with bruising. The lights flicker as the girl turns towards you and says "Thank you." Her tears no longer stain her shirt. (Lose 10 stacks of __Will__)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def flood_run(self, ctx):
+        msg = "You begin a full sprint towards the exit. The water is crashing against the metal pipes behind you as you hear the pipes respond with metalic groans from the weight. The pipe ends in a sheer drop to a drain, there is light shining through it. It will hurt, but you might be able to smash through it and get clear on the other side (:game_die: < 5 : -2 :heart: and go back one level)"
+        await ctx.send(msg)
+
+    @commands.command()
+    async def flood_branch(self, ctx):
+        msg = "You see an off shoot of the main pipe directly above you with a ladder leading up, you muster your strength and jump up to reach it just in time for the watter to blast through the pipe below you. Your feet get drenched, but you are fine. You climb to the top and push off the metallic cover only to see you aer now in the middle of an enemies camp... (Fight a Major, +5 :gold: if you win)"
+        await ctx.send(msg)
+
+    @commands.command()
+    async def flood_brace(self, ctx):
+        msg = "You eye up the water coming towards you and glance behind you to see a drain isnt far off. You scan your environment and see there is a drain above you but the tunnel is too small for you to fit. You decide your best bet is to grab the ladder above and brace for impact. The water is intense, but nothing you cant handle. Despite it being murky, the water smells like only algae inhabits it, and its cool against your skin. (Gain +1 :large_blue_diamond:)"
         await ctx.send(msg)
 
     @commands.command()
