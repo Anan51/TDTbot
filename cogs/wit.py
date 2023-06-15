@@ -831,12 +831,13 @@ https://www.youtube.com/watch?v=bMfvZmhqW0A&pp=ygUTZ29kIHNoYXR0ZXJpbmcgc3Rhcg%3D
         await split_send(ctx, gen_shop(), "\n\n")
 
     @commands.command(aliases=['r'])
-    async def roll (self, ctx, roll_str)
+    async def roll(self, ctx, roll_str)
         rolls = roll(roll_str)
         msg = ' + '.join(rolls)
         if len(rolls) > 1:
             msg += ' = {:}'.format(sum(roll))
         await ctx.send()
+        
         
 if usingV2:
     async def setup(bot):
