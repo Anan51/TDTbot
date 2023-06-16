@@ -867,7 +867,7 @@ https://www.youtube.com/watch?v=bMfvZmhqW0A&pp=ygUTZ29kIHNoYXR0ZXJpbmcgc3Rhcg%3D
         msg = ' + '.join([str(i) for i in rolls])
         if len(rolls) > 1:
             msg += ' = {:}'.format(sum(roll))
-        await ctx.send()
+        await ctx.send(msg)
 
 
 if usingV2:
