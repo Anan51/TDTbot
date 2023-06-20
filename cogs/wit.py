@@ -64,7 +64,7 @@ def gen_weapon(roll_str):
         "REDACTED]]",
     ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(weapons)))
-    return [(prefixes[r[0] - 1], weapons[r[1] - 1], r[0] + r[1]) for r in rolls]
+    return [(prefixes[r[0] - 1], weapons[r[1] - 1], (r[0] if r[0] != 2 else 10) + r[1]) for r in rolls]
 
 
 def gen_potion(roll_str):
