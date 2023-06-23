@@ -695,6 +695,11 @@ Behavior: +2 to all dice rolls (including speed ties)
 **Climb Up** tdt$factory_climb
 **Find Another Around** tdt$factory_around
 :mechanical_arm:   Sentian: ||**Examine the Machines** tdt$factory_examine||""",
+            """**__Ferryman__**
+- You approach the edge of a slow moving river of clear blue and green liquid. The river stretches from the inside of a pipe in a massive concrete wall to miles down the waterway. You arent going to be able to go around... A man with a cloak standing on top of a small flat raft approach you. "Do you seek to cross?" You cant see his face but you can tell the tone of his voice is one of a tired, withered old man. You nod, forgetting he likely cant see your face either. Nevertheless he responds "You are the ones who broke the seals?" Your pulse quickens for a moment but you slowly reply, "Y-yeah." He doesnt move "Perhaps it is time..." He holds out his hand expectantly.
+**Pay in Gold** tdt$ferry_gold
+**Pay in Spirit** tdt$ferry_spirit
+:bow_and_arrow:  Elvish: ||**Pay in Blood** tdt$ferry_blood||""",
         ]
         await ctx.send(random.choice(encounters))
 
@@ -840,6 +845,21 @@ Behavior: When this takes damage or an ally dies, gain __Empower__.
         msg = """You take a moment to stop and examine the machines. It was hard to see in the dim light but with a little use of your flashlight you can clearly see that the parts scattered around here are Sentian parts. The parts are very old, probably some of the first models ever produced by AEROR corp., even the logo is out of date! Something triggers deep within the recesses of your mind, you mindlessly navigate to a backroom where one machine is still in perfect functioning order. This seems so familiar. The machine is perched in the ceiling and needles and surgery equipment arm its front like teeth. In the chair a smaller Sentian is sat limp with its chest open. Your curiosity gets the better of you as you walk around to the front. The Sentian's chest is open; a human heart is exposed inside. Wires interlock it into place. It beats slowly and meekly. As you try to collect your emotions you notice that a black rot has begun eating away at its lower aorta. Your own heartbeat quickens as the Sentian child looks up at you weakly. You panic and head for the door with a quick step when you are stopped by another taller Sentian holding scissors and bandages.
 
 "We can't save him" it says to you, its eyes looking down at the bandages, "this was his favorite, take it with you to defeat the Evil One." it looks you in your eyes as it holds out a custom made forearm plate. You look down at the equipment. (You may spend 3 :heart: and 7 :gold: to upgrade your Sentian passive to: __AEROR Corp. Classic__ :gear: "Gain __Empower__ for each point of damage you take" lasts for the rest of this run)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def ferry_gold(self, ctx):
+        msg = "You dig through your pocket in search of gold. While you are doing so, the man says \"He did not bring the curse\" This gives you pause, but you keep looking (pay 20 Gold or 2 Higuard Keys, if you dont have the currency use tdt$ferry_spirit)"
+        await ctx.send(msg)
+
+    @commands.command()
+    async def ferry_spirit(self, ctx):
+        msg = "You dont elect to provide any currency. You decide to instead grasp his hand. This feels like what was intended, strangely. The man grips your hand firmly and says \"He knows you will kill if it gets you more renown or experience\" (Gain __Will__ x3)"
+        await ctx.send(msg)
+
+    @commands.command()
+    async def ferry_blood(self, ctx):
+        msg = "You examine the mans hand. You notice it has tattoos in old elvish. You dont speak it, but you strangely seem to understand what they are saying. You place the edge of your blade in your hand and cut it. It begins to bleed. You drip some of the blood onto the ferryman's hand \"Sacrifice is the only cure\" he says. The tattoos recede and he retracts his hand. (-2 max HP)"
         await ctx.send(msg)
 
     @commands.command()
