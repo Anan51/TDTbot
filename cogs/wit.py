@@ -479,7 +479,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def sack_climb(self, ctx):
-        msg = """You gather your strength then attempt to reach the sack dangling from the branches. ( 🎲 < 5: summon enemy | 🎲 > 5: !r 1d5 lesser chest)"""
+        msg = """You gather your strength then attempt to reach the sack dangling from the branches. ( 🎲 <= 4: summon enemy | 🎲 >= 5: !r 1d5 lesser chest)"""
         await ctx.send(msg)
 
     @commands.command()
