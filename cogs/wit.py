@@ -879,8 +879,36 @@ Behavior: When this takes damage or an ally dies, gain __Empower__.
 
     @commands.command()
     async def vending_charge(self, ctx):
-        msg = 'You slip a handful of coins into its slot, press its button pad, and eagerly await the machine to dispense your goods. The machine whirrs and sings as it pushes the bottles out of the metal tube. Your face lights up as it gets near the edge as you watch with earnest... at this moment in time, all is right in the world. The troubles you have gone through up until this point feel like distant memories. All that matters... right now... is this little cup and the machine that- is stuck? Stuck?! STUCK!?! This will not stand. Your face distorts into concentrated fury. Your snort and scrunch your face. You backpaddle. Onlookers watch in horror as what happens next can only be described as an unstoppable force meeting an immovable object. You wind up and put your FULL body into the machine. With a crash, the machine detaches from the wall and sails into the air. Writers of this moment, to this day, swear that the machine moved in slow motion as an chorus of angels accompanied its flight. Plays, songs, and cinemas were written about this moment in the years to come, always with some details wrong, but the one thing that remained a constant through all of them was the beauty of that moment. Some say some world leaders had changes of heart after hearing about this moment. Nations would fall, others would rise, but this moment... is a constant. Like a manifesto of peace and war. This moment was... poetic. Your mind becomes lost in the contemplations of the cosmos as the machine -some say it landed on the corners but historians tend to agree it landed face first- shatters upon the cold stone ground. The cracking of metal and glass rang out for everyone to hear. They say even Malokai shuddered at the sound of it. Truly, this was the culmination of the human spirit against the cold uncaring virtues of the system it was placed in. Justice. Truth. Love. All were made apparent that day. Truly... this would be the highlight of your life. It was all downhill from here... You understood this. How could you possibly follow such a display? You couldn\'t! A deep sadness underpines your mountain top experience. But at least for a while... you made your ancestors -and all those who would come after you- proud. (select one "Tonic of" prefixed potion)'
-        await ctx.send(msg)
+        msg = [
+            'You slip a handful of coins into its slot, press its button pad, and eagerly await the machine to dispense your goods.',
+            'The machine whirrs and sings as it pushes the bottles out of the metal tube.',
+            'Your face lights up as it gets near the edge as you watch with earnest...',
+            'at this moment in time, all is right in the world.',
+            'The troubles you have gone through up until this point feel like distant memories.',
+            'All that matters... right now... is this little cup and the machine that- is stuck? Stuck?! STUCK!?!',
+            'This will not stand. Your face distorts into concentrated fury.',
+            'Your snort and scrunch your face. You backpaddle.',
+            'Onlookers watch in horror as what happens next can only be described as an unstoppable force meeting an immovable object.',
+            'You wind up and put your FULL body into the machine.',
+            'With a crash, the machine detaches from the wall and sails into the air.',
+            'Writers of this moment, to this day, swear that the machine moved in slow motion as an chorus of angels accompanied its flight.',
+            'Plays, songs, and cinemas were written about this moment in the years to come, always with some details wrong, but the one thing that remained a constant through all of them was the beauty of that moment.',
+            'Some say some world leaders had changes of heart after hearing about this moment.',
+            'Nations would fall, others would rise, but this moment... is a constant.',
+            'Like a manifesto of peace and war. This moment was... poetic.',
+            'Your mind becomes lost in the contemplations of the cosmos as the machine -some say it landed on the corners but historians tend to agree it landed face first- shatters upon the cold stone ground.',
+            'The cracking of metal and glass rang out for everyone to hear.',
+            'They say even Malokai shuddered at the sound of it.',
+            'Truly, this was the culmination of the human spirit against the cold uncaring virtues of the system it was placed in. Justice. Truth. Love.',
+            'All were made apparent that day.',
+            'Truly... this would be the highlight of your life.',
+            'It was all downhill from here... You understood this.',
+            'How could you possibly follow such a display?',
+            'You couldn\'t! A deep sadness underpines your mountain top experience.',
+            'But at least for a while... you made your ancestors -and all those who would come after you- proud.',
+            '(select one "Tonic of" prefixed potion)',
+        ]
+        await split_send(ctx, msg, " ")
 
     @commands.command()
     async def underwash_boss(self, ctx):
