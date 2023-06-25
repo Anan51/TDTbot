@@ -950,10 +950,10 @@ https://www.youtube.com/watch?v=zP_1e30FWsE""",
 
     @commands.command()
     async def floor(self, ctx):
-        options = ["💀 Enemy (9/20 chance)",
-                   "☠️ Major (2/20 chance)",
-                   "❔ Encounter (9/20 chance)"]
-        await ctx.send(random.choices(options, weights=[9, 2, 9], k=1)[0])
+        options = ["💀 Enemy",
+                   "☠️ Major",
+                   "❔ Encounter"]
+        await ctx.send(', '.join(random.choices(options, weights=[9, 2, 9], k=3)))
 
 
 if usingV2:
