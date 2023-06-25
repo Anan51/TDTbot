@@ -725,12 +725,12 @@ Behavior: +2 to all dice rolls (including speed ties)
 
     @commands.command()
     async def clinic_heal(self, ctx):
-        msg = """"Hello there." a woman with greasy black hair, dark bags under her eyes, and a smile says to you. "Do you need healing? I can offer my services if you have something in exchange." (10 Gold or 1 Higuard Key to attempt to remove a curse/negative passive: :game_die: < 9 : remove 1 passive)"""
+        msg = """"Hello there." a woman with greasy black hair, dark bags under her eyes, and a smile says to you. "Do you need healing? I can offer my services if you have something in exchange." (10 Gold or 1 Higuard Key to attempt to remove a curse/negative passive: :game_die: ≤ 9 : remove 1 passive)"""
         await ctx.send(msg)
 
     @commands.command()
     async def clinic_help(self, ctx):
-        msg = """"I might be able to help you and your cause" you say to an old woman wearily trying to take care of the line of people. "That-" she looks at her guards "That would be fine, but you need to lay down your weapons." You are nervous about leaving your weapons out in such a public place, but it would be worth it if you can help. (:game_die: > 3 : gain 5 <:gold:1058304371940655185> and give a weapon :twisted_rightwards_arrows: gain __heal__ | :game_die: < 2: discard one weapon )"""
+        msg = """"I might be able to help you and your cause" you say to an old woman wearily trying to take care of the line of people. "That-" she looks at her guards "That would be fine, but you need to lay down your weapons." You are nervous about leaving your weapons out in such a public place, but it would be worth it if you can help. (:game_die: ≥ 3 : gain 5 <:gold:1058304371940655185> and give a weapon :twisted_rightwards_arrows: gain __heal__ | :game_die: ≤ 2: discard one weapon )"""
         await ctx.send(msg)
 
     @commands.command()
@@ -741,13 +741,13 @@ Behavior: +2 to all dice rolls (including speed ties)
     @commands.command()
     async def salesman_sip(self, ctx):
         msg = """You take a timid sip of the liquid. The salesman eyes you over with a smirk on his lips. You begin to feel... something... You look back up to see the salesman has vanished
-( :game_die: < 2: lose your primary passive | :game_die: 3-7: nothing happens | :game_die: > 8: gain a second passive (roll 1d10 for it from the creation engines lineage list) )"""
+( :game_die: ≤ 2: lose your primary passive | :game_die: 3-7: nothing happens | :game_die: ≥ 8: gain a second passive (roll 1d10 for it from the creation engines lineage list) )"""
         await ctx.send(msg)
 
     @commands.command()
     async def salesman_gulp(self, ctx):
         msg = """You drain the flask into your stomach with gusto. The salesman cant help but cackle. "tastes good right?" his mouth flops open and he drools at the thought. He begins to sniff the air "ahhh yes you're in for a ride"
-( :game_die: < 5: lose your primary passive | :game_die: > 5: gain a second passive (roll 1d10 for it from the creation engines lineage list) and __Will__x2)"""
+( :game_die: ≤ 5: lose your primary passive | :game_die: ≥ 5: gain a second passive (roll 1d10 for it from the creation engines lineage list) and __Will__x2)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -758,7 +758,7 @@ Behavior: +2 to all dice rolls (including speed ties)
     @commands.command()
     async def chest_open(self, ctx):
         msg = """You decide to open the chest. You quietly approach it, looking around for traps. There doesnt seem to be any...
-( :game_die: < 9: its a mimic. Fight the enemy in spoiler tags below | :game_die: =10 : huh. its just loot (roll !r d10 lesser))
+( :game_die: ≤ 9: its a mimic. Fight the enemy in spoiler tags below | :game_die: =10 : huh. its just loot (roll !r d10 lesser))
 
 ||__**MIMIC NYMPH**__
 :heart: : Target's HP
@@ -799,7 +799,7 @@ Behavior: Select a random player at the start of the game. This will only ever a
 
     @commands.command()
     async def flood_run(self, ctx):
-        msg = "You begin a full sprint towards the exit. The water is crashing against the metal pipes behind you as you hear the pipes respond with metalic groans from the weight. The pipe ends in a sheer drop to a drain, there is light shining through it. It will hurt, but you might be able to smash through it and get clear on the other side (:game_die: < 5 : -2 :heart: and go back one level)"
+        msg = "You begin a full sprint towards the exit. The water is crashing against the metal pipes behind you as you hear the pipes respond with metalic groans from the weight. The pipe ends in a sheer drop to a drain, there is light shining through it. It will hurt, but you might be able to smash through it and get clear on the other side (:game_die: ≤ 5 : -2 :heart: and go back one level)"
         await ctx.send(msg)
 
     @commands.command()
@@ -819,7 +819,7 @@ Behavior: Select a random player at the start of the game. This will only ever a
 
     @commands.command()
     async def zone_sneak(self, ctx):
-        msg = "You dont have time to waste. You wait for the staff to look away then you cross under the tape and head inside the dome. Inside black and pinkish sludge are growing along the walls. The smell of chemical has fully given way to the smell of rot. You instinctively cover your face. Bodies are strewn about the zone, with some of their corpses slowly climbing up the walls from the sludge. The room in here is well lit with florescent lamps that seem to be dissipating some of the sludge where it is most concentrated leaving a large amorphous scab where it has dried up. Some site containment crews are looking at equipment and scanning the room with strange devices. Others are collecting samples. The longer you stand in here the more you begin to feel light headed... You head for the door.. (:game_die: < 3 : summon 2 Reach enemies | :game_die: > 4 : lose 1 max HP and 1 max MP, gain one stack of __Will__)"
+        msg = "You dont have time to waste. You wait for the staff to look away then you cross under the tape and head inside the dome. Inside black and pinkish sludge are growing along the walls. The smell of chemical has fully given way to the smell of rot. You instinctively cover your face. Bodies are strewn about the zone, with some of their corpses slowly climbing up the walls from the sludge. The room in here is well lit with florescent lamps that seem to be dissipating some of the sludge where it is most concentrated leaving a large amorphous scab where it has dried up. Some site containment crews are looking at equipment and scanning the room with strange devices. Others are collecting samples. The longer you stand in here the more you begin to feel light headed... You head for the door.. (:game_die: ≤ 3 : summon 2 Reach enemies | :game_die: ≥ 4 : lose 1 max HP and 1 max MP, gain one stack of __Will__)"
         await ctx.send(msg)
 
     @commands.command()
@@ -829,7 +829,7 @@ Behavior: Select a random player at the start of the game. This will only ever a
 
     @commands.command()
     async def factory_climb(self, ctx):
-        msg = "You let out a sigh. You knew the shortcut was too good to be true. You loosen your shoulders and start mantling equipment and support beams to climb towards the hole. The metal lurches and creaks with every next step... Maybe... maybe you shouldnt be doing this( Gain +1 to your dice for each :zap: move you have: :game_die: < 6 : fall, -1 :heart: and gain :x_ray: __**Fractured**__: \"Skip your first turn every new combat\"  | :game_die: > 7 : skip ahead 3 levels)"
+        msg = "You let out a sigh. You knew the shortcut was too good to be true. You loosen your shoulders and start mantling equipment and support beams to climb towards the hole. The metal lurches and creaks with every next step... Maybe... maybe you shouldnt be doing this( Gain +1 to your dice for each :zap: move you have: :game_die: ≤ 6 : fall, -1 :heart: and gain :x_ray: __**Fractured**__: \"Skip your first turn every new combat\"  | :game_die: ≥ 7 : skip ahead 3 levels)"
         await ctx.send(msg)
 
     @commands.command()
@@ -869,12 +869,12 @@ Behavior: When this takes damage or an ally dies, gain __Empower__.
 
     @commands.command()
     async def vending_one(self, ctx):
-        msg = "You slip a handful of coins into its slot, press its button pad, and eagerly await the machine to dispense your goods. The machine whirrs and sings as it pushes one of the bottles out of the metal tube. Your face lights up as it gets near the edge as you watch with earnest... at this moment in time, all is right in the world. The troubles you have gone through up until this point feel like distant memories. All that matters... right now... is this little cup and the machine that- is stuck? Stuck?! STUCK!?! ( Gain +1 to your dice for each :no_entry_sign: move you have: :game_die: < 3 : Stuck :(  | :game_die: > 4 : select one \"Tonic of\" prefixed potion from the loot table)"
+        msg = "You slip a handful of coins into its slot, press its button pad, and eagerly await the machine to dispense your goods. The machine whirrs and sings as it pushes one of the bottles out of the metal tube. Your face lights up as it gets near the edge as you watch with earnest... at this moment in time, all is right in the world. The troubles you have gone through up until this point feel like distant memories. All that matters... right now... is this little cup and the machine that- is stuck? Stuck?! STUCK!?! ( Gain +1 to your dice for each :no_entry_sign: move you have: :game_die: ≤ 3 : Stuck :(  | :game_die: ≥ 4 : select one \"Tonic of\" prefixed potion from the loot table)"
         await ctx.send(msg)
 
     @commands.command()
     async def vending_three(self, ctx):
-        msg = 'You slip a handful of coins into its slot, press its button pad, and eagerly await the machine to dispense your goods. The machine whirrs and sings as it pushes the bottles out of the metal tube. Your face lights up as it gets near the edge as you watch with earnest... at this moment in time, all is right in the world. The troubles you have gone through up until this point feel like distant memories. All that matters... right now... is this little cup and the machine that- is stuck? Stuck?! STUCK!?! ( Gain +1 to your dice for each :no_entry_sign: move you have: :game_die: < 3 : Stuck :(  | :game_die: > 4 : select one "Tonic of" prefixed potion from the loot table. Repeat your rolls for each Tonic)'
+        msg = 'You slip a handful of coins into its slot, press its button pad, and eagerly await the machine to dispense your goods. The machine whirrs and sings as it pushes the bottles out of the metal tube. Your face lights up as it gets near the edge as you watch with earnest... at this moment in time, all is right in the world. The troubles you have gone through up until this point feel like distant memories. All that matters... right now... is this little cup and the machine that- is stuck? Stuck?! STUCK!?! ( Gain +1 to your dice for each :no_entry_sign: move you have: :game_die: ≤ 3 : Stuck :(  | :game_die: ≥ 4 : select one "Tonic of" prefixed potion from the loot table. Repeat your rolls for each Tonic)'
         await ctx.send(msg)
 
     @commands.command()
