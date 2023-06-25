@@ -884,7 +884,8 @@ Behavior: When this takes damage or an ally dies, gain __Empower__.
 
     @commands.command()
     async def underwash_boss(self, ctx):
-        msg = """__**THE TRAITOR: JUDGE-23**__
+        encounters = [
+            """__**THE TRAITOR: JUDGE-23**__
 :heart: : 12
 :moneybag: : 1d19 :dagger:, 1d10 <:gold:1058304371940655185>, 1d10 :test_tube:
 Behavior: Summon another JUDGE-23 per :busts_in_silhouette:. Whenever a player gains an __effect__ this gains __Empower__
@@ -893,8 +894,19 @@ Behavior: Summon another JUDGE-23 per :busts_in_silhouette:. Whenever a player g
 5-7   | **Martyr** (-2 :game_die:) Cause __Weak__x2 to ALL players per damage taken. If this would have died this turn, all players gain __burn__x99 instead.
 8-10 | **Doomsayer** If this took no damage, ALL players gain __Vulnerable__ at the start of every turn.
 11+   | **Judgement** :boom::boom::boom::no_entry_sign: to ALL. If a player dies, repeat.
-https://www.youtube.com/watch?v=bMfvZmhqW0A&pp=ygUTZ29kIHNoYXR0ZXJpbmcgc3Rhcg%3D%3D"""
-        await ctx.send(msg)
+https://www.youtube.com/watch?v=bMfvZmhqW0A&pp=ygUTZ29kIHNoYXR0ZXJpbmcgc3Rhcg%3D%3D""",
+            """__**LEGION OF FLESH**__
+:heart: : 4
+:moneybag: : 1d19 :dagger:, +6 Comp Points
+Behavior: Summon another Legion of Flesh x :busts_in_silhouette: x 4. They roll/act as one unit but must be targeted individually
+—————————————————
+1-4   | **Wrath** (:game_die: +4) :boom: lowest HP, repeat per Legion of Flesh
+5-7   | **Envy** All other Legion of Flesh gain +:heart: per damage taken
+8-10 | **Greed** (:game_die: - 3) If this took no damage, summon another Legion of Flesh
+11+    | **Pride** roll `!r 1d<# of Legion>`, That corresponding Legion is invincible until another dies
+https://www.youtube.com/watch?v=zP_1e30FWsE""",
+        ]
+        await ctx.send(random.choice(encounters))
 
     @commands.command()
     async def wit_shop(self, ctx):
