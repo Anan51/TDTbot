@@ -223,12 +223,12 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def cliff_run(self, ctx):
-        msg = """You manage to reach the other side of the porous white cliff face. In your haste you may have pulled an ankle. ( 🎲 < 5: Remove ⚡ from a move for the rest of your run)"""
+        msg = """You manage to reach the other side of the porous white cliff face. In your haste you may have pulled an ankle. ( 🎲 ≤ 5: Remove ⚡ from a move for the rest of your run)"""
         await ctx.send(msg)
 
     @commands.command()
     async def cliff_hunker(self, ctx):
-        msg = """You cling to the side of the cliff face, the bone shatters, splints, and falls away around you. You are mostly unscathed except for a few shards that cut into your back. ( 🎲 < 4: -1 ❤️ )"""
+        msg = """You cling to the side of the cliff face, the bone shatters, splints, and falls away around you. You are mostly unscathed except for a few shards that cut into your back. ( 🎲 ≤ 4: -1 ❤️ )"""
         await ctx.send(msg)
 
     @commands.command()
@@ -248,7 +248,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def blood_collect(self, ctx):
-        msg = """You grab one of your empty water satchels and draw close to the pool, but before you can even get the lid off your satchel you are attacked! ( 🎲 < 8: use tdt$reach_enemy | 🎲 > 9: +5 <:gold:1058304371940655185>)"""
+        msg = """You grab one of your empty water satchels and draw close to the pool, but before you can even get the lid off your satchel you are attacked! ( 🎲 ≤ 8: use tdt$reach_enemy | 🎲 ≥ 9: +5 <:gold:1058304371940655185>)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -274,12 +274,12 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def cling_cut(self, ctx):
-        msg = """You draw your weapon and destroy the tendrils attaching to your flesh. ( 🎲 < 4: Gain: __Sapped__ 💤 "Disable all other passives" | 🎲 > 5: Lose 3 🔷)"""
+        msg = """You draw your weapon and destroy the tendrils attaching to your flesh. ( 🎲 ≤ 4: Gain: __Sapped__ 💤 "Disable all other passives" | 🎲 ≥ 5: Lose 3 🔷)"""
         await ctx.send(msg)
 
     @commands.command()
     async def cling_relax(self, ctx):
-        msg = """You conclude the plant is drawn to motion and struggling. You try to relax. The plants reach towards you slows!.. but it doesnt stop. Before you realize it you are surrounded with vines each with a sticky sap like substance on their leaflets you attempt to fight back but its too late, your are slowly being pulled down against the bridge. ( 🎲 < 7: You or a teammate may spend 1 🔷 for you to try again otherwise: Gain: __Sapped__ 💤 "Disable all other passives" )"""
+        msg = """You conclude the plant is drawn to motion and struggling. You try to relax. The plants reach towards you slows!.. but it doesnt stop. Before you realize it you are surrounded with vines each with a sticky sap like substance on their leaflets you attempt to fight back but its too late, your are slowly being pulled down against the bridge. ( 🎲 ≤ 7: You or a teammate may spend 1 🔷 for you to try again otherwise: Gain: __Sapped__ 💤 "Disable all other passives" )"""
         await ctx.send(msg)
 
     @commands.command()
@@ -300,17 +300,17 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def shin_squeeze(self, ctx):
-        msg = """You carefully sidle through the field of spears, a few of them catch your clothing. ( 🎲 < 3: -2 ❤️ | 🎲 > 4: -2 <:gold:1058304371940655185>)"""
+        msg = """You carefully sidle through the field of spears, a few of them catch your clothing. ( 🎲 ≤ 3: -2 ❤️ | 🎲 ≥ 4: -2 <:gold:1058304371940655185>)"""
         await ctx.send(msg)
 
     @commands.command()
     async def shin_attack(self, ctx):
-        msg = """You Raise your weapon and begin smashing through the spears. Splinters fly in every direction and a few fly towards your face ( 🎲 < 7: -2 ❤️)"""
+        msg = """You Raise your weapon and begin smashing through the spears. Splinters fly in every direction and a few fly towards your face ( 🎲 ≤ 7: -2 ❤️)"""
         await ctx.send(msg)
 
     @commands.command()
     async def shin_remove(self, ctx):
-        msg = """You squat down along the first row of spears, they are crudely made BUT not flimsily made. You recognize a few of the markings and knots used on the fastenings; they are fenric. "That makes sense" you say out loud to yourself. You think you might be able to remove one of the spears ( 🎲 < 6: failure | 🎲 > 7: Acquire one **Relentless Fang** from the Loot Table)"""
+        msg = """You squat down along the first row of spears, they are crudely made BUT not flimsily made. You recognize a few of the markings and knots used on the fastenings; they are fenric. "That makes sense" you say out loud to yourself. You think you might be able to remove one of the spears ( 🎲 ≤ 6: failure | 🎲 ≥ 7: Acquire one **Relentless Fang** from the Loot Table)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -459,7 +459,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def feast_buffet(self, ctx):
-        msg = """You try to consume as much as humanly possible... you start to feel sleepy (+4 :heart: and +4 :large_blue_diamond:, 🎲 < 8: go back 3 places in your journey)"""
+        msg = """You try to consume as much as humanly possible... you start to feel sleepy (+4 :heart: and +4 :large_blue_diamond:, 🎲 ≤ 8: go back 3 places in your journey)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -479,7 +479,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def sack_climb(self, ctx):
-        msg = """You gather your strength then attempt to reach the sack dangling from the branches. ( 🎲 <= 4: summon enemy | 🎲 >= 5: !r 1d5 lesser chest)"""
+        msg = """You gather your strength then attempt to reach the sack dangling from the branches. ( 🎲 ≤ 4: summon enemy | 🎲 ≥ 5: !r 1d5 lesser chest)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -509,7 +509,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def fork_right(self, ctx):
-        msg = """You head towards the bridge. You know its risky but you at least understand your risks. You carefully try to cross the bridge ( 🎲 < 3: -3 ❤️ )"""
+        msg = """You head towards the bridge. You know its risky but you at least understand your risks. You carefully try to cross the bridge ( 🎲 ≤ 3: -3 ❤️ )"""
         await ctx.send(msg)
 
     @commands.command()
