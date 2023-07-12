@@ -947,6 +947,60 @@ https://www.youtube.com/watch?v=EKLWC93nvAU""",
         await ctx.send(random.choice(encounters))
 
     @commands.command()
+    async def blinds_enemy(self, ctx):
+        encounters = [
+            """__**VOID GOLUM**__
+:heart: : 20
+:moneybag: : Lose 1 __Will__
+Behavior: When this takes damage, attacker loses 1 :large_blue_diamond:
+—————————————————
+1-3   | **Crush** in 2 turns from now :boom::boom::boom::boom:
+4-8   | **Accretion** Gain persistent :shield: per damage taken this turn
+9-10 | **Singularity** (-2 :game_die:) in 4 turns from now, deal :boom::boom::boom::boom::boom::boom::dart::no_entry_sign: to ALL :twisted_rightwards_arrows: cause __Will__ x3
+https://www.youtube.com/watch?v=FhS2jvMDPv4""",
+            """__**∅ HUNTER**__
+:heart: : 15
+:moneybag: : !r 3d10 :gold:
+Behavior: Every turn this doesn't take damage, gain __Empower__. Can be immediately dismissed if fighting Gaidg-3, Naya, or Remus but doing so yields no loot.
+—————————————————
+1-3   | **Sidestep** (+2 :game_die:) Avoid all :boom: :twisted_rightwards_arrows: take another turn
+4-7   | **Fire** :boom::zap::dart:  to ALL
+8-10 | **Target Lock** (-2 :game_die:) Double your current __empower__ stacks
+https://www.youtube.com/watch?v=CHdHaoPLW9U""",
+            """__**EYES IN SILENCE**__
+:heart: : 10
+:moneybag: : Lose 2 __Will__
+Behavior: Immune to direct attacks, cant be targeted directly by effects.
+—————————————————
+1-3   | **Bleed** (-2 :game_die:) :boom::boom: :no_entry_sign: :twisted_rightwards_arrows: cause __Will__ x1
+4-7   | **Suffocate** (+6 :game_die:) Cause __Weak__, __Vulnerable__, and __Will__ to ALL players
+8-10 | **Peer** (+2 :game_die:) Summon a Sclera
+> **__SCLERA __**
+> :heart: : 5 / :boom: : 1
+> Upon death, cause -:heart: to ALL Eyes in Silence.
+https://www.youtube.com/watch?v=FhS2jvMDPv4""",
+            """__**NIHILEACH**__
+:heart: : 6
+:moneybag: : Lose 1 __Will__
+Behavior: Summon 2 more NIHILEACHES; resurrect with 2 HP if the fight doesnt end after 4 turns of each dying. You gain rewards for the summoned NIHILEACHES as well.
+—————————————————
+1-3   | **Bite** (+2 :game_die:) :boom::dart: :twisted_rightwards_arrows: cause __Will__ per hit
+4-5   | **Drain** :boom::zap: :twisted_rightwards_arrows: +:heart: per hit, -4 :game_die:
+6-10 | **Chitter** (+2 :game_die:) All other Nihileaches gain __Empower__ and +:heart:
+https://www.youtube.com/watch?v=ldFdBiT4VN0""",
+            """__**-THE DIFFERENCE -SECOND -DECISION -PERSONALITY -OPEN -UP -IN TWO**__
+:heart: : -6
+:moneybag: : Lose all __Will__
+Behavior: -m3:4Pa62sl
+—————————————————
+1-4   | **Gloom** (+1 :game_die:) :shield::shield::shield:
+5-8   | **Cursed Shield** :boom::boom::boom: :twisted_rightwards_arrows: +:game_die:
+9-10 | **Doubt** (+3 :game_die:) Gain __Burn__x3
+https://www.youtube.com/watch?v=qMX3aVbNdvo""",
+        ]
+        await ctx.send(random.choice(encounters))
+
+    @commands.command()
     async def wit_shop(self, ctx):
         await split_send(ctx, gen_shop(), "\n\n")
 
