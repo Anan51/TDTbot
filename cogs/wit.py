@@ -321,7 +321,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 Behavior: Shields are Immune to Precision and Piercing damage
 —————————————————
 1-3   | **Swat** 💥💥 to ALL players
-4-8   | **Prevent** (-3 🎲) 🛡️🛡️x👥 🔀 +❤️
+4-8   | **Prevent** (-2 🎲) 🛡️🛡️x👥 🔀 +❤️
 9-10 | **Looming** (+2 🎲) Gain __Empower__
 11+    | **Flatten** (-8 🎲) 💥🚫🛡️ to ALL players 🔀 skip their turn
 https://www.youtube.com/watch?v=0uAsD6lQV1I"""
@@ -330,7 +330,7 @@ https://www.youtube.com/watch?v=0uAsD6lQV1I"""
     @commands.command()
     async def reach_boss(self, ctx):
         encounters = [
-            """__**THE GREAT SERPANT**__
+            """__**THE GREAT SERPENT**__
 ❤️ : 20 x 👥
 💰 : 2d10 basic
 Behavior: gain permanent __Empower__ for every 5 damage taken
@@ -346,14 +346,14 @@ https://youtu.be/wlF0-Qs2xkI""",
 :moneybag: : 1d19 :dagger:, +6 Comp Points
 Behavior: At even minutes this gains a stack of __Protect__ permanently, at odd minutes this gains a stack of __Empower__ permanently.
 —————————————————
-1-4   | **Beat** (:game_die: = 11) :boom::zap:
-5-7   | **Groove** (:game_die: = 1) :shield: :twisted_rightwards_arrows: deal :boom: per blocked
+1-4   | **Beat** (:game_die: = 11) :boom::boom::zap:
+5-7   | **Groove** (:game_die: = 1) :shield::shield: :twisted_rightwards_arrows: deal :boom: per blocked
 8-10 | **Rhythm** (:game_die: = 5) +3:heart:
 11+    | **Change Up** Immune. Nullify all status moves used this turn.
 https://www.youtube.com/watch?v=16y1AkoZkmQ""",
 
             """__**SLIGGO THE GREEN**__
-:heart: : 30 x:busts_in_silhouette:
+:heart: : 25 x:busts_in_silhouette:
 :moneybag: : 3d10 :test_tube:, +6 Comp Points
 Behavior: When a player deals damage to this, they gain __Heal__. Sliggo cannot lose more than half its current HP every turn (unless at 1 of course).
 —————————————————
@@ -370,7 +370,7 @@ https://www.youtube.com/watch?v=iMH49ieL4es""",
         encounters = [
             """__**RED WING**__
 ❤️ : 2
-💰 : 1 <:gold:1058304371940655185>
+💰 : 4 <:gold:1058304371940655185>
 Behavior: take 1/2 damage, rounds down
 —————————————————
 1-2   | **Peck** 💥💥⚡to the highest HP player
@@ -382,13 +382,13 @@ Behavior: take 1/2 damage, rounds down
 💰 : 1d5 lesser
 Behavior: at 2 HP become immune for the rest of the turn
 —————————————————
-1-6   | **Gnaw** (+2 🎲) 💥💥 to a random player 🔀❤️
+1-6   | **Gnaw** (-1 🎲) 💥💥 to a random player 🔀❤️
 7-8   | **Curl** (-2 🎲) 🛡️🛡️🛡️🛡️🛡️
 9-10 | **Burrow** leave the encounter and yield no loot""",
 
             """__**SPINED CONSTRICTOR**__
 ❤️ : 5
-💰 : 4 <:gold:1058304371940655185>
+💰 : 6 <:gold:1058304371940655185>
 Behavior: successful attacks makes the target lose their next turn
 —————————————————
 1-3   | **Wrap** (-2 🎲) 💥 random player
@@ -411,7 +411,7 @@ Behavior: When this takes damage, gain <:stealthIcon:943248201790677052> for the
 —————————————————
 1-3   | **Shiv** (+2  🎲) 💥💥⚡ random player
 4-7   | **Shifty** (+4 🎲) 🛡️🛡️🔀 Cause __Weak__
-8-10 | **Mug** 💥 🚫 lowest HP 🔀 lose 1 <:gold:1058304371940655185>""",
+8-10 | **Mug** 💥 🚫 lowest HP 🔀 lose 3 <:gold:1058304371940655185>""",
 
             """__**MALOKOLYTES**__
 ❤️ : 4
@@ -574,13 +574,13 @@ Behavior: at the end of turn 3, lower all players max HP and MP by 1 for the res
 💰 : 1d10 🗡️
 Behavior: Immune to negative effects
 —————————————————
-1-3   | **Secure** 💥💥 to ALL players 🔀 dispell all __effects__ stacks
+1-3   | **Secure** 💥💥💥 to the highest HP player 🔀 dispell all __effects__ stacks
 4-6   | **Contain** (+2 🎲) ALL players gain __Weak__x3
 7-10 | **Protect** (-4 🎲) Disable any active player status moves. All other PvEnemies gain __Protect__x3""",
 
             """__**TOCK**__
 ❤️ : 8
-💰 : 2d5 <:gold:1058304371940655185>
+💰 : 1d10 🗡️
 Behavior: at the end of turn 5, deal 20 damage to everything
 —————————————————
 1-4   | **Sidearm** 💥⚡🎯
@@ -589,8 +589,8 @@ Behavior: at the end of turn 5, deal 20 damage to everything
 
             """__**H3-nry,  THE PROTOTYPE**__
 ❤️ : 1
-💰 : !r 1d3 lesser
-Behavior: Summon 1 more Henry's on battle start
+💰 : 6 <:gold:1058304371940655185>
+Behavior: Summon another henry at the end of every 2 turns
 —————————————————
 1-3   | **BLAST** 💥💥💥💥 to ALL players
 4-8   | **BLAST** 💥💥💥💥 to lowest HP players
@@ -638,17 +638,17 @@ Behavior: at 4, 2, and 1 remaining HP summon a copy of itself. Loot only drops f
 Behavior: Cannot take more than 4 damage a turn
 —————————————————
 1-4   | **Thrash** 💥⚡🚫
-5-7   | **Submerge** 🛡️🛡️ immune to 🚫
-8-10 | **Gills** Dispell all player __effects__ 🔀 gain __Empower__ per dispelled""",
+5-8   | **Submerge** 🛡️🛡️ immune to 🚫
+9-10 | **Gills** Dispell all player __effects__ 🔀 gain __Empower__ per dispelled""",
 
             """__**BLACKHAND GANG MARAUDER**__
-❤️ : 4
+❤️ : 8
 💰 : 2 Higuard Keys
-Behavior: +2 to all dice rolls (including speed ties)
+Behavior: cause Vulnerable whenever gold is stolen per gold stolen
 —————————————————
-1-2   | **Seeing Red** 💥💥 🔀 -3 <:gold:1058304371940655185> per damage dealt
-3-7   | **Trick Step** Ignore 1 incoming 💥 🔀 -6 🎲; Your next 💥 has 🚫🎯
-8-10 | **Sapping Powder** (-2 🎲) Random player has -2 🔷""",
+1-2   | **Seeing Red** 💥💥⚡ 🔀 -3 <:gold:1058304371940655185> per damage dealt
+3-7   | **Trick Step** Ignore ALL incoming 💥 🔀 -6 🎲; Your next 💥 has 🚫🎯
+8-10 | **Sapping Powder** (-2 🎲) ALL players gain -2 🔷""",
         ]
         await ctx.send(random.choice(encounters))
 
@@ -914,7 +914,7 @@ Behavior: When this takes damage or an ally dies, gain __Empower__.
     async def underwash_boss(self, ctx):
         encounters = [
             """__**THE TRAITOR: JUDGE-23**__
-:heart: : 12
+:heart: : 14
 :moneybag: : 1d19 :dagger:, 1d10 <:gold:1058304371940655185>, 1d10 :test_tube:
 Behavior: Summon another JUDGE-23 per :busts_in_silhouette:. Whenever a player gains an __effect__ this gains __Empower__
 —————————————————
@@ -924,7 +924,7 @@ Behavior: Summon another JUDGE-23 per :busts_in_silhouette:. Whenever a player g
 11+   | **Judgement** :boom::boom::boom::no_entry_sign: to ALL. If a player dies, repeat.
 https://www.youtube.com/watch?v=bMfvZmhqW0A&pp=ygUTZ29kIHNoYXR0ZXJpbmcgc3Rhcg%3D%3D""",
             """__**LEGION OF FLESH**__
-:heart: : 4
+:heart: : 6
 :moneybag: : 1d19 :dagger:, +6 Comp Points
 Behavior: Summon another Legion of Flesh x :busts_in_silhouette: x 4. They roll/act as one unit but must be targeted individually
 —————————————————
