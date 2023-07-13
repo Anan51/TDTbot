@@ -52,10 +52,10 @@ def gen_weapon(roll_str):
         "**Siphon Stone**: 💥🔀+❤️ ",
         "**Fang**: 💥<:stealthIcon:943248201790677052> ",
         "**Broadsword**: 💥💥",
-        "**Spell Book** (-3 🔷): Grant ALL allies any effectx2",
+        "**Spell Book** (-3 🔷): Grant ALL allies any effectx4",
         "**Wand** (-4 🔷): Double a target's active effect stacks",
         "**Runic Flintlock** (-1 🔷):💥; 1/6 chance to TRIPLE successful damage",
-        "**Graven Shield** (-1 🔷): 🛡️ to ALL allies, ignores 🚫 🔀 cause Weak per blocked",
+        "**Graven Shield** (-1 🔷): 🛡️🛡️ to ALL allies, ignores 🚫",
         "**Gilded Hammer** (-2 🔷): 🛡️🛡️ 🔀 💥 to ALL enemies per block",
         "**Tome** (-4 🔷): Summon a Dire Wolf",
         "**Scroll** (-4 🔷): Your next turn is twice as powerful",
@@ -101,10 +101,10 @@ def gen_artifact(roll_str):
         "**Ring of Momentum**: 💍 Kills grant Empower x3",
         "**Safety Hook**: 🪝 Gain Protect whenever a shield fails to block damage",
         "**Vitamins**: 💊 Start each combat with Heal",
-        "**Lucky Clover**: 🍀 All enemies gain Weak the first time you run out of MP",
+        "**Lucky Clover**: 🍀 All enemies gain Weak x2 the first time you run out of MP",
         "**War Drum**: 🥁 All enemies have Vulnerable when you are at 1/2 your max HP",
-        "**Eternal Lantern**: 🪔 All future weapons gain: \"🔀 cause Burn\" for the rest of this run",
-        "**Cook Book**: 🍔 You may raise your max HP and MP by 2 at Camp Sites instead of resting",
+        "**Eternal Lantern**: 🪔 Attacking causes __Burn__ if you took no damage this turn",
+        "**Cook Book**: 🍔 You may raise your max HP and MP by 1 at Camp Sites instead of resting",
         "**Safety Scissors**: ✂️ Once per world, you may escape an encounter or combat, go to the next level, but award no loot. May not be used on a boss ",
         "**Port-a-Forge**: 🛠️ You may upgrade one item or skill (give it the \"Superior\" prefix) for 10 gold whenever you arrive at a shop ",
         "**Ancient Key**: 🗝️ Double the loot you can store this run",
@@ -202,7 +202,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def blind_threaten(self, ctx):
-        msg = """You deftly draw your weapon on the man. He doesnt respond. You know this man isnt trying to trick you. You say a quick prayer then you give the man some money. He hears the coins hit the bag and says "oh thank you! May YHWH bless your kindness. (-1 <:gold:1058304371940655185> (You may spend 6 <:gold:1058304371940655185> to upgrade your Annointed passive to: __Angel__ :rosette: "Once per combat: if you have __protect__ and your HP reaches zero, lose all stacks but survive with 1 HP." for the rest of the run)"""
+        msg = """You deftly draw your weapon on the man. He doesnt respond. You know this man isnt trying to trick you. You say a quick prayer then you give the man some money. He hears the coins hit the bag and says "oh thank you! May YHWH bless your kindness. (You may spend 20 :gold: to upgrade your Annointed passive to: __Angel__ :rosette: "Protect persists, taking damage removes __Protect__ first" for the rest of the run)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -223,17 +223,17 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def cliff_run(self, ctx):
-        msg = """You manage to reach the other side of the porous white cliff face. In your haste you may have pulled an ankle. ( 🎲 ≤ 5: Remove ⚡ from a move for the rest of your run)"""
+        msg = """You manage to reach the other side of the porous white cliff face. In your haste you may have pulled an ankle. (  🎲 ≤ 5: Gain: Limping 🩼  "Gain -1 🎲 to all future encounter rolls)"""
         await ctx.send(msg)
 
     @commands.command()
     async def cliff_hunker(self, ctx):
-        msg = """You cling to the side of the cliff face, the bone shatters, splints, and falls away around you. You are mostly unscathed except for a few shards that cut into your back. ( 🎲 ≤ 4: -1 ❤️ )"""
+        msg = """You cling to the side of the cliff face, the bone shatters, splints, and falls away around you. You are mostly unscathed except for a few shards that cut into your back. ( 🎲 ≤ 4: -25% ❤️ )"""
         await ctx.send(msg)
 
     @commands.command()
     async def cliff_dash(self, ctx):
-        msg = """You nimbly sprint along the cliff face and make it safely to the other side. You're feeling pretty good about yourself (Start the next combat with __Empower__x2)"""
+        msg = """You nimbly sprint along the cliff face and make it safely to the other side. You're feeling pretty good about yourself (Start all combat with __Empower__)"""
         await ctx.send(msg)
 
 # Blood Puddle
@@ -248,17 +248,17 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def blood_collect(self, ctx):
-        msg = """You grab one of your empty water satchels and draw close to the pool, but before you can even get the lid off your satchel you are attacked! ( 🎲 ≤ 8: use tdt$reach_enemy | 🎲 ≥ 9: +5 <:gold:1058304371940655185>)"""
+        msg = """You grab one of your empty water satchels and draw close to the pool, but before you can even get the lid off your satchel you are attacked! (🎲 ≤ 8: use tdt$reach_enemy | 🎲 ≥ 9: +10 <:gold:1058304371940655185>)"""
         await ctx.send(msg)
 
     @commands.command()
     async def blood_leave(self, ctx):
-        msg = """You decide to leave the pool alone and let nature figure out what to do with it"""
+        msg = """You decide to leave the pool alone and let nature figure out what to do with it (do another encounter)"""
         await ctx.send(msg)
 
     @commands.command()
     async def blood_drink(self, ctx):
-        msg = """You hesitantly cup your hands and drink from the pool. It taste bitter but you feel it resonate with your pulse. (gain +❤️ and +🔷)"""
+        msg = """You hesitantly cup your hands and drink from the pool. It taste bitter but you feel it resonate with your pulse. (gain +25% ❤️ and + 25%🔷)"""
         await ctx.send(msg)
 
 # Clingweed
@@ -274,12 +274,12 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def cling_cut(self, ctx):
-        msg = """You draw your weapon and destroy the tendrils attaching to your flesh. ( 🎲 ≤ 4: Gain: __Sapped__ 💤 "Disable all other passives" | 🎲 ≥ 5: Lose 3 🔷)"""
+        msg = """You draw your weapon and destroy the tendrils attaching to your flesh. ( :game_die: ≤ 7: You or a teammate may spend 1 :heart: for you to try again otherwise: Gain: __Sapped__ :zzz: "Disable all other passives")"""
         await ctx.send(msg)
 
     @commands.command()
     async def cling_relax(self, ctx):
-        msg = """You conclude the plant is drawn to motion and struggling. You try to relax. The plants reach towards you slows!.. but it doesnt stop. Before you realize it you are surrounded with vines each with a sticky sap like substance on their leaflets you attempt to fight back but its too late, your are slowly being pulled down against the bridge. ( 🎲 ≤ 7: You or a teammate may spend 1 🔷 for you to try again otherwise: Gain: __Sapped__ 💤 "Disable all other passives" )"""
+        msg = """You conclude the plant is drawn to motion and struggling. You try to relax. The plants reach towards you slows!.. but it doesnt stop. Before you realize it you are surrounded with vines each with a sticky sap like substance on their leaflets you attempt to fight back but its too late, your are slowly being pulled down against the bridge. ( :game_die: ≤ 7: You or a teammate may spend 1 :heart: for you to try again otherwise: Gain: __Sapped__ :zzz: "Disable all other passives" )"""
         await ctx.send(msg)
 
     @commands.command()
@@ -300,17 +300,17 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def shin_squeeze(self, ctx):
-        msg = """You carefully sidle through the field of spears, a few of them catch your clothing. ( 🎲 ≤ 3: -2 ❤️ | 🎲 ≥ 4: -2 <:gold:1058304371940655185>)"""
+        msg = """You carefully sidle through the field of spears, a few of them catch your clothing. ( 🎲 ≤ 3: -25% ❤️ | 🎲 ≥ 4: -6 <:gold:1058304371940655185>)"""
         await ctx.send(msg)
 
     @commands.command()
     async def shin_attack(self, ctx):
-        msg = """You Raise your weapon and begin smashing through the spears. Splinters fly in every direction and a few fly towards your face ( 🎲 ≤ 7: -2 ❤️)"""
+        msg = """You Raise your weapon and begin smashing through the spears. Splinters fly in every direction and a few fly towards your face ( 🎲 ≤ 7: -25% ❤️ )"""
         await ctx.send(msg)
 
     @commands.command()
     async def shin_remove(self, ctx):
-        msg = """You squat down along the first row of spears, they are crudely made BUT not flimsily made. You recognize a few of the markings and knots used on the fastenings; they are fenric. "That makes sense" you say out loud to yourself. You think you might be able to remove one of the spears ( 🎲 ≤ 6: failure | 🎲 ≥ 7: Acquire one **Relentless Fang** from the Loot Table)"""
+        msg = """You squat down along the first row of spears, they are crudely made BUT not flimsily made. You recognize a few of the markings and knots used on the fastenings; they are fenric. "That makes sense" you say out loud to yourself. You think you might be able to remove one of the spears ( 🎲 ≤ 6: failure | 🎲 ≥ 7: Acquire one **Invigorating Fang** from the Loot Table)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -335,7 +335,7 @@ https://www.youtube.com/watch?v=0uAsD6lQV1I"""
 💰 : 2d10 basic
 Behavior: gain permanent __Empower__ for every 5 damage taken
 —————————————————
-1-2   | **Fangs** (+1  🎲) 💥🎯 to the highest HP player
+1-2   | **Fangs** 💥🎯 to the highest HP player
 3-7   | **Scales** (-2 🎲) 🛡️🛡️🛡️ x 👥
 8-10 | **Weep** (+4 🎲) Cause __Weak__x3 to ALL players
 11+   | **Hypnotic Speech** (-4 🎲) summon a random enemy
@@ -514,7 +514,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def fork_straight(self, ctx):
-        msg = """You were born of fire. You march straight through the outpost, fearlessly. You find some gold in one of the buildings. (+3 <:gold:1058304371940655185> )"""
+        msg = """You were born of fire. You march straight through the outpost, fearlessly. You find some gold in one of the buildings. (Double your current <:gold:1058304371940655185> )"""
         await ctx.send(msg)
 
 # Desperate Traveler
@@ -534,7 +534,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def traveler_fight(self, ctx):
-        msg = """You beckon the woman to stand behind you and prepare for a fight. (Summon two random enemies per party member. Gain __empower__ and __protect__ at the start of THIS combat. Gain a bonus Artifact if you win (one per team))"""
+        msg = """You beckon the woman to stand behind you and prepare for a fight. (Summon a Major, gain a permanent stack of __Protect__ if you win)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -571,7 +571,7 @@ Behavior: at the end of turn 3, lower all players max HP and MP by 1 for the res
 
             """__**SITE CONTAMINATE PURIFIER**__
 ❤️ : 10
-💰 : 1d10 🗡️
+💰 : 1 Higuard Key + 5 <:gold:1058304371940655185>
 Behavior: Immune to negative effects
 —————————————————
 1-3   | **Secure** 💥💥💥 to the highest HP player 🔀 dispell all __effects__ stacks
@@ -782,7 +782,7 @@ Behavior: Select a random player at the start of the game. This will only ever a
 
     @commands.command()
     async def child_leave(self, ctx):
-        msg = """You tell the little girl you cant help. "But why!" She cries out holding back sobs. You tell her necrosis is too dangerous and she should find a doctor. "The doctors wont help" she says. You say that you are sorry, but neither can you."""
+        msg = """You tell the little girl you cant help. "But why!" She cries out holding back sobs. You tell her necrosis is too dangerous and she should find a doctor. "The doctors wont help" she says. You say that you are sorry, but neither can you. ( Gain: __Cold__ :snowflake:  "Take and give 1 less __Healing__ and +:heart:" )"""
         await ctx.send(msg)
 
     @commands.command()
@@ -799,7 +799,7 @@ Behavior: Select a random player at the start of the game. This will only ever a
 
     @commands.command()
     async def flood_run(self, ctx):
-        msg = "You begin a full sprint towards the exit. The water is crashing against the metal pipes behind you as you hear the pipes respond with metalic groans from the weight. The pipe ends in a sheer drop to a drain, there is light shining through it. It will hurt, but you might be able to smash through it and get clear on the other side (:game_die: ≤ 5 : -2 :heart: and go back one level)"
+        msg = "You begin a full sprint towards the exit. The water is crashing against the metal pipes behind you as you hear the pipes respond with metalic groans from the weight. The pipe ends in a sheer drop to a drain, there is light shining through it. It will hurt, but you might be able to smash through it and get clear on the other side (🎲 ≤ 5 : -50% ❤️ and go back one level)"
         await ctx.send(msg)
 
     @commands.command()
@@ -809,7 +809,7 @@ Behavior: Select a random player at the start of the game. This will only ever a
 
     @commands.command()
     async def flood_brace(self, ctx):
-        msg = "You eye up the water coming towards you and glance behind you to see a drain isnt far off. You scan your environment and see there is a drain above you but the tunnel is too small for you to fit. You decide your best bet is to grab the ladder above and brace for impact. The water is intense, but nothing you cant handle. Despite it being murky, the water smells like only algae inhabits it, and its cool against your skin. (Gain +1 :large_blue_diamond:)"
+        msg = "You eye up the water coming towards you and glance behind you to see a drain isnt far off. You scan your environment and see there is a drain above you but the tunnel is too small for you to fit. You decide your best bet is to grab the ladder above and brace for impact. The water is intense, but nothing you cant handle. Despite it being murky, the water smells like only algae inhabits it, and its cool against your skin. (Gain +25% 🔷)"
         await ctx.send(msg)
 
     @commands.command()
@@ -1016,8 +1016,11 @@ https://www.youtube.com/watch?v=qMX3aVbNdvo""",
     async def floor(self, ctx):
         options = ["💀 Enemy",
                    "☠️ Major",
-                   "❔ Encounter"]
-        await ctx.send(', '.join(random.choices(options, weights=[9, 2, 9], k=3)))
+                   "❔ Encounter",
+                   "⛺ Camping Spot",
+                   "🛖 Shop"
+                   ]
+        await ctx.send(', '.join(random.choices(options, weights=[11, 2, 9, 1, 1], k=3)))
 
 
 if usingV2:
