@@ -484,7 +484,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
 
     @commands.command()
     async def sack_leave(self, ctx):
-        msg = """You leave the sack. Its probably someone's stuff anyways."""
+        msg = """You leave the sack. Its probably someone's stuff anyways... (Go back one floor)"""
         await ctx.send(msg)
 
     @commands.command()
@@ -570,7 +570,7 @@ Behavior: at the end of turn 3, lower all players max HP and MP by 1 for the res
 9-10 | **Spore** (-2 🎲) if you took less than 3 damage this turn, skip all players turns once.""",
 
             """__**SITE CONTAMINATE PURIFIER**__
-❤️ : 10
+❤️ : 8
 💰 : 1 Higuard Key + 5 <:gold:1058304371940655185>
 Behavior: Immune to negative effects
 —————————————————
