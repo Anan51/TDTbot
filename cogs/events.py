@@ -369,7 +369,8 @@ class _Event(dict):
         self.children = []
         msg = await self.message()
         await msg.delete()
-        for i in self:
+        keys = self.keys()[:]
+        for i in keys:
             del self[i]
 
 
