@@ -187,16 +187,16 @@ class MainBot(commands.Bot):
                          remove=None):
         """Handle an emoji reaction"""
         if message_id is not None:
-            if payload.message_id != message_id:
+            if getattr(payload, "message_id") != message_id:
                 return
-        if self.user.id in [payload.user_id, (payload.member, 'id', None)]:
+        if self.user.id in [getattr(payload, "user_id"), (payload.member, 'id', None)]:
             return
         if guild is None:
             guild = [g for g in self.guilds if g.id == payload.guild_id][0]
         if type(guild) == int:
             guild = self.guilds[guild]
         if member is None:
-            member = payload.member
+            member = getattr(payload, "member")
             if member is None:
                 member = await self.get_or_fetch_user(payload.user_id, guild)
         if min_role is not None and not delete:
