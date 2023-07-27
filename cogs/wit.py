@@ -997,6 +997,42 @@ Behavior: -m3:4Pa62sl
 5-8   | **Cursed Shield** :boom::boom::boom: :twisted_rightwards_arrows: +:game_die:
 9-10 | **Doubt** (+3 :game_die:) Gain __Burn__x3
 https://www.youtube.com/watch?v=qMX3aVbNdvo""",
+            """__**ROTTING BEHEMOTH**__
+:heart: : 20
+:moneybag: : Lose 2 __Will__
+Behavior:  :tooth: Giant: ||**Devotion, Bravery, Sacrifice**|| (If you have no __Will__ and beat this fight, upgrade your Giant passive to: __Guardian__ :trident:  "On all future Crusades using Giant, allies can use your encounter paths.")
+—————————————————
+1-6   | **Stuggle** :boom::boom::boom::boom::boom::boom: :twisted_rightwards_arrows: -:heart: per dealt
+7-8   | **Flinch**  Cause __Burn__ per taken :twisted_rightwards_arrows: -:game_die: and __Empower__ per caused
+9-10 | **Grow** Double current HP. Gains permanent __Weak__ and +:game_die:.
+https://www.youtube.com/watch?v=-4tmO9ZOBn8""",
+            """__**PHANTOM OF AGE**__
+:heart: : 12
+:moneybag: : Lose 4 __Will__
+Behavior: This can only take one damage per turn
+—————————————————
+1-3   | **Early** (+3 :game_die:) :boom::zap::no_entry_sign::dart: :twisted_rightwards_arrows: all PVEnemies gain permanent __Empower__
+4-6   | **Prime**  If this took no damage, disable ALL player's passive and statuses for the rest of the fight
+8-10 | **Late** (-3 :game_die:) :stealthIcon::shield::twisted_rightwards_arrows: cause __Will__
+https://www.youtube.com/watch?v=bK6D94UHP6M""",
+            """__**THE WILLESS**__
+:heart: : 6
+:moneybag: : Summon the last enemy that killed you
+Behavior: "Wh-what? Why dont you relax! We are happy this way"
+—————————————————
+1-3   | **Flesh** ALL gain __Empower__, __Protect__, and __Will__
+4-6   | **Eyes** ALL gain +:gold: and __Will__
+8-10  | **Life** ALL gain +:heart: and __Will__
+https://m.youtube.com/watch?v=yZsfIluYxsA""",
+            """__**MESSENGER**__
+:heart: : 10
+:moneybag: : +50% :heart: and :large_blue_diamond:
+Behavior: Gain __Empower__ and __Protect__ for each stack of __Will__ the player's have. This will not fight and is immune to everything unless its alone.
+—————————————————
+1-3   | **Hope** (-2 :game_die:) :boom::zap: :twisted_rightwards_arrows: Cause __Burn__ per stack of __WIll__ the player's have
+4-6   | **Love** (+5 :game_die:) :shield::shield: :twisted_rightwards_arrows: Cause __Weak__ per stack of __WIll__ the player's have
+8-10  | **Faith** Gain __Healing__ per stack of __WIll__ the player's have
+https://www.youtube.com/watch?v=ze0Rk-m0w2A""",
         ]
         await ctx.send(random.choice(encounters))
 
