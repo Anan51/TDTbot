@@ -1093,6 +1093,36 @@ https://www.youtube.com/watch?v=ze0Rk-m0w2A""",
         await ctx.send(random.choice(encounters))
 
     @commands.command()
+    async def champions_landing_enemy(self, ctx):
+        encounters = [
+            """__**GELLY**__
+:heart: : 8
+:moneybag: : 1 :gold:
+Behavior: Takes double damage from :no_entry_sign: but no damage from __Burn__
+—————————————————
+1-2   | **Lunge** (+2 :game_die:) :boom:
+4-6   | **Wobble** Gain __Healing__x3
+8-10 | **Mutate** (-3 :game_die:) Disable this creatures behavior until it takes damage""",
+            """__**SPEYEDER**__
+:heart: : 3
+:moneybag: : 2 XP
+Behavior: Immune to the first attack
+—————————————————
+1-4   | **Bite** :boom::zap:
+5-6   | **Scurry** :shield:, gain __protect__x2
+8-10 | **Gaze** All PvEnemies gain __Empower__""",
+            """__**NUDNIK**__
+:heart: : 4
+:moneybag: : Lose 1 __will__
+Behavior: Cause __Weak__ whenever this takes damage
+—————————————————
+1-3   | **Lockjaw** :boom::twisted_rightwards_arrows: :boom::dart: , -10 :game_die:
+4-6   | **Retaliate** Deal :boom: equal to :boom: taken
+8-10 | **Flank** (-3 :game_die:) Cause __Vulnerable__x2""",
+            ]
+        await ctx.send(random.choice(encounters))
+
+    @commands.command()
     async def wit_shop(self, ctx):
         await split_send(ctx, gen_shop(), "\n\n")
 
