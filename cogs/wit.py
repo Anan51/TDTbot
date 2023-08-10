@@ -542,6 +542,31 @@ Behavior: after 5 turns, cause 💥🚫 to all players
         msg = """You fire a smoke bomb behind the woman. She is fearful at first but understands your intent a moment later. You call her over to a hiding spot. She obeys. Once on the other side of the smoke, the enemies cannot find you and decide to give up. "You saved me." she says with a thick romanian accent. You look down at her and say nothing. "Please..." she fumbles through her bag "take one" she offers you a potion (gain one !r 1d10 potion)"""
         await ctx.send(msg)
 
+# A Hole in Reality
+    @commands.command()
+    async def a_hole_in_reality(self, ctx):
+        msg = """**__A Hole in Reality__**
+- You are passing by a familiar trail (one you like taking when you are doing a crusade) when you hear something odd. A humming sound mixed with a chorus of water. Turning to your right you see a strange portal. It looks unstable but it doesnt seem to be growing any larger. It secretes a strange black smoke that splashes softly against the grass and bone ground. You can barely see inside and you see...  some mean looking creature on the other side.
+**Touch the portal** tdt$hole_touch
+**Reach inside and Punch the Creature** tdt$hole_punch
+:crystal_ball:  Etherborne: ||**Guide it Open** tdt$hole_open||"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def hole_touch(self, ctx):
+        msg = """You are curious as to what this strange energy is. You slowly raise your hand and touch the edge of the wobbly portal horizon... instantly you begin to feel your body fade from reality ( :game_die: ≤ 3: Unable to resist the portal's pull, go back `!r 1d6` floors then `!r 1d5` floors forward )"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def hole_punch(self, ctx):
+        msg = """You arent scared of no water loving creature! You reach inside that portal with your left hand while holding onto the edge of the portal with your right. You fish around for a moment, making a series of different faces -some of them more attractive than others- before finally pulling the creature out and giving a good punch (summon an Underwash enemy, deal damage equal to 25% of your max HP to it)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def hole_open(self, ctx):
+        msg = """This type of is magic familiar to you... although these sorts of tears through time shouldnt be happening wildly... You are concerned for a moment but realize you can use this as an opportunity to jump ahead in your travels (teleport you and your team to the first floor of the Underwash)"""
+        await ctx.send(msg)
+
     @commands.command()
     async def reach_encounter(self, ctx):
         encounters = ['desperate_traveler',
@@ -553,6 +578,7 @@ Behavior: after 5 turns, cause 💥🚫 to all players
                       'blood_puddle',
                       'fracturing_cliff',
                       'blind_beggar',
+                      'a_hole_in_reality',
                       ]
         encounter = getattr(self, random.choice(encounters))
         return await encounter(ctx)
@@ -705,6 +731,12 @@ Behavior: cause Vulnerable whenever gold is stolen per gold stolen
 **Buy One (5 Gold)** tdt$vending_one
 **Buy Three (15 gold)** tdt$vending_three
 :mountain_snow: Highlander: ||**SHOULDER CHARGE** tdt$vending_charge||""",
+            """**__The Bakery__**
+- You stopped at a nearby bakery to try to order some food. You havent really seen this bakery before in your travels, but you figure it could be a good opportunity to recover. There are some locals inside, some you recognize from previous crusades, all looking over the selections. The bakery is just as grimey and disheveled as the rest of the Underwash but the owner has clearly put some love and care into this place. You grab some bread and head back out when you realize you are not in the underwash anymore.. in fact... where are  you?
+
+**Look around** tdt$bakery_look
+**Explore** tdt$bakery_explore
+:crystal_ball:  Etherborne: ||**Conjure the Bakery** tdt$bakery_conjure||""",
         ]
         await ctx.send(random.choice(encounters))
 
@@ -909,6 +941,21 @@ Behavior: When this takes damage or an ally dies, gain __Empower__.
             '(select one "Tonic of" prefixed potion)',
         ]
         await split_send(ctx, msg, " ")
+
+    @commands.command()
+    async def bakery_look(self, ctx):
+        msg = """You look around bewildered. A strange blackish fog begins to form familiar shapes around you. You feel a tiny tingling sensation in your spine as you begin to realize you are back on The Reach. A sudden fear grips you when, suddenly, you hear the familiar sounds of enemies approaching. ( Summon 2 Reach enemies. Each player in a team fights them separately. If you beat them you find a way out of this reality)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def bakery_explore(self, ctx):
+        msg = """You decide not to hesitate. You immediately set off to find out what's going on although the more you explore, the more reality around you seems to get weirder... (Do a Reach encounter, your dice roll has -3 to it.)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def bakery_conjure(self, ctx):
+        msg = """Your smile sinks into a scowl. Something is not right here and you know it. You can feel that the timeline is weaker here. You gather your strength and attempt to will the timeline back to its rightfull state. (Roll a d20. Anything above a 10 and you return to your previous place... with some bread (+2 HP and MP). If you fail you *must* spend 1 MP and HP to try again.)"""
+        await ctx.send(msg)
 
     @commands.command()
     async def underwash_boss(self, ctx):
