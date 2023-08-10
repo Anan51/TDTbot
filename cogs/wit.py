@@ -994,7 +994,7 @@ https://www.youtube.com/watch?v=EKLWC93nvAU""",
         await ctx.send(random.choice(encounters))
 
     @commands.command()
-    async def blinds_enemy(self, ctx):
+    async def gates_enemy(self, ctx):
         encounters = [
             """__**VOID GOLUM**__
 :heart: : 20
