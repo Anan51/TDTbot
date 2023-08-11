@@ -994,6 +994,54 @@ https://www.youtube.com/watch?v=EKLWC93nvAU""",
         await ctx.send(random.choice(encounters))
 
     @commands.command()
+    async def gates_encounters(self, ctx):
+        encounters = [
+            """**__An Alter__**
+- You come to a large mountain that looks impassible, thankfully jutting out of its face is a small temple entrance. You cautiously walk inside. Its still well lit with torches and there is a faint scent of death in the air. In front of you lies a large round stone alter about 3 feet high and 1 foot in radius. A dried blackish substance rests along the top of the rocks. Around the alter is a chiseled grove which runs to two closed doors to your right and left. Behind the alter is a man on his knees with his hands outstretched above his head... You know you need to offer SOMETHING on this alter for the doors to open, but what?
+
+**Grain** tdt$alter_grain
+**Peace** tdt$alter_peace
+:fire:  Draconic: ||**Burnt** tdt$alter_burnt||""",
+            """**__The Blind__**
+- A man sat next to a small caravan perks up as you approach. "Oh please, champion." the man says in a dehydrated voice "spare some coin for a blind man?" You look the man up and down. He is wearing a tattered yellow shawl with withered greyish brown shorts. He smiles up at you.
+
+**Give Gold?** tdt$blind_gold
+**Something doesn't feel right** tdt$blind_feeling
+:droplet: Annointed: ||**The Harbinger** tdt$blind_harbinger||""",
+        ]
+        await ctx.send(random.choice(encounters))
+
+    @commands.command()
+    async def alter_grain(self, ctx):
+        msg = """You remove a potion from your sacthel and pour it over the alter. It splashes along the rocks then flows into the grooves then under the door on the left. (Remove one potion from your inventory. If you dont have one, do a major fight)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def alter_peace(self, ctx):
+        msg = """You hesitantly rake out a weapon and lay on the alter. You stand there for a while until you hear the sound of stone door grinding open to your right. (Remove one weapon from your inventory. If you dont have one, do a major fight.)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def alter_burnt(self, ctx):
+        msg = """You take a closer look at the alter. You notice that the strange dried substance along the stop used to be blood. Its darkish like this from being set ablaze. You breathe deep and let out a gust of flames that ignites the blood yet again. The stone statue's eyes behind the alter light up as it rolls out of the way revealing a shortcut. (Skip ahead one extra floor.)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def blind_gold(self, ctx):
+        msg = """You furrow your brow. The man's smile is sinister. You throw a piece of gold at his feet doing your best to keep your distance. He doesnt remove his gaze into your face. "Hmmm I dont think that will be enough..." (Roll a :game_die: if it lands on 10 you leave the encounter, otherwise you must keep giving gold until it does. If you are out, use tdt$blind_feeling)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def blind_feeling(self, ctx):
+        msg = """"no" you say to no one in particular. You have seen many a poor man before on your way through the reach but this one isnt normal. You draw you weapon, "No." you say louder. The man looks up at you, its face drops into a disgusted frown, "You greedy worm!" the man says standing up, its skin shedding off like a robe "I will take it for myself!" (Do a fight.)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def blind_harbinger(self, ctx):
+        msg = """Your eyes meet the mans. His greyed eyes seem to look through you. You sense something external is tormenting this man. Your eyes narrow into a scowl. The blind man seems to see this as his face shifts from greed to concern to fear. "W-wait a second." he says "you arent a normal pilot are you?" you raise your hand "NO PLEASE WAIT!" it cries out as you place your hand on the man's head "MERCY! LEAVE ME! MERCY" it begins to shriek as it tries to flee through the mans eyes, nose, and mouth. "PLEASE HARBINGER! LET ME LIVE" it cries in a chorus of lost souls. You glare down at the being as light begins to fire from your hand. "NOOOOOOoooo!" it screams one final time before erupting. Light fills the abyss. The man crumples to his knees. The light fades but slowly the man begins to speak, "thank you." he pauses touching your hand "I was so lost." (Dispel ALL will from any allies, gain 1 will)"""
+        await ctx.send(msg)
+
+    @commands.command()
     async def gates_enemy(self, ctx):
         encounters = [
             """__**VOID GOLUM**__
