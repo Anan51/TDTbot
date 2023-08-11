@@ -994,7 +994,7 @@ https://www.youtube.com/watch?v=EKLWC93nvAU""",
         await ctx.send(random.choice(encounters))
 
     @commands.command()
-    async def gates_encounters(self, ctx):
+    async def gates_encounter(self, ctx):
         encounters = [
             """**__An Alter__**
 - You come to a large mountain that looks impassible, thankfully jutting out of its face is a small temple entrance. You cautiously walk inside. Its still well lit with torches and there is a faint scent of death in the air. In front of you lies a large round stone alter about 3 feet high and 1 foot in radius. A dried blackish substance rests along the top of the rocks. Around the alter is a chiseled grove which runs to two closed doors to your right and left. Behind the alter is a man on his knees with his hands outstretched above his head... You know you need to offer SOMETHING on this alter for the doors to open, but what?
