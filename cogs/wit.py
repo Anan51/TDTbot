@@ -1008,6 +1008,36 @@ https://www.youtube.com/watch?v=EKLWC93nvAU""",
 **Give Gold?** tdt$blind_gold
 **Something doesn't feel right** tdt$blind_feeling
 :droplet: Annointed: ||**The Harbinger** tdt$blind_harbinger||""",
+            """**__Taskmaster__**
+- The gates are bleak. Not much seems to thrive and very few seem to dwell in the dark underground mountain ranges... so hearing the sound of music was more alarming than welcoming. You follow the sound of the music for a while until you see a tent pitched in a clearing. It appears to be a circus. Outside the ring leader is cracking a whip and forcing animals into their cages. You are about to approach when you see the man lose his temper at one of the creatures. He begins violently kicking the cage and shouting angry words at the creature inside. As you approach you hear him say "Starve for all I care!" before he notices you. He turns and looks at you as his face morphs into a smile "erm... Welcome to Bingbee's circus" he waves his arm into the air. The cages are quiet.
+
+**Pay for a Ticket** tdt$taskmaster_ticket
+**Buy an Animal** tdt$taskmaster_buy
+:fox:  Fenric: ||**Confront the Taskmaster** tdt$taskmaster_confront||""",
+            """**__The Tree__**
+- There is a certain unbearable heat that emanates from within the gates. As a result most plantlife around it is small or withered, but as your are mulling this thought over, before you stands a tall fruit tree. It looks surprisingly well kept despite its environment. You look around and see only some wildlife lurking about its branches. The tree pulses with a sort of dark energy that you arent sure would be healthy to partake of... but you could REALLY use some food right about now...
+
+**Eat and Restore Max Stats** tdt$tree_eat
+**Leave the Tree** tdt$tree_leave
+:herb: Earthen: ||**Prune the Tree** tdt$tree_prune||""",
+            """**__On Top__**
+- You were forced to scale one of the many underground mountains in order to proceed. Its much harder to climb a mountain when its so dark... but you manage. You are nearing the top when you spot a mound of rocks laid in a pile which overlooks the peak. Stuck out of the pile is a singular plank of wood. Nothing else seems to be of any significance
+
+**Remove the pile and search** tdt$top_search
+**Consider it a Warning** tdt$top_warning
+:mountain_snow:  Highlander: ||**Pay Respects** tdt$top_respects||""",
+            """**__Runic Tomb__**
+- You stumble into what seems to be some kind of graveyard. You scan the area looking for anything that could either hurt or help you and and find only a large tomb with a strange circle of runes engraved alongthe front. The tomb seems to be for someone important... or dangerous.
+
+**Try to Roll it** tdt$tomb_roll
+**Raid a Nearby Grave** tdt$tomb_raider
+:bow_and_arrow:  Elvish: ||**Speak the Enchantment** tdt$tomb_speak||""",
+            """**__The Shipyard__**
+- There isnt any water per say around the gates, more like a strange hot liquid that seems too mineral rich to consume. It gives off the smell of stagnated rust which is why you havent tried swimming or forging through it... that is until you walk onto the landing of a dock. Before you stretches a massive orange river and a stone dock feebly jutting out into it. There are a few buildings scattered here and there that seem abandoned. You could cross this river and save yourself some time... if you could just figure out how to patch up one of the wrecked rafts
+
+**Patch a Raft** tdt$shipyard_raft
+**Search the nearby buildings** tdt$shipyard_search
+:books:  Educated: ||**Read the travel logs** tdt$shipyard_logs||""",
         ]
         await ctx.send(random.choice(encounters))
 
@@ -1039,6 +1069,81 @@ https://www.youtube.com/watch?v=EKLWC93nvAU""",
     @commands.command()
     async def blind_harbinger(self, ctx):
         msg = """Your eyes meet the mans. His greyed eyes seem to look through you. You sense something external is tormenting this man. Your eyes narrow into a scowl. The blind man seems to see this as his face shifts from greed to concern to fear. "W-wait a second." he says "you arent a normal pilot are you?" you raise your hand "NO PLEASE WAIT!" it cries out as you place your hand on the man's head "MERCY! LEAVE ME! MERCY" it begins to shriek as it tries to flee through the mans eyes, nose, and mouth. "PLEASE HARBINGER! LET ME LIVE" it cries in a chorus of lost souls. You glare down at the being as light begins to fire from your hand. "NOOOOOOoooo!" it screams one final time before erupting. Light fills the abyss. The man crumples to his knees. The light fades but slowly the man begins to speak, "thank you." he pauses touching your hand "I was so lost." (Dispel ALL will from any allies, gain 1 will)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def taskmaster_ticket(self, ctx):
+        msg = """You shake off the scene before and decide to purchase a ticket. Once inside you see a lot of wonderous creatures and sights all performing death defying tricks and feats of strength and agility. You thought about buying some snacks but its extremely pricey. You enjoyed your time as does a lot of the random patrons that filed in. (-5 :gold:, gain __Empower__ next combat. If you cant afford this, summon 5 Champions_landing_enemy and fight them)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def taskmaster_buy(self, ctx):
+        msg = """"How much for one of the creatures?" you say pointing at one of the cages. The man looks down at the cages before looking back up at you, "Ah! a man of high class! These creatures are professionally trained and so will follow your command. They took some time to house break but I may want to part with them for say... 30 gold?" (-30 :gold:, on the next combat: summon a champion_landing_enemy to fight along side you. If you cant afford this summon a Gates enemy and fight it.)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def taskmaster_confront(self, ctx):
+        msg = """The man is still stood there arms in the air expectantly waiting for you to reply. An awkward amount of time passes before you finally speak... your voice is low and grave "Let them go." "I beg pardon?" the man replies. "RELEASE THEM!" You snarl bearing your fangs. The man is startled but only for a moment, "Hahaha awww whats wrong? the little puppy doesnt like the cages?" he says mockingly. You draw your weapon... (Fight a major, if you win upgrade your Fenric passive to: __Fangwild__ :wolf:  ":zap: hits cause __Vulnerable__. Enemies with __Vulnerable__ take double damage." lasts for the rest of this run)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def tree_eat(self, ctx):
+        msg = """You decide the tree is good for food and pleasant to the eyes. You pluck a fruit off and eat a bite. (Restore 100% :heart: and :large_blue_diamond:, enemies roll first in your next fight. Gain permanent __Healing__ and __Will__x10)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def tree_leave(self, ctx):
+        msg = """You think that the tree is too good to be true. You decide to leave it be... however the wildlife seems to have noticed this as a perfect opportunity to make you into a feeding frenzy.   (Summon 3 Champions_landing_enemy and make them into majors)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def tree_prune(self, ctx):
+        msg = """You notice the tree has branches that arent bearing any fruit. You carefully reach up and snap off the branches. You also decide its likely best if the tree got some sunlight so you also release some onto the tree. (If you encounter the tree again, eating the fruit will not cause __Will__ for the rest of this run.)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def top_search(self, ctx):
+        msg = """You think that perhaps the pile is meant to be someones burried treasure. You begin removing the stones to uncover what little remains of a skeleton. Its bones are fractured and gnashed. You immediately realize this was meant to be a grave... but you are too far at this point not to take what you came for. (Gain 1 __Will__ and a 1d10 weapon)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def top_warning(self, ctx):
+        msg = """You dont quite understand what these stones mean but you figure them to be a warning. You let out a heavy sigh and begin to trek back down the mountain. (Go back 2 floors.)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def top_respects(self, ctx):
+        msg = """An immense reverence and sadness overtakes you. You kneel down in front of the grave. "I hope you died in a glorious battle. The homeland mourns the loss of a great warrior." (gain permanent __Empower__ and __Vulnerable__)."""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def tomb_roll(self, ctx):
+        msg = """You clap your hands together. This monstrosity of a stone might just be able to be moved with enough force. Your walk to the long side and begin to push. (Roll a d20, add your max HP to it. :game_die: ≥ 20: gain a 1d10 potion)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def tomb_raider(self, ctx):
+        msg = """You decide it isnt worht your while and go looking at the other graves. You find one that has already been dug up and decide to be an opportunist and investigate what was left. Inside you find the remains of what appears to have been a woman. She was burried with her clothes on which consists of safari shorts a strangely cubic t-shirt and her... weapons! (Gain a Runic Flintlock with no prefix. Summon 2 Reach enemies and fight them)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def tomb_speak(self, ctx):
+        msg = """You recognize the symbols on the tomb. You decide to speak the enchantment out loud. The symbols light up and create a portal back to champions landing... (You may either: leave the crusade and return to champions landing with ALL your gear and loot {OR} you can make your next floor into a guaranteed shop)."""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def shipyard_raft(self, ctx):
+        msg = """You attempt to lug the largest pieces of the boat scrap together to make a raft. You find a few pieces that could work but getting them together might take you more time than you would like. You grit your teeth and get to work. (:game_die: ≥ 7: Skip ahead 3 floors, otherwise lose 1 floor and roll again)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def shipyard_search(self, ctx):
+        msg = """The river is dangerous and you arent a ship maker. You decide to focus your attention on the nearby buildings. You flingthe door open and give a cautious "Hello?". You find a lantern and light it up to peer through the dark room.You carefully sweep through when you hear a noise behind you... like the sound of a creaking board. Fear grips you as you carefully proceed onwards. You find what seems to be a captains journal and a few gold coins still left hidden in the drawer... You turn to leave when out of the darkness lunges a creature (gain 2d20 :gold:, do a underwash enemy fight. Skip your first turn.)"""
+        await ctx.send(msg)
+
+    @commands.command()
+    async def shipyard_logs(self, ctx):
+        msg = """You scan the area. This place hasnt been out of operation for too long. Whoever was here left in a hurry. You run around back to the old steam generator and flip it on. Thankfully it still has some coals to burn. The lights flash on as you make your way over to the building to find a ship log. (gain 2d20 :gold:, do a underwash enemy fight. The next time you encounter this, immediately pass the raft construction roll)."""
         await ctx.send(msg)
 
     @commands.command()
