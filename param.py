@@ -72,12 +72,14 @@ users = _Struct(electro=221778796250923008,
                 )
 
 # roles
-role2emoji = {roles.destiny_2: emojis.destiny_2,
-              roles.minecraft: emojis.minecraft,
-              roles.overwatch2: emojis.overwatch2,
-              roles.d2pvp: "⚔️",
-              roles.d2pve: "☠️",
+emoji2role = {emojis.destiny_2: roles.destiny_2,
+              emojis.overwatch2: roles.overwatch2,
+              emojis.call_of_duty: roles.call_of_duty,
+              "⚔️": roles.d2pvp,
+              "☠️": roles.d2pve,
               }
+
+role2emoji = {v: k for k, v in emoji2role.items()}
 
 
 # Defaults for parameters

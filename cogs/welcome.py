@@ -3,7 +3,7 @@ from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
 from ..helpers import find_channel, find_role, localize
-from ..param import emojis, messages, roles
+from ..param import messages, roles, emoji2role
 from ..version import usingV2
 # from ..async_helpers import admin_check
 import logging
@@ -62,10 +62,7 @@ async def send_welcome(member, channel=None, retry=None):
 class Welcome(commands.Cog):
     """Cog to listen and send alerts"""
     # emoji: role
-    _emoji_dict = {emojis.destiny_2: roles.destiny_2,
-                   emojis.overwatch2: roles.overwatch2,
-                   emojis.call_of_duty: roles.call_of_duty,
-                   }
+    _emoji_dict = emoji2role
 
     def __init__(self, bot):
         self.bot = bot
