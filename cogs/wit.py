@@ -1,16 +1,42 @@
 import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
-# import datetime
+import datetime
 import random
-# from ..helpers import find_channel, find_role, localize
-# from ..param import emojis, messages, roles
+from .. import param
+from ..config import UserConfig
 from ..version import usingV2
-from ..async_helpers import split_send
+from ..async_helpers import split_send, sleep
+from ..helpers import second, minute, localize
 import logging
 
 
 logger = logging.getLogger('discord.' + __name__)
+
+
+_channel_id = param.channels.champions_landing
+
+
+# keywords for player/bot config storage
+_bot_key = "tdt.wit"
+_msg_key = _bot_key + ".msg"
+
+
+# time between major wit events
+def random_time(nlast=3, add_random=True):
+    """Return a random time in seconds. Taken from trick_or_treat.py.
+    nlast is the number of votes last time. Times are in seconds."""
+    import random
+    if nlast is None:
+        nlast = 5
+    if add_random:
+        nlast += random.uniform(-1, 1)
+    nlast = min(max(1, nlast), 10)
+    shape = 22 - 2 * nlast
+    scale = -1.4 * nlast + 16.4
+    ratio = 5 * (16 - nlast)
+    t = (random.weibullvariate(shape, scale) + .5) * ratio
+    return min(max(600, t), 3600)
 
 
 def parse_roll(roll_str, max_sides=None):
@@ -135,29 +161,142 @@ def gen_shop():
     return [item_card(item, gold=5) for item in items]
 
 
+_champions_landing_enemies = [
+    """__**GELLY**__
+:heart: : 8
+:moneybag: : 1 :gold:
+Behavior: Takes double damage from :no_entry_sign: but no damage from __Burn__
+—————————————————
+1-2   | **Lunge** (+2 :game_die:) :boom:
+4-6   | **Wobble** Gain __Healing__x3
+8-10 | **Mutate** (-3 :game_die:) Disable this creatures behavior until it takes damage""",
+    """__**SPEYEDER**__
+:heart: : 3
+:moneybag: : 2 XP
+Behavior: Immune to the first attack
+—————————————————
+1-4   | **Bite** :boom::zap:
+5-6   | **Scurry** :shield:, gain __protect__x2
+8-10 | **Gaze** All PvEnemies gain __Empower__""",
+    """__**NUDNIK**__
+:heart: : 4
+:moneybag: : Lose 1 __will__
+Behavior: Cause __Weak__ whenever this takes damage
+—————————————————
+1-3   | **Lockjaw** :boom::twisted_rightwards_arrows: :boom::dart: , -10 :game_die:
+4-6   | **Retaliate** Deal :boom: equal to :boom: taken
+8-10 | **Flank** (-3 :game_die:) Cause __Vulnerable__x2""",
+    ]
+
+
 class Wit(commands.Cog, command_attrs=dict(hidden=True)):
     def __init__(self, bot):
         self.bot = bot
         self._init = False
         self._init_finished = False
         self._gold = None
+        self._active_message_id = None
+        self._dt = 15 * minute
+        self._channel = None
 
     async def _async_init(self):
         if self._init:
             return
-        await self.clean_manual_page(None)
         self._init = True
+        self._channel = await self.bot.fetch_channel(_channel_id)
         guild = self.bot.tdt()
         try:
             self._gold = [e for e in guild.emojis if e.name == "gold"][0]
         except IndexError:
             pass
+        await self.send_major()
         self._init_finished = True
 
     @commands.Cog.listener()
     async def on_ready(self):
         await asyncio.sleep(5)
         await self._async_init()
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        """Parse messages"""
+        # ignore all messages from our bot
+        if message.author == self.bot.user:
+            return
+        await self._async_init()
+
+    def _get_config(self, user=None):
+        """Get a user's config file"""
+        if user is None:
+            user = self.bot.user
+        try:
+            return self._configs[user.id]
+        except KeyError:
+            self._configs[user.id] = UserConfig(user)
+            return self._configs[user.id]
+
+    @property
+    def message_id(self):
+        """Active trick-or-treat game message id"""
+        if self._active_message_id is None:
+            try:
+                self._active_message_id = self._get_config().set_if_not_set(_msg_key, 0)
+            except AttributeError:
+                self._active_message_id = None
+        return self._active_message_id
+
+    async def message_active(self):
+        if not self.message_id:
+            return False
+        msg = await self._get_message()
+        if localize(msg.created_at) < localize(datetime.datetime.utcnow() - self._dt):
+            self._set_msg_id(0)
+            return False
+        return True
+
+    @property
+    def channel(self):
+        """Trick-or-treat channel"""
+        if self._channel is None:
+            self._channel = self.bot.find_channel(_channel_id)
+        return self._channel
+
+    async def send_major(self, dt=0, set_timer=True):
+        """Send wit major"""
+        # if we have an active game message already then quit
+        if not dt and await self.message_active():
+            return
+        if dt is True:
+            dt = random_time()
+            self._dt = dt * second
+        await sleep(dt)
+        # ensure some funny business didn't happen while we were waiting
+        if await self.message_active():
+            return
+        # send new active game message
+        msg = "# MAJOR\n" + random.choice(_champions_landing_enemies)
+        msg = await self.channel.send(msg)
+        self._set_msg_id(msg.id)
+        if set_timer is not True and set_timer < .01:
+            set_timer = .01
+        if set_timer:
+            # launch task for delayed message
+            self.bot.loop.create_task(self.send_major(dt=set_timer))
+
+    async def _get_message(self):
+        """Get active game message id"""
+        if self.message_id:
+            try:
+                return await self.channel.fetch_message(self.message_id)
+            except discord.NotFound:
+                self._set_msg_id(0)
+
+    def _set_msg_id(self, idn):
+        """set active message id and return old one"""
+        old = self.message_id
+        self._active_message_id = idn
+        self._get_config(self.bot.user)[_msg_key] = idn
+        return old
 
     @property
     def gold(self):
@@ -1263,33 +1402,7 @@ https://www.youtube.com/watch?v=GGhZsiRCvYc""",
 
     @commands.command()
     async def champions_landing_enemy(self, ctx):
-        encounters = [
-            """__**GELLY**__
-:heart: : 8
-:moneybag: : 1 :gold:
-Behavior: Takes double damage from :no_entry_sign: but no damage from __Burn__
-—————————————————
-1-2   | **Lunge** (+2 :game_die:) :boom:
-4-6   | **Wobble** Gain __Healing__x3
-8-10 | **Mutate** (-3 :game_die:) Disable this creatures behavior until it takes damage""",
-            """__**SPEYEDER**__
-:heart: : 3
-:moneybag: : 2 XP
-Behavior: Immune to the first attack
-—————————————————
-1-4   | **Bite** :boom::zap:
-5-6   | **Scurry** :shield:, gain __protect__x2
-8-10 | **Gaze** All PvEnemies gain __Empower__""",
-            """__**NUDNIK**__
-:heart: : 4
-:moneybag: : Lose 1 __will__
-Behavior: Cause __Weak__ whenever this takes damage
-—————————————————
-1-3   | **Lockjaw** :boom::twisted_rightwards_arrows: :boom::dart: , -10 :game_die:
-4-6   | **Retaliate** Deal :boom: equal to :boom: taken
-8-10 | **Flank** (-3 :game_die:) Cause __Vulnerable__x2""",
-            ]
-        await ctx.send(random.choice(encounters))
+        await ctx.send(random.choice(_champions_landing_enemies))
 
     @commands.command()
     async def wit_shop(self, ctx):
