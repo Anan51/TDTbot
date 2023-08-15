@@ -61,7 +61,7 @@ def sign(x):
 
 
 def random_time(nlast=None, add_random=True):
-    """Return a random time in seconds."""
+    """Return a random time in seconds. nlast is the number of votes last time."""
     if nlast is None:
         nlast = 5
     if add_random:
