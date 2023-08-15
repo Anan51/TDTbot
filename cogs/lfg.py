@@ -6,7 +6,7 @@ import pytz
 import logging
 import os
 from .. import param
-from ..param import channels, emojis, roles
+from ..param import channels
 from ..helpers import find_role
 from ..async_helpers import admin_check, split_send
 from ..version import usingV2
@@ -16,12 +16,7 @@ logger = logging.getLogger('discord.' + __name__)
 _dbm = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 _dbm = os.path.join(_dbm, 'config', 'lfg.dbm')
 _tmax = datetime.timedelta(days=90)
-_role2emoji = {roles.destiny_2: emojis.destiny_2,
-               roles.minecraft: emojis.minecraft,
-               roles.overwatch2: emojis.overwatch2,
-               roles.d2pvp: "⚔️",
-               roles.d2pve: "☠️",
-               }
+_role2emoji = param.role2emoji
 _tz = pytz.timezone(param.rc('timezone'))
 
 # todo: auto react(drop or update?), CoC rxn for role/multi-lfgs
