@@ -26,7 +26,6 @@ _msg_key = _bot_key + ".msg"
 def random_time(nlast=3, add_random=True):
     """Return a random time in seconds. Taken from trick_or_treat.py.
     nlast is the number of votes last time. Times are in seconds."""
-    import random
     if nlast is None:
         nlast = 5
     if add_random:
@@ -34,9 +33,9 @@ def random_time(nlast=3, add_random=True):
     nlast = min(max(1, nlast), 10)
     shape = 22 - 2 * nlast
     scale = -1.4 * nlast + 16.4
-    ratio = 5 * (16 - nlast)
+    ratio = 5 * (16 - nlast) * 7
     t = (random.weibullvariate(shape, scale) + .5) * ratio
-    return min(max(600, t), 3600)
+    return min(max(3600, t), 3*3600)
 
 
 def parse_roll(roll_str, max_sides=None):
@@ -196,8 +195,9 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         self._init_finished = False
         self._gold = None
         self._active_message_id = None
-        self._dt = 15 * minute
+        self._dt = 60 * minute
         self._channel = None
+        self._configs = dict()
 
     async def _async_init(self):
         if self._init:
