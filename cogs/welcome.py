@@ -234,6 +234,7 @@ class Welcome(commands.Cog):
         admin = find_role(guild, roles.admin)
         for rxn in msg.reactions:
             top_role = None
+            user = await self.bot.get_or_fetch_user(self.bot.user.id, guild)
             async for user in rxn.users():
                 if top_role is None:
                     try:
