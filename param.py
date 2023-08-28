@@ -57,7 +57,8 @@ roles = _Struct(
                 admin=318255861002928129,
                 # game roles
                 apex=879069368649134160,
-                destiny_2=878812130453905420,
+                destiny_2=878812130453905420,  # kept for backwards compatibility
+                tdt_peeps=878812130453905420,
                 minecraft=1024825607059669043,
                 overwatch2=1034230093872111708,
                 call_of_duty=1034230036078788638,
@@ -73,7 +74,7 @@ users = _Struct(electro=221778796250923008,
                 )
 
 # roles
-emoji2role = {emojis.destiny_2: roles.destiny_2,
+emoji2role = {emojis.tdt_bruh: roles.tdt_peeps,
               emojis.overwatch2: roles.overwatch2,
               emojis.call_of_duty: roles.call_of_duty,
               "⚔️": roles.d2pvp,
