@@ -1,0 +1,1 @@
+**ANGUS**: :shield::shield::shield::shield::shield: ignores :no_entry_sign:, per __will__ the players have total

@@ -1,0 +1,1 @@
+**EDEN**: Remove all Modifiers from players :shield: and :boom: for the next turns per each player's __will__
