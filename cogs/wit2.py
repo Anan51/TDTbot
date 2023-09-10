@@ -3,6 +3,7 @@ from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
 import random
+import re
 import os
 from .. import param
 from ..config import UserConfig
@@ -59,6 +60,23 @@ def safe_update(d, u, key=None):
                     logger.warning(f"Overwriting {k} with {v}")
             d[k] = v
     return d
+
+
+async def safe_send(channel, message):
+    if len(message) < 2000:
+        await channel.send(message)
+    else:
+        tmp = re.split(r"(\.+)", message)
+        if not tmp:
+            return
+        out = [tmp[0]]
+        for s in tmp[1:]:
+            if s.startswith('.'):
+                out[-1] += s
+            else:
+                out.append(s)
+        for s in out:
+            await channel.send(s)
 
 
 def make_decorator(dct):
@@ -200,7 +218,6 @@ def gen_artifact(roll_str):
 
 
 def item_card(item, gold=None):
-    import re
     gold_str = ""
     prefix, kind, price = item
     if gold is not None and gold is not False:
@@ -307,8 +324,10 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
             cmd = words[0].lower()
             cmd = self.get_command(cmd)
             if iscoroutinefunction(cmd):
-                cmd = await cmd(message, *words[1:])
-            await message.channel.send(cmd)
+                cmd = await cmd(message.channel, *words[1:])
+                if cmd is None:
+                    return
+            await safe_send(message.channel, cmd)
         except Exception as e:
             logger.error(e)
             tb = traceback.format_exc()
