@@ -81,7 +81,7 @@ async def safe_send(channel, message):
                 chunks[-1] += s
             else:
                 chunks.append(s)
-        for s in out:
+        for s in chunks:
             await channel.send(s)
 
 
