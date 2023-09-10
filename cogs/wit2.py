@@ -75,6 +75,12 @@ async def safe_send(channel, message):
                 out[-1] += s
             else:
                 out.append(s)
+        chunks = [out[0]]
+        for s in out[1:]:
+            if len(chunks[-1]) + len(s) < 2000:
+                chunks[-1] += s
+            else:
+                chunks.append(s)
         for s in out:
             await channel.send(s)
 
