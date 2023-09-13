@@ -260,6 +260,7 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
         self._configs = dict()
         self._data = dict()
         self._aliases = dict()
+        self._active_commands = []
         self.load_data()
 
     def get_data(self, *keys):
@@ -287,6 +288,15 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
                 else:
                     out = out()
         return out
+
+    def set_command(self, cmd):
+        """Set command in wit data files"""
+        async def _(self, ctx, *args):
+            await ctx.send(self.get_command(cmd))
+
+        func = commands.command(name=cmd)(_)
+        setattr(self, cmd, func)
+        self._active_commands.append(cmd)
 
     async def _async_init(self):
         if self._init:
@@ -378,6 +388,9 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
             return data
 
         if overwrite or not self._data:
+            for cmd in self._active_commands:
+                delattr(self, cmd)
+            self._active_commands = []
             self._data = dict()
             self._data = path2dict(_wit_data_path, data=self._data)
 
