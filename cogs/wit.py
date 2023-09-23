@@ -6,7 +6,7 @@ import random
 from .. import param
 from ..config import UserConfig
 from ..version import usingV2
-from ..async_helpers import split_send, sleep
+from ..async_helpers import split_send, sleep, admin_check
 from ..helpers import second, minute, localize
 import logging
 
@@ -1519,6 +1519,14 @@ https://youtu.be/eUcThHVbrXY""",
                    "🛖 Shop"
                    ]
         await ctx.send(', '.join(random.choices(options, weights=[11, 2, 9, 1, 1], k=3)))
+
+    @commands.command()
+    @commands.check(admin_check)
+    async def force_major(self, ctx):
+        self._dt = 0 * second
+        self._set_msg_id(0)
+        self._active_message_id = None
+        await self.send_major()
 
 
 if usingV2:
