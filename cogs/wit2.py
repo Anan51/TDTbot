@@ -8,7 +8,7 @@ import os
 from .. import param
 from ..config import UserConfig
 from ..version import usingV2
-from ..async_helpers import split_send, sleep
+from ..async_helpers import split_send, sleep, admin_check
 from ..helpers import second, minute, localize
 import logging
 from inspect import iscoroutinefunction
@@ -120,7 +120,7 @@ def random_time(nlast=3, add_random=True):
     scale = -1.4 * nlast + 16.4
     ratio = 5 * (16 - nlast) * 7
     t = (random.weibullvariate(shape, scale) + .5) * ratio
-    return min(max(3600, t), 3*3600) * 9999999
+    return min(max(3600, t), 3*3600)
 
 
 def parse_roll(roll_str, max_sides=None):
@@ -375,6 +375,8 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
             self.set_command(cmd)
         for cmd in self._data['tasks'].keys():
             self.set_command(cmd)
+        for cmd in self._aliases.keys():
+            self.set_command(cmd)
         return
 
     @property
@@ -445,12 +447,12 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
         return self._gold if self._gold else "<:gold:1058304371940655185>"
 
     # @commands.command()
-    @wit_cmd()
+    # @wit_cmd()
     async def wit_shop(self, ctx):
         await split_send(ctx, gen_shop(), "\n\n")
 
     # @commands.command(aliases=['r'])
-    @wit_cmd(aliases=['r'])
+    # @wit_cmd(aliases=['r'])
     async def roll(self, ctx, roll_str):
         rolls = roll(roll_str)
         msg = ' + '.join([str(i) for i in rolls])
@@ -459,7 +461,7 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
         await ctx.send(msg)
 
     # @commands.command()
-    @wit_cmd()
+    # @wit_cmd()
     async def floor(self, ctx):
         options = ["💀 Enemy",
                    "☠️ Major",
@@ -468,6 +470,15 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
                    "🛖 Shop"
                    ]
         await ctx.send(', '.join(random.choices(options, weights=[11, 2, 9, 1, 1], k=3)))
+
+    # @commands.command()
+    # @commands.check(admin_check)
+    # @wit_cmd()
+    async def force_major(self, ctx):
+        self._dt = 0 * second
+        self._set_msg_id(0)
+        self._active_message_id = None
+        await self.send_major()
 
 
 if usingV2:
