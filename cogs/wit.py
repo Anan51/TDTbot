@@ -372,6 +372,9 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
                 if key in self._aliases:
                     logger.warning(f"Collision between task and alias {key}")
 
+        tmp = {k: ('additional_commands', k) for k in self._data['additional_commands']}
+        safe_update(self._aliases, tmp)
+
         for cmd in self._wit_cmds:
             self.set_command(cmd)
         for cmd in self._data['additional_commands'].keys():
