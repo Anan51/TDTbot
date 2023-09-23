@@ -11,7 +11,6 @@ from ..version import usingV2
 from ..async_helpers import split_send, sleep
 from ..helpers import second, minute, localize
 import logging
-import traceback
 from inspect import iscoroutinefunction
 
 
@@ -294,7 +293,7 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
         async def _(self, ctx, *args):
             await ctx.send(self.get_command(cmd))
 
-        func = commands.command(name=cmd)(_)
+        func = commands.command(name="wit_" + cmd)(_)
         setattr(self, cmd, func)
         self._active_commands.append(cmd)
 
@@ -308,50 +307,13 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
             self._gold = [e for e in guild.emojis if e.name == "gold"][0]
         except IndexError:
             pass
-        await self.send_major()
+        # await self.send_major()
         self._init_finished = True
 
     @commands.Cog.listener()
     async def on_ready(self):
         await asyncio.sleep(5)
         await self._async_init()
-
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        """Parse messages"""
-        try:
-            # ignore all messages from our bot
-            if message.author == self.bot.user:
-                return
-            await self._async_init()
-            # ignore normal commands
-            try:
-                if message.content.startswith(self.bot.command_prefix):
-                    return
-            except TypeError:
-                for prefix in self.bot.command_prefix:
-                    if message.content.startswith(prefix):
-                        return
-            if not message.content.lower().startswith(_wit_prefix):
-                return
-            if message.channel.category_id != param.channels.wit_category:
-                return
-            words = message.content[len(_wit_prefix):].strip().split(' ')
-            cmd = words[0].lower()
-            cmd = self.get_command(cmd)
-            if iscoroutinefunction(cmd):
-                cmd = await cmd(message.channel, *words[1:])
-                if cmd is None:
-                    return
-            await safe_send(message.channel, cmd)
-        except Exception as e:
-            logger.error(e)
-            tb = traceback.format_exc()
-            logger.error(tb)
-            channel = await self.bot.fetch_channel(param.channels.debugging)
-            await channel.send("Wit issue:")
-            await channel.send(e)
-            await channel.send(f"```{tb}```")
 
     def _get_config(self, user=None):
         """Get a user's config file"""
@@ -406,6 +368,12 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
             for key in self._data['tasks']:
                 if key in self._aliases:
                     logger.warning(f"Collision between task and alias {key}")
+
+        for cmd in self._wit_cmds:
+            self.set_command(cmd)
+        for cmd in self._data['tasks'].keys():
+            self.set_command(cmd)
+        return
 
     @property
     def message_id(self):
