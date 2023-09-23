@@ -1,0 +1,1 @@
+**YIN**: Double all players __Will__ if they have none: give all players 5 __will__

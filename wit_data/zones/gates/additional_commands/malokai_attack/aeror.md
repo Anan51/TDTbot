@@ -1,0 +1,1 @@
+**AEROR**: summon a gates enemy; break off from this fight to fight it but time keeps going here and so do other allies

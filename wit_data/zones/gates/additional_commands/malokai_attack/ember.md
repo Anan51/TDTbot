@@ -1,0 +1,1 @@
+**EMBER**: Cause __weak__, __vulnerable__, and __burning__ to each player per __will__ the players have in total.
