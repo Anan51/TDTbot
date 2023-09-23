@@ -291,7 +291,8 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
     def set_command(self, cmd):
         """Set command in wit data files"""
         async def _(ctx, *args):
-            await ctx.send(self.get_command(cmd))
+            exe = lambda: self.get_command(cmd, exicute=True)
+            await ctx.send(exe())
 
         key = 'wit_' + cmd
         func = commands.command(name=key)(_)
