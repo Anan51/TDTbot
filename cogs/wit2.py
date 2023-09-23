@@ -244,7 +244,7 @@ def gen_shop():
     return [item_card(item, gold=5) for item in items]
 
 
-class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
+class Wit(commands.Cog, command_attrs=dict(hidden=True)):
     _wit_cmds = dict()
     wit_cmd = make_decorator(_wit_cmds)
 
@@ -310,7 +310,7 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
             self._gold = [e for e in guild.emojis if e.name == "gold"][0]
         except IndexError:
             pass
-        # await self.send_major()
+        await self.send_major()
         self._init_finished = True
 
     @commands.Cog.listener()
@@ -447,13 +447,11 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
     def gold(self):
         return self._gold if self._gold else "<:gold:1058304371940655185>"
 
-    # @commands.command()
-    # @wit_cmd()
+    @commands.command()
     async def wit_shop(self, ctx):
         await split_send(ctx, gen_shop(), "\n\n")
 
-    # @commands.command(aliases=['r'])
-    # @wit_cmd(aliases=['r'])
+    @commands.command(aliases=['r'])
     async def roll(self, ctx, roll_str):
         rolls = roll(roll_str)
         msg = ' + '.join([str(i) for i in rolls])
@@ -461,8 +459,7 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
             msg += ' = {:}'.format(sum(rolls))
         await ctx.send(msg)
 
-    # @commands.command()
-    # @wit_cmd()
+    @commands.command()
     async def floor(self, ctx):
         options = ["💀 Enemy",
                    "☠️ Major",
@@ -472,9 +469,8 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
                    ]
         await ctx.send(', '.join(random.choices(options, weights=[11, 2, 9, 1, 1], k=3)))
 
-    # @commands.command()
-    # @commands.check(admin_check)
-    # @wit_cmd()
+    @commands.command()
+    @commands.check(admin_check)
     async def force_major(self, ctx):
         self._dt = 0 * second
         self._set_msg_id(0)
@@ -484,8 +480,8 @@ class Wit2(commands.Cog, command_attrs=dict(hidden=True)):
 
 if usingV2:
     async def setup(bot):
-        cog = Wit2(bot)
+        cog = Wit(bot)
         await bot.add_cog(cog)
 else:
     def setup(bot):
-        bot.add_cog(Wit2(bot))
+        bot.add_cog(Wit(bot))
