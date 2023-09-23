@@ -294,7 +294,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
             exe = lambda: self.get_command(cmd, exicute=True)  # noqa: E731
             await ctx.send(exe())
 
-        key = 'wit_' + cmd
+        key = cmd[:]
         func = commands.command(name=key)(_)
         setattr(self, key, _)
         self.bot.add_command(func)
