@@ -374,6 +374,8 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
         for cmd in self._wit_cmds:
             self.set_command(cmd)
+        for cmd in self._data['additional_commands'].keys():
+            self.set_command(cmd)
         for cmd in self._data['tasks'].keys():
             self.set_command(cmd)
         for cmd in self._aliases.keys():
