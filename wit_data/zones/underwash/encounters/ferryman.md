@@ -5,11 +5,17 @@
 :bow_and_arrow:  Elvish: ||**Pay in Blood** tdt$ferry_blood||
 
 -------------
-tdt$
+tdt$ferry_gold
+
+You dig through your pocket in search of gold. While you are doing so, the man says "He did not bring the curse" This gives you pause, but you keep looking (pay 20 Gold or 2 Higuard Keys, if you dont have the currency use tdt$ferry_spirit)
 
 -------------
-tdt$
+tdt$ferry_spirit
+
+You dont elect to provide any currency. You decide to instead grasp his hand. This feels like what was intended, strangely. The man grips your hand firmly and says "He knows you will kill if it gets you more renown or experience" (Gain Will x3)
 
 -------------
-tdt$
+tdt$ferry_blood
+
+You examine the mans hand. You notice it has tattoos in old elvish. You dont speak it, but you strangely seem to understand what they are saying. You place the edge of your blade in your hand and cut it. It begins to bleed. You drip some of the blood onto the ferryman's hand "Sacrifice is the only cure" he says. The tattoos recede and he retracts his hand. (-2 :heart: max, travel straight to the gates)
 
