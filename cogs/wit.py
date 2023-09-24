@@ -85,6 +85,18 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         """Get command from wit data files"""
         return self.data.get_command(cmd, exicute=exicute)
 
+    def set_command(self, cmd):
+        """Set command in wit data files"""
+        async def _(ctx, *args):
+            exe = lambda: self.get_command(cmd, exicute=True)  # noqa: E731
+            await ctx.send(exe())
+
+        key = cmd[:]
+        func = commands.command(name=key)(_)
+        setattr(self, key, _)
+        self.bot.add_command(func)
+        return key
+
     async def _async_init(self):
         if self._init:
             return
