@@ -3,6 +3,6 @@ max-line-length=120
 per-file-ignores =
     cogs/wilds.py:E501
     cogs/wit.py:E501
-    cogs/wit2.py:E501
+    wit_data/__init__.py:E501
     __init__.py:F401
     */__init__.py:F401
