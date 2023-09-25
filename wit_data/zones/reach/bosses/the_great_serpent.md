@@ -1,6 +1,6 @@
 **THE GREAT SERPENT**
 :heart: : 20 x :busts_in_silhouette:
-:moneybag: : 2d10 basic {OR} 1/50 chance to gain "**Fifth-Rib Fang** :boom::no_entry_sign: :twisted_rightwards_arrows: Cause __burn__, gain __healing__" valued at 45 :gold:
+:moneybag: : 2d10 basic {OR} 1/50 chance to gain "**Fifth-Rib Fang** :boom::no_entry_sign: :twisted_rightwards_arrows: Cause __burn__, gain __healing__" valued at 45 <:gold:1058304371940655185>
 Behavior: gain permanent __Empower__ for every 5 damage taken
 —————————————————
 1-2   | **Fangs** :boom::dart: to the highest HP player
