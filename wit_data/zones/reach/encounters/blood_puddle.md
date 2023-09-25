@@ -17,4 +17,4 @@ You decide to leave the pool alone and let nature figure out what to do with it 
 -------------
 tdt$blood_drink
 
-You hesitantly cup your hands and drink from the pool. It taste bitter but you feel it resonate with your pulse. (gain +25% ❤️ and + 25%🔷)
+You hesitantly cup your hands and drink from the pool. It taste bitter but you feel it resonate with your pulse. (gain +:heart: and +:large_blue_diamond: to your max)
