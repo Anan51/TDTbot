@@ -15,7 +15,7 @@ tdt$factory_around
 "This isnt worth it" you mutter to yourself out loud. You turn around to leave the factory when you are greeted by a band of Sentian marauders. They are rusted and brandishing discarded parts. They do NOT look happy to see you. (Fight 3 of the below enemy)
 || __**RUSTED MARAUDER**__
 :heart: : 6
-:moneybag: : Safety Scissors or 6 gold
+:moneybag: : **Dis-arm** (-5 :large_blue_diamond:): Cause __Weak__ x10 :cyclone:
 Behavior: When this takes damage or an ally dies, gain __Empower__.
 —————————————————
 1-4   | **Knife** (+2 :game_die:) :boom: lowest HP
