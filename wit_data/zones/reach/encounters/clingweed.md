@@ -7,7 +7,7 @@
 -------------
 tdt$cling_cut
 
-You draw your weapon and destroy the tendrils attaching to your flesh. ( :game_die: ≤ 7: You or a teammate may spend 1 :heart: for you to try again otherwise: Gain: __Sapped__ :zzz: "Disable all other passives")
+You draw your weapon and destroy the tendrils attaching to your flesh. ( :game_die: < 4: Gain: __Sapped__ :zzz: "Disable all other passives" | :game_die: > 5: Lose 2 :large_blue_diamond: from your max)
 
 -------------
 tdt$cling_relax
