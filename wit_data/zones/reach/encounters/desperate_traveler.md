@@ -12,7 +12,7 @@ You clearly make eye contact with the woman, but dip behind a tree to avoid dete
 -------------
 tdt$traveler_fight
 
-You beckon the woman to stand behind you and prepare for a fight. (Summon a Major, gain a permanent stack of __Protect__ if you win)
+You beckon the woman to stand behind you and prepare for a fight. (Summon a Major, gain a stack of __Protect__ at the beginning of every combat if you win)
 
 -------------
 tdt$traveler_smoke
