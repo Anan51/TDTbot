@@ -7,7 +7,9 @@
 -------------
 tdt$sack_climb
 
-You gather your strength then attempt to reach the sack dangling from the branches. ( 🎲 ≤ 4: summon enemy | 🎲 ≥ 5: !r 1d5 lesser chest)
+tdt$sack_climb
+
+You gather your strength then attempt to reach the sack dangling from the branches. ( :game_die: < 5: summon enemy | :game_die: > 5: Acquire a "**Snap Trap** (-2 :large_blue_diamond:): <:Persistence:1151788148322484234> :twisted_rightwards_arrows: :boom::no_entry_sign:" valued at 12 <:gold:1058304371940655185> )
 
 -------------
 tdt$sack_leave
@@ -17,4 +19,4 @@ You leave the sack. Its probably someone's stuff anyways... (Go back one floor)
 -------------
 tdt$sack_search
 
-You remember using this trick yourself back when you were younger. This is to keep away wild animals which means there is probably a camp not too far nearby. Sure enough after a bit of searching you find an elvish camp. It seems it has been overtaken by some thugs but there is still an Elvish scroll bound around a book that they werent capable of opening. (You may spend 2 :heart: to upgrade your Elvish passive to: __Pure Blood__ :woman_elf: "While an enemy has __Weak__ they cannot cause __effects__")
+You remember using this trick yourself back when you were younger. This is to keep away wild animals which means there is probably a camp not too far nearby. Sure enough after a bit of searching you find an elvish camp. It seems it has been overtaken by some thugs but there is still an Elvish scroll bound around a book that they werent capable of opening. (You may spend 2 :heart: from your max to upgrade your Elvish passive to: __Pure Blood__ :woman_elf: "While an enemy has __Weak__ they cannot cause __effects__. Disable a targets passive/behavior while they are __Weak__")
