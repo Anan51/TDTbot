@@ -1,8 +1,8 @@
-__**FENRIC THUG**__
-❤️ : 8
-💰 : 1d7 lesser
-Behavior: When this takes damage, gain <:stealthIcon:943248201790677052> for the rest of the turn
+**FENRIC THUG**
+:heart: : 8
+:moneybag: : 1d7 lesser (and your stolen <:gold:1058304371940655185>)
+Behavior: At then end of turn 5, leave combat and yield no loot
 —————————————————
-1-3   | **Shiv** (+2  🎲) 💥💥⚡ random player
-4-7   | **Shifty** (+4 🎲) 🛡️🛡️🔀 Cause __Weak__
-8-10 | **Mug** 💥 🚫 lowest HP 🔀 lose 3 <:gold:1058304371940655185>
+1-3   | **Shiv** (+2  :game_die:) :boom::boom::zap: random player
+4-7   | **Shifty** (+4 :game_die:) :stealthIcon: :twisted_rightwards_arrows: Cause __Weak__
+8-10 | **Mug** :boom::no_entry_sign: lowest HP :twisted_rightwards_arrows: target loses 3 <:gold:1058304371940655185>
