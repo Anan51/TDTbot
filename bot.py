@@ -189,7 +189,9 @@ class MainBot(commands.Bot):
         if message_id is not None:
             if getattr(payload, "message_id") != message_id:
                 return
-        if self.user.id in [getattr(payload, "user_id"), (payload.member, 'id', None)]:
+        author = getattr(getattr(payload, "member", None), "id", None)
+        uid = getattr(payload, "user_id", None)
+        if self.user.id in [author, uid]:
             return
         if guild is None:
             guild = [g for g in self.guilds if g.id == payload.guild_id][0]
