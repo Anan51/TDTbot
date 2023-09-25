@@ -8,7 +8,7 @@
 -------------
 tdt$tree_eat
 
-You decide the tree is good for food and pleasant to the eyes. You pluck a fruit off and eat a bite. (Restore 100% :heart: and :large_blue_diamond:, enemies roll first in your next fight. Gain permanent __Healing__ and __Will__x10)
+You decide the tree is good for food and pleasant to the eyes. You pluck a fruit off and eat a bite. (Restore 100% :heart: and :large_blue_diamond:, enemies roll first in your next fight. Gain permanent __Healing__. Gain __Will__x10)
 
 -------------
 tdt$tree_leave
