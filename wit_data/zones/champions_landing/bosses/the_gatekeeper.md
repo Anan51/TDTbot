@@ -1,10 +1,9 @@
 __**THE GATEKEEPER**__
-❤️ : 15 x👥
-💰 : !r 1d3 Lesser
-Behavior: Shields are Immune to Precision and Piercing damage
+:heart: : 10 x:busts_in_silhouette:
+:moneybag: : !r 1d3 Lesser {OR} 1/50 chance to get "**Gatekeeper's Eye** (-4 :heart:) Your next :shield: becomes :Persistence::cyclone:" valued at 60 :gold:
+Behavior: Start the combat with :Persistence::Persistence::Persistence::Persistence::Persistence:
 —————————————————
-1-3   | **Swat** 💥💥 to ALL players
-4-8   | **Prevent** (-2 🎲) 🛡️🛡️x👥 🔀 +❤️
-9-10 | **Looming** (+2 🎲) Gain __Empower__
-11+    | **Flatten** (-8 🎲) 💥🚫🛡️ to ALL players 🔀 skip their turn
-https://www.youtube.com/watch?v=0uAsD6lQV1I
+1-3   | **Swat** :boom::boom::cyclone:
+4-8   | **Prevent** (-2 :game_die:) :Sturdy::Sturdy:x:busts_in_silhouette: :twisted_rightwards_arrows: +:heart:
+9-10 | **Looming** (+2 :game_die:) Gain __Empower__
+11+    | **Flatten** (-8 :game_die:) :boom::no_entry_sign::cyclone: :twisted_rightwards_arrows: skip targets turns
