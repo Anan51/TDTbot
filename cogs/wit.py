@@ -9,7 +9,7 @@ from ..config import UserConfig
 from ..version import usingV2
 from ..async_helpers import sleep, admin_check, split_send
 from ..helpers import second, minute, localize
-from ..wit_data import WitData, roll
+from ..wit_data import WitData, roll, gen_shop
 import logging
 
 
@@ -42,7 +42,7 @@ def random_time(nlast=3, add_random=True):
 
 async def safe_send(channel, message):
     if isinstance(message, list):
-        await split_send(channel, message)
+        return await split_send(channel, message)
     if len(message) < 2000:
         await channel.send(message)
     else:
@@ -185,10 +185,10 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         self._get_config(self.bot.user)[_msg_key] = idn
         return old
 
-    @commands.command
+    @commands.command()
     async def wit_shop(self, ctx):
         """Show the wit shop"""
-        await split_send(ctx, self.data.wit_shop(), "\n\n")
+        await split_send(ctx, gen_shop(), "\n\n")
 
     @commands.command(aliases=['r'])
     async def roll(self, ctx, roll_str):

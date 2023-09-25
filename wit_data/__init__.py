@@ -291,9 +291,6 @@ class WitData:
             self.set_command(cmd)
         return
 
-    def wit_shop(self):
-        return gen_shop()
-
     @wit_cmd
     def floor(self):
         options = ["💀 Enemy",
