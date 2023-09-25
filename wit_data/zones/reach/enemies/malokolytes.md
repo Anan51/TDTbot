@@ -1,8 +1,8 @@
 __**MALOKOLYTES**__
-❤️ : 4
-💰 : 1d6 basic
-Behavior: upon death, summon another malocolyte with half of your max HP (unless max is 1)
+:heart: : 4
+:moneybag: : 1d6 basic
+Behavior: upon death, summon another malocolyte with half of its highest :heart: total (unless max is 1)
 —————————————————
-1-3   | **Sacrificial Dagger** (-6 🎲) 💥💥💥 random player
-4-9   | **Bad Omen** (+6 🎲) 🛡️🛡️
-10     | **Dark Ritual** (-6 🎲) ⚡ double your current max HP
+1-3   | **Sacrificial Dagger** (-5 :game_die:) :boom::boom::boom: random player
+4-9   | **Bad Omen** (+5 :game_die:) :shield::shield:
+10     | **Dark Ritual** (-5 :game_die:) +:heart: equal to your current :heart:
