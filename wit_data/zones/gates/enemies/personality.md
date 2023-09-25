@@ -1,9 +1,9 @@
-__**-THE DIFFERENCE -SECOND -DECISION -PERSONALITY -OPEN -UP -IN TWO**__
-:heart: : -6
-:moneybag: : Lose all __Will__
-Behavior: -m3:4Pa62sl
+__**THE FAMILIAR**__
+:heart: : 4
+:moneybag: : )
+Behavior: "For old times sake?"
 —————————————————
-1-4   | **Gloom** (+1 :game_die:) :shield::shield::shield:
-5-8   | **Cursed Shield** :boom::boom::boom: :twisted_rightwards_arrows: +:game_die:
-9-10 | **Doubt** (+3 :game_die:) Gain __Burn__x3
-https://www.youtube.com/watch?v=qMX3aVbNdvo
+1-6   | **Light** (-2 :game_die:) :boom::boom::boom::twisted_rightwards_arrows: +:no_entry_sign: 
+4-7   | **Guidance** Gain __Heal__ and +:heart::zap: per incoming :boom:
+8-10  | **Intervention** (-1 :heart:) Cause -__will__, cause __vulnerable__ per __will__ remaining
+https://www.youtube.com/watch?v=JIrLwSl7ARA
