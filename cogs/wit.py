@@ -7,7 +7,7 @@ import re
 from .. import param
 from ..config import UserConfig
 from ..version import usingV2
-from ..async_helpers import sleep, admin_check
+from ..async_helpers import sleep, admin_check, split_send
 from ..helpers import second, minute, localize
 from ..wit_data import WitData, roll
 import logging
@@ -41,15 +41,17 @@ def random_time(nlast=3, add_random=True):
 
 
 async def safe_send(channel, message):
+    if isinstance(message, list):
+        await split_send(channel, message)
     if len(message) < 2000:
         await channel.send(message)
     else:
-        tmp = re.split(r"(\.+)", message)
+        tmp = re.split(r"(\.|\n+)", message)
         if not tmp:
             return
         out = [tmp[0]]
         for s in tmp[1:]:
-            if s.startswith('.'):
+            if s.startswith('.') or s.startswith('\n'):
                 out[-1] += s
             else:
                 out.append(s)
@@ -89,7 +91,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         """Set command in wit data files"""
         async def _(ctx, *args):
             exe = lambda: self.get_command(cmd, exicute=True)  # noqa: E731
-            await ctx.send(exe())
+            await safe_send(ctx, exe())
 
         key = cmd[:]
         func = commands.command(name=key)(_)
@@ -182,6 +184,11 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         self._active_message_id = idn
         self._get_config(self.bot.user)[_msg_key] = idn
         return old
+
+    @commands.command
+    async def wit_shop(self, ctx):
+        """Show the wit shop"""
+        await split_send(ctx, self.data.wit_shop(), "\n\n")
 
     @commands.command(aliases=['r'])
     async def roll(self, ctx, roll_str):

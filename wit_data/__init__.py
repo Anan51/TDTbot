@@ -291,7 +291,6 @@ class WitData:
             self.set_command(cmd)
         return
 
-    @wit_cmd
     def wit_shop(self):
         return gen_shop()
 
