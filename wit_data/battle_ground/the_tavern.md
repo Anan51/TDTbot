@@ -1,0 +1,2 @@
+# :beer: :wine_glass: :tumbler_glass: :cocktail: The Tavern :cocktail: :tumbler_glass: :wine_glass: :beer:
+- All players have access to the move > **Chug**: Grant __Empower__ and __healing__x3, your moves have a 1/6 chance of missing while you have __healing__
