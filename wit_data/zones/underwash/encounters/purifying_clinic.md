@@ -12,7 +12,7 @@ tdt$clinic_heal
 -------------
 tdt$clinic_help
 
-"I might be able to help you and your cause" you say to an old woman wearily trying to take care of the line of people. "That-" she looks at her guards "That would be fine, but you need to lay down your weapons." You are nervous about leaving your weapons out in such a public place, but it would be worth it if you can help. (:game_die: ≥ 3 : gain 5 <:gold:1058304371940655185> and give a weapon :twisted_rightwards_arrows: gain __heal__ | :game_die: ≤ 2: discard one weapon )
+"I might be able to help you and your cause" you say to an old woman wearily trying to take care of the line of people. "That-" she looks at her guards "That would be fine, but you need to lay down your weapons." You are nervous about leaving your weapons out in such a public place, but it would be worth it if you can help. (:game_die: > 3 : "**Red Cross** (-1 :heart:): __Healing__ you grant for the rest of combat grants its :heart:s immediately" valued at 13 <:gold:1058304371940655185> | :game_die: < 2: discard one weapon )
 
 -------------
 tdt$clinic_study
