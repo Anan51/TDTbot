@@ -17,4 +17,4 @@ You Raise your weapon and begin smashing through the spears. Splinters fly in ev
 -------------
 tdt$shin_remove
 
-You squat down along the first row of spears, they are crudely made BUT not flimsily made. You recognize a few of the markings and knots used on the fastenings; they are fenric. "That makes sense" you say out loud to yourself. You think you might be able to remove one of the spears ( 🎲 ≤ 6: failure | 🎲 ≥ 7: Acquire one **Invigorating Fang** from the Loot Table)
+You squat down along the first row of spears, they are crudely made BUT not flimsily made. You recognize a few of the markings and knots used on the fastenings; they are fenric. "That makes sense" you say out loud to yourself. You think you might be able to remove one of the spears ( :game_die: < 6: failure | :game_die: > 7: Acquire a "**Fenric Spear** (-1 :large_blue_diamond:): :boom::zap: :twisted_rightwards_arrows: cause __Vulnerable__" valued at 15 :gold:)
