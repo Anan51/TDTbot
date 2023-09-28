@@ -38,7 +38,7 @@ reissue, startup = None, None
 # while it takes more than 5 second to complete this loop
 while time.time() - now > 5:
     now = time.time()
-    from . import param, bot, git_manage, reloader
+    from . import param, bot, git_manage, reloader, wit_data
     # init param
     param.rc.read_config(args.config)
     token = param.rc.read_token(args.token)
@@ -67,9 +67,10 @@ while time.time() - now > 5:
     # reload all packages
     for i in range(2):
         reloader.reload_package(sys.modules[__name__])
+        importlib.reload(wit_data)
         importlib.reload(param)
         importlib.reload(git_manage)
         importlib.reload(reloader)
         importlib.reload(bot)
-    del param, bot, git_manage, reloader
+    del param, bot, git_manage, reloader, wit_data
     logger.printv("End of loop.")
