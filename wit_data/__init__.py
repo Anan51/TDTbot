@@ -111,7 +111,7 @@ def gen_weapon(roll_str):
         "**Spell Book** (-2 🔷): any effectx4",
         "**Wand** (-4 🔷): Double a target's active effect stacks",
         "**Runic Flintlock** (-1 🔷):💥; 1/6 chance to TRIPLE successful damage",
-        "**Graven Shield** (-2 🔷): :Sturdy: :Persistence:🌀",
+        "**Graven Shield** (-2 🔷): <:Sturdy:1152516154192044142> <:Persistence:1151788148322484234>🌀",
         "**Gilded Hammer** (-2 🔷): 💥🛡️🔀💥🌀 per success",
         "**Tome** (-4 🔷): Summon a Dire Wolf or an Automaton",
         "**Scroll** (-4 🔷): +2 🔷🌀",
