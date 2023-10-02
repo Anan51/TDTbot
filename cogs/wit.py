@@ -78,7 +78,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
 
     def get_data(self, *keys):
         """Retrieve preloaded wit data"""
-        data = self._data
+        data = self.data
         for key in keys:
             data = data[key]
         return data
