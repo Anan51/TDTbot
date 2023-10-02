@@ -199,6 +199,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         await ctx.send(msg)
 
     @commands.check(admin_check)
+    @commands.command()
     async def force_major(self, ctx):
         self._dt = 0 * second
         self._set_msg_id(0)
