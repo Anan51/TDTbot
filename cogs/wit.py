@@ -157,7 +157,8 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         if await self.message_active():
             return
         # send new active game message
-        enemies = self.get_data('zones', 'champions_landing', 'enemies')
+        enemies = self.get_data('zones', 'champions_landing', 'enemies').values()
+        enemies = [i for i in enemies]
         msg = "# MAJOR\n" + random.choice(enemies)
         msg = await self.channel.send(msg)
         self._set_msg_id(msg.id)
