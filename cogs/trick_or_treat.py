@@ -23,8 +23,8 @@ year = "{:04d}".format(datetime.datetime.utcnow().year)
 
 # main settings:
 _channel = "the_neighborhood"   # trick-or-treat channel name or id
-_rule_id = None                 # message id for rules/reaction check
-_game_on = False                # flag to run game
+_rule_id = 1158930818241151026  # message id for rules/reaction check
+_game_on = True                # flag to run game
 _role = "SPOOKY"                # role name or id for game participation
 _nmin = 2, 5                    # minimum number (range) of votes to start count
 # secondary settings
