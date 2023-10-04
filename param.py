@@ -44,7 +44,7 @@ guilds = _Struct(tdt=164589623459184640)
 
 messages = _Struct(CoC=563406038754394112,
                    wolfpack=945717800788447282,
-                   trick_or_treat=1025676700043972688,
+                   trick_or_treat=1158930818241151026,
                    games=563406038754394112,
                    )
 

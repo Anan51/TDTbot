@@ -5,6 +5,7 @@ import datetime
 import pytz
 import random
 from .. import param
+from ..param import messages, channels
 from ..helpers import find_role, second, day
 from ..config import UserConfig
 from ..async_helpers import split_send, sleep, admin_check, wait_until
@@ -22,11 +23,12 @@ logger = logging.getLogger("discord." + __name__)
 year = "{:04d}".format(datetime.datetime.utcnow().year)
 
 # main settings:
-_channel = "the_neighborhood"   # trick-or-treat channel name or id
-_rule_id = 1158930818241151026  # message id for rules/reaction check
-_game_on = True                # flag to run game
-_role = "SPOOKY"                # role name or id for game participation
-_nmin = 2, 5                    # minimum number (range) of votes to start count
+_channel = "the_neighborhood"       # trick-or-treat channel name or id
+# MAKE SURE TO UPDATE MESSAGE ID IN param.py
+_rule_id = messages.trick_or_treat  # message id for rules/reaction check
+_game_on = True                     # flag to run game
+_role = "SPOOKY"                    # role name or id for game participation
+_nmin = 2, 5                        # minimum number (range) of votes to start count
 # secondary settings
 _start = 0                     # starting score
 _trick = "😈"                   # trick emoji
@@ -45,7 +47,7 @@ _start_time = _start_time.astimezone(pytz.utc).replace(tzinfo=None)
 _stop_time = _stop_time.astimezone(pytz.utc).replace(tzinfo=None)
 
 # manual page
-_manual = param.channels.manual_page
+_manual = channels.manual_page
 
 # alt accounts
 _alts = {547171042565685250: [856003669090369536, 522962175690539008],  # eyes
