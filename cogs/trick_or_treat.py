@@ -21,6 +21,7 @@ except ImportError:
 
 logger = logging.getLogger("discord." + __name__)
 year = "{:04d}".format(datetime.datetime.utcnow().year)
+iyear = int(year)
 
 # main settings:
 _channel = "the_neighborhood"       # trick-or-treat channel name or id
@@ -41,8 +42,8 @@ _bot = "tdt.trick_or_treat.msg." + year
 _nlast = "tdt.trick_or_treat.nlast." + year
 # start/stop datetime
 _tz = pytz.timezone(param.rc('timezone'))
-_start_time = datetime.datetime(2022, 10, 1, 0, 0, 0, 0, _tz)
-_stop_time = datetime.datetime(2022, 11, 1, 0, 0, 0, 0, _tz)
+_start_time = datetime.datetime(iyear, 10, 1, 0, 0, 0, 0, _tz)
+_stop_time = datetime.datetime(iyear, 11, 1, 0, 0, 0, 0, _tz)
 _start_time = _start_time.astimezone(pytz.utc).replace(tzinfo=None)
 _stop_time = _stop_time.astimezone(pytz.utc).replace(tzinfo=None)
 
