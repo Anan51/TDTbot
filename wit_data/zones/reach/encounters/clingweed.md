@@ -17,4 +17,4 @@ You conclude the plant is drawn to motion and struggling. You try to relax. The 
 -------------
 tdt$cling_command
 
-You speak an ancient language to the clingweed. It obeys. You command it to wrap one of its blooms around your back for protection... it wants to obey, but its malnourished. (You may spend 6 🔷 to upgrade your Earthen passive to: __Blooming__ 🌸 "Whenever you __Heal__ recover MP as well" for the rest of the run)
+You speak an ancient language to the clingweed. It obeys. You command it to wrap one of its blooms around your back for protection... it wants to obey, but its malnourished. (You may spend 6 🔷 to upgrade your Earthen passive to: __Blooming__ 🌸 "Gain <:Persistence:1151788148322484234> per damage taken" for the rest of the run)
