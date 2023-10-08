@@ -1,2 +1,0 @@
-# :euro: :pound: :dollar: :yen: Champion's Landing Marketplace :yen: :dollar: :pound: :euro:
-- All players start with 15 :gold:, each turn summon a `tdt$wit_shop`, players can buy or sell 1 weapon. Weapons sell for +10 :gold: (gold this match cannot be saved)
