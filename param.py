@@ -25,6 +25,7 @@ channels = _Struct(debugging=721427624483749991,
                    tdt_events=637134842911260673,
                    champions_landing=1084331687305023529,
                    wit_category=639147967131025453,
+                   spicy_clips_supporters=1153123185043185694,
                    )
 
 emojis = _Struct(destiny_2=878802171913732118,
