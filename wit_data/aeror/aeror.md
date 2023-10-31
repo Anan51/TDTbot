@@ -1,0 +1,22 @@
+# [**__AEROR__**](<https://youtu.be/yydNF8tuVmU>)
+:lock:||Max Level 6 Characters and 30 Comp Points to unlock||
+:heart: : `(7)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square:
+:large_orange_diamond: : `(5)` :orange_square::orange_square::orange_square::orange_square::orange_square:
+
+:bulb: [**Supplemental Inspiration**](https://media.discordapp.net/attachments/1056365502101979146/1168051985052872774/Aeror.jpg?ex=65505c2e&is=653de72e&hm=130ce0e144b39f1a40f482f767084f1caa5466a0756f6ac698c991c704b084e8&=)  
+*Your <:Persistence:1151788148322484234> grants :boom: +1 each. Start combat with <:Persistence:1151788148322484234>*
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+**Scrap-Shot** :boom::zap: :twisted_rightwards_arrows: grant __protect__
+**Barricade** (-1 :large_orange_diamond:) <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142><:Sturdy:1152516154192044142>:twisted_rightwards_arrows::boom:
+**Assemble** Summon an Automaton {OR} Grant <:Persistence:1151788148322484234>
+**Shrapnel Frag** (-1 <:Persistence:1151788148322484234>) in 2 turns +:boom::boom::boom::cyclone: :twisted_rightwards_arrows: __burn__ (*LVL 3*)
+**Mechacutioner** Destroy your Automatons, gain <:Persistence:1151788148322484234> per their :heart: (*LVL 5*)
+**__HENRY mk.8__**
+> ﻿:heart:﻿﻿ : 1 / :zap: 
+> Grant +:large_orange_diamond: every turn
+**__SURGE-O-TRON__** (*LVL 2*)
+> ﻿:heart:﻿﻿ : 3 / :boom:﻿﻿﻿ : 0 / :large_orange_diamond:﻿﻿ ﻿: -2
+> This gains :boom: end of every turn
+**__MAGNIGHT__** (*LVL 4*)
+> ﻿:heart:﻿﻿ : 1 / :boom:﻿﻿﻿:dart: : 1 / :large_orange_diamond:﻿﻿ ﻿: -1
+> Upon death, grant <:Persistence:1151788148322484234>
