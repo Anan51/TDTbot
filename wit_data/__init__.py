@@ -276,7 +276,7 @@ class WitData:
                     else:
                         tmp = {zone + "_" + _remap.get(key, key): ('zones', zone, key)}
                     safe_update(self._aliases, tmp)
-            tmp = {champ: ('random_champions', champ) for champ in self._data['random_champion']}
+            tmp = {champ: ('random_champion', champ) for champ in self._data['random_champion']}
             safe_update(self._aliases, tmp)
 
             for key in self._data['tasks']:
