@@ -1,5 +1,5 @@
 # [**__FINCH__**](<https://youtu.be/nq6jS2-XDeA>) 
-Difficulty: ⭐⭐⭐
+Difficulty: ⭐⭐
 :heart: : `(8)`   :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(10)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square: 
 
