@@ -1,5 +1,5 @@
 # [__**VIKTOR**__](<https://youtu.be/GjTTB6yII4o>) 
-:lock: ||Max level 5 characters and 30 Comp Points to unlock||
+Difficulty: ⭐⭐
 :heart: : `(9)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square: 
 
 :gem: [**Voltike Munitions**](https://media.discordapp.net/attachments/1056365502101979146/1168051984813805599/Viktor.jpg?ex=65505c2e&is=653de72e&hm=bba88f91cd565570d246ab0a68117b087a5a270e9e78e9c19a36517560245e14&=) 
