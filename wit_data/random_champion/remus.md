@@ -1,5 +1,5 @@
 # [__**REMUS**__](<https://youtu.be/IqAeSUeaVtY>) 
-:lock: ||Max Level 4 Characters and 30 Comp Points to Purchase||
+Difficulty: ⭐⭐⭐⭐
 :heart: : `(12)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(8)`   :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
 
