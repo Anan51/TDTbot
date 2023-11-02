@@ -1,5 +1,5 @@
 # [__**EDEN**__](<https://youtu.be/J6ZWlDks0nQ>) 
-Difficulty: ⭐⭐⭐
+Difficulty: ⭐⭐
 :heart: : `(7)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(7)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
 
