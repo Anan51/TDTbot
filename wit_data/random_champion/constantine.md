@@ -1,5 +1,5 @@
 # [**__CONSTANTINE__**](<https://youtu.be/qXVmZuPOzU0>)
-:lock: ||*Costs 30 Comp Points to Purchase*||
+Difficulty: ⭐⭐
 :heart: : `(14)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(6)`   :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
 
