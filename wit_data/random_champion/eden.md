@@ -1,5 +1,5 @@
 # [__**EDEN**__](<https://youtu.be/J6ZWlDks0nQ>) 
-:lock: ||Max level 5 characters and 30 Comp Points to unlock||
+Difficulty: ⭐⭐⭐
 :heart: : `(7)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(7)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
 
