@@ -1,5 +1,5 @@
 # [**__YIN__**](<https://youtu.be/Na36SJZaPME>) 
-:lock:||Max Level 6 Characters and 30 Comp Points to unlock||
+Difficulty: ⭐⭐⭐⭐
 :heart: : `(10)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square: 
 :large_blue_diamond: : `(10)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square: 
 
