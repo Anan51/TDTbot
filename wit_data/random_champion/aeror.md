@@ -1,5 +1,5 @@
 # [**__AEROR__**](<https://youtu.be/yydNF8tuVmU>)
-:lock:||Max Level 6 Characters and 30 Comp Points to unlock||
+Difficulty: ⭐⭐⭐⭐
 :heart: : `(7)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_orange_diamond: : `(5)` :orange_square::orange_square::orange_square::orange_square::orange_square:
 
