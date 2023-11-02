@@ -1,5 +1,5 @@
 # [**__NAYA__**](<https://youtu.be/NpQ-s3zQass?si=UdrIZmsXHp2ZnCH0>) 
-:lock: ||*Costs 30 Comp Points to Purchase*||
+Difficulty: ⭐⭐
 :heart: : `(8)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square: 
 :large_blue_diamond: : `(8)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square: 
 
