@@ -1,4 +1,5 @@
 # [**__ORION__**](<https://youtu.be/AVy7YPNP_zI>)
+Difficulty: ⭐
 :heart: : `(10)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square: 
 :large_blue_diamond: : `(10)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square: 
 
