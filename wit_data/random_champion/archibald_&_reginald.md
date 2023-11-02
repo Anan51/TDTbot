@@ -1,6 +1,5 @@
 # [**__Archibald & Reginald__**](<https://youtu.be/WsWkLVi2Xf8>)
-
-:lock: ||Max Level 6 Characters and 30 Comp Points to unlock||
+Difficulty: ⭐⭐⭐⭐
 :heart: : `(8)`    :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(4)`    :blue_square::blue_square::blue_square::blue_square:
 :coin: : `(4)`    :yellow_square::yellow_square::yellow_square::yellow_square:
