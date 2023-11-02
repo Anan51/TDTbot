@@ -1,5 +1,5 @@
 # [**__ISAIAH__**](<https://youtu.be/MJDn70jh1V0>)
-Difficulty: ⭐⭐
+Difficulty: ⭐
 :heart: : `(8)`    :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square: 
 :large_blue_diamond: : `(12)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square: 
 
