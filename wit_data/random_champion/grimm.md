@@ -1,5 +1,5 @@
 # [**__GRIMM__**](<https://www.youtube.com/watch?v=Xnc4wSuKvuo>) 
-Difficulty: ⭐⭐⭐⭐
+Difficulty: ⭐⭐⭐
 :heart: : `(6)`   :red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(14)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
 
