@@ -1,5 +1,5 @@
 # [**__PROF. EMBER__**](<https://www.youtube.com/watch?v=ZPdk5GaIDjo>)
-:lock:||*Costs 30 Comp Points to Unlock*||
+Difficulty: ⭐⭐⭐
 :heart: : `(4)`   :red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(16)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
 
