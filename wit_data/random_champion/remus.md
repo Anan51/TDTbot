@@ -10,9 +10,9 @@ Difficulty: ⭐⭐⭐
 **Adapt** (-1 :large_blue_diamond:) :shield::shield::heart:
 **Shapeshift** Swap stats; :boom::heart: swaps :shield:<:stealthIcon:943248201790677052>
 **BEES!** (-1 :large_blue_diamond:) :boom::twisted_rightwards_arrows::shield::twisted_rightwards_arrows::boom::twisted_rightwards_arrows::shield: *LVL 2*
-**Wild Growth** (-1 :heart:) Grant __Empower__ per each cast *LVL 3*
+**Wild Growth** (-1 :heart:) Grant your next damage: +🛡️⚡, then +🛡️⚡🚫, then +🛡️⚡🚫🎯 per each cast *LVL 3*
 **Plague** (-2 :large_blue_diamond:) Disable a target's HP/MP regen for 2 turns *LVL 4*
-**Summon Beast** Summon a Dire Wolf *LVL 5*
+**Summon Beast** (-3 :large_blue_diamond:) Summon a Dire Wolf *LVL 5*
 > **__DIRE WOLF __**
-> ﻿:heart:﻿ : 2 / :boom:﻿ : 1 / :large_blue_diamond:﻿ : -4
-> Hits grant <:stealthIcon:943248201790677052>:cyclone: and __Empower__:cyclone:
+> ﻿:heart:﻿ : 2 / :boom: <:stealthIcon:943248201790677052>﻿ : 1 
+> **First Strike**: Grant 🛡️<:stealthIcon:943248201790677052>:cyclone:
