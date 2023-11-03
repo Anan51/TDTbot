@@ -1,2 +1,0 @@
-# :performing_arts: :microphone: :camera_with_flash: :movie_camera:  Finch's Grandstand :movie_camera: :camera_with_flash: :microphone: :performing_arts:
-- Rewards are doubled this match, losses award nothing

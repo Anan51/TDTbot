@@ -1,2 +1,0 @@
-# :heart: :revolving_hearts: :two_hearts: :heart_decoration: Soul Swap :heart_decoration: :two_hearts: :revolving_hearts: :heart:
-- Players pick the opponents champions to use (Creations swap ownership for this match).

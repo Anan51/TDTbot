@@ -1,2 +1,0 @@
-# :ear_of_rice: :bug: :palm_tree: :mushroom: Fenric Deep Jungle :mushroom: :palm_tree: :bug: :ear_of_rice:
-- Summon a champions landing enemy, grant the player that kills it +25% :heart: and :large_blue_diamond: (or equivalent). The enemy only reacts to players attacking it

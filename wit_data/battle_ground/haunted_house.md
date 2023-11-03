@@ -1,2 +1,0 @@
-# :ghost: :spider: :house_abandoned: :jack_o_lantern: Haunted House :jack_o_lantern: :house_abandoned: :spider: :ghost:
-- <:stealthIcon:943248201790677052> Rounds down. All players have <:stealthIcon:943248201790677052> until they deal or take damage

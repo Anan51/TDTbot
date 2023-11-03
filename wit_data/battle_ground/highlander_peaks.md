@@ -1,2 +1,0 @@
-# :snowman: :snowflake: :cloud_snow: :ice_cube: Highlander Peaks :ice_cube: :cloud_snow: :snowflake: :snowman:
-- All players have access to the move > **Snowball** (-1 :heart: {OR} -1 :large_blue_diamond:): :boom::shield: :twisted_rightwards_arrows: __Freezing__ per success. __Freezing__ removes modifiers, ticks down by 1 stack every turn, and skips a targets a turn all together at 3 stacks (this removes all stacks)
