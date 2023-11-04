@@ -8,7 +8,7 @@ Difficulty: ⭐⭐⭐⭐⭐
 ———————————————————
 **Paradox** Next turn deals: +:boom::boom::boom:
 **Phase Shift** (-1 :large_blue_diamond:) Convert ALL :boom: into your __Empower__ :twisted_rightwards_arrows: lose :large_blue_diamond: each
-**Worldline** Gain another turn next turn.
+**Worldline** (-2 :large_blue_diamond:) Gain another turn next turn.
 **Alpha** (*Once*) Reply to a message. Rewind the game to that point *LVL 2*
 **Omega** (-6 :large_blue_diamond:) Your target tells you their next move *LVL 3*
 **Redact** (-3 :large_blue_diamond:) Edit a previous turn *LVL 4*
