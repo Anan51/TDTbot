@@ -17,4 +17,4 @@ Difficulty: ⭐⭐⭐⭐
 **Capitalize** (-3 :large_blue_diamond:, *Once*): +:coin: = turn count *LVL 2*
 **Market Crash** (-2 :coin:): :boom::boom::zap: :twisted_rightwards_arrows: ALL moves next turn cost 2 more/less *LVL 3*
 **Bankrupture** (-1 :large_blue_diamond:): :shield::cyclone::twisted_rightwards_arrows: +:large_blue_diamond: = :coin: *LVL 4*
-**Arms Deal** (-2 :coin:): Substitute a move's cost for a different resource *LVL 5*
+**Arms Deal** (-2 :coin:): Substitute one of your move's cost for a different resource *LVL 5*
