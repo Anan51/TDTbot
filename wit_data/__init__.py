@@ -114,7 +114,7 @@ def gen_weapon(roll_str):
         "**Graven Shield** (-2 🔷): <:Sturdy:1152516154192044142> <:Persistence:1151788148322484234>🌀",
         "**Gilded Hammer** (-2 🔷): 💥🛡️🔀💥🌀 per success",
         "**Tome** (-4 🔷): Summon a Dire Wolf or an Automaton",
-        "**Scroll** (-4 🔷): +2 🔷🌀",
+        "**Scroll**: +2 🔷🌀",
         "**Enchanted Blade** (-4 🔷): 💥💥💥🌀",
         "**Staff** (-2 🔷): deal 💥 per each friendly effect stack you have ",
         "REDACTED]]",
