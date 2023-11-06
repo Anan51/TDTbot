@@ -10,7 +10,7 @@ Difficulty: ⭐⭐
 **Spore Shield** (-1 :large_blue_diamond:) :shield::shield::shield::twisted_rightwards_arrows: __Vulnerable__:cyclone:
 **Sunshine**  Remove :twisted_rightwards_arrows: from all friendlies’ next moves
 **Wall of Thorns** (-LVL :heart:) <:Persistence:1151788148322484234> per *LVL* :twisted_rightwards_arrows::boom:
-**Harvest** (-*LVL* :heart:) <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> :twisted_rightwards_arrows: Give a player the move **Good Fruit**: +:heart::heart::large_blue_diamond:
+**Harvest** (-*LVL* :heart:) <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> :twisted_rightwards_arrows: Give a player the move **Good Fruit**: +:heart::large_blue_diamond:🌀
 **Bloom** Summon a Blossom
 > **__BLOSSOM __**
 > :heart:﻿﻿ : 1 / :large_blue_diamond:: +1 each turn
