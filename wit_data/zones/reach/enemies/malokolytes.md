@@ -1,8 +1,8 @@
-__**MALOKOLYTES**__
-:heart: : 4
+__**MALOKOLYTE**__
+:heart: : 10
 :moneybag: : 1d6 basic
-Behavior: upon death, summon another malocolyte with half of its highest :heart: total (unless max is 1)
+Behavior: This has +10 🎲 until the end of turn 4
 —————————————————
-1-3   | **Sacrificial Dagger** (-5 :game_die:) :boom::boom::boom: random player
-4-9   | **Bad Omen** (+5 :game_die:) :shield::shield:
-10     | **Dark Ritual** (-5 :game_die:) +:heart: equal to your current :heart:
+1-3   | **Sacrificial Dagger** (-3 :game_die:) Deals :boom: per its __vulnerable__ to a random player
+4-9   | **Bad Omen** (+3 :game_die:) If this took 💥, restore :heart: per __Vulnerable__ this has
+10    | **Dark Ritual** Gain and cause __Vulnerable__ 🌀
