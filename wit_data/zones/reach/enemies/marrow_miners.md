@@ -1,6 +1,6 @@
 __**MARROW MINERS**__
 ❤️ : 10
-💰 : 1d5 basic
+💰 : 3d5 <:gold:1058304371940655185>
 Behavior: **Martyr**: deal 💥💥💥💥💥 to ALL entities next turn, deals double to this. If this __burn__s trigger its **Martyr**
 —————————————————
 1-3   | **Excevate** (+2 🎲) 💥💥🌀 🔀 -5 🎲
