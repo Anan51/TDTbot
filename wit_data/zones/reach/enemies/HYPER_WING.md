@@ -5,4 +5,4 @@ Behavior: take 1/2 damage (rounds down) unless the player uses ⚡. Gain __Empow
 —————————————————
 1-2   | **Peck** 💥💥⚡ to the highest HP player
 3-8   | **Flap** (+5 🎲) <:stealthIcon:943248201790677052>
-9-10 | **Caw** (-10 🎲) Summon another Red Wing (only the first drops gold)
+9-10 | **Screech** (-10 🎲) Double this creature's __empower__
