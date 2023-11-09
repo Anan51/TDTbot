@@ -1,5 +1,5 @@
 __**MUSTARD SLUG**__
-:heart: : 6
+:heart: : 4
 :moneybag: : 6 <:gold:1058304371940655185>
 Behavior: taking damage causes __vulnerable__ to the attacker. Takes double damage from __burn__
 —————————————————
