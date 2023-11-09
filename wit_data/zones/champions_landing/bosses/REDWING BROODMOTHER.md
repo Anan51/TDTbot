@@ -1,6 +1,6 @@
 # [RED WING BROODMOTHER](<https://www.youtube.com/watch?v=DPtn9KzfsGI&pp=ygUQYmlyZCBpcyB0aGUgd29yZA%3D%3D>)
 ❤️ : 6 x 👥
-💰 : 1d3 lesser {OR} 1/50 chance to get "**Red's Nest** : (-4 🔷) Summon a RED WING to fight along side you." Valued at 35 <:gold:1058304371940655185>
+💰 : Roll 3d10. Pick one of the corresponding Artifacts 🏺 {OR} 1/50 chance to get "**Red's Nest** : (-4 🔷) Summon a RED WING to fight along side you." Valued at 35 <:gold:1058304371940655185>
 Behavior:  **FIRST STRIKE** Summon a Red Wing per 👥. Take 1/2 damage, rounds down, unless the player uses :zap:
 —————————————————
 1-3   | Scavenge 💥💥⚡(+💥 if a RED WING is on the field) to the Lowest HP player
