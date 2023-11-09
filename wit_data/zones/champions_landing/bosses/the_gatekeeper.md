@@ -1,6 +1,6 @@
 __**THE GATEKEEPER**__
 :heart: : 10 x:busts_in_silhouette:
-:moneybag: : !r 1d3 Lesser {OR} 1/50 chance to get "**Gatekeeper's Eye** (-4 :heart:) Your next :shield: becomes <:Persistence:1151788148322484234>:cyclone:" valued at 60 <:gold:1058304371940655185>
+:moneybag: : Roll 3d10. Pick one of the corresponding Artifacts 🏺 {OR} 1/50 chance to get "**Gatekeeper's Eye** (-4 :heart:) Your next :shield: becomes <:Persistence:1151788148322484234>:cyclone:" valued at 60 <:gold:1058304371940655185>
 Behavior: Start the combat with <:Persistence:1151788148322484234> <:Persistence:1151788148322484234> <:Persistence:1151788148322484234> <:Persistence:1151788148322484234> <:Persistence:1151788148322484234>
 —————————————————
 1-3   | **Swat** :boom::boom::cyclone:
