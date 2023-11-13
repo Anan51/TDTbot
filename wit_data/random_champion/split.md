@@ -4,7 +4,7 @@ Difficulty: ⭐⭐⭐⭐⭐
 :large_blue_diamond: : `(18)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square: 
 
 :hourglass: [**Second Guard**](https://cdn.discordapp.com/attachments/1056365502101979146/1168685658697642086/split.jpg?ex=6552aa56&is=65403556&hm=b10ee033f0868523d5cabd3d397b2aad817dbb7ce0f23c494989256697fd74b0&) 
-*Upon taking lethal damage, restart that turn (Once per combat)*
+*Immune to the first incoming damage*
 ———————————————————
 **Paradox** :boom::boom: Next turn gains: +:boom:
 **Phase Shift** (-1 :large_blue_diamond:) Convert ALL :boom: into your __Empower__ :twisted_rightwards_arrows: lose :large_blue_diamond:
