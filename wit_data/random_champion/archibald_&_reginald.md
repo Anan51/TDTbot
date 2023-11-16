@@ -14,7 +14,7 @@ Difficulty: ⭐⭐⭐⭐
 **Shoot the Loot** (-1 :coin:): :boom: = :coin:; +:large_blue_diamond:
 **The Paywall**  (-1 :large_blue_diamond:): :shield: = :large_blue_diamond:; +:coin:
 **Blood Money**  (-1 :heart:): +:coin::large_blue_diamond::cyclone:
-**Capitalize** (-3 :large_blue_diamond:, *Once*): +:coin: = turn count *LVL 2*
+**Capitalize** (-4 :large_blue_diamond:, *Once*): +:coin: = turn count *LVL 2*
 **Market Crash** (-2 :coin:): :boom::boom::zap: :twisted_rightwards_arrows: ALL moves next turn cost 2 more/less *LVL 3*
-**Bankrupture** (-1 :large_blue_diamond:): :shield::cyclone::twisted_rightwards_arrows: +:large_blue_diamond: = :coin: *LVL 4*
+**Bankrupture** (-1 :large_blue_diamond: -1 :coin:): :shield::cyclone::twisted_rightwards_arrows: +:large_blue_diamond: = :coin: *LVL 4*
 **Arms Deal** (-2 :coin:): Substitute one of your move's cost for a different resource *LVL 5*
