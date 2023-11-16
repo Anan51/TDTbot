@@ -10,6 +10,6 @@ Difficulty: ⭐⭐⭐
 **Bluff** (-1 :large_blue_diamond:) :shield::shield::twisted_rightwards_arrows: skip target's next turn
 **Reload**  +:large_blue_diamond: up to 6. Clear your statuses
 **Moxie** +2 Critical damage *LVL 2*
-**Double Barrel** (-3 :large_blue_diamond:) :boom::boom::twisted_rightwards_arrows::boom::boom: *LVL 3*
+**Double Barrel** (-3 :large_blue_diamond:) :boom::boom::twisted_rightwards_arrows::boom::boom:🌀 *LVL 3*
 **Blackjack Rounds** +2 Critical chance *LVL 4*
 **Swift Trigger** Your next Magnum shot fires again at no cost. *LVL 5*
