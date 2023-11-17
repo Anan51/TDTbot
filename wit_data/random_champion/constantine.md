@@ -10,6 +10,6 @@ Difficulty: ⭐⭐
 **Anathema** (-1 :large_blue_diamond:) :shield::shield::twisted_rightwards_arrows: :boom: each
 **Prayer** Grant __Protect__ and +:large_blue_diamond:
 **Grace** (- :heart:) You are Immune next turn *LVL 2*
-**Sanctify** (-1 :large_blue_diamond:) If you took 💥 🔀 grant <:Persistence:1151788148322484234> at the beginning of the next turn and dispell the targets hostile __effects__ *LVL 3*
+**Sanctify** (-2 :large_blue_diamond:) Grant <:Persistence:1151788148322484234> 🔀 dispell an enemy __effect__ on you each block *LVL 3*
 **Divine Shield** <:Sturdy:1152516154192044142>:cyclone: *LVL 4*
 **Smite** Convert __protect__ into :boom::zap::cyclone: *LVL 5*
