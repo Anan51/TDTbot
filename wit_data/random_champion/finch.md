@@ -6,7 +6,7 @@ Difficulty: ⭐⭐
 :feather:  [**Mocking Bird**](https://media.discordapp.net/attachments/1056365502101979146/1168052055210995862/Finch.jpg?ex=65505c3f&is=653de73f&hm=8d091111a87052dc4d77712275631c0cba1b7b92327f81fbb1fbe39cc74904f4&=) 
 *Start of Combat you may copy another player's passive.*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**Crescendo** (-1 :large_blue_diamond:) :boom::twisted_rightwards_arrows: __Empower__ each
+**Crescendo** (-1 :large_blue_diamond:) :boom::twisted_rightwards_arrows: __Empower__ (each hit)
 **Tempo** <:stealthIcon:943248201790677052>:shield::twisted_rightwards_arrows: cause -:large_blue_diamond: each
 **Melody** (-1 :large_blue_diamond:)  __Effect__x2 to ALL players
 **Inspire** (-2 :large_blue_diamond:) +:zap::dart::no_entry_sign::cyclone:<:stealthIcon:943248201790677052> to your next :boom: *LVL 2*
