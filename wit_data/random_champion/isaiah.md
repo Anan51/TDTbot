@@ -11,5 +11,5 @@ Difficulty: ⭐
 **Faith** (-3 :large_blue_diamond:) Grant __Healing__x3 :cyclone:
 **Blessing** Grants next move 0 :large_blue_diamond: cost *LVL 2*
 **Forgiveness** (-2 :large_blue_diamond:) :heart::heart::zap:, dispel hostile __effects__ *LVL 3*
-**Consecrate** (-3 :large_blue_diamond:) :boom::zap::no_entry_sign::dart::cyclone: *LVL 4*
+**Consecrate** (-2 :large_blue_diamond:) :boom::zap::no_entry_sign::dart::cyclone: *LVL 4*
 **Prophecy** (-4 :large_blue_diamond:) Tell your opponent your next move. Double its efficacy *LVL 5*
