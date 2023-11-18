@@ -11,7 +11,7 @@ Difficulty: ⭐⭐⭐
 **Shapeshift** Swap stats; :boom::heart: swaps :shield:<:stealthIcon:943248201790677052>
 **BEES!** (-1 :large_blue_diamond:) :boom::twisted_rightwards_arrows::shield::twisted_rightwards_arrows::boom::twisted_rightwards_arrows::shield: *LVL 2*
 **Wild Growth** (-1 :heart:) Grant your next damage: +🛡️⚡, then +🛡️⚡🚫, then +🛡️⚡🚫🎯 per each cast *LVL 3*
-**Plague** (-2 :large_blue_diamond:) Disable a target's HP/MP regen for 3 turns *LVL 4*
+**Plague** (-2 :large_blue_diamond:) Disable a target's HP/MP regen for 2 turns *LVL 4*
 **Summon Beast** (-3 :large_blue_diamond:) Summon a Dire Wolf *LVL 5*
 > **__DIRE WOLF __**
 > ﻿:heart:﻿ : 2 / :boom: <:stealthIcon:943248201790677052>﻿ : 1 
