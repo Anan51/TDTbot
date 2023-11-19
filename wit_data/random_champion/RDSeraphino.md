@@ -1,15 +1,14 @@
-# [Seraphino](<https://www.youtube.com/watch?v=hmqSuMX5fyM>)
-(Wandering Champion)
+# [__**Seraphino**__](<https://youtu.be/hmqSuMX5fyM?si=f5nqhRvJnglRISQP>)
 Difficulty: :star::star::star:
-:heart: : `(10)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
-:large_blue_diamond:: `(8)`    :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
-:sunny: [**Sweltering Heat**](https://media.discordapp.net/attachments/1056365502101979146/1175660686802702396/download_5.png?ex=656c0a56&is=65599556&hm=2e99fb39c659cde7f3bba58f1109e12b5f62a845924d4785ab0458844a75d1d8&=&width=450&height=675) 
-While you are __Burning__, you have __Empower__. Kills while you are __burning__ grant __Healing__x2 per stack of burn you have when you killed your target.
+:heart: (10) :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
+:large_blue_diamond:: (8) :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
+:sunny: [**Sweltering Heat**](https://cdn.discordapp.com/attachments/1132070747557330984/1175328046065131582/download_5.jpg?ex=656ad48a&is=65585f8a&hm=3f87e33ab85625182fe281c9ca585eb77193cd5f59a4aa5a44ae1067967cb806&)
+*Taking __Burn__ damage grants +:boom: on your :boom: moves that turn. Kills while you are __burn__ing grant __Healingx2__ per stack of __burn__ you have when you killed your target.*
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-**Fire Axe** :boom::boom:; +:no_entry_sign: if __burning__
-**Extinguisher** :shield:<:Persistence:1151788148322484234>:twisted_rightwards_arrows: Dispell all __Effects__ on yourself and your attacker
-**Gaslight** (-:large_blue_diamond:) Cause __Burn__x2 :cyclone:; gain __Burn__x2
-**Burnline** (-:large_blue_diamond:) :boom::shield:; +:zap:if __burning __LVL 2
-**Flare** (-:large_blue_diamond:) :boom:<:stealthIcon:943248201790677052>:twisted_rightwards_arrows: __burn__ per LVL 3
-**Reignite** (*Once*) Gain +:large_blue_diamond: per __Burn__ everyone has, and gain +:heart::zap: per 2 :large_blue_diamond: gained.
-**Scorch** (-2:large_blue_diamond:) If you took no damage, cause __burn __ at the end of every turn. LVL 5
+**Fireaxe** :boom::boom:
+**Extinguisher** :shield::shield::twisted_rightwards_arrows::heart::large_blue_diamond:
+**Gaslight** (-:large_blue_diamond:) Cause __Burnx2:cyclone:__; gain __Burnx2__
+**Burnline** (-:large_blue_diamond:) :boom::shield:; +:zap:if __burn__ing *LVL 2*
+**Flare** (-:large_blue_diamond:) :boom::twisted_rightwards_arrows:<:stealthIcon:943248201790677052>:twisted_rightwards_arrows:__burn__ per *LVL 3*
+**Reignite** (*Once*) Gain +:large_blue_diamond::heart::zap: for every 2 __Burn__ everyone has at the end of last turn. *LVL 4*
+**Scorch** (-3:large_blue_diamond:) If you took no damage, cause __burnx2__ at the end of every turn. *LVL 5*
