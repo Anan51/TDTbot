@@ -1,5 +1,5 @@
 # [Seraphino](<https://www.youtube.com/watch?v=hmqSuMX5fyM>)
-(Wanddering Champion)
+(Wandering Champion)
 Difficulty: :star::star::star:
 :heart: : `(10)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond:: `(8)`    :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
