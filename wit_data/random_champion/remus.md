@@ -9,17 +9,14 @@ Difficulty: ⭐⭐⭐
 **Moonfire** :boom::zap::twisted_rightwards_arrows: grant <:stealthIcon:943248201790677052>
 **Adapt** (-1 :large_blue_diamond:) :shield::shield::heart:
 **Summon Beast**  Summon a Familiar
-**Wild Growth** (-1 :heart:) Grant __heal__ per each cast *LVL 2*
-**Shapeshift** Swap your HP and MP; Your move's :boom::heart: swaps with :shield:<:stealthIcon:943248201790677052> {OR} Set a summons attack equal to its health *LVL 4*
-
+**Wild Growth** (-1 :heart:) Cause __heal__ per each cast *LVL 2*
+**Shapeshift** Swap your HP and MP. Swap your move's :boom:,:heart:, and __heal__ with :shield:,<:stealthIcon:943248201790677052>, and __vulnerable__ respectively *LVL 5*
 **__DIRE WOLF __**
-> ﻿:heart:﻿ : 2 / :boom: : 2 / :large_blue_diamond: : -4
-> **First Strike**: +<:stealthIcon:943248201790677052>🌀
-
-**__BEES!__** (*LVL 3*)
+> ﻿:heart:﻿ : 2 / :boom:🚫 : 1 / :large_blue_diamond: : -4
+> **First Strike**: Grant <:stealthIcon:943248201790677052>:cyclone:
+**__BEES!__** (*LVL 2*)
 > ﻿:heart:﻿ : 1 / :boom: 🔀 summon another Bee : 1  / :large_blue_diamond: : -2
 > Attacks the turn its summoned.
-
-**PLAGUE RAT** (*LVL 5*)
-> ﻿:heart:﻿ : 1 / :boom: : 1 🔀 summon another Bee / :large_blue_diamond: : -2
-> Attacks the turn its summoned.
+**__PLAGUE RAT__** (*LVL 4*)
+> ﻿:heart:﻿ : 1 / :boom: : 1 / :large_blue_diamond: : -3
+> **First Strike**: Cause __vulnerable__. Disable all enemies' HP and MP regen while they have __vulnerable__.
