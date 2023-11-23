@@ -11,5 +11,5 @@ Difficulty: ⭐
 **Breathe In** (-2 :large_blue_diamond:): Grant __Empower__ x2 if you took no damage this turn
 **Counter** :boom::no_entry_sign: *LVL 2*
 **Riposte** :boom::dart: *LVL 3*
-**Soar** (-1 :large_blue_diamond:): :stealthIcon::shield::shield: *LVL 4*
+**Soar** (-1 :large_blue_diamond:): <:stealthIcon:943248201790677052>:shield::shield: *LVL 4*
 **Dragonfire** (-4 :large_blue_diamond:) :boom::boom::boom::boom::cyclone: *LVL 5*
