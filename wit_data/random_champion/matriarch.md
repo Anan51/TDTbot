@@ -12,5 +12,5 @@ Difficulty: ⭐⭐⭐⭐⭐
 **Telekinesis** (-1 :large_blue_diamond:): __Empower__ and <:Persistence:1151788148322484234> per target's :shield:; +<:stealthIcon:943248201790677052> next move
 **Warp Beam** (-3 :large_blue_diamond:): Immune. Next *enemy* turn, deal: +:boom::boom::boom::zap::dart: *LVL 2*
 **Intimidate**: Disable target's modifiers and __effects__ for their next 3 turns *LVL 3*
-**Ancient Power** (-1 :large_blue_diamond:): :boom::no_entry_sign:, doubles next use *LVL 4*
+**Ancient Power** (-1 :large_blue_diamond:): :boom::no_entry_sign:, doubles next use if you took no damage this turn *LVL 4*
 **Psyche Out** (-2 :heart:): Swap this move with the move your target used this turn *LVL 5*
