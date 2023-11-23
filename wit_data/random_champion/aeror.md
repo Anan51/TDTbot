@@ -19,4 +19,4 @@ Difficulty: ⭐⭐⭐⭐
 > This gains :boom: end of every turn
 **__MAGNIGHT__** (*LVL 4*)
 > ﻿:heart:﻿﻿ : 1 / :boom:﻿﻿﻿:dart: : 1 / :large_orange_diamond:﻿﻿ ﻿: -1
-> Upon death, grant <:Persistence:1151788148322484234>
+> **Martyr**: Grant <:Persistence:1151788148322484234>
