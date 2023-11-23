@@ -7,9 +7,9 @@ Difficulty: ⭐⭐⭐
 *Destroy anything with __Vulnerable__ x5+ at the end of the turn.*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Eldritch Blast** (-2 :large_blue_diamond:) :boom::boom::boom::no_entry_sign:
-**Bend Will** (-2 :large_blue_diamond:) Grant +:heart::heart::zap: each :boom: taken this turn
+**Bend Will** (-2 :large_blue_diamond:) +:heart::heart::zap: (per damage taken)
 **Blood Ritual** (-1 :heart:) Cause __Vulnerable__ x2
-**Siphon Bolt** (-3 :large_blue_diamond:) :boom::boom::boom::zap::twisted_rightwards_arrows: +:heart: each *LVL 2*
+**Siphon Bolt** (-3 :large_blue_diamond:) :boom::boom::boom::zap::twisted_rightwards_arrows: +:heart: (per hit) *LVL 2*
 **Soul Silk** +:large_blue_diamond::large_blue_diamond: per __Vulnerable__ *LVL 3*
 **Conjure Void** (-4 :large_blue_diamond:) Your :large_blue_diamond: costs one less, minimum cost of one *LVL 4*
 **Infest** (-8 :large_blue_diamond:) You cause __Vulnerable__:cyclone: start of your turns *LVL 5*
