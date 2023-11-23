@@ -16,5 +16,5 @@ Difficulty: ⭐⭐⭐⭐
 **Blood Money** (-1 :heart:): +:coin::large_blue_diamond::cyclone:
 **Capitalize** (*Once*): +:coin: per odd numbered turns *LVL 2*
 **Market Crash** (-2 :coin:): :boom::boom:🌀 :twisted_rightwards_arrows: ALL moves next turn cost 2 more/less *LVL 3*
-**Bankrupture**  (-2 🔷): <:stealthIcon:943248201790677052><:Persistence:1151788148322484234> per spent last turn 🔀 +🔷 *LVL 4*
+**Bankrupture**  (-2 🔷): <:stealthIcon:943248201790677052><:Sturdy:1152516154192044142> 🔀 +🔷 per spent last turn *LVL 4*
 **Arms Deal**      (-2 ❤️): Substitute any move's cost for a different available resource *LVL 5*
