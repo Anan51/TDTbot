@@ -11,6 +11,7 @@ Difficulty: ⭐⭐⭐⭐
 **Assemble** Summon an Automaton {OR} Grant <:Persistence:1151788148322484234>
 **Shrapnel Frag** (-1 <:Persistence:1151788148322484234>) in 2 turns +:boom::boom::boom::cyclone: :twisted_rightwards_arrows: __burn__ (*LVL 3*)
 **Mechacutioner** Destroy your Automatons, gain <:Persistence:1151788148322484234> per their :heart: (*LVL 5*)
+
 **__HENRY mk.8__**
 > ﻿:heart:﻿﻿ : 1 / :zap: 
 > Grant +:large_orange_diamond: every turn
