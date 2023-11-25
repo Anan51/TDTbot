@@ -1,5 +1,7 @@
 # [**__PROF. EMBER__**](<https://www.youtube.com/watch?v=ZPdk5GaIDjo>)
-Difficulty: ⭐⭐
+Difficulty: ⭐⭐ 
+Archetype: Caster
+
 :heart: : `(4)`   :red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(16)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
 
