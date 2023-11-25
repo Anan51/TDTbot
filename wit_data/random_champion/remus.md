@@ -1,5 +1,7 @@
 # [__**REMUS**__](<https://youtu.be/IqAeSUeaVtY>) 
 Difficulty: ⭐⭐⭐
+Archetype: Summoner
+
 ❤️ : `(12)` 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 🔷 : `(8)`   🟦🟦🟦🟦🟦🟦🟦🟦
 
