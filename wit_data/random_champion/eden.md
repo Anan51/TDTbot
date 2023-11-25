@@ -1,5 +1,6 @@
 # [__**EDEN**__](<https://youtu.be/J6ZWlDks0nQ>) 
-Difficulty: ⭐⭐
+Difficulty: ⭐⭐ 
+Archetype: Support
 ❤️ : `(13)` 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 🔷 : `(7)`   🟦🟦🟦🟦🟦🟦🟦🟦
 
