@@ -1,5 +1,5 @@
 # [**__Archibald & Reginald__**](<https://youtu.be/WsWkLVi2Xf8>)
-Difficulty: ⭐⭐⭐⭐
+Difficulty: ⭐⭐⭐⭐ Archetype: Tank
 :heart: : `(8)`    :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(3)`    :blue_square::blue_square::blue_square:
 :coin: : `(3)`    :yellow_square::yellow_square::yellow_square:
