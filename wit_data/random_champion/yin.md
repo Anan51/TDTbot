@@ -1,5 +1,7 @@
 # [**__YIN__**](<https://youtu.be/Na36SJZaPME>) 
 Difficulty: ⭐⭐⭐⭐
+Archetype: Assassin
+
 :heart: : `(10)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square: 
 :large_blue_diamond: : `(10)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square: 
 
