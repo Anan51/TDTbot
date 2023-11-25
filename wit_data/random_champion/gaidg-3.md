@@ -1,5 +1,7 @@
 # [**__GAIDG-3__**](<https://www.youtube.com/watch?v=UFFa0QoHWvE>) 
-Difficulty: ⭐⭐⭐
+Difficulty: ⭐⭐⭐ 
+Archetype: Fighter
+
 :heart: : `(10)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square: 
 :large_blue_diamond: : `(6)`   :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
 
