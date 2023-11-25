@@ -1,5 +1,7 @@
 # [**__SPLIT__**](<https://youtu.be/tLnea_nab4Y?si=847opF8HCkON49Nf>)
 Difficulty: ⭐⭐⭐⭐⭐
+Archetype: Caster
+
 :heart: : `(2)`   :red_square::red_square:
 :large_blue_diamond: : `(18)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square: 
 
