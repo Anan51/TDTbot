@@ -1,5 +1,5 @@
 # [**__CONSTANTINE__**](<https://youtu.be/qXVmZuPOzU0>)
-Difficulty: ⭐⭐
+Difficulty: ⭐⭐ Archetype: Tank
 :heart: : `(14)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(6)`   :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
 
