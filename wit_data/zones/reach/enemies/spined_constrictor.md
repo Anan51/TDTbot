@@ -7,11 +7,11 @@ Behavior: **First Strike** Cause __Weak__x3 🌀. Gain __Empower__x3 when on its
 4-7   | **Slither** (+5 :game_die:) <:Sturdy:1152516154192044142>:stealthIcon: 🔀 gain an extra turn
 8-10 | **Venom Cloud** (-3 :game_die:) Cause __Weak__🌀 for 2 turns
 
-__**RED WING**__
-❤️ : 2
-💰 : 3 <:gold:1058304371940655185>. If this died to __burn__ instead reward 2 :heart: and 2 🔷
-Behavior: **First Strike**: -2 🎲. Take 1/2 damage (rounds down) unless the player uses ⚡
+__**MUSTARD SLUG**__
+:heart: : 4
+:moneybag: : 6 <:gold:1058304371940655185>
+Behavior: taking damage causes __vulnerable__ to the attacker. Takes double damage from __burn__
 —————————————————
-1-2   | **Peck** 💥💥⚡ to the highest HP player
-3-8   | **Flap** (+5 🎲) <:stealthIcon:943248201790677052>
-9-10 | **Caw** (-10 🎲) Summon another Red Wing (only this drops gold)
+1-3   | **Corrosive Sludge** (-2 :game_die:) :boom::boom: random player next turn :twisted_rightwards_arrows: __burn__x5
+4-7   | **Gas** (+5 :game_die:) :shield: :twisted_rightwards_arrows:  __Vulnerable__ and __burn__ :cyclone:
+8-10 | **Mucous** (-3 :game_die:) Cause __Vulnerable__ and __burn__ :cyclone:, if this took damage, disable that attack for one turn.
