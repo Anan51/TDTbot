@@ -1,5 +1,5 @@
 __**MARROW MITE**__
-❤️ : 3
+❤️ : 2
 💰 : 6 <:gold:1058304371940655185>
 Behavior: When a player takes damage, target that player and gain -10 🎲. When an ally dies gain  __heal__
 —————————————————
@@ -8,7 +8,7 @@ Behavior: When a player takes damage, target that player and gain -10 🎲. When
 9-10 | **Burrow** Gain +:heart: per __heal__ next turn
 
 __**MARROW MITE**__
-❤️ : 3
+❤️ : 2
 💰 : 6 <:gold:1058304371940655185>
 Behavior: When a player takes damage, target that player and gain -10 🎲. When an ally dies gain  __heal__
 —————————————————
@@ -17,7 +17,7 @@ Behavior: When a player takes damage, target that player and gain -10 🎲. When
 9-10 | **Burrow** Gain +:heart: per __heal__ next turn
 
 __**MARROW MITE**__
-❤️ : 3
+❤️ : 2
 💰 : 6 <:gold:1058304371940655185>
 Behavior: When a player takes damage, target that player and gain -10 🎲. When an ally dies gain  __heal__
 —————————————————
