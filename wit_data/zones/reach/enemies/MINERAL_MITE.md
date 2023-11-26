@@ -8,11 +8,11 @@ Behavior: **First Strike**: gain <:Persistence:1151788148322484234><:Persistence
 8-10 | **Burrow** (-3 🎲) Gain <:Persistence:1151788148322484234> next turn
 
 
-__**RED WING**__
+__**MARROW MITE**__
 ❤️ : 2
-💰 : 3 <:gold:1058304371940655185>. If this died to __burn__ instead reward 2 :heart: and 2 🔷
-Behavior: **First Strike**: -2 🎲. Take 1/2 damage (rounds down) unless the player uses ⚡
+💰 : 6 <:gold:1058304371940655185>
+Behavior: When a player takes damage, target that player and gain -10 🎲. When an ally dies gain  __heal__
 —————————————————
-1-2   | **Peck** 💥💥⚡ to the highest HP player
-3-8   | **Flap** (+5 🎲) <:stealthIcon:943248201790677052>
-9-10 | **Caw** (-10 🎲) Summon another Red Wing (only this drops gold)
+1-6   | **Gnaw** (-1 🎲) 💥 to a random player 🔀 gain __heal__
+7-8   | **Curl** (-2 🎲) 🛡️🛡️ 🔀 gain __heal__x2
+9-10 | **Burrow** Gain +:heart: per __heal__ next turn
