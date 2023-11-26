@@ -1,1 +1,0 @@
-Command "jux" is not found

@@ -1,1 +1,0 @@
-The colors are so beautiful

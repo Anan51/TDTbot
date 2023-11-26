@@ -1,1 +1,0 @@
-Good soldiers do what they are told!

@@ -1,1 +1,0 @@
-Your RP character takes 2 damage

@@ -1,1 +1,0 @@
-"Am I funny? Am I good enough yet?"

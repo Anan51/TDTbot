@@ -1,1 +1,0 @@
-"Is... is that normal? Is there something wrong with me?"
