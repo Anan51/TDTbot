@@ -8,7 +8,7 @@ Behavior: taking damage causes __vulnerable__ to the attacker. Takes double dama
 8-10 | **Mucous** (-3 :game_die:) Cause __Vulnerable__ and __burn__ :cyclone:, if this took damage, disable that attack for one turn.
 
 __**MARROW MITE**__
-❤️ : 3
+❤️ : 2
 💰 : 6 <:gold:1058304371940655185>
 Behavior: When a player takes damage, target that player and gain -10 🎲. When an ally dies gain  __heal__
 —————————————————
