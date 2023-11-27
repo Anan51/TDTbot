@@ -1,3 +1,3 @@
-# <:engram_yellow_exotic:905174973491064895> LEGENDARY <:engram_yellow_exotic:905174973491064895>
+# <:engram_blue:905174948669190174> RARE <:engram_blue:905174948669190174>
 
-**Courage** (-4 :large_blue_diamond:) Dispell all hostile __effects__ on you, gain __empower__ for each.
+**Courage**: -1 🔷 each turn, while active: you have __empower__. Use again to disable
