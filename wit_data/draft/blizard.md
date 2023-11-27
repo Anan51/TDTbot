@@ -1,3 +1,3 @@
 # <:engram_blue:905174948669190174> RARE <:engram_blue:905174948669190174>
 
-**Blizard** (-2 :large_blue_diamond:) :boom::boom::shield::twisted_rightwards_arrows: skip targets next turn if this was fully succesful
+**Blizzard** (-2 :large_blue_diamond:) :boom::boom::shield::twisted_rightwards_arrows: skip targets next turn if this was fully succesful
