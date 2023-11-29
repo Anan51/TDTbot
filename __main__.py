@@ -57,6 +57,8 @@ while time.time() - now > 5:
         raise e
     except RuntimeError as e:
         logger.info(e)
+    except KeyError as e:
+        logger.error(e)
     # if we get here, bot loop has ended
     try:
         # try to update own code via git
