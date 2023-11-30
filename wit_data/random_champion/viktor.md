@@ -12,5 +12,5 @@ Archetype: Fighter
 **Detainment Field** Skip a target’s turn if you took no damage this turn
 **Anti-Matrix** Invert __effects__ this turn *LVL 2*
 **Charge Shot** Your next turn is: :boom::boom::boom::zap::no_entry_sign: *LVL 3*
-**D.E.D.** In 2 turns, +:boom::boom::cyclone: *LVL 4*
+**D.E.D.** In 2 turns, deal an additional :boom::boom::cyclone: *LVL 4*
 **Overclock** (*Once*): Double your power but die in 3 turns. *LVL 5*
