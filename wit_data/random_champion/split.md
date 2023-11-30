@@ -8,7 +8,7 @@ Archetype: Summoner
 ⌛ [**Second Guard**](https://cdn.discordapp.com/attachments/1056365502101979146/1168685658697642086/split.jpg?ex=6552aa56&is=65403556&hm=b10ee033f0868523d5cabd3d397b2aad817dbb7ce0f23c494989256697fd74b0&) 
 *Successful hits with 🚫 summons another Split*
 ———————————————————
-**Paradox** (-2 🔷): 💥💥💥 🔀 +🚫
+**Paradox** (-2 🔷): 💥💥 🔀 +🚫💥
 **Phase Shift**(-2 🔷): Convert hostile 💥 into your 💥🌀
 **Worldline** (-1 ❤️): Summon a Split 
 **Sacrifice**(-∞ ❤️): 💥💥💥⚡ 🔀 +❤️🌀 *LVL 2*
