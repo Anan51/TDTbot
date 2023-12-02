@@ -1,3 +1,3 @@
-# <:engram_blue:905174948669190174> RARE <:engram_blue:905174948669190174>
+# <:engram_yellow_exotic:905174973491064895> LEGENDARY <:engram_yellow_exotic:905174973491064895>
 
 **Bound Mace** (-1 :large_blue_diamond:) :boom::zap::no_entry_sign:, free to reuse until you take damage
