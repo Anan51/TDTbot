@@ -299,6 +299,7 @@ class WitData:
                    "☠️ Major",
                    "❔ Encounter",
                    "⛺ Camping Spot",
+                   "🎇 Blessing",
                    "🛖 Shop"
                    ]
-        return ', '.join(random.choices(options, weights=[11, 2, 9, 1, 1], k=3))
+        return ', '.join(random.choices(options, weights=[11, 2, 9, 1, 1, 1], k=3))
