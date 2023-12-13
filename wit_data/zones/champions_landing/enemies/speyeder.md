@@ -1,8 +1,9 @@
-__**SPEYEDER**__
-:heart: : 3
-:moneybag: : 2 XP
-Behavior: Immune to the first attack
+# [__**SPEYEDER**__](<https://www.youtube.com/watch?v=NH-GAwLAO30>)
+❤️ : 2
+💰 : +1 🔷
+**First Strike**: <:stealthIcon:943248201790677052>
+*Has asperations of being a world renowned web designer*
 —————————————————
-1-4   | **Bite** :boom::zap:
-5-6   | **Scurry** :shield:, gain __protect__x2
-8-10 | **Gaze** All PvEnemies gain __Empower__
+Turn 1  | **Cobweb** <:Persistence:1151788148322484234> 🔀 cause __Weak__ and __Vulnerable__
+Turn 2 | **Bite** 💥🔀 Cause __burn__x3
+Turn 3 | **Piercing Gaze** Next 💥 gains 🚫. Reset Turns
