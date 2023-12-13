@@ -1,8 +1,9 @@
-__**GELLY**__
-:heart: : 8
-:moneybag: : 1 :gold:
-Behavior: Takes double damage from :no_entry_sign: but no damage from __Burn__
+# [__**GELLY**__](https://www.youtube.com/watch?v=lN9JsxrI4v8)
+❤️ : 3
+💰 : 1 <:gold:1058304371940655185>
+Behavior: jiggly, likes cool damp areas and small birds
+*"-Tiny squelching noises-"*
 —————————————————
-1-2   | **Lunge** (+2 :game_die:) :boom:
-4-6   | **Wobble** Gain __Healing__x3
-8-10 | **Mutate** (-3 :game_die:) Disable this creatures behavior until it takes damage
+Turn 1  | **Plop** 💥💥💥
+Turn 2 | **Wobble** Gain __Healing__
+Turn 3 | **Wubble** Gain __Healing__. Reset Turns
