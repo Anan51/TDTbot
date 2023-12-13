@@ -92,32 +92,32 @@ def gen_weapon(roll_str):
         "**Relentless**: +🚫",
         "**Honed**: +🎯",
         "**Heavy**: +🛡️",
-        "**Invigorating**: 🔀 +🔷",
-        "**Vital**: 🔀 +❤️",
-        "**Concealed**: + <:stealthIcon:943248201790677052>",
-        "**Superior**: +💥/ +🛡️ / +effect",
+        "**Robust**: +🔀<:Sturdy:1152516154192044142>",
+        "**Concealed**: +🔀<:stealthIcon:943248201790677052>",
+        "**Unbreaking**: +🔀<:Persistence:1151788148322484234>",
+        "**Sweeping**: +🔀+🌀",
     ]
     weapons = [
-        "**Knife**: 💥",
+        "**Short Sword**: 💥",
         "**Buckler**: 🛡️🛡️",
         "**Kunai**: 💥⚡ ",
-        "**Axe**: 💥🚫 ",
-        "**Crossbow**: 💥🎯",
-        "**Halberd**: 💥🛡️ ",
-        "**Focus Stone**: 💥🔀+🔷",
-        "**Siphon Stone**: 💥🔀+❤️ ",
-        "**Fang**: 💥<:stealthIcon:943248201790677052> ",
-        "**Broadsword**: 💥💥",
-        "**Spell Book** (-2 🔷): any effectx4",
-        "**Wand** (-4 🔷): Double a target's active effect stacks",
-        "**Runic Flintlock** (-1 🔷):💥; 1/6 chance to TRIPLE successful damage",
-        "**Graven Shield** (-2 🔷): <:Sturdy:1152516154192044142> <:Persistence:1151788148322484234>🌀",
-        "**Gilded Hammer** (-2 🔷): 💥🛡️🔀💥🌀 per success",
-        "**Tome** (-4 🔷): Summon a Dire Wolf or an Automaton",
-        "**Scroll**: +2 🔷🌀",
-        "**Enchanted Blade** (-4 🔷): 💥💥💥🌀",
+        "**Axe** (-1 🔷): 💥🚫 ",
+        "**Crossbow** (-1 🔷): 💥🎯",
+        "**Halberd** (-1 🔷): 💥🛡️ ",
+        "**Focus Rune** (-1 🔷): <:Persistence:1151788148322484234>🔀+🔷",
+        "**Siphon Rune** (-1 ❤️): <:Persistence:1151788148322484234>🔀+❤️ ",
+        "**Fang** (-1 🔷): 💥<:stealthIcon:943248201790677052> ",
+        "**Knights Shield** (-1 🔷): <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142>",
+        "**Spell Book** (-1 🔷): Grant or cause any __effect__x2",
+        "**Wand** (-1 🔷): Gain a random draft spell, it has one use",
+        "**Runic Flintlock** (-2 🔷):💥💥🔀💥 per success",
+        "**Graven Shield** (-1 🔷): 🛡️🛡️🔀💥 per success",
+        "**Gilded Hammer** (-2 🔷): 💥🛡️🔀💥 per success",
+        "**Tome** (-1 🔷): Summon a Familiar or an Automaton",
+        "**Scroll**: +2 🔷 {OR} +1 ❤️",
+        "**Protection Rune** (-2 🔷): <:Persistence:1151788148322484234><:Persistence:1151788148322484234>",
         "**Staff** (-2 🔷): deal 💥 per each friendly effect stack you have ",
-        "REDACTED]]",
+        "**Sword of the Spirit** Remove all __will__ at the end of next turn",
     ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(weapons)))
     return [(prefixes[r[0] - 1], weapons[r[1] - 1], (r[0] if r[0] != 2 else 10) + r[1]) for r in rolls]
@@ -125,28 +125,28 @@ def gen_weapon(roll_str):
 
 def gen_potion(roll_str):
     prefixes = [
-        "**Tincture of**: -Effect",
-        "**Potion of**: No bonus",
+        "**Tincture of**: --Effect",
         "**Tonic of**: Roll Potion Effect list twice, -Effect",
+        "**Potion of**: No bonus",
         "**Elixir of**: +Effect",
         "**Grand Mixture of**: ++Effect",
-        "**Splash Tincture of**: -Effect, +🌀",
+        "**Splash Tincture of**: --Effect, +🌀",
+        "**Splash Tonic of**: -Effect, +🌀",
         "**Splash Potion of**: +🌀",
-        "**Splash Tonic of**: Roll Potion Effect list twice, -Effect, +🌀",
         "**Splash Elixir of**: +Effect, +🌀",
         "**Grand Splash Mixture of**: ++Effect, +🌀]",
     ]
     potions = [
-        "**Regeneration**: +50% ❤️ ( +/-25% per effect prefix)",
-        "**Rejuvenation**: +50% 🔷 ( +/-25% per effect prefix)",
+        "**Regeneration**: +4 ❤️ ( +/- 1 per effect)",
+        "**Rejuvenation**: +4 🔷 ( +/- 1 per effect)",
         "**Strength**: Empower x3",
         "**Toughness**: Protect x3",
         "**Healing**: Heal x5",
         "**Weakness**: Weak x3",
         "**Sapping**: Vulnerable x3",
         "**Flames**: Burn x5",
-        "**Frost**: Skip your targets next 1 turn(s)",
-        "**Proficiency**: +🚫🎯⚡ for the next 1 turn(s)",
+        "**Foritude**: +<:stealthIcon:943248201790677052><:Persistence:1151788148322484234>🌀 for the next 3 turn(s)",
+        "**Proficiency**: +🚫🎯⚡ for the next 3 turn(s)",
         ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(potions)))
     return [(prefixes[r[0] - 1], potions[r[1] - 1], r[0] + r[1]) for r in rolls]
@@ -154,16 +154,16 @@ def gen_potion(roll_str):
 
 def gen_artifact(roll_str):
     artifacts = [
-        "**Ring of Momentum**: 💍 Kills grant Empower x3",
-        "**Safety Hook**: 🪝 Gain Protect whenever a shield fails to block damage",
-        "**Vitamins**: 💊 Start each combat with Heal",
-        "**Lucky Clover**: 🍀 All enemies gain Weak x2 the first time you run out of MP",
-        "**War Drum**: 🥁 All enemies have Vulnerable when you are at 1/2 your max HP",
-        "**Eternal Lantern**: 🪔 Attacking causes __Burn__ if you took no damage this turn",
+        "**Ancient Key**: 🗝️  Opens loot chests found on floors (Single Use)",
+        "**Safety Scissors**: ✂️ Flees the combat or encounter. Redo your floor roll. (Single Use)",
         "**Cook Book**: 🍔 You may raise your max HP and MP by 1 at Camp Sites instead of resting",
-        "**Safety Scissors**: ✂️ Once per run, you may escape an encounter or combat, go to the next level, but award no loot. May not be used on a boss ",
-        "**Port-a-Forge**: 🛠️ You may upgrade one item or skill (give it the \"Superior\" prefix) for 10 gold whenever you arrive at a shop ",
-        "**Ancient Key**: 🗝️ Double the loot you can store this run",
+        "**Port-a-Forge**: 🛠️ You may increase a skills damage, shield, or __effect__ at a camp instead of resting. (Lasts until the end of the run)",
+        "**Ring of Momentum**: 💍 You have __Empower__ until you take damage",
+        "**Safety Hook**: 🪝 Gain __Protect__x2 the first time an enemy deals damage to you",
+        "**Vitamins**: 💊 Start each combat with __Heal__x2",
+        "**Lucky Clover**: 🍀 Cause an enemy __Weak__x3 on turn 3.",
+        "**War Drum**: 🥁 Cause __vulnerable__x2 the first time you damage an enemy",
+        "**Eternal Lantern**: 🪔 Using potions causes __Burn__",
     ]
     return [(None, artifacts[r - 1], r) for r in roll(roll_str, max_sides=len(artifacts))]
 
@@ -300,6 +300,7 @@ class WitData:
                    "❔ Encounter",
                    "⛺ Camping Spot",
                    "🎇 Blessing",
+                   "🔒 Chest",
                    "🛖 Shop"
                    ]
-        return ', '.join(random.choices(options, weights=[11, 2, 9, 1, 1, 1], k=3))
+        return ', '.join(random.choices(options, weights=[10, 3, 10, 1, 1, 1, 1], k=3))
