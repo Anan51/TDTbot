@@ -1,10 +1,11 @@
-**THE GREAT SERPENT**
-:heart: : 20 x :busts_in_silhouette:
-:moneybag: : 2d10 basic, +1 Comp Point 🌀 {OR} 1/50 chance to gain "**Fifth-Rib Fang** :boom::no_entry_sign: :twisted_rightwards_arrows: Cause __burn__, gain __healing__" valued at 45 <:gold:1058304371940655185>
+# [__**THE GREAT SERPENT**__](<https://youtu.be/wlF0-Qs2xkI>)
+❤️ : 12 x 👥
+💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$wit_shop` {OR} 1/50 chance to gain "**Fifth-Rib Fang** 💥⚡🚫  🔀 Cause __burn__, gain __healing__" valued at 45 <:gold:1058304371940655185>||
 Behavior: gain permanent __Empower__ for every 5 damage taken
+**First Strike**: Cause __burn__x20 🌀 
+*"For YHWH knows the day you eat thereof your eyes will be open and you will be like God. Knowing good and evil."*
 —————————————————
-1-2   | **Fangs** :boom::dart: to the highest HP player
-3-7   | **Scales** (-2 :game_die:) (:shield::shield::twisted_rightwards_arrows: <:Persistence:1151788148322484234>) x :busts_in_silhouette:
-8-10 | **Weep** (+4 :game_die:) Cause __Weak__x3 :cyclone: 
-11+   | **Hypnotic Speech** (-4 :game_die:) summon a random reach enemy
-https://youtu.be/wlF0-Qs2xkI
+Turn 1  | **Scales** 🛡️🛡️x 👥🔀 <:Persistence:1151788148322484234> per block
+Turn 2 | **Weep** Cause __Weak__x2🌀
+Turn 3 | **Hypnotic Speech** Skip a players next turn(s) x👥 if this took no damage. Random turn.
+Turn 4 | **Fangs** 💥⚡🚫🔀 double the target's __burn__. Reset turns.
