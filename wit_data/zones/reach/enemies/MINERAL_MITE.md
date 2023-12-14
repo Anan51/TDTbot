@@ -1,18 +1,11 @@
-__**MINERAL MITE**__
-❤️ : 1
-💰 : 1d5 lesser
-Behavior: **First Strike**: gain <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234>. This is immune to __burn__
-—————————————————
-1-4   | **Gnaw** (+4 🎲) 💥💥 🔀 Gain __protect__ x2 
-5-7   | **Curl**  🛡️🛡️ 🔀 Gain __protect__ x2
-8-10 | **Burrow** (-3 🎲) Gain <:Persistence:1151788148322484234> next turn
-
-
-__**MARROW MITE**__
+# [__**DARK MITE**__](<https://www.youtube.com/watch?v=lkgHqBl12Cg>)
 ❤️ : 2
-💰 : 6 <:gold:1058304371940655185>
-Behavior: When a player takes damage, target that player and gain -10 🎲. When an ally dies gain  __heal__
+<:Persistence:1151788148322484234> : 2
+💰 : ||🗡️ **Mite Nail**: 💥🎯, can be upgraded with a **Port a Forge** unlimitedly.||
+**Martyr** Deal 💥💥💥💥💥🎯 🔀 cause __will__ per success
+*In the matriarchal structure of Mites, these creatures are considered the guards or knights, which is ironic considering how hollow their tough outer shells are compared to normal drones*
 —————————————————
-1-6   | **Gnaw** (-1 🎲) 💥 to a random player 🔀 gain __heal__
-7-8   | **Curl** (-2 🎲) 🛡️🛡️ 🔀 gain __heal__x2
-9-10 | **Burrow** Gain +:heart: per __heal__ next turn
+Turn 1  | **Burrow** Gain <:Persistence:1151788148322484234> next turn
+Turn 2 | **Curl**  🛡️🛡️ 🔀 Decrease this creatures **Martyr** per sits __will__
+Turn 3 | **Leach** 💥🌀 🔀 Increase this creatures **Martyr** per its __will__
+Turn 4 | **Succumb** Gain __will__ and permanent __empower__
