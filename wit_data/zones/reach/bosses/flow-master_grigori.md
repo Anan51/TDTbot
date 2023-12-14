@@ -1,10 +1,11 @@
-__**FLOW-MASTER GRIGORI**__
-:heart: : 15 x:busts_in_silhouette:
-:moneybag: : 1d19 :dagger:, +1 Comp Point 🌀 {OR} 1/50 chance to gain "**:control_knobs: Equalizer**: Gain __Protect__ on even numbered turns and __Empower__ on odd numbered turns" Valued at 70 <:gold:1058304371940655185>
-Behavior: At even minutes this gains a stack of __Protect__ permanently, at odd minutes this gains a stack of __Empower__ permanently.
+# [__**FLOW-MASTER GRIGORI**__](<https://www.youtube.com/watch?v=16y1AkoZkmQ&pp=ygUIcmFzcHV0aW4%3D>) 
+❤️ : 10 x👥
+🔷 : 10
+💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$wit_shop` {OR} 1/50 chance to gain "**🎛️ Equalizer**: Gain __Protect__ on even numbered turns and __Empower__ on odd numbered turns" Valued at 70 <:gold:1058304371940655185>||
+**Clockwork** Gain permanent __empower__ on odd turns and permanent __protect__ on even turns 
 —————————————————
-1-4   | **Beat** (:game_die: = 11) :boom::boom::zap:
-5-7   | **Groove** (:game_die: = 1) :shield::shield::twisted_rightwards_arrows: deal :boom: per blocked
-8-10  | **Rhythm** (:game_die: = 5) +3:heart:
-11+   | **Change Up** Immune. Nullify all status moves used this turn.
-https://www.youtube.com/watch?v=16y1AkoZkmQ
+Turn 1  | **Beat**: 💥⚡
+Turn 2 | **Groove**: 🛡️🛡️🔀 +💥🌀 per blocked
+Turn 3 | **Rhythm**: +2 ❤️ x 👥
+Turn 4 | **Change Up** (-2 🔷): Immune. Nullify all status moves used this turn. Random turn
+Turn 5 | **Take it Back Now**: Dispel all player effects. Reset turn
