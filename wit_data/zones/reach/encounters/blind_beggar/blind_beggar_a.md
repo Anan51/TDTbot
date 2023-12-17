@@ -17,7 +17,7 @@ You purse your lips at the man. You pat your satchel to make sure it hasn't been
 -------------
 tdt$blind_threaten
 
-You deftly draw your weapon on the man. He doesnt respond. You know this man isnt trying to trick you. You say a quick prayer then you give the man some money. He hears the coins hit the bag and says "oh thank you! May YHWH bless your kindness. (You may spend 20 :gold: to upgrade your Annointed passive to: __Angel__ :rosette: "Protect persists, taking damage removes __Protect__ first" for the rest of the run)
+You deftly draw your weapon on the man. He doesnt respond. You know this man isnt trying to trick you. You say a quick prayer then you give the man some money. He hears the coins hit the bag and says "oh thank you! May YHWH bless your kindness. (You may spend 20 :gold: to gain: __Angel__ :rosette: "Protect persists, taking damage removes __Protect__ first" for the rest of the run)
 
 -------------
 tdt$blind_hostile
