@@ -8,7 +8,7 @@
 -------------
 tdt$top_search
 
-You think that perhaps the pile is meant to be someones burried treasure. You begin removing the stones to uncover what little remains of a skeleton. Its bones are fractured and gnashed. You immediately realize this was meant to be a grave... but you are too far at this point not to take what you came for. (Gain 1 __Will__ and a 1d10 weapon)
+You think that perhaps the pile is meant to be someones burried treasure. You begin removing the stones to uncover what little remains of a skeleton. Its bones are fractured and gnashed. You immediately realize this was meant to be a grave... but you are too far at this point not to take what you came for. (Gain 1 __Will__ and `tdt$wit_loot 10`)
 
 -------------
 tdt$top_warning
