@@ -1,6 +1,6 @@
 __**THE FAMILIAR**__
 :heart: : 4
-:moneybag: : )
+:moneybag: ||:)||
 Behavior: "For old times sake?"
 —————————————————
 1-6   | **Light** (-2 :game_die:) :boom::boom::boom::twisted_rightwards_arrows: +:no_entry_sign: 
