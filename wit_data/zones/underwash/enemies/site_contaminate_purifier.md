@@ -1,6 +1,6 @@
 __**SITE CONTAMINATE PURIFIER**__
 :heart: : 8
-:moneybag: : 1d10 :dagger: 
+:moneybag: : ||`tdt$wit_loot 15`||
 Behavior: Immune to negative effects
 —————————————————
 1-3   | **Secure** :boom::boom::boom: highest HP player :twisted_rightwards_arrows: dispell all __effect__ stacks
