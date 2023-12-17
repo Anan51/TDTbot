@@ -1,6 +1,6 @@
 __**HYPNOCYTE**__
 :heart: : 8
-:moneybag: : Lose 3 __Will__
+:moneybag: : ||Lose 3 __Will__, +6 🔷||
 Behavior: If this is alone, flee and yield no loot.
 —————————————————
 1-6   | **Indulge** (:game_die: + __will__ ) -2:heart: a different enemy :twisted_rightwards_arrows: this gains __will__ x2
