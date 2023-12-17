@@ -1,6 +1,6 @@
 __**PRODIGOLEM**__
 :heart: : 20
-:moneybag: : Lose 3 __Will__
+:moneybag: : ||Lose 3 __Will__, +3 🔷||
 Behavior: When this takes damage, attacker loses 1 :large_blue_diamond:
 —————————————————
 1-3   | **Crush** in 2 turns from now: :boom::boom::boom::boom::cyclone: 
