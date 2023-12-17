@@ -1,8 +1,11 @@
 # :sparkler: CONGRATULATIONS! :sparkler: 
 *Here are your rewards*
 
-[Spells cannot be sold/traded/modified and only one can be used at a time unless weilded by a champion]
+[Spells cannot be sold/traded/modified and only one can be used at a time unless weilded by a champion. Spells are NOT lost on death]
 
-- **Lunar Bolt** (-1 :large_blue_diamond:) :boom::dart:, +:boom: if you have <:stealthIcon:943248201790677052>
+**Mana Elemental** (-3 :large_blue_diamond:): Summon a Mana Elemental 
+**__Mana Elemental__**
+﻿> :heart:﻿﻿﻿ : 2
+> Whenever the owner spends :large_blue_diamond:, refund it
 
 :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: 
