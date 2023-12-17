@@ -13,9 +13,9 @@ You attempt to lug the largest pieces of the boat scrap together to make a raft.
 -------------
 tdt$shipyard_search
 
-The river is dangerous and you arent a ship maker. You decide to focus your attention on the nearby buildings. You fling the door open and give a cautious "Hello?". You find a lantern and light it up to peer through the dark room.You carefully sweep through when you hear a noise behind you... like the sound of a creaking board. Fear grips you as you carefully proceed onwards. You find what seems to be a captains journal and a few gold coins still left hidden in the drawer... You turn to leave when out of the darkness lunges a creature (gain 2d20 :gold:, do a underwash enemy fight. Skip your first turn.)
+The river is dangerous and you arent a ship maker. You decide to focus your attention on the nearby buildings. You fling the door open and give a cautious "Hello?". You find a lantern and light it up to peer through the dark room.You carefully sweep through when you hear a noise behind you... like the sound of a creaking board. Fear grips you as you carefully proceed onwards. You find what seems to be a captains journal and a few gold coins still left hidden in the drawer... You turn to leave when out of the darkness lunges a creature (gain 2d20 <:gold:1058304371940655185>, do a underwash enemy fight. Skip your first turn.)
 
 -------------
 tdt$shipyard_logs
 
-You scan the area. This place hasnt been out of operation for too long. Whoever was here left in a hurry. You run around back to the old steam generator and flip it on. Thankfully it still has some coals to burn. The lights flash on as you make your way over to the building to find a ship log. (gain 2d20 :gold:, do a underwash enemy fight. The next time you encounter this, immediately pass the raft construction roll).
+You scan the area. This place hasnt been out of operation for too long. Whoever was here left in a hurry. You run around back to the old steam generator and flip it on. Thankfully it still has some coals to burn. The lights flash on as you make your way over to the building to find a ship log. (gain 2d20 <:gold:1058304371940655185>, do a underwash enemy fight. The next time you encounter this, immediately pass the raft construction roll).
