@@ -158,11 +158,11 @@ def gen_artifact(roll_str):
         "**Safety Scissors**: ✂️ Flees the combat or encounter. Redo your floor roll. (Destroyed on Use) [+2 <:gold:1058304371940655185>]",
         "**Cook Book**: 🍔 You may raise your max HP and MP by 1 at Camp Sites instead of resting (Lasts until the end of the run, once per team) [+3 <:gold:1058304371940655185>]",
         "**Port-a-Forge**: 🛠️ You may increase a skills damage, shield, or __effect__ at a camp instead of resting. (Lasts until the end of the run, once per team) [+4 <:gold:1058304371940655185>]",
-        "**Ring of Momentum**: 💍 You have __Empower__ until you take damage [+5 <:gold:1058304371940655185>]",
+        "**Ring of Momentum**: 💍 You have __Empower__ while at full HP or MP. [+5 <:gold:1058304371940655185>]",
         "**Safety Hook**: 🪝 Gain __Protect__x2 the first time an enemy deals damage to you [+6 <:gold:1058304371940655185>]",
         "**Vitamins**: 💊 Start each combat with __Heal__x2 [+7 <:gold:1058304371940655185>]",
         "**Lucky Clover**: 🍀 Cause an enemy __Weak__x3 on turn 3 [+8 <:gold:1058304371940655185>]",
-        "**War Drum**: 🥁 Cause __vulnerable__x2 the first time you damage an enemy [+9 <:gold:1058304371940655185>]",
+        "**War Drum**: 🥁 Cause __vulnerable__x2 the first time you damage each enemy [+9 <:gold:1058304371940655185>]",
         "**Eternal Lantern**: 🪔 Using potions causes __Burn__ [+10 <:gold:1058304371940655185>]",
     ]
     return [(None, artifacts[r - 1], r) for r in roll(roll_str, max_sides=len(artifacts))]
