@@ -12,7 +12,7 @@ Turn 4 | **Venom Spray** Cause __Weak__x2 and __burn__x2
 Turn 5 | **Constrict** Reset turns; 💥🛡️ 🔀 +🔷
 
 
-# [__** CORNERED SPEYEDER**__](<https://www.youtube.com/watch?v=NH-GAwLAO30>)
+# [__**CORNERED SPEYEDER**__](<https://www.youtube.com/watch?v=NH-GAwLAO30>)
 ❤️ : 1
 💰 : ||+1 🔷||
 **First Strike**: <:stealthIcon:943248201790677052>
