@@ -1,6 +1,6 @@
 __**∅ HUNTER**__
 :heart: : 15
-:moneybag: : !r 3d10 <:gold:1058304371940655185> 
+:moneybag: : ||30 <:gold:1058304371940655185>||
 Behavior: Every turn this doesn't take damage, gain __Empower__. Can be immediately dismissed if fighting Gaidg-3, Naya, or Remus but doing so yields no loot.
 —————————————————
 1-3   | **Sidestep** (+2 :game_die:) Avoid all :boom: :twisted_rightwards_arrows: take another turn
