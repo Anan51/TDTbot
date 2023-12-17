@@ -1,6 +1,6 @@
 __**HIGAURD**__
 :heart: : 7
-:moneybag: : 1 Higuard Key
+:moneybag: : ||1 Higuard Key||
 Behavior: If this takes 3 or more damage in one turn, summon another Higuard in 2 turns
 —————————————————
 1-3   | **Polearm** :boom::boom::shield: 
