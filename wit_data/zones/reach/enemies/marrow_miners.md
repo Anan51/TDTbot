@@ -1,20 +1,19 @@
-__**MARROW MINERS**__
-❤️ : 8
-💰 : 3d5 <:gold:1058304371940655185>
-Behavior: **Martyr**: deal 💥💥💥💥 to ALL entities next turn, deals double to this. If this __burn__s trigger its **Martyr**
+# [__**MARROW DRONE**__](<https://www.youtube.com/watch?v=vKDQNGDOdE4>)
+❤️ : 1
+💰 : ||+2 ❤️ +4 🔷🌀 ||
+**First Strike**: Summon another Marrow Mite per 👥 -1 
+*"Wait... the chitter-chatters can grow WINGS?!" - Fenric Bestiary*
 —————————————————
-1-3   | **Excevate** (+2 🎲) 💥💥🌀 🔀 -5 🎲
-4-7   | **Hardhat** <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> 🔀 <:Persistence:1151788148322484234>
-8-10 | **Greed** (-10 🎲) Gain __Empower__ for every 10 <:gold:1058304371940655185> your party has
+Turn 1  | **Feed** +❤️🌀
+Turn 2 | **Curl** +<:stealthIcon:943248201790677052>❤️
+Turn 3 | **Gnaw** 💥💥 🔀 gain +❤️ and reset turns
 
-__**CONFUSED ADVENTURER**__
-:heart: : 6
-:moneybag: : 1/5 chance to drop a random Weapon 🗡️
-Behavior: This flees combat (but still yields loot) if it has 2 or more __vulnerable__
+# [__**MARROW MITE**__](<https://www.youtube.com/watch?v=fhUqu-g0pVY>)
+❤️ : 2
+💰 : ||`tdt$wit_loot 5`, +1 ❤️ +1 🔷 ||
+**Martyr**: Reset turns. Revive with 1 ❤️ next turn and disable this **behavior**. 
+*Its thorax is a dark red color from feeding on the bone of The Reach. Its highly destructive feed habit, mixed with its aggressive nature, has made it a targeted species for the Higaurd and hunters.*
 —————————————————
-1-4   | **Spear Charge** :boom:<:Sturdy:1152516154192044142>:dart: to a random player next turn
-5-8   | **Defend** :shield::shield::cyclone: 
-9-10  | **Bag of Potions** (-3 :game_die:) Gain __Empower__ and +:heart:, the players choose an __effect__ and apply it to ALL entities
-
-
-
+Turn 1  | **Gnaw** 💥💥 🔀 gain +❤️ and reset turns 
+Turn 2 | **Burrow** Gain 🚫 next turn
+Turn 3 | **Curl** +<:stealthIcon:943248201790677052>❤️
