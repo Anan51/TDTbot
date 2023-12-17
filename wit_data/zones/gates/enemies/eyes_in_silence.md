@@ -1,6 +1,6 @@
 __**EYES IN SILENCE**__
 :heart: : 10
-:moneybag: : Lose 2 __Will__
+:moneybag: : ||Lose 2 __Will__, +4 🔷||
 Behavior: Immune to direct attacks, cant be targeted directly by effects.
 —————————————————
 1-3   | **Bleed** (-2 :game_die:) :boom::boom: :no_entry_sign: :twisted_rightwards_arrows: cause __Will__ x1 
