@@ -1,6 +1,6 @@
 __**TOCK**__
 :heart: : 8
-:moneybag: : 1d15 :dagger: 
+:moneybag: : ||`tdt$wit_loot 8`||
 Behavior: at the end of turn 5, deal 20 damage to everything
 —————————————————
 1-4   | **Sidearm** :boom::zap::dart: 
