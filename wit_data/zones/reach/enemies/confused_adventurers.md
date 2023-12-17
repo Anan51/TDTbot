@@ -7,7 +7,7 @@ Behavior: "W-wobble?"
 —————————————————
 Turn 1  | **Cower** 🛡️🛡️🌀 x👥 
 Turn 2 | **Muster** (-2 🔷) Target a random player. Gain __empower__x4 and __weak__.
-Turn 3 | **Confused Wobbling** Gain __heal__x3 and the players choose an __effect__ and apply it to ALL entities
+Turn 3 | **Confused Wobbling** Gain __heal__x3 and the players choose an __effect__x2 and apply it to ALL entities
 Turn 4 | **Spear Charge** 💥<:Sturdy:1152516154192044142>🎯 to the random player. Reset turns
 
 
@@ -16,7 +16,7 @@ Turn 4 | **Spear Charge** 💥<:Sturdy:1152516154192044142>🎯 to the random pl
 🔷 : 3
 💰 : ||4 <:gold:1058304371940655185> (and your stolen <:gold:1058304371940655185>)||
 Behavior: Every successful attack from this causes the player to lose <:gold:1058304371940655185> per hit. Once this has stolen 5 <:gold:1058304371940655185>, this flees combat and yields no loot.
-*"Heeeeyy.... nice armor ya got there... mind if I take a closer look?"*
+*"Stupid dwarf man thinks him jiggly"*
 —————————————————
 Turn 1  | **Greed** (-1 🔷) Gain __empower__ per 10 <:gold:1058304371940655185> your party has  
 Turn 2 | **Shifty** <:stealthIcon:943248201790677052> 🔀 gain 🎯 next 💥 and random turn
