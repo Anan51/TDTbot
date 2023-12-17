@@ -1,17 +1,10 @@
-__**RED WING**__
+# [__**RED WING**__](<https://www.youtube.com/watch?v=jf9ot3SvvmM>)
 ❤️ : 2
-💰 : 3 <:gold:1058304371940655185>. If this died to __burn__ instead reward 2 :heart: and 2 🔷
-Behavior: **First Strike**: -2 🎲. Take 1/2 damage (rounds down) unless the player uses ⚡
+💰 : ||+2 <:gold:1058304371940655185> . If this died to __burn__ instead reward +1 ❤️🌀 and +1 🔷🌀 ||
+**First Strike**: Summon another Red Wing per 👥
+*"Tasty bird! But is mean bird... hmmm... is conundrum of even best Fangwild hunters" - Fenric Bestiary*
 —————————————————
-1-2   | **Peck** 💥💥⚡ to the highest HP player
-3-8   | **Flap** (+5 🎲) <:stealthIcon:943248201790677052>
-9-10 | **Caw** (-10 🎲) Summon another Red Wing (only this drops gold)
-
-__**RED WING**__
-❤️ : 2
-💰 : 3 <:gold:1058304371940655185>. If this died to __burn__ instead reward 2 :heart: and 2 🔷
-Behavior: **First Strike**: -2 🎲. Take 1/2 damage (rounds down) unless the player uses ⚡
-—————————————————
-1-2   | **Peck** 💥💥⚡ to the highest HP player
-3-8   | **Flap** (+5 🎲) <:stealthIcon:943248201790677052>
-9-10 | **Caw** (-10 🎲) Summon another Red Wing (only this drops gold)
+Turn 1  | **Peck** 💥💥<:stealthIcon:943248201790677052>⚡
+Turn 2 | **Flap** <:Persistence:1151788148322484234><:stealthIcon:943248201790677052>
+Turn 3 | **Roost** +🔷<:stealthIcon:943248201790677052> per <:Persistence:1151788148322484234>. 🛡️🛡️<:stealthIcon:943248201790677052> 🔀 Reset turns, gain __empower__.
+Turn 4 | **Caw** (-3 🔷) <:stealthIcon:943248201790677052>. Summon another Red Wing. Reset turns
