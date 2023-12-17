@@ -13,7 +13,7 @@ You decide the tree is good for food and pleasant to the eyes. You pluck a fruit
 -------------
 tdt$tree_leave
 
-You think that the tree is too good to be true. You decide to leave it be... however the wildlife seems to have noticed this as a perfect opportunity to make you into a feeding frenzy.   (Summon 3 Champions_landing_enemy and make them into majors)
+You think that the tree is too good to be true. You decide to leave it be... however the wildlife seems to have noticed this as a perfect opportunity to make you into a feeding frenzy.   (Summon 10 `tdt$champions_landing_enemy` )
 
 -------------
 tdt$tree_prune
