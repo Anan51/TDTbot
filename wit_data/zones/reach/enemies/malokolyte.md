@@ -6,5 +6,5 @@
 *Malokolytes are revered by many and feared by any more. If you ever hear strange whispers in your mind at night you may have angered one in the day by mistake.*
 —————————————————
 Turn 1  | **Dark Ritual** (-1 🔷) <:Sturdy:1152516154192044142>x👥 🔀 Cause permanent __Vulnerable__ 🌀 
-Turn 3 |  **Sacrificial Dagger** (-1 ❤️) Deals 💥⚡, +💥 per its target's __vulnerable__
-Turn 4 |  **Bad Omen** +🔷🌀, random turn
+Turn 2 |  **Sacrificial Dagger** (-1 ❤️) Deals 💥⚡, +💥 per its target's __vulnerable__
+Turn 3 |  **Bad Omen** +🔷🌀, random turn
