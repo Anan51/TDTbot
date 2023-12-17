@@ -1,12 +1,8 @@
 # :sparkler: CONGRATULATIONS! :sparkler: 
 *Here are your rewards*
 
-[Spells cannot be sold/traded/modified and only one can be used at a time unless weilded by a champion]
+[Spells cannot be sold/traded/modified and only one can be used at a time unless weilded by a champion. Spells are NOT lost upon death]
 
-- **Clockwork Rook** (-4 :large_blue_diamond:): Summon a Clockwork Rook 
-**__Clockwork Rook__**
-﻿> :heart:﻿﻿﻿ : 3 / :boom:
-> ﻿﻿Gain :boom: per damage taken
-
+**Thorn Shot** (-1 🔷) 💥:boom: 🔀 gain __heal__ per hit
 
 :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: 
