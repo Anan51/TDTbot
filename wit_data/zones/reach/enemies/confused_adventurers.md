@@ -1,5 +1,5 @@
 # [__**CONFUSED ADVENTURER**__](<https://www.youtube.com/watch?v=3rGZiyi3Z_Q>)
-❤️ : 6 x👥
+❤️ : 4 x👥
 🔷 : 2 x👥
 💰 : ||tdt$wit_loot 5||
 Behavior: "W-wobble?"
