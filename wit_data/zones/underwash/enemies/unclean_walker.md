@@ -1,6 +1,6 @@
 __**UNCLEAN WALKER**__
 ❤️ : 5
-💰 : 1d10 🧪
+💰 : ||`tdt$wit_loot 8`||
 Behavior: at the end of turn 3, lower all players max HP and MP by 1 for the rest of the run
 —————————————————
 1-5   | **Breathe** (+2 🎲) __Weak__, __Vulnerable__, __Burn__ to ALL but itself
