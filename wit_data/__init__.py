@@ -109,14 +109,14 @@ def gen_weapon(roll_str):
         "**Fang** (-1 🔷): 💥<:stealthIcon:943248201790677052> [+9 <:gold:1058304371940655185>]",
         "**Knights Shield** (-1 🔷): <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> [+10 <:gold:1058304371940655185>]",
         "**Spell Book** (-2 🔷): Grant or cause any __effect__x2 [+11 <:gold:1058304371940655185>]",
-        "**Wand** (-1 🔷): Gain a random draft spell, it has one use [+12 <:gold:1058304371940655185>]",
-        "**Runic Flintlock** (-3 🔷):💥💥🔀💥 per success [+13 <:gold:1058304371940655185>]",
-        "**Graven Shield** (-2 🔷): 🛡️🛡️🔀💥 per success [+14 <:gold:1058304371940655185>]",
-        "**Gilded Hammer** (-3 🔷): 💥🛡️🔀💥 per success [+15 <:gold:1058304371940655185>]",
+        "**Wand** (-1 🔷): Gain a random tdt$draft spell, it has as many uses as your current stacks of __empower__. [+12 <:gold:1058304371940655185>]",
+        "**Runic Flintlock** (-3 🔷): 💥, +💥 per stack of __weak__ your target has [+13 <:gold:1058304371940655185>]",
+        "**Graven Shield** (-2 🔷): <:Sturdy:1152516154192044142>, +<:Sturdy:1152516154192044142> per stack of __heal__ you have [+14 <:gold:1058304371940655185>]",
+        "**Gilded Hammer** (-3 🔷): 🛡️, +💥 per stack of __protect__ you you have [+15 <:gold:1058304371940655185>]",
         "**Tome** (-1 🔷): Summon a Familiar or an Automaton [+16 <:gold:1058304371940655185>]",
         "**Scroll**: +2 🔷 {OR} +1 ❤️ [+17 <:gold:1058304371940655185>]",
         "**Protection Rune** (-3 🔷): <:Persistence:1151788148322484234><:Persistence:1151788148322484234> [+18 <:gold:1058304371940655185>]",
-        "**Staff** (-2 🔷): deal 💥 per each friendly effect stack you have [+19 <:gold:1058304371940655185>]",
+        "**Staff** (-2 🔷): 💥, +💥 per stack of __burn__ your target has [+19 <:gold:1058304371940655185>]",
         "**Sword of the Spirit** Remove all __will__ at the end of next turn [+20 <:gold:1058304371940655185>]",
     ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(weapons)))
@@ -126,7 +126,7 @@ def gen_weapon(roll_str):
 def gen_potion(roll_str):
     prefixes = [
         "**Tincture of**: --Effect [+1 <:gold:1058304371940655185>]",
-        "**Tonic of**: Roll Potion Effect list twice, -Effect [+2 <:gold:1058304371940655185>]",
+        "**Tonic of**: -Effect [+2 <:gold:1058304371940655185>]",
         "**Potion of**: No bonus [+3 <:gold:1058304371940655185>]",
         "**Elixir of**: +Effect [+4 <:gold:1058304371940655185>]",
         "**Grand Mixture of**: ++Effect [+5 <:gold:1058304371940655185>]",
@@ -137,14 +137,14 @@ def gen_potion(roll_str):
         "**Grand Splash Mixture of**: ++Effect, +🌀] [+10 <:gold:1058304371940655185>]",
     ]
     potions = [
-        "**Regeneration**: +4 ❤️ ( +/- 1 per effect) [+1 <:gold:1058304371940655185>]",
-        "**Rejuvenation**: +4 🔷 ( +/- 1 per effect) [+2 <:gold:1058304371940655185>]",
+        "**Regeneration**: +6 ❤️ ( +/- 1 per effect) [+1 <:gold:1058304371940655185>]",
+        "**Rejuvenation**: +6 🔷 ( +/- 1 per effect) [+2 <:gold:1058304371940655185>]",
         "**Strength**: Empower x3 [+3 <:gold:1058304371940655185>]",
-        "**Toughness**: Protect x3 [+4 <:gold:1058304371940655185>]",
-        "**Healing**: Heal x5 [+5 <:gold:1058304371940655185>]",
+        "**Toughness**: Protect x5 [+4 <:gold:1058304371940655185>]",
+        "**Healing**: Heal x10 [+5 <:gold:1058304371940655185>]",
         "**Weakness**: Weak x3 [+6 <:gold:1058304371940655185>]",
-        "**Sapping**: Vulnerable x3 [+7 <:gold:1058304371940655185>]",
-        "**Flames**: Burn x5 [+8 <:gold:1058304371940655185>]",
+        "**Sapping**: Vulnerable x5 [+7 <:gold:1058304371940655185>]",
+        "**Flames**: Burn x10 [+8 <:gold:1058304371940655185>]",
         "**Foritude**: +<:stealthIcon:943248201790677052><:Persistence:1151788148322484234>🌀 for the next 3 turn(s) [+9 <:gold:1058304371940655185>]",
         "**Proficiency**: +🚫🎯⚡ for the next 3 turn(s) [+10 <:gold:1058304371940655185>]",
         ]
