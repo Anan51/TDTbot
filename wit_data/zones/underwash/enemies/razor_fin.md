@@ -1,6 +1,6 @@
 __**RAZOR FIN**__
 :heart: : 10
-:moneybag: : !r 1d10 :test_tube:  + 5 <:gold:1058304371940655185>
+:moneybag: : ||`tdt$wit_loot 5`  + 5 <:gold:1058304371940655185>||
 Behavior: Cannot take more than 4 damage a turn
 —————————————————
 1-4   | **Thrash** :boom::zap::no_entry_sign: 
