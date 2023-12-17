@@ -3,4 +3,4 @@
 - **Clockwork Rook** (-4 :large_blue_diamond:): Summon a Clockwork Rook 
 **__Clockwork Rook__**
 ﻿> :heart:﻿﻿﻿ : 3 / :boom:
-> ﻿﻿Gains :boom: per damage taken
+> **clockwork** Gain __empower__ every turn this is damaged
