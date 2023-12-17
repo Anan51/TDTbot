@@ -1,17 +1,23 @@
-__**CONFUSED ADVENTURER**__
-:heart: : 6
-:moneybag: : 1/5 chance to drop a random Weapon 🗡️
-Behavior: This flees combat (but still yields loot) if it has 2 or more __vulnerable__
+# [__**CONFUSED ADVENTURER**__](<https://www.youtube.com/watch?v=3rGZiyi3Z_Q>)
+❤️ : 6 x👥
+🔷 : 2 x👥
+💰 : ||tdt$wit_loot 5||
+Behavior: "W-wobble?"
+*Has been convinced by a marrow mite that he is a gelly... what's more concerning is that he somehow spoke (or at least thought he spoke) to a marrow mite.*
 —————————————————
-1-4   | **Spear Charge** :boom:<:Sturdy:1152516154192044142>:dart: to a random player next turn
-5-8   | **Defend** :shield::shield::cyclone: 
-9-10  | **Bag of Potions** (-3 :game_die:) Gain __Empower__ and +:heart:, the players choose an __effect__ and apply it to ALL entities
+Turn 1  | **Cower** 🛡️🛡️🌀 x👥 
+Turn 2 | **Muster** (-2 🔷) Target a random player. Gain __empower__x4 and __weak__.
+Turn 3 | **Confused Wobbling** Gain __heal__x3 and the players choose an __effect__ and apply it to ALL entities
+Turn 4 | **Spear Charge** 💥<:Sturdy:1152516154192044142>🎯 to the random player. Reset turns
 
-**FENRIC THUG**
-:heart: : 3
-:moneybag: : 1d7 <:gold:1058304371940655185> (and your stolen <:gold:1058304371940655185>)
-Behavior: Every succesful attack from this causes the player to lose <:gold:1058304371940655185> per hit. Once this has stolen 5 <:gold:1058304371940655185>, this flees combat and yields no loot.
+
+# [**__FENRIC THUG__**](<https://www.youtube.com/watch?v=geQhMmSbK2k>)
+❤️ : 3
+🔷 : 3
+💰 : ||4 <:gold:1058304371940655185> (and your stolen <:gold:1058304371940655185>)||
+Behavior: Every successful attack from this causes the player to lose <:gold:1058304371940655185> per hit. Once this has stolen 5 <:gold:1058304371940655185>, this flees combat and yields no loot.
+*"Heeeeyy.... nice armor ya got there... mind if I take a closer look?"*
 —————————————————
-1-3   | **Shiv** (+2  :game_die:) :boom::boom::zap: random player
-4-7   | **Shifty** (+4 :game_die:) :stealthIcon: 🔀 gain 🎯 next turn. Become immune until this attacks again
-8-10 | **Sleep Darts** :boom::cyclone:, this loses its next turn 🔀 skip the target's turn until they take damage
+Turn 1  | **Greed** (-1 🔷) Gain __empower__ per 10 <:gold:1058304371940655185> your party has  
+Turn 2 | **Shifty** <:stealthIcon:943248201790677052> 🔀 gain 🎯 next 💥 and random turn
+Turn 3 | **Shiv** 💥🚫⚡ 🔀  reset turns
