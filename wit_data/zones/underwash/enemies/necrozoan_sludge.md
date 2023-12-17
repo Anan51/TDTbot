@@ -1,6 +1,6 @@
 __**NECROZOAN SLUDGE**__
 ❤️ : 8
-💰 : !r 1d10 basic
+💰 : ||`tdt$wit_loot 10`||
 Behavior: at 4, 2, and 1 remaining HP summon a copy of itself. Loot only drops for completing the fight.
 —————————————————
 1-4   | **Infect** 💥 lowest HP 🔀 ❤️, cause __Weak__ and __Will__
