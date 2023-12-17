@@ -1,6 +1,6 @@
 __**DESPERATE CHAMPION**__
 ❤️ : 12
-💰 : !r 1d7 Basic
+💰 : ||`tdt$wit_loot 10`||
 Behavior: When this takes damage, gain __Empower__. Can be immediately dismissed if you are doing a Champion Run.
 —————————————————
 1-4   | **Momentum** (+2 🎲) 💥 lowest HP
