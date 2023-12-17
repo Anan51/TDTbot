@@ -9,7 +9,7 @@ from ..config import UserConfig
 from ..version import usingV2
 from ..async_helpers import sleep, admin_check, split_send
 from ..helpers import second, minute, localize
-from ..wit_data import WitData, roll, gen_shop
+from ..wit_data import WitData, roll, gen_shop, gen_loot
 import logging
 
 
@@ -187,6 +187,11 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
     async def wit_shop(self, ctx):
         """Show the wit shop"""
         await split_send(ctx, gen_shop(), "\n\n")
+
+    @commands.command()
+    async def wit_loot(self, ctx, roll_str=None):
+        """Create a random loot item"""
+        await split_send(ctx, gen_loot(roll_str), "\n\n")
 
     @commands.command(aliases=['r'])
     async def roll(self, ctx, roll_str):

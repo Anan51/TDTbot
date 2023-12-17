@@ -190,6 +190,24 @@ def gen_shop():
     return [item_card(item, gold=5) for item in items]
 
 
+def gen_loot(roll_str=None):
+    if roll_str is None:
+        roll_str = "1d10"
+    if hasattr(roll_str, "lower"):
+        if roll_str.isdigit():
+            roll_str = int(roll_str)
+    if isinstance(roll_str, int):
+        roll_str = f"1d{roll_str}"
+    choice = random.randint(1, 3)
+    if choice == 1:
+        items = gen_weapon(roll_str)
+    elif choice == 2:
+        items = gen_potion(roll_str)
+    else:
+        items = gen_artifact(roll_str)
+    return [item_card(item, gold=False) for item in items]
+
+
 class WitData:
     _wit_cmds = dict()
     wit_cmd = make_decorator(_wit_cmds)
