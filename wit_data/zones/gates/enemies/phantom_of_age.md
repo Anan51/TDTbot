@@ -1,6 +1,6 @@
 __**PHANTOM OF AGE**__
 :heart: : 12
-:moneybag: : Lose 4 __Will__
+:moneybag: : ||Lose 4 __Will__, +8 🔷||
 Behavior: This can only take one damage per turn
 —————————————————
 1-3   | **Early** (+3 :game_die:) :boom::zap::no_entry_sign::dart: :twisted_rightwards_arrows: Grant permanent __Empower__:cyclone: 
