@@ -8,7 +8,7 @@
 -------------
 tdt$alter_grain
 
-You hesitantly rake out a weapon and lay on the alter. You stand there for a while until you hear the sound of stone door grinding open to your right. (Remove one weapon from your inventory. If you dont have one, do a major fight.)
+You hesitantly rake out a weapon and lay on the alter. You stand there for a while until you hear the sound of stone door grinding open to your right. (Remove one potion from your inventory. If you dont have one, do a major fight.)
 
 -------------
 tdt$alter_peace
