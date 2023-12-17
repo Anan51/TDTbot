@@ -7,14 +7,14 @@
 -------------
 tdt$blood_collect
 
-You grab one of your empty water satchels and draw close to the pool, but before you can even get the lid off your satchel you are attacked! (🎲 ≤ 8: use tdt$reach_enemy | 🎲 ≥ 9: +10 <:gold:1058304371940655185>)
+You grab one of your empty water satchels and draw close to the pool... (🎲 ≤ 6:  `tdt$reach_enemy` per 👥 | 🎲 ≥ 7: escape with the liquid +10 <:gold:1058304371940655185>)
 
 -------------
 tdt$blood_leave
 
-You decide to leave the pool alone and let nature figure out what to do with it (do another encounter)
+You decide to leave the pool alone and let nature figure out what to do with it (proceed to the next floor)
 
 -------------
 tdt$blood_drink
 
-You hesitantly cup your hands and drink from the pool. It taste bitter but you feel it resonate with your pulse. (gain +:heart: and +:large_blue_diamond: to your max)
+Something inside you feels drawn to this liquid. Almost instinctually you go down to one knee. You can see your own reflection in dark red liquid and you swear its looking at you differently than you are looking at it. You hesitantly cup your hands and drink from the pool. It taste bitter but you feel it resonate with your pulse. (||gain +1 max :heart: and +1 max :large_blue_diamond:||)
