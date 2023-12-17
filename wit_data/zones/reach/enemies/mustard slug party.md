@@ -10,6 +10,7 @@ Turn 3 | **Coil** Gain __protect__
 Turn 4 | **Acid Squirt** (-1 🔷) Remove the target's modifiers on the move used this turn for the rest of combat. Reset turns.
 Turn 5 | **Mucous** Gain +2 🔷 x 👥
 
+
 # [__**RED WING**__](<https://www.youtube.com/watch?v=jf9ot3SvvmM>)
 ❤️ : 2
 💰 : ||+2 <:gold:1058304371940655185> . If this died to __burn__ instead reward +1 ❤️🌀 and +1 🔷🌀 ||
