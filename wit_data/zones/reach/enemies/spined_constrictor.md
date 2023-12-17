@@ -5,7 +5,7 @@
 **First Strike**: Cause __burn__x5 🌀 
 *"Snake with spikes! Hard to touch, but good for necklace. Sprays green cloud when angry, burns the eyes and snout" - Fenric Bestiary*
 —————————————————
-Turn 1  | **Consume** (-1 🔷) Destroy the lowest health enemy (excluding itself) 🔀 gain that creatures ❤️, permanent __empower__, and +1 🔷
+Turn 1  | **Consume** (-1 🔷) ⚡ Destroy the lowest health enemy (excluding itself) 🔀 gain that creatures ❤️, permanent __empower__, and +1 🔷
 Turn 2 | **Swallow** (-1 🔷) Gain __vulnerable__x2
 Turn 3 | **Slither**  🛡️<:stealthIcon:943248201790677052>x 👥 🔀 <:Persistence:1151788148322484234> per success 
 Turn 4 | **Venom Spray** Cause __Weak__x2 and __burn__x2
