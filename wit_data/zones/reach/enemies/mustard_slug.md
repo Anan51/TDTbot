@@ -1,7 +1,7 @@
 # [__**MUSTARD SLUG**__](<https://www.youtube.com/watch?v=r7hCJIC_y6Q>)
 ❤️ : 8 x 👥
 🔷 : 0
-💰 : || 6 <:gold:1058304371940655185>🌀||
+💰 : ||`tdt$wit_loot 8`||
 **Mana Thirst**: Deal self -❤️ equal to its __burn__ stacks
 —————————————————
 Turn 1  | **Corrosive Sludge** (-1 🔷) 💥💥💥💥 🔀 disable any weapons used this turn for the rest of combat.
