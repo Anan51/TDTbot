@@ -1,29 +1,20 @@
-__**MARROW MINERS**__
-❤️ : 8
-💰 : 3d5 <:gold:1058304371940655185>
-Behavior: **Martyr**: deal 💥💥💥💥 to ALL entities next turn, deals double to this. If this __burn__s trigger its **Martyr**
+# [__**MARROW MINER**__](<https://www.youtube.com/watch?v=JgBpABEoIog>)
+❤️ : 4 x👥
+🔷 : 4
+💰 : ||15 <:gold:1058304371940655185>||
+**Behavior**: If this ever gains __burn__, deal 💥💥💥💥x👥 to itself and all players at the end of the turn. 
+*"Confounded, dadblasted, dagum, old, piece of junk fire starter! I needs to blow these no good varmints to kingdom come darn you!"*
 —————————————————
-1-3   | **Excevate** (+2 🎲) 💥💥🌀 🔀 -5 🎲
-4-7   | **Hardhat** <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> 🔀 <:Persistence:1151788148322484234>
-8-10 | **Greed** (-10 🎲) Gain __Empower__ for every 10 <:gold:1058304371940655185> your party has
+Turn 1  |  **Faulty Lighter** (-1 🔷) Reset turns
+Turn 2 | **Panic** Gain __burn__
 
-__**SPEYEDER**__
-:heart: : 3
-:moneybag: : 2 XP
-Behavior: Immune to the first attack
+
+# [__**MARROW MITE**__](<https://www.youtube.com/watch?v=fhUqu-g0pVY>)
+❤️ : 2
+💰 : ||`tdt$wit_loot 5`, +1 ❤️ +1 🔷 ||
+**Martyr**: Reset turns. Revive with 1 ❤️ next turn and disable this **behavior**. 
+*Its thorax is a dark red color from feeding on the bone of The Reach. Its highly destructive feed habit, mixed with its aggressive nature, has made it a targeted species for the Higaurd and hunters.*
 —————————————————
-1-4   | **Bite** :boom::zap:
-5-6   | **Scurry** :shield:, gain __protect__x2
-8-10 | **Gaze** All PvEnemies gain __Empower__
-
-
-__**SPEYEDER**__
-:heart: : 3
-:moneybag: : 2 XP
-Behavior: Immune to the first attack
-—————————————————
-1-4   | **Bite** :boom::zap:
-5-6   | **Scurry** :shield:, gain __protect__x2
-8-10 | **Gaze** All PvEnemies gain __Empower__
-
-
+Turn 1  | **Curl** +<:stealthIcon:943248201790677052>❤️
+Turn 2 | **Burrow** Gain 🚫 next turn
+Turn 3 | **Gnaw** 💥💥 🔀 gain +❤️ and reset turns
