@@ -17,4 +17,4 @@ tdt$clinic_help
 -------------
 tdt$clinic_study
 
-"You ask the woman if you can sit and observe how she works. She is clearly skilled in medicines and also working the more complicated machinery. She is hesitant. You offer some gold and keys in exchange for her inconvenience" (You may spend 10 <:gold:1058304371940655185> and 1 Higuard Key to upgrade your Educated passive to: __Scholar__ :brain:  "Recreate your character with an additional 14 :sparkles: to your total" lasts for the rest of this run)
+"You ask the woman if you can sit and observe how she works. She is clearly skilled in medicines and also working the more complicated machinery. She is hesitant. You offer some gold and keys in exchange for her inconvenience" (You may spend 10 <:gold:1058304371940655185> and 1 Higuard Key to gain ||: __Scholar__ :brain:  "Succesful moves with 🔀 overwrite the left side to the right for this combat"|| lasts for the rest of this run)
