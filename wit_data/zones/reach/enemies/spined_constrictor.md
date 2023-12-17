@@ -12,17 +12,6 @@ Turn 4 | **Venom Spray** Cause __Weak__x2 and __burn__x2
 Turn 5 | **Constrict** Reset turns; 💥🛡️ 🔀 +🔷
 
 
-# [__**CORNERED SPEYEDER**__](<https://www.youtube.com/watch?v=NH-GAwLAO30>)
-❤️ : 1
-💰 : ||+1 🔷||
-**First Strike**: <:stealthIcon:943248201790677052>
-*Has asperations of being a world renowned web designer*
-—————————————————
-Turn 1  | **Cobweb** <:Persistence:1151788148322484234> 🔀 cause __Weak__ and __Vulnerable__
-Turn 2 | **Bite** 💥🔀 Cause __burn__x3
-Turn 3 | **Piercing Gaze** Next 💥 gains 🚫. Reset Turns
-
-
 # [__**RED WING**__](<https://www.youtube.com/watch?v=jf9ot3SvvmM>)
 ❤️ : 2
 💰 : ||+2 <:gold:1058304371940655185> . If this died to __burn__ instead reward +1 ❤️🌀 and +1 🔷🌀 ||
