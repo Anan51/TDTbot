@@ -1,6 +1,8 @@
 # :sparkler: CONGRATULATIONS! :sparkler: 
 *Here are your rewards*
 
-- **Pleasant Package**: Once opened, add 3 random `!r 1d10` Basic 💰 to your arsenal, items cannot be sold
+[Spells cannot be sold/traded/modified and only one can be used at a time unless weilded by a champion. Spells are NOT lost upon death]
+
+**Power Word: Halt** (-1 🔷): :shield:🌀 🔀 gain __protect__ per block
 
 :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: 
