@@ -1,6 +1,6 @@
 __**THE TRAITOR: JUDGE-23**__
 :heart: : 14
-:moneybag: : 1d19 :dagger:, 1d10 <:gold:1058304371940655185>, 1d10 :test_tube:, +1 Comp Point 🌀 {OR} 1/50 chance to gain "**False Idol** (-1 :heart:, -1 __Protect__): :boom::shield: per __will__ you have" valued at 50 <:gold:1058304371940655185>.
+:moneybag: : ||+100% ❤️ and 🔷; Choose one from `tdt$wit_loot 19` x3 {OR} 1/50 chance to gain "**False Idol** (-1 :heart:, -1 __Protect__): :boom::shield: per __will__ you have" valued at 50 <:gold:1058304371940655185>.||
 Behavior: Summon another JUDGE-23 per :busts_in_silhouette:. Whenever a player gains an __effect__ this gains __Empower__
 —————————————————
 1-4   | **Heresy** (+1 :game_die:) :boom:, Repeats 2 times (w buffs applied).
