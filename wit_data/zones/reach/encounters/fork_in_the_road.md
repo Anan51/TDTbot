@@ -7,7 +7,7 @@
 -------------
 tdt$fork_left
 
-You decide to play it safe and go towards the vegitation. (Do another encounter)
+You decide to play it safe and go towards the vegitation. (Do another encounter, -1 🔷)
 
 -------------
 tdt$fork_right
@@ -17,4 +17,4 @@ You head towards the bridge. You know its risky but you at least understand your
 -------------
 tdt$fork_straight
 
-You were born of fire. You march straight through the outpost, fearlessly. You find some gold in one of the buildings. (Double your current <:gold:1058304371940655185>)
+You were born of fire. You march straight through the outpost, fearlessly. (Double your current 🔷 next combat)
