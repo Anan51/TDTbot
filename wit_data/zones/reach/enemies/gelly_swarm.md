@@ -8,7 +8,7 @@ Turn 1  | **Wubble** Gain __Healing__
 Turn 2 | **Wobble** Gain __Healing__
 Turn 3 | **Plop** 💥💥💥 Reset Turns
 
-# [__**GELLY ♂**__](<https://www.youtube.com/watch?v=lN9JsxrI4v8>)
+# [__**GELLY ♂**__](<https://www.youtube.com/watch?v=x6QZn9xiuOE>)
 ❤️ : 3
 💰 : ||+:heart:||
 Behavior: jiggly, likes cool damp areas and long walks on the beach
