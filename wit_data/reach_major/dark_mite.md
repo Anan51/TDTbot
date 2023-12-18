@@ -8,4 +8,4 @@
 Turn 1  | **Burrow** Gain <:Persistence:1151788148322484234> next turn
 Turn 2 | **Curl**  🛡️🛡️ 🔀 Decrease this creatures **Martyr** per sits __will__
 Turn 3 | **Leach** 💥🌀 🔀 Increase this creatures **Martyr** per its __will__
-Turn 4 | **Succumb** Gain __will__ and permanent __empower__
+Turn 4 | **Succumb** Gain __will__ and permanent __empower__. Reset turns
