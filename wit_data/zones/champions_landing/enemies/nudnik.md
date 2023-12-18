@@ -6,4 +6,4 @@
 —————————————————
 Turn 1  | **Lockjaw** :boom::boom::twisted_rightwards_arrows: +:boom:, random turn
 Turn 2 | **Retaliate** :shield::shield::twisted_rightwards_arrows: :boom::boom:
-Turn 3 | **Flank**  Target has __Vulnerable__ for 3 turns
+Turn 3 | **Flank**  Target has __Vulnerable__ for 3 turns. Reset turns
