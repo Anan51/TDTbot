@@ -7,7 +7,7 @@
 -------------
 tdt$blind_gift
 
-You give the man a coin and go about your way.
+You give the man a coin and go about your way. (-1 __will__)
 
 -------------
 tdt$blind_leave
