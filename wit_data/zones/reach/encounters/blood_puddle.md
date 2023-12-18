@@ -7,7 +7,7 @@
 -------------
 tdt$blood_collect
 
-You grab one of your empty water satchels and draw close to the pool... (🎲 ≤ 6:  `tdt$reach_enemy` per 👥 | 🎲 ≥ 7: escape with the liquid +10 <:gold:1058304371940655185>)
+You grab one of your empty water satchels and draw close to the pool... (🎲 ≤ 6:  `tdt$reach_enemy` per 👥 | 🎲 ≥ 7: escape with the liquid 🧪 **Giant's Marrow**: Gain +1 max ❤️ and +1 max 🔷 [20 <:gold:1058304371940655185>])
 
 -------------
 tdt$blood_leave
