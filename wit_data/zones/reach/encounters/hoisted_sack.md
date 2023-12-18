@@ -19,4 +19,4 @@ You leave the sack. Its probably someone's stuff anyways... (Go back one floor)
 -------------
 tdt$sack_search
 
-You remember using this trick yourself back when you were younger. This is to keep away wild animals which means there is probably a camp not too far nearby. Sure enough after a bit of searching you find an elvish camp. It seems it has been overtaken by some thugs but there is still an Elvish scroll bound around a book that they werent capable of opening. (You may spend 2 :heart: from your max to upgrade your Elvish passive to: __Pure Blood__ :woman_elf: "While an enemy has __Weak__ they cannot cause __effects__. Disable a targets passive/behavior while they are __Weak__")
+You remember using this trick yourself back when you were younger. This is to keep away wild animals which means there is probably a camp not too far nearby. Sure enough after a bit of searching you find an elvish camp. It seems it has been overtaken by some thugs but there is still an Elvish scroll bound around a book that they werent capable of opening. (You may spend 2 :heart: from your max to gain: __Pure Blood__ :woman_elf: "Perfect hits with 🎯 also deal -❤️")
