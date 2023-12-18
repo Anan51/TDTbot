@@ -9,7 +9,7 @@ Turn 1  | **Consume** (-1 🔷) ⚡ Destroy the lowest health enemy (excluding i
 Turn 2 | **Swallow** (-1 🔷) Gain __vulnerable__x2
 Turn 3 | **Slither**  🛡️<:stealthIcon:943248201790677052>x 👥 🔀 <:Persistence:1151788148322484234> per success 
 Turn 4 | **Venom Spray** Cause __Weak__x2 and __burn__x2
-Turn 5 | **Constrict** Reset turns; 💥🛡️ 🔀 +🔷
+Turn 5 | **Constrict** 💥🛡️ 🔀 +🔷 and reset turns
 
 
 # [__**MALOKOLYTE**__](<https://www.youtube.com/watch?v=nksim6Tz11Y>)
