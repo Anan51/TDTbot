@@ -17,13 +17,13 @@ You lower your gaze back to the white bone earth. You mutter "no" as you walk pa
 **STRANGER IN RED**
 :heart: : 6
 :moneybag: : 10 <:gold:1058304371940655185>
-Behavior: Successful hits grants this +:heart:
+Behavior: Successful hits while you have __vulnerable__ grants this +:heart:
 —————————————————
-1-3   | **Lash** :boom::boom::zap: random player
-4-7   | **Swarm** (-4 :game_die:) <:stealthIcon:943248201790677052> :twisted_rightwards_arrows: gain an extra turn
-8-10 | **Suggest** Cause __Weak__ and __Vulnerable__. If this is used 3 times, destroy a random player
+Turn 1   | **Lash** :boom:🚫 🔀 cause __vulnerable__
+Turn 2  | **Swarm** <:stealthIcon:943248201790677052> :twisted_rightwards_arrows: gain an extra turn
+Turn 3 | **Suggest** Cause __Weak__ and reandom turns. If this is used 3 times, destroy a random player
 
 -------------
 tdt$stranger_question
 
-Your look the stranger squarely in his eyes. "How long have you been this way?" The man staggers at your question as he looks you over before returning back to look at you "Since I was a boy." he mutters. "Then you should know better than to resort to this." you reply. The man doesnt move. The man struggles to find his voice "But I will die." "So you would rather ruin the lives others so that you can live?" you reply sharply "You dont know m-" the man starts "I am one of you." you retort, reaching your hand out to the moonlight, your hand flaking skin off into the breeze. The man lowers his head "We are YHWH's mistake." "I dont think He makes those." You reply with a smile and a pat on his shoulder. The man sighs. You spend the next few minutes exchanging stories as you walk. The man guides you through a shortcut he uses to get through the thick brush. (Skip ahead 2 floors. Gain __Healing__x2 at the start of the next combat)
+Your look the stranger squarely in his eyes. "How long have you been this way?" The man staggers at your question as he looks you over before returning back to look at you "Since I was a boy." he mutters. "Then you should know better than to resort to this." you reply. The man doesnt move. The man struggles to find his voice "But I will die." "So you would rather ruin the lives others so that you can live?" you reply sharply "You dont know m-" the man starts "I am one of you." you retort, reaching your hand out to the moonlight, your hand flaking skin off into the breeze. The man lowers his head "We are YHWH's mistake." "I dont think He makes those." You reply with a smile and a pat on his shoulder. The man sighs. You spend the next few minutes exchanging stories as you walk. The man guides you through a shortcut he uses to get through the thick brush. (Skip ahead 2 floors. Gain __Healing__x4 at the start of the next combat)
