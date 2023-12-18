@@ -12,7 +12,7 @@ You are curious as to what this strange energy is. You slowly raise your hand an
 -------------
 tdt$hole_punch
 
-You arent scared of no water loving creature! You reach inside that portal with your left hand while holding onto the edge of the portal with your right. You fish around for a moment, making a series of different faces -some of them more attractive than others- before finally pulling the creature out and giving a good punch (summon an Underwash enemy, deal damage equal to 25% of your max HP to it)
+You arent scared of no water loving creature! You reach inside that portal with your left hand while holding onto the edge of the portal with your right. You fish around for a moment, making a series of different faces -some of them more attractive than others- before finally pulling the creature out and giving a good punch (summon an Underwash enemy, deal damage equal to your current ❤️)
 
 -------------
 tdt$hole_open
