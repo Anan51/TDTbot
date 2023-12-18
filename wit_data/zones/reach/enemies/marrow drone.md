@@ -1,4 +1,4 @@
-# [__**MARROW DRONE**__](<https://www.youtube.com/watch?v=vKDQNGDOdE4>)
+# [__**MARROW DRONE**__](<https://www.youtube.com/watch?v=lkgHqBl12Cg>)
 ❤️ : 1
 💰 : ||+2 ❤️ +4 🔷🌀 ||
 **First Strike**: Summon another Marrow Mite per 👥 -1 
