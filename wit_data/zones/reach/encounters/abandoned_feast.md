@@ -17,4 +17,4 @@ You try to consume as much as humanly possible... you start to feel sleepy (+4 :
 -------------
 tdt$feast_devour
 
-You immediately recognize this feast. This is a traditional highlander feast. You know exactly what to do. (You may spend 7 <:gold:1058304371940655185> to upgrade your Highlander passive to: __True Scottsman__ :scotland: "Your max MP is now equal to your current HP. Gain 50% of your new max MP" for the rest of the run)
+You immediately recognize this feast. This is a traditional highlander feast. You know exactly what to do. (You may spend 7 <:gold:1058304371940655185> to gain: ||__True Scottsman__ :scotland: "Gain 50% of your new max HP as MP||" for the rest of the run)
