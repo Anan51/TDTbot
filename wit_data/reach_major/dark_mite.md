@@ -1,4 +1,4 @@
-# [__**DARK MITE**__](<https://www.youtube.com/watch?v=lkgHqBl12Cg>)
+# [__**DARK MITE**__](<https://www.youtube.com/watch?v=vKDQNGDOdE4>)
 ❤️ : 2
 <:Persistence:1151788148322484234> : 2
 💰 : ||🗡️ **Mite Nail**: 💥🎯, can be upgraded with a **Port a Forge** unlimitedly.||
