@@ -8,4 +8,4 @@
 Turn 1  | **Fang Strike** (-1 🔷) 💥🚫⚡ 🔀 cause __burn__x10
 Turn 2 | **Slither**  🛡️<:stealthIcon:943248201790677052>x 👥 🔀 <:Persistence:1151788148322484234> per success 
 Turn 3 | **Venom Cloud** Cause __Weak__ and __burn__🌀 for 2 turns.
-Turn 4 | **Constrict** Reset turns; 💥🛡️ 🔀 +❤️
+Turn 4 | **Constrict** 💥🛡️ 🔀 +❤️ and random turns
