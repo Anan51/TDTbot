@@ -16,5 +16,5 @@ Turn 2 | **Panic** Gain __burn__
 *Its thorax is a dark red color from feeding on the bone of The Reach. Its highly destructive feed habit, mixed with its aggressive nature, has made it a targeted species for the Higaurd and hunters.*
 —————————————————
 Turn 1  | **Curl** +<:stealthIcon:943248201790677052>❤️
-Turn 2 | **Burrow** Gain 🚫 next turn
+Turn 2 | **Burrow** Gain 🚫 next attack
 Turn 3 | **Gnaw** 💥💥 🔀 gain +❤️ and reset turns
