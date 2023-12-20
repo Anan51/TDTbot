@@ -16,4 +16,4 @@ Turn 3 | **Gnaw** 💥💥 🔀 gain +❤️ and reset turns
 —————————————————
 Turn 1  | **Gnaw** 💥💥 🔀 gain +❤️ and reset turns 
 Turn 2 | **Burrow** Gain 🚫 next attack
-Turn 3 | **Curl** +<:stealthIcon:943248201790677052>❤️
+Turn 3 | **Curl** +<:stealthIcon:943248201790677052>❤️. Reset turns
