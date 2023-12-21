@@ -10,3 +10,4 @@ Turn 2 | **Absorb** Grant __Heal__x2 🌀
 Turn 3 | **Dissolve** Cause __Burn__x5 🌀, - __burn__ per 💥 taken this turn
 Turn 4 | **Digest** +🔷 per 💥 taken last turn
 Turn 5 | **Mitosis** (-10 🔷): Summon another **Sliggo the Green**. Random turn
+Turn 6 | **Gurgle** Grant __Heal__x2 🌀, reset turns
