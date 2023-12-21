@@ -20,8 +20,8 @@ You lower your gaze back to the white bone earth. You mutter "no" as you walk pa
 Behavior: Successful hits while you have __vulnerable__ grants this +:heart:
 —————————————————
 Turn 1   | **Lash** :boom:🚫 🔀 cause __vulnerable__
-Turn 2  | **Swarm** <:stealthIcon:943248201790677052> :twisted_rightwards_arrows: gain an extra turn
-Turn 3 | **Suggest** Cause __Weak__ and reandom turns. If this is used 3 times, destroy a random player
+Turn 2 | **Swarm** <:stealthIcon:943248201790677052> :twisted_rightwards_arrows: gain an extra turn
+Turn 3 | **Suggest** Cause __Weak__ and random turns. If this is used 3 times, destroy a random player
 
 -------------
 tdt$stranger_question
