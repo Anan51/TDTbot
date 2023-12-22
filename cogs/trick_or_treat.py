@@ -27,7 +27,7 @@ iyear = int(year)
 _channel = "the_neighborhood"       # trick-or-treat channel name or id
 # MAKE SURE TO UPDATE MESSAGE ID IN param.py
 _rule_id = messages.trick_or_treat  # message id for rules/reaction check
-_game_on = True                     # flag to run game
+_game_on = False                     # flag to run game
 _role = "SPOOKY"                    # role name or id for game participation
 _nmin = 2, 5                        # minimum number (range) of votes to start count
 # secondary settings
