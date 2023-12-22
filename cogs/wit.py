@@ -76,6 +76,9 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         self._configs = dict()
         self.data = WitData(parent=self)
 
+        for mid in [param.messages.wit_pvp, param.messages.wit_pve]:
+            self.bot.enroll_emoji_role({param.emojis.wit: param.roles.wit_initiate}, message_id=mid)
+
     def get_data(self, *keys):
         """Retrieve preloaded wit data"""
         return self.data.get_data(*keys)
