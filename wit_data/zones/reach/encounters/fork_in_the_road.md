@@ -12,7 +12,7 @@ You decide to play it safe and go towards the vegitation. (Do another encounter,
 -------------
 tdt$fork_right
 
-You head towards the bridge. You know its risky but you at least understand your risks. You carefully try to cross the bridge ( 🎲 ≤ 3: -3 ❤️ )
+You head towards the bridge. You know its risky but you at least understand your risks. You carefully try to cross the bridge ( 🎲 ≤ 3: -2 ❤️ )
 
 -------------
 tdt$fork_straight
