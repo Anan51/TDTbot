@@ -17,4 +17,4 @@ You try to consume as much as humanly possible... you start to feel sleepy (+4 :
 -------------
 tdt$feast_devour
 
-You immediately recognize this feast. This is a traditional highlander feast. You know exactly what to do. (You may spend 7 <:gold:1058304371940655185> to gain: ||__True Scottsman__ :scotland: "Gain 🔷 every 2 turns||" for the rest of the run)
+You immediately recognize this feast. This is a traditional highlander feast. You know exactly what to do. (You may spend 7 <:gold:1058304371940655185> to gain: ||__True Scottsman__ :scotland: "Gain an extra 🔷 everytime you take damage||" for the rest of the run)
