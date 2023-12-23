@@ -3,6 +3,7 @@
 🔷 : 0
 💰 : || 4 <:gold:1058304371940655185>🌀||
 **Mana Thirst**: Deal self -❤️ equal to its __burn__ stacks
+*Is just happy to be included*
 —————————————————
 Turn 1  | **Corrosive Sludge** (-1 🔷) 💥💥💥💥 🔀 disable any weapons used this turn for the rest of combat.
 Turn 2 | **Gas** 🛡️ x 👥   🔀  __Vulnerable__ 🌀
@@ -16,7 +17,7 @@ Turn 5 | **Mucous** Gain +2 🔷 x 👥, Reset turns
 🔷 : 2 x👥
 💰 : ||tdt$wit_loot 5||
 Behavior: "W-wobble?"
-*Has been convinced by a marrow mite that he is a gelly... what's more concerning is that he somehow spoke (or at least thought he spoke) to a marrow mite.*
+*Doesnt know whats going on*
 —————————————————
 Turn 1  | **Cower** 🛡️🛡️🌀 x👥 
 Turn 2 | **Confused Wobbling** Gain __heal__x3 and the players choose an __effect__x2 and apply it to ALL entities
@@ -25,11 +26,11 @@ Turn 4 | **Spear Charge** 💥<:Sturdy:1152516154192044142>🎯 to the random pl
 
 
 # [__**MARROW MINER**__](<https://www.youtube.com/watch?v=JgBpABEoIog>)
-❤️ : 4 x👥
+❤️ : 5 x👥
 🔷 : 4
 💰 : ||15 <:gold:1058304371940655185>||
 **Behavior**: If this ever gains __burn__, deal 💥💥💥💥x👥 to itself and all players at the start of the next turn. 
-*"Confounded, dadblasted, dagum, old, piece of junk fire starter! I needs to blow these no good varmints to kingdom come darn you!"*
+*Keeps snickering when he looks at the adventurer*
 —————————————————
 Turn 1  |  **Faulty Lighter** (-1 🔷) Reset turns
 Turn 2 | **Panic** Gain __burn__
