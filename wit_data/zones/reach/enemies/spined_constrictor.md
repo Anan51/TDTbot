@@ -3,7 +3,7 @@
 🔷 : 1
 💰 : ||`tdt$wit_loot 5` +2 ❤️  +2 🔷||
 **First Strike**: Cause __burn__x5 🌀 
-*"Snake with spikes! Hard to touch, but good for necklace. Sprays green cloud when angry, burns the eyes and snout" - Fenric Bestiary*
+*It looks like you are interrupting its meal*
 —————————————————
 Turn 1  | **Consume** (-1 🔷) ⚡ Destroy the lowest health enemy (excluding itself) 🔀 gain that creatures ❤️, permanent __empower__, and +1 🔷
 Turn 2 | **Swallow** (-1 🔷) Gain __vulnerable__x2
