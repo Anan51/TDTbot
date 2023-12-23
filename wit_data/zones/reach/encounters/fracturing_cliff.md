@@ -17,4 +17,4 @@ You cling to the side of the cliff face, the bone shatters, splints, and falls a
 -------------
 tdt$cliff_dash
 
-You nimbly sprint along the cliff face and make it safely to the other side. You're feeling pretty good about yourself (Gain **Dashing** 💨 "Start combat with 1 perfect combo towards your Fenric lineage")
+You nimbly sprint along the cliff face and make it safely to the other side. You're feeling pretty good about yourself (Gain **Dashing** 💨 "Start combat with __empower__")
