@@ -1,5 +1,5 @@
 # [__**MARROW MINER**__](<https://www.youtube.com/watch?v=JgBpABEoIog>)
-❤️ : 4 x👥
+❤️ : 5 x👥
 🔷 : 4
 💰 : ||15 <:gold:1058304371940655185>||
 **Behavior**: If this ever gains __burn__, deal 💥💥💥💥x👥 to itself and all players at the start of the next turn.
