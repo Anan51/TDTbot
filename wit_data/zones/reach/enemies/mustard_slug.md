@@ -3,6 +3,7 @@
 🔷 : 0
 💰 : ||`tdt$wit_loot 8`||
 **Mana Thirst**: Deal self -❤️ equal to its __burn__ stacks
+*These slugs emmit a gas that has a mildly pscho-toxic effect to humans and fenric... some fenrics keep them as pets to uh... lick them*
 —————————————————
 Turn 1  | **Corrosive Sludge** (-1 🔷) 💥💥💥💥 🔀 disable any weapons used this turn for the rest of combat.
 Turn 2 | **Gas** 🛡️ x 👥   🔀  __Vulnerable__ 🌀
