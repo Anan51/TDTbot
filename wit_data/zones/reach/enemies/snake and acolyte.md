@@ -2,6 +2,7 @@
 ❤️ : 6 x 👥
 🔷 : 1
 💰 : ||`tdt$wit_loot 5` +2 ❤️  +2 🔷||
+
 **First Strike**: Cause __burn__x5 🌀 
 *"Snake with spikes! Hard to touch, but good for necklace. Sprays green cloud when angry, burns the eyes and snout" - Fenric Bestiary*
 —————————————————
@@ -16,6 +17,7 @@ Turn 5 | **Constrict** 💥🛡️ 🔀 +🔷 and reset turns
 ❤️ : 4
 🔷 : 1
 💰 : ||+3 🔷, 1 <:gold:1058304371940655185> , 1/20 🎲 at acquiring **Sacrificial Dagger** (-1 ❤️) Deals 💥⚡, +💥 per its target's __vulnerable__ (valued at -5 <:gold:1058304371940655185>)||
+
 **Mana Thirst** Summon a copy of this at its current ❤️ and 🔷 per 👥.
 *Malokolytes are revered by many and feared by any more. If you ever hear strange whispers in your mind at night you may have angered one in the day by mistake.*
 —————————————————
