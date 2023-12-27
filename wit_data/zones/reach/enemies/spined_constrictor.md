@@ -2,6 +2,7 @@
 ❤️ : 6 x 👥
 🔷 : 1
 💰 : ||`tdt$wit_loot 5` +2 ❤️  +2 🔷||
+
 **First Strike**: Cause __burn__x5 🌀 
 *It looks like you are interrupting its meal*
 —————————————————
@@ -15,6 +16,7 @@ Turn 5 | **Constrict** 💥🛡️ 🔀 +🔷 and reset turns
 # [__**RED WING**__](<https://www.youtube.com/watch?v=jf9ot3SvvmM>)
 ❤️ : 2
 💰 : ||+2 <:gold:1058304371940655185> . If this died to __burn__ instead reward +1 ❤️🌀 and +1 🔷🌀 ||
+
 **First Strike**: Summon another Red Wing without this behavior per 👥
 *"Tasty bird! But is mean bird... hmmm... is conundrum of even best Fangwild hunters" - Fenric Bestiary*
 —————————————————
