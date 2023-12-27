@@ -2,6 +2,7 @@
 ❤️ : 8 x 👥
 🔷 : 0
 💰 : ||`tdt$wit_loot 8`||
+
 **Mana Thirst**: Deal self -❤️ equal to its __burn__ stacks
 *These slugs emmit a gas that has a mildly pscho-toxic effect to humans and fenric... some fenrics keep them as pets to uh... lick them*
 —————————————————
