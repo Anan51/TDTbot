@@ -1,6 +1,7 @@
 # [__**SPEYEDER**__](<https://www.youtube.com/watch?v=NH-GAwLAO30>)
 ❤️ : 2
 💰 : ||+1 🔷||
+
 **First Strike**: <:stealthIcon:943248201790677052>
 *Has asperations of being a world renowned web designer*
 —————————————————
