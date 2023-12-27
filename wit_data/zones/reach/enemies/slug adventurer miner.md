@@ -2,6 +2,7 @@
 ❤️ : 4 x 👥
 🔷 : 0
 💰 : || 4 <:gold:1058304371940655185>🌀||
+
 **Mana Thirst**: Deal self -❤️ equal to its __burn__ stacks
 *Is just happy to be included*
 —————————————————
@@ -16,6 +17,7 @@ Turn 5 | **Mucous** Gain +2 🔷 x 👥, Reset turns
 ❤️ : 4 x👥
 🔷 : 2 x👥
 💰 : ||tdt$wit_loot 5||
+
 Behavior: "W-wobble?"
 *Doesnt know whats going on*
 —————————————————
@@ -29,6 +31,7 @@ Turn 4 | **Spear Charge** 💥<:Sturdy:1152516154192044142>🎯 to the random pl
 ❤️ : 5 x👥
 🔷 : 4
 💰 : ||15 <:gold:1058304371940655185>||
+
 **Behavior**: If this ever gains __burn__, deal 💥💥💥💥x👥 to itself and all players at the start of the next turn. 
 *Keeps snickering when he looks at the adventurer*
 —————————————————
