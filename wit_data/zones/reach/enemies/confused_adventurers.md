@@ -2,6 +2,7 @@
 ❤️ : 4 x👥
 🔷 : 2 x👥
 💰 : ||tdt$wit_loot 5||
+
 Behavior: "W-wobble?"
 *Has been convinced by a marrow mite that he is a gelly... what's more concerning is that he somehow spoke (or at least thought he spoke) to a marrow mite.*
 —————————————————
@@ -15,6 +16,7 @@ Turn 4 | **Spear Charge** 💥<:Sturdy:1152516154192044142>🎯 to the random pl
 ❤️ : 3
 🔷 : 3
 💰 : ||4 <:gold:1058304371940655185> (and your stolen <:gold:1058304371940655185>)||
+
 Behavior: Every successful attack from this causes the player to lose <:gold:1058304371940655185> per hit. Once this has stolen 5 <:gold:1058304371940655185>, this flees combat and yields no loot.
 *"Stupid dwarf-man thinks him a jiggly"*
 —————————————————
