@@ -145,7 +145,7 @@ def gen_potion(roll_str):
         "**Weakness**: Weak x3 [+6 <:gold:1058304371940655185>]",
         "**Sapping**: Vulnerable x5 [+7 <:gold:1058304371940655185>]",
         "**Flames**: Burn x10 [+8 <:gold:1058304371940655185>]",
-        "**Foritude**: +<:stealthIcon:943248201790677052><:Persistence:1151788148322484234>🌀 for the next 3 turn(s) [+9 <:gold:1058304371940655185>]",
+        "**Foritude**: +<:stealthIcon:943248201790677052><:Persistence:1151788148322484234><:Sturdy:1152516154192044142> for the next 3 turn(s) [+9 <:gold:1058304371940655185>]",
         "**Proficiency**: +🚫🎯⚡ for the next 3 turn(s) [+10 <:gold:1058304371940655185>]",
         ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(potions)))
