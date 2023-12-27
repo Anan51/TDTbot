@@ -2,6 +2,7 @@
 ❤️ : 2
 <:Persistence:1151788148322484234> : 2
 💰 : ||🗡️ **Mite Nail**: 💥🎯, can be upgraded with a **Port a Forge** unlimitedly.||
+
 **Martyr** Deal 💥💥💥💥💥🎯 🔀 cause __will__ per success
 *In the matriarchal structure of Mites, these creatures are considered the guards or knights, which is ironic considering how hollow their tough outer shells are compared to normal drones*
 —————————————————
