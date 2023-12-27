@@ -2,6 +2,7 @@
 ❤️ : 5 x👥
 🔷 : 4
 💰 : ||15 <:gold:1058304371940655185>||
+
 **Behavior**: If this ever gains __burn__, deal 💥💥💥💥x👥 to itself and all players at the start of the next turn.
 *"Cleetus! Did you invite guests over?... then we got ourselves a dagum thief!"*
 —————————————————
@@ -12,6 +13,7 @@ Turn 2 | **Panic** Gain __burn__
 ❤️ : 5 x👥
 🔷 : 4
 💰 : ||15 <:gold:1058304371940655185>||
+
 **Behavior**: If this ever gains __burn__, deal 💥💥💥💥x👥 to itself and all players at the start of the next turn.
 *"...no?... By the double-barrelled jumping jiminetty!"*
 —————————————————
