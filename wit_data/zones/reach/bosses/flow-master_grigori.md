@@ -2,6 +2,7 @@
 ❤️ : 10 x👥
 🔷 : 10
 💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$wit_artifacts` x3 {OR} 1/50 chance to gain "**🎛️ Equalizer**: Gain __Protect__ on even numbered turns and __Empower__ on odd numbered turns" Valued at 70 <:gold:1058304371940655185>||
+
 **Clockwork** Gain permanent __empower__ on odd turns and permanent __protect__ on even turns 
 *Accused of being: shot, poisoned, thrown into a freezing river, and still busting down a sick groove through it all*
 —————————————————
