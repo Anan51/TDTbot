@@ -1,6 +1,7 @@
 # [__**NUDNIK**__](<https://youtu.be/H8WE9GBlzEI?si=5fcYQTmP2RPlzTQv&t=117>)
 :heart: : 2
 :moneybag: : ||Lose 1 __will__||
+
 **First Strike**: Cause __Weak__:cyclone: 
 *"-Chittering mandibles, rat-like squeaking, and awkward wing flapping noises-"*
 —————————————————
