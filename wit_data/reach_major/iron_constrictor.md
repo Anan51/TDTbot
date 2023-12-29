@@ -3,7 +3,7 @@
 🔷 : 1 x 👥
 💰 : || 🧪  **Anti-Venom**: Dispel up to 10 stacks of __burn__ [24 <:gold:1058304371940655185>]||
 
-**First Strike** Gain <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234>; for the rest of the game, this creature is immune to __Burn__
+**First Strike** Gain <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234> x :busts_in_silhouette: ; for the rest of the game, this creature is immune to __Burn__
 *"The skin of this creature is excellent for a lightweight armor!" - Fenric Bestiary*
 —————————————————
 Turn 1  | **Fang Strike** (-1 🔷) 💥🚫⚡ 🔀 cause __burn__x5
