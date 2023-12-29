@@ -20,5 +20,5 @@ Turn 4 | **Caw** (-3 🔷) <:stealthIcon:943248201790677052>. Summon another Red
 —————————————————
 Turn 1  | **Peck** 💥💥<:stealthIcon:943248201790677052>⚡
 Turn 2 | **Flap** <:Persistence:1151788148322484234><:stealthIcon:943248201790677052>
-Turn 3 | **Roost** +🔷<:stealthIcon:943248201790677052> per <:Persistence:1151788148322484234>. 🛡️🛡️<:stealthIcon:943248201790677052> 🔀 Reset turns, gain __empower__.
+Turn 3 | **Roost** +🔷 Cause __weak__x2. 🛡️🛡️<:stealthIcon:943248201790677052> 🔀 Random turns, gain __empower__.
 Turn 4 | **Caw** (-3 🔷) <:stealthIcon:943248201790677052>. Summon another Red Wing. Reset turns
