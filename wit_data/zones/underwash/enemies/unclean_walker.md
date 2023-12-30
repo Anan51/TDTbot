@@ -1,8 +1,25 @@
-__**UNCLEAN WALKER**__
-❤️ : 5
-💰 : ||`tdt$wit_loot 8`||
-Behavior: at the end of turn 3, lower all players max HP and MP by 1 for the rest of the run
+# [__**UNCLEAN CRIER**__](<https://www.youtube.com/watch?v=3mt7fkr7-cA>)
+❤️ : 5 x 👥
+__will__ : 20
+💰 : ||`tdt$wit_loot 15`, if this died before it took a turn gain **Higuard Keycard** 💳: "Use to gain 1 **Ancient Key** at any shop. This doesnt take inventory space" ||
+
+**Martyr**: Summon an UNCLEAN WALKER per 👥 - 1.
+*"Its a small world after all... its a small world after all...!"*
 —————————————————
-1-5   | **Breathe** (+2 🎲) __Weak__, __Vulnerable__, __Burn__ to ALL but itself
-6-8   | **Fester** (+3 🎲) ⚡🛡️❤️
-9-10 | **Spore** (-2 🎲) if you took less than 3 damage this turn, skip all players turns once.
+Turn 1  | **Spore** Cause and gain __vulnerable__🌀 per this __healing__
+Turn 2 | **Fester** Gain __healing__ per damage taken
+Turn 3 | **Breathe** 💥💥, gain __weak__ per damage taken 
+Turn 4 | **Utter** Summon an UNCLEAN WALKER. Random Turns
+
+# [__**UNCLEAN WALKER**__](<https://www.youtube.com/watch?v=47jpx7TZaMY>)
+❤️ : 5
+__will__ : 20
+💰 : ||`tdt$wit_loot 15`, if this died before it took a turn gain **Higuard Keycard** 💳: "Use to gain 1 **Ancient Key** at any shop. This doesnt take inventory space" ||
+
+**Martyr**: 💥🚫🛡️🔀 cause -1 max ❤️ and -1 max 🔷
+*"P-please... end us..."*
+—————————————————
+Turn 1  | **Breathe** 💥💥, gain __weak__ per damage taken 
+Turn 2 | **Fester** Gain __healing__ per damage taken
+Turn 3 | **Spore** Cause and gain __vulnerable__ per this __healing__
+Turn 3 | **Relapse** Cause __will__ 🌀, reset turns.
