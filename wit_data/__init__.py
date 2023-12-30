@@ -163,7 +163,10 @@ def gen_artifact(roll_str):
         "**Vitamins**: 💊 Start each combat with __Heal__x2 [+7 <:gold:1058304371940655185>]",
         "**Lucky Clover**: 🍀 Cause an enemy __Weak__x3 on turn 3 [+8 <:gold:1058304371940655185>]",
         "**War Drum**: 🥁 Cause __vulnerable__x2 the first time you damage each enemy [+9 <:gold:1058304371940655185>]",
-        "**Eternal Lantern**: 🪔 Using potions causes __Burn__ [+10 <:gold:1058304371940655185>]",
+        "**Eternal Lantern**: 🪔 Using potions causes __Burn__x2 [+10 <:gold:1058304371940655185>]",
+        "**Potion Pack** 🎒 Increase potion 🧪 carry quantity by +2. [11 <:gold:1058304371940655185>]",
+        "**Bandolier** 🎽 Increase weapon 🗡️ carry quantity by +2. [12 <:gold:1058304371940655185>]",
+        "**Wax Key** 🔑 All chests are unlocked for the rest of the region once you open one chest. [13 <:gold:1058304371940655185>]",
     ]
     return [(None, artifacts[r - 1], r) for r in roll(roll_str, max_sides=len(artifacts))]
 
