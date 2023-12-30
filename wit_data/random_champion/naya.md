@@ -1,4 +1,4 @@
-# [**__NAYA__**](<https://youtu.be/NpQ-s3zQass?si=UdrIZmsXHp2ZnCH0>) 
+# [**__NAYA__**](<https://www.youtube.com/watch?v=SPcVvEnxTLU>) 
 Difficulty: ⭐⭐
 Archetype: Assassin
 
