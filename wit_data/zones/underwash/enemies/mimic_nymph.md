@@ -1,8 +1,11 @@
-__**MIMIC NYMPH**__
-❤️ : Target's HP
-💰 : ||`tdt$wit_loot 19`||
-Behavior: Select a random player at the start of the game. This will only ever attack that
+# [__**MIMIC NYMPH**__](<https://discord.com/channels/164589623459184640/931667324564557874>)
+❤️ : 1
+🔷 : 1
+💰 : ||Duplicate one of your weapons, potions, or non-rare artifacts||
+
+**First Strike**: Immune. Choose a target, gain +❤️ +🔷 until matching the target
+*"The name's Bachi!"*
 —————————————————
-1-3   | **Copy** Use targets first skill.
-4-6   | **Imitate** Use targets second skill.
-7-10 | **Plagiarize** Use targets third skill.
+Turn 1  | **Copy** Use the same move your targets used this turn
+Turn 2 | **Imitate** Gain the active status's of all players
+Turn 2 | **Plagiarize** Disable the moves used this turn for the rest of combat. Reset turns
