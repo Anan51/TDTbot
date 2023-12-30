@@ -1,8 +1,13 @@
-__**TOCK**__
-:heart: : 8
-:moneybag: : ||`tdt$wit_loot 8`||
-Behavior: at the end of turn 5, deal 20 damage to everything
+# [__**TOCK**__](<https://www.youtube.com/watch?v=RmRRfd2-VeM>)
+❤️ : 6 x 👥
+🔶 : 1
+💰 : ||`tdt$wit_loot 8` +4 <:gold:1058304371940655185> ||
+
+**Clockwork**: Gain 🔶. If this reaches 6 🔶 deal: 💥💥💥💥💥💥🌀 and gain -6 ❤️
+*"'Ferrous Sphaeriludium' this beast has spent too much time in deep, mineral rich waters and now it thinks it can kill a god - Sullen Journal*
 —————————————————
-1-4   | **Sidearm** :boom::zap::dart: 
-5-8   | **Harden** (+2 :game_die:) <:Sturdy:1152516154192044142>:twisted_rightwards_arrows: <:Persistence:1151788148322484234><:Persistence:1151788148322484234>
-8-10  | **Beacon** (-5 :game_die:) if this took no damage this turn, summon another enemy
+Turn 1  | **Tick** 💥🌀
+Turn 2 | **Tock** 🛡️ x 👥
+Turn 3 | **Tick** 💥🌀
+Turn 4 | **Tock** 🛡️ x 👥
+Turn 5 | **Ring** ⚡ Summon another Tock.
