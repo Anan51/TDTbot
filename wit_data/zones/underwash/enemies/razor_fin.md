@@ -1,8 +1,11 @@
-__**RAZOR FIN**__
-:heart: : 10
-:moneybag: : ||`tdt$wit_loot 5`  + 5 <:gold:1058304371940655185>||
-Behavior: Cannot take more than 4 damage a turn
+# [__**RAZOR FIN**__](<https://www.youtube.com/watch?v=8rx6wtvu-LM>)
+❤️ : 6 x 👥
+💰 : ||`tdt$wit_loot 15`. If this died to __burn__ instead gain +2 ❤️🌀  +4 🔷🌀||
+
+**First Strike**: Cause __vulnerable__x10 🌀.
+*"'Novacula Sphaeriludium' a particularly feisty species known for their dagger-like teeth - Sullen Journal*
 —————————————————
-1-4   | **Thrash** :boom::zap::no_entry_sign: 
-5-8   | **Submerge** <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> :twisted_rightwards_arrows: gain __Empower__
-9-10  | **Gills** Dispell all player __effects__ :twisted_rightwards_arrows: gain __Empower__ per dispelled
+Turn 1  | **Submerge** <:Sturdy:1152516154192044142><:stealthIcon:943248201790677052> 🔀 gain __Empower__
+Turn 2 | **Whirlpool** Cause -🎯⚡ next 💥. Gain __Empower__ x👥
+Turn 3 | **Splash** Cause __vulnerable__🌀, __weak__🌀
+Turn 4 | **Feeding Frenzy** Random turns. 💥⚡🚫
