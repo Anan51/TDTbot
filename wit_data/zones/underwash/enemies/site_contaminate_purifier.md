@@ -1,8 +1,25 @@
-__**SITE CONTAMINATE PURIFIER**__
-:heart: : 8
-:moneybag: : ||`tdt$wit_loot 15`||
-Behavior: Immune to negative effects
+# [__**SITE CONTAMINATE PURIFIER**__](<https://www.youtube.com/watch?v=47jpx7TZaMY>)
+❤️ : 6 x 👥
+🔷 : 4
+💰 : ||`tdt$wit_loot 15`, if this died before it took a turn gain **Higuard Keycard** 💳: "Use to gain 1 **Ancient Key** at any shop. This doesnt take inventory space" ||
+
+**Mana Thirst**: Dispel negative effects on itself
+*This initiative is possibly our greatest achievement as a species. A constant treadmill of fearmongering and a hatred for YHWH for the world they created... brilliant - Sullen Journal*
 —————————————————
-1-3   | **Secure** :boom::boom::boom: highest HP player :twisted_rightwards_arrows: dispell all __effect__ stacks
-4-6   | **Contain** (+2 :game_die:) If this took damage :twisted_rightwards_arrows: Cause __Weak__x3 :cyclone: 
-7-10 | **Protect** (-4 :game_die:) <:Persistence:1151788148322484234><:Persistence:1151788148322484234>:cyclone:
+Turn 1 | **Secure** 💥💥⚡
+Turn 2 | **Quarantine** (-2 🔷) Cause __burn__x5 to anything with __will__
+Turn 3 | **Contain** <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> 🔀 Cause __Weak__x3 🌀 
+Turn 4 | **Protect** <:Persistence:1151788148322484234>🌀 🔀 random turn.
+
+# [__**UNCLEAN CRIER**__](<https://www.youtube.com/watch?v=47jpx7TZaMY>)
+❤️ : 5
+__will__ : 20
+💰 : ||`tdt$wit_loot 15`, if this died before it took a turn gain **Higuard Keycard** 💳: "Use to gain 1 **Ancient Key** at any shop. This doesnt take inventory space" ||
+
+**First Strike**: Summon an UNCLEAN WALKER without this first strike per 👥. **Martyr**: 💥🚫🛡️🔀 cause -1 max ❤️ and -1 max 🔷
+*"P-please... end us..."*
+—————————————————
+Turn 1  | **Breathe** 💥💥, gain __weak__ per damage taken 
+Turn 2 | **Fester** Gain __healing__ per damage taken
+Turn 3 | **Spore** Cause and gain __vulnerable__ per this __healing__
+Turn 3 | **Relapse** Cause __will__ 🌀, reset turns.
