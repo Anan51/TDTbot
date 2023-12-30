@@ -1,0 +1,1 @@
+**Failsafe** 🪂 Ignore the first damage that hits over your 🛡️'s each combat. [22 <:gold:1058304371940655185>]

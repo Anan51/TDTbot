@@ -1,0 +1,1 @@
+**Ball of Threads** 🧶 Excess 💥 from weapons are dealt as 🌀 [21 <:gold:1058304371940655185>]
