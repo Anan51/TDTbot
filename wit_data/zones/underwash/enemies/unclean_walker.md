@@ -22,4 +22,4 @@ __will__ : 20
 Turn 1  | **Breathe** 💥💥, gain __weak__ per damage taken 
 Turn 2 | **Fester** Gain __healing__ per damage taken
 Turn 3 | **Spore** Cause and gain __vulnerable__ per this __healing__
-Turn 3 | **Relapse** Cause __will__ 🌀, reset turns.
+Turn 4 | **Relapse** Cause __will__ 🌀, reset turns.
