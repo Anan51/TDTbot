@@ -12,15 +12,15 @@ You let out a sigh. You knew the shortcut was too good to be true. You loosen yo
 -------------
 tdt$factory_around
 
-"This isnt worth it" you mutter to yourself out loud. You turn around to leave the factory when you are greeted by a band of Sentian marauders. They are rusted and brandishing discarded parts. They do NOT look happy to see you. (Fight 3 of the below enemy)
+"This isnt worth it" you mutter to yourself out loud. You turn around to leave the factory when you are greeted by a band of Sentian marauders. They are rusted and brandishing discarded parts. They do NOT look happy to see you. (Fight 👥 + 1 of the below enemy)
 || __**RUSTED MARAUDER**__
 :heart: : 6
 :moneybag: : **Dis-arm** (-5 :large_blue_diamond:): Cause __Weak__ x10 :cyclone:
 Behavior: When this takes damage or an ally dies, gain __Empower__.
 —————————————————
-1-4   | **Knife** (+2 :game_die:) :boom: lowest HP
-5-8   | **Broken Fang** (+2 :game_die:) :stealthIcon: :twisted_rightwards_arrows: -4 :game_die: if you have :dart:
-9-10 | **Hone** (-2 :game_die:) Your next :boom: has :dart:||
+Turn 1  | **Knife**  :boom::boom:
+Turn 2 | **Broken Fang** :stealthIcon: :twisted_rightwards_arrows: Reset turns if you have :dart:
+Turn 3 | **Hone**  Your next :boom: has :dart:. Random turns||
 
 -------------
 tdt$factory_examine
