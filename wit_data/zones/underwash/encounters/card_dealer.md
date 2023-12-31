@@ -11,7 +11,7 @@ You look at your cards and decide to take another (Roll !r 1d11)
 -------------
 tdt$card_stand
 
-You decide you are happy with your card total. ( Roll !r 3d15, if your card total is greater than this BUT not over 21 you gain 10 <:gold:1058304371940655185>. If not, then lose 10 <:gold:1058304371940655185> )
+You decide you are happy with your card total. ( Roll !r 3d10, if your card total is greater than this BUT not over 21 you gain 10 <:gold:1058304371940655185>. If not, then lose 10 <:gold:1058304371940655185> )
 
 -------------
 tdt$card_trick
