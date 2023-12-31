@@ -1,10 +1,12 @@
-__**ITS RIGHT HAND**__
-:heart: : 20
-:moneybag: : ||+100% ❤️ and 🔷; Choose one from `tdt$wit_artifacts` x3 {OR} 1/50 chance to gain "**:gemini: Soul Gem**: Defeating creatures that cause __will__ grant a stack of __Empower__ at the start of combat for the rest of your run." Valued at 80 <:gold:1058304371940655185>.||
-Behavior: All players gain __Will__ if this takes any form of damage from a player, per damage taken.
+# [__**UNCLEAN WALKER**__](<https://www.youtube.com/watch?v=EKLWC93nvAU>)
+❤️ : 6 x 👥
+__will__ : 20
+💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$wit_artifacts` x3 {OR} 1/50 chance to gain "**♊ Soul Gem**: Defeating creatures that cause __will__ grant a stack of __Empower__ at the start of combat for the rest of your run." Valued at 80 <:gold:1058304371940655185>.||
+
+**Martyr**: If this has __will__, resummon itself with full stats, randomize turns, and keep all __will__ stacks
+*"P-please... end us..."*
 —————————————————
-1-3   | **Reaching** (:game_die: -3) :boom::boom::dart::cyclone: :twisted_rightwards_arrows: this gains -:heart::heart:
-4-6   | **Pulling** :shield::shield::shield: :twisted_rightwards_arrows: this gains -:heart::heart:
-7-10  | **Whispering** (:game_die: +2) If this took no damage, this gains -:heart::heart: and gains __empower__ x2
-11+   | **Sinking** all players must do a different encounter from underwash or the reach. This shares your encounter results. Combat is paused until you return.
-https://www.youtube.com/watch?v=EKLWC93nvAU
+Turn 1  | **Whispering**  If this took no damage, this gains -__will__ and gains __empower__ x2
+Turn 2 | **Pulling** 🛡️<:Sturdy:1152516154192044142><:Persistence:1151788148322484234> 🔀 Gain -__will__
+Turn 3 | **Reaching** 💥💥🎯🌀 🔀 Gain -__will__
+Turn 4 | **Sinking** Gain __will__ per ❤️ missing. Cause __burn__ and __vulnerable__ (do NOT reset turns).
