@@ -8,13 +8,13 @@
 tdt$salesman_sip
 
 You take a timid sip of the liquid. The salesman eyes you over with a smirk on his lips. You begin to feel... something... You look back up to see the salesman has vanished
-( :game_die: ≤ 2: lose your primary passive | :game_die: 3-7: nothing happens | :game_die: ≥ 8: gain a second passive (roll 1d10 for it from the creation engines lineage list) )
+( :game_die: ≤ 2: lose your primary passive | :game_die: 3-7: nothing happens | :game_die: ≥ 8: gain a second passive (roll 1d15 for it from the creation engines lineage list) and __Will__x2 )
 
 -------------
 tdt$salesman_gulp
 
 You drain the flask into your stomach with gusto. The salesman cant help but cackle. "tastes good right?" his mouth flops open and he drools at the thought. He begins to sniff the air "ahhh yes you're in for a ride"
-( :game_die: ≤ 5: lose your primary passive | :game_die: ≥ 5: gain a second passive (roll 1d10 for it from the creation engines lineage list) and __Will__x2)
+( :game_die: ≤ 5: lose your primary passive | :game_die: ≥ 5: gain a second passive (roll 1d15 for it from the creation engines lineage list) and __Will__x2)
 
 -------------
 tdt$salesman_smell
