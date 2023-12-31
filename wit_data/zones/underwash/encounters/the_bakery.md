@@ -8,7 +8,7 @@
 -------------
 tdt$bakery_look
 
-You look around bewildered. A strange blackish fog begins to form familiar shapes around you. You feel a tiny tingling sensation in your spine as you begin to realize you are back on The Reach. A sudden fear grips you when, suddenly, you hear the familiar sounds of enemies approaching. ( Summon 2 Reach enemies. Each player in a team fights them separately. If you beat them you find a way out of this reality)
+You look around bewildered. A strange blackish fog begins to form familiar shapes around you. You feel a tiny tingling sensation in your spine as you begin to realize you are back on The Reach. A sudden fear grips you when, suddenly, you hear the familiar sounds of enemies approaching. ( Summon a Reach enemies. Each player in a team fights them separately. If you beat them you find a way out of this reality)
 
 -------------
 tdt$bakery_explore
@@ -18,4 +18,4 @@ You decide not to hesitate. You immediately set off to find out what's going on 
 -------------
 tdt$bakery_conjure
 
-Your smile sinks into a scowl. Something is not right here and you know it. You can feel that the timeline is weaker here. You gather your strength and attempt to will the timeline back to its rightfull state. (Roll a d20. Anything above a 10 and you return to your previous place... with some bread (+2 HP and MP). If you fail you *must* spend 1 MP and HP to try again.)
+Your smile sinks into a scowl. Something is not right here and you know it. You can feel that the timeline is weaker here. You gather your strength and attempt to will the timeline back to its rightfull state. (🎲 > 4 return to your previous place... with some bread (+2 HP and MP). If you fail you *must* spend 1 MP and HP to try again or use one of the other paths.)
