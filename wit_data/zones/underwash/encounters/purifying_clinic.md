@@ -7,7 +7,7 @@
 -------------
 tdt$clinic_heal
 
-"Hello there." a woman with greasy black hair, dark bags under her eyes, and a smile says to you. "Do you need healing? I can offer my services if you have something in exchange." (10 Gold or 1 Higuard Key to attempt to remove a curse/negative passive: :game_die: ≤ 9 : remove 1 passive)
+"Hello there." a woman with greasy black hair, dark bags under her eyes, and a smile says to you. "Do you need healing? I can offer my services if you have something in exchange." (10 Gold or 1 Higuard Key to attempt to remove a curse/negative passive: :game_die: ≤ 7 : remove 1 passive (repeatable))
 
 -------------
 tdt$clinic_help
