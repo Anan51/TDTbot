@@ -7,14 +7,14 @@
 -------------
 tdt$child_leave
 
-You tell the little girl you cant help. "But why!" She cries out holding back sobs. You tell her necrosis is too dangerous and she should find a doctor. "The doctors wont help" she says. You say that you are sorry, but neither can you. ( Gain: __Cold__ :snowflake:  "Take and give 1 less __Healing__ and +:heart:" )
+You tell the little girl you cant help. "But why!" She cries out holding back sobs. You tell her necrosis is too dangerous and she should find a doctor. "The doctors wont help" she says. You say that you are sorry, but neither can you. ( Gain: __Cold__ :snowflake:  "Take and give 1 less __Healing__ and +:heart:" for the rest of the run )
 
 -------------
 tdt$child_help
 
 You nod and go into the the shack the girl is standing outside of. Inside the situation is dire. The room is dimly lit with candles that are struggling to stay lit under the influence of the necrosis. A woman, about 16-20 years old is neck deep in the thick black substance, its beginning to pin her to the wall and it looks like it has already overtaken her feet completely. The womans hands are restrained to the bed. shards of glass bottles dot the ground, some of them with bits of dried blood on them. "It felt so good at first." The woman says "I wasnt hurting anyone, it just brought me pleasure. Isnt life about finding pleasure?" A chill runs down your spine. "Let me guess, you are going to tell me that this is wrong?" You stare blankly "That I am not allowed to feel this way." You hear something whisper in your mind...
 
-(You can either use your mana to try to sever the woman from the necrosis (!r 1d20, anything below a 12 is a success and you lose 2 stacks of __will__) or you can coax the necorsis onto you (gain 5 stacks of __Will__, gain a Higuard key))
+(You can either use your mana to try to sever the woman from the necrosis (!r 1d20, anything below a 12 is a success and you lose 2 stacks of __will__) or you can coax the necorsis onto you (gain 5 stacks of __Will__, gain a **Higuard Keycard** :credit_card:: "Use to gain 1 **Ancient Key** at any shop. This doesnt take inventory space"))
 
 -------------
 tdt$child_pray
