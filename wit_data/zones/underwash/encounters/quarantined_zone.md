@@ -7,7 +7,7 @@
 -------------
 tdt$zone_around
 
-You decided to follow the orders and detour around the site. Unfortunately this will set you back pretty severely. (Go back 5 levels)
+You decided to follow the orders and detour around the site. Unfortunately this will set you back pretty severely. (Go back 1 level)
 
 -------------
 tdt$zone_sneak
