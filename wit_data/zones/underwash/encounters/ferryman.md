@@ -17,5 +17,5 @@ You dont elect to provide any currency. You decide to instead grasp his hand. Th
 -------------
 tdt$ferry_blood
 
-You examine the mans hand. You notice it has tattoos in old elvish. You dont speak it, but you strangely seem to understand what they are saying. You place the edge of your blade in your hand and cut it. It begins to bleed. You drip some of the blood onto the ferryman's hand "Sacrifice is the only cure" he says. The tattoos recede and he retracts his hand. (-2 :heart: max, travel straight to the gates)
+You examine the mans hand. You notice it has tattoos in old elvish. You dont speak it, but you strangely seem to understand what they are saying. You place the edge of your blade in your hand and cut it. It begins to bleed. You drip some of the blood onto the ferryman's hand "Sacrifice is the only cure" he says. The tattoos recede and he retracts his hand. (-2 :heart: max - all __will__, travel straight to the gates)
 
