@@ -8,16 +8,19 @@
 tdt$chest_open
 
 You decide to open the chest. You quietly approach it, looking around for traps. There doesnt seem to be any...
-( :game_die: ≤ 9: its a mimic. Fight the enemy in spoiler tags below | :game_die: =10 : huh. its just loot (roll !r d10 lesser))
+( :game_die: ≤ 9: its a mimic. Fight the enemy in spoiler tags below | :game_die: =10 : huh. its just loot (use `tdt$wit_loot 10`))
 
-||__**MIMIC NYMPH**__
-:heart: : Target's HP
-:moneybag: : !r 7d3 <:gold:1058304371940655185>
-Behavior: Select a random player at the start of the game. This will only ever attack that
+||# [__**MIMIC NYMPH**__](<https://discord.com/channels/164589623459184640/931667324564557874>)
+❤️ : 1
+🔷 : 1
+💰 : ||Duplicate one of your weapons, potions, or non-rare artifacts||
+
+**First Strike**: Immune. Choose a target, gain +❤️ +🔷 until matching the target
+*"The name's Bachi!"*
 —————————————————
-1-3   | **Copy** Use targets first move.
-4-6   | **Imitate** Use targets second move.
-7-10 | **Plagiarize** Use targets third move.||
+Turn 1  | **Copy** Use the same move your targets used this turn
+Turn 2 | **Imitate** Gain the active status's of all players
+Turn 2 | **Plagiarize** Disable the moves used this turn for the rest of combat. Reset turns||
 
 -------------
 tdt$chest_leave
@@ -27,5 +30,5 @@ You decide to leave the chest. Something doesnt feel right. (do another encounte
 -------------
 tdt$chest_listen
 
-Something in the air clues you in that this isnt a normal chest. You perk up your ears, close your eyes, and listen. You hear the sounds of the wood creaking. The sounds of the waterway rushing outside. The drops of the the Ether seeping in through the stone walls. The sounds of... breathing... Its faint, but you can identify that that breathing is coming from the chest. Its a mimic. You have heard about these and you know how to deal with it. You stand up as tall as you can and begin clanging your weapon on the ground and growling and roaring. You bear your fangs and make as much noise as you can. After a little while, the mimic begins to slowly back away towards a hole in the house, revealing a pile of gold where it was digesting (gain !r 1d10 gold)
+Something in the air clues you in that this isnt a normal chest. You perk up your ears, close your eyes, and listen. You hear the sounds of the wood creaking. The sounds of the waterway rushing outside. The drops of the the Ether seeping in through the stone walls. The sounds of... breathing... Its faint, but you can identify that that breathing is coming from the chest. Its a mimic. You have heard about these and you know how to deal with it. You stand up as tall as you can and begin clanging your weapon on the ground and growling and roaring. You bear your fangs and make as much noise as you can. After a little while, the mimic begins to slowly back away towards a hole in the house, revealing a pile of gold where it was digesting (gain 10 gold)
 
