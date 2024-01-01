@@ -12,7 +12,7 @@ You notice an offer proudly posted on the wall about a practice range for the pr
 -------------
 tdt$shady_shop
 
-The man gives you a nod. He turns around and presses a button below the counter that responds with a *beep*. Behind the man unflods a set of massive metallic shudders that reveal a haul of confescated goods from the hands of dead adventurers (use  `tdt$wit_shop` if you have 3 higaurd keycards you can exchange it for :dagger: **High Guard**: :shield:, +:shield: per missing :large_blue_diamond:)
+The man gives you a nod. He turns around and presses a button below the counter that responds with a *beep*. Behind the man unflods a set of massive metallic shudders that reveal a haul of confescated goods from the hands of dead adventurers (use  `tdt$wit_shop` if you have 3 higaurd keycards you can exchange it for :dagger: **High Guard**: :shield:, +:shield: per missing :large_blue_diamond:. You sell Ornate weapons for three times their total values here)
 
 -------------
 tdt$shady_goody
