@@ -16,10 +16,10 @@ Archetype: Summoner
 
 **__HENRY mk.8__**
 > ﻿:heart:﻿﻿ : 1 / :zap: 
-> Grant +:large_orange_diamond: every turn
+> **Clockwork** Grant +:large_orange_diamond:
 **__SURGE-O-TRON__** (*LVL 2*)
 > ﻿:heart:﻿﻿ : 3 / :boom:﻿﻿﻿ : 0 / :large_orange_diamond:﻿﻿ ﻿: -2
-> This gains :boom: end of every turn
+> **Clockwork** gains :boom: end of every turn
 **__MAGNIGHT__** (*LVL 4*)
 > ﻿:heart:﻿﻿ : 1 / :boom:﻿﻿﻿:dart: : 1 / :large_orange_diamond:﻿﻿ ﻿: -1
 > **Martyr**: Grant <:Persistence:1151788148322484234>
