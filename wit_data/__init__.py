@@ -108,14 +108,14 @@ def gen_weapon(roll_str):
         "**Siphon Rune** (-1 ❤️): <:Persistence:1151788148322484234>🔀+❤️ [+8 <:gold:1058304371940655185>]",
         "**Fang** (-1 🔷): 💥<:stealthIcon:943248201790677052> [+9 <:gold:1058304371940655185>]",
         "**Knights Shield** (-1 🔷): <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> [+10 <:gold:1058304371940655185>]",
-        "**Spell Book** (-2 🔷): Grant or cause any __effect__x2 [+11 <:gold:1058304371940655185>]",
-        "**Wand** (-1 🔷): Gain a random tdt$draft spell, it has as many uses as your current stacks of __empower__. [+12 <:gold:1058304371940655185>]",
-        "**Runic Flintlock** (-3 🔷): 💥, +💥 per stack of __weak__ your target has [+13 <:gold:1058304371940655185>]",
-        "**Graven Shield** (-2 🔷): <:Sturdy:1152516154192044142>, +<:Sturdy:1152516154192044142> per stack of __heal__ you have [+14 <:gold:1058304371940655185>]",
-        "**Gilded Hammer** (-3 🔷): 🛡️, +💥 per stack of __protect__ you you have [+15 <:gold:1058304371940655185>]",
+        "**Scroll**: +3 🔷 {OR} +1 ❤️ [+11 <:gold:1058304371940655185>]",
+        "**Wand**: Gain a random tdt$draft spell, it has as many uses as your current stacks of __empower__ +1. [+12 <:gold:1058304371940655185>]",
+        "**Runic Flintlock** (-2 🔷): 💥, +💥 per stack of __weak__ your target has [+13 <:gold:1058304371940655185>]",
+        "**Graven Shield** (-1 🔷): <:Sturdy:1152516154192044142>, +<:Sturdy:1152516154192044142> per stack of __heal__ you have [+14 <:gold:1058304371940655185>]",
+        "**Gilded Hammer** (-2 🔷): 🛡️, +💥 per stack of __protect__ you you have [+15 <:gold:1058304371940655185>]",
         "**Tome** (-1 🔷): Summon a Familiar or an Automaton [+16 <:gold:1058304371940655185>]",
-        "**Scroll**: +2 🔷 {OR} +1 ❤️ [+17 <:gold:1058304371940655185>]",
-        "**Protection Rune** (-3 🔷): <:Persistence:1151788148322484234><:Persistence:1151788148322484234> [+18 <:gold:1058304371940655185>]",
+        "**Spell Book** (-4 🔷): Double your next move's efficacy [+17 <:gold:1058304371940655185>]",
+        "**Protection Rune** (-2 🔷): <:Persistence:1151788148322484234><:Persistence:1151788148322484234> [+18 <:gold:1058304371940655185>]",
         "**Staff** (-2 🔷): 💥, +💥 per stack of __burn__ your target has [+19 <:gold:1058304371940655185>]",
         "**Sword of the Spirit** Remove all __will__ at the end of next turn [+20 <:gold:1058304371940655185>]",
     ]
@@ -155,7 +155,7 @@ def gen_potion(roll_str):
 def gen_artifact(roll_str):
     artifacts = [
         "**Ancient Key**: 🗝️  Opens loot chests found on floors (Destroyed on Use) [+1 <:gold:1058304371940655185>]",
-        "**Safety Scissors**: ✂️ Flees the combat or encounter. Redo your floor roll. (Destroyed on Use) [+2 <:gold:1058304371940655185>]",
+        "**Safety Scissors**: ✂️ Flees the combat or encounter. Redo your floor roll. (One person. Destroyed on Use) [+2 <:gold:1058304371940655185>]",
         "**Cook Book**: 🍔 You may raise your max HP and MP by 1 at Camp Sites instead of resting (Lasts until the end of the run, once per team) [+3 <:gold:1058304371940655185>]",
         "**Port-a-Forge**: 🛠️ You may increase a skills damage, shield, or __effect__ at a camp instead of resting. (Lasts until the end of the run, once per team) [+4 <:gold:1058304371940655185>]",
         "**Ring of Momentum**: 💍 You have __Empower__ while at full HP or MP. [+5 <:gold:1058304371940655185>]",
@@ -324,4 +324,4 @@ class WitData:
                    "🔒 Chest",
                    "🛖 Shop"
                    ]
-        return ', '.join(random.choices(options, weights=[10, 3, 10, 1, 1, 1, 1], k=3))
+        return ', '.join(random.choices(options, weights=[10, 3, 7, 2, 1, 1, 2], k=3))
