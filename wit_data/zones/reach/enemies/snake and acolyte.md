@@ -13,9 +13,9 @@ Turn 4 | **Venom Spray** Cause __Weak__x2 and __burn__x2
 Turn 5 | **Constrict** 💥🛡️ 🔀 +🔷 and reset turns
 
 
-# [__**MALOKOLYTE**__](<https://www.youtube.com/watch?v=nksim6Tz11Y>)
+# [__**TIRED MALOKOLYTE**__](<https://www.youtube.com/watch?v=nksim6Tz11Y>)
 ❤️ : 4
-🔷 : 1
+🔷 : 0
 💰 : ||+3 🔷, 1 <:gold:1058304371940655185> , 1/20 🎲 at acquiring **Sacrificial Dagger** (-1 ❤️) Deals 💥⚡, +💥 per its target's __vulnerable__ (valued at -5 <:gold:1058304371940655185>)||
 
 **Mana Thirst** Summon a copy of this at its current ❤️ and 🔷 per 👥.
