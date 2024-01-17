@@ -1,5 +1,5 @@
 # [__**BLACKHAND GANG CAPTAIN**__](<https://www.youtube.com/watch?v=k8lcuXNeyrw>)
-❤️ : 3
+❤️ : 4
 <:Persistence:1151788148322484234> : 1
 💰 : ||<:gold:1058304371940655185> 12, if this died while you had __protect__ instead reward: **Sapping Powder** (-3 🔷)💥<:stealthIcon:943248201790677052>🌀 🔀 Cause -2 🔷 [28 <:gold:1058304371940655185>]||
 
@@ -12,10 +12,10 @@ Turn 3 | **Trick Step** Your next 💥 has 🎯. Random turns.
 Turn 4 | **Seeing Red** Reset Turns. 💥🚫 🔀 -3 <:gold:1058304371940655185> per dealt. Gain permanent __empower__x2
 
 # [__**BLACKHAND GANG THUG**__](<https://www.youtube.com/watch?v=k8lcuXNeyrw>)
-❤️ : 4
+❤️ : 3
 💰 : ||<:gold:1058304371940655185> 12, if this died while you had __protect__ instead reward: **Sapping Powder** (-3 🔷)💥<:stealthIcon:943248201790677052>🌀 🔀 Cause -2 🔷 [28 <:gold:1058304371940655185>]||
 
-**First Strike**: Disable mana costing moves until you take damage
+**First Strike**: Disable mana costing moves for 1 turn.
 *"👋 ✌️ 🤞 ☝️ ✋ 🤚 ✊ 👉 "*
 —————————————————
 Turn 1  | **Seeing Red** 💥🚫 🔀 -3 <:gold:1058304371940655185> per dealt. Gain permanent __empower__x2
