@@ -1,5 +1,5 @@
 # [__**SPEYEDER NEST**__](<https://www.youtube.com/watch?v=rvXm2TNLfnQ>)
-❤️ : 10 x:busts_in_silhouette:
+❤️ : 6 x:busts_in_silhouette:
 💰 : ||`tdt$rare_artifacts`||
 
 **First Strike**: Summon x:busts_in_silhouette: SPEYEDERS
