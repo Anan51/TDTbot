@@ -21,5 +21,5 @@ Archetype: Summoner
 > ﻿❤️﻿ : 1 / 💥🚫 : 1  / 🔷 : -2
 > Attacks immediately
 **__PLAGUE  VIPER__** (*LVL 4*)
-> ﻿❤️﻿ : 1 / Cause __vulnerable__ / 🔷 : -3
-> Disable HP/MP regen to any __vulnerable__ targets. **First Strike**: Summon a PLAGUE VIPER.
+> ﻿❤️﻿ : 1 / Cause __vulnerable__ / 🔷 : -1
+> Disable HP/MP regen to any __vulnerable__ targets.
