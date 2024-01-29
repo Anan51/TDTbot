@@ -2,5 +2,5 @@
 
 **Clockwork Pawn** (-1 :large_blue_diamond:) : Summon a Clockwork Pawn
 **__Clockwork Pawn__**
-﻿> :heart:﻿﻿﻿ : 1 / :shield:
-> **clockwork** has __empower__ every turn you control another clockwork pawn
+﻿> :heart:﻿﻿﻿ : 1 / 💥
+> **clockwork** has :shield: every turn you control another clockwork pawn
