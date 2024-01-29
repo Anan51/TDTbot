@@ -6,7 +6,7 @@
 
 **Clockwork Pawn** (-1 :large_blue_diamond:) : Summon a Clockwork Pawn
 **__Clockwork Pawn__**
-﻿> :heart:﻿﻿﻿ : 1 / :shield:
-> ﻿﻿Gains :boom: for every *other* Clockwork Pawn you control
+﻿> :heart:﻿﻿﻿ : 1 / 💥
+> **clockwork** has :shield: every turn you control another clockwork pawn
 
 :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: :sparkler: 
