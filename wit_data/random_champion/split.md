@@ -11,7 +11,7 @@ __Will__ : `(6)` ⬛⬛⬛⬛⬛⬛
 ———————————————————
 **Paradox** (-2 🔷): 💥💥 🔀 Gain __will__x2 per hit
 **Phase Shift** (-1 🔷): Choose a target; Convert its incoming 💥 into your +🔷
-**Worldline**: Summon a Split
+**Worldline**: Summon a Timeline Split
 **Sacrifice**(-1 ❤️): Convert any amount of your __will__ to grant an __effect__ *LVL 2*
 **Redact**: (-4 🔷) Reply to a previous move, edit it {OR} have it also deal +💥 *LVL 3*
 **Kronomancy** (-12 __will__): Resurrect all allies that died last turn *LVL 4*
@@ -21,4 +21,4 @@ __Will__ : `(6)` ⬛⬛⬛⬛⬛⬛
 > **Mana Thirst**: Grant +💥🚫
 **__OMEGA__** (*LVL 5*)
 > ﻿:heart:﻿﻿ : 2 / :boom:🌀﻿﻿﻿ : 0 / 🔷﻿﻿ ﻿: -2
-> **Mana Thirst**: Your opponent tells you their next move
+> **Mana Thirst**: Your opponent tells you their next move and grant an ally +❤️
