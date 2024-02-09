@@ -12,6 +12,6 @@ Archetype: Support
 **Spore Shield** (-1 🔷) 🛡️🛡️🛡️ 🔀 <:Persistence:1151788148322484234>
 **Wall of Thorns**   (-3 ❤️) <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234> 🔀💥
 **Bloom Blossom** (-3 🔷)  +❤️❤️🌀
-**Sunshine** Remove 🔀 from all friendlies’ next moves
-**Harvest** Grant +🔷 per your <:Persistence:1151788148322484234>
-**Naturalize** (-1 🔷, -1 ❤️) 💥💥🎯; If this kills 🔀 +1 max ❤️ and 🔷
+**Sunshine** Remove 🔀 from all friendlies’ next moves. Improve **Naturalize**'s attack or reward
+**Harvest** (-1 <:Persistence:1151788148322484234>) Grant +🔷🔷🌀. Improve **Naturalize**'s attack or reward
+**Naturalize** (-1 🔷, -1 ❤️) 💥🎯; If this kills 🔀 +1 max ❤️ and 🔷
