@@ -13,5 +13,5 @@ Archetype: Caster
 **Spark** :zap: Cause all target's __burn__ to trigger this turn. Cause __Burn__
 **Fireball** (-5 :large_blue_diamond:) :boom::boom::boom::cyclone: :twisted_rightwards_arrows: __burn__ each *LVL 2*
 **Lightning** (-7 :large_blue_diamond:) :boom::boom::boom::boom::zap::no_entry_sign: *LVL 3*
-**Frostbite** (-3 :large_blue_diamond:)  Convert a target's __Burn__ into +🔷 twisted_rightwards_arrows: skip their next turn *LVL 4*
+**Frostbite** (-3 :large_blue_diamond:)  Convert a target's __Burn__ into +🔷 :twisted_rightwards_arrows: skip their next turn *LVL 4*
 **Mana Storm** (-all :large_blue_diamond:) next turn: :boom::cyclone: per :large_blue_diamond: spent *LVL 5*
