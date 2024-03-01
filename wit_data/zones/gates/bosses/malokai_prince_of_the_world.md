@@ -1,5 +1,5 @@
 __**MALOKAI, PRINCE OF THE WORLD**__
-:heart: : 20 x :busts_in_silhouette:
+:heart: : 40 x :busts_in_silhouette:
 :moneybag: : ||"You cannot destroy me. You are allowed to only injure me. Take your weapon and leave me." `tdt$wit_loot 19` {OR} If you have no __will__: ||summon tdt$gates_boss_2||
 Behavior: Cause __Will__ at the beginning of every player turn. Lowest HP player rolls move decisions
 —————————————————
