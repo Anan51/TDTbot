@@ -157,13 +157,13 @@ def gen_artifact(roll_str):
         "**Ancient Key**: 🗝️  Opens loot chests found on floors (Destroyed on Use) [+1 <:gold:1058304371940655185>]",
         "**Safety Scissors**: ✂️ Flees the combat or encounter. Redo your floor roll. (One person. Destroyed on Use) [+2 <:gold:1058304371940655185>]",
         "**Cook Book**: 🍔 You may raise your max HP and MP by 1 at Camp Sites instead of resting (Lasts until the end of the run, once per team) [+3 <:gold:1058304371940655185>]",
-        "**Port-a-Forge**: 🛠️ You may increase a skills damage, shield, or __effect__ at a camp instead of resting. (Lasts until the end of the run, once per team) [+4 <:gold:1058304371940655185>]",
-        "**Ring of Momentum**: 💍 You have __Empower__ while at full HP or MP. [+5 <:gold:1058304371940655185>]",
+        "**Port-a-Forge**: 🛠️ You may increase a weapon's damage, shield, or __effect__ at a camp instead of resting. (Lasts until the end of the run, once per team) [+4 <:gold:1058304371940655185>]",
+        "**Ring of Momentum**: 💍 Weapon kills grant __Empower__ (carries into the next combat). [+5 <:gold:1058304371940655185>]",
         "**Safety Hook**: 🪝 Gain __Protect__x2 the first time an enemy deals damage to you [+6 <:gold:1058304371940655185>]",
         "**Vitamins**: 💊 Start each combat with __Heal__x2 [+7 <:gold:1058304371940655185>]",
-        "**Lucky Clover**: 🍀 Cause an enemy __Weak__x3 on turn 3 [+8 <:gold:1058304371940655185>]",
-        "**War Drum**: 🥁 Cause __vulnerable__x2 the first time you damage each enemy [+9 <:gold:1058304371940655185>]",
-        "**Eternal Lantern**: 🪔 Using potions causes __Burn__x2 [+10 <:gold:1058304371940655185>]",
+        "**Lucky Clover**: 🍀 Successful weapon blocks cause __Weak__ [+8 <:gold:1058304371940655185>]",
+        "**War Drum**: 🥁 Weapons cause __vulnerable__x3 the first time you damage each enemy [+9 <:gold:1058304371940655185>]",
+        "**Eternal Lantern**: 🪔 Successful weapon hits cause __Burn__ [+10 <:gold:1058304371940655185>]",
         "**Potion Pack** 🎒 Increase potion 🧪 carry quantity by +2. [11 <:gold:1058304371940655185>]",
         "**Bandolier** 🎽 Increase weapon 🗡️ carry quantity by +2. [12 <:gold:1058304371940655185>]",
         "**Wax Key** 🔑 All chests are unlocked for the rest of the region once you open one chest. [13 <:gold:1058304371940655185>]",
@@ -324,4 +324,4 @@ class WitData:
                    "🔒 Chest",
                    "🛖 Shop"
                    ]
-        return ', '.join(random.choices(options, weights=[10, 3, 7, 2, 1, 1, 2], k=3))
+        return ', '.join(random.choices(options, weights=[10, 3, 7, 2, 1, 1, 3], k=3))
