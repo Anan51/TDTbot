@@ -162,7 +162,7 @@ def gen_artifact(roll_str):
         "**Safety Hook**: 🪝 Gain __Protect__x2 the first time an enemy deals damage to you [+6 <:gold:1058304371940655185>]",
         "**Vitamins**: 💊 Start each combat with __Heal__x2 [+7 <:gold:1058304371940655185>]",
         "**Lucky Clover**: 🍀 Successful weapon blocks cause __Weak__ [+8 <:gold:1058304371940655185>]",
-        "**War Drum**: 🥁 Weapons cause __vulnerable__x3 the first time you damage each enemy [+9 <:gold:1058304371940655185>]",
+        "**War Drum**: 🥁 Weapons cause __vulnerable__ the first time they are succesful [+9 <:gold:1058304371940655185>]",
         "**Eternal Lantern**: 🪔 Successful weapon hits cause __Burn__ [+10 <:gold:1058304371940655185>]",
         "**Potion Pack** 🎒 Increase potion 🧪 carry quantity by +2. [11 <:gold:1058304371940655185>]",
         "**Bandolier** 🎽 Increase weapon 🗡️ carry quantity by +2. [12 <:gold:1058304371940655185>]",
