@@ -167,6 +167,8 @@ def gen_artifact(roll_str):
         "**Potion Pack** 🎒 Increase potion 🧪 carry quantity by +2. [11 <:gold:1058304371940655185>]",
         "**Bandolier** 🎽 Increase weapon 🗡️ carry quantity by +2. [12 <:gold:1058304371940655185>]",
         "**Wax Key** 🔑 All chests are unlocked for the rest of the region once you open one chest. [13 <:gold:1058304371940655185>]",
+        "**Thirsty Cup** 🫗 Increases the effect of all potions by 2 [14 <:gold:1058304371940655185>]",
+        "**Crystal Jar** 🫙 Potions have infnite uses but take a turn to use and only have 1/2 their max effect [15 <:gold:1058304371940655185>]",
     ]
     return [(None, artifacts[r - 1], r) for r in roll(roll_str, max_sides=len(artifacts))]
 
