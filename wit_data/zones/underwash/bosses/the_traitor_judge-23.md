@@ -1,6 +1,6 @@
 # [__**THE TRAITOR: JUDGE-23**__](<https://www.youtube.com/watch?v=bMfvZmhqW0A&pp=ygUTZ29kIHNoYXR0ZXJpbmcgc3Rhcg%3D%3D>)
 ❤️ : 14
-💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$wit_loot 19` x3 {OR} 1/50 chance to gain "**False Idol** (-1 ❤️, -1 __Protect__): 💥🛡️ per __will__ you have" valued at 50 <:gold:1058304371940655185>.||
+💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$wit_loot 19` x3 ||
 
 **First Strike**: Summon another JUDGE-23 per 👥. Whenever a player gains an __effect__ this gains __Empower__
 *"Kneel."*
