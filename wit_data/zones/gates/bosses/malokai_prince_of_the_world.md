@@ -1,6 +1,6 @@
 __**MALOKAI, PRINCE OF THE WORLD**__
 :heart: : 40 x :busts_in_silhouette:
-:moneybag: : ||"You cannot destroy me. You are allowed to only injure me. Take your weapon and leave me." `tdt$wit_loot 19` {OR} If you have no __will__: ||summon tdt$gates_boss_2||
+:moneybag: : ||"You cannot destroy me. You are allowed to only injure me. Take your weapon and leave me." `tdt$wit_loot 19` and <:legendaryShard:1213251982341709854> x5 {OR} If you have no __will__: summon tdt$gates_boss_2||
 Behavior: Cause __Will__ at the beginning of every player turn. Lowest HP player rolls move decisions
 —————————————————
 1-12    | **Nightmare Blade** :boom::boom::boom::shield::cyclone:; If this took no damage :twisted_rightwards_arrows: :boom::boom::boom::dart: Lowest HP next turn
