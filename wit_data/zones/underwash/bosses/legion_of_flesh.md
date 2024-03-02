@@ -1,7 +1,7 @@
 # [__**LEGION OF FLESH**__](<https://www.youtube.com/watch?v=zP_1e30FWsE>)
 ❤️ : 6
 🔷 : 3
-💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$rare_artifacts` x3 and <:legendaryShard:1213251982341709854>x3||
+💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$rare_artifacts` x2 and <:legendaryShard:1213251982341709854>x3||
 
 **Mana Thirst**: Summon a Legion of Flesh x 👥 with 0 🔷. (They roll/act as one unit but must be targeted individually)
 *"Lust of the eyes... lust of the flesh... pride of life..."*
