@@ -1,0 +1,1 @@
+🧪 x 2 **Aurum Eye** "🪙" This combat, blocking incoming 💥 that have modifiers grants said modifier to your next 💥 [25 <:gold:1058304371940655185>]

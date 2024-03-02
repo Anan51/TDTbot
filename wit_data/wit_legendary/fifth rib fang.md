@@ -1,0 +1,1 @@
+:dagger: **Fifth-Rib Fang** (-1 🔷) 💥💥⚡  🔀 Every 5th succesful hit causes __burn__x5 [45 <:gold:1058304371940655185>]

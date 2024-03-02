@@ -1,0 +1,1 @@
+:dagger: **Gatekeeper's Eye** (-2 :heart:) Your next :shield: becomes <:Persistence:1151788148322484234>:cyclone: [60 <:gold:1058304371940655185>]

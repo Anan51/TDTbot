@@ -1,0 +1,1 @@
+🏺 **Bean Belt** 🫘 Refill your 🔷 and ❤️ upon reaching 1 ❤️ (destroyed on use) [42 <:gold:1058304371940655185>]

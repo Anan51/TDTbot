@@ -1,0 +1,1 @@
+🧪 x 3: **♊ Soul Gem**: Defeating creatures that cause __will__ this combat grant a stack of __Empower__ at the start of combat for the rest of your game.  [40 <:gold:1058304371940655185>]

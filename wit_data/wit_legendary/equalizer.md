@@ -1,0 +1,1 @@
+:amphora: **🎛️ Equalizer**: Succesful blocks grant __Protect__ on even numbered turns and __Empower__ on odd numbered turns [ 70 <:gold:1058304371940655185> ]
