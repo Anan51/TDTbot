@@ -1,1 +1,4 @@
-🧪 x 12: **Gelly Doughnut** Summon a friendly Champion Landing Enemy. [12 <:gold:1058304371940655185>]
+🧪 x 12: **Gelly Doughnut 🍩** [33 <:gold:1058304371940655185>]
+- *Ich bin ein Berliner*
+
+Summon a friendly Champion Landing Enemy. 
