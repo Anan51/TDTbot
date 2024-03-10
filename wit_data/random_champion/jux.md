@@ -9,4 +9,4 @@ Archetype: Caster
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 **Card Trick** (-1 🔷) 💥💥 🔀 Cause -🔷 (per hit). Gain ⚡, 🚫, or 🎯 per discarded 📜 this turn.
 **Paper Ward** (-1 📜) <:Sturdy:1152516154192044142> (per 📜 in hand) 🔀 Gain +1 🔷 per block.
-**Philosopher's Stone** (-1 🔷) Draw +📜 {OR} Discard 📜 and +4 🔷 {OR} reveal your hand and draw +2 📜
+**Philosopher's Stone** Draw +📜 {OR} Discard 📜 and +4 🔷 {OR} reveal your hand and draw +2 📜
