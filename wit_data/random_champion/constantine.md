@@ -14,4 +14,4 @@ Archetype: Tank
 **Grace** (- :heart:) You are Immune next turn *LVL 2*
 **Sanctify** (-2 :large_blue_diamond:) <:Persistence:1151788148322484234> 🔀 gain 🎯 this turn *LVL 3*
 **Divine Shield** <:Sturdy:1152516154192044142>:cyclone: *LVL 4*
-**Smite** Convert __protect__ into :boom::zap::cyclone: *LVL 5*
+**Smite** Convert __protect__ and <:Persistence:1151788148322484234> into :boom::zap::cyclone: *LVL 5*
