@@ -6,7 +6,7 @@ Archetype: Summoner
 :large_orange_diamond: : `(5)` :orange_square::orange_square::orange_square::orange_square::orange_square:
 
 :bulb: [**Supplemental Inspiration**](https://media.discordapp.net/attachments/1056365502101979146/1168051985052872774/Aeror.jpg?ex=65505c2e&is=653de72e&hm=130ce0e144b39f1a40f482f767084f1caa5466a0756f6ac698c991c704b084e8&=)  
-*Your <:Persistence:1151788148322484234> grants :boom: +1 each. Start combat with <:Persistence:1151788148322484234>*
+*Your <:Persistence:1151788148322484234> grants +:boom:. Start combat with <:Persistence:1151788148322484234>*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Scrap-Shot** :boom::zap: :twisted_rightwards_arrows: grant __protect__
 **Barricade** (-1 :large_orange_diamond:) <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142><:Sturdy:1152516154192044142>:twisted_rightwards_arrows::boom:
