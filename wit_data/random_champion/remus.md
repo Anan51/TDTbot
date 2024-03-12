@@ -6,20 +6,21 @@ Archetype: Summoner
 🔷 : `(8)`   🟦🟦🟦🟦🟦🟦🟦🟦
 
  🦌  [**Barkskin Hyde**](https://media.discordapp.net/attachments/1056365502101979146/1168051984532775033/Remus.jpg?ex=65505c2e&is=653de72e&hm=0670dfc75fb3a775a52ba3beceb65e5e3ac6c1bcf87c8e2a69768cf505d9194f&=)
-*Succesful <:stealthIcon:943248201790677052> grants +🔷. Summons with <:stealthIcon:943248201790677052> can skip turns and cant be targetted directly.*
+*Triggering an ally's <:stealthIcon:943248201790677052> grants you +🔷.*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Moonfire** 💥⚡ 🔀 Grant +<:stealthIcon:943248201790677052>
 **Adapt** (-1 🔷) 🛡️🛡️❤️
-**Conjure Familiar** Summon a Beast
-**Wild Growth** (-1 ❤️) Grant or cause __Heal__ per each cast {OR} Increase your summons attack *LVL 3*
-**Shapeshift** Skills that deal 💥, 🛡️, ❤️, <:stealthIcon:943248201790677052>, and __heal__ swap to 🛡️, 💥, <:stealthIcon:943248201790677052>, ❤️, and __vulnerable__ respectively. Swap your HP amount with MP amount. *LVL 5*
+**Wildform** Summon a Beast {OR} Swap an ally's HP/MP stats: 💥❤️ swaps 🛡️<:stealthIcon:943248201790677052>
+**BEES!** (-2 🔷) 🛡️🔀💥🔀🛡️🔀💥🔀 Summon a **__SWARM HORNET__** *LVL 2*
+**Wild Growth** (-1 ❤️) Grant __Empower__ per each cast *LVL 4*
 
-**__DIRE WOLF __**
-> ﻿❤️﻿ : 2 / 💥 : 1 / 🔷 : -4
-> **First Strike**: Grant 🌀: +💥<:stealthIcon:943248201790677052>
-**__BEES!__** (*LVL 2*)
-> ﻿❤️﻿ : 1 / 💥🚫 : 1  / 🔷 : -2
-> Gains +💥 per other Bee you control
-**__PLAGUE  VIPER__** (*LVL 4*)
-> ﻿❤️﻿ : 1 / 💥 🔀 Grant or cause __vulnerable__ / 🔷 : -3
-> Attacks immediately
+
+**__SWARM HORNET__** 
+> ﻿❤️﻿ : 1 / 💥 : 0  / 🔷 : -1
+> **First Strike**: Grant other Swarm Hornet's +💥
+**__PLAGUE  VIPER__** (*LVL 3*)
+> ﻿❤️﻿ : 1 / 💥🚫 : 1 / 🔷 : -3
+> **First Strike**: Trigger your other summon's First Strike
+**__DIRE WOLF __** (*LVL 5*)
+> ﻿❤️﻿ : 2 / 💥🔀 Grant __Empower__ : 1 / 🔷 : -4
+>  **First Strike**: Grant 🌀: +<:stealthIcon:943248201790677052>
