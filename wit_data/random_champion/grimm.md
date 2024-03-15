@@ -9,9 +9,9 @@ Archetype: Caster
 *Destroy anything with __Vulnerable__ x5+ at the end of the turn.*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Eldritch Blast** (-2 :large_blue_diamond:) :boom::boom::boom::no_entry_sign:
-**Bend Will** (-2 :large_blue_diamond:) +:heart::heart::zap: per 💥 taken
+**Bend Will** (-2 :large_blue_diamond:) +:heart::heart::zap: per incoming 💥
 **Blood Ritual** (-1 :heart:) Cause __Vulnerable__ x2
 **Siphon Bolt** (-3 :large_blue_diamond:) :boom::boom::boom::zap::twisted_rightwards_arrows: +:heart: (per hit) *LVL 2*
 **Soul Silk** +2 :large_blue_diamond: per __Vulnerable__ *LVL 3*
-**Conjure Void** (-4 :large_blue_diamond:) Your :large_blue_diamond: costs are one less, (min of one) *LVL 4*
+**Conjure Void** (-4 :large_blue_diamond:) Your :large_blue_diamond: costs are one less, (min. of one) *LVL 4*
 **Infest** (-8 :large_blue_diamond:) You cause __Vulnerable__:cyclone: start of your turns *LVL 5*
