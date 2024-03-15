@@ -10,7 +10,7 @@ Archetype: Support
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Leech Leaf**    (-1 🔷) 💥💥 🔀 +:heart:
 **Spore Shield** (-1 🔷) 🛡️🛡️🛡️ 🔀 +<:Persistence:1151788148322484234>
-**Sunshine** (-1 <:Persistence:1151788148322484234>) <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142>; remove 🔀 from all friendlies’ next moves.
+**Sunshine** (-1 ❤️) <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142>; remove 🔀 from all friendlies’ next moves.
 **Wall of Thorns** (-3 ❤️) <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234> 🔀💥 *LVL 2*
 **Bloom Blossom** (-3 🔷)  +❤️❤️<:Sturdy:1152516154192044142>🌀 *LVL 3*
 **Harvest** (-2 <:Persistence:1151788148322484234>) Grant +🔷🔷🔷🔷<:Sturdy:1152516154192044142>🌀 *LVL 4*
