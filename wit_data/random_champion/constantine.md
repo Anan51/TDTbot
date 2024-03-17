@@ -11,7 +11,7 @@ Archetype: Tank
 **Hammer** :boom::boom::twisted_rightwards_arrows: Gain __Protect__
 **Anathema** (-1 :large_blue_diamond:) :shield::shield::twisted_rightwards_arrows: :boom: each
 **Prayer** Grant __Protect__ and +:large_blue_diamond:
-**Grace** (- :heart:) You are Immune next turn *LVL 2*
+**Grace** (- :heart:) You are immune to 💥 next turn *LVL 2*
 **Sanctify** (-2 :large_blue_diamond:) <:Persistence:1151788148322484234> 🔀 gain 🎯 this turn *LVL 3*
 **Divine Shield** <:Sturdy:1152516154192044142>:cyclone: *LVL 4*
 **Smite** Convert __protect__ and <:Persistence:1151788148322484234> into :boom::zap::cyclone: *LVL 5*
