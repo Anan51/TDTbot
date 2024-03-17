@@ -1,5 +1,5 @@
 # [Jux](<https://www.youtube.com/watch?v=Zf2qOWmKiz0>)
-Difficulty: ⭐⭐⭐⭐
+Difficulty: ⭐⭐⭐⭐⭐
 Archetype: Caster
 
 ❤️ : `(5)`   🟥🟥🟥🟥🟥
@@ -9,4 +9,4 @@ Archetype: Caster
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 **Card Trick** (-1 🔷) 💥💥 🔀 +1 📜
 **Paper Ward** (-1 🔷) 🛡️🛡️🛡️ 🔀 +1 🔷 per block
-**Philosopher's Stone** Draw +1 📜, gain +3 🔷, or cause -2 🔷
+**Philosopher's Stone** Draw +2 📜, gain +3 🔷, or cause -2 🔷
