@@ -1,5 +1,5 @@
 # [**__AEROR__**](<https://youtu.be/yydNF8tuVmU>)
-Difficulty: ⭐⭐⭐⭐ 
+Difficulty: ⭐⭐
 Archetype: Summoner
 
 :heart: : `(7)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square:
