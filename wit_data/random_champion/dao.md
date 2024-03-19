@@ -4,7 +4,7 @@ Archetype: Tank
 
 ❤️ : `( 13 )`  🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 🖤 : `( 2 )`   🔲🔲
-⚰️ [**Destiny of the 4**](https://media.discordapp.net/attachments/1056365502101979146/1218755032145461279/Dao.jpg?ex=6608d113&is=65f65c13&hm=4dd4fa4d670b0080db8e3a830554e61eca57df054e5efac1bccd6806d416d069&=&format=webp)
+⚰️ [**Destiny of the 4**](https://media.discordapp.net/attachments/1056365502101979146/1219485043701841942/Dao.jpg?ex=660b78f3&is=65f903f3&hm=fb5ede59cc3c81327f06cc9a7d8d5f54a9220a2d25e9d38ee4b80c7709790d76&=&format=webp)
 *At 4+ 🖤 your next 💥 gains: +💥🚫🌀 🔀 -4 🖤*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Shatter** (-1 ❤️): 💥💥💥 🔀 +1 🖤
