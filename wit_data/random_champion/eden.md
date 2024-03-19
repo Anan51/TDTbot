@@ -12,6 +12,6 @@ Archetype: Support
 **Spore Shield** (-1 🔷): 🛡️🛡️🛡️ 🔀 Grant +<:Persistence:1151788148322484234>
 **Sunshine** (-1 ❤️): <:Sturdy:1152516154192044142>; remove 🔀 from all friendlies’ next moves.
 **Wall of Thorns** (-3 ❤️): Grant <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234> 🔀💥 *LVL 2*
-**Bloom Blossom** (-3 🔷): Grant +❤️❤️<:Sturdy:1152516154192044142>🌀 *LVL 3*
-**Harvest** (-2 <:Persistence:1151788148322484234>): Grant +🔷🔷🔷🔷<:Sturdy:1152516154192044142>🌀 *LVL 4*
+**Bloom Blossom** (-3 🔷): +❤️❤️<:Sturdy:1152516154192044142>🌀 *LVL 3*
+**Harvest** (-2 <:Persistence:1151788148322484234>): +🔷🔷🔷🔷<:Sturdy:1152516154192044142>🌀 *LVL 4*
 **Naturalize** (-1 🔷, -1 ❤️): 💥🎯; If this kills 🔀 +1 max ❤️ and 🔷 *LVL 5*
