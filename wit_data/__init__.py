@@ -147,6 +147,10 @@ def gen_potion(roll_str):
         "**Flames**: Burn x10 [+8 <:gold:1058304371940655185>]",
         "**Foritude**: +<:stealthIcon:943248201790677052><:Persistence:1151788148322484234><:Sturdy:1152516154192044142> for the next 3 turn(s) [+9 <:gold:1058304371940655185>]",
         "**Proficiency**: +🚫🎯⚡ for the next 3 turn(s) [+10 <:gold:1058304371940655185>]",
+        "**Impact**: Cause +:boom::boom::boom:⚡ [+11 <:gold:1058304371940655185>]",
+        "**Demolition**: Cause +:boom::boom::boom::no_entry_sign: in 2 turns [+12 <:gold:1058304371940655185>]",
+        "**Needling**: Cause +:boom::boom::dart: in 3 turns [+13 <:gold:1058304371940655185>]",
+        "**Smoke**: Cause +🛡️ <:Persistence:1151788148322484234> <:Sturdy:1152516154192044142> <:stealthIcon:943248201790677052> next turn [+14 <:gold:1058304371940655185>]",
         ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(potions)))
     return [(prefixes[r[0] - 1], potions[r[1] - 1], r[0] + r[1]) for r in rolls]
