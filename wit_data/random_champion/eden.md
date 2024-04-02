@@ -12,7 +12,7 @@ Archetype: Support
 **Spore Shield** (-1 🔷): <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> 🔀 +❤️
 **Blossom** Grant +1 LVL
 **Vine and Root** (-2 🔷): 💥💥<:Sturdy:1152516154192044142>🔀 +🔷🌀 *LVL 2*
-**Bury** In 2 turns, +<:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> *LVL 3*
+**Bury** In 2 turns, gain an additional +<:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> *LVL 3*
 **Sunshine**: Remove 🔀 from all allies next moves. *LVL 4*
 **Wall of Thorns** (- 4 🔷): <:Persistence:1151788148322484234><:Persistence:1151788148322484234>🔀💥  *LVL 5*
 **Prune** (-1 LVL): +🔷🌀 per your LVL *LVL 6*
