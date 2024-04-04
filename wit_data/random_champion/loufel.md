@@ -1,7 +1,7 @@
 # [Loufel](<https://youtu.be/-ZQbp_eB-9A>)
 
 Difficulty: ⭐⭐⭐⭐
-Archetype: Wandering Champion
+Archetype: Assassin 
 
 ❤️ `(8)` 🟥🟥🟥🟥🟥🟥🟥🟥
 🔷 `(6)` 🟦🟦🟦🟦🟦🟦
@@ -12,7 +12,7 @@ Archetype: Wandering Champion
 **Slap** 💥💥 ⚡; +💥 if target has 3 or more stacks of __taunt__
 **Fool** 🛡️🛡️🛡️🔀 Cause __taunt__
 **Provoke** If you took no damage this turn, cause __tauntx3__
-**Insult** (-2🔷) 💥🚫🔀 Cause __weakx2__ and __taunt__ *LVL 2*
+**Insult** (-2🔷) 💥🔀 Cause __weakx2__ and __taunt__ *LVL 2*
 **Magic Mirror** (-1🔷) The effects of status moves used this turn are applied to all members of the opposite team. *LVL 3*
 **Trick** <:Sturdy:1152516154192044142>🔀+🔷💥 *LVL 4*
 **Abracadabra** (-2 🔷) 🛡️ per incoming 💥 🔀 Next cast: 💥💥 per block instead LVL 5
