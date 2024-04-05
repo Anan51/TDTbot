@@ -1,6 +1,6 @@
 # [__**IRON FIN**__](<https://www.youtube.com/watch?v=Rv3SOWZjT3A>)
 ❤️ : 4
-💰 : ||+3 🔷🌀, Choose between 1 of 3 `tdt$rare_artifacts`, they cannot be stored.||
+💰 : ||+3 🔷🌀, Choose between 1 of 3 `tdt$rare_artifacts`.||
 
 **First Strike**: Gain <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234> x 👥 ; for the rest of the game, this creature is immune to __Burn__
 *"'Ferrous Sphaeriludium' this beast has spent too much time in deep, mineral rich waters and now it thinks it can kill a god - Sullen Journal*
