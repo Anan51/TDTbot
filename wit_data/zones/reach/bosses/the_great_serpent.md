@@ -1,7 +1,7 @@
 # [__**THE GREAT SERPENT**__](<https://youtu.be/wlF0-Qs2xkI>)
 ❤️ : 12 x 👥
 🔷 : 9
-💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$rare_artifacts` x3 and <:legendaryShard:1213251982341709854>x1||
+💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x1, and Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
 **First Strike**: Cause __burn__x20 🌀 
 *"For YHWH knows the day you eat thereof your eyes will be open and you will be like God. Knowing good and evil."*
