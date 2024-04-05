@@ -1,7 +1,7 @@
 # [__**HY(PER)GUARD**__](<https://www.youtube.com/watch?v=eOLl_QbxLrg>)
 ❤️ : 14 x 👥
 🔷 : 3
-💰 : ||🗡️ **High Guard**: 🛡️, +🛡️ per missing 🔷||
+💰 : ||Choose between 1 of 3 `tdt$rare_artifacts` and 🗡️ **High Guard**: 🛡️, +🛡️ per missing 🔷, they cannot be stored||
 
 **Clockwork**: Gain __empower__ unless __vulnerable__.
 *One day, this higuard woke up, had a few too many shots, and chose Violence*
