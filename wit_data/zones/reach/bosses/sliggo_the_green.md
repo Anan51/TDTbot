@@ -1,7 +1,7 @@
 # [__**SLIGGO THE GREEN**__](<https://www.youtube.com/watch?v=iMH49ieL4es>)
 ❤️ : 20 x👥
 🔷 : 0
-💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$rare_artifacts` x3 and <:legendaryShard:1213251982341709854>x1||
+💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x1, and Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
 **Martyr** Summon another **Sliggo The Green** with half of this Sliggo's starting ❤️ (round down).
 *"-Grotesque slorping noises-" Bits of small creatures skeletons such as birds and rodents are visible engulfed in the gelatinous mass*
