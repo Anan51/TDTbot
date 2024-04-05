@@ -1,7 +1,7 @@
 # [__**SKYHOOK PLUNDER-CAPTAIN**__](<https://www.youtube.com/watch?v=J2skbG1WHXw>)
 ❤️ : 12 x 👥 
 <:Persistence:1151788148322484234> : 4
-💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$rare_artifacts` x3 and <:legendaryShard:1213251982341709854>x1||
+💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x3, and Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
 [**Behavior**](https://media.discordapp.net/attachments/1056365502101979146/1221288344944644126/download.jpg?ex=66120867&is=65ff9367&hm=6207c57dc4a2910b67730312fbd6fc447a504f42eef2bf051e1c4cb246a6e55d&=&format=webp&width=450&height=676): Gains +💥 per 👥 to all 💥
 *"I ain't leaving without a score and you lubbers look like you would fetch a high price"*
