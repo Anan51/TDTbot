@@ -1,7 +1,7 @@
 # [__**HIS RIGHT HAND**__](<https://www.youtube.com/watch?v=EKLWC93nvAU>)
 ❤️ : 6 x 👥
 __will__ : 20
-💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$rare_artifacts` x2 and <:legendaryShard:1213251982341709854>x3||
+💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x3, and Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
 **Martyr**: If this has __will__, resummon itself with full stats, randomize turns, and keep all __will__ stacks
 *"..."*
