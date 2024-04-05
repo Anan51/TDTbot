@@ -1,7 +1,7 @@
 # __**[POTASSIUM](<https://m.youtube.com/watch?v=BRD9BqjIk-E&pp=ygUKQmFuYW5hIG1hbg%3D%3D>) [POSTMAN](<https://www.youtube.com/watch?v=uivFFnCI8tM>)**__
 ❤️ : 6 x 👥
 🔷 : 6
-💰 : ||Choose between 1 of 3 `tdt$rare_artifacts`, they cannot be stored {OR} Summon a `tdt$wit_shop`, take one item valued at less than 20 <:gold:1058304371940655185> for free||
+💰 : ||Choose between 1 of 3 `tdt$rare_artifacts` {OR} Summon a `tdt$wit_shop`, take one item valued at less than 20 <:gold:1058304371940655185> for free||
 
 **Mana Thirst**: use `tdt$wit_loot 10` if its a 🧪 potion, use it. 
 *You have your doubts that those are REAL bananas...*
