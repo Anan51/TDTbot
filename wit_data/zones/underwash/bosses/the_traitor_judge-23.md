@@ -1,6 +1,6 @@
 # [__**THE TRAITOR: JUDGE-23**__](<https://www.youtube.com/watch?v=bMfvZmhqW0A&pp=ygUTZ29kIHNoYXR0ZXJpbmcgc3Rhcg%3D%3D>)
 ❤️ : 14
-💰 : ||+100% ❤️ and 🔷; Choose one from `tdt$wit_loot 19` x2 ||
+💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x3, and Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
 **First Strike**: Summon another JUDGE-23 per 👥. Whenever a player gains an __effect__ this gains __Empower__
 *"Kneel."*
