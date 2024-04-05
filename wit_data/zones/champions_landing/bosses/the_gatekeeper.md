@@ -1,6 +1,6 @@
 # [__**THE GATEKEEPER**__](<https://www.youtube.com/watch?v=0uAsD6lQV1I&pp=ygUZYm9tYnMgZm9yIHRocm93aW5nIGF0IHlvdQ%3D%3D>)
 :heart: : 8 x:busts_in_silhouette:
-:moneybag: : ||+100% 🔷 and +50% ❤️, Choose one of 3 `tdt$wit_loot 10` ||
+:moneybag: : ||+100% ❤️ and 🔷. Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
 **Clockwork** Gain <:Persistence:1151788148322484234>
 *"TRESSPASSERS DETECTED. CHARGING CORE AND COUNTERMEASURES"*
