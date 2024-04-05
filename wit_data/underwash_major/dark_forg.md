@@ -1,6 +1,6 @@
 # [__**DARK FORG**__](<https://m.youtube.com/watch?v=ZqJfqIwpXZ8>)
 ❤️ : 8
-💰 : ||+4 ❤️ 🌀, and `tdt$rare_artifacts`||
+💰 : ||+4 ❤️ 🌀, and Choose between 1 of 3 `tdt$rare_artifacts`, they cannot be stored.||
 
 **Martyr**: Deal 💥💥💥💥💥🎯 x 👥 🔀 cause __will__ per success
 *"Just let me help. Relax. Let me take control for a moment" - a small voice*
