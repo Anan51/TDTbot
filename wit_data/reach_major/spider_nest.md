@@ -1,6 +1,6 @@
 # [__**SPEYEDER NEST**__](<https://www.youtube.com/watch?v=rvXm2TNLfnQ>)
 ❤️ : 6 x:busts_in_silhouette:
-💰 : ||`tdt$rare_artifacts`||
+💰 : ||Choose between 1 of 3 `tdt$rare_artifacts`, they cannot be stored.||
 
 **First Strike**: Summon x:busts_in_silhouette: SPEYEDERS
 *You smell something like a... bakery?*
