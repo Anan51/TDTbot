@@ -161,7 +161,7 @@ def gen_artifact(roll_str):
         "**Honey Money** 🍯 Defeating enemies grants +1 <:gold:1058304371940655185>. [+1 <:gold:1058304371940655185>]",
         "**Safety Scissors**: ✂️ Flees the combat or encounter. Redo your floor roll. (One person. Destroyed on Use) [+2 <:gold:1058304371940655185>]",
         "**Cook Book**: 🍔 You may raise your max HP and MP by 1 at Camp Sites instead of resting (Lasts until the end of the run, once per team) [+3 <:gold:1058304371940655185>]",
-        "**Port-a-Forge**: 🛠️ Immediately increase a weapon's damage, shield, or __effect__. [+4 <:gold:1058304371940655185>]",
+        "**Port-a-Forge**: 🛠️ Immediately increase a weapon's damage, shield, or __effect__ then destroy this item. [+4 <:gold:1058304371940655185>]",
         "**Ring of Momentum**: 💍 Weapon kills grant __Empower__ (carries into the next combat). [+5 <:gold:1058304371940655185>]",
         "**Safety Hook**: 🪝 Gain __Protect__x2 the first time an enemy deals damage to you [+6 <:gold:1058304371940655185>]",
         "**Vitamins**: 💊 Start each combat with __Heal__x2 [+7 <:gold:1058304371940655185>]",
