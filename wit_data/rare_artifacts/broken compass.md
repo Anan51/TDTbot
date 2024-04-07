@@ -1,1 +1,2 @@
-🧭 **Broken Compass** Your encounter rolls have +3 or -3 🎲. All basic encounter paths are open to you but you gain __will__ and - 🔷 for using them. [20 <:gold:1058304371940655185>]
+#  **Broken Compass** 🧭
+> Your encounter rolls have +3 or -3 🎲. All basic encounter paths are open to you but you gain __will__ and - 🔷 for using them. [20 <:gold:1058304371940655185>]
