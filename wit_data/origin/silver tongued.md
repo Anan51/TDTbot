@@ -1,0 +1,2 @@
+#  __Silver Tongued__ 🔐
+> Your __weak__ causes targets to receive double stacks of negative effects. <:gold:1058304371940655185> replaces your 🔷, this includes any costs. You may grant  +/- 2 🎲 to one roll per realm.
