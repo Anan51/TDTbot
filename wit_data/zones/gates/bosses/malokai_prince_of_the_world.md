@@ -1,7 +1,9 @@
 # [__**MALOKAI, PRINCE OF THE WORLD**__](<https://www.youtube.com/watch?v=GGhZsiRCvYc>)
 :heart: : 40 x :busts_in_silhouette:
-:moneybag: : ||"You cannot destroy me. You are allowed to only injure me. Take your weapon and leave me." `tdt$wit_loot 19` and <:legendaryShard:1213251982341709854> x3 {OR} If you have no __will__: summon tdt$gates_boss_2||
-Behavior: Cause __Will__ at the beginning of every player turn. Lowest HP player rolls move decisions
+:moneybag: : ||<:legendaryShard:1213251982341709854> x:busts_in_silhouette: +2; return to floor 1 of The Reach with +2 to 👥 {OR} If you have no __will__: summon tdt$gates_boss_2||
+
+**Behavior**: Cause __Will__ at the beginning of every player turn. Lowest HP player rolls move decisions
+*"You cannot destroy me. You are allowed to only injure me. Take your loot and leave me." *
 —————————————————
 1-12    | **Nightmare Blade** :boom::boom::boom::shield::cyclone:; If this took no damage :twisted_rightwards_arrows: :boom::boom::boom::dart: Lowest HP next turn
 13-16   | **Soul Devour** :shield:, Cause __Will__ per damage taken :twisted_rightwards_arrows: Double the efficacy of your last turn
