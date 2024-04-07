@@ -3,11 +3,11 @@
 🔷 : 10
 💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x1, and Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
-**Clockwork** Gain permanent __empower__ on odd turns and permanent __protect__ on even turns 
+**Behavior** Disable all player Status Moves
 *Accused of being: shot, poisoned, thrown into a freezing river, and still busting down a sick groove through it all*
 —————————————————
 Turn 1  | **Beat**: 💥⚡
 Turn 2 | **Groove**: 🛡️🛡️🔀 +💥🌀 per blocked
 Turn 3 | **Rhythm**: +2 ❤️ x 👥
-Turn 4 | **Change Up** (-2 🔷): Immune. Nullify all status moves used this turn. Random turn
+Turn 4 | **Change Up** (-2 🔷): Change behavior to say "Disable all player Defense Moves". Use again to remove. Random turn
 Turn 5 | **Take it Back Now**: Dispel all player effects. Reset turn
