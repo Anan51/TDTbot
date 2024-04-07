@@ -3,13 +3,13 @@
 🔷 : 3
 💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x3, and Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
-**Mana Thirst**: Summon a Legion of Flesh x 👥 with 0 🔷. (They roll/act as one unit but must be targeted individually)
+**Behavior**: Players have __Weak__x3 unless this is dealing 💥. **Start of Combat**: Summon a Legion of Flesh x 👥 +1. 
 *"Lust of the eyes... lust of the flesh... pride of life..."*
 —————————————————
-Turn 1  | **Pride** (-2 🔷) Become Immune each turn per the parties __will__. Random turns
-Turn 2 | **Lust** Cause __will__ for every __effect__ the players have.
-Turn 3 | **Wrath** 💥 repeat per Legion of Flesh
-Turn 4 | **Envy** <:stealthIcon:943248201790677052> 🔀 Gain <:Persistence:1151788148322484234> and __protect__🌀
-Turn 5 | **Greed** Grant 3 <:gold:1058304371940655185> but gain __empower__ for every 🛡️ the party has
-Turn 6 | **Gluttony** Consume another Legion of Flesh, Gain its ❤️. Grant __empower__ 🌀 and +🔷🌀
-Turn 7 | **Sloth** +🔷, Reset Turns. Cause -__will__ per damage taken this turn.
+Turn 1  | **Pride** (-2 🔷) Gain __empower__ and <:Persistence:1151788148322484234> per 👥.
+Turn 2 | **Envy** 🛡️<:Sturdy:1152516154192044142> 🔀 Gain __empower__ x 👥
+Turn 3 | **Lust** Cause __will__ for every __effect__ the players have.
+Turn 4 | **Wrath** 💥🌀 per target's __will__
+Turn 5 | **Greed** Gain __protect__ for every 10 <:gold:1058304371940655185> the party has
+Turn 6 | **Gluttony** Consume a player's +🔷 above their max.
+Turn 7 | **Sloth** 💥⚡ Cause -__will__ per damage taken this turn. Random Turns.
