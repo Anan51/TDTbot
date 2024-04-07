@@ -199,10 +199,10 @@ def gen_shop():
     items.extend(gen_potion("3d10"))
     print ("# __ARTIFACTS__")
     items.extend(gen_artifact("3d10"))
-    print ("# __SPELLS__")
+    print ("# __FEATURED GOODS__")
     print ("[-15 <:gold:1058304371940655185>] +1 tdt$draft spell 📜")
-    print ("# __MEALS__")
     print ("[-10 <:gold:1058304371940655185>] +1 max ❤️ or 🔷")
+    print ("[-5 <:gold:1058304371940655185>] **Ancient Key**: :key2: Opens one chest.")
     return [item_card(item, gold=10) for item in items]
 
 
