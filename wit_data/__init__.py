@@ -89,34 +89,34 @@ def gen_weapon(roll_str):
         "**Basic**: No bonus [+1 <:gold:1058304371940655185>]",
         "**Ornate**: +10 in <:gold:1058304371940655185> value",
         "**Lightweight**: +⚡ [+3 <:gold:1058304371940655185>]",
-        "**Relentless**: +🚫 [+4 <:gold:1058304371940655185>]",
-        "**Honed** (-1 🔷): +🎯 [+5 <:gold:1058304371940655185>]",
-        "**Heavy**: +🛡️ [+6 <:gold:1058304371940655185>]",
-        "**Robust**: +🔀<:Sturdy:1152516154192044142> [+7 <:gold:1058304371940655185>]",
-        "**Concealed**: +🔀<:stealthIcon:943248201790677052> [+8 <:gold:1058304371940655185>]",
-        "**Unbreaking**: +🔀<:Persistence:1151788148322484234> [+9 <:gold:1058304371940655185>]",
-        "**Sweeping**: +🔀+🌀 [+10 <:gold:1058304371940655185>]",
+        "**Relentless** (-1 🔷): +🚫 [+4 <:gold:1058304371940655185>]",
+        "**Honed** (-2 🔷): +🎯 [+5 <:gold:1058304371940655185>]",
+        "**Heavy** (-1 🔷): +🛡️ [+6 <:gold:1058304371940655185>]",
+        "**Robust** (-2 🔷): +<:Sturdy:1152516154192044142> [+7 <:gold:1058304371940655185>]",
+        "**Concealed** (-1 🔷): +<:stealthIcon:943248201790677052> [+8 <:gold:1058304371940655185>]",
+        "**Unbreaking** (-2 🔷): +<:Persistence:1151788148322484234> [+9 <:gold:1058304371940655185>]",
+        "**Sweeping** (-2 🔷): +🌀 [+10 <:gold:1058304371940655185>]",
     ]
     weapons = [
-        "**Short Sword**: 💥 [+1 <:gold:1058304371940655185>]",
-        "**Buckler**: 🛡️🛡️ [+2 <:gold:1058304371940655185>]",
-        "**Kunai** (-1 🔷): 💥⚡ [+3 <:gold:1058304371940655185>]",
-        "**Axe** (-1 🔷): 💥🚫 [+4 <:gold:1058304371940655185>]",
+        "**Short Sword**: 💥💥 [+1 <:gold:1058304371940655185>]",
+        "**Buckler**: 🛡️🛡️🛡️ [+2 <:gold:1058304371940655185>]",
+        "**Kunai**: 💥⚡ [+3 <:gold:1058304371940655185>]",
+        "**Axe**: 💥🚫 [+4 <:gold:1058304371940655185>]",
         "**Crossbow** (-1 🔷): 💥🎯 [+5 <:gold:1058304371940655185>]",
-        "**Halberd** (-1 🔷): 💥🛡️ [+6 <:gold:1058304371940655185>]",
-        "**Focus Rune** (-1 🔷): <:Persistence:1151788148322484234>🔀+🔷 [+7 <:gold:1058304371940655185>]",
-        "**Siphon Rune** (-1 ❤️): <:Persistence:1151788148322484234>🔀+❤️ [+8 <:gold:1058304371940655185>]",
-        "**Fang** (-1 🔷): 💥<:stealthIcon:943248201790677052> [+9 <:gold:1058304371940655185>]",
-        "**Knights Shield** (-1 🔷): <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> [+10 <:gold:1058304371940655185>]",
+        "**Halberd**: 💥🛡️ [+6 <:gold:1058304371940655185>]",
+        "**Focus Rune**: <:Persistence:1151788148322484234>🔀+🔷🔷 [+7 <:gold:1058304371940655185>]",
+        "**Siphon Rune**: <:Persistence:1151788148322484234>🔀+❤️ [+8 <:gold:1058304371940655185>]",
+        "**Fang**: 💥<:stealthIcon:943248201790677052> [+9 <:gold:1058304371940655185>]",
+        "**Knights Shield**: <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> [+10 <:gold:1058304371940655185>]",
         "**Scroll**: +3 🔷 {OR} +1 ❤️ [+11 <:gold:1058304371940655185>]",
         "**Wand**: Gain a random tdt$draft spell, it has as many uses as your current stacks of __empower__ +1. [+12 <:gold:1058304371940655185>]",
         "**Runic Flintlock** (-2 🔷): 💥, +💥 per stack of __weak__ your target has [+13 <:gold:1058304371940655185>]",
         "**Graven Shield** (-1 🔷): <:Sturdy:1152516154192044142>, +<:Sturdy:1152516154192044142> per stack of __heal__ you have [+14 <:gold:1058304371940655185>]",
-        "**Gilded Hammer** (-2 🔷): 🛡️, +💥 per stack of __protect__ you you have [+15 <:gold:1058304371940655185>]",
+        "**Gilded Hammer** (-2 🔷): 🛡️🛡️, +💥 per stack of __protect__ you you have [+15 <:gold:1058304371940655185>]",
         "**Tome** (-1 🔷): Summon a Familiar or an Automaton [+16 <:gold:1058304371940655185>]",
         "**Spell Book** (-4 🔷): Double your next move's efficacy [+17 <:gold:1058304371940655185>]",
         "**Protection Rune** (-2 🔷): <:Persistence:1151788148322484234><:Persistence:1151788148322484234> [+18 <:gold:1058304371940655185>]",
-        "**Staff** (-2 🔷): 💥, +💥 per stack of __burn__ your target has [+19 <:gold:1058304371940655185>]",
+        "**Staff** (-2 🔷): 💥💥, +🔷 per stack of __burn__ your target has [+19 <:gold:1058304371940655185>]",
         "**Sword of the Spirit** Remove all __will__ at the end of next turn [+20 <:gold:1058304371940655185>]",
     ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(weapons)))
@@ -158,7 +158,7 @@ def gen_potion(roll_str):
 
 def gen_artifact(roll_str):
     artifacts = [
-        "**Ancient Key**: 🗝️  Opens loot chests found on floors (Destroyed on Use) [+1 <:gold:1058304371940655185>]",
+        "**Honey Money** 🍯 Defeating enemies grants +1 <:gold:1058304371940655185>. [+1 <:gold:1058304371940655185>]",
         "**Safety Scissors**: ✂️ Flees the combat or encounter. Redo your floor roll. (One person. Destroyed on Use) [+2 <:gold:1058304371940655185>]",
         "**Cook Book**: 🍔 You may raise your max HP and MP by 1 at Camp Sites instead of resting (Lasts until the end of the run, once per team) [+3 <:gold:1058304371940655185>]",
         "**Port-a-Forge**: 🛠️ You may increase a weapon's damage, shield, or __effect__ at a camp instead of resting. (Lasts until the end of the run, once per team) [+4 <:gold:1058304371940655185>]",
@@ -193,10 +193,17 @@ def item_card(item, gold=None):
 
 
 def gen_shop():
+    print ("# __WEAPONS__")
     items = gen_weapon("3d19")
+    print ("# __POTIONS__")
     items.extend(gen_potion("3d10"))
+    print ("# __ARTIFACTS__")
     items.extend(gen_artifact("3d10"))
-    return [item_card(item, gold=5) for item in items]
+    print ("# __SPELLS__")
+    print ("[-15 <:gold:1058304371940655185>] +1 tdt$draft spell 📜")
+    print ("# __MEALS__")
+    print ("[-10 <:gold:1058304371940655185>] +1 max ❤️ or 🔷")
+    return [item_card(item, gold=10) for item in items]
 
 
 def gen_loot(roll_str=None):
