@@ -7,7 +7,7 @@
 *These slugs emmit a gas that has a mildly pscho-toxic effect to humans and fenric... some fenrics keep them as pets to uh... lick them*
 —————————————————
 Turn 1  | **Corrosive Sludge** (-1 🔷) 💥💥💥💥 🔀 disable any weapons used this turn for the rest of combat.
-Turn 2 | **Gas** 🛡️ x 👥   🔀  __Vulnerable__ 🌀
-Turn 3 | **Coil** Gain __protect__
+Turn 2 | **Gas** 🛡️ x 👥   🔀  __Vulnerable__ x 👥
+Turn 3 | **Coil** Gain __protect__ x 👥
 Turn 4 | **Acid Squirt** (-1 🔷) Remove the target's modifiers on the move used this turn for the rest of combat. Reset turns.
 Turn 5 | **Mucous** Gain +2 🔷 x 👥, random turns
