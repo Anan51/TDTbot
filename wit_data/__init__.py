@@ -200,11 +200,11 @@ def gen_shop():
     out.extend(item_card(item, gold=10) for item in gen_potion("3d10"))
     out.append("# __ARTIFACTS__")
     out.extend(item_card(item, gold=10) for item in gen_artifact("3d10"))
-    out.append("# __FEATURED GOODS__")
+    out.append("# __SINGLE USE GOODS__")
     out.append("[-15 <:gold:1058304371940655185>] **Spell Book** +1 tdt$draft spell 📜")
     out.append("[-10 <:gold:1058304371940655185>] **Tavern Meal** +1 max ❤️ or 🔷")
     out.append("[-5 <:gold:1058304371940655185>] **Ancient Key**: :key2: Opens one chest.")
-    out.append("**Sell Items**: Remove 1 item 💰, gain its listed <:gold:1058304371940655185> value")
+    out.append("**Sell Items**: Remove any items 💰, gain their listed <:gold:1058304371940655185> value")
     return out
 
 
