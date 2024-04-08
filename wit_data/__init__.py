@@ -137,20 +137,20 @@ def gen_potion(roll_str):
         "**Grand Splash Mixture of**: ++Effect, +🌀] [+10 <:gold:1058304371940655185>]",
     ]
     potions = [
-        "**Regeneration**: +6 ❤️ ( +/- 1 per effect) [+1 <:gold:1058304371940655185>]",
-        "**Rejuvenation**: +6 🔷 ( +/- 1 per effect) [+2 <:gold:1058304371940655185>]",
-        "**Strength**: Empower x3 [+3 <:gold:1058304371940655185>]",
-        "**Toughness**: Protect x5 [+4 <:gold:1058304371940655185>]",
-        "**Healing**: Heal x10 [+5 <:gold:1058304371940655185>]",
-        "**Weakness**: Weak x3 [+6 <:gold:1058304371940655185>]",
-        "**Sapping**: Vulnerable x5 [+7 <:gold:1058304371940655185>]",
-        "**Flames**: Burn x10 [+8 <:gold:1058304371940655185>]",
+        "**Regeneration**: +4 ❤️ ( +/- 1 per effect) [+1 <:gold:1058304371940655185>]",
+        "**Rejuvenation**: +4 🔷 ( +/- 1 per effect) [+2 <:gold:1058304371940655185>]",
+        "**Strength**: Empower x4 [+3 <:gold:1058304371940655185>]",
+        "**Toughness**: Protect x4 [+4 <:gold:1058304371940655185>]",
+        "**Healing**: Heal x6 [+5 <:gold:1058304371940655185>]",
+        "**Weakness**: Weak x4 [+6 <:gold:1058304371940655185>]",
+        "**Sapping**: Vulnerable x4 [+7 <:gold:1058304371940655185>]",
+        "**Flames**: Burn x6 [+8 <:gold:1058304371940655185>]",
         "**Foritude**: +<:stealthIcon:943248201790677052><:Persistence:1151788148322484234><:Sturdy:1152516154192044142> for the next 3 turn(s) [+9 <:gold:1058304371940655185>]",
         "**Proficiency**: +🚫🎯⚡ for the next 3 turn(s) [+10 <:gold:1058304371940655185>]",
-        "**Impact**: Cause +💥💥💥⚡ [+11 <:gold:1058304371940655185>]",
-        "**Demolition**: Cause +:💥💥💥🚫 in 2 turns [+12 <:gold:1058304371940655185>]",
-        "**Needling**: Cause +💥💥💥🎯 in 3 turns [+13 <:gold:1058304371940655185>]",
-        "**Smoke**: Cause +🛡️ <:Persistence:1151788148322484234> <:Sturdy:1152516154192044142> <:stealthIcon:943248201790677052> next turn [+14 <:gold:1058304371940655185>]",
+        "**Impact**: Cause +💥💥💥💥⚡ [+11 <:gold:1058304371940655185>]",
+        "**Demolition**: Cause +:💥💥💥💥🚫 in 2 turns [+12 <:gold:1058304371940655185>]",
+        "**Needling**: Cause +💥💥💥💥🎯 in 3 turns [+13 <:gold:1058304371940655185>]",
+        "**Smoke**: Cause +🛡️🛡️🛡️<:stealthIcon:943248201790677052> next turn [+14 <:gold:1058304371940655185>]",
         ]
     rolls = zip(roll(roll_str, max_sides=len(prefixes)), roll(roll_str, max_sides=len(potions)))
     return [(prefixes[r[0] - 1], potions[r[1] - 1], r[0] + r[1]) for r in rolls]
@@ -159,20 +159,20 @@ def gen_potion(roll_str):
 def gen_artifact(roll_str):
     artifacts = [
         "**Honey Money** 🍯 Defeating enemies grants +1 <:gold:1058304371940655185>. [+1 <:gold:1058304371940655185>]",
-        "**Safety Scissors**: ✂️ Flees the combat or encounter. Redo your floor roll. (One person. Destroyed on Use) [+2 <:gold:1058304371940655185>]",
+        "**Safety Scissors**: ✂️ Redo your Floor or Boss roll. (Destroyed on Use) [+2 <:gold:1058304371940655185>]",
         "**Cook Book**: 🍔 You may raise your max HP and MP by 1 at Camp Sites instead of resting (Lasts until the end of the run, once per team) [+3 <:gold:1058304371940655185>]",
-        "**Port-a-Forge**: 🛠️ Immediately increase a weapon's damage, shield, or __effect__ then destroy this item. [+4 <:gold:1058304371940655185>]",
-        "**Ring of Momentum**: 💍 Weapon kills grant __Empower__ (carries into the next combat). [+5 <:gold:1058304371940655185>]",
-        "**Safety Hook**: 🪝 Gain __Protect__x2 the first time an enemy deals damage to you [+6 <:gold:1058304371940655185>]",
-        "**Vitamins**: 💊 Start each combat with __Heal__x2 [+7 <:gold:1058304371940655185>]",
-        "**Lucky Clover**: 🍀 Successful weapon blocks cause __Weak__ [+8 <:gold:1058304371940655185>]",
-        "**War Drum**: 🥁 Weapons cause __vulnerable__ the first time they are succesful [+9 <:gold:1058304371940655185>]",
+        "**Port-a-Forge**: 🛠️ Increase a move's damage, shield, or effect then destroy this item. If used on the same move more than once, this also costs -1 max 🔷 [+4 <:gold:1058304371940655185>]",
+        "**Ring of Momentum**: 💍 Kills grant __Empower__. [+5 <:gold:1058304371940655185>]",
+        "**Safety Hook**: 🪝 Gain __Protect__x 👥 the first time an enemy deals damage to you [+6 <:gold:1058304371940655185>]",
+        "**Vitamins**: 💊 Start each combat with __Heal__x 👥 [+7 <:gold:1058304371940655185>]",
+        "**Lucky Clover**: 🍀 Successful blocks cause __Weak__x 👥 [+8 <:gold:1058304371940655185>]",
+        "**War Drum**: 🥁 Blocks cause __vulnerable__x 👥 the first time they are succesful [+9 <:gold:1058304371940655185>]",
         "**Eternal Lantern**: 🪔 Successful weapon hits cause __Burn__ [+10 <:gold:1058304371940655185>]",
         "**Potion Pack** 🎒 Increase potion 🧪 carry quantity by +2. [11 <:gold:1058304371940655185>]",
         "**Bandolier** 🎽 Increase weapon 🗡️ carry quantity by +2. [12 <:gold:1058304371940655185>]",
         "**Wax Key** 🔑 All chests are unlocked for the rest of the region once you open one chest. [13 <:gold:1058304371940655185>]",
-        "**Thirsty Cup** 🫗 Increases the effect of all potions by 2 [14 <:gold:1058304371940655185>]",
-        "**Crystal Jar** 🫙 Potions have 3 uses but take a turn to use and only have 1/2 their max effect [15 <:gold:1058304371940655185>]",
+        "**Thirsty Cup** 🫗 Increases the effect of all potions by 👥 [14 <:gold:1058304371940655185>]",
+        "**Crystal Jar** 🫙 Potions have unlimited uses but take a turn to use, cost 1 🔷, and have 1/2 of their effect. [15 <:gold:1058304371940655185>]",
     ]
     return [(None, artifacts[r - 1], r) for r in roll(roll_str, max_sides=len(artifacts))]
 
