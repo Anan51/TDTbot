@@ -8,6 +8,6 @@
 —————————————————
 Turn 1  | **Beat**: 💥💥⚡ x 👥
 Turn 2 | **Groove**: 🛡️🛡️ x 👥 🔀 +💥🌀 per blocked
-Turn 3 | **Rhythm**: +2 ❤️ x 👥
+Turn 3 | **Rhythm**: +1 ❤️ x 👥 if this took no damage
 Turn 4 | **Change Up** (-2 🔷): Cause permanent __Vulnerable__🌀. Reset turns 
 Turn 5 | **Take it Back Now**: +4 🔷, Change behavior to say "Dispel all player effects.". Use again to remove. Random turn
