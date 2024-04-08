@@ -1,6 +1,6 @@
 # [__**MALOKAI, PRINCE OF THE WORLD**__](<https://www.youtube.com/watch?v=GGhZsiRCvYc>)
 :heart: : 40 x :busts_in_silhouette:
-:moneybag: : ||<:legendaryShard:1213251982341709854> x:busts_in_silhouette: +2; return to floor 1 of The Reach with +2 to 👥 {OR} If you have no __will__: summon tdt$gates_boss_2||
+:moneybag: : ||<:legendaryShard:1213251982341709854> x:busts_in_silhouette: +2; return to floor 1 of The Reach with +3 to 👥 {OR} If you have no __will__: summon tdt$gates_boss_2||
 
 **Behavior**: Cause __Will__ at the beginning of every player turn. Lowest HP player rolls move decisions
 *"You cannot destroy me. You are allowed to only injure me. Take your loot and leave me." *
