@@ -3,7 +3,7 @@
 🔷 : 6
 💰 : ||Choose from one of 3 `tdt$rare_artifacts`. If this died to __burn__ also gain +3 ❤️🌀 and +3 🔷🌀 ||
 
-**Clockwork**: Gain __Empower__ every turn unless __Vulnerable__
+**Clockwork**: Gain __Empower__ at the end of every turn unless __Vulnerable__
 *"Oh man... that's a really big and pissed off bird" - Fenric Bestiary*
 —————————————————
 Turn 1  | **Peck** 💥💥<:stealthIcon:943248201790677052>⚡
