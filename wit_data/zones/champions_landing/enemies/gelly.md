@@ -2,7 +2,7 @@
 ❤️ : 3
 💰 : ||1 <:gold:1058304371940655185>||
 
-Behavior: jiggly, likes cool damp areas and small birds
+**Behavior**: jiggly, likes cool damp areas and small birds
 *"-Tiny squelching noises-"*
 —————————————————
 Turn 1  | **Plop** 💥💥💥
