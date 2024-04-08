@@ -1,5 +1,5 @@
 # [__**FLOW-MASTER GRIGORI**__](<https://www.youtube.com/watch?v=16y1AkoZkmQ&pp=ygUIcmFzcHV0aW4%3D>) 
-❤️ : 10 x👥
+❤️ : 8 x👥
 🔷 : 10
 💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x1, and Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
