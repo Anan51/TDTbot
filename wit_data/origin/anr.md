@@ -1,2 +1,2 @@
 # Money Men 💸
-> Hits with 🌀 grant <:gold:1058304371940655185>
+> Moves with 🌀 have increased efficacy for every 25 <:gold:1058304371940655185> you have
