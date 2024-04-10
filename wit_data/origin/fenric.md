@@ -1,2 +1,2 @@
 # Fenric 🦊
-> Offense skills gain +💥 per consecutive perfect reads using ⚡ 
+> Hits with :zap: grant stacking +:boom: until you strike a shield. (resets end of combat)
