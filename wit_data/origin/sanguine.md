@@ -1,2 +1,2 @@
 # __Sanguine__ 🩸 
-> Successful 🚫 hits cause __vulnerable__ and grants +❤️ on __vulnerable__ targets
+> Successful :no_entry_sign: hits cause __vulnerable__. Moves that cost :heart: have :twisted_rightwards_arrows: +:heart: at no additional cost.
