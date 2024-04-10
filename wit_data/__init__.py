@@ -158,21 +158,18 @@ def gen_potion(roll_str):
 
 def gen_artifact(roll_str):
     artifacts = [
-        "**Honey Money** 🍯 Defeating enemies grants +1 <:gold:1058304371940655185>. [+1 <:gold:1058304371940655185>]",
-        "**Safety Scissors**: ✂️ Redo your Floor or Boss roll. (Destroyed on Use) [+2 <:gold:1058304371940655185>]",
-        "**Cook Book**: 🍔 You may raise your max HP and MP by 1 at Camp Sites instead of resting (Lasts until the end of the run, once per team) [+3 <:gold:1058304371940655185>]",
-        "**Port-a-Forge**: 🛠️ Increase a move's damage, shield, or effect then destroy this item. If used on the same move more than once, this also costs -1 max 🔷 [+4 <:gold:1058304371940655185>]",
-        "**Ring of Momentum**: 💍 Kills grant __Empower__. [+5 <:gold:1058304371940655185>]",
-        "**Safety Hook**: 🪝 Gain __Protect__x 👥 the first time an enemy deals damage to you [+6 <:gold:1058304371940655185>]",
-        "**Vitamins**: 💊 Start each combat with __Heal__x 👥 [+7 <:gold:1058304371940655185>]",
-        "**Lucky Clover**: 🍀 Successful blocks cause __Weak__x 👥 [+8 <:gold:1058304371940655185>]",
-        "**War Drum**: 🥁 Blocks cause __vulnerable__x 👥 the first time they are succesful [+9 <:gold:1058304371940655185>]",
-        "**Eternal Lantern**: 🪔 Successful weapon hits cause __Burn__ [+10 <:gold:1058304371940655185>]",
-        "**Potion Pack** 🎒 Increase potion 🧪 carry quantity by +2. [11 <:gold:1058304371940655185>]",
-        "**Bandolier** 🎽 Increase weapon 🗡️ carry quantity by +2. [12 <:gold:1058304371940655185>]",
-        "**Wax Key** 🔑 All chests are unlocked for the rest of the region once you open one chest. [13 <:gold:1058304371940655185>]",
-        "**Thirsty Cup** 🫗 Increases the effect of all potions by 👥 [14 <:gold:1058304371940655185>]",
-        "**Crystal Jar** 🫙 Potions have unlimited uses but take a turn to use, cost 1 🔷, and have 1/2 of their effect. [15 <:gold:1058304371940655185>]",
+        "**Honey Money** 🍯: Succesful 🗡️ hits grant +1 <:gold:1058304371940655185>. [+1 <:gold:1058304371940655185>]",
+        "**Safety Scissors** ✂️: Redo your Floor or Boss roll. (Destroyed on Use) [+2 <:gold:1058304371940655185>]",
+        "**Cook Book** 🍔: You may raise your max ❤️ and 🔷 by 1 at ⛺ instead of resting. [+3 <:gold:1058304371940655185>]",
+        "**Port-a-Forge** 🛠️: Increase a 🗡️'s 💥, 🛡️, or __effect__. If used on an upgraded 🗡️, this costs -1 max 🔷 to use. (Destroyed on use). [+4 <:gold:1058304371940655185>]",
+        "**Ring of Momentum** 💍: 🗡️ kills grant __Empower__. [+5 <:gold:1058304371940655185>]",
+        "**Safety Hook** 🪝: Succesful 🗡️ hits grant __Protect__. [+6 <:gold:1058304371940655185>]",
+        "**Vitamins** 💊: Start combat with __Heal__x🧪 [+7 <:gold:1058304371940655185>]",
+        "**Lucky Clover** 🍀: Successful 🗡️ blocks cause __Weak__ [+8 <:gold:1058304371940655185>]",
+        "**War Drum** 🥁: Succesful 🗡️ blocks cause __vulnerable__ [+9 <:gold:1058304371940655185>]",
+        "**Eternal Lantern** 🪔: Successful 🗡️ hits cause __Burn__ [+10 <:gold:1058304371940655185>]",
+        "**Potion Pack** 🎒: Increase 🧪 capacity by +2. [11 <:gold:1058304371940655185>]",
+        "**Bandolier** 🎽: Increase 🗡️ capacity by +2. [12 <:gold:1058304371940655185>]",
     ]
     return [(None, artifacts[r - 1], r) for r in roll(roll_str, max_sides=len(artifacts))]
 
@@ -201,9 +198,10 @@ def gen_shop():
     out.append("# __ARTIFACTS__")
     out.extend(item_card(item, gold=10) for item in gen_artifact("3d10"))
     out.append("# __SINGLE USE GOODS__")
-    out.append("[-15 <:gold:1058304371940655185>] **Spell Book** +1 tdt$draft spell 📜")
-    out.append("[-10 <:gold:1058304371940655185>] **Tavern Meal** +1 max ❤️ or 🔷")
     out.append("[-5 <:gold:1058304371940655185>] **Ancient Key**: :key2: Opens one chest.")
+    out.append("[-10 <:gold:1058304371940655185>] **Tavern Meal** +1 max ❤️ or 🔷")
+    out.append("[-10 <:gold:1058304371940655185>] **Ancient Relic** Roll 3 rare 🏺, you may buy one")
+    out.append("[-15 <:gold:1058304371940655185>] **Spell Book** +1 tdt$draft spell 📜")
     out.append("**Sell Items**: Remove any items 💰, gain their listed <:gold:1058304371940655185> value")
     return out
 
@@ -339,4 +337,4 @@ class WitData:
                    "🔒 Chest",
                    "🛖 Shop"
                    ]
-        return ', '.join(random.choices(options, weights=[10, 3, 7, 2, 1, 1, 3], k=3))
+        return ', '.join(random.choices(options, weights=[7, 3, 7, 3, 2, 2, 2], k=3))
