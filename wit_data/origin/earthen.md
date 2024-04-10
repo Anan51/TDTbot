@@ -1,2 +1,2 @@
 # __Earthen__ 🌿
-> Your __heal__ also grants +🔷. Gain +<:Persistence:1151788148322484234> from __heal__ when at full ❤️.
+> Your __heal__ grants +<:Persistence:1151788148322484234> instead of +:heart:. Ally kills grant +:heart: per their <:Persistence:1151788148322484234>
