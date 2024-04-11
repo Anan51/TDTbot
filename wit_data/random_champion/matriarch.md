@@ -1,6 +1,7 @@
 # [**__MATRIARCH__**](<https://www.youtube.com/watch?v=NFTemk99fLU>)
 Difficulty: ⭐⭐⭐⭐
 Archetype: Fighter
+*NOTE:* Banned in PvE
 
 :heart: : `(20)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
  `       `   :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
