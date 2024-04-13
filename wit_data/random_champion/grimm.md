@@ -1,5 +1,5 @@
 # [**__GRIMM__**](<https://www.youtube.com/watch?v=Xnc4wSuKvuo>) 
-Difficulty: ⭐⭐⭐
+Difficulty: ⭐⭐
 Archetype: Caster
 
 :heart: : `(6)`   :red_square::red_square::red_square::red_square::red_square::red_square:
@@ -10,8 +10,8 @@ Archetype: Caster
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Eldritch Blast** (-2 :large_blue_diamond:) :boom::boom::boom::no_entry_sign:
 **Bend Will** (-2 :large_blue_diamond:) Convert incoming 💥 into +:heart:
-**Blood Ritual** (-1 :heart:) Cause __Vulnerable__ x2
+**Blood Ritual** (-1 :heart:) <:stealthIcon:943248201790677052>, Cause __Vulnerable__ x2
 **Siphon Bolt** (-3 :large_blue_diamond:) :boom::boom::boom::zap::twisted_rightwards_arrows: +:heart: (per hit) *LVL 2*
-**Soul Silk** +2 :large_blue_diamond: per __Vulnerable__ *LVL 3*
+**Soul Silk** +2 :large_blue_diamond: per active __Vulnerable__ *LVL 3*
 **Conjure Void** (-4 :large_blue_diamond:) Your :large_blue_diamond: costs are one less, (min. of one) *LVL 4*
 **Infest** (-8 :large_blue_diamond:) You cause __Vulnerable__:cyclone: start of your turns *LVL 5*
