@@ -8,5 +8,5 @@ Archetype: Caster
 *At the start of the game, use `tdt$draft` to gain a single use Spell 📜 per your level (up to 5). You can discard spells on a turn to grant your skills a modifier* 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 **Card Trick** (-1 🔷) 💥💥 🔀 +1 📜
-**Paper Ward** (-1 🔷) 🛡️🛡️🛡️ 🔀 +1 🔷 per block
-**Philosopher's Stone** Draw +2 📜, gain +3 🔷, or cause -2 🔷
+**Paper Ward** (-1 🔷) 🛡️🛡️🛡️ 🔀 +1 📜
+**Philosopher's Stone** Draw +1 📜, gain +3 🔷, or cause -2 🔷
