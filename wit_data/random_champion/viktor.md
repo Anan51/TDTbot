@@ -8,7 +8,7 @@ Archetype: Fighter
 *Superior moves, but moves can only be used consecutively thrice.*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Halberd** :boom::boom::zap::shield:
-**Barrier** :shield::shield:<:Sturdy:1152516154192044142>:twisted_rightwards_arrows::boom:
+**Barrier** :shield::shield:🛡️:twisted_rightwards_arrows::boom:
 **Detainment Field** Skip a target’s turn if you took no damage this turn
 **Anti-Matrix** Invert __effects__ this turn *LVL 2*
 **Charge Shot** Your next turn is: :boom::boom::boom::zap::no_entry_sign: *LVL 3*
