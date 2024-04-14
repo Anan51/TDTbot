@@ -113,7 +113,7 @@ def gen_weapon(roll_str):
         "**Runic Flintlock** (-2 🔷): 💥, +💥 per stack of __weak__ your target has [+13 <:gold:1058304371940655185>]",
         "**Graven Shield** (-1 🔷): <:Sturdy:1152516154192044142>, +<:Sturdy:1152516154192044142> per stack of __heal__ you have [+14 <:gold:1058304371940655185>]",
         "**Gilded Hammer** (-2 🔷): 🛡️🛡️, +💥 per stack of __protect__ you you have [+15 <:gold:1058304371940655185>]",
-        "**Tome** (-1 🔷): Summon a Familiar or an Automaton [+16 <:gold:1058304371940655185>]",
+        "**Tome**: Summon a Familiar or an Automaton. It costs 1 extra 🔷 [+16 <:gold:1058304371940655185>]",
         "**Spell Book** (-4 🔷): Double your next move's efficacy [+17 <:gold:1058304371940655185>]",
         "**Protection Rune** (-2 🔷): <:Persistence:1151788148322484234><:Persistence:1151788148322484234> [+18 <:gold:1058304371940655185>]",
         "**Staff** (-2 🔷): 💥💥, +🔷 per stack of __burn__ your target has [+19 <:gold:1058304371940655185>]",
