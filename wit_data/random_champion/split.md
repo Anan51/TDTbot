@@ -10,10 +10,10 @@ __Will__ : `(12)` ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 *6 __will__ can be spent with any move to gain an extra turn*
 ———————————————————
 **Paradox** (-1 🔷): 💥💥 🔀 Gain __will__ per hit
-**Phase Shift** (-3 🔷): Convert a ally's incoming 💥 into +🔷 and +__will__
+**Phase Shift** (-3 🔷): Convert an ally's incoming 💥 into +🔷 and +__will__
 **Worldline**: (-2 🔷): Summon a Timeline Split {OR} Grant your pervious turn +💥
 **Sacrifice** (-6 __will__): Grant +4 ❤️ or +6 🔷 *LVL 2*
-**Redact**: (-4 🔷): Edit a previous move (use a reply) *LVL 3*
+**Redact**: (-4 🔷): Change a previous move (use an edit) *LVL 3*
 **Kronomancy** (-12 __will__): Resurrect all allies that died this combat. *LVL 4*
 
 **__ALPHA__** 
