@@ -12,6 +12,6 @@ Archetype: Support
 **Sacred Shield** :shield::shield::shield::twisted_rightwards_arrows: +:large_blue_diamond:
 **Faith** (-3 :large_blue_diamond:) Grant __Healing__x3 :cyclone:
 **Blessing** Grants next move 0 :large_blue_diamond: cost *LVL 2*
-**Forgiveness** (-2 :large_blue_diamond:) :heart::heart::zap:, dispel hostile __effects__ *LVL 3*
-**Consecrate** (-2 :large_blue_diamond:) :boom::zap::no_entry_sign::dart::cyclone: *LVL 4*
+**Forgiveness** (-2 :large_blue_diamond:) :heart::heart::zap:, dispel target's hostile __effects__ *LVL 3*
+**Consecrate** (-2 :large_blue_diamond:) :boom::zap::no_entry_sign::dart::cyclone::twisted_rightwards_arrows: gain __heal__ *LVL 4*
 **Prophecy** (-4 :large_blue_diamond:) Tell your opponent your next move. Double its efficacy *LVL 5*
