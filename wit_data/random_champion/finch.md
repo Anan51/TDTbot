@@ -14,4 +14,4 @@ Archetype: Assassin
 **Inspire** (-2 :large_blue_diamond:) +:zap::dart::no_entry_sign::cyclone:<:stealthIcon:943248201790677052> to your next :boom: *LVL 2*
 **Illusion** (-2 :large_blue_diamond:) Evade next :boom: *LVL 3*
 **Mockery** Copy a target's move *LVL 4*
-**Polymorph** (-3 :large_blue_diamond:) Swap a player's moves with a random `tdt$champions_landing_enemy`. In 2 turns, swap back *LVL 5*
+**Polymorph** (-3 :large_blue_diamond:) Swap a target's moves with a random `tdt$champions_landing_enemy`. In 2 turns, swap back *LVL 5*
