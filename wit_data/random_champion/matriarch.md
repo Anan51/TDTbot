@@ -11,8 +11,8 @@ Archetype: Fighter
 *Using moves with 🔀 uses the left side the first time, then the right side the next time*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Wing Whip**: +⚡ next turn 🔀:boom::boom::boom:🌀
-**Telekinesis**: +<:stealthIcon:943248201790677052> next turn 🔀 Grant an target <:stealthIcon:943248201790677052>, any hostile 💥's target them this turn
-**Intimidate**: (-1 🔷) If you took no damage, cause __Vulnerable__ for the next 3 turns
+**Telekinesis**: <:stealthIcon:943248201790677052> 🔀 Grant an target <:stealthIcon:943248201790677052>, any hostile 💥's target them this turn
+**Intimidate**: (-1 🔷) You have __empower__ for the next 3 turns If you took no damage.
 **Warp Beam** (-4 :large_blue_diamond:): <:stealthIcon:943248201790677052><:Sturdy:1152516154192044142><:Sturdy:1152516154192044142><:Sturdy:1152516154192044142>  🔀:boom::boom::boom::dart: *LVL 2*
 **Confuse** (-2 :large_blue_diamond:): +💥 to your next 💥 per target's 🛡️'s 🔀 Gain <:Persistence:1151788148322484234> per target's 🛡️'s *LVL 3*
 **Ancient Power**: :boom: 🔀 +🚫 next turn *LVL 4*
