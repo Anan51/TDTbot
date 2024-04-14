@@ -8,10 +8,10 @@ Archetype: Tank
 :cross: [**Armor of YHWH**](https://media.discordapp.net/attachments/1056365502101979146/1168051983190601769/Constantine.jpg?ex=65505c2e&is=653de72e&hm=29bf78bea6f07608cb513d8343c363f1e67833b283985a0dcff0f7c38662b9f5&=)
 *__Protect__ lasts until used.*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**Hammer** :boom::boom::twisted_rightwards_arrows: Gain __Protect__
+**Hammer** :boom::boom::twisted_rightwards_arrows: Grant __Protect__
 **Anathema** (-1 :large_blue_diamond:) :shield::shield::twisted_rightwards_arrows: :boom: each
 **Prayer** Grant __Protect__ and +:large_blue_diamond:
-**Grace** (- :heart:) You are immune to 💥 next turn *LVL 2*
-**Sanctify** (-2 :large_blue_diamond:) <:Persistence:1151788148322484234> 🔀 gain 🎯 this turn *LVL 3*
+**Grace** (-1 :heart:) You are immune to 💥 next turn *LVL 2*
+**Sanctify** (-1 __protect__) +❤️🌀 *LVL 3*
 **Divine Shield** <:Sturdy:1152516154192044142>:cyclone: *LVL 4*
 **Smite** Convert __protect__ and <:Persistence:1151788148322484234> into :boom::zap::cyclone: *LVL 5*
