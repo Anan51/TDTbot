@@ -8,7 +8,7 @@ Archetype: Support
 🌱 [**Ancient Genesis**](https://media.discordapp.net/attachments/1056365502101979146/1168052057400430622/Eden.png?ex=65505c3f&is=653de73f&hm=617bc05782a578eadbd2ec0b4500c8ab366d7ea7efe856a185692b7527ca9366&=&width=673&height=673) 
 *Successful ally <:Sturdy:1152516154192044142> increases LVL; excess LVL grants +❤️ +🔷. (Your starting max LVL is 5)*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**Leech Leaf**  (-1 🔷):   💥💥🔀 -🔷
+**Leech Leaf**  (-1 🔷):  💥💥🔀 -🔷
 **Spore Shield** (-1 🔷): <:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> 🔀 +❤️
 **Blossom** Grant +1 LVL
 **Vine and Root** (-2 🔷): 💥💥<:Sturdy:1152516154192044142>🔀 +🔷🌀 *LVL 2*
