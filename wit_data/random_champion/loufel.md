@@ -1,6 +1,6 @@
 # [Loufel](<https://youtu.be/-ZQbp_eB-9A>)
 
-Difficulty: ⭐⭐⭐⭐
+Difficulty: ⭐⭐⭐
 Archetype: Assassin 
 
 ❤️ `(8)` 🟥🟥🟥🟥🟥🟥🟥🟥
@@ -11,8 +11,8 @@ Archetype: Assassin
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 **Slap** 💥💥 ⚡; +💥 if target has 3 or more stacks of __taunt__
 **Fool** 🛡️🛡️🛡️🔀 Cause __taunt__
-**Provoke** If you took no damage this turn, cause __tauntx3__
+**Provoke** If you took no damage this turn, cause __tauntx2__ and __weak__
 **Insult** (-2🔷) 💥🔀 Cause __weakx2__ and __taunt__ *LVL 2*
-**Magic Mirror** (-1🔷) The effects of status moves used this turn are applied to all members of the opposite team. *LVL 3*
-**Trick** <:Sturdy:1152516154192044142>🔀+🔷💥 *LVL 4*
-**Abracadabra** (-2 🔷) 🛡️ per incoming 💥 🔀 Next cast: 💥💥 per block instead LVL 5
+**Magic Mirror** (-1❤️) The effects of status moves used this turn are applied to all members of the opposite team. *LVL 3*
+**Trick** :Sturdy:🔀+🔷💥 *LVL 4*
+**Abracadabra** (-🔷) 🛡️ per incoming 💥 🔀 Next cast: 💥🌀 per block instead LVL 5
