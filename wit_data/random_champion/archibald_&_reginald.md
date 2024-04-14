@@ -5,6 +5,7 @@ Archetype: Tank
 :heart: : `(8)`    :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : `(3)`    :blue_square::blue_square::blue_square:
 :coin: : `(3)`    :yellow_square::yellow_square::yellow_square:
+👥 : `(2)`
 
 :heart: : `(6)`    :red_square::red_square::red_square::red_square::red_square::red_square:
 :large_blue_diamond: : *`(4)`*    :blue_square::blue_square::blue_square::blue_square:
