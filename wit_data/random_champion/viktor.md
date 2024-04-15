@@ -5,7 +5,7 @@ Archetype: Fighter
 :heart: : `(9)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square: 
 
 :gem: [**Voltike Munitions**](https://media.discordapp.net/attachments/1056365502101979146/1168051984813805599/Viktor.jpg?ex=65505c2e&is=653de72e&hm=bba88f91cd565570d246ab0a68117b087a5a270e9e78e9c19a36517560245e14&=) 
-*Superior moves, but moves "fatigue" in just 3 turns.*
+*Superior moves, but moves "fatigue" after using a move 4 times in a row.*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Halberd** :boom::boom::zap::shield:
 **Barrier** :shield::shield:🛡️:twisted_rightwards_arrows::boom:
