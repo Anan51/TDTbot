@@ -170,6 +170,7 @@ def gen_artifact(roll_str):
         "**Eternal Lantern** 🪔: Successful 🗡️ hits cause __Burn__ [+10 <:gold:1058304371940655185>]",
         "**Potion Pack** 🎒: Increase 🧪 capacity by +2. [11 <:gold:1058304371940655185>]",
         "**Bandolier** 🎽: Increase 🗡️ capacity by +2. [12 <:gold:1058304371940655185>]",
+        "**Foreboding Omen** ☠️: +1 👥 <:gold:1058304371940655185>. [+13 <:gold:1058304371940655185>]",
     ]
     return [(None, artifacts[r - 1], r) for r in roll(roll_str, max_sides=len(artifacts))]
 
