@@ -15,5 +15,5 @@ Archetype: Fighter
 **Intimidate**: (-1 🔷) You have __empower__ for the next 3 turns If you took no damage.
 **Warp Beam** (-4 :large_blue_diamond:): <:stealthIcon:943248201790677052><:Sturdy:1152516154192044142><:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> 🔀 :boom::boom::boom::dart: *LVL 2*
 **Telekinesis** (-2 :large_blue_diamond:): Gain __empower__ (per target's 🛡️) 🔀 Gain <:Persistence:1151788148322484234> (per target's 🛡️) *LVL 3*
-**Ancient Power**: :boom: 🔀 Deal an additional 🚫💥 next turn *LVL 4*
+**Ancient Power**: :boom: 🔀 Deal an additional 🚫💥💥 next turn *LVL 4*
 **Psy-Shock** (-2 :heart:): Your target replaces the move they used this turn with: "**Psyched Out**: regain your Psy-Shocked moves" *LVL 5*
