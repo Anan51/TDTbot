@@ -1,7 +1,7 @@
 # :sparkler: CONGRATULATIONS! :sparkler: 
 *Here are your rewards*
 
-[Spells cannot be sold/traded/modified and only one can be used at a time unless weilded by a champion. Spell are NOT dropped on death in crusades]
+[Spells cannot be sold/traded/modified. Once a spell is learned it is permanently available in Slayer Runs and lore environments. Spells do NOT take up space in your vault and aren't dropped on death]
 
 **Courage**: -1 🔷 each turn, while active: you have __empower__. Use again to disable
 
