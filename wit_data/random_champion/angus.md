@@ -2,7 +2,8 @@
 Difficulty: ⭐ 
 Archetype: Tank
 
-:heart: : `(16)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square: 
+❤️ : `(16)` 🟥🟥🟥🟥🟥🟥🟥🟥
+`        ` 🟥🟥🟥🟥🟥🟥🟥🟥
 
 :anger: [**Battle Rage**](https://media.discordapp.net/attachments/1056365502101979146/1168051982716641380/angus.jpg?ex=65505c2e&is=653de72e&hm=4a721548187614414b74e3d1daa5603f54ae865417fe60be64ad364dc02ad0e1&=)
 *Cause __Weak__ :cyclone: when you reach 4 or less :heart:. Kills grant +2 :heart:*
