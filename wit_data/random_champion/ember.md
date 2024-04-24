@@ -2,16 +2,17 @@
 Difficulty: ⭐⭐⭐
 Archetype: Caster
 
-:heart: : `(4)`   :red_square::red_square::red_square::red_square:
-:large_blue_diamond: : `(16)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
+❤️ : `(4)`   🟥🟥🟥🟥
+🔷 : `(16)` 🟦🟦🟦🟦🟦🟦🟦🟦
+`        ` 🟦🟦🟦🟦🟦🟦🟦🟦
 
-:heart_on_fire: [**Ignition Therapy**](https://media.discordapp.net/attachments/1056365502101979146/1168052054917398568/Ember.jpg?ex=65505c3f&is=653de73f&hm=b33dcbcc8e89e2093ff3eee238d467df106c3692b3238d39f769e4fd9a7a559a&=)
+❤️‍🔥 [**Ignition Therapy**](https://media.discordapp.net/attachments/1056365502101979146/1168052054917398568/Ember.jpg?ex=65505c3f&is=653de73f&hm=b33dcbcc8e89e2093ff3eee238d467df106c3692b3238d39f769e4fd9a7a559a&=)
 *Cause __Burn__ per damage taken*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**Mana Bolt** :boom::dart::twisted_rightwards_arrows: +:large_blue_diamond: (per hit)
-**Mana Ward** (-1 :large_blue_diamond:) incoming :boom: damages your :large_blue_diamond: instead
-**Spark** :zap:; Trigger all the target's __burn__. Cause __Burn__.
-**Fireball** (-5 :large_blue_diamond:) :boom::boom::boom::cyclone: :twisted_rightwards_arrows: __burn__ (per hit) *LVL 2*
-**Lightning** (-7 :large_blue_diamond:) :boom::boom::boom::boom::zap::no_entry_sign: *LVL 3*
-**Frostbite** Convert a target's __Burn__ into +🔷 :twisted_rightwards_arrows: skip their next turn *LVL 4*
-**Mana Storm** (-all :large_blue_diamond:) next turn: :boom::cyclone: per :large_blue_diamond: spent *LVL 5*
+**Mana Bolt** 💥🎯🔀 +🔷 (per hit)
+**Mana Ward** (-1 🔷) Incoming 💥 damages your 🔷 instead
+**Spark** ⚡; Trigger all the target's __burn__. Cause __Burn__.
+**Fireball** (-5 🔷) 💥💥💥🌀 🔀 __burn__ (per hit) *LVL 2*
+**Lightning** (-7 🔷) 💥💥💥💥⚡🚫 *LVL 3*
+**Frostbite** Convert a target's __Burn__ into +🔷 🔀 skip their next turn *LVL 4*
+**Mana Storm** (-all 🔷) next turn: 💥🌀 per 🔷 spent *LVL 5*
