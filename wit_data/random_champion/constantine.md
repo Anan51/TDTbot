@@ -2,16 +2,17 @@
 Difficulty: ⭐⭐ 
 Archetype: Tank
 
-:heart: : `(14)` :red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square::red_square:
-:large_blue_diamond: : `(6)`   :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
+❤️ : `(14)` 🟥🟥🟥🟥🟥🟥🟥
+`        ` 🟥🟥🟥🟥🟥🟥🟥
+🔷 : `(6)`   🟦🟦🟦🟦🟦🟦
 
-:cross: [**Armor of YHWH**](https://media.discordapp.net/attachments/1056365502101979146/1168051983190601769/Constantine.jpg?ex=65505c2e&is=653de72e&hm=29bf78bea6f07608cb513d8343c363f1e67833b283985a0dcff0f7c38662b9f5&=)
-*__Protect__ lasts until used.*
+✝️ [**Armor of YHWH**](https://media.discordapp.net/attachments/1056365502101979146/1168051983190601769/Constantine.jpg?ex=65505c2e&is=653de72e&hm=29bf78bea6f07608cb513d8343c363f1e67833b283985a0dcff0f7c38662b9f5&=)
+*__Protect__ stacks persists until used*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**Hammer** :boom::boom::twisted_rightwards_arrows: Grant __Protect__
-**Anathema** (-1 :large_blue_diamond:) :shield::shield::twisted_rightwards_arrows: :boom: each
-**Prayer** Grant __Protect__ and +:large_blue_diamond:
-**Grace** (-1 :heart:) You are immune to 💥 next turn *LVL 2*
-**Sanctify** (-1 __protect__) +❤️🌀 *LVL 3*
-**Divine Shield** <:Sturdy:1152516154192044142>:cyclone: *LVL 4*
-**Smite** Convert __protect__ into :boom::zap::cyclone: *LVL 5*
+**Hammer**:  💥💥🔀 Grant __Protect__
+**Anathema** (-1 🔷): 🛡️🛡️🔀 💥 (per block)
+**Prayer**: Grant __Protect__ and +🔷
+**Grace** (-2 🔷): Grant immunity next turn *LVL 2*
+**Sanctify** (-1 __protect__): +❤️🌀 *LVL 3*
+**Divine Shield**: <:Sturdy:1152516154192044142>🌀 *LVL 4*
+**Smite** (-all __protect__) Deal 💥⚡🌀 per __protect__ spent *LVL 5*
