@@ -2,7 +2,8 @@
 Difficulty: ⭐⭐⭐
 Archetype: Summoner
 
-❤️ : `(12)` 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+❤️ : `(12)` 🟥🟥🟥🟥🟥🟥
+`        ` 🟥🟥🟥🟥🟥🟥
 🔷 : `(8)`   🟦🟦🟦🟦🟦🟦🟦🟦
 
  🦌  [**Barkskin Hyde**](https://media.discordapp.net/attachments/1056365502101979146/1168051984532775033/Remus.jpg?ex=65505c2e&is=653de72e&hm=0670dfc75fb3a775a52ba3beceb65e5e3ac6c1bcf87c8e2a69768cf505d9194f&=)
@@ -23,4 +24,4 @@ Archetype: Summoner
 > **First Strike**: Trigger your other summon's First Strike
 **__DIRE WOLF __** (🔷 : -4) *LVL 5*
 > ﻿❤️﻿ : 2 / 💥<:stealthIcon:943248201790677052>
->  **First Strike**: Grant __empower__. 
+>  **First Strike**: Grant __empower__.
