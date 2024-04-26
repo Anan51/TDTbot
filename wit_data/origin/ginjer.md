@@ -1,2 +1,2 @@
 # Extra Loaded 💣 
-> Ally hits with 🚫 disallows enemies from spending 🔷 next turn.
+> Ally hits with 🚫 cripples enemy speed next turn
