@@ -1,19 +1,18 @@
 # [**__MATRIARCH__**](<https://www.youtube.com/watch?v=NFTemk99fLU>)
 Difficulty: ⭐⭐⭐⭐
-Archetype: Fighter
+Archetype: Tank
 
 ❤️ : `(20)` 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 `        ` 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
-:large_blue_diamond: : `(10)` :blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square::blue_square:
-👥 : `(2)`
+🔷 : `(10)` 🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦
 
-:nazar_amulet:  [**Presence of a Titan**](https://media.discordapp.net/attachments/1056365502101979146/1168051983496781855/matriarch.jpg?ex=65505c2e&is=653de72e&hm=837a0ad9fe1e2cd6517cdf6aec2c095e3af4f8499d94c6cf7c2d4390c41ca9ef&=&width=707&height=676) 
-*Using moves with 🔀 uses the left side the first time, then the right side the next time*
+🧿  [**Might of the Titans**](https://media.discordapp.net/attachments/1056365502101979146/1168051983496781855/matriarch.jpg?ex=65505c2e&is=653de72e&hm=837a0ad9fe1e2cd6517cdf6aec2c095e3af4f8499d94c6cf7c2d4390c41ca9ef&=&width=707&height=676) 
+*Each turn you may spend 3 🔷 extra to double your move's 💥 and 🛡️*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**Wing Whip**: +⚡ next 💥 🔀 :boom::boom::boom:🌀
-**Confuse**: <:stealthIcon:943248201790677052> 🔀 Choose a target, all hostiles target it this turn
-**Intimidate**: (-1 🔷) You have __empower__ for the next 3 turns If you took no damage.
-**Warp Beam** (-4 :large_blue_diamond:): <:stealthIcon:943248201790677052><:Sturdy:1152516154192044142><:Sturdy:1152516154192044142><:Sturdy:1152516154192044142> 🔀 :boom::boom::boom::dart: *LVL 2*
-**Telekinesis** (-2 :large_blue_diamond:): Gain __empower__ (per target's 🛡️) 🔀 Gain <:Persistence:1151788148322484234> (per target's 🛡️) *LVL 3*
-**Ancient Power**: :boom: 🔀 Deal an additional 🚫💥💥 next turn *LVL 4*
-**Psy-Shock** (-2 :heart:): Your target replaces the move they used this turn with: "**Psyched Out**: regain your Psy-Shocked moves" *LVL 5*
+**Wing Whip** (-1 🔷): 💥💥🌀
+**Telekinesis** (-1 🔷): 🛡️🛡️ 🔀 +<:Persistence:1151788148322484234> (per block)
+**Mind Games**: Receive 💥x2 this turn, double your next move's 💥 and 🛡️, and gain +1 🔷.
+**Warp Beam** (-3 🔷): Prepare this move 🔀 💥💥💥🎯 *LVL 2*
+**Confuse**(-2 🔷): 🛡️🛡️ 🔀 __burn__ (per block), __burning__ targets lose modifiers *LVL 3*
+**Ancient Power**: Deal 💥 for every turn you blocked damage. Reset this counter *LVL 4*
+**Psy-Shock** (-4 ❤️): Replaces your target's move with: "**Psyched Out**: regain your move" *LVL 5*
