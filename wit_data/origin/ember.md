@@ -1,2 +1,2 @@
-# ❤️‍🔥 Ignition Therapy 
-> Cause __Burn__ per damage taken
+# ❤️‍🔥 Ignition Counseling
+> Cause __Burn__ each turn you take damage
