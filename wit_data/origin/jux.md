@@ -1,2 +1,2 @@
 # Spellflinger 🃏 
-> At the start of the game, use tdt$draft to gain a Spell 📜 . You can discard spells on a turn to grant your skills a modifier. All spells are single use.
+> At the start of the game, use tdt$draft to gain 5 Spells 📜 . All spells are single use.
