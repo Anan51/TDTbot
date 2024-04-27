@@ -5,6 +5,6 @@
 **Behavior**: Whenever this __heal__s, increase its 💥 permanently
 *"-Tiny squelching noises-"*
 —————————————————
-Turn 1  | **Plop** 💥
+Turn 1  | **Plop** 💥💥
 Turn 2 | **Wobble** Gain __Healing__
 Turn 3 | **Wubble** Gain __Healing__. Reset Turns
