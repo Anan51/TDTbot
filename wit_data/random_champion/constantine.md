@@ -15,4 +15,4 @@ Archetype: Tank
 **Grace** (-2 🔷): Grant immunity next turn *LVL 2*
 **Sanctify** (-1 __protect__): +❤️🌀 *LVL 3*
 **Divine Shield**: <:Sturdy:1152516154192044142>🌀 *LVL 4*
-**Smite** (-all __protect__) Deal 💥⚡🌀 per __protect__ spent *LVL 5*
+**Smite** (-2 ❤️) Deal 💥⚡🌀 per your __protect__, dispell 1/2 stacks. *LVL 5*
