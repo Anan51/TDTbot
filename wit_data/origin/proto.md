@@ -1,2 +1,2 @@
-# __Cursebinder__ 🖤 
-> __Will__ instead grants +🔷 but causes -❤️. Moves with 🌀 instead add your current move to your last move. 
+# Fundamental Arcana ⚛️ 
+> The first time your 🔷 = 0, your next move becomes free and twice as powerful
