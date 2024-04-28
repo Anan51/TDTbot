@@ -158,7 +158,7 @@ def gen_potion(roll_str):
 
 def gen_artifact(roll_str):
     artifacts = [
-        "**Honey Money** 🍯: Succesful 🗡️ hits grant +1 <:gold:1058304371940655185>. [+1 <:gold:1058304371940655185>]",
+        "**Honey Money** 🍯: Succesful combats while you have an __effect__ hits grant +1 <:gold:1058304371940655185> per stack remaining. [+1 <:gold:1058304371940655185>]",
         "**Safety Scissors** ✂️: Redo your Floor or Boss roll. (Destroyed on Use) [+2 <:gold:1058304371940655185>]",
         "**Cook Book** 🍔: You may raise your max ❤️ and 🔷 by 1 at ⛺ instead of resting. [+3 <:gold:1058304371940655185>]",
         "**Port-a-Forge** 🛠️: Increase a 🗡️'s 💥, 🛡️, or __effect__. If used on an upgraded 🗡️, this costs -1 max 🔷 to use. (Destroyed on use). [+4 <:gold:1058304371940655185>]",
