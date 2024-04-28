@@ -11,7 +11,7 @@ Archetype: Tank
 **Shatter** (-1 ❤️): 💥💥💥 🔀 +1 🖤
 **Beckon** (-1 🖤): Convert incoming 💥 into +🖤
 **Bleed**: +1 🖤
-**Tear** (-1 🖤): 💥💥 🔀 +1 ❤️ (per hit) *LVL 2*
+**Tear** (-1 🖤): 💥💥 🔀 +1 🖤 (per hit) *LVL 2*
 **Lacerate** (-1 ❤️): 💥🚫 🔀 __weak__ *LVL 3*
-**Endure** (-2 🖤): Take a max of 1 💥; +❤️ per remaining 💥 *LVL 4*
+**Endure** (-1 🖤): Take a max of 1 💥; +❤️ per remaining 💥 *LVL 4*
 **Aspect of Gore** (-1 🖤 each turn): Your 💥's have: 🔀 +1 ❤️. Use again to disable *LVL 5*
