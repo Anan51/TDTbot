@@ -11,7 +11,7 @@ Archetype: Support
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Kanun** (-1 🔶): 💥🎯🌀
 **Spring Plank**  (-2 🔶): Evade incoming 💥 🔀 Grant +💥🚫 next 💥
-**Broadside**: Target receives 💥x2 next times they take damage from 🚫
+**Broadside**: Target receives 💥x2 next time they take damage from 🚫
 **Spot o' Grog**: +❤️🔷🔶 *LVL2*
 **Low Blow** (-2 🔶): 💥🚫 🔀 Cause __vulnerable__, target can't spend or gain 🔷 while __vulnerable__*LVL 3*
 **Chorus**: Grant an ally +🚫🌀 in 2 turns *LVL 4*
