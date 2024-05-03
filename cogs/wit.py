@@ -104,7 +104,7 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
             return
         self._init = True
         self._channel = await self.bot.fetch_channel(_channel_id)
-        await self.send_major()
+        # await self.send_major()  # no more random major events per Mesome 2024-05-03
         self._init_finished = True
 
     @commands.Cog.listener()
