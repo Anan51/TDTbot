@@ -1,4 +1,4 @@
-# [**__GAIDG-3__**](<https://www.youtube.com/watch?v=UFFa0QoHWvE>) 
+# [**__GAIDG-3__**](<https://www.youtube.com/watch?v=1SmD6tIJu5c>) 
 Difficulty: ⭐⭐⭐ 
 Archetype: Fighter
 
