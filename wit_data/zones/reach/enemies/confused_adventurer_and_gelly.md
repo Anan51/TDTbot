@@ -1,9 +1,8 @@
 # [__**CONFUSED ADVENTURER**__](<https://www.youtube.com/watch?v=3rGZiyi3Z_Q>)
-❤️ : 3
-🔷 : 1
+❤️ : 4
+🔷 : 2
 💰 : ||tdt$wit_loot 5||
 
-**Behavior**: Gain +❤️, +🔷, and +🛡️ per 👥
 *Has been convinced by a marrow mite that he is a gelly... what's more concerning is that he somehow spoke (or at least thought he spoke) to a marrow mite.*
 —————————————————
 Turn 1  | **Cower** 🛡️🛡️🌀
