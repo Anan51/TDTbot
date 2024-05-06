@@ -1,5 +1,5 @@
 # [__**SLIGGO THE GREEN**__](<https://www.youtube.com/watch?v=iMH49ieL4es>)
-❤️ : 12 x👥
+❤️ : 12
 🔷 : 0
 💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x1, and Choose between 1 of 3 `tdt$wit_legendary`||
 
