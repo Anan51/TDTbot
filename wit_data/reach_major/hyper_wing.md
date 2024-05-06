@@ -1,7 +1,7 @@
 # [__**HYPER WING**__](<https://www.youtube.com/watch?v=NBFuzr_GnqQ>)
 ❤️ : 4
 🔷 : 6
-💰 : ||Choose between 1 of 3 `tdt$rare_artifacts`. If this died to __burn__ also reward +3 ❤️🌀 and +3 🔷🌀 ||
+💰 : || +40 <:gold:1058304371940655185>. If this died to __burn__ also reward +3 ❤️🌀 and +3 🔷🌀 ||
 
 **Clockwork**: Gain __Empower__ every turn unless this has __Vulnerable__
 *"Oh man... that's a really big and pissed off bird" - Fenric Bestiary*
