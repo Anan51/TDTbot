@@ -8,14 +8,16 @@
 tdt$mine_call
 
 You peak your head inside. Very faintly you can hear the unmistakable sound of metal striking bone. You second guess your actions but only for a second before calling out, "Hello?". The call echoes through the dark cave. You listen closely. The sound reaches the end of the cave and the digging noises halt. Your heart starts to race. "Maybe this was a really bad idea" you think to yourself. You sit in silence for what feels like an eternity before you hear in reply "Yello?" The voice sounds friendly albeit confused. Emerging from the darkness appears a large man with suspenders, a hard hat, a handful of TNT sticks, and a dirt covered face. His eyes are weary and stoic as he glances you up and down before squinting together his bushy eyebrows and saying "You with the higaurd?". You shake your head silently. "Well then! Take a look at what we got fer ya!" He opens a box revealing a collection of stolen goodies 
-> CHOOSE ONE - __CHARISMA CHECK__ ≥ 🎲 use `tdt$wit_shop` all weapons are marked down by 1/2 but break at the end of the round they are used. You MUST purchase something otherwise use `tdt$reach_enemy`
+> CHOOSE ONE - __Charisma Check__ 🎲 ≥ 6: use `tdt$wit_shop` all weapons are marked down by 1/2 but break at the end of the round they are used. __Intelligence Save__ 🎲 ≤ 10: These goods look faulty but you dont realize the situation you are in, gain `tdt$wit_loot 10` then summon a `tdt$reach_enemy`
 
 -------------
 tdt$mine_grab
 
-You look around the entrance to the cave and see a crate filled with stolen or counterfeit goods. You noisily pry open the crate further and snatch up an item, but the noise seems to have attracted the owners and their pets... (gain ||`tdt$wit_loot 19` if its a weapon it breaks at the end of the combat it is used. Summon a `tdt$reach_enemy`||)
+You look around the entrance to the cave and see a crate filled with stolen or counterfeit goods. You noisily pry open the crate further and snatch up an item, but the noise seems to have attracted the owners and their pets... 
+> Gain`tdt$wit_loot 19` if its a weapon it breaks at the end of the combat it is used. __Strength Save__ 🎲 ≤ 8 Summon a `tdt$reach_enemy`
 
 -------------
 tdt$mine_dig
 
-You look down at the cave before you then greedily snatch up a pickaxe, spin it in your hand, then waltz down into the cave with a whistle on your lips. ( 🎲 ≥ 2 : gain +1 <:gold:1058304371940655185>, this can be repeated. 🎲 ≤ fight a `tdt$reach_enemy` then proceed to the next floor.)
+You look down at the cave before you then greedily snatch up a pickaxe, spin it in your hand, then waltz down into the cave with a whistle on your lips. 
+> __Strength Check__ 🎲 ≥ 5 : gain +1 <:gold:1058304371940655185>, this can be repeated __Constitution Save__ times or until you fail.
