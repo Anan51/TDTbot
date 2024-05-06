@@ -2,7 +2,7 @@
 Difficulty: ⭐
 Archetype: Caster
 
-❤️ : `(7)`   🟥🟥🟥🟥🟥🟥
+❤️ : `(7)`   🟥🟥🟥🟥🟥🟥🟥
 🔷 : `(13)` 🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦
 
 ⚛️ [**Fundamental Arcana**](https://media.discordapp.net/attachments/1056365502101979146/1225574553502089246/apprentice.png?ex=6621a03f&is=660f2b3f&hm=3ea071a167a081c30fe6bd890e9e54d6cd9c76c4906196e20416e832dc2d6ce8&=&format=webp&quality=lossless&width=450&height=676)
