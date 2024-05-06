@@ -7,14 +7,17 @@
 -------------
 tdt$feast_snack
 
-You take a few bites of food and leave the rest. (+1 :heart: and +1 :large_blue_diamond:)
+You take a few bites of food and leave the rest. 
+> +1 :heart: and +1 :large_blue_diamond:
 
 -------------
 tdt$feast_buffet
 
-You try to consume as much as humanly possible... you start to feel sleepy (+4 :heart: and +4 :large_blue_diamond:, 🎲 ≤ 8: go back 3 places in your journey)
+You try to consume as much as humanly possible... you start to feel sleepy 
+> +4 :heart: and +4 :large_blue_diamond:; CHOOSE ONE - __Constitution Save__ 🎲 ≤ 8: pass out and give a skill -Efficacy. __Wisdom Save__ 🎲 ≤ 12: you neglect your limits and end up with a unbearable stomach ache, -1 max ❤️ and -1 max 🔷. 
 
 -------------
 tdt$feast_devour
 
-You immediately recognize this feast. This is a traditional highlander feast. You know exactly what to do. (You may spend 7 <:gold:1058304371940655185> to gain: ||__True Scottsman__ :scotland: "Gain an extra 🔷 everytime you take damage||" for the rest of the run)
+You immediately recognize this feast. This is a traditional highlander feast. You know exactly what to do. 
+> Spend 7 <:gold:1058304371940655185> and gain: **True Scottsman** :scotland: "Gain an extra 🔷 everytime you take damage" for the rest of your run
