@@ -1,9 +1,9 @@
 # [__**SLIGGO THE GREEN**__](<https://www.youtube.com/watch?v=iMH49ieL4es>)
-❤️ : 16 x👥
+❤️ : 12 x👥
 🔷 : 0
 💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x1, and Choose between 1 of 3 `tdt$wit_legendary`||
 
-**Behavior** The first time this takes damage, destroy a random 🗡️
+**Behavior** 🗡️ hits destroy the used 🗡️
 *"-Grotesque slorping noises-" Bits of small creatures skeletons such as birds and rodents are visible engulfed in the gelatinous mass*
 —————————————————
 Turn 1  | **Squelch** 💥💥💥💥🌀, -🔷 per 💥 taken this turn
