@@ -1,5 +1,5 @@
 # [__**SPEYEDER NEST**__](<https://www.youtube.com/watch?v=rvXm2TNLfnQ>)
-❤️ : 6 x:busts_in_silhouette:
+❤️ : 6
 💰 : ||Choose between 1 of 3 `tdt$rare_artifacts`.||
 
 **First Strike**: Summon x:busts_in_silhouette: SPEYEDERS
@@ -9,7 +9,7 @@ Turn 1   | **Tangled Web** If there is a SPEYEDER :twisted_rightwards_arrows: +�
 Turn 2  | **Tangled Web** If there is a SPEYEDER :twisted_rightwards_arrows: +❤️
 Turn 3  | **Tangled Web** If there is a SPEYEDER :twisted_rightwards_arrows: +❤️
 Turn 4  | **Tangled Web** If there is a SPEYEDER :twisted_rightwards_arrows: +❤️
-Turn 5  | **Skitter** <:stealthIcon:943248201790677052> Summon a **SPEYEDER** x:busts_in_silhouette:. Reset turns
+Turn 5  | **Skitter** <:stealthIcon:943248201790677052> Summon **SPEYEDER(S)** . Reset turns
 
 
 # [__**SPEYEDER**__](<https://www.youtube.com/watch?v=NH-GAwLAO30>)
