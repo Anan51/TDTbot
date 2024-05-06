@@ -1,5 +1,5 @@
 # [__**THE GREAT SERPENT**__](<https://youtu.be/wlF0-Qs2xkI>)
-❤️ : 8 x 👥
+❤️ : 10 x 👥
 🔷 : 9
 💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x1, and Choose between 1 of 3 `tdt$wit_legendary`||
 
