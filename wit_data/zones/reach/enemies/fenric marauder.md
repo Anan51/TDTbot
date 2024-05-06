@@ -1,6 +1,6 @@
 # [**__FENRIC MARAUDER__**](<https://www.youtube.com/watch?v=kiyDawjd2e0>)
 ❤️ : 6
-💰 : ||tdt$wit_loot 10||
+💰 : || +10 <:gold:1058304371940655185>||
 
 *Hand over the gold and you might not get hurt*
 —————————————————
