@@ -7,14 +7,17 @@
 -------------
 tdt$blood_collect
 
-You grab one of your empty water satchels and draw close to the pool... (🎲 ≤ 6:  `tdt$reach_enemy` per 👥 | 🎲 ≥ 7: escape with the liquid 🧪 **Giant's Marrow**: Gain +1 max ❤️ and +1 max 🔷 [20 <:gold:1058304371940655185>])
+You grab one of your empty water satchels and draw close to the pool... 
+> CHOOSE ONE - __Charisma Save__ 🎲 ≤ 6: Halted by a greedy onlooker, summon `tdt$reach_enemy`. __Dexterity Check__ 🎲 ≥ 7: escape with the liquid 🧪 **Giant's Marrow**: Gain +1 max ❤️ and +1 max 🔷 for the rest of the run [20 <:gold:1058304371940655185>]
 
 -------------
 tdt$blood_leave
 
-You decide to leave the pool alone and let nature figure out what to do with it (proceed to the next floor)
+You decide to leave the pool alone and let nature figure out what to do with it 
+> Proceed to the next floor
 
 -------------
 tdt$blood_drink
 
-Something inside you feels drawn to this liquid. Almost instinctually you go down to one knee. You can see your own reflection in dark red liquid and you swear its looking at you differently than you are looking at it. You hesitantly cup your hands and drink from the pool. It taste bitter but you feel it resonate with your pulse. (||gain +1 max :heart: and +1 max :large_blue_diamond:||)
+Something inside you feels drawn to this liquid. Almost instinctually you go down to one knee. You can see your own reflection in dark red liquid and you swear its looking at you differently than you are looking at it. You hesitantly cup your hands and drink from the pool. It taste bitter but you feel it resonate with your pulse. 
+> gain +1 max :heart: and +1 max :large_blue_diamond:
