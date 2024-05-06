@@ -1,5 +1,5 @@
 # [**__NAYA__**](<https://www.youtube.com/watch?v=SPcVvEnxTLU>) 
-Difficulty: ⭐⭐
+Difficulty: ⭐
 Archetype: Assassin
 
 ❤️ : `(8)` 🟥🟥🟥🟥🟥🟥🟥🟥 
