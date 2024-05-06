@@ -1,6 +1,6 @@
 # [__**SPEYEDER NEST**__](<https://www.youtube.com/watch?v=rvXm2TNLfnQ>)
 ❤️ : 6
-💰 : ||Choose between 1 of 3 `tdt$rare_artifacts`.||
+💰 : || +40 <:gold:1058304371940655185>||
 
 **First Strike**: Summon x:busts_in_silhouette: SPEYEDERS
 *You smell something like a... bakery?*
