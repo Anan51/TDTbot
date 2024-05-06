@@ -3,7 +3,7 @@
 🔷 : 10
 💰 : ||+100% ❤️ and 🔷; <:legendaryShard:1213251982341709854>x1, and Choose between 1 of 3 `tdt$wit_legendary`, they cannot be stored.||
 
-**Behavior** Disable all 🏺
+**Behavior** Disable all 🏺 until one is dropped
 *Accused of being: shot, poisoned, thrown into a freezing river, and still busting down a sick groove through it all*
 —————————————————
 Turn 1  | **Beat**: 💥💥⚡ x 👥
