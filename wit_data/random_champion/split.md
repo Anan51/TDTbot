@@ -5,7 +5,8 @@ Archetype: Summoner
 ❤️ : `(2)`   🟥🟥
 🔷 : `(18)` 🟦🟦🟦🟦🟦🟦🟦🟦🟦
 `        ` 🟦🟦🟦🟦🟦🟦🟦🟦🟦
-__Will__ : `(12)` ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+__Will__ : `(12)` ⬛⬛⬛⬛⬛⬛
+`        `  ⬛⬛⬛⬛⬛⬛
 
 ⌛ [**Second Guard**](https://cdn.discordapp.com/attachments/1056365502101979146/1168685658697642086/split.jpg?ex=6552aa56&is=65403556&hm=b10ee033f0868523d5cabd3d397b2aad817dbb7ce0f23c494989256697fd74b0&) 
 *6 __will__ can be spent with any move to gain an extra turn*
