@@ -7,14 +7,17 @@
 -------------
 tdt$shin_squeeze
 
-You carefully sidle through the field of spears, a few of them catch your clothing. ( 🎲 ≤ 3: -2 ❤️ | 🎲 ≥ 4: -6 <:gold:1058304371940655185>)
+You carefully sidle through the field of spears, a few of them catch your clothing. 
+> CHOOSE ONE - __Strength Save__ 🎲 ≤ 6: -3 ❤️. __Dexterity Check__ 🎲 ≥ 8: -12 <:gold:1058304371940655185>
 
 -------------
 tdt$shin_attack
 
-You Raise your weapon and begin smashing through the spears. Splinters fly in every direction and a few fly towards your face ( 🎲 ≤ 7: -2 ❤️ )
+You Raise your weapon and begin smashing through the spears. Splinters fly in every direction and a few fly towards your face 
+> __Constitution Save__ 🎲 ≤ 14: -1 ❤️
 
 -------------
 tdt$shin_remove
 
-You squat down along the first row of spears, they are crudely made BUT not flimsily made. You recognize a few of the markings and knots used on the fastenings; they are fenric. "That makes sense" you say out loud to yourself. You think you might be able to remove one of the spears ( :game_die: < 6: failure | :game_die: > 7: Acquire a "**Fenric Spear** (-1 :large_blue_diamond:): :boom::zap: :twisted_rightwards_arrows: cause __Vulnerable__" valued at 16 <:gold:1058304371940655185>)
+You squat down along the first row of spears, they are crudely made BUT not flimsily made. You recognize a few of the markings and knots used on the fastenings; they are fenric. "That makes sense" you say out loud to yourself. You think you might be able to remove one of the spears 
+> __Intellect Check__ :game_die: ≥ 6: Acquire a "**Fenric Spear** (-1 :large_blue_diamond:): :boom::zap: :twisted_rightwards_arrows: cause __Vulnerable__" valued at 16 <:gold:1058304371940655185>
