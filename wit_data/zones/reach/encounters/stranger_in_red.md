@@ -7,16 +7,18 @@
 -------------
 tdt$stranger_yes
 
-Your heart is beating in your chest and you dont know why. Slowly you answer "yes". The mans smile widens as he asks you to hold up your arm. You absentmindedly obey. He looks it over for a second before plunging his fangs into the soft part of your flesh ( -2 :heart:, +5 <:gold:1058304371940655185>. Can be repeated as much as desired)
+Your heart is beating in your chest and you dont know why. Slowly you answer "yes". The mans smile widens as he asks you to hold up your arm. You absentmindedly obey. He looks it over for a second before plunging his fangs into the soft part of your flesh 
+> -2 :heart:, +5 <:gold:1058304371940655185>. Can be repeated as much as desired
 
 -------------
 tdt$stranger_no
 
-You lower your gaze back to the white bone earth. You mutter "no" as you walk past the now motionless stranger. Your weapons firmly in your hand. You hear the mans breathing quicken... ( :game_die: ≤ 3: fight the enemy below)
+You lower your gaze back to the white bone earth. You mutter "no" as you walk past the now motionless stranger. Your weapons firmly in your hand. You hear the mans breathing quicken... 
+> __Charisma Save__ :game_die: ≤ 6: fight the enemy below
 
 **STRANGER IN RED**
 :heart: : 6
-:moneybag: : 10 <:gold:1058304371940655185>
+:moneybag: : ||+10 <:gold:1058304371940655185>||
 Behavior: Successful hits while you have __vulnerable__ grants this +:heart:
 —————————————————
 Turn 1   | **Lash** :boom:🚫 🔀 cause __vulnerable__
@@ -26,4 +28,5 @@ Turn 3 | **Suggest** Cause __Weak__ and random turns. If this is used 3 times, d
 -------------
 tdt$stranger_question
 
-Your look the stranger squarely in his eyes. "How long have you been this way?" The man staggers at your question as he looks you over before returning back to look at you "Since I was a boy." he mutters. "Then you should know better than to resort to this." you reply. The man doesnt move. The man struggles to find his voice "But I will die." "So you would rather ruin the lives others so that you can live?" you reply sharply "You dont know m-" the man starts "I am one of you." you retort, reaching your hand out to the moonlight, your hand flaking skin off into the breeze. The man lowers his head "We are YHWH's mistake." "I dont think He makes those." You reply with a smile and a pat on his shoulder. The man sighs. You spend the next few minutes exchanging stories as you walk. The man guides you through a shortcut he uses to get through the thick brush. (Skip ahead 2 floors. Gain __Healing__x4 at the start of the next combat)
+Your look the stranger squarely in his eyes. "How long have you been this way?" The man staggers at your question as he looks you over before returning back to look at you "Since I was a boy." he mutters. "Then you should know better than to resort to this." you reply. The man doesnt move. The man struggles to find his voice "But I will die." "So you would rather ruin the lives others so that you can live?" you reply sharply "You dont know m-" the man starts "I am one of you." you retort, reaching your hand out to the moonlight, your hand flaking skin off into the breeze. The man lowers his head "We are YHWH's mistake." "I dont think He makes those." You reply with a smile and a pat on his shoulder. The man sighs. You spend the next few minutes exchanging stories as you walk. The man guides you through a shortcut he uses to get through the thick brush. 
+> Skip ahead 2 floors. Gain __Healing__x4 at the start of the next combat
