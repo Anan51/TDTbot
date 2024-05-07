@@ -8,7 +8,7 @@ Archetype: Tank
 
 
 💸  [**Fare-Weather Friends**](https://media.discordapp.net/attachments/1056365502101979146/1168051982943146084/Archibald_And_Reginald.jpg?ex=65505c2e&is=653de72e&hm=1b0bdcd6f39f0f216d8a93f47fb1d9a994b5865bdcb56ee0acb52bbb4141c250&=)
-*Upon death, re-summon as Reginald with 6 ❤️, 4 🔷, and 4 🪙 (Once per combat)*
+*Upon death, re-summon as Reginald with 6 ❤️, 4 🔷, and 4 🪙 (Once per game)*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Shoot & Loot** (-1 🪙): 💥 [x 2]
 **The Paywall**  (-1 🔷): 🛡️🛡️🛡️ [x 1] 🔀 +1 🪙
