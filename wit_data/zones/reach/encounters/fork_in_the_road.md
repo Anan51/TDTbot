@@ -7,14 +7,17 @@
 -------------
 tdt$fork_left
 
-You decide to play it safe and go towards the vegitation. (Do another encounter, -1 🔷)
+You decide to play it safe and go towards the vegitation. 
+> CHOOSE ONE - __Intelligence Save__ 🎲 ≤ 12: get lost in the woods, do another encounter, and -2 🔷. __Constitution Check__ 🎲 ≥ 8 Power through the thistles and vines, otherwise lose 2 ❤️.
 
 -------------
 tdt$fork_right
 
-You head towards the bridge. You know its risky but you at least understand your risks. You carefully try to cross the bridge ( 🎲 ≤ 3: -2 ❤️ )
+You head towards the bridge. You know its risky but you at least understand your risks. You carefully try to cross the bridge 
+> __Dexterity Save__ 🎲 ≤ 6: Slip and fall to the bone shards below -4 ❤️ )
 
 -------------
 tdt$fork_straight
 
-You were born of fire. You march straight through the outpost, fearlessly. (Double your current 🔷 next combat)
+You were born of fire. You march straight through the outpost, fearlessly. 
+> Double your current 🔷 next combat
