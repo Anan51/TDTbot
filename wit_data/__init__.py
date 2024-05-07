@@ -338,4 +338,4 @@ class WitData:
                    "🔒 Chest",
                    "🛖 Shop"
                    ]
-        return ', '.join(random.choices(options, weights=[7, 3, 7, 3, 2, 2, 2], k=3))
+        return ', '.join(random.choices(options, weights=[7, 3, 7, 3, 2, 2, 4], k=3))
