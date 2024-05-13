@@ -64,7 +64,19 @@ class AutoMod(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        """Parse messages to see if we should roast even without a command"""
+        # ignore messages from this bot
+        if message.author == self.bot.user:
+            return
+        if message.channel.id == param.channels.banning_channel:
+            msg = ["Auto banning message ({:}):".format(message.channel.mention),
+                   "```{:}```".format(message.content),
+                   "From: {:} ({:}, {:})".format(message.author.mention, message.author.name, message.author.id),
+                   ]
+            await split_send(self.log_channel, msg)
+            await message.delete()
+            return
+            await message.author.ban(reason="Auto ban: message in banning channel",
+                                     delete_message_seconds=3600)
         # ignore commands
         try:
             if message.content.startswith(self.bot.command_prefix):
@@ -73,9 +85,6 @@ class AutoMod(commands.Cog):
             for prefix in self.bot.command_prefix:
                 if message.content.startswith(prefix):
                     return
-        # ignore messages from this bot
-        if message.author == self.bot.user:
-            return
         for search in _searches:
             if re.search(search, message.content):
                 if search == _discord_link:
