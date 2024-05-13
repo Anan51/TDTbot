@@ -74,8 +74,7 @@ class AutoMod(commands.Cog):
                    ]
             await split_send(self.log_channel, msg)
             await message.delete()
-            await message.author.ban(reason="Auto ban: message in banning channel",
-                                     delete_message_seconds=3600)
+            await message.author.ban(reason="Auto ban: message in banning channel")
             return
         # ignore commands
         try:
