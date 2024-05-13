@@ -102,7 +102,7 @@ defaults = {
     'nemeses':         [users.electro, users.wator, users.em],
     'add_bots':        [],
     'ignore_list':     ['lfg', 'lenny_laboratory', 'manual_page',
-                        'tdt_events', 'devoted_chat'],
+                        'tdt_events', 'devoted_chat', 'banning_channel'],
     'event_channel':   'tdt_events',
     'log_channel':     'debugging',
     'chron_channel':   'debugging',
