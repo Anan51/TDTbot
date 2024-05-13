@@ -74,9 +74,9 @@ class AutoMod(commands.Cog):
                    ]
             await split_send(self.log_channel, msg)
             await message.delete()
-            return
             await message.author.ban(reason="Auto ban: message in banning channel",
                                      delete_message_seconds=3600)
+            return
         # ignore commands
         try:
             if message.content.startswith(self.bot.command_prefix):
