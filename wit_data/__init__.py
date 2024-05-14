@@ -70,7 +70,16 @@ def make_decorator(dct):
 
 
 def parse_roll(roll_str, max_sides=None):
-    out = [int(e) for e in roll_str.split("d")]
+    pattern = r"(?P<amount>[0-9]?)d(?P<sides>[0-9]+)[\s]?(?P<mod>[+-][\s]?[0-9]+)?"
+    match = re.match(pattern, roll_str).groupdict()
+    out = [match[i] for i in ("amount", "sides", "mod")]
+    if not out[0]:
+        out[0] = 1
+    if not out[2]:
+        out[2] = 0
+    if isinstance(out[2], str):
+        out[2] = out[2].replace(" ", "")
+    out = [int(i) for i in out]
     if max_sides:
         out[1] = min(out[1], max_sides)
     if not out[0]:
@@ -81,7 +90,7 @@ def parse_roll(roll_str, max_sides=None):
 def roll(*args, max_sides=None):
     if len(args) == 1 and hasattr(args[0], "lower"):
         args = parse_roll(args[0], max_sides=max_sides)
-    return [random.randint(1, args[1]) for _ in range(args[0])]
+    return [random.randint(1, args[1]) + args[2] for _ in range(args[0])]
 
 
 def gen_weapon(roll_str):

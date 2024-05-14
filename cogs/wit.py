@@ -197,12 +197,16 @@ class Wit(commands.Cog, command_attrs=dict(hidden=True)):
         await split_send(ctx, gen_loot(roll_str), "\n\n")
 
     @commands.command(aliases=['r'])
-    async def roll(self, ctx, roll_str):
+    async def roll(self, ctx, *roll_str):
+        roll_str = ' '.join(roll_str)
         rolls = roll(roll_str)
-        msg = ' + '.join([str(i) for i in rolls])
+        msg = '{:}\n'.format(ctx.author.mention)
+        msg += 'Rolling {:}:\n'.format(roll_str)
+        msg += ' + '.join([str(i) for i in rolls])
         if len(rolls) > 1:
             msg += ' = {:}'.format(sum(rolls))
         await ctx.send(msg)
+        await ctx.message.delete()
 
     @commands.check(admin_check)
     @commands.command()
