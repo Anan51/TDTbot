@@ -90,7 +90,10 @@ def parse_roll(roll_str, max_sides=None):
 def roll(*args, max_sides=None):
     if len(args) == 1 and hasattr(args[0], "lower"):
         args = parse_roll(args[0], max_sides=max_sides)
-    return [random.randint(1, args[1]) + args[2] for _ in range(args[0])]
+    out = [random.randint(1, args[1]) for _ in range(args[0])]
+    if args[2]:
+        out.append(args[2])
+    return out
 
 
 def gen_weapon(roll_str):
