@@ -13,6 +13,6 @@ Archetype: Support
 **Spring Plank**  (-2 🔶): Evade incoming 💥 🔀 Grant +💥🚫 next 💥
 **Broadside**: Target receives 💥x2 next time they take damage from 🚫
 **Spot o' Grog**: +❤️🔷🔶 *LVL2*
-**Low Blow** (-2 🔶): 💥🚫 🔀 Cause __vulnerable__, target can't spend or gain 🔷 while __vulnerable__*LVL 3*
+**Low Blow** (-2 🔶): 💥🚫 🔀 Cause __vulnerable__; +1 to targets 🔷 costs while __Vulnerable__ *LVL 3*
 **Chorus**: Grant an ally +🚫🌀 in 2 turns *LVL 4*
 **Rhythm**: Gain: +⚡, +🚫, +🎯, +🌀, and then +💥 each turn until you take damage *LVL 5*
