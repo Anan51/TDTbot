@@ -14,7 +14,7 @@ Archetype: Caster
 **Mirror Image** (-6 🔷): Skip a target's next turn *LVL 2*
 **Animate Arcana** (-4 🔷): Summon a **MANA SOUL** *LVL 3*
 **Anti-Magic Shell** (-1 🔷):  Gain __Protect__x2. This __Protect__ also blocks incoming hostile __effects__ *LVL 4*
-**Wish** (-20 🔷): Cast a 2 random `tdt$draft` for free *LVL 5*
+**Wish** If you took no damage 🔀 Prepare 3 (Single use) `tdt$draft` Spells *LVL 5*
 
 **MANA SOUL**
 > ﻿❤️﻿﻿ : 1 / 💥 : 1
