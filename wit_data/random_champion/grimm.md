@@ -11,8 +11,8 @@ Archetype: Caster
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **Eldritch Blast** (-2 🔷): 💥💥💥🚫
 **Bend Will** (-2 🔷): Convert incoming 💥 into +❤️
-**Blood Ritual** (-1 ❤️): <:stealthIcon:943248201790677052>, Cause __Vulnerable__ x2
-**Siphon Bolt** (-3 🔷): 💥💥💥⚡🔀 +❤️ (per hit) *LVL 2*
+**Blood Ritual** (-1 ❤️): Cause __Vulnerablex2__
+**Siphon Bolt** (-3 🔷): 💥💥⚡🔀 +❤️ (per hit) *LVL 2*
 **Soul Silk**: +2 🔷 per all __Vulnerable__ *LVL 3*
 **Conjure Void** (-4 🔷): Moves cost one less (minimum of one) *LVL 4*
 **Infest** (-8 🔷): Cause __Vulnerable__🌀 start of turns *LVL 5*
