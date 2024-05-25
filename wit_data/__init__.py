@@ -176,7 +176,7 @@ def gen_artifact(roll_str):
         "**Port-a-Forge** 🛠️: Increase a 🗡️'s 💥, 🛡️, or __effect__. If used on an upgraded 🗡️, this costs -1 max 🔷 to use. (Destroyed on use). [+4 <:gold:1058304371940655185>]",
         "**Ring of Momentum** 💍: 🗡️ kills grant __Empower__. [+5 <:gold:1058304371940655185>]",
         "**Safety Hook** 🪝: Succesful 🗡️ hits grant __Protect__. [+6 <:gold:1058304371940655185>]",
-        "**Vitamins** 💊: Start combat with __Heal__x🧪 [+7 <:gold:1058304371940655185>]",
+        "**Vitamins** 💊: Start combat with __Heal__ [+7 <:gold:1058304371940655185>]",
         "**Lucky Clover** 🍀: Successful 🗡️ blocks cause __Weak__ [+8 <:gold:1058304371940655185>]",
         "**War Drum** 🥁: Succesful 🗡️ blocks cause __vulnerable__ [+9 <:gold:1058304371940655185>]",
         "**Eternal Lantern** 🪔: Successful 🗡️ hits cause __Burn__ [+10 <:gold:1058304371940655185>]",
