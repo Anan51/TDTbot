@@ -1,26 +1,21 @@
-# [**__ARBITER__**](<https://www.youtube.com/watch?v=OcGnrY5JEnw>)
-Difficulty: ⭐⭐⭐⭐
-Archetype: Summoner
+# [**The One**](<https://youtu.be/2oX_Q9NLsAY?si=5WkbvVJCt5zFOf-t>)
 
-❤️ : (8) 🟥🟥🟥🟥🟥🟥🟥🟥
-🔷 : (10) 🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦
+Difficulty: ⭐⭐⭐⭐⭐
+Archetype: Assassin
+ 
+❤️: `(1)` 🟥 
+🔷: `(19)`🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦
+`        `🟦🟦🟦🟦🟦🟦🟦🟦🟦
+🏆 0/3
 
-<:Guillotine:1236468011016261672> [**Judge, Jury, Executioner**](https://cdn.discordapp.com/attachments/1068260233807396874/1236463796784988252/jason-engle-abraham-the-justice-final.png?ex=66381a25&is=6636c8a5&hm=f9ef94079afd5a0aa1a054bb9dd54d416d25f8d34ab7294e5b4ba678993dd946&) (Art by Jason Engle)
-*Ally 💥 can target anyone. Ally summons persist after owner's death.*
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-**Prosecution** (-1 🔷) 💥💥⚡; +💥 per dead Ally -1
-**Libel** 🛡️🛡️🛡️🔀 Grant +🔷
-**Habeus Corpus** Summon an __Undead Citizen__ {OR} Grant +🔷🔷 per summon you have
-**Conviction** 💥🌀 🔀 Gain ❤️ per *LVL 3*
-**Injunction** (-1 ❤️) <:Sturdy:1152516154192044142>🌀🔀 Gain +❤️; If you take 💥 this turn, trigger all **Martyrs** *LVL 5*
+👑 [Game master](https://cdn.discordapp.com/attachments/1197372534363000943/1246614335573332039/54573861.jpg?ex=665d0792&is=665bb612&hm=bed2e8ca84497a0bb86edd0772a4eb1b7422417732ea9d055028cf6cf0d0c9c8&)
+Perfect reads awards a 🏆. Upon reaching 3 🏆, win the combat.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-
-**__WITNESS__**
-> ❤️ : 2 / 💥 / ❤️ : -1 🔷 : -1
-> **Martyr **Cause __Vulnerable__
-**__JURY__** *(LVL 2)*
-> ❤️ : 2 / (- ❤️) Summon a __Witness__. / 🔷 : -4, - __Witness__
-> **Martyr** Next turn: All __Witness__ 💥 causes - ❤️ instead
-**__BAILIFF__** *(LVL 4)*
-> ❤️ : 1 / Resurrect a dead Ally / 🔷 : -6 
-> **Martyr**💥🌀 per dead Ally.
+**The attack** (-5 🔷) 💥💥💥🎯
+**The dodge** (-2 🔷) Evade all damage 🔀 cause __Weak__ per damage evaded
+**The setup** (-4 🔷)  Convert your next 💥 into cause -❤️ (this still counts as an offensive move)
+**The vote of Confidence** If your next turn is a perfect read, gain an additional 🏆. *lvl 2*
+**The sacrifice** (-1 🏆) +2 ❤️⚡, Refill your 🔷 *lvl 3*
+**The ultimate attack** (-7 🔷) 💥💥⚡🚫🎯🌀; This move always wins speed ties. *lvl 4*
+**The finale** (-2 🏆) +3 🏆 *lvl 5*
