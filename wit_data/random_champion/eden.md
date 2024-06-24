@@ -2,22 +2,23 @@
 Difficulty: ⭐⭐⭐⭐
 Archetype: Support
 
-❤️ : `(10)` 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
-🔷 : `(8)`   🟦🟦🟦🟦🟦🟦🟦🟦
-
-🌱 [**Ancient Genesis**](https://media.discordapp.net/attachments/1056365502101979146/1168052057400430622/Eden.png?ex=65505c3f&is=653de73f&hm=617bc05782a578eadbd2ec0b4500c8ab366d7ea7efe856a185692b7527ca9366&=&width=673&height=673) 
-*Granting or gaining +🔷 increases your LVL (up to 7). Your maximum starting LVL is 5*
+❤️ : `(12)` 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+🔷 : `(10)` 🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦
+[**Ancient Genesis**](https://media.discordapp.net/attachments/1056365502101979146/1168052057400430622/Eden.png?ex=65505c3f&is=653de73f&hm=617bc05782a578eadbd2ec0b4500c8ab366d7ea7efe856a185692b7527ca9366&=&width=673&height=673) “🌱”
+*Gain -❤️🔷 per lvl above 1; At the start of combat, you may rearrange your moves and choose your lvl*
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**Leech Leaf**  (-1 🔷):  💥💥🔀 -🔷
-**Spore Shield** (-2 🔷): 🛡️🛡️🛡️🛡️ 🔀 +❤️
-**Bloom** Summon a __**BLOSSOM**__
-**Sunshine**: Remove 🔀 from all allies next moves. *LVL 2*
-**Vine and Root** (- 1 LVL): 💥💥🛡️🔀 +🔷 *LVL 3*
-**Bury** Destroy a __**BLOSSOM**__. In 2 turns summon 2. *LVL 4*
-**Wall of Thorns** (-2 🔷): Grant <:Persistence:1151788148322484234> (per cast) 🔀💥 *LVL 5*
-**Prune** (-1 ❤️): Gain __Heal__x2. Dealing 💥 while you have __heal__ grants +1 stack. *LVL 6*
-**Naturalize** (-6 LVLs): Cause -❤️ per 1/2 your 🔷 *LVL 7*
-
-> **__BLOSSOM __** 
+**Leach Leaf** (-1 🔷) 💥💥 🔀 Gain +❤️
+**Spore Shield** (-1 🔷) 🛡️🛡️🌀 🔀 Cause __Weak__
+**Sunshine** All allies gain -🔀 and -Cost next turn
+**Wall of Thorns** (-2 ❤️) <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234> 🔀 💥 *lvl 2*
+**Bloom** Summon a **Blossom** *lvl 3*
+**Harvest** (-2 🔷) ⚡Sacrifice your summons 🔀 +<:Persistence:1151788148322484234>❤️🌀 per *lvl 4*
+**Naturalize** (-all <:Persistence:1151788148322484234>) Summon 1 **Blossom** per <:Persistence:1151788148322484234> spent this turn *lvl 5*
+**Overgrowth** (-2 🔷) 💥💥🛡️; If fully successful, summon a **Blossom** *lvl 6*
+**Mycelium** If 3 **Blossom**s have died this combat, summon a **Nullshroom** *lvl 7*
+> **Blossom**
 > ❤️﻿﻿ : 1 / 🔷 : +1 each turn
-> Grant next 💥 +⚡, if 2 Blossoms 🔀 +🚫, if 3 🔀 +🎯
+> Grant next 💥 +⚡, if 2 **Blossom**s 🔀 +🚫, if 3 🔀 +🎯
+> **Nullshroom**
+> ❤️ : 3 / 💥<:stealthIcon:943248201790677052> : 1 / ❤️ : -2
+> **Clockwork** When an ally dies, this gains +💥
