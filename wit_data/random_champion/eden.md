@@ -10,7 +10,7 @@ Archetype: Support
 **Leach Leaf** (-1 🔷) 💥💥 🔀 Gain +❤️
 **Spore Shield** (-1 🔷) 🛡️🛡️🌀 🔀 Cause __Weak__
 **Sunshine** All allies gain -🔀 and -Cost next turn
-**Wall of Thorns** (-2 ❤️) <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234> 🔀 💥 *lvl 2*
+**Wall of Thorns** (-3 ❤️) <:Persistence:1151788148322484234><:Persistence:1151788148322484234><:Persistence:1151788148322484234> 🔀 💥 *lvl 2*
 **Bloom** Summon a **Blossom** *lvl 3*
 **Harvest** (-2 🔷) ⚡Sacrifice your summons 🔀 +<:Persistence:1151788148322484234>❤️🌀 per *lvl 4*
 **Naturalize** (-all <:Persistence:1151788148322484234>) Summon 1 **Blossom** per <:Persistence:1151788148322484234> spent this turn *lvl 5*
