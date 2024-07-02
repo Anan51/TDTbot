@@ -1,3 +1,4 @@
+from aiohttp.client_exceptions import ClientConnectorError
 import argparse
 import importlib
 import sys
@@ -59,6 +60,9 @@ while time.time() - now > 5:
         logger.info(e)
     except KeyError as e:
         logger.error(e)
+    except ClientConnectorError as e:
+        logger.error(e)
+        time.sleep(60)
     # if we get here, bot loop has ended
     try:
         # try to update own code via git
