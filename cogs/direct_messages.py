@@ -121,7 +121,7 @@ class DirectMessages(commands.Cog):
                 if message.content.startswith(prefix):
                     return
         # if DM
-        if type(message.channel) == discord.DMChannel:
+        if isinstance(message.channel, discord.DMChannel):
             channel = self.bot.find_channel(param.rc('log_channel'))
             if message.author.id == param.users.stellar:
                 roles = ['@' + find_role(channel.guild, i).name for i in ["admin", "devoted"]]
@@ -129,7 +129,7 @@ class DirectMessages(commands.Cog):
             else:
                 roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
                 msg = ' '.join(roles) + '\n'
-            msg += 'From: {0.author}\n"{0.content}"'.format(message)
+            msg += 'From: {0.author.mention}\n"{0.content}"'.format(message)
             sent = [await channel.send(msg)]
             urls = []
             if message.attachments:
@@ -146,6 +146,7 @@ class DirectMessages(commands.Cog):
             await sent[-1].add_reaction(_tdt_bruh)
             if "spicy clips" in message.content.lower():
                 await sent[-1].add_reaction('🌶️')
+            await message.add_reaction('✅')
             return
         # if message from log channel
         if message.channel == self.channel:
