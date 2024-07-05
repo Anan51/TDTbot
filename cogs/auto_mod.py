@@ -21,6 +21,17 @@ _searches = [r'(?i)\bkill\byourself\b',
 _searches += [r'(?i)\b{:}[s]?\b'.format(i) for i in _bad_words]
 
 
+class _Spam():
+    def __init__(self, author=None, content=None, log_msg=None, count=0):
+        self.author = author
+        self.content = content
+        self.log_msg = log_msg
+        self.count = count
+
+    def __eq__(self, message):
+        return self.author == message.author.id and self.content == message.content
+
+
 class AutoMod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -28,6 +39,7 @@ class AutoMod(commands.Cog):
         self._init = False
         self._mentions = None
         self._coc_link = None
+        self._last_spam = None
 
     async def _async_init(self):
         if self._init:
@@ -86,6 +98,21 @@ class AutoMod(commands.Cog):
                     return
         for search in _searches:
             if re.search(search, message.content):
+                if self._last_spam:
+                    if self._last_spam == message:
+                        self._last_spam.count += 1
+                        if self._last_spam.count <= 11:
+                            if self._last_spam.count == 2:
+                                await self._last_spam.log_msg.add_reaction("1️⃣")
+                            emoji = "1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟➕"[self._last_spam.count]
+                            await self._last_spam.log_msg.add_reaction(emoji)
+                        await message.delete()
+                        if self._last_spam.count >= 5:
+                            await message.channel.send("Repeated spam from {:} has been deleted; this will auto-ban in the future.".format(message.author.mention))
+                            return
+                            await message.author.ban(reason="Repeated spam")
+                            await self._last_spam.log_msg.add_reaction("🔨")
+                        return
                 if search == _discord_link:
                     if message.channel.id in [param.channels.tdt_events,
                                               param.channels.content_hub]:
@@ -96,10 +123,11 @@ class AutoMod(commands.Cog):
                        "In: {:} ({:})".format(message.channel.mention, message.channel.name),
                        "{:}".format(self.mentions),
                        ]
-                await split_send(self.log_channel, msg)
+                log_msg = (await split_send(self.log_channel, msg))[-1]
                 msg = "I have parsed this message as spam as against the Code of Conduct (CoC) and deleted it.\n"
                 msg += "Please read the CoC: " + await self.fetch_coc_link()
                 await message.channel.send(msg, reference=message)
+                self._last_spam = _Spam(message.author.id, message.content, log_msg, 1)
                 await message.delete()
                 return
 
