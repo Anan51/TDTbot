@@ -5,7 +5,7 @@ from discord.ext import commands  # type: ignore
 from glob import glob
 import logging
 import os
-import pytz
+import pytz  # type: ignore
 import sys  # type: ignore # noqa: F401
 import traceback  # type: ignore # noqa: F401
 from . import param
@@ -113,7 +113,7 @@ class MainBot(commands.Bot):
     def find_channel(self, channel):
         """Attempts to return a Channel type object from different types of inputs"""
         # if int assume it's an id number
-        if type(channel) == int:
+        if isinstance(channel, int):
             out = self.get_channel(channel)
             if out is not None:
                 return out
