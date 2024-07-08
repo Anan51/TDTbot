@@ -108,7 +108,9 @@ class AutoMod(commands.Cog):
                             await self._last_spam.log_msg.add_reaction(emoji)
                         await message.delete()
                         if self._last_spam.count >= 5:
-                            await message.channel.send("Repeated spam from {:} has been deleted; this will auto-ban in the future.".format(message.author.mention))
+                            msg = "Repeated spam from {:} has been deleted; this will auto-ban in the future."
+                            log_msg = self._last_spam.log_msg
+                            await log_msg.reply(msg.format(message.author.mention))
                             return
                             await message.author.ban(reason="Repeated spam")
                             await self._last_spam.log_msg.add_reaction("🔨")
