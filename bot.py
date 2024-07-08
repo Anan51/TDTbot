@@ -195,7 +195,7 @@ class MainBot(commands.Bot):
             return
         if guild is None:
             guild = [g for g in self.guilds if g.id == payload.guild_id][0]
-        if type(guild) == int:
+        if isinstance(guild, int):
             guild = self.guilds[guild]
         if member is None:
             member = getattr(payload, "member")
