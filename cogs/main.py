@@ -35,6 +35,7 @@ class MainCommands(commands.Cog):
         self._kicks = []
         self.bot.enroll_emoji_role({'👍': "Wit Challengers"}, message_id=809302963990429757)
         self.bot.enroll_emoji_role({'🏆': "Tourney Challengers"}, message_id=822744897505067018)
+        self.bot.enroll_emoji_role(param.emoji2role, message_id=param.messages.CoC)
         _roles = ['alpha', 'beta', 'gamma', 'omega']
         _dict = {i: i for i in _roles}
         self.bot.enroll_emoji_role(_dict, message_id=messages.wolfpack, remove=_roles, min_role='Recruit')
