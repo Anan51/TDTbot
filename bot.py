@@ -186,6 +186,8 @@ class MainBot(commands.Bot):
                          member=None, guild=None, min_role=None, delete=False,
                          remove=None):
         """Handle an emoji reaction"""
+        if delete:
+            logger.printv('Delete (rxn): {}'.format(payload))
         if message_id is not None:
             if getattr(payload, "message_id") != message_id:
                 return
@@ -233,6 +235,7 @@ class MainBot(commands.Bot):
                     await member.remove_roles(i)
             try:
                 if delete:
+                    logger.printv('Delete (role): {}->{}->{}'.format(key, role0, role))
                     await member.remove_roles(role)
                 else:
                     await member.add_roles(role)
