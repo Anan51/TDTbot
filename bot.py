@@ -98,6 +98,7 @@ class MainBot(commands.Bot):
         @self.event
         async def on_raw_reaction_remove(payload):
             """Handle emoji reactions"""
+            logger.printv('Reaction removed: {}'.format(payload))
             kwargs = {}
             for args_, kwargs_ in self._emoji_role_data:
                 kwargs.update(kwargs_)
