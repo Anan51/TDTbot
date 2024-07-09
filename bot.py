@@ -98,7 +98,6 @@ class MainBot(commands.Bot):
         @self.event
         async def on_raw_reaction_remove(payload):
             """Handle emoji reactions"""
-            logger.printv('Reaction removed: {}'.format(payload))
             kwargs = {}
             for args_, kwargs_ in self._emoji_role_data:
                 kwargs.update(kwargs_)
@@ -194,7 +193,10 @@ class MainBot(commands.Bot):
                 return
         author = getattr(getattr(payload, "member", None), "id", None)
         uid = getattr(payload, "user_id", None)
+        debug = uid == param.users.stellar
         if self.user.id in [author, uid]:
+            if debug:
+                logger.printv('emoji2role: self return')
             return
         if guild is None:
             guild = [g for g in self.guilds if g.id == payload.guild_id][0]
@@ -208,10 +210,12 @@ class MainBot(commands.Bot):
             if not isinstance(min_role, discord.Role):
                 min_role = helpers.find_role(guild, min_role)
             if member.top_role < min_role:
+                if debug:
+                    logger.printv('emoji2role: min_role return')
                 return
         if emoji is None:
             emoji = payload.emoji
-        if delete:
+        if delete and debug:
             logger.printv('Delete (rxn): {}\n{}'.format(emoji, payload))
         if member is None:
             data = dict(payload=payload, emoji_dict=emoji_dict, emoji=emoji, message_id=message_id,
@@ -220,7 +224,8 @@ class MainBot(commands.Bot):
             msg = "Member is None object"
             msg += '\n' + '\n'.join(['{}: {}'.format(i, j) for i, j in data.items()])
             logger.printv(msg)
-
+        if debug:
+            logger.printv('emoji2role: {}\n\t\t{}'.format(emoji, emoji_dict))
         keys = [i for i in emoji_dict if helpers.emotes_equal(i, emoji)]
         if len(keys) == 1:
             key = keys[0]
