@@ -186,10 +186,10 @@ class MainBot(commands.Bot):
                          member=None, guild=None, min_role=None, delete=False,
                          remove=None):
         """Handle an emoji reaction"""
-        if delete:
-            logger.printv('Delete (rxn): {}'.format(payload))
         if message_id is not None:
             if getattr(payload, "message_id") != message_id:
+                if delete:
+                    logger.printv('emoji2role: message mismatch {}\n{}'.format(getattr(payload, "message_id"), message_id))
                 return
         author = getattr(getattr(payload, "member", None), "id", None)
         uid = getattr(payload, "user_id", None)
