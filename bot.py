@@ -187,16 +187,6 @@ class MainBot(commands.Bot):
                          member=None, guild=None, min_role=None, delete=False,
                          remove=None):
         """Handle an emoji reaction"""
-        logger.printv('Emoji2role: {}'.format(payload))
-        logger.printv('Emoji2role: {}'.format(emoji_dict))
-        logger.printv(
-            f"""Emoji2role: {emoji},
-                            {message_id},
-                            {member},
-                            {guild},
-                            {min_role},
-                            {delete},
-                            {remove}""")
         if delete:
             logger.printv('Delete (rxn): {}'.format(payload))
         if message_id is not None:
@@ -221,6 +211,8 @@ class MainBot(commands.Bot):
                 return
         if emoji is None:
             emoji = payload.emoji
+        if delete:
+            logger.printv('Delete (rxn): {}\n{}'.format(emoji, payload))
         if member is None:
             data = dict(payload=payload, emoji_dict=emoji_dict, emoji=emoji, message_id=message_id,
                         member=member, guild=guild, min_role=min_role, delete=delete, remove=remove)
