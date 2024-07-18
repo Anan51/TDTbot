@@ -61,6 +61,7 @@ roles = _Struct(
                 member=318266595187228672,
                 devoted=611745292899057694,
                 admin=318255861002928129,
+                supporter=1006390128907919411,
                 # game roles
                 apex=879069368649134160,
                 destiny_2=878812130453905420,  # kept for backwards compatibility

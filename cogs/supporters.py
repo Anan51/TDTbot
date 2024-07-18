@@ -14,8 +14,10 @@ roles = param.roles
 logger = logging.getLogger('discord.' + __name__)
 supporters_fn = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 supporters_fn = os.path.join(supporters_fn, 'config', 'supporters.dbm')
-_supporter_rank = roles.community
+_min_support_role = roles.community
 _user_t = Union[discord.Member, discord.User]
+_training_key = '<debug_training>'
+_nmax = 20
 
 
 class Supporters(commands.Cog):
@@ -23,6 +25,8 @@ class Supporters(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.data = param.IntPermaDict(supporters_fn)
+        self._trainings = []
+        self._bounty_board = None
 
     async def cog_check(self, ctx):
         """Don't allow everyone to access this cog"""
@@ -45,7 +49,7 @@ class Supporters(commands.Cog):
         now = int_time()
         self.data[member.id] = [now, alias]
         reason = "User is a paid supporter"
-        role = find_role(ctx.guild, _supporter_rank)
+        role = find_role(ctx.guild, _min_support_role)
         if not isinstance(member, discord.Member):
             tmp = ctx.guild.get_member(member.id)
             member = tmp if tmp else member
@@ -128,6 +132,38 @@ class Supporters(commands.Cog):
             await split_send(ctx, lines)
         else:
             await ctx.send("Empty supporter data.")
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        """Listen for supporters asking for training"""
+        supporter = False
+        for role in message.author.roles:
+            if role.id == param.roles.supporter:
+                supporter = True
+                break
+        if not supporter:
+            return
+        if _training_key not in message.content.lower():
+            return
+        self._trainings.append(message.id)
+        if len(self._trainings) > _nmax:
+            self._trainings.pop(0)
+        await message.add_reaction('⚔️')
+
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self, payload):
+        """Listen for reactions to training messages"""
+        if payload.message_id not in self._trainings:
+            return
+        message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
+        if payload.emoji.name != '⚔️':
+            return
+        msg = 'Training request by {} here: {}.'.format(message.author.mention, message.jump_url)
+        msg += '\nPlease help if you can.'
+        if not self._bounty_board:
+            self._bounty_board = self.bot.get_channel(param.channels.bounty_board)
+        await self._bounty_board.send(msg)
+        await message.add_reaction('✅')
 
 
 if usingV2:
