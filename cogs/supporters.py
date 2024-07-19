@@ -5,7 +5,7 @@ import logging
 import pytz
 from typing import Union
 from .. import param
-from ..helpers import int_time, find_role, seconds_to_datetime
+from ..helpers import int_time, find_role, seconds_to_datetime, emotes_equal
 from ..async_helpers import admin_check, split_send
 from ..version import usingV2
 
@@ -180,7 +180,8 @@ class Supporters(commands.Cog):
         """Listen for reactions to training messages"""
         if payload.user_id == self.bot.user.id:
             return
-        if payload.emoji.name != '⚔️':
+        if not emotes_equal(payload.emoji, '⚔️'):
+            logger.printv('Reaction not a sword.')
             return
         if payload.message_id not in self._trainings:
             data = [payload.message_id,
