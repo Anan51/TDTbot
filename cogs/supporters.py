@@ -23,7 +23,6 @@ _nmax = 20
 class _Training:
     def __init__(self, message):
         self.id = message.id
-        self.author = message.author
 
     def __eq__(self, other):
         if isinstance(other, int):
@@ -180,11 +179,17 @@ class Supporters(commands.Cog):
         """Listen for reactions to training messages"""
         if payload.user_id == self.bot.user.id:
             return
-        if payload.message_id not in self._trainings:
-            return
-        training = [msg for msg in self._trainings if msg == payload.message_id][0]
         if payload.emoji.name != '⚔️':
             return
+        if payload.message_id not in self._trainings:
+            data = [payload.message_id,
+                   [i.id for i in self._trainings],
+                   payload.message_id in self._trainings,
+                   payload.message_id == self._trainings[0]
+                   ]
+            logger.printv('Training message not found.\n\n' + str(data))
+            return
+        training = [msg for msg in self._trainings if msg == payload.message_id][0]
         if training.author.id == payload.user_id:
             return
         if not self._bounty_board:
