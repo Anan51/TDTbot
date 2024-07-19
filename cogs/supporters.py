@@ -34,7 +34,8 @@ class _Training:
             return False
 
     def alert(self):
-        msg = 'Training request by {} here: {}.'.format(self.author.mention, self.jump_url)
+        msg = 'Training request by {} here: {}.'
+        msg = msg.format(self.author.mention, self.mesage.jump_url)
         n = len(msg) + 34
         quote = self.message.content
         if len(quote) > 2000 - n:
@@ -180,20 +181,12 @@ class Supporters(commands.Cog):
         """Listen for reactions to training messages"""
         if payload.user_id == self.bot.user.id:
             return
-        data = [payload.message_id,
-                [i.id for i in self._trainings],
-                payload.message_id in self._trainings,
-                payload.message_id == self._trainings[0]
-                ]
         if not emotes_equal(payload.emoji, '⚔️'):
-            logger.printv('Reaction not a sword.\n\n' + str(data))
             return
         if payload.message_id not in self._trainings:
-            logger.printv('Training message not found.\n\n' + str(data))
             return
         training = [msg for msg in self._trainings if msg == payload.message_id][0]
         if training.author.id != payload.user_id:
-            logger.printv('Training author reacted.\n\n' + str(data))
             return
         if not self._bounty_board:
             self._bounty_board = self.bot.get_channel(param.channels.bounty_board)
