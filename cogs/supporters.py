@@ -180,19 +180,20 @@ class Supporters(commands.Cog):
         """Listen for reactions to training messages"""
         if payload.user_id == self.bot.user.id:
             return
+        data = [payload.message_id,
+                [i.id for i in self._trainings],
+                payload.message_id in self._trainings,
+                payload.message_id == self._trainings[0]
+                ]
         if not emotes_equal(payload.emoji, '⚔️'):
-            logger.printv('Reaction not a sword.')
+            logger.printv('Reaction not a sword.\n\n' + str(data))
             return
         if payload.message_id not in self._trainings:
-            data = [payload.message_id,
-                    [i.id for i in self._trainings],
-                    payload.message_id in self._trainings,
-                    payload.message_id == self._trainings[0]
-                    ]
             logger.printv('Training message not found.\n\n' + str(data))
             return
         training = [msg for msg in self._trainings if msg == payload.message_id][0]
-        if training.author.id == payload.user_id:
+        if training.author.id != payload.user_id:
+            logger.printv('Training author reacted.\n\n' + str(data))
             return
         if not self._bounty_board:
             self._bounty_board = self.bot.get_channel(param.channels.bounty_board)
