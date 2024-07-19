@@ -35,7 +35,7 @@ class _Training:
 
     def alert(self):
         msg = 'Training request by {} here: {}.'
-        msg = msg.format(self.author.mention, self.mesage.jump_url)
+        msg = msg.format(self.author.mention, self.message.jump_url)
         n = len(msg) + 34
         quote = self.message.content
         if len(quote) > 2000 - n:
