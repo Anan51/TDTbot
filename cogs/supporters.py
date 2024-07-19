@@ -24,6 +24,7 @@ class _Training:
     def __init__(self, message):
         self.id = message.id
         self.author = message.author
+        self.message = message
 
     def __eq__(self, other):
         if isinstance(other, int):
