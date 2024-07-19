@@ -20,6 +20,30 @@ _training_key = 'exotic training'
 _nmax = 20
 
 
+class _Training:
+    def __init__(self, message):
+        self.id = message.id
+        self.author = message.author
+
+    def __eq__(self, other):
+        if isinstance(other, int):
+            return self.id == other
+        try:
+            return self.id == other.id
+        except AttributeError:
+            return False
+
+    def alert(self):
+        msg = 'Training request by {} here: {}.'.format(self.author.mention, self.jump_url)
+        n = len(msg) + 34
+        quote = self.message.content
+        if len(quote) > 2000 - n:
+            quote = quote[:2000 - n] + '...'
+        msg += '\n```' + quote + '```\n'
+        msg += '\nPlease help if you can.'
+        return msg
+
+
 class Supporters(commands.Cog):
     """Store and list supporters"""
     def __init__(self, bot):
@@ -145,25 +169,29 @@ class Supporters(commands.Cog):
             return
         if _training_key not in message.content.lower():
             return
-        self._trainings.append(message.id)
+        self._trainings.append(_Training(message))
         if len(self._trainings) > _nmax:
-            self._trainings.pop(0)
+            msg = self._trainings.pop(0)
+            await msg.add_reaction('❌')
         await message.add_reaction('⚔️')
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         """Listen for reactions to training messages"""
+        if payload.user_id == self.bot.user.id:
+            return
         if payload.message_id not in self._trainings:
             return
-        message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
+        training = [msg for msg in self._trainings if msg == payload.message_id][0]
         if payload.emoji.name != '⚔️':
             return
-        msg = 'Training request by {} here: {}.'.format(message.author.mention, message.jump_url)
-        msg += '\nPlease help if you can.'
+        if training.author.id == payload.user_id:
+            return
         if not self._bounty_board:
             self._bounty_board = self.bot.get_channel(param.channels.bounty_board)
-        await self._bounty_board.send(msg)
-        await message.add_reaction('✅')
+        await self._bounty_board.send(training.alert())
+        await training.add_reaction('✅')
+        self._trainings.remove(training)
 
 
 if usingV2:
