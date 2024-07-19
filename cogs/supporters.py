@@ -16,7 +16,7 @@ supporters_fn = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 supporters_fn = os.path.join(supporters_fn, 'config', 'supporters.dbm')
 _min_support_role = roles.community
 _user_t = Union[discord.Member, discord.User]
-_training_key = '<debug_training>'
+_training_key = 'exotic training'
 _nmax = 20
 
 
