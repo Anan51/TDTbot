@@ -114,7 +114,7 @@ class MainCommands(commands.Cog):
 
     @commands.command()
     async def karen_electro(self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
-        """<n (optional)> <channel (optional)> <server (optional)> posts vibing cat"""
+        """<n (optional)> <channel (optional)> <server (optional)> posts karen electro"""
         emote = "<:karen_electro:779088291496460300>"
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
 
