@@ -1,3 +1,13 @@
+"""
+Trick or Treat game cog
+
+Intructions for initiation:
+- Create a channel named "the_neighborhood" (or change the _channel variable)
+- Create a message in #manual_page and copy the id to param.messages.trick_or_treat
+- Make sure _game_on is set to "auto" or True
+- Create a role named "SPOOKY" (or change the _role variable)
+"""
+
 import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
 import asyncio
@@ -20,14 +30,15 @@ except ImportError:
 
 
 logger = logging.getLogger("discord." + __name__)
-year = "{:04d}".format(datetime.datetime.utcnow().year)
+_utc = datetime.timezone.utc
+year = "{:04d}".format(datetime.datetime.now(_utc).year)
 iyear = int(year)
 
 # main settings:
 _channel = "the_neighborhood"       # trick-or-treat channel name or id
 # MAKE SURE TO UPDATE MESSAGE ID IN param.py
 _rule_id = messages.trick_or_treat  # message id for rules/reaction check
-_game_on = False                     # flag to run game
+_game_on = "auto"                   # flag to run game, "auto" for auto start/stop
 _role = "SPOOKY"                    # role name or id for game participation
 _nmin = 2, 5                        # minimum number (range) of votes to start count
 # secondary settings
@@ -154,7 +165,7 @@ class TrickOrTreat(commands.Cog):
         if not self._game_on:
             return False
         if self._game_on == "auto":
-            return _start_time <= datetime.datetime.utcnow() <= _stop_time
+            return _start_time <= datetime.datetime.now(_utc) <= _stop_time
         if self._game_on is True:
             return True
         return True
@@ -394,7 +405,7 @@ class TrickOrTreat(commands.Cog):
             results = ' {:} x {:} vs {:} x {:}'
             results = results.format(ntrick, _trick, ntreat, _treat)
             ntot = max(noa_tot, 1)
-            scale = (_stop_time - _start_time) / max(_stop_time - datetime.datetime.utcnow(), day)
+            scale = (_stop_time - _start_time) / max(_stop_time - datetime.datetime.now(_utc), day)
             scale = max(1, int(scale + .5))
             delta = random.randint(1, ntot * scale)
             stealth_nerf = 0
@@ -454,7 +465,7 @@ class TrickOrTreat(commands.Cog):
             await self.channel.send(txt)
             await split_send(self.channel, summary, style='```')
             self._set_msg_id(0)
-            if self._game_on == "auto" and datetime.datetime.utcnow() > _stop_time:
+            if self._game_on == "auto" and datetime.datetime.now(_utc) > _stop_time:
                 self._awaiting = None
                 msg = "Thank you all for playing this year. Here is the final tally:"
                 await self.channel.send(msg)
