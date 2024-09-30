@@ -49,7 +49,10 @@ class Roast(commands.Cog):
         msg = roast_str() if roast is None else roast
         if prefix is not None:
             msg = prefix.rstrip() + ' ' + msg
-        msg = await channel.send(msg)
+        if isinstance(last, discord.Message):
+            msg = await last.reply(msg)
+        else:
+            msg = await channel.send(msg)
         self._log_roast(msg.id)
         if last is not None:
             self._last_roast = last
