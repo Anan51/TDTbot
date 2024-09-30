@@ -30,7 +30,7 @@ except ImportError:
 
 
 logger = logging.getLogger("discord." + __name__)
-_utc = datetime.timezone.utc
+_utc = pytz.utc
 year = "{:04d}".format(datetime.datetime.now(_utc).year)
 iyear = int(year)
 
@@ -55,8 +55,6 @@ _nlast = "tdt.trick_or_treat.nlast." + year
 _tz = pytz.timezone(param.rc('timezone'))
 _start_time = datetime.datetime(iyear, 10, 1, 0, 0, 0, 0, _tz)
 _stop_time = datetime.datetime(iyear, 11, 1, 0, 0, 0, 0, _tz)
-_start_time = _start_time.astimezone(pytz.utc).replace(tzinfo=None)
-_stop_time = _stop_time.astimezone(pytz.utc).replace(tzinfo=None)
 
 # manual page
 _manual = channels.manual_page
