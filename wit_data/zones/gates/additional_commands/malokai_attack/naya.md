@@ -1,1 +1,0 @@
-**NAYA**: Your previous turn also dealt :boom::zap::no_entry_sign: to the lowest HP player per __will__ they had

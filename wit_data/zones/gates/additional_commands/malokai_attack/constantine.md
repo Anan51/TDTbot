@@ -1,1 +1,0 @@
-**CONSTANTINE**: Gain __empower__, __protect__, and __healing__ per __will__ the players have in total. 

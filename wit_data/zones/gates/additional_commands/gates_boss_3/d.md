@@ -1,9 +1,0 @@
-"Foolish player. Do you not understand that you are expected to die? I am immortal. I am death."
-
-__**MALOKAI, DRAGON OF WIT**__
-:heart: : 180 x :busts_in_silhouette:
-:moneybag: : ||tdt$gates_boss_3||
-Behavior: This causes __Will__ every minute this is alive
-—————————————————
-∞  | **Nightmare Blaze** tdt$malokai_attack
-https://youtu.be/eUcThHVbrXY

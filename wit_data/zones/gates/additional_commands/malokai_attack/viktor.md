@@ -1,1 +1,0 @@
-**VIKTOR**: Delete the player with the highest __will__'s last turn. Remove any affect it may have had to Malokai this turn but deal any affect that may have done from Malokai. 
