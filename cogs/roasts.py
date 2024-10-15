@@ -37,9 +37,13 @@ class RoastButton(discord.ui.Button['RoastView']):
         if self.view.count > 0:
             cog: "Roast" = self.view.cog
             self.view.count -= 1
-            await cog._send_roast(self.view.channel, sender=interaction.user)
             self.view.add_buttons()
-            await interaction.response.edit_message(view=self.view)
+            try:
+                await interaction.response.edit_message(view=self.view)
+            except discord.errors.NotFound:
+                pass
+            finally:
+                await cog._send_roast(self.view.channel, sender=interaction.user)
         if self.view.count <= 0:
             self.view.stop()
             await interaction.delete_original_response()
