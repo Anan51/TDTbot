@@ -1,6 +1,5 @@
 import discord  # type: ignore # noqa: F401
 from discord.ext import commands  # type: ignore
-import asyncio
 import datetime
 import logging
 import random
@@ -35,24 +34,14 @@ class RoastButton(discord.ui.Button['RoastView']):
         super().__init__(style=style, label=label, emoji='🔥')
 
     async def callback(self, interaction: discord.Interaction):
-        view = self.view
-        if view.count > 0:
-            cog: "Roast" = view.cog
-            view.count -= 1
-            await cog._send_roast(view.channel, sender=interaction.user)
-            view.add_buttons()
-            try:
-                await asyncio.sleep(.1)
-                await interaction.response.edit_message(view=view)
-            except discord.errors.NotFound:
-                await asyncio.sleep(.1)
-                try:
-                    await interaction.response.edit_message(view=view)
-                except discord.errors.NotFound:
-                    await asyncio.sleep(.1)
-                    await interaction.response.edit_message(view=view)
-        if view.count <= 0:
-            view.stop()
+        if self.view.count > 0:
+            cog: "Roast" = self.view.cog
+            self.view.count -= 1
+            await cog._send_roast(self.view.channel, sender=interaction.user)
+            self.view.add_buttons()
+            await interaction.response.edit_message(view=self.view)
+        if self.view.count <= 0:
+            self.view.stop()
             await interaction.delete_original_response()
 
 
