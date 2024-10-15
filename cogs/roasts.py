@@ -40,7 +40,7 @@ class RoastButton(discord.ui.Button['RoastView']):
             cog: "Roast" = view.cog
             view.count -= 1
             await cog._send_roast(view.channel, sender=interaction.user)
-            self.view.add_buttons()
+            view.add_buttons()
             try:
                 await asyncio.sleep(.1)
                 await interaction.response.edit_message(view=view)
@@ -49,7 +49,8 @@ class RoastButton(discord.ui.Button['RoastView']):
                 try:
                     await interaction.response.edit_message(view=view)
                 except discord.errors.NotFound:
-                    pass
+                    await asyncio.sleep(.1)
+                    await interaction.response.edit_message(view=view)
         if view.count <= 0:
             view.stop()
             await interaction.delete_original_response()
