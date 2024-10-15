@@ -30,7 +30,7 @@ class RoastButton(discord.ui.Button['RoastView']):
             style = discord.ButtonStyle.blurple
         else:
             style = discord.ButtonStyle.green
-        label = f'Roast {channel.mention} {count}'
+        label = f'Roast {channel.name} {count}'
         super().__init__(style=style, label=label, emoji='🔥')
 
     async def callback(self, interaction: discord.Interaction):
@@ -43,7 +43,7 @@ class RoastButton(discord.ui.Button['RoastView']):
             await cog._send_roast(view.channel, sender=interaction.user)
         if view.count <= 0:
             view.stop()
-            await interaction.response.delete_message()
+            await interaction.delete_original_response()
 
 
 class RoastView(discord.ui.View):
