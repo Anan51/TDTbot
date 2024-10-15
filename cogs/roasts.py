@@ -20,6 +20,46 @@ def roast_str():
     return random.choice(param.rc('roasts'))
 
 
+class RoastButton(discord.ui.Button['RoastView']):
+    def __init__(self, channel: discord.TextChannel, count: int = 1):
+        if count < 4:
+            style = discord.ButtonStyle.red
+        elif count < 7:
+            style = discord.ButtonStyle.gray
+        elif count < 11:
+            style = discord.ButtonStyle.blurple
+        else:
+            style = discord.ButtonStyle.green
+        label = f'Roast {channel.mention} {count}'
+        super().__init__(style=style, label=label, emoji='🔥')
+
+    async def callback(self, interaction: discord.Interaction):
+        view = self.view
+        if view.count > 0:
+            cog: "Roast" = view.cog
+            view.count -= 1
+            self.view.add_buttons()
+            await interaction.response.edit_message(view=view)
+            await cog._send_roast(view.channel, sender=interaction.user)
+        if view.count <= 0:
+            view.stop()
+            await interaction.response.delete_message()
+
+
+class RoastView(discord.ui.View):
+    """A view that prompts the user to select an action."""
+    def __init__(self, cog: "Roast", channel: discord.TextChannel, count: int = 1):
+        super().__init__()
+        self.cog = cog
+        self.channel = channel
+        self.count = count
+        self.add_buttons()
+
+    def add_buttons(self):
+        self.clear_items()
+        self.add_item(RoastButton(self.channel, self.count))
+
+
 class Roast(commands.Cog):
     """Cog to roast people"""
 
@@ -258,6 +298,13 @@ class Roast(commands.Cog):
         self._react_snipe[user.id] = [emoji, n]
         if self._react_snipe[user.id][1] <= 0:
             self._react_snipe.pop(user.id)
+
+    @commands.command(hidden=True)
+    @commands.check(admin_check)
+    async def roast_button(self, ctx, channel: discord.TextChannel, count: int = 1):
+        """<channel> <int (optional:1)> - Create a button to roast a channel"""
+        view = RoastView(self, channel, count)
+        await ctx.send('Roast button:', view=view)
 
 
 if usingV2:
