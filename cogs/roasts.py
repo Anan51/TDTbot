@@ -52,7 +52,7 @@ class RoastButton(discord.ui.Button['RoastView']):
 class RoastView(discord.ui.View):
     """A view that prompts the user to select an action."""
     def __init__(self, cog: "Roast", channel: discord.TextChannel, count: int = 1):
-        super().__init__()
+        super().__init__(timeout=None)
         self.cog = cog
         self.channel = channel
         self.count = count
