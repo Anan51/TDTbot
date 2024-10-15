@@ -42,6 +42,7 @@ class RoastButton(discord.ui.Button['RoastView']):
             await cog._send_roast(view.channel, sender=interaction.user)
             self.view.add_buttons()
             try:
+                await asyncio.sleep(.1)
                 await interaction.response.edit_message(view=view)
             except discord.errors.NotFound:
                 await asyncio.sleep(.1)
