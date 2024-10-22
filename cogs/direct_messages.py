@@ -33,8 +33,8 @@ class DirectMessages(commands.Cog):
         self._init = False
         self._init_finished = False
         self._chancla = None
-        if "ignore" not in self.data:
-            self.data["ignore"] = []
+        #if "ignore" not in self.data:
+        #    self.data["ignore"] = []
 
     @commands.Cog.listener()
     async def on_ready(self):
