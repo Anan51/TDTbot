@@ -33,8 +33,9 @@ class DirectMessages(commands.Cog):
         self._init = False
         self._init_finished = False
         self._chancla = None
-        #if "ignore" not in self.data:
-        #    self.data["ignore"] = []
+        my_config = self._get_config()
+        if "ignore" not in my_config:
+            my_config["ignore"] = []
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -122,8 +123,12 @@ class DirectMessages(commands.Cog):
         else:
             users = [user]
         out = []
+        config = self._get_config()
         for user in users:
-            self['ignore'].append(user.id)
+            if user.id in config['ignore']:
+                out.append("{} already in ignore list".format(user))
+                continue
+            config['ignore'].append(user.id)
             out.append("Added {} to ignore list".format(user))
         await split_send(ctx, out)
 
@@ -142,15 +147,20 @@ class DirectMessages(commands.Cog):
         else:
             users = [user]
         out = []
+        config = self._get_config()
         for user in users:
-            self['ignore'].remove(user.id)
-            out.append("Removed {} from ignore list".format(user))
+            try:
+                config['ignore'].remove(user.id)
+                out.append("Removed {} from ignore list".format(user))
+            except KeyError:
+                out.append("{} not in ignore list".format(user))
         await split_send(ctx, out)
 
     @commands.command()
     async def dm_ignore_list(self, ctx):
         """Prints the list of ignored users"""
-        users = [self.bot.get_user(i) for i in self['ignore']]
+        config = self._get_config()
+        users = [self.bot.get_user(i) for i in config['ignore']]
         lines = ["{}".format(i) for i in users]
         await split_send(ctx, lines, style='```')
 
@@ -171,7 +181,8 @@ class DirectMessages(commands.Cog):
                     return
         # if DM
         if isinstance(message.channel, discord.DMChannel):
-            if message.author.id in self['ignore']:
+            config = self._get_config()
+            if message.author.id in config['ignore']:
                 return
             channel = self.bot.find_channel(param.rc('log_channel'))
             if message.author.id == param.users.stellar:
