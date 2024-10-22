@@ -33,6 +33,8 @@ class DirectMessages(commands.Cog):
         self._init = False
         self._init_finished = False
         self._chancla = None
+        if "ignore" not in self.data:
+            self.data["ignore"] = []
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -105,6 +107,53 @@ class DirectMessages(commands.Cog):
         lines = ["{}: {}".format(i, self[i]) for i in self.keys()]
         await split_send(ctx, lines, style='```')
 
+    @commands.command()
+    async def ignore_dm(self, ctx, user: discord.User = None):
+        """<user> ignores a user's DMs"""
+        if user is None:
+            if ctx.message.reference:
+                cid = self[ctx.message.reference.message_id]
+                channel = self.bot.get_channel(cid)
+                if not channel:
+                    channel = await self.bot.fetch_channel(cid)
+                users = [u for u in channel.recipients if u != self.bot.user]
+            else:
+                raise ValueError("No user specified")
+        else:
+            users = [user]
+        out = []
+        for user in users:
+            self['ignore'].append(user.id)
+            out.append("Added {} to ignore list".format(user))
+        await split_send(ctx, out)
+
+    @commands.command()
+    async def unignore_dm(self, ctx, user: discord.User = None):
+        """<user> unignores a user's DMs"""
+        if user is None:
+            if ctx.message.reference:
+                cid = self[ctx.message.reference.message_id]
+                channel = self.bot.get_channel(cid)
+                if not channel:
+                    channel = await self.bot.fetch_channel(cid)
+                users = [u for u in channel.recipients if u != self.bot.user]
+            else:
+                raise ValueError("No user specified")
+        else:
+            users = [user]
+        out = []
+        for user in users:
+            self['ignore'].remove(user.id)
+            out.append("Removed {} from ignore list".format(user))
+        await split_send(ctx, out)
+
+    @commands.command()
+    async def dm_ignore_list(self, ctx):
+        """Prints the list of ignored users"""
+        users = [self.bot.get_user(i) for i in self['ignore']]
+        lines = ["{}".format(i) for i in users]
+        await split_send(ctx, lines, style='```')
+
     @commands.Cog.listener()
     async def on_message(self, message):
         """Listen for DMs and post them in the bot log channel"""
@@ -122,6 +171,8 @@ class DirectMessages(commands.Cog):
                     return
         # if DM
         if isinstance(message.channel, discord.DMChannel):
+            if message.author.id in self['ignore']:
+                return
             channel = self.bot.find_channel(param.rc('log_channel'))
             if message.author.id == param.users.stellar:
                 roles = ['@' + find_role(channel.guild, i).name for i in ["admin", "devoted"]]

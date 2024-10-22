@@ -10,6 +10,7 @@ import re
 
 
 logger = logging.getLogger('discord.' + __name__)
+BAN_TDT = False  # set to True to ban members with 'tdt' in their name
 
 
 # below are unacceptable words and phrases
@@ -132,6 +133,27 @@ class AutoMod(commands.Cog):
                 self._last_spam = _Spam(message.author.id, message.content, log_msg, 1)
                 await message.delete()
                 return
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        names = [member.name, member.display_name, member.nick]
+        for name in names:
+            token = name.lower()
+            for i in "-_ ":
+                token = token.replace(i, "")
+            if re.match(r"(\d+)?tdt(\d+)?", token):
+                roles = [find_role(self.log_channel.guild, i).mention for i in ["admin", "devoted"]]
+                msg = ' '.join(roles)
+                msg += "\nI have detected a new member with 'tdt' in their name: {:} ({:})"
+                if not BAN_TDT:
+                    msg += "\n\nPlease check their account for legitimacy."
+                    msg += "\nYou can right click (or long press) on the mention to initiate a ban."
+                    await self.log_channel.send(msg.format(member.mention, member.id))
+                else:
+                    msg += "\nBanning them now."
+                    await self.log_channel.send(msg.format(member.mention, member.id))
+                    await member.ban(reason="Intimidating TDT")
+                break
 
 
 if usingV2:
