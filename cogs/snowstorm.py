@@ -197,7 +197,7 @@ class Snowstorm(commands.Cog):
             return
         if self._awaiting:
             return
-        logger.printv('TrickOrTreat.send_message waiting for {:} s'.format(dt))
+        logger.info('TrickOrTreat.send_message waiting for {:} s'.format(dt))
         # send new active game message
         msg = await self.channel.send(_msg)
         self._set_msg_id(msg.id)
@@ -213,7 +213,7 @@ class Snowstorm(commands.Cog):
         """Non-async wrapper for send_message"""
         if not self._game_on:
             return
-        logger.printv('TrickOrTreat.send_later')
+        logger.info('TrickOrTreat.send_later')
         self.bot.loop.create_task(self.send_message(**kwargs))
 
     async def _get_message(self):
@@ -277,18 +277,18 @@ class Snowstorm(commands.Cog):
             return
         if dt is True:
             dt = random.randint(_tmin, _tmax)
-        logger.printv('TrickOrTreat.finish_count waiting for {:} s'.format(dt))
+        logger.info('TrickOrTreat.finish_count waiting for {:} s'.format(dt))
         if self._awaiting is None:
             self._awaiting = mid
         await sleep(dt)
         msg = await self._get_message()
         if not msg:
             if set_timer:
-                logger.printv('Finish TrickOrTreat.finish_count (no message)')
+                logger.info('Finish TrickOrTreat.finish_count (no message)')
                 self._awaiting = None
                 return await self.send_message(dt=set_timer)
         if msg.id != mid:
-            logger.printv('Finish TrickOrTreat.finish_count (bad id)')
+            logger.info('Finish TrickOrTreat.finish_count (bad id)')
             self._awaiting = None
             return
         trickers = []
@@ -306,7 +306,7 @@ class Snowstorm(commands.Cog):
                 noa_treat = [u for u in trickers if u.id not in _all_alts]
             else:
                 try:
-                    logger.printv('snowstorm.finish_count: removing rxn {}'.format(rxn))
+                    logger.info('snowstorm.finish_count: removing rxn {}'.format(rxn))
                     await rxn.clear()
                 except discord.HTTPException:
                     pass
@@ -321,7 +321,7 @@ class Snowstorm(commands.Cog):
             alts_used = []
         if noa_tot >= _nmin > ntot:
             if random.randint(0, 1):
-                logger.printv('Finish TrickOrTreat.finish_count (too few real votes)')
+                logger.info('Finish TrickOrTreat.finish_count (too few real votes)')
                 self._awaiting = None
                 if not random.randint(0, 2):
                     alt = random.choice(alts_used)
@@ -330,12 +330,12 @@ class Snowstorm(commands.Cog):
                             try:
                                 rxn.remove(alt)
                                 msg = 'Removed reaction {} by alt "{}"'
-                                logger.printv(msg.format(rxn.emoji, alt))
+                                logger.info(msg.format(rxn.emoji, alt))
                             except (discord.HTTPException, discord.Forbidden, discord.Not):
                                 pass
                 return self.count_later(dt=set_timer, mid=mid)
         elif len(set(trickers + treaters)) < _nmin:
-            logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
+            logger.info('Finish TrickOrTreat.finish_count (too few votes)')
             self._awaiting = None
             return self.count_later(dt=set_timer, mid=mid)
         self._last = datetime.datetime.now()
@@ -368,7 +368,7 @@ class Snowstorm(commands.Cog):
             for u in alting:
                 delt = -abs(dtrick) * stealth_nerf
                 msg = 'Stealth nerf "{}" by {} ({})'.format(u, delt, stealth_nerf)
-                logger.printv(msg)
+                logger.info(msg)
                 self.apply_delta(u, delt)
         trickers = [await self._member(u) for u in trickers]
         treaters = [await self._member(u) for u in treaters]
@@ -388,12 +388,12 @@ class Snowstorm(commands.Cog):
         if set_timer:
             self.send_later(dt=True)
         self._awaiting = None
-        logger.printv('Finish TrickOrTreat.finish_count (end)')
+        logger.info('Finish TrickOrTreat.finish_count (end)')
 
     def count_later(self, **kwargs):
         if not self._game_on:
             return
-        logger.printv('TrickOrTreat.channel')
+        logger.info('TrickOrTreat.channel')
         self.bot.loop.create_task(self.finish_count(**kwargs))
 
     @commands.Cog.listener()

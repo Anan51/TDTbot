@@ -128,8 +128,8 @@ class _Event(dict):
                     try:
                         timezone = parse_timezone(time[4])
                     except pytz.exceptions.UnknownTimeZoneError:
-                        logger.printv('timezone parse "{}" fail.'.format(time[4]))
-                        logger.printv(traceback.format_exc())
+                        logger.info('timezone parse "{}" fail.'.format(time[4]))
+                        logger.info(traceback.format_exc())
                     else:
                         tz_parsed = True
                         # self._comments.append('Timezone "{}" parsed as: "{}"'.format(time[4], timezone.zone))
@@ -157,12 +157,12 @@ class _Event(dict):
             self.update(out)
             return
         except Exception as e:
-            logger.printv("Error parsing event!")
-            logger.printv(e)
-            logger.printv(traceback.format_exc())
-            logger.printv("=" * 30)
-            logger.printv(message.content)
-            logger.printv("=" * 30)
+            logger.info("Error parsing event!")
+            logger.info(e)
+            logger.info(traceback.format_exc())
+            logger.info("=" * 30)
+            logger.info(message.content)
+            logger.info("=" * 30)
             if not from_hist:
                 self._error = "Event not registered. Unable to parse event.\n" \
                               "Sorry, I'm not much smarter than Electro."
@@ -342,9 +342,9 @@ class _Event(dict):
             delta = localize(self['datetime']) - localize(datetime.datetime.utcnow())
             tmp = [dt for dt in dts if datetime.timedelta(minutes=dt) <= delta]
             if dts != tmp:
-                logger.printv('dts changed for event {0.name}'.format(self))
-                logger.printv('dts: ' + str(dts))
-                logger.printv('new: ' + str(tmp))
+                logger.info('dts changed for event {0.name}'.format(self))
+                logger.info('dts: ' + str(dts))
+                logger.info('new: ' + str(tmp))
             dts = tmp
         for dt in dts:
             self.cog.bot.loop.create_task(self.alert(dt, channel=channel))
@@ -705,7 +705,7 @@ class Events(commands.Cog):
 
         if sent:
             msg = '{:} event rolls sent to {:}.'.format(event_name, ', '.join(sent))
-            logger.printv(msg)
+            logger.info(msg)
             await ctx.send(msg)
         else:
             raise RuntimeError('No event roll messages sent.')

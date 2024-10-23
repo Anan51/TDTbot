@@ -34,7 +34,7 @@ class AdminTools(commands.Cog):
         Can be used as a reply to a message, in this case:
         <message id> defaults to the message that's being replied to.
         <channel> defaults to the channel where this command was entered."""
-        logger.printv('clear_rxn: {}'.format(dict(ctx=ctx, emote=emote, msg_id=msg_id, channel=channel)))
+        logger.info('clear_rxn: {}'.format(dict(ctx=ctx, emote=emote, msg_id=msg_id, channel=channel)))
         ref = ctx.message.reference
         try:
             emote = int(emote)
@@ -70,7 +70,7 @@ class AdminTools(commands.Cog):
     async def reboot(self, ctx):
         """Reboots this bot"""
         await ctx.send("Ok. I will reboot now.")
-        logger.printv('\nRebooting\n\n\n\n')
+        logger.info('\nRebooting\n\n\n\n')
         self.bot.reissue = ctx
         # This exits the bot loop, allowing __main__ loop to take over
         await self.bot.loop.run_until_complete(await self.bot.close())

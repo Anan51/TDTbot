@@ -234,7 +234,7 @@ class TrickOrTreat(commands.Cog):
         if self._awaiting:
             return
         msg = 'TrickOrTreat.send_message waiting for {:} s ({:})'
-        logger.printv(msg.format(dt, datetime.datetime.now() + dt * second))
+        logger.info(msg.format(dt, datetime.datetime.now() + dt * second))
         # send new active game message
         msg = await self.channel.send(_msg)
         self._set_msg_id(msg.id)
@@ -250,7 +250,7 @@ class TrickOrTreat(commands.Cog):
         """Non-async wrapper for send_message"""
         if not self.game_on:
             return
-        logger.printv('TrickOrTreat.send_later')
+        logger.info('TrickOrTreat.send_later')
         self.bot.loop.create_task(self.send_message(**kwargs))
 
     async def _get_message(self):
@@ -327,19 +327,19 @@ class TrickOrTreat(commands.Cog):
             if dt is True:
                 dt = random_time()
             msg = 'TrickOrTreat.finish_count waiting for {:} s ({:})'
-            logger.printv(msg.format(dt, datetime.datetime.now() + dt * second))
+            logger.info(msg.format(dt, datetime.datetime.now() + dt * second))
             if self._awaiting is None:
                 self._awaiting = mid
             await sleep(dt)
             msg = await self._get_message()
             if not msg:
                 if set_timer:
-                    logger.printv('Finish TrickOrTreat.finish_count (no message)')
+                    logger.info('Finish TrickOrTreat.finish_count (no message)')
                     self._awaiting = None
                     self._lock = False
                     return await self.send_message(dt=2)
             if msg.id != mid:
-                logger.printv('Finish TrickOrTreat.finish_count (bad id)')
+                logger.info('Finish TrickOrTreat.finish_count (bad id)')
                 self._awaiting = None
                 self._lock = False
                 return
@@ -359,7 +359,7 @@ class TrickOrTreat(commands.Cog):
                     noa_treat = [u for u in trickers if u.id not in _all_alts]
                 else:
                     try:
-                        logger.printv('trick_or_treat.finish_count: removing rxn {}'.format(rxn))
+                        logger.info('trick_or_treat.finish_count: removing rxn {}'.format(rxn))
                         await rxn.clear()
                     except discord.HTTPException:
                         pass
@@ -377,7 +377,7 @@ class TrickOrTreat(commands.Cog):
             # if alt accounts are used
             if noa_tot >= nmin > ntot:
                 if random.randint(0, 1):
-                    logger.printv('Finish TrickOrTreat.finish_count (too few real votes)')
+                    logger.info('Finish TrickOrTreat.finish_count (too few real votes)')
                     self._awaiting = None
                     if not random.randint(0, 2):
                         alt = random.choice(alts_used)
@@ -386,14 +386,14 @@ class TrickOrTreat(commands.Cog):
                                 try:
                                     rxn.remove(alt)
                                     msg = 'Removed reaction {} by alt "{}"'
-                                    logger.printv(msg.format(rxn.emoji, alt))
+                                    logger.info(msg.format(rxn.emoji, alt))
                                 except (discord.HTTPException, discord.Forbidden, discord.Not):
                                     pass
                     self._lock = False
                     return self.count_later(dt=set_timer, mid=mid, nlast=max(noa_tot, nlast - 1))
             # if not enough votes
             elif len(set(trickers + treaters)) < nmin:
-                logger.printv('Finish TrickOrTreat.finish_count (too few votes)')
+                logger.info('Finish TrickOrTreat.finish_count (too few votes)')
                 # self._awaiting = None
                 self._lock = False
                 return self.count_later(dt=set_timer, mid=mid, nlast=max(noa_tot, nlast - 1))
@@ -429,7 +429,7 @@ class TrickOrTreat(commands.Cog):
                 for u in alting:
                     delt = -abs(dtrick) * stealth_nerf
                     msg = 'Stealth nerf "{}" by {} ({})'.format(u, delt, stealth_nerf)
-                    logger.printv(msg)
+                    logger.info(msg)
                     self.apply_delta(u, delt)
             # based on moon phase swap trickers/treaters
             phase = .5
@@ -469,20 +469,20 @@ class TrickOrTreat(commands.Cog):
                 await self.channel.send(msg)
                 await self.rankings(self.channel)
                 self._game_on = False
-                logger.printv('Finish TrickOrTreat.finish_count (Finished Game)')
+                logger.info('Finish TrickOrTreat.finish_count (Finished Game)')
             if set_timer == 0:
                 set_timer = .01
             self.send_later(dt=1)
             self._awaiting = None
             self._lock = False
-            logger.printv('Finish TrickOrTreat.finish_count (end)')
+            logger.info('Finish TrickOrTreat.finish_count (end)')
         finally:
             self._lock = False
 
     def count_later(self, **kwargs):
         if not self.game_on:
             return
-        logger.printv('TrickOrTreat.channel')
+        logger.info('TrickOrTreat.channel')
         if kwargs.get('nlast', None) is not None:
             self._get_config()[_nlast] = kwargs.get('nlast')
         self.bot.loop.create_task(self.finish_count(**kwargs))

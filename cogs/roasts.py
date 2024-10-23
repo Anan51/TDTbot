@@ -269,7 +269,7 @@ class Roast(commands.Cog):
                         return
                 # Roast nemesis with 1/30 probability
                 if not random.randrange(30):
-                    logger.printv("Decided to roast nemesis.")
+                    logger.info("Decided to roast nemesis.")
                     await self._send_roast(message.channel, last=message)
                     return
         # catch self._nemeses = None

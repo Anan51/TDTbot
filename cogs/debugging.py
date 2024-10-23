@@ -70,7 +70,7 @@ class Debugging(commands.Cog):
     @commands.command()
     async def print(self, ctx, *args):
         """Print text following command to terminal. This is useful for emojis."""
-        logger.printv(' '.join(args))
+        logger.info(' '.join(args))
 
     @commands.command()
     async def param(self, ctx, *args):
@@ -161,7 +161,7 @@ class Debugging(commands.Cog):
                          for i, m in enumerate(hist)])
         if not msg:
             msg = "No history available."
-        logger.printv(str(hist))
+        logger.info(str(hist))
         await split_send(ctx, msg)
 
     @commands.command()

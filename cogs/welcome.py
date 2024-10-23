@@ -110,7 +110,7 @@ class Welcome(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         """Alert admin type roles on new member joining"""
-        logger.printv('New member {0.name} joined'.format(member))
+        logger.info('New member {0.name} joined'.format(member))
         _roles = [find_role(member.guild, i) for i in ["Admin", "Devoted"]]
         _roles = " ".join([i.mention for i in _roles if hasattr(i, 'mention')])
         if _log_in_discord:
@@ -177,7 +177,7 @@ class Welcome(commands.Cog):
         kwargs = dict(guild=guild, min_role=recruit)
         if str(payload.emoji) == "👍":
             out = "{0.display_name} agreed to the code of conduct.".format(payload.member)
-            logger.printv(out)
+            logger.info(out)
             if _log_in_discord:
                 log_channel = find_channel(guild, "admin_log")
                 # if they've agreed to CoC recently then return

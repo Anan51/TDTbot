@@ -79,4 +79,4 @@ while time.time() - now > 5:
         importlib.reload(reloader)
         importlib.reload(bot)
     del param, bot, git_manage, reloader, wit_data
-    logger.printv("End of loop.")
+    logger.info("End of loop.")

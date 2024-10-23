@@ -55,7 +55,7 @@ class MainBot(commands.Bot):
         async def on_ready():
             """Do something when the bot is ready and active... like say so."""
             msg = 'We have logged in as {0.user}, running discord.py {1.__version__}'
-            logger.printv(msg.format(self, discord))
+            logger.info(msg.format(self, discord))
             # also we can set a non-custom type activity. This is a discord limitation.
             activity = discord.Activity(name='your suggestions and issues, DM me',
                                         type=discord.ActivityType.listening)
@@ -67,13 +67,13 @@ class MainBot(commands.Bot):
                     cog = __package__ + '.cogs.' + os.path.split(cog)[-1].split('.')[0]
                     await self.load_extension(cog)
             if self.reissue is not None:
-                logger.printv('Reissue detected.')
+                logger.info('Reissue detected.')
                 now = pytz.utc.localize(datetime.datetime.now())
                 await asyncio.sleep(1)
                 hour, week = helpers.hour, helpers.week
                 look_back = min(now - hour, self.startup, git_manage.last_updated())
                 log = git_manage.git_log_items(look_back=max(look_back, now - week))
-                logger.printv('Reboot complete.')
+                logger.info('Reboot complete.')
                 channel = self.find_channel(self.reissue.channel.id)
                 if log:
                     await channel.send("Reboot complete. Git updates detected:")
@@ -194,7 +194,7 @@ class MainBot(commands.Bot):
         debug = uid == param.users.stellar
         if self.user.id in [author, uid]:
             if debug:
-                logger.printv('emoji2role: self return')
+                logger.info('emoji2role: self return')
             return
         if guild is None:
             guild = [g for g in self.guilds if g.id == payload.guild_id][0]
@@ -209,21 +209,21 @@ class MainBot(commands.Bot):
                 min_role = helpers.find_role(guild, min_role)
             if member.top_role < min_role:
                 if debug:
-                    logger.printv('emoji2role: min_role return')
+                    logger.info('emoji2role: min_role return')
                 return
         if emoji is None:
             emoji = payload.emoji
         if delete and debug:
-            logger.printv('Delete (rxn): {}\n{}'.format(emoji, payload))
+            logger.info('Delete (rxn): {}\n{}'.format(emoji, payload))
         if member is None:
             data = dict(payload=payload, emoji_dict=emoji_dict, emoji=emoji, message_id=message_id,
                         member=member, guild=guild, min_role=min_role, delete=delete, remove=remove)
             data = {i: j for i, j in data.items() if j is not None}
             msg = "Member is None object"
             msg += '\n' + '\n'.join(['{}: {}'.format(i, j) for i, j in data.items()])
-            logger.printv(msg)
+            logger.info(msg)
         if debug:
-            logger.printv('emoji2role: {}\n\t\t{}'.format(emoji, emoji_dict))
+            logger.info('emoji2role: {}\n\t\t{}'.format(emoji, emoji_dict))
         keys = [i for i in emoji_dict if helpers.emotes_equal(i, emoji)]
         if len(keys) == 1:
             key = keys[0]
@@ -241,15 +241,15 @@ class MainBot(commands.Bot):
                     await member.remove_roles(i)
             try:
                 if delete:
-                    logger.printv('Delete (role): {}->{}->{}'.format(key, role0, role))
+                    logger.info('Delete (role): {}->{}->{}'.format(key, role0, role))
                     await member.remove_roles(role)
                 else:
                     await member.add_roles(role)
                 return role
             except AttributeError:
-                logger.printv('Role attr err: {}->{}->{}'.format(key, role0, role))
+                logger.info('Role attr err: {}->{}->{}'.format(key, role0, role))
         elif len(keys) > 1:
-            logger.printv('Multiple matches: {}'.format({i: emoji_dict[i] for i in keys}))
+            logger.info('Multiple matches: {}'.format({i: emoji_dict[i] for i in keys}))
 
     def tdt(self):
         for g in self.guilds:
