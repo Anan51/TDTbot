@@ -163,6 +163,8 @@ class Supporters(commands.Cog):
     async def on_message(self, message):
         """Listen for supporters asking for training"""
         supporter = False
+        if not hasattr(message.author, 'roles'):
+            return
         for role in message.author.roles:
             if role.id == param.roles.supporter:
                 supporter = True
