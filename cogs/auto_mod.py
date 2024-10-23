@@ -137,11 +137,12 @@ class AutoMod(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         names = [member.name, member.display_name, member.nick]
+        names = [i for i in names if isinstance(i, str)]
         for name in names:
             token = name.lower()
             for i in "-_ ":
                 token = token.replace(i, "")
-            if re.match(r"(\d+)?tdt(\d+)?", token):
+            if re.match(r"^(\d+)?tdt(\d+)?$", token):
                 roles = [find_role(self.log_channel.guild, i).mention for i in ["admin", "devoted"]]
                 msg = ' '.join(roles)
                 msg += "\nI have detected a new member with 'tdt' in their name: {:} ({:})"
