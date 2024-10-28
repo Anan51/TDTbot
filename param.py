@@ -65,6 +65,7 @@ roles = _Struct(
                 devoted=611745292899057694,
                 admin=318255861002928129,
                 supporter=1006390128907919411,
+                tdt_peeps=878812130453905420,
                 # game roles
                 destiny_2=878812130453905420,  # kept for backwards compatibility
                 d2pvp=1140789426319003738,
