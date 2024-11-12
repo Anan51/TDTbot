@@ -142,7 +142,7 @@ class AutoMod(commands.Cog):
             token = name.lower()
             for i in "-_ ":
                 token = token.replace(i, "")
-            if re.match(r"^(\d+)?tdt(\d+)?$", token):
+            if re.match(r"^([\d_\s\-]+)?tdt", token):
                 roles = [find_role(self.log_channel.guild, i).mention for i in ["admin", "devoted"]]
                 msg = ' '.join(roles)
                 msg += "\nI have detected a new member with 'tdt' in their name: {:} ({:})"
