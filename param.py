@@ -44,6 +44,9 @@ emojis = _Struct(destiny_2=878802171913732118,
                  helldiver2=1300244446025093132,
                  warframe=1300244078117781524,
                  space_marine_2=1300247394692239431,
+                 cod_bo6=1324177150097490001,
+                 deadlock=1324177148608516169,
+                 marvel_rivals=1324177147602141254,
                  )
 
 guilds = _Struct(tdt=164589623459184640)
@@ -75,6 +78,9 @@ roles = _Struct(
                 warframe=1300249523951505418,
                 minecraft=1300249136645275688,
                 helldivers2=1300249391088799764,
+                call_of_duty=1320268864080187423,
+                marvel_rivals=1320268692268908645,
+                deadlock=1324178731333324912,
                 )
 
 users = _Struct(electro=221778796250923008,
@@ -92,6 +98,9 @@ emoji2role = {emojis.tdt_bruh: roles.tdt_peeps,
               emojis.helldiver2: roles.helldivers2,
               emojis.warframe: roles.warframe,
               emojis.space_marine_2: roles.space_marine_2,
+              emojis.cod_bo6: roles.call_of_duty,
+              emojis.deadlock: roles.deadlock,
+              emojis.marvel_rivals: roles.marvel_rivals,
               }
 
 role2emoji = {v: k for k, v in emoji2role.items()}
