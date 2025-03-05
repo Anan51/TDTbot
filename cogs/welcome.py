@@ -167,9 +167,13 @@ class Welcome(commands.Cog):
         # if not code of conduct message
         if payload.message_id != _CoC_id:
             # if reaction is in manual page and not protected
-            if payload.channel_id == self.manual_channel.id:
-                msg = await self.manual_channel.fetch_message(payload.message_id)
-                await self.safely_remove_reactions(msg)
+            try:
+                if payload.channel_id == self.manual_channel.id:
+                    msg = await self.manual_channel.fetch_message(payload.message_id)
+                    await self.safely_remove_reactions(msg)
+            # handle missing channel
+            except AttributeError:
+                pass
             return
         guild = [g for g in self.bot.guilds if g.id == payload.guild_id][0]
         recruit = find_role(guild, _recruit)
