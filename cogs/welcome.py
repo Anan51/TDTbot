@@ -69,6 +69,7 @@ class Welcome(commands.Cog):
         self._last_member = None
         self._manual_channel = None
         self._log_channel = None
+        self._welcome_channel = None
         self._init = False
 
     async def _async_init(self):
@@ -91,8 +92,14 @@ class Welcome(commands.Cog):
     @property
     def log_channel(self):
         if self._log_channel is None:
-            self._log_channel = self.bot.find_channel("admin_log")
+            self._log_channel = self.bot.find_channel("debugging")
         return self._log_channel
+
+    @property
+    def welcome_channel(self):
+        if self._welcome_channel is None:
+            self._welcome_channel = self.bot.find_channel("welcome_wagon")
+        return self._welcome_channel
 
     async def fetch_coc(self):
         return await self.manual_channel.fetch_message(_CoC_id)

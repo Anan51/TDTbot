@@ -1,4 +1,5 @@
 from .param import rc as _rc
+import param
 import re
 import datetime
 import pytz
@@ -36,6 +37,8 @@ def find_channel(guild, channel=None):
         return find_channel(guild, channel.lstrip('#'))
     if channel.startswith('<#') and channel.endswith('>'):
         return find_channel(guild, channel[2:-1])
+    if channel in param.channels:
+        return find_channel(guild, param.channels[channel])
     return
 
 

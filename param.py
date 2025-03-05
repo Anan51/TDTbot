@@ -10,6 +10,9 @@ class _Struct(object):
     def __init__(self, **entries):
         self.__dict__.update(entries)
 
+    def __contains__(self, item):
+        return item in self.__dict__
+
 
 channels = _Struct(debugging=721427624483749991,
                    manual_page=558136628590280704,
@@ -27,6 +30,7 @@ channels = _Struct(debugging=721427624483749991,
                    wit_category=639147967131025453,
                    spicy_clips_supporters=1153123185043185694,
                    banning_channel=1239658247804420096,
+                   welcome_wagon=932748539107356852,
                    )
 
 emojis = _Struct(destiny_2=878802171913732118,
