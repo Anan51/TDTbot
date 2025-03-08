@@ -13,6 +13,9 @@ class _Struct(object):
     def __contains__(self, item):
         return item in self.__dict__
 
+    def __getitem__(self, item):
+        return self.__dict__[item]
+
 
 channels = _Struct(debugging=721427624483749991,
                    manual_page=558136628590280704,
@@ -120,7 +123,7 @@ defaults = {
     'lore_file':       os.path.join(_config, 'lore.md'),
     'nemeses':         [users.electro, users.wator, users.em],
     'add_bots':        [],
-    'ignore_list':     ['lfg', 'lenny_laboratory', 'manual_page',
+    'ignore_list':     ['lfg_pvp', 'lfg_pve', 'lenny_laboratory', 'manual_page',
                         'tdt_events', 'devoted_chat', 'banning_channel'],
     'event_channel':   'tdt_events',
     'log_channel':     'debugging',
@@ -213,6 +216,7 @@ class Parameters(dict):
         self.read_config(config)
         self.read_token(token)
         self.read_roasts(roasts)
+        self.string2ids()
 
     def __call__(self, key, default=None):
         """Make this callable, allowing us to avoid/handle key errors"""
@@ -262,6 +266,23 @@ class Parameters(dict):
         else:
             self['roasts'] = lines
         return self['roasts']
+
+    def string2ids(self, *keys):
+        """Convert strings to integer IDs if possible, silently ignore if not"""
+        if not keys:
+            keys = self.keys()
+        for key in keys:
+            if key not in self:
+                continue
+            if not isinstance(self[key], str):
+                continue
+            if self[key].isdigit():
+                self[key] = int(self[key])
+            elif "channel" in key or key == "ignore_list":
+                if self[key] in channels:
+                    self[key] = channels[self[key]]
+            elif key == "nemeses":
+                self[key] = [users[i] for i in self[key].split(',')]
 
 
 class PermaDict:
