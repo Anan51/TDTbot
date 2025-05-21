@@ -1,5 +1,5 @@
 from .param import rc as _rc
-import param
+from . import param
 import re
 import datetime
 import pytz
