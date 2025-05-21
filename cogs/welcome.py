@@ -56,7 +56,7 @@ async def send_welcome(member, channel=None, retry=None, msg=_welcome_text):
             if not channel:
                 await member.create_dm()
                 channel = member.dm_channel
-        return await channel.send(msg.format(member))
+        return await channel.send(msg.format(member=member))
     except discord.Forbidden as e:
         if retry is not None:
             msg = '{:} I am unable to DM you so I am posting my standard welcome DM here.\n' + msg
