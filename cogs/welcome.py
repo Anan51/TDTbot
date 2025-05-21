@@ -60,7 +60,7 @@ async def send_welcome(member, channel=None, retry=None, msg=_welcome_text):
     except discord.Forbidden as e:
         if retry is not None:
             msg = '{:} I am unable to DM you so I am posting my standard welcome DM here.\n' + msg
-            await retry.send(msg.format(member.mention))
+            await retry.send(msg.format(member=member))
             return await retry.send(msg.format(member=member))
         raise e
 
