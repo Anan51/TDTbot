@@ -1,4 +1,4 @@
-Greetings [NAME HERE]!
+Greetings {member.name}!
 
 I am TDT bot, your robotic overlord and *direct* link to the moderation team at TDT. Welcome to the server!
 
