@@ -3,7 +3,7 @@ from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
 from ..helpers import find_channel, find_role, localize
-from ..param import rc, messages, roles, emoji2role
+from ..param import rc, channels, messages, roles, emoji2role
 from ..version import usingV2
 # from ..async_helpers import admin_check
 import logging
@@ -24,6 +24,7 @@ try:
     with open(rc('welcome_file'), 'r') as f:
         _welcome_text = f.read()
 except IOError:
+    logger.warning(f'Welcome file ({rc('welcome_file')}) not found, using default welcome message.', exc_info=True)
     _welcome_text = 'Greetings {member.name}! Part of my duties as TDTbot are to welcome ' \
                     'newcomers to The Dream Team. \n\nSo welcome!\n\nWe have a few questions ' \
                     'we ask everyone, so please post the answers to the following questions ' \
@@ -31,7 +32,7 @@ except IOError:
                     '1) How did you find out about TDT?\n' \
                     '2) What games and platforms do you play?\n' \
                     '3) Are you a YouTube subscriber?\n' \
-                    '4) Are you a Patreon supporter, or a Twitch sub (teir 2 or higher)? If so, what\'s your account name?\n\n'\
+                    '4) Are you a Patreon supporter, or a Twitch sub (tier 2 or higher)? If so, what\'s your account name?\n\n'\
                     'If you\'re interested in learning wolf pack (see our #manual_page), ping ' \
                     '@member, and if you want to send any feedback to the TDT admins then leave ' \
                     'me a DM.\n\n'\
@@ -92,19 +93,19 @@ class Welcome(commands.Cog):
     @property
     def manual_channel(self):
         if self._manual_channel is None:
-            self._manual_channel = self.bot.find_channel("manual_page")
+            self._manual_channel = self.bot.find_channel(channels.manual_page)
         return self._manual_channel
 
     @property
     def log_channel(self):
         if self._log_channel is None:
-            self._log_channel = self.bot.find_channel("debugging")
+            self._log_channel = self.bot.find_channel(channels.debugging)
         return self._log_channel
 
     @property
     def welcome_channel(self):
         if self._welcome_channel is None:
-            self._welcome_channel = self.bot.find_channel("welcome_wagon")
+            self._welcome_channel = self.bot.find_channel(channels.welcome_wagon)
         return self._welcome_channel
 
     async def fetch_coc(self):
