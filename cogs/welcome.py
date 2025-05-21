@@ -5,7 +5,7 @@ import datetime
 from ..helpers import find_channel, find_role, localize
 from ..param import rc, channels, messages, roles, emoji2role
 from ..version import usingV2
-# from ..async_helpers import admin_check
+from ..async_helpers import admin_check
 import logging
 
 
@@ -90,6 +90,10 @@ class Welcome(commands.Cog):
     async def on_ready(self):
         await asyncio.sleep(5)
         await self._async_init()
+
+    async def cog_check(self, ctx):
+        """Don't allow everyone to access this cog"""
+        return await admin_check(ctx)
 
     @property
     def manual_channel(self):
