@@ -19,12 +19,13 @@ _log_in_discord = False
 _before = datetime.datetime(2022, 1, 22, 0, 0, 0)
 # don't clear reactions from these messages
 _protected = [_CoC_id, _wolfpack_id, _trick_or_treat]
+_welcome_file = rc('welcome_file')
 
 try:
-    with open(rc('welcome_file'), 'r') as f:
+    with open(_welcome_file, 'r') as f:
         _welcome_text = f.read()
 except IOError:
-    logger.warning(f'Welcome file ({rc('welcome_file')}) not found, using default welcome message.', exc_info=True)
+    logger.warning(f'Welcome file ({_welcome_file}) not found, using default welcome message.', exc_info=True)
     _welcome_text = 'Greetings {member.name}! Part of my duties as TDTbot are to welcome ' \
                     'newcomers to The Dream Team. \n\nSo welcome!\n\nWe have a few questions ' \
                     'we ask everyone, so please post the answers to the following questions ' \
