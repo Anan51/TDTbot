@@ -3,7 +3,7 @@ from discord.ext import commands  # type: ignore
 import asyncio
 import datetime
 from ..helpers import find_channel, find_role, localize
-from ..param import messages, roles, emoji2role
+from ..param import rc, messages, roles, emoji2role
 from ..version import usingV2
 # from ..async_helpers import admin_check
 import logging
@@ -20,30 +20,36 @@ _before = datetime.datetime(2022, 1, 22, 0, 0, 0)
 # don't clear reactions from these messages
 _protected = [_CoC_id, _wolfpack_id, _trick_or_treat]
 
+try:
+    with open(rc('welcome_file'), 'r') as f:
+        _welcome_text = f.read()
+except IOError:
+    _welcome_text = 'Greetings {member.name}! Part of my duties as TDTbot are to welcome ' \
+                    'newcomers to The Dream Team. \n\nSo welcome!\n\nWe have a few questions ' \
+                    'we ask everyone, so please post the answers to the following questions ' \
+                    'in the general chat:\n' \
+                    '1) How did you find out about TDT?\n' \
+                    '2) What games and platforms do you play?\n' \
+                    '3) Are you a YouTube subscriber?\n' \
+                    '4) Are you a Patreon supporter, or a Twitch sub (teir 2 or higher)? If so, what\'s your account name?\n\n'\
+                    'If you\'re interested in learning wolf pack (see our #manual_page), ping ' \
+                    '@member, and if you want to send any feedback to the TDT admins then leave ' \
+                    'me a DM.\n\n'\
+                    'And... finally... we have a code of conduct in our #manual_page that we ' \
+                    'ask everybody to agree to. Just give it a 👍 if you agree. If you want me to ' \
+                    'give you a Destiny 2 tag, click the corresponding platform tag on the ' \
+                    'code of conduct after you give the thumbs up.' \
+                    '\n\nWhelp, I hope someone gives you a less robotic welcome soon!\n\n'\
+                    'Also find us on social media:\n'\
+                    'YT channel membership: https://www.youtube.com/channel/UCKBCsmU53MBzCm_wNZY7hLA/join\n'\
+                    'Twitter: https://twitter.com/productions_tdt\n'\
+                    'Instagram: https://www.instagram.com/tdt_productions_\n'\
+                    'Patreon: https://www.patreon.com/TDTPatreon'
 
-async def send_welcome(member, channel=None, retry=None):
+
+async def send_welcome(member, channel=None, retry=None, msg=_welcome_text):
     """Sends welcome message to member"""
-    msg = 'Greetings {0.name}! Part of my duties as TDTbot are to welcome ' \
-          'newcomers to The Dream Team. \n\nSo welcome!\n\nWe have a few questions ' \
-          'we ask everyone, so please post the answers to the following questions ' \
-          'in the general chat:\n' \
-          '1) How did you find out about TDT?\n' \
-          '2) What games and platforms do you play?\n' \
-          '3) Are you a YouTube subscriber?\n' \
-          '4) Are you a Patreon supporter, or a Twitch sub (teir 2 or higher)? If so, what\'s your account name?\n\n'\
-          'If you\'re interested in learning wolf pack (see our #manual_page), ping ' \
-          '@member, and if you want to send any feedback to the TDT admins then leave ' \
-          'me a DM.\n\n'\
-          'And... finally... we have a code of conduct in our #manual_page that we ' \
-          'ask everybody to agree to. Just give it a 👍 if you agree. If you want me to ' \
-          'give you a Destiny 2 tag, click the corresponding platform tag on the ' \
-          'code of conduct after you give the thumbs up.' \
-          '\n\nWhelp, I hope someone gives you a less robotic welcome soon!\n\n'\
-          'Also find us on social media:\n'\
-          'YT channel membership: https://www.youtube.com/channel/UCKBCsmU53MBzCm_wNZY7hLA/join\n'\
-          'Twitter: https://twitter.com/productions_tdt\n'\
-          'Instagram: https://www.instagram.com/tdt_productions_\n'\
-          'Patreon: https://www.patreon.com/TDTPatreon'
+
     try:
         if channel is None:
             channel = member.dm_channel
@@ -53,9 +59,9 @@ async def send_welcome(member, channel=None, retry=None):
         return await channel.send(msg.format(member))
     except discord.Forbidden as e:
         if retry is not None:
-            msg = '{:} I am unable to DM you so I am posting my standard welcome DM here.'
+            msg = '{:} I am unable to DM you so I am posting my standard welcome DM here.\n' + msg
             await retry.send(msg.format(member.mention))
-            return await retry.send(msg.format(member))
+            return await retry.send(msg.format(member=member))
         raise e
 
 

@@ -131,6 +131,8 @@ class LFG(commands.Cog):
                 roles_tagged.append(role.id)
             except KeyError:
                 pass
+            except IndexError:
+                pass
         if roles_tagged:
             self.data.update_pings(message, roles_tagged)
 

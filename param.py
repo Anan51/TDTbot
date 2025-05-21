@@ -121,6 +121,7 @@ defaults = {
     'token_file':      os.path.join(_config, 'token.txt'),
     'roast_file':      os.path.join(_config, 'roasts.txt'),
     'lore_file':       os.path.join(_config, 'lore.md'),
+    'welcome_file':    os.path.join(_config, 'welcome.md'),
     'nemeses':         [users.electro, users.wator, users.em],
     'add_bots':        [],
     'ignore_list':     ['lfg_pvp', 'lfg_pve', 'lenny_laboratory', 'manual_page',
