@@ -186,10 +186,10 @@ class DirectMessages(commands.Cog):
                 return
             channel = self.bot.find_channel(param.rc('log_channel'))
             if message.author.id == param.users.stellar:
-                roles = ['@' + find_role(channel.guild, i).name for i in ["admin", "devoted"]]
+                roles = ['@' + find_role(channel.guild, i).name for i in ["devoted"]]
                 msg = '`' + ' '.join(roles) + '`\n'
             else:
-                roles = [find_role(channel.guild, i).mention for i in ["admin", "devoted"]]
+                roles = [find_role(channel.guild, i).mention for i in ["devoted"]]
                 msg = ' '.join(roles) + '\n'
             msg += 'From: {0.author.mention}\n"{0.content}"'.format(message)
             sent = [await channel.send(msg)]
