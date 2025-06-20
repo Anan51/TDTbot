@@ -34,6 +34,7 @@ channels = _Struct(debugging=721427624483749991,
                    spicy_clips_supporters=1153123185043185694,
                    banning_channel=1239658247804420096,
                    welcome_wagon=932748539107356852,
+                   art_atrium=1385350203522945075,
                    )
 
 emojis = _Struct(destiny_2=878802171913732118,
