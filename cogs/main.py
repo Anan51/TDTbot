@@ -107,6 +107,16 @@ class MainCommands(commands.Cog):
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
 
     @commands.command()
+    async def basic(self, ctx, channel: discord.TextChannel = None,
+                   guild: str = None):
+        """<channel (optional)> <server (optional)> tells recruits that god gave them eyeballs for a reason"""
+        if channel:
+            channel = find_channel(guild, channel)
+        else:
+            channel = ctx.channel
+        await channel.send("If you can't access certain channels, try reacting to the CoC in "+ find_channel(guild, "manual_page") +" with a 👍🏽, or the relevant reaction for the channel you are trying to access")
+
+    @commands.command()
     async def vibe(self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
         """<n (optional)> <channel (optional)> <server (optional)> posts vibing cat"""
         emote = "<a:vibe:761582456867520532>"
