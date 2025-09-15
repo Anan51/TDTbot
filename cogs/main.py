@@ -1,6 +1,7 @@
 import discord  # type: ignore
 from discord.ext import commands  # type: ignore
 import logging
+
 # from typing import Tuple
 from .. import param
 from ..param import messages, roles
@@ -9,7 +10,7 @@ from ..async_helpers import admin_check, split_send
 from ..version import usingV2
 
 
-logger = logging.getLogger('discord.' + __name__)
+logger = logging.getLogger("discord." + __name__)
 
 
 async def _parings_perms(ctx=None, bot=None, author=None, guild=None):
@@ -19,7 +20,7 @@ async def _parings_perms(ctx=None, bot=None, author=None, guild=None):
         author = ctx.author
     if guild is None:
         guild = ctx.guild
-    logger.debug('parings_perms_check', author, getattr(author, "top_role", "NO_ROLE"))
+    logger.debug("parings_perms_check", author, getattr(author, "top_role", "NO_ROLE"))
     try:
         if author.top_role.id in [roles.admin, roles.devoted, roles.member]:
             return True
@@ -33,12 +34,18 @@ class MainCommands(commands.Cog):
         self.bot = bot
         self._last_member = None
         self._kicks = []
-        self.bot.enroll_emoji_role({'👍': "Wit Challengers"}, message_id=809302963990429757)
-        self.bot.enroll_emoji_role({'🏆': "Tourney Challengers"}, message_id=822744897505067018)
+        self.bot.enroll_emoji_role(
+            {"👍": "Wit Challengers"}, message_id=809302963990429757
+        )
+        self.bot.enroll_emoji_role(
+            {"🏆": "Tourney Challengers"}, message_id=822744897505067018
+        )
         self.bot.enroll_emoji_role(param.emoji2role, message_id=param.messages.CoC)
-        _roles = ['alpha', 'beta', 'gamma', 'omega']
+        _roles = ["alpha", "beta", "gamma", "omega"]
         _dict = {i: i for i in _roles}
-        self.bot.enroll_emoji_role(_dict, message_id=messages.wolfpack, remove=_roles, min_role='Recruit')
+        self.bot.enroll_emoji_role(
+            _dict, message_id=messages.wolfpack, remove=_roles, min_role="Recruit"
+        )
 
     @commands.command()
     async def guild(self, ctx):
@@ -50,16 +57,17 @@ class MainCommands(commands.Cog):
         """<member (optional)> Says hello"""
         member = member or ctx.author
         if self._last_member is None or self._last_member.id != member.id:
-            await ctx.send('Hello {0.name}!'.format(member))
+            await ctx.send("Hello {0.name}!".format(member))
         else:
-            await ctx.send('Hello {0.name}... This feels familiar.'.format(member))
+            await ctx.send("Hello {0.name}... This feels familiar.".format(member))
         self._last_member = member
 
     @commands.command()
     async def roles(self, ctx):
         """List server roles"""
-        await ctx.send("\n".join([i.name for i in ctx.guild.roles
-                                  if 'everyone' not in i.name]))
+        await ctx.send(
+            "\n".join([i.name for i in ctx.guild.roles if "everyone" not in i.name])
+        )
 
     @commands.command()
     async def bots(self, ctx):
@@ -70,17 +78,25 @@ class MainCommands(commands.Cog):
         if electro and electro not in bots:
             bots.insert(0, electro)
         # add other members to bots for fun
-        adds = param.rc('add_bots')
+        adds = param.rc("add_bots")
         adds = [ctx.guild.get_member_named(i) for i in adds]
         adds = [i for i in adds if i and i not in bots]
         bots += adds
         # construct message
-        msg = 'Listing bots for {0.guild}:\n'.format(ctx)
-        msg += '\n'.join([str(i + 1) + ') ' + b.display_name for i, b in enumerate(bots)])
+        msg = "Listing bots for {0.guild}:\n".format(ctx)
+        msg += "\n".join(
+            [str(i + 1) + ") " + b.display_name for i, b in enumerate(bots)]
+        )
         await ctx.send(msg)
 
-    async def emote(self, ctx, emote, n: int = 1, channel: discord.TextChannel = None,
-                    guild: str = None):
+    async def emote(
+        self,
+        ctx,
+        emote,
+        n: int = 1,
+        channel: discord.TextChannel = None,
+        guild: str = None,
+    ):
         """emote <n (optional)> <channel (optional)> <server (optional)>
         posts emote"""
         if guild is None:
@@ -100,30 +116,25 @@ class MainCommands(commands.Cog):
         await channel.send(msg)
 
     @commands.command()
-    async def blob(self, ctx, n: int = 1, channel: discord.TextChannel = None,
-                   guild: str = None):
+    async def blob(
+        self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None
+    ):
         """<n (optional)> <channel (optional)> <server (optional)> posts dancing blob"""
         emote = "<a:blobDance:738431916910444644>"
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
 
     @commands.command()
-    async def basic(self, ctx, channel: discord.TextChannel = None,
-                   guild: str = None):
-        """<channel (optional)> <server (optional)> tells recruits that god gave them eyeballs for a reason"""
-        if channel:
-            channel = find_channel(guild, channel)
-        else:
-            channel = ctx.channel
-        await channel.send("If you can't access certain channels, try reacting to the CoC in "+ find_channel(guild, "manual_page") +" with a 👍🏽, or the relevant reaction for the channel you are trying to access")
-
-    @commands.command()
-    async def vibe(self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
+    async def vibe(
+        self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None
+    ):
         """<n (optional)> <channel (optional)> <server (optional)> posts vibing cat"""
         emote = "<a:vibe:761582456867520532>"
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
 
     @commands.command()
-    async def karen_electro(self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None):
+    async def karen_electro(
+        self, ctx, n: int = 1, channel: discord.TextChannel = None, guild: str = None
+    ):
         """<n (optional)> <channel (optional)> <server (optional)> posts karen electro"""
         emote = "<:karen_electro:779088291496460300>"
         await self.emote(ctx, emote, n=n, channel=channel, guild=guild)
@@ -157,14 +168,21 @@ class MainCommands(commands.Cog):
         for member in members:
             data[member] = member.joined_at
         items = sorted(data.items(), key=lambda x: x[1], reverse=True)
-        msg = ['{0.display_name} {1}'.format(i[0], i[1].date().isoformat())
-               for i in items]
-        await split_send(ctx, msg, style='```')
+        msg = [
+            "{0.display_name} {1}".format(i[0], i[1].date().isoformat()) for i in items
+        ]
+        await split_send(ctx, msg, style="```")
 
     @commands.command()
     @commands.check(admin_check)
-    async def add_roles(self, ctx, role: discord.Role, emote: str = None,
-                        msg_id: int = None, channel: discord.abc.Messageable = None):
+    async def add_roles(
+        self,
+        ctx,
+        role: discord.Role,
+        emote: str = None,
+        msg_id: int = None,
+        channel: discord.abc.Messageable = None,
+    ):
         """<role> <emote (optional)> <message id (optional)> <channel (optional)>
         For all members who have already reacted to given message with given emote,
         assign them the given role.
@@ -181,7 +199,7 @@ class MainCommands(commands.Cog):
         if msg_id is not None:
             msg = await channel.fetch_message(msg_id)
         if msg is None and msg_id is None and ref:
-            if hasattr(ref, 'resolved'):
+            if hasattr(ref, "resolved"):
                 msg = ref.resolved
             else:
                 channel = self.bot.find_channel(ref.channel_id)
@@ -193,7 +211,9 @@ class MainCommands(commands.Cog):
                     msg = await channel.fetch_message(ref.message_id)
         if not msg:
             raise ValueError("Cannot identify message.")
-        rxns = sorted([rxn for rxn in msg.reactions], key=lambda x: x.count, reverse=True)
+        rxns = sorted(
+            [rxn for rxn in msg.reactions], key=lambda x: x.count, reverse=True
+        )
         try:
             if emote is not None:
                 rxns = [rxn for rxn in rxns if emotes_equal(emote, rxn.emoji)]
@@ -212,9 +232,9 @@ class MainCommands(commands.Cog):
                 err = "Cannot add {} role to user {} with error {}."
                 errors.append(err.format(role, user, e))
         if errors:
-            await split_send(ctx, errors, style='```')
-        out = 'Added role {} to {} player{} who reacted with {} to message {}.'
-        out.format(role, n, 's' if n > 1 else 0, emote, msg.id)
+            await split_send(ctx, errors, style="```")
+        out = "Added role {} to {} player{} who reacted with {} to message {}."
+        out.format(role, n, "s" if n > 1 else 0, emote, msg.id)
         try:
             msg.reply(out, mention_author=False)
         except (discord.HTTPException, discord.Forbidden, discord.InvalidArgument):
@@ -223,7 +243,9 @@ class MainCommands(commands.Cog):
     @commands.command()
     async def source(self, ctx):
         """Source code for this bot."""
-        await ctx.send('My source code is available at https://github.com/TDTcode/TDTbot')
+        await ctx.send(
+            "My source code is available at https://github.com/TDTcode/TDTbot"
+        )
 
     @commands.command()
     @commands.check(_parings_perms)
@@ -231,6 +253,7 @@ class MainCommands(commands.Cog):
         """<role1> <role2> <role3> ... <roleN>
         1v1 parings for members in listed roles."""
         from random import shuffle
+
         converter = commands.RoleConverter()
 
         if not args:
@@ -249,7 +272,7 @@ class MainCommands(commands.Cog):
         i = 0
         matches = []
         while i < n - 1:
-            matches.append("{} vs {}".format(people[i].mention, people[i+1].mention))
+            matches.append("{} vs {}".format(people[i].mention, people[i + 1].mention))
             i += 2
         if n % 2:
             matches.append("{} has no match.".format(people[-1].mention))
@@ -257,9 +280,12 @@ class MainCommands(commands.Cog):
 
 
 if usingV2:
+
     async def setup(bot):
         cog = MainCommands(bot)
         await bot.add_cog(cog)
+
 else:
+
     def setup(bot):
         bot.add_cog(MainCommands(bot))
